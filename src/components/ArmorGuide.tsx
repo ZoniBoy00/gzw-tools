@@ -146,10 +146,10 @@ function VestSection() {
           <tbody>
             {sorted.map((v, i) => (
               <tr key={i}>
-                <td className="text-center">
+                <td className="text-center align-middle">
                   <button
                     onClick={() => toggleCompare(v.name)}
-                    className={`text-[10px] px-1 py-0.5 border ${
+                    className={`inline-flex items-center justify-center w-5 h-5 text-[10px] border ${
                       compare.includes(v.name)
                         ? 'border-accent/50 text-accent bg-accent/10'
                         : 'border-border text-text-muted hover:border-text-muted/30'
@@ -260,9 +260,9 @@ function PlateCarrierSection() {
           <tbody>
             {sorted.map((v, i) => (
               <tr key={i}>
-                <td className="text-center">
+                <td className="text-center align-middle">
                   <button onClick={() => toggleCompare(v.name)}
-                    className={`text-[10px] px-1 py-0.5 border ${compare.includes(v.name) ? 'border-accent/50 text-accent bg-accent/10' : 'border-border text-text-muted hover:border-text-muted/30'}`}
+                    className={`inline-flex items-center justify-center w-5 h-5 text-[10px] border ${compare.includes(v.name) ? 'border-accent/50 text-accent bg-accent/10' : 'border-border text-text-muted hover:border-text-muted/30'}`}
                     aria-label={`${compare.includes(v.name) ? 'Remove' : 'Add'} ${v.name}`}
                   ><i className={`fas fa-${compare.includes(v.name) ? 'check' : 'plus'}`} /></button>
                 </td>
@@ -369,10 +369,10 @@ function HelmetSection() {
           <tbody>
             {sorted.map((h, i) => (
               <tr key={i}>
-                <td className="text-center">
+                <td className="text-center align-middle">
                   <button
                     onClick={() => toggleCompare(h.name)}
-                    className={`text-[10px] px-1 py-0.5 border ${
+                    className={`inline-flex items-center justify-center w-5 h-5 text-[10px] border ${
                       compare.includes(h.name)
                         ? 'border-accent/50 text-accent bg-accent/10'
                         : 'border-border text-text-muted hover:border-text-muted/30'
@@ -401,7 +401,7 @@ function HelmetSection() {
                   </button>
                 </td>
                 <td data-label="NIJ" className={`text-center font-bold ${nijColor(h.nij)}`}>{h.nij}</td>
-                <td data-label="Mat" className={`text-center ${matColor(h.material)}`}>{h.material}</td>
+                <td data-label="Mat" className={`text-center ${matColor(h.material)}`}>{h.material.slice(0, 4)}</td>
                 <td data-label="Wt" className="text-right text-text-muted">{h.weight}kg</td>
                 <td data-label="Source" className="text-right text-text-muted">{h.source}</td>
               </tr>

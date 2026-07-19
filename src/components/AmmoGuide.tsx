@@ -189,10 +189,10 @@ export default function AmmoGuide() {
                     </td>
                   );
                 })}
-                <td data-label="" className="text-center">
+                <td data-label="" className="text-center align-middle">
                   <button
                     onClick={() => toggleCompare(r.name)}
-                    className={`text-[10px] px-1.5 py-0.5 border transition-colors ${
+                    className={`inline-flex items-center justify-center w-5 h-5 text-[10px] border transition-colors ${
                       compare.includes(r.name)
                         ? 'border-accent/50 text-accent bg-accent/10'
                         : 'border-border text-text-muted hover:border-text-muted/30'

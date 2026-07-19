@@ -141,7 +141,7 @@ export default function WeaponsGuide() {
             </div>
             <button
               onClick={() => toggleCompare(w.name)}
-              className={`text-[10px] px-1.5 py-1 border shrink-0 ${
+              className={`inline-flex items-center justify-center w-6 h-6 text-[10px] border shrink-0 ${
                 compare.includes(w.name)
                   ? 'border-accent/50 text-accent bg-accent/10'
                   : 'border-border text-text-muted'
@@ -178,10 +178,10 @@ export default function WeaponsGuide() {
             <tbody>
               {filtered.map((w, i) => (
                 <tr key={i}>
-                  <td className="text-center">
+                  <td className="text-center align-middle">
                     <button
                       onClick={() => toggleCompare(w.name)}
-                      className={`text-[10px] px-1 py-0.5 border ${
+                      className={`inline-flex items-center justify-center w-5 h-5 text-[10px] border ${
                         compare.includes(w.name)
                           ? 'border-accent/50 text-accent bg-accent/10'
                           : 'border-border text-text-muted hover:border-text-muted/30'

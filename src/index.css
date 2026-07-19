@@ -255,6 +255,11 @@ select.input {
   white-space: nowrap;
   background: var(--color-surface);
   z-index: 10;
+  vertical-align: middle;
+}
+.table-wrap th i {
+  vertical-align: middle;
+  line-height: 1;
 }
 .table-wrap th::after {
   content: '';
@@ -383,6 +388,23 @@ select.input {
   min-width: 70px;
   max-width: 70px;
   text-align: center !important;
+}
+/* Fix shield icon alignment in plates header */
+.armor-table th:nth-child(5) i {
+  vertical-align: middle;
+  font-size: 13px;
+  line-height: 1;
+}
+/* Fixed width for last two columns (Wt + Source) */
+.armor-table th:nth-last-child(2),
+.armor-table td:nth-last-child(2) {
+  min-width: 60px;
+  max-width: 60px;
+}
+.armor-table th:last-child,
+.armor-table td:last-child {
+  min-width: 120px;
+  max-width: 160px;
 }
 
 /* ── Sorting indicators ── */
