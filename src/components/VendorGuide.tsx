@@ -277,7 +277,6 @@ export default function VendorGuide() {
             const levelItems = items.filter((i) => i.repLevel === level);
             const idx = level - 1; // levels are 1-indexed, array is 0-indexed
             const levelRepNeeded = vendor?.rankCumulative?.[idx] ?? level * 2500;
-            const nextRepNeeded = vendor?.rankCumulative?.[idx + 1];
             const isUnlocked = repData.rep >= levelRepNeeded;
             return (
               <div key={level} className="mb-4">
