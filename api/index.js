@@ -214,8 +214,8 @@ function etag(payload) {
   return createHash('md5').update(JSON.stringify(payload)).digest('hex');
 }
 
-function json(data, code = 200, req) {
-  const body = JSON.stringify({
+function json(data, code = 200, res) {
+  const body = {
     data,
     meta: {
       count: Array.isArray(data) ? data.length : 1,
@@ -223,43 +223,38 @@ function json(data, code = 200, req) {
       version: '2.0.0',
       timestamp: new Date().toISOString(),
     },
-  }, null, 2);
+  };
 
   const tag = etag(body);
-  if (req) {
-    const ifNoneMatch = typeof req.headers.get === 'function' ? req.headers.get('if-none-match') : req.headers['if-none-match'];
-    if (ifNoneMatch === `"${tag}"`) {
-      return new Response(null, { status: 304, headers: { 'ETag': `"${tag}"` } });
-    }
+  const ifNoneMatch = res.req?.headers['if-none-match'];
+  if (ifNoneMatch === `"${tag}"`) {
+    return res.status(304).end();
   }
 
-  return new Response(body, {
-    status: code,
-    headers: {
-      'Content-Type': 'application/json',
-      'Access-Control-Allow-Origin': '*',
-      'Cache-Control': CACHE,
-      'ETag': `"${tag}"`,
-    },
-  });
+  res.setHeader('Content-Type', 'application/json');
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Cache-Control', CACHE);
+  res.setHeader('ETag', `"${tag}"`);
+  return res.status(code).json(body);
 }
 
-function error(msg, code = 400, req) {
-  return json({ error: msg, code }, code, req);
+function error(msg, code = 400, res) {
+  return json({ error: msg, code }, code, res);
 }
 
 // ─── Router ───
 
-export default async function handler(req) {
-  const host = req.headers?.get ? req.headers.get('host') : (req.headers?.host || 'localhost');
-  const url = new URL(req.url, `https://${host}`);
+export default async function handler(req, res) {
+  const url = new URL(req.url, `https://${req.headers.host || 'localhost'}`);
   const path = url.pathname.replace(/\/$/, '').replace('/api', '') || '/';
   const method = req.method;
 
   if (method === 'OPTIONS') {
-    return new Response(null, { status: 204, headers: { 'Access-Control-Allow-Origin': '*', 'Access-Control-Allow-Methods': 'GET, OPTIONS' } });
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Methods', 'GET, OPTIONS');
+    return res.status(204).end();
   }
-  if (method !== 'GET') return error('Method not allowed', 405, req);
+  if (method !== 'GET') return error('Method not allowed', 405, res);
 
   try {
     // ── /api/ — Root / docs ──
@@ -282,7 +277,7 @@ export default async function handler(req) {
           { path: '/api/calculator/missions?current=&target=', desc: 'Mission count calculator' },
           { path: '/api/search?q=', desc: 'Unified search across all data' },
         ],
-      }, 200, req);
+      }, 200, res);
     }
 
     // ── /api/ammo ──
@@ -290,12 +285,12 @@ export default async function handler(req) {
       const caliber = url.searchParams.get('caliber');
       let data = AMMO;
       if (caliber) data = data.filter(a => a.caliber === caliber);
-      return json({ rounds: data, calibers: CALIBERS }, 200, req);
+      return json({ rounds: data, calibers: CALIBERS }, 200, res);
     }
 
     // ── /api/vendors ──
     if (path === '/vendors') {
-      return json(VENDORS, 200, req);
+      return json(VENDORS, 200, res);
     }
 
     // ── /api/weapons ──
@@ -307,15 +302,15 @@ export default async function handler(req) {
       if (type) data = data.filter(w => w.type === type);
       if (caliber) data = data.filter(w => w.caliber === caliber);
       if (search) { const q = search.toLowerCase(); data = data.filter(w => w.name.toLowerCase().includes(q) || w.caliber.includes(q)); }
-      return json(data, 200, req);
+      return json(data, 200, res);
     }
 
     // ── /api/armor ──
     if (path === '/armor') {
-      return json({ vests: VESTS, helmets: HELMETS }, 200, req);
+      return json({ vests: VESTS, helmets: HELMETS }, 200, res);
     }
-    if (path === '/armor/vests') return json(VESTS, 200, req);
-    if (path === '/armor/helmets') return json(HELMETS, 200, req);
+    if (path === '/armor/vests') return json(VESTS, 200, res);
+    if (path === '/armor/helmets') return json(HELMETS, 200, res);
 
     // ── /api/recommendations ──
     if (path === '/recommendations') {
@@ -325,7 +320,7 @@ export default async function handler(req) {
         { vendor: 'Artisan', rep: 1, items: 'Molle Vest IIIA, SS-27 IIA' },
         { vendor: 'Turncoat', rep: 2, items: 'SK-S III, ATBV III, ACH IIIA' },
         { vendor: 'Banshee', rep: 2, items: 'FAST Carbon IIIA' },
-      ] }, 200, req);
+      ] }, 200, res);
     }
 
     // ── /api/missions ── (NEW)
@@ -337,7 +332,7 @@ export default async function handler(req) {
       if (vendor) data = data.filter(m => m.vendor?.toLowerCase() === vendor.toLowerCase());
       if (area) data = data.filter(m => m.area?.toLowerCase().includes(area.toLowerCase()));
       if (search) { const q = search.toLowerCase(); data = data.filter(m => m.name.toLowerCase().includes(q) || (m.area || '').toLowerCase().includes(q)); }
-      return json(data, 200, req);
+      return json(data, 200, res);
     }
 
     // ── /api/stats ── (NEW)
@@ -351,7 +346,7 @@ export default async function handler(req) {
         totalRep: VENDORS.reduce((a, v) => a + v.currentRep, 0),
         maxTotalRep: VENDORS.reduce((a, v) => a + v.maxRep, 0),
         avgProgress: Math.round(VENDORS.reduce((a, v) => a + (v.currentRep / v.maxRep) * 100, 0) / VENDORS.length),
-      }, 200, req);
+      }, 200, res);
     }
 
     // ── /api/calculator/rep-to-dollars ── (NEW)
@@ -365,7 +360,7 @@ export default async function handler(req) {
         cost: diff * rate,
         progressPct: Math.min((current / target) * 100, 100),
         progressAfterPct: Math.min((target / target) * 100, 100),
-      }, 200, req);
+      }, 200, res);
     }
 
     // ── /api/calculator/missions ── (NEW)
@@ -394,13 +389,13 @@ export default async function handler(req) {
         const existing = results.find(r => r.type === smallest.name);
         if (existing) existing.count += 1; else results.push({ type: smallest.name, repEach: smallest.rep, count: 1 });
       }
-      return json({ current, target, needed, totalMissions: results.reduce((a, r) => a + r.count, 0), breakdown: results }, 200, req);
+      return json({ current, target, needed, totalMissions: results.reduce((a, r) => a + r.count, 0), breakdown: results }, 200, res);
     }
 
     // ── /api/search ── (NEW)
     if (path === '/search') {
       const q = (url.searchParams.get('q') || '').toLowerCase();
-      if (!q) return error('Query parameter "q" is required', 400, req);
+      if (!q) return error('Query parameter "q" is required', 400, res);
 
       const weap = WEAPONS.filter(w => w.name.toLowerCase().includes(q) || w.caliber.includes(q)).slice(0, 10);
       const ammo = AMMO.filter(a => a.name.toLowerCase().includes(q) || a.caliber.includes(q)).slice(0, 10);
@@ -408,11 +403,11 @@ export default async function handler(req) {
       const hel = HELMETS.filter(h => h.name.toLowerCase().includes(q)).slice(0, 5);
       const miss = MISSIONS.filter(m => m.name.toLowerCase().includes(q) || (m.area || '').toLowerCase().includes(q) || (m.vendor || '').toLowerCase().includes(q)).slice(0, 10);
 
-      return json({ query: q, weapons: weap, ammo, vests: vest, helmets: hel, missions: miss }, 200, req);
+      return json({ query: q, weapons: weap, ammo, vests: vest, helmets: hel, missions: miss }, 200, res);
     }
 
-    return error('Not found', 404, req);
+    return error('Not found', 404, res);
   } catch (e) {
-    return error('Internal error: ' + e.message, 500, req);
+    return error('Internal error: ' + e.message, 500, res);
   }
 }
