@@ -733,5 +733,100 @@
     "wikiUrl": "https://gray-zone-warfare.fandom.com/wiki/YBL-1_Weapon_Storage_Key",
     "image": "https://static.wikia.nocookie.net/gray-zone-warfare/images/c/c5/YBL-1_Weapon_Storage_Key_icon.png/revision/latest?cb=20260508104744",
     "inTask": false
+  },
+  {
+    "name": "A102 Key",
+    "location": "Fort Narith",
+    "description": "Room A102 in Fort Narith barracks."
+  },
+  {
+    "name": "Fort Narith HQ Comms Room Key",
+    "location": "Fort Narith",
+    "description": "Comms room in FN HQ."
+  },
+  {
+    "name": "Hunter's Paradise Motel Room 101 Key",
+    "location": "Hunter's Paradise",
+    "description": "Motel room 101."
+  },
+  {
+    "name": "Hunter's Paradise Motel Room 102 Key",
+    "location": "Hunter's Paradise",
+    "description": "Motel room 102."
+  },
+  {
+    "name": "Kiu Vongsa Marketplace Broom Closet Key",
+    "location": "Kiu Vongsa",
+    "description": "Broom closet at marketplace."
+  },
+  {
+    "name": "Kiu Vongsa Marketplace Storeroom Key",
+    "location": "Kiu Vongsa",
+    "description": "Storeroom at marketplace."
+  },
+  {
+    "name": "Kiu Vongsa Motel Room Key",
+    "location": "Kiu Vongsa",
+    "description": "Motel room."
+  },
+  {
+    "name": "Kiu Vongsa UNLRA Office Key",
+    "location": "Kiu Vongsa",
+    "description": "UNLRA office."
+  },
+  {
+    "name": "Nam Thaven Marketplace Broom Closet Key",
+    "location": "Nam Thaven",
+    "description": "Broom closet at marketplace."
+  },
+  {
+    "name": "Nam Thaven Marketplace Storeroom Key",
+    "location": "Nam Thaven",
+    "description": "Storeroom at marketplace."
+  },
+  {
+    "name": "Nam Thaven Motel Room Key",
+    "location": "Nam Thaven",
+    "description": "Motel room."
+  },
+  {
+    "name": "Nam Thaven UNLRA Office Key",
+    "location": "Nam Thaven",
+    "description": "UNLRA office."
+  },
+  {
+    "name": "Pha Lang Marketplace Broom Closet Key",
+    "location": "Pha Lang",
+    "description": "Broom closet at marketplace."
+  },
+  {
+    "name": "Pha Lang Marketplace Storeroom Key",
+    "location": "Pha Lang",
+    "description": "Storeroom at marketplace."
+  },
+  {
+    "name": "Pha Lang Motel Room Key",
+    "location": "Pha Lang",
+    "description": "Motel room."
+  },
+  {
+    "name": "Pha Lang UNLRA Office Key",
+    "location": "Pha Lang",
+    "description": "UNLRA office."
+  },
+  {
+    "name": "Phousai Village House Key",
+    "location": "Phousai",
+    "description": "House key."
+  },
+  {
+    "name": "UNLRA Dorm Container Key",
+    "location": "Tiger Bay",
+    "description": "Dorm container."
+  },
+  {
+    "name": "Villa Lusia Key",
+    "location": "Midnight Sapphire",
+    "description": "Villa key."
   }
 ]

@@ -329,5 +329,61 @@
     "magSize": 7,
     "fireRate": "300",
     "source": "Handshake R.2"
+  },
+  {
+    "name": "RGD-5",
+    "type": "Throwable",
+    "caliber": "",
+    "magSize": 0,
+    "fireRate": null
+  },
+  {
+    "name": "M26",
+    "type": "Throwable",
+    "caliber": "",
+    "magSize": 0,
+    "fireRate": null
+  },
+  {
+    "name": "M67",
+    "type": "Throwable",
+    "caliber": "",
+    "magSize": 0,
+    "fireRate": null
+  },
+  {
+    "name": "F-1",
+    "type": "Throwable",
+    "caliber": "",
+    "magSize": 0,
+    "fireRate": null
+  },
+  {
+    "name": "M84 Stun Grenade",
+    "type": "Throwable",
+    "caliber": "",
+    "magSize": 0,
+    "fireRate": null
+  },
+  {
+    "name": "M18 Smoke Grenade (Yellow)",
+    "type": "Throwable",
+    "caliber": "",
+    "magSize": 0,
+    "fireRate": null
+  },
+  {
+    "name": "M18 Smoke Grenade (Green)",
+    "type": "Throwable",
+    "caliber": "",
+    "magSize": 0,
+    "fireRate": null
+  },
+  {
+    "name": "M18 Smoke Grenade (Red)",
+    "type": "Throwable",
+    "caliber": "",
+    "magSize": 0,
+    "fireRate": null
   }
 ]

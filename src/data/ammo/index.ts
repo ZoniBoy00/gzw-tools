@@ -80,3 +80,87 @@ export const AMMO: AmmoRound[] = [
 ];
 
 export const CALIBERS = Array.from(new Set(AMMO.map((a) => a.caliber)));
+  {
+    name: '7.62x25mm FMJ',
+    caliber: '7.62x25mm',
+    speed: 427,
+    accMod: 0,
+    durMod: -15,
+    tracer: false,
+    subsonic: false,
+    pen: {"I": 2, "IIA": 2, "IIA+": 2, "IIIA": 1, "IIIA+": 1, "III": 0, "III+": 0, "III++": 0},
+    vendor: 'Artisan',
+    repLevel: 1,
+    source: 'Artisan R.1'
+  },
+];
+  {
+    name: '7.62x25mm PT',
+    caliber: '7.62x25mm',
+    speed: 415,
+    accMod: 2,
+    durMod: -15,
+    tracer: true,
+    subsonic: false,
+    pen: {"I": 2, "IIA": 2, "IIA+": 2, "IIIA": 1, "IIIA+": 1, "III": 0, "III+": 0, "III++": 0},
+    vendor: 'Artisan',
+    repLevel: 2,
+    source: 'Artisan R.2'
+  },
+];
+  {
+    name: '7.62x25mm PST',
+    caliber: '7.62x25mm',
+    speed: 430,
+    accMod: -24,
+    durMod: -15,
+    tracer: false,
+    subsonic: false,
+    pen: {"I": 2, "IIA": 2, "IIA+": 2, "IIIA": 2, "IIIA+": 1, "III": 0, "III+": 0, "III++": 0},
+    vendor: 'Artisan',
+    repLevel: 2,
+    source: 'Artisan R.2'
+  },
+];
+  {
+    name: '7.65 Browning FMJ',
+    caliber: '7.65mm Browning',
+    speed: 318,
+    accMod: 0,
+    durMod: -15,
+    tracer: false,
+    subsonic: false,
+    pen: {"I": 2, "IIA": 1, "IIA+": 1, "IIIA": 0, "IIIA+": 0, "III": 0, "III+": 0, "III++": 0},
+    vendor: 'Artisan',
+    repLevel: 1,
+    source: 'Artisan R.1'
+  },
+];
+  {
+    name: '7.65 Browning JHP',
+    caliber: '7.65mm Browning',
+    speed: 238,
+    accMod: 4,
+    durMod: -15,
+    tracer: false,
+    subsonic: false,
+    pen: {"I": 1, "IIA": 1, "IIA+": 0, "IIIA": 0, "IIIA+": 0, "III": 0, "III+": 0, "III++": 0},
+    vendor: 'Artisan',
+    repLevel: 1,
+    source: 'Artisan R.1'
+  },
+];
+  {
+    name: '7.65 Browning Xtreme Defender',
+    caliber: '7.65mm Browning',
+    speed: 289,
+    accMod: 2,
+    durMod: -15,
+    tracer: false,
+    subsonic: false,
+    pen: {"I": 2, "IIA": 2, "IIA+": 1, "IIIA": 1, "IIIA+": 0, "III": 0, "III+": 0, "III++": 0},
+    vendor: '',
+    repLevel: 0,
+    source: 'Looting'
+  },
+];
