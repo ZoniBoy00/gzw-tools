@@ -46,6 +46,10 @@ function App() {
               </p>
             </div>
           </div>
+          <div className="ts-badge text-[9px]">
+            <i className="fas fa-cloud-arrow-down" />
+            <span>Data: Jul 2026</span>
+          </div>
         </div>
       </header>
 

@@ -3,14 +3,21 @@ import { AMMO, CALIBERS } from '../data/ammo';
 import { ARMOR_CLASSES } from '../data/types';
 
 const PEN: Record<number, { label: string; cls: string }> = {
-  0: { label: '✕', cls: 'text-red-400 bg-red-900/20' },
-  1: { label: '~', cls: 'text-amber-400 bg-amber-900/20' },
-  2: { label: '•', cls: 'text-green-400 bg-green-900/20' },
+  0: { label: '✕', cls: 'pen-none' },
+  1: { label: '~', cls: 'pen-low' },
+  2: { label: '•', cls: 'pen-high' },
+};
+
+const PEN_LABELS: Record<number, string> = {
+  0: 'Ineffective',
+  1: 'Magdump',
+  2: 'Penetrates',
 };
 
 export default function AmmoGuide() {
   const [caliber, setCaliber] = useState('5.56x45mm');
   const [search, setSearch] = useState('');
+  const [compare, setCompare] = useState<string[]>([]);
 
   const filtered = useMemo(() => {
     const byCal = AMMO.filter((a) => a.caliber === caliber);
@@ -19,8 +26,19 @@ export default function AmmoGuide() {
     return byCal.filter((a) => a.name.toLowerCase().includes(q));
   }, [caliber, search]);
 
+  const toggleCompare = (name: string) => {
+    setCompare((prev) =>
+      prev.includes(name) ? prev.filter((n) => n !== name) : prev.length < 3 ? [...prev, name] : prev,
+    );
+  };
+
+  const comparedRounds = useMemo(
+    () => AMMO.filter((a) => compare.includes(a.name)),
+    [compare],
+  );
+
   return (
-    <div>
+    <div className="tab-content">
       <div className="flex items-center gap-2 mb-4">
         <i className="fas fa-bolt text-accent text-sm" />
         <span className="section-title">Ammunition Penetration Chart</span>
@@ -33,59 +51,157 @@ export default function AmmoGuide() {
           onChange={(e) => setSearch(e.target.value)}
           placeholder="Search ammo..."
           className="input flex-1 min-w-[120px]"
+          aria-label="Search ammunition"
         />
-        <select value={caliber} onChange={(e) => setCaliber(e.target.value)} className="input w-auto">
-          {CALIBERS.map((c) => <option key={c} value={c}>{c}</option>)}
+        <select
+          value={caliber}
+          onChange={(e) => setCaliber(e.target.value)}
+          className="input w-auto"
+          aria-label="Filter by caliber"
+        >
+          {CALIBERS.map((c) => (
+            <option key={c} value={c}>
+              {c}
+            </option>
+          ))}
         </select>
       </div>
 
-      <div className="table-wrap">
-        <table>
+      {/* Compare section */}
+      {comparedRounds.length > 0 && (
+        <div className="mb-4 p-3 border border-accent/20 bg-accent/5">
+          <div className="text-[10px] font-bold uppercase tracking-[0.12em] text-accent mb-2 flex items-center gap-2">
+            <i className="fas fa-not-equal text-xs" />
+            Compare Mode — {comparedRounds.length} round{comparedRounds.length > 1 ? 's' : ''} selected
+            <button
+              onClick={() => setCompare([])}
+              className="ml-auto text-[9px] font-mono text-text-muted hover:text-text"
+            >
+              Clear
+            </button>
+          </div>
+          <div className="compare-grid">
+            {comparedRounds.map((r) => (
+              <div key={r.name} className="compare-card selected">
+                <div className="text-sm font-bold mb-2 text-accent">{r.name}</div>
+                {[
+                  { label: 'Speed', value: `${r.speed} m/s` },
+                  { label: 'Acc Mod', value: `${r.accMod > 0 ? '+' : ''}${r.accMod}`, cls: r.accMod > 0 ? 'pen-high' : r.accMod < 0 ? 'pen-low' : '' },
+                  { label: 'Dur Mod', value: r.durMod ? `${r.durMod}` : '-', cls: r.durMod < 0 ? 'durability-bad' : '' },
+                  { label: 'Tracer', value: r.tracer ? 'Yes' : 'No' },
+                  { label: 'Subsonic', value: r.subsonic ? 'Yes' : 'No' },
+                  { label: 'Source', value: r.vendor ? `${r.vendor} R.${r.repLevel}` : r.source || 'Looting' },
+                ].map((f) => (
+                  <div key={f.label} className="compare-field">
+                    <span className="text-text-muted">{f.label}</span>
+                    <span className={f.cls || 'text-text'}>{f.value}</span>
+                  </div>
+                ))}
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {/* Main table */}
+      <div className="table-wrap table-mobile-cards">
+        <table role="table" aria-label="Ammunition penetration data">
           <thead>
             <tr>
-              <th>Name</th><th className="text-right">m/s</th><th className="text-right">Acc</th><th className="text-right">Dur</th>
-              <th className="text-center" title="Subsonic"><i className="fas fa-ear-deaf text-xs" /></th>
-              <th className="text-center" title="Tracer"><i className="fas fa-fire text-xs" /></th>
-              {ARMOR_CLASSES.map((ac) => <th key={ac} className="text-center">{ac}</th>)}
+              <th role="columnheader">Name</th>
+              <th className="text-right" role="columnheader">m/s</th>
+              <th className="text-right" role="columnheader">Acc</th>
+              <th className="text-right" role="columnheader">Dur</th>
+              <th className="text-center" role="columnheader" title="Subsonic">
+                <i className="fas fa-ear-deaf text-xs" aria-hidden="true" />
+                <span className="sr-only">Subsonic</span>
+              </th>
+              <th className="text-center" role="columnheader" title="Tracer">
+                <i className="fas fa-fire text-xs" aria-hidden="true" />
+                <span className="sr-only">Tracer</span>
+              </th>
+              {ARMOR_CLASSES.map((ac) => (
+                <th key={ac} className="text-center" role="columnheader">
+                  {ac}
+                </th>
+              ))}
+              <th className="text-center" role="columnheader">Compare</th>
             </tr>
           </thead>
           <tbody>
             {filtered.map((r, i) => (
               <tr key={i}>
-                <td className="font-medium">
+                <td data-label="" className="font-medium">
                   {r.name}
                   <span className="text-[10px] text-text-muted ml-1.5 font-normal">
-                    {r.vendor ? `${r.vendor} R.${r.repLevel}` : r.source}
+                    {r.vendor ? `${r.vendor} R.${r.repLevel}` : r.source || 'Looting'}
                   </span>
                 </td>
-                <td className="text-right text-text-muted">{r.speed}</td>
-                <td className={`text-right ${r.accMod > 0 ? 'text-green' : r.accMod < 0 ? 'text-red' : 'text-text-muted'}`}>
+                <td data-label="Speed" className="text-right text-text-muted">{r.speed}</td>
+                <td data-label="Acc" className={`text-right ${r.accMod > 0 ? 'pen-high' : r.accMod < 0 ? 'pen-low' : 'text-text-muted'}`}>
                   {r.accMod > 0 ? `+${r.accMod}` : r.accMod || '0'}
                 </td>
-                <td className={`text-right ${r.durMod < 0 ? 'text-red' : 'text-text-muted'}`}>{r.durMod || '-'}</td>
-                <td className="text-center text-text-muted">{r.subsonic ? <i className="fas fa-ear-deaf text-green/60" /> : '-'}</td>
-                <td className="text-center text-text-muted">{r.tracer ? <i className="fas fa-fire text-accent/60" /> : '-'}</td>
+                <td data-label="Dur" className={`text-right ${r.durMod < -50 ? 'durability-bad' : r.durMod < 0 ? 'pen-low' : 'text-text-muted'}`}>
+                  {r.durMod || '-'}
+                </td>
+                <td data-label="Sub" className="text-center text-text-muted">
+                  {r.subsonic ? <i className="fas fa-ear-deaf pen-high" aria-label="Subsonic" /> : '-'}
+                </td>
+                <td data-label="Tr" className="text-center text-text-muted">
+                  {r.tracer ? <i className="fas fa-fire text-accent/60" aria-label="Tracer" /> : '-'}
+                </td>
                 {ARMOR_CLASSES.map((ac) => {
                   const p = PEN[r.pen[ac] ?? 0];
-                  return <td key={ac} className={`text-center text-xs ${p.cls}`}>{p.label}</td>;
+                  return (
+                    <td
+                      key={ac}
+                      data-label={ac}
+                      className={`text-center text-xs ${p.cls}`}
+                      title={`${ac}: ${PEN_LABELS[r.pen[ac] ?? 0]}`}
+                    >
+                      {p.label}
+                    </td>
+                  );
                 })}
+                <td data-label="" className="text-center">
+                  <button
+                    onClick={() => toggleCompare(r.name)}
+                    className={`text-[10px] px-1.5 py-0.5 border transition-colors ${
+                      compare.includes(r.name)
+                        ? 'border-accent/50 text-accent bg-accent/10'
+                        : 'border-border text-text-muted hover:border-text-muted/30'
+                    }`}
+                    aria-label={`${compare.includes(r.name) ? 'Remove' : 'Add'} ${r.name} for comparison`}
+                    title="Compare"
+                  >
+                    <i className={`fas fa-${compare.includes(r.name) ? 'check' : 'plus'}`} />
+                  </button>
+                </td>
               </tr>
             ))}
             {filtered.length === 0 && (
-              <tr><td colSpan={14} className="text-center py-8 text-text-muted">No ammo found</td></tr>
+              <tr>
+                <td colSpan={14} className="empty-state">
+                  <i className="fas fa-bolt" aria-hidden="true" />
+                  <p>No ammunition matches your search</p>
+                </td>
+              </tr>
             )}
           </tbody>
         </table>
       </div>
 
+      {/* Legend */}
       <div className="flex flex-wrap gap-4 mt-4 text-[11px] font-mono text-text-muted">
         {Object.entries(PEN).map(([k, v]) => (
           <span key={k} className="flex items-center gap-1.5">
-            <span className={`w-2.5 h-2.5 ${v.cls}`} /> {v.label} = {['Pointless', 'Magdump only', 'Usually ignores'][+k]}
+            <span className={`w-2.5 h-2.5 inline-block ${v.cls}`} />
+            {' '}{v.label} = {['Ineffective', 'Magdump', 'Penetrates'][+k]}
           </span>
         ))}
-        <span className="flex items-center gap-1"><i className="fas fa-ear-deaf text-green/60" /> Subsonic</span>
+        <span className="flex items-center gap-1"><i className="fas fa-ear-deaf pen-high" /> Subsonic</span>
         <span className="flex items-center gap-1"><i className="fas fa-fire text-accent/60" /> Tracer</span>
+        <span className="flex items-center gap-1"><i className="fas fa-check text-accent/60" /> Compare mode</span>
       </div>
     </div>
   );
