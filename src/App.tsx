@@ -26,11 +26,11 @@ const TABS = [
   { id: 'ammo', label: 'Ammo', icon: 'fas fa-bolt', path: '/ammo' },
   { id: 'weapons', label: 'Weapons', icon: 'fas fa-crosshairs', path: '/weapons' },
   { id: 'armor', label: 'Armor', icon: 'fas fa-shield-halved', path: '/armor' },
+  { id: 'keys', label: 'Keys', icon: 'fas fa-key', path: '/keys' },
   { id: 'vendors', label: 'Vendors', icon: 'fas fa-store', path: '/vendors' },
   { id: 'loadouts', label: 'Loadouts', icon: 'fas fa-screwdriver-wrench', path: '/loadouts' },
   { id: 'logs', label: 'Log Analyzer', icon: 'fas fa-file-lines', path: '/logs' },
   { id: 'api-docs', label: 'API', icon: 'fas fa-code', path: '/api-docs' },
-  { id: 'keys', label: 'Keys', icon: 'fas fa-key', path: '/keys' },
 ] as const;
 
 function Layout() {
