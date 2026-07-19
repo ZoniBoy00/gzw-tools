@@ -1,0 +1,63 @@
+@import "tailwindcss";
+
+/* ── Gray Zone Warfare — Tactical Theme ── */
+
+@theme {
+  --color-*: initial;
+  --color-og: #1b2b1b;
+  --color-og-light: #2a3f2a;
+  --color-og-lighter: #3a5a3a;
+  --color-drab: #4a5d23;
+  --color-drab-light: #5e7330;
+  --color-sand: #c4a56e;
+  --color-sand-light: #d4c08a;
+  --color-amber: #f0b429;
+  --color-amber-light: #f5c542;
+  --color-crimson: #8b1a1a;
+  --color-crimson-light: #b91c1c;
+  --color-steel: #4a5568;
+  --color-steel-light: #6b7a8f;
+  --color-carbon: #0f1215;
+  --color-carbon-light: #1a1f26;
+  --color-carbon-lighter: #242b36;
+  --color-carbon-border: #2d3645;
+  --color-slate: #8892a0;
+  --color-slate-light: #a0aaba;
+  --color-white: #f0f2f5;
+  --color-danger: #dc2626;
+}
+
+:root {
+  font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+  color-scheme: dark;
+}
+
+body {
+  background: var(--color-carbon);
+  color: var(--color-white);
+  min-height: 100vh;
+}
+
+/* Military HUD digits */
+.font-mono {
+  font-family: 'JetBrains Mono', 'Fira Code', 'Consolas', monospace;
+}
+
+/* Scanline overlay for tactical feel */
+.scanlines::after {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(0, 0, 0, 0.03) 2px,
+    rgba(0, 0, 0, 0.03) 4px
+  );
+  z-index: 9999;
+}

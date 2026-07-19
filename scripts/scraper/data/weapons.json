@@ -1,0 +1,259 @@
+[
+  {
+    "name": "AK-12",
+    "type": "Assault Rifle",
+    "fireRate": "700 RPM",
+    "caliber": "5.45x39mm"
+  },
+  {
+    "name": "AK-15",
+    "type": "Assault Rifle",
+    "fireRate": "700 RPM",
+    "caliber": "7.62x39mm"
+  },
+  {
+    "name": "AK-19",
+    "type": "Assault Rifle",
+    "fireRate": "700 RPM",
+    "caliber": "5.56x45mm"
+  },
+  {
+    "name": "AK-308",
+    "type": "Assault Rifle",
+    "caliber": "7.62x51mm"
+  },
+  {
+    "name": "AK-74M",
+    "type": "Assault Rifle",
+    "fireRate": "Single / Full Auto",
+    "caliber": "5.45x39mm"
+  },
+  {
+    "name": "AK-74N",
+    "type": "Assault Rifle",
+    "fireRate": "Single / Full Auto",
+    "caliber": "5.45x39mm"
+  },
+  {
+    "name": "AKM",
+    "type": "Assault Rifle",
+    "fireRate": "600 RPM",
+    "caliber": "7.62x39mm"
+  },
+  {
+    "name": "AKMN",
+    "type": "Assault Rifle",
+    "fireRate": "Single / Full Auto",
+    "caliber": "7.62x39mm"
+  },
+  {
+    "name": "AKMSN",
+    "type": "Assault Rifle",
+    "fireRate": "Single / Full Auto",
+    "caliber": "7.62x39mm"
+  },
+  {
+    "name": "AKS-74U",
+    "type": "Assault Rifle",
+    "fireRate": "650 RPM",
+    "caliber": "5.45x39mm"
+  },
+  {
+    "name": "Beretta M9A1",
+    "type": "Pistol",
+    "fireRate": "600 RPM",
+    "caliber": "9x19mm"
+  },
+  {
+    "name": "Buran's AK-74N",
+    "type": "Assault Rifle",
+    "fireRate": "650 RPM",
+    "caliber": "5.45x39mm"
+  },
+  {
+    "name": "Colt 1911",
+    "type": "Pistol",
+    "fireRate": "600 RPM",
+    "caliber": ".45 ACP"
+  },
+  {
+    "name": "Colt Combat Commander",
+    "type": "Pistol",
+    "fireRate": "600 RPM",
+    "caliber": ".45 ACP"
+  },
+  {
+    "name": "CQ A1",
+    "type": "Assault Rifle",
+    "fireRate": "800 RPM",
+    "caliber": "5.56x45mm"
+  },
+  {
+    "name": "DDM4",
+    "type": "Assault Rifle",
+    "fireRate": "800 RPM",
+    "caliber": "5.56x45mm NATO"
+  },
+  {
+    "name": "Firebrand's AKS-74U",
+    "type": "Assault Rifle",
+    "fireRate": "650 RPM",
+    "caliber": "5.45x39mm"
+  },
+  {
+    "name": "Glock 17",
+    "type": "Handgun",
+    "fireRate": "600 RPM",
+    "caliber": "9x19mm"
+  },
+  {
+    "name": "Grin's Colt 1911 Commander",
+    "type": "Pistol",
+    "fireRate": "600 RPM",
+    "caliber": ".45 ACP"
+  },
+  {
+    "name": "L403A1",
+    "type": "Assault Rifle",
+    "fireRate": "800 RPM",
+    "caliber": "5.56x45mm"
+  },
+  {
+    "name": "Laugo alien",
+    "type": "Pistol",
+    "fireRate": "700 RPM",
+    "caliber": "9x19mm"
+  },
+  {
+    "name": "M14 Rifle",
+    "type": "Rifle",
+    "fireRate": "???? RPM",
+    "caliber": "7.62x51mm"
+  },
+  {
+    "name": "M16 A1",
+    "type": "Assault Rifle",
+    "fireRate": "800 rpm RPM",
+    "caliber": "5.56x45mm"
+  },
+  {
+    "name": "M1A Rifle",
+    "type": "Rifle",
+    "fireRate": "700 RPM",
+    "caliber": "7.62x51mm"
+  },
+  {
+    "name": "M201C",
+    "type": "Pistol",
+    "fireRate": "??? RPM",
+    "caliber": "7.62x25mm"
+  },
+  {
+    "name": "M4A1",
+    "type": "Assault Rifle",
+    "fireRate": "800 RPM",
+    "caliber": "5.56x45mm NATO"
+  },
+  {
+    "name": "M700",
+    "type": "Rifle",
+    "caliber": "7.62x51mm"
+  },
+  {
+    "name": "M870",
+    "type": "Shotgun",
+    "fireRate": "300 RPM",
+    "caliber": "12 Gauge"
+  },
+  {
+    "name": "Mosin-Nagant",
+    "type": "Rifle",
+    "fireRate": "20 RPM",
+    "caliber": "7.62x54mm R"
+  },
+  {
+    "name": "Mosin-Nagant (Sniper)",
+    "type": "Rifle",
+    "fireRate": "20 RPM"
+  },
+  {
+    "name": "Mossberg 590",
+    "type": "Shotgun",
+    "fireRate": "300 RPM",
+    "caliber": "12 Gauge"
+  },
+  {
+    "name": "MP5",
+    "type": "Submachine Gun",
+    "fireRate": "800 RPM",
+    "caliber": "9x19mm"
+  },
+  {
+    "name": "MP7",
+    "type": "SMG",
+    "fireRate": "950 RPM",
+    "caliber": "4.6x30mm"
+  },
+  {
+    "name": "MP7A1",
+    "type": "Submachine Gun",
+    "fireRate": "Single/Full-Auto",
+    "caliber": "4.6x30mm"
+  },
+  {
+    "name": "MP7A2",
+    "type": "Submachine Gun",
+    "fireRate": "Single/Full-Auto",
+    "caliber": "4.6x30mm"
+  },
+  {
+    "name": "Remington 788",
+    "type": "Rifle",
+    "caliber": ".222 Remington"
+  },
+  {
+    "name": "Sa vz. 58",
+    "type": "Assault Rifle",
+    "fireRate": "800 RPM",
+    "caliber": "7.62x39mm"
+  },
+  {
+    "name": "SIG MCX",
+    "type": "Assault Rifle",
+    "fireRate": "800 RPM",
+    "caliber": ".300 AAC Blackout"
+  },
+  {
+    "name": "SKS",
+    "fireRate": "Single",
+    "caliber": "7.62x39mm"
+  },
+  {
+    "name": "SVD",
+    "type": "Rifle",
+    "fireRate": "600 rpm RPM",
+    "caliber": "7.62x54mm R"
+  },
+  {
+    "name": "Type 51",
+    "type": "Pistol",
+    "fireRate": "600 RPM",
+    "caliber": "7.62x25mm"
+  },
+  {
+    "name": "USMC Fighting Knife",
+    "type": "Melee"
+  },
+  {
+    "name": "VZ. 58",
+    "type": "Assault Rifle",
+    "fireRate": "???? RPM",
+    "caliber": "7.62x39mm"
+  },
+  {
+    "name": "Vz. 61 Skorpion",
+    "type": "SMG",
+    "fireRate": "800 RPM",
+    "caliber": "7.65mm Browning"
+  }
+]
