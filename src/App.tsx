@@ -10,6 +10,7 @@ import WeaponsGuide from './components/WeaponsGuide';
 import VendorGuide from './components/VendorGuide';
 import LoadoutBuilder from './components/LoadoutBuilder';
 import LogAnalyzer from './components/LogAnalyzer';
+import KeysGuide from './components/KeysGuide';
 import ApiDocs from './components/ApiDocs';
 import PrivacyPolicy from './components/PrivacyPolicy';
 import TermsOfService from './components/TermsOfService';
@@ -29,6 +30,7 @@ const TABS = [
   { id: 'loadouts', label: 'Loadouts', icon: 'fas fa-screwdriver-wrench', path: '/loadouts' },
   { id: 'logs', label: 'Log Analyzer', icon: 'fas fa-file-lines', path: '/logs' },
   { id: 'api-docs', label: 'API', icon: 'fas fa-code', path: '/api-docs' },
+  { id: 'keys', label: 'Keys', icon: 'fas fa-key', path: '/keys' },
 ] as const;
 
 function Layout() {
@@ -84,6 +86,7 @@ function Layout() {
             <Route path="/loadouts" element={<LoadoutBuilder />} />
             <Route path="/logs" element={<LogAnalyzer />} />
             <Route path="/api-docs" element={<ApiDocs />} />
+            <Route path="/keys" element={<KeysGuide />} />
             <Route path="/privacy" element={<PrivacyPolicy />} />
             <Route path="/tos" element={<TermsOfService />} />
             <Route path="*" element={<Navigate to="/" replace />} />
