@@ -12,7 +12,7 @@ import type { ModalItem } from './ui/ItemModal';
 
 interface VendorItem {
   name: string;
-  type: 'weapon' | 'ammo' | 'vest' | 'helmet' | 'medical' | 'gear';
+  type: 'weapon' | 'ammo' | 'vest' | 'helmet' | 'medical' | 'gear' | 'attachment' | 'container' | 'tool';
   repLevel: number;
   detail: string;
   image?: string;
