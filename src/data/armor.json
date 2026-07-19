@@ -1,191 +1,226 @@
 {
   "vests": [
     {
-      "name": "6B23-1(Digital)",
-      "nij": "-",
-      "material": "Steel",
-      "weight": 7.9,
-      "plates": "Front",
+      "name": "Coolmax Covert Vest",
+      "nij": "IIIA",
+      "material": "Aramid",
+      "plates": "Front, Back",
       "grid": "3x3",
+      "weight": 1.76,
       "source": "Looting"
     },
     {
-      "name": "6B23-1(Flora)",
-      "nij": "-",
-      "material": "Steel",
-      "weight": 7.4,
-      "plates": "Front",
+      "name": "Covert Tactical (UNLRA)",
+      "nij": "IIIA",
+      "material": "Aramid",
+      "plates": "Front, Back",
       "grid": "3x3",
-      "source": "Looting"
-    },
-    {
-      "name": "Armor Vests",
-      "nij": "-",
-      "material": "-",
-      "weight": 0,
-      "plates": "Front",
-      "grid": "3x3",
-      "source": "Looting"
-    },
-    {
-      "name": "ATBV Vest",
-      "nij": "-",
-      "material": "UHMWPE",
-      "weight": 3.8,
-      "plates": "Front",
-      "grid": "3x3",
-      "source": "Looting"
-    },
-    {
-      "name": "B Krogan",
-      "nij": "-",
-      "material": "???",
-      "weight": 0,
-      "plates": "Front",
-      "grid": "3x3",
+      "weight": 2.1,
       "source": "Looting"
     },
     {
       "name": "Commander (Black)",
-      "nij": "-",
-      "material": "UHMWPE",
-      "weight": 2.45,
-      "plates": "Front",
+      "nij": "IIIA",
+      "material": "Aramid",
+      "plates": "Front, Back",
       "grid": "3x3",
-      "source": "Looting"
+      "weight": 2.45,
+      "source": "Handshake R.1"
     },
     {
       "name": "Commander (Navy)",
-      "nij": "-",
+      "nij": "IIIA",
       "material": "Aramid",
-      "weight": 2.45,
-      "plates": "Front",
+      "plates": "Front, Back",
       "grid": "3x3",
+      "weight": 2.45,
       "source": "Looting"
     },
     {
       "name": "Commander (Olive)",
-      "nij": "-",
-      "material": "UHMWPE",
+      "nij": "IIIA",
+      "material": "Aramid",
+      "plates": "Front, Back",
+      "grid": "3x3",
       "weight": 2.45,
-      "plates": "Front",
-      "grid": "3x3",
-      "source": "Looting"
-    },
-    {
-      "name": "Coolmax Covert Vest",
-      "nij": "-",
-      "material": "Aramid",
-      "weight": 1.76,
-      "plates": "Front",
-      "grid": "3x3",
-      "source": "Looting"
-    },
-    {
-      "name": "Covert Tactical Body Armour (Police)",
-      "nij": "-",
-      "material": "UHMWPE",
-      "weight": 5.77,
-      "plates": "Front",
-      "grid": "3x3",
-      "source": "Looting"
-    },
-    {
-      "name": "Covert Tactical Body Armour (Press)",
-      "nij": "-",
-      "material": "Steel",
-      "weight": 10.41,
-      "plates": "Front",
-      "grid": "3x3",
-      "source": "Looting"
-    },
-    {
-      "name": "Covert Tactical Body Armour (UNLRA)",
-      "nij": "-",
-      "material": "Aramid",
-      "weight": 2.1,
-      "plates": "Front",
-      "grid": "3x3",
-      "source": "Looting"
-    },
-    {
-      "name": "CZ 4M Hornet (UNLRA)",
-      "nij": "-",
-      "material": "Ceramic",
-      "weight": 6.45,
-      "plates": "Front",
-      "grid": "3x3",
-      "source": "Looting"
-    },
-    {
-      "name": "CZ VIP (Black)",
-      "nij": "-",
-      "material": "Steel",
-      "weight": 4.8,
-      "plates": "Front",
-      "grid": "3x3",
-      "source": "Looting"
-    },
-    {
-      "name": "LVS Overt (Ranger Green)",
-      "nij": "-",
-      "material": "Steel",
-      "weight": 7.5,
-      "plates": "Front",
-      "grid": "3x3",
-      "source": "Looting"
-    },
-    {
-      "name": "LVS Tactical (Multicam)",
-      "nij": "-",
-      "material": "Ceramic",
-      "weight": 8.2,
-      "plates": "Front",
-      "grid": "3\u00d73",
-      "source": "Looting"
-    },
-    {
-      "name": "LVS Tactical (Ranger Green)",
-      "nij": "-",
-      "material": "Steel",
-      "weight": 10.8,
-      "plates": "Front",
-      "grid": "3x3",
       "source": "Looting"
     },
     {
       "name": "Molle Vest",
-      "nij": "-",
+      "nij": "IIIA",
       "material": "Steel",
-      "weight": 2.6,
       "plates": "Front",
       "grid": "3x3",
-      "source": "Looting"
+      "weight": 2.6,
+      "source": "Artisan R.1"
+    },
+    {
+      "name": "LVS Overt (Ranger Green)",
+      "nij": "IIIA+",
+      "material": "Steel",
+      "plates": "Front, Back",
+      "grid": "3x3",
+      "weight": 7.5,
+      "source": "Handshake R.1"
     },
     {
       "name": "SK-S Ballistic Vest",
-      "nij": "-",
+      "nij": "III",
       "material": "UHMWPE",
+      "plates": "Front, Back",
+      "grid": "3x3",
       "weight": 3.15,
+      "source": "Turncoat R.2"
+    },
+    {
+      "name": "ATBV Vest",
+      "nij": "III",
+      "material": "UHMWPE",
+      "plates": "Front, Back",
+      "grid": "3x3",
+      "weight": 3.8,
+      "source": "Turncoat R.2"
+    },
+    {
+      "name": "CZ VIP (Black)",
+      "nij": "III",
+      "material": "Steel",
       "plates": "Front",
       "grid": "3x3",
+      "weight": 4.8,
+      "source": "Handshake R.2"
+    },
+    {
+      "name": "Covert Tactical (Police)",
+      "nij": "III",
+      "material": "UHMWPE",
+      "plates": "Front, Back",
+      "grid": "3x3",
+      "weight": 5.77,
       "source": "Looting"
+    },
+    {
+      "name": "Covert Tactical (Press)",
+      "nij": "III",
+      "material": "Steel",
+      "plates": "Front, Back",
+      "grid": "3x3",
+      "weight": 10.41,
+      "source": "Looting"
+    },
+    {
+      "name": "CZ 4M Hornet (UNLRA)",
+      "nij": "III",
+      "material": "Ceramic",
+      "plates": "Front, Back",
+      "grid": "3x3",
+      "weight": 6.45,
+      "source": "Looting"
+    },
+    {
+      "name": "Covert Tactical (Woodland)",
+      "nij": "III",
+      "material": "Steel",
+      "plates": "Front, Back",
+      "grid": "3x3",
+      "weight": 8.8,
+      "source": "Handshake R.2"
+    },
+    {
+      "name": "LVS Tactical (Ranger Green)",
+      "nij": "III",
+      "material": "Steel",
+      "plates": "Front, Back, Sides",
+      "grid": "3x3",
+      "weight": 10.8,
+      "source": "Handshake R.2"
+    },
+    {
+      "name": "6B23-1 (Flora)",
+      "nij": "III+",
+      "material": "Steel",
+      "plates": "Front",
+      "grid": "3x4",
+      "weight": 7.4,
+      "source": "Turncoat R.3"
+    },
+    {
+      "name": "6B23-1 (Digital)",
+      "nij": "III+",
+      "material": "Steel",
+      "plates": "Front",
+      "grid": "3x4",
+      "weight": 7.9,
+      "source": "Looting"
+    },
+    {
+      "name": "CZ 4M Hornet (Green)",
+      "nij": "III+",
+      "material": "Ceramic",
+      "plates": "Front, Back",
+      "grid": "3x3",
+      "weight": 6.9,
+      "source": "Handshake R.3"
+    },
+    {
+      "name": "LVS Tactical (Multicam)",
+      "nij": "III++",
+      "material": "Ceramic",
+      "plates": "Front, Back, Sides",
+      "grid": "3x3",
+      "weight": 8.2,
+      "source": "Handshake R.4"
     }
   ],
   "helmets": [
     {
       "name": "AMP-1 TP LC (Ranger Green)",
-      "nij": "-",
+      "nij": "IIA",
       "material": "Aramid",
       "weight": 1.4,
       "source": "Looting"
     },
     {
       "name": "AMP-1 TP LC (UNLRA)",
-      "nij": "-",
+      "nij": "IIA",
       "material": "Aramid",
       "weight": 1.69,
       "source": "Looting"
+    },
+    {
+      "name": "SS-27 (Black)",
+      "nij": "IIA",
+      "material": "Aramid",
+      "weight": 1.3,
+      "source": "Artisan R.1"
+    },
+    {
+      "name": "SS-27 (Multicam)",
+      "nij": "IIA",
+      "material": "Aramid",
+      "weight": 1.3,
+      "source": "Looting"
+    },
+    {
+      "name": "ACH (Olive)",
+      "nij": "IIIA",
+      "material": "Aramid",
+      "weight": 1.5,
+      "source": "Turncoat R.2"
+    },
+    {
+      "name": "MICH (Olive)",
+      "nij": "IIIA",
+      "material": "Steel",
+      "weight": 1.6,
+      "source": "Handshake R.2"
+    },
+    {
+      "name": "FAST Carbon",
+      "nij": "IIIA",
+      "material": "Aramid",
+      "weight": 1.1,
+      "source": "Banshee R.2"
     }
   ]
 }

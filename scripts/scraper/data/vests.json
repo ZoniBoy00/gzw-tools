@@ -1,159 +1,173 @@
 [
   {
-    "name": "6B23-1(Digital)",
-    "id": "6b23-1(digital)",
-    "type": "Ballistic Vest",
-    "material": "Steel",
-    "weight": 7.9,
+    "name": "Coolmax Covert Vest",
+    "nij": "IIIA",
+    "material": "Aramid",
+    "plates": "Front, Back",
     "grid": "3x3",
-    "image": "https://static.wikia.nocookie.net/gray-zone-warfare/images/1/15/6B23-1%28Digital%29_inspect.png/revision/latest/scale-to-width-down/178?cb=20250621182707"
+    "weight": 1.76,
+    "source": "Looting"
   },
   {
-    "name": "6B23-1(Flora)",
-    "id": "6b23-1(flora)",
-    "type": "Ballistic Vest",
-    "material": "Steel",
-    "weight": 7.4,
-    "grid": "3x3"
-  },
-  {
-    "name": "Armor Vests",
-    "id": "armor-vests",
-    "image": "https://static.wikia.nocookie.net/gray-zone-warfare/images/a/a4/Commander%28Black%29_icon.png/revision/latest?cb=20250609082307"
-  },
-  {
-    "name": "ATBV Vest",
-    "id": "atbv-vest",
-    "type": "Ballistic Vest",
-    "material": "UHMWPE",
-    "weight": 3.8,
-    "grid": "3x3"
-  },
-  {
-    "name": "B Krogan",
-    "id": "b-krogan",
-    "type": "Armor vest",
-    "material": "???",
-    "grid": "3x3"
+    "name": "Covert Tactical (UNLRA)",
+    "nij": "IIIA",
+    "material": "Aramid",
+    "plates": "Front, Back",
+    "grid": "3x3",
+    "weight": 2.1,
+    "source": "Looting"
   },
   {
     "name": "Commander (Black)",
-    "id": "commander-(black)",
-    "type": "Armor vest",
-    "material": "UHMWPE",
+    "nij": "IIIA",
+    "material": "Aramid",
+    "plates": "Front, Back",
+    "grid": "3x3",
     "weight": 2.45,
-    "grid": "3x3"
+    "source": "Handshake R.1"
   },
   {
     "name": "Commander (Navy)",
-    "id": "commander-(navy)",
-    "type": "Armor vest",
+    "nij": "IIIA",
     "material": "Aramid",
-    "weight": 2.45,
+    "plates": "Front, Back",
     "grid": "3x3",
-    "image": "https://static.wikia.nocookie.net/gray-zone-warfare/images/c/c7/Commander%28Navy%29_inspect.png/revision/latest/scale-to-width-down/180?cb=20260304175540"
+    "weight": 2.45,
+    "source": "Looting"
   },
   {
     "name": "Commander (Olive)",
-    "id": "commander-(olive)",
-    "type": "Armor vest",
-    "material": "UHMWPE",
+    "nij": "IIIA",
+    "material": "Aramid",
+    "plates": "Front, Back",
+    "grid": "3x3",
     "weight": 2.45,
-    "grid": "3x3"
-  },
-  {
-    "name": "Coolmax Covert Vest",
-    "id": "coolmax-covert-vest",
-    "type": "Ballistic Vest",
-    "material": "Aramid",
-    "weight": 1.76,
-    "grid": "3x3"
-  },
-  {
-    "name": "Covert Tactical Body Armour (Police)",
-    "id": "covert-tactical-body-armour-(police)",
-    "type": "Ballistic Vest",
-    "material": "UHMWPE",
-    "weight": 5.77,
-    "grid": "3x3"
-  },
-  {
-    "name": "Covert Tactical Body Armour (Press)",
-    "id": "covert-tactical-body-armour-(press)",
-    "type": "Ballistic Vest",
-    "material": "Steel",
-    "weight": 10.41,
-    "grid": "3x3"
-  },
-  {
-    "name": "Covert Tactical Body Armour (UNLRA)",
-    "id": "covert-tactical-body-armour-(unlra)",
-    "type": "Ballistic Vest",
-    "material": "Aramid",
-    "weight": 2.1,
-    "grid": "3x3",
-    "image": "https://static.wikia.nocookie.net/gray-zone-warfare/images/d/d2/Covert_%28UNLRA%29_inspect.png/revision/latest/scale-to-width-down/186?cb=20240515142152"
-  },
-  {
-    "name": "CZ 4M Hornet (UNLRA)",
-    "id": "cz-4m-hornet-(unlra)",
-    "type": "Ballistic Vest",
-    "material": "Ceramic",
-    "weight": 6.45,
-    "grid": "3x3",
-    "image": "https://static.wikia.nocookie.net/gray-zone-warfare/images/b/b4/Hornet_inspect.png/revision/latest/scale-to-width-down/186?cb=20250601042837"
-  },
-  {
-    "name": "CZ VIP (Black)",
-    "id": "cz-vip-(black)",
-    "type": "Ballistic Vest",
-    "material": "Steel",
-    "weight": 4.8,
-    "grid": "3x3",
-    "image": "https://static.wikia.nocookie.net/gray-zone-warfare/images/0/0c/VIP_inspect.png/revision/latest/scale-to-width-down/200?cb=20250621182702"
-  },
-  {
-    "name": "LVS Overt (Ranger Green)",
-    "id": "lvs-overt-(ranger-green)",
-    "type": "Ballistic Vest",
-    "material": "Steel",
-    "weight": 7.5,
-    "grid": "3x3",
-    "image": "https://static.wikia.nocookie.net/gray-zone-warfare/images/2/20/LVS_Overt_%28Ranger_Green%29_inspect.png/revision/latest/scale-to-width-down/200?cb=20260331092143"
-  },
-  {
-    "name": "LVS Tactical (Multicam)",
-    "id": "lvs-tactical-(multicam)",
-    "type": "Ballistic Vest",
-    "material": "Ceramic",
-    "weight": 8.2,
-    "grid": "3\u00d73",
-    "image": "https://static.wikia.nocookie.net/gray-zone-warfare/images/c/c5/LVS_Tactical_%28Multicam%29_inspect.png/revision/latest/scale-to-width-down/200?cb=20260404182210"
-  },
-  {
-    "name": "LVS Tactical (Ranger Green)",
-    "id": "lvs-tactical-(ranger-green)",
-    "type": "Ballistic Vest",
-    "material": "Steel",
-    "weight": 10.8,
-    "grid": "3x3",
-    "image": "https://static.wikia.nocookie.net/gray-zone-warfare/images/f/f5/LVS_Tactical_%28Ranger_Green%29_inspect.png/revision/latest/scale-to-width-down/188?cb=20260331092115"
+    "source": "Looting"
   },
   {
     "name": "Molle Vest",
-    "id": "molle-vest",
-    "type": "Ballistic Vest",
+    "nij": "IIIA",
     "material": "Steel",
-    "weight": 2.6,
+    "plates": "Front",
     "grid": "3x3",
-    "image": "https://static.wikia.nocookie.net/gray-zone-warfare/images/8/87/Molle_inspect.png/revision/latest/scale-to-width-down/180?cb=20250621182814"
+    "weight": 2.6,
+    "source": "Artisan R.1"
+  },
+  {
+    "name": "LVS Overt (Ranger Green)",
+    "nij": "IIIA+",
+    "material": "Steel",
+    "plates": "Front, Back",
+    "grid": "3x3",
+    "weight": 7.5,
+    "source": "Handshake R.1"
   },
   {
     "name": "SK-S Ballistic Vest",
-    "id": "sk-s-ballistic-vest",
-    "type": "Ballistic Vest",
+    "nij": "III",
     "material": "UHMWPE",
+    "plates": "Front, Back",
+    "grid": "3x3",
     "weight": 3.15,
-    "grid": "3x3"
+    "source": "Turncoat R.2"
+  },
+  {
+    "name": "ATBV Vest",
+    "nij": "III",
+    "material": "UHMWPE",
+    "plates": "Front, Back",
+    "grid": "3x3",
+    "weight": 3.8,
+    "source": "Turncoat R.2"
+  },
+  {
+    "name": "CZ VIP (Black)",
+    "nij": "III",
+    "material": "Steel",
+    "plates": "Front",
+    "grid": "3x3",
+    "weight": 4.8,
+    "source": "Handshake R.2"
+  },
+  {
+    "name": "Covert Tactical (Police)",
+    "nij": "III",
+    "material": "UHMWPE",
+    "plates": "Front, Back",
+    "grid": "3x3",
+    "weight": 5.77,
+    "source": "Looting"
+  },
+  {
+    "name": "Covert Tactical (Press)",
+    "nij": "III",
+    "material": "Steel",
+    "plates": "Front, Back",
+    "grid": "3x3",
+    "weight": 10.41,
+    "source": "Looting"
+  },
+  {
+    "name": "CZ 4M Hornet (UNLRA)",
+    "nij": "III",
+    "material": "Ceramic",
+    "plates": "Front, Back",
+    "grid": "3x3",
+    "weight": 6.45,
+    "source": "Looting"
+  },
+  {
+    "name": "Covert Tactical (Woodland)",
+    "nij": "III",
+    "material": "Steel",
+    "plates": "Front, Back",
+    "grid": "3x3",
+    "weight": 8.8,
+    "source": "Handshake R.2"
+  },
+  {
+    "name": "LVS Tactical (Ranger Green)",
+    "nij": "III",
+    "material": "Steel",
+    "plates": "Front, Back, Sides",
+    "grid": "3x3",
+    "weight": 10.8,
+    "source": "Handshake R.2"
+  },
+  {
+    "name": "6B23-1 (Flora)",
+    "nij": "III+",
+    "material": "Steel",
+    "plates": "Front",
+    "grid": "3x4",
+    "weight": 7.4,
+    "source": "Turncoat R.3"
+  },
+  {
+    "name": "6B23-1 (Digital)",
+    "nij": "III+",
+    "material": "Steel",
+    "plates": "Front",
+    "grid": "3x4",
+    "weight": 7.9,
+    "source": "Looting"
+  },
+  {
+    "name": "CZ 4M Hornet (Green)",
+    "nij": "III+",
+    "material": "Ceramic",
+    "plates": "Front, Back",
+    "grid": "3x3",
+    "weight": 6.9,
+    "source": "Handshake R.3"
+  },
+  {
+    "name": "LVS Tactical (Multicam)",
+    "nij": "III++",
+    "material": "Ceramic",
+    "plates": "Front, Back, Sides",
+    "grid": "3x3",
+    "weight": 8.2,
+    "source": "Handshake R.4"
   }
 ]
