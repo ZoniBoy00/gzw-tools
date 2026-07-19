@@ -333,6 +333,27 @@
       "material": "Aramid",
       "weight": 1.05,
       "source": "Handshake R.4"
+    },
+    {
+      "name": "QGF-03 (Ghillie)",
+      "nij": "IIIA",
+      "material": "Aramid",
+      "weight": 1.5,
+      "source": "Looting"
+    },
+    {
+      "name": "FAST XP HC (Multicam)",
+      "nij": "IIIA",
+      "material": "UHMWPE",
+      "weight": 1.1,
+      "source": "Looting"
+    },
+    {
+      "name": "FAST XP HC (Olive)",
+      "nij": "IIIA",
+      "material": "UHMWPE",
+      "weight": 1.1,
+      "source": "Looting"
     }
   ],
   "plate_carriers": [

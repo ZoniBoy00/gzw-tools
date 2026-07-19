@@ -14,12 +14,15 @@
 | **Overview** | Dashboard with quick stats, rep progress, gear recommendations |
 | **Rep → $** | Calculate cost to reach a target reputation |
 | **$ → Rep** | Calculate how much rep you can buy with your budget |
-| **Missions** | Browse 159 missions from 6 vendors — search, filter, expand |
+| **Overview** | Dashboard with quick stats, rep progress, gear recommendations |
+| **Rep → $** | Calculate cost to reach a target reputation |
+| **$ → Rep** | Calculate how much rep you can buy with your budget |
+| **Missions** | Browse 159 missions from 7 vendors — search, filter, expand |
 | **Ammo** | Full ammo database with caliber, pen values, vendor sources |
 | **Weapons** | Weapons database with compare mode, filters, detail modals |
-| **Armor** | Armor & gear guide with recommendations, compare, vendor gear |
-| **Keys** 🔑 | 103 keys & keycards across 12 locations — search by location or name |
-| **Vendors** | Vendor guide with rep tracking, per-rank item lists, unlock status |
+| **Armor** | Armor & gear guide with vests, plate carriers, helmets, recommendations |
+| **Keys** 🔑 | 105 keys & keycards across 12 locations — search by location or name |
+| **Vendors** | Vendor guide with rep tracking, per-rank item lists, unlock status (7 vendors) |
 | **Loadouts** | Build and save weapon loadouts in your browser |
 | **Log Analyzer** | Parse GZW.log files to extract match data |
 | **API** | REST API for all game data |
@@ -50,12 +53,12 @@ GET /api                    API documentation
 GET /api/ammo               All ammunition data
 GET /api/vendors            Vendor reputation data
 GET /api/weapons            Weapons database
-GET /api/armor              Armor vests & helmets
+GET /api/armor              Armor vests, plate carriers & helmets
 GET /api/armor/vests        Vests only
 GET /api/armor/helmets      Helmets only
 GET /api/recommendations    Gear recommendations
 GET /api/missions           Mission database
-GET /api/keys               Keys & keycards
+GET /api/keys               Keys & keycards (105 keys)
 GET /api/stats              Aggregate statistics
 GET /api/search?q=          Unified search
 GET /api/calculator/rep-to-dollars?current=&target=&rate=

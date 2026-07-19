@@ -19,7 +19,7 @@ const FAQS = [
   },
   {
     q: 'How do vendor reputation levels work?',
-    a: 'Each vendor has 4 reputation ranks. You need a certain amount of rep to unlock each rank. The formula is: Rank × 2,500 = rep needed. For example, R.2 requires 5,000 rep total. Enter your current rep in the Vendor Guide to see what items you have access to.',
+    a: 'Each vendor has 4 reputation ranks with different cumulative rep requirements. Handshake needs 1,250 rep for R.2, 9,500 for R.3, and 13,000 for R.4. Other vendors have different thresholds — check the Vendor Guide tab for exact values per vendor.',
   },
   {
     q: 'How does the Rep → $ calculator work?',
