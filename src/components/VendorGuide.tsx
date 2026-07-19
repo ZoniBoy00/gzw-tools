@@ -83,7 +83,8 @@ function getVendorItems(vendorName: string): VendorItem[] {
 }
 
 function buildModal(item: VendorItem): ModalItem {
-  const base = { name: item.name, image: itemImages[item.name as keyof typeof itemImages] as string | undefined };
+  const ammoKey = item.type === 'ammo' && item.raw ? `${(item.raw as Record<string, unknown>).caliber} ${item.name}` : item.name;
+  const base = { name: item.name, image: (itemImages[ammoKey as keyof typeof itemImages] || itemImages[item.name as keyof typeof itemImages]) as string | undefined };
 
   if (item.type === 'weapon') {
     if (item.raw) {
@@ -302,6 +303,8 @@ export default function VendorGuide() {
                     >
                       {itemImages[item.name as keyof typeof itemImages] && (
                         <img src={itemImages[item.name as keyof typeof itemImages] as string} alt="" className="w-9 h-9 object-contain shrink-0 bg-surface border" style={{ borderColor: meta.color + '20' }} loading="lazy" />
+                      ) || item.type === 'ammo' && item.raw && itemImages[`${(item.raw as Record<string, unknown>).caliber} ${item.name}` as keyof typeof itemImages] && (
+                        <img src={itemImages[`${(item.raw as Record<string, unknown>).caliber} ${item.name}` as keyof typeof itemImages] as string} alt="" className="w-9 h-9 object-contain shrink-0 bg-surface border" style={{ borderColor: meta.color + '20' }} loading="lazy" />
                       )}
                       <div className="min-w-0 flex-1">
                         <div className="text-xs font-medium flex items-center gap-1.5">
