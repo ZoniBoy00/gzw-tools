@@ -34,13 +34,13 @@ export default function MissionFinder() {
   const [expanded, setExpanded] = useState<string | null>(null);
 
   const categories = useMemo(() => {
-    const cats = ['main', 'side', 'hidden_task', 'squad', 'contract', 'unknown'];
+    const cats = ['main_task', 'side_task', 'hidden_task', 'squad_strike', 'contract', 'unknown'];
     const result: { key: string; label: string; icon: string }[] = [];
     for (const c of cats) {
       const count = tasks.filter((t) => t.category === c || t.type === c).length;
       if (count > 0) {
-        const labels: Record<string, string> = { main: 'Main Tasks', side: 'Side Tasks', hidden_task: 'Hidden Tasks', squad: 'Squad Strikes', contract: 'Contracts', unknown: 'Other' };
-        const icons: Record<string, string> = { main: 'fas fa-star', side: 'fas fa-list', hidden_task: 'fas fa-eye-slash', squad: 'fas fa-people-group', contract: 'fas fa-file-contract', unknown: 'fas fa-question' };
+        const labels: Record<string, string> = { main_task: 'Main Tasks', side_task: 'Side Tasks', hidden_task: 'Hidden Tasks', squad_strike: 'Squad Strikes', contract: 'Contracts', unknown: 'Other' };
+        const icons: Record<string, string> = { main_task: 'fas fa-star', side_task: 'fas fa-list', hidden_task: 'fas fa-eye-slash', squad_strike: 'fas fa-people-group', contract: 'fas fa-file-contract', unknown: 'fas fa-question' };
         result.push({ key: c, label: `${labels[c] || c} (${count})`, icon: icons[c] || 'fas fa-circle' });
       }
     }
@@ -192,6 +192,9 @@ function MissionRow({ task, expanded, setExpanded }: { task: Task; expanded: str
           <div className="min-w-0">
             <div className="text-sm font-medium truncate">{task.name}
               {task.category === 'hidden_task' && <span className="tag tag-amber text-[8px] ml-2">Hidden</span>}
+              {task.category === 'main_task' && <span className="tag text-[8px] ml-2" style={{background:'rgba(59,130,246,0.15)',color:'#3b82f6'}}>Main</span>}
+              {task.category === 'side_task' && <span className="tag text-[8px] ml-2" style={{background:'rgba(34,197,94,0.15)',color:'#22c55e'}}>Side</span>}
+              {task.category === 'squad_strike' && <span className="tag text-[8px] ml-2" style={{background:'rgba(168,85,247,0.15)',color:'#a855f7'}}>Squad</span>}
             </div>
             <div className="text-[10px] font-mono text-text-muted flex items-center gap-2">
               {task.vendor && <span className="tag tag-drab text-[8px]">{task.vendor}</span>}

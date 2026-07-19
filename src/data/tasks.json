@@ -16,7 +16,7 @@
       "and report back to"
     ],
     "reward_text": "Rewards Reputation with All four accounted for. Good work. We\u2019ll handle the recovery, so consider your part done. Here\u2019s your reward.",
-    "category": "unknown"
+    "category": "contract"
   },
   {
     "id": "cache-report-ix",
@@ -35,7 +35,7 @@
       "and report back to"
     ],
     "reward_text": "Rewards Reputation with All four accounted for. Good work. We\u2019ll handle the recovery, so consider your part done. Here\u2019s your reward.",
-    "category": "unknown"
+    "category": "contract"
   },
   {
     "id": "they-are-everywhere",
@@ -48,7 +48,7 @@
       "Search along the river for the other PMC operatives"
     ],
     "reward_text": "Rewards Reputation with Reputation with after the first completion. It's official. I've confirmed that the dead contractors were working for our competition. It seems they got too close to the jungle, and someone definitely didn\u2019t appreciate it. We need to exercise extreme caution around those woods; you never know who might be watching and waiting for the chance to take us out.",
-    "category": "unknown"
+    "category": "contract"
   },
   {
     "id": "a-small-favor",
@@ -107,7 +107,7 @@
     "name": "At the Mounds of Madness",
     "vendor": "Artisan",
     "area": "Ban pa",
-    "type": "unknown",
+    "type": "main",
     "objectives": [
       "Find proof of the cult's presence in Ban Pan (22:00 - 5:00)",
       "Find an ominous mural",
@@ -116,7 +116,7 @@
       "Find a disturbing statue"
     ],
     "reward_text": "Rewards Reputation with Artisan Mosin-Nagant (Sniper) 7.62x54R Sniper Round (7N1)",
-    "category": "unknown"
+    "category": "main_task"
   },
   {
     "id": "at-the-mounds-of-madness-ii",
@@ -135,7 +135,7 @@
     "name": "Aye Aye, Captain",
     "vendor": "Gunny",
     "area": "Tiger Bay",
-    "type": "unknown",
+    "type": "side",
     "objectives": [
       "Location of dock behind UNLRA building .",
       "Location of dock behind UNLRA building .",
@@ -145,7 +145,7 @@
       "Interact with red boat to complete task."
     ],
     "reward_text": "Rewards after first completion Reputation with Reputation with after first completion",
-    "category": "unknown"
+    "category": "side_task"
   },
   {
     "id": "baked",
@@ -165,12 +165,12 @@
     "name": "Big Entrance",
     "vendor": "Gunny",
     "area": "Tiger Bay",
-    "type": "unknown",
+    "type": "main",
     "objectives": [
       "Find and mark all the LAF weapon caches in Tiger Bay Central (22:00 - 5:00)"
     ],
     "reward_text": "Rewards Reputation with $4,200 Muxxum Rifle Case You did well. The exact locations of their weapon caches will be golden when we launch our strike against them. And knowing they don't have as much as we expected is a nice bonus.",
-    "category": "unknown"
+    "category": "main_task"
   },
   {
     "id": "buyer-of-untold-truths",
@@ -189,25 +189,25 @@
     "name": "Carnivore",
     "vendor": "Lab Rat",
     "area": "Hunter's Paradise",
-    "type": "unknown",
+    "type": "side",
     "objectives": [
       "Collect biological samples from Hunter's Paradise"
     ],
     "reward_text": "Rewards Reputation with Lab Rat $6,300 Basic Surgical &amp; Suture Kit",
-    "category": "unknown"
+    "category": "side_task"
   },
   {
     "id": "crumb-collector",
     "name": "Crumb Collector",
     "vendor": "Lab Rat",
     "area": "Tiger Bay",
-    "type": "unknown",
+    "type": "main",
     "objectives": [
       "Retrieve the medical records and report back to Lab Rat",
       "Locate the medical records in Tiger Bay"
     ],
     "reward_text": "Rewards Reputation with Lab Rat EPO V2 ORI-12 V2",
-    "category": "unknown"
+    "category": "main_task"
   },
   {
     "id": "deal-of-the-century",
@@ -363,20 +363,20 @@
     "name": "Firestarter",
     "vendor": "Lab Rat",
     "area": "Lamang Island",
-    "type": "unknown",
+    "type": "side",
     "objectives": [
       "Find out what happened in Khamphet village",
       "Investigate who is responsible for the atrocities"
     ],
     "reward_text": "Rewards Reputation with Lab Rat Strychnine I feel like everyone I\u2019ve ever tried to help here ends up dead sooner or later. Is it me? Could it all be my fault? I was just trying to do some good...",
-    "category": "unknown"
+    "category": "side_task"
   },
   {
     "id": "first-hit",
     "name": "First Hit",
     "vendor": "Handshake",
     "area": "Starting town",
-    "type": "unknown",
+    "type": "side",
     "objectives": [
       "Location of the marketplace on the map. Despite being the starting city of lamang, the market place is always approximatively in the middle of the town.",
       "Location of the marketplace on the map. Despite being the starting city of lamang, the market place is always approximatively in the middle of the town.",
@@ -386,7 +386,7 @@
       "Picture of the equipment of the criminal leader."
     ],
     "reward_text": "Rewards Reputation with Handshake $2,300 EXFIL(Multicam)",
-    "category": "unknown"
+    "category": "side_task"
   },
   {
     "id": "fort-narith-stroll",
@@ -409,7 +409,7 @@
     "name": "Fresh Meat II",
     "vendor": "Banshee",
     "area": "Blue Lagoon",
-    "type": "unknown",
+    "type": "main",
     "objectives": [
       "Picture of the room where is located the objective.",
       "Picture of the room where is located the objective.",
@@ -421,14 +421,14 @@
       "Inspect and report the matress."
     ],
     "reward_text": "Rewards Reputation with Banshee MP5 Standard 30-Round Magazine It doesn't matter how often I find places like this, it always makes me sick to my stomach. It never gets easier, that\u2019s for sure. I think we\u2019re starting to get the complete picture now, but there\u2019s still one piece missing. I\u2019ll talk to you soon.",
-    "category": "unknown"
+    "category": "main_task"
   },
   {
     "id": "fresh-meat-iii",
     "name": "Fresh Meat III",
     "vendor": "Banshee",
     "area": "Blue Lagoon",
-    "type": "unknown",
+    "type": "main",
     "objectives": [
       "Location of the body on the map.",
       "Location of the body on the map.",
@@ -438,7 +438,7 @@
       "Search the body and pick-up the intel."
     ],
     "reward_text": "Rewards Reputation with Banshee 7.62x51mm FMJ (M80A1) Just as I thought, it looks like the vast majority of the tourists were transported to the Midnight Sapphire Resort. As for the rest, we cannot be sure yet, but I\u2019m confident we\u2019ll get to the bottom of it eventually. Thank you for your help. While there\u2019s only a slim chance that we may be able to help these people, we can at least bring those responsible to justice and ensure that this doesn\u2019t happen again.",
-    "category": "unknown"
+    "category": "main_task"
   },
   {
     "id": "friendly-suggestion",
@@ -502,7 +502,7 @@
     "name": "Hacker II",
     "vendor": "Handshake",
     "area": "Fort Narith",
-    "type": "unknown",
+    "type": "main",
     "objectives": [
       "Hack the radio tower at Fort Narith airfield (22:00-5:00)",
       "Hack the central radio tower at Fort Narith (22:00-5:00)",
@@ -511,7 +511,7 @@
       "Locate the codebook in the radio room (22:00-5:00)"
     ],
     "reward_text": "Rewards Reputation with Handshake $4,600 Unlocks",
-    "category": "unknown"
+    "category": "main_task"
   },
   {
     "id": "hazardous-treasures",
@@ -537,7 +537,7 @@
     "name": "Hide And Seek",
     "vendor": "Gunny",
     "area": "Tiger Bay",
-    "type": "unknown",
+    "type": "squad",
     "objectives": [
       "Locate the LAF warehouse in Tiger Bay and identify the military reserves",
       "Mark a vehicle",
@@ -549,33 +549,33 @@
       "Gather intel from a laptop in the comms room"
     ],
     "reward_text": "Rewards +1,125 Reputation with $6,870 5.56x45mm AP (M995)",
-    "category": "unknown"
+    "category": "squad_strike"
   },
   {
     "id": "i-went-i-saw-i-conquered-ii",
     "name": "I Went, I Saw, I Conquered II",
     "vendor": "Handshake",
     "area": "Sawmill",
-    "type": "unknown",
+    "type": "main",
     "objectives": [
       "Explore the sawmill and find out the hostile group's intentions",
       "Find an explosives workshop",
       "Find barrels of kerosene"
     ],
     "reward_text": "Rewards Reputation with Handshake $2,800 Well, this is just getting better and better, doesn\u2019t it? Not only are they supposedly some assholes from afar, but from what you\u2019re telling me, they\u2019re making fucking explosives! Only God knows what they\u2019re planning to do with them\u2026 This has to be dealt with pronto, understand?",
-    "category": "unknown"
+    "category": "main_task"
   },
   {
     "id": "i-went-i-saw-i-conquered-iii",
     "name": "I Went, I Saw, I Conquered III",
     "vendor": "Handshake",
     "area": "Sawmill",
-    "type": "unknown",
+    "type": "main",
     "objectives": [
       "Neutralize the hostiles at the sawmill 0/20"
     ],
     "reward_text": "Rewards Reputation with Handshake $3,900 Recon Chest Rig",
-    "category": "unknown"
+    "category": "main_task"
   },
   {
     "id": "in-the-right-hands",
@@ -626,14 +626,14 @@
     "name": "Invaders From Afar",
     "vendor": "Artisan",
     "area": "Sawmill",
-    "type": "unknown",
+    "type": "side",
     "objectives": [
       "Search for leads about what happened to the hostiles in the Sawmill",
       "Locate  the medic's notes",
       "Find out what happened to the deserters"
     ],
     "reward_text": "Rewards Reputation with Artisan M700 Suppressed Barrel - 20\" M700 7.62x51mm 10-Round Magazine",
-    "category": "unknown"
+    "category": "side_task"
   },
   {
     "id": "its-in-the-water",
@@ -700,7 +700,7 @@
     "name": "Lamang Connection",
     "vendor": "Banshee",
     "area": "Ban Pa",
-    "type": "unknown",
+    "type": "side",
     "objectives": [
       "Shed where logbook is located at the table. Middle Door.",
       "Shed where logbook is located at the table. Middle Door.",
@@ -710,14 +710,14 @@
       "Window to climb over"
     ],
     "reward_text": "Rewards Reputation with Banshee 870 USD I see. So, our suspicions were spot on. The merch was intended for both foreign and domestic markets. That logbook you brought paints a much clearer picture, but we don\u2019t have all the information yet. I\u2019ll work on it and let you know once I discover more. Great work, by the way.",
-    "category": "unknown"
+    "category": "side_task"
   },
   {
     "id": "last-farewell-ii",
     "name": "Last Farewell II",
     "vendor": "Gunny",
     "area": "",
-    "type": "unknown",
+    "type": "side",
     "objectives": [
       "Location of Hole 4 at the Midnight Sapphire Golf Course",
       "Location of Hole 4 at the Midnight Sapphire Golf Course",
@@ -725,14 +725,14 @@
       "Mark the body to complete the task"
     ],
     "reward_text": "Rewards Reputation with Reputation with after first completion $1,880",
-    "category": "unknown"
+    "category": "side_task"
   },
   {
     "id": "last-flight",
     "name": "Last Flight",
     "vendor": "Artisan",
     "area": "Pha Lang Airfield",
-    "type": "unknown",
+    "type": "side",
     "objectives": [
       "Location of the crashed plane on the map (177/160).",
       "Location of the crashed plane on the map (177/160).",
@@ -740,7 +740,7 @@
       "The pilot laying next to the plane to inspect."
     ],
     "reward_text": "Rewards after first completion Reputation with Artisan Reputation with",
-    "category": "unknown"
+    "category": "side_task"
   },
   {
     "id": "last-resort",
@@ -758,7 +758,7 @@
     "name": "Left Behind II",
     "vendor": "Handshake",
     "area": "",
-    "type": "unknown",
+    "type": "side",
     "objectives": [
       "Location of Hole 4 at the Midnight Sapphire Golf Course",
       "Location of Hole 4 at the Midnight Sapphire Golf Course",
@@ -766,7 +766,7 @@
       "Mark the body to complete the task"
     ],
     "reward_text": "Rewards Reputation with Handshake Reputation with Handshake",
-    "category": "unknown"
+    "category": "side_task"
   },
   {
     "id": "line-in-the-sand",
@@ -813,13 +813,13 @@
     "name": "Lost Girl II",
     "vendor": "Gunny",
     "area": "Blue Lagoon",
-    "type": "unknown",
+    "type": "main",
     "objectives": [
       "Retrieve any clues from the Blue Lagoon and report back to Gunny",
       "Locate clues about the missing girl's whereabouts"
     ],
     "reward_text": "Rewards Reputation with $2,400 Damn, looking at the last entry in her diary does not look good. She met some \u201ccool people\u201d who like to party, and they were about to show her their \u201cspecial place.\u201d Goddammit! Why are kids so stupid!? I have a really bad feeling about this. Let\u2019s just hope I\u2019m wrong.",
-    "category": "unknown"
+    "category": "main_task"
   },
   {
     "id": "lost-hope",
@@ -838,14 +838,14 @@
     "name": "Lost Lover",
     "vendor": "Lab Rat",
     "area": "Fort Narith",
-    "type": "unknown",
+    "type": "side",
     "objectives": [
       "Search Savanpha village and uncover what happened to Atsawin Xiong",
       "Head to Fort Narith barracks and locate Atsawin Xiong's quarters",
       "Investigate the infirmary at Fort Narith and locate Atsawin Xiong"
     ],
     "reward_text": "Rewards Reputation with Lab Rat $3,300 Combat Tourniquet",
-    "category": "unknown"
+    "category": "side_task"
   },
   {
     "id": "mall-vigilante",
@@ -883,26 +883,26 @@
     "name": "Missing Colleague",
     "vendor": "Artisan",
     "area": "Fort Narith",
-    "type": "unknown",
+    "type": "side",
     "objectives": [
       "Find out what happened to Artisan's colleague.",
       "Locate any intel about the colleague's whereabouts."
     ],
     "reward_text": "Rewards Reputation with Artisan So he was arrested? Ah, fuck! You stupid old idealist, what the hell have you done this time? Merc, I need some time to think. Why don\u2019t you go away and kill some babies or whatever it is you do for fun, hm?",
-    "category": "unknown"
+    "category": "side_task"
   },
   {
     "id": "missing-colleague-ii",
     "name": "Missing Colleague II",
     "vendor": "Artisan",
     "area": "Fort narith",
-    "type": "unknown",
+    "type": "side",
     "objectives": [
       "Retrieve the interrogation transcript and report back to Artisan",
       "Locate the interrogation transcript"
     ],
     "reward_text": "Rewards Reputation with Artisan $1,880 So he sabotaged the vehicles at Fort Narith? God, you old fool! He was always opposing the government, but to be so reckless... it's not like him at all. I must make some calls and find him quickly...",
-    "category": "unknown"
+    "category": "side_task"
   },
   {
     "id": "name-your-poison",
@@ -940,14 +940,14 @@
     "name": "Native Negotiations",
     "vendor": "Handshake",
     "area": "Kiu Vongsa, Nam Thaven, Pha Lang",
-    "type": "unknown",
+    "type": "main",
     "objectives": [
       "Place the briefcase underneath a tractor",
       "Collect the",
       "at the command tent in the Base Camp"
     ],
     "reward_text": "Rewards Reputation with Lab Rat Excellent work. The drop went smoothly, and that\u2019s all I needed from you. Now we wait and see if our new friend keeps his word. It might take a while, but either way, we\u2019ll be ready.",
-    "category": "unknown"
+    "category": "main_task"
   },
   {
     "id": "neighborly-help",
@@ -1295,7 +1295,7 @@
     "name": "Skycrawlers II",
     "vendor": "Banshee",
     "area": "Pha Lang Airfield",
-    "type": "unknown",
+    "type": "main",
     "objectives": [
       "Location of the office on the map.",
       "Location of the office on the map.",
@@ -1307,7 +1307,7 @@
       "Logbook on top of a box next to a desk."
     ],
     "reward_text": "Rewards Reputation with Banshee $5,500 Okay, judging by this logbook, the narcotics were transported here from a yet unknown location, probably the production plant, and then processed, packed, and shipped off by planes with oblivious tourists inside. Laos, Cambodia, Vietnam, Thailand\u2026 they were quite busy, I see. With tourists on board the planes, the volume of the shipments wasn\u2019t great, but they clearly made up for it with the frequent flights. You did well. Now we need to find the source.",
-    "category": "unknown"
+    "category": "main_task"
   },
   {
     "id": "snooper",
@@ -1521,13 +1521,13 @@
     "name": "The Shadow Over Ban Pa II",
     "vendor": "Handshake",
     "area": "Ban Pa",
-    "type": "unknown",
+    "type": "main",
     "objectives": [
       "Bring the intel from Ban Pa to Handshake",
       "Find intel regarding the cult Ban Pa (22:00 - 5:00)"
     ],
     "reward_text": "Rewards Reputation with Handshake $3,500 MC50 Laser Edition",
-    "category": "unknown"
+    "category": "main_task"
   },
   {
     "id": "the-snitch",
@@ -1665,7 +1665,7 @@
     "name": "UNLRA",
     "vendor": "Handshake",
     "area": "Tiger Bay",
-    "type": "unknown",
+    "type": "squad",
     "objectives": [
       "Locate intel at the southern UNLRA checkpoint",
       "Gather intel from the first LAF checkpoint in Tiger Bay",
@@ -1677,7 +1677,7 @@
       "Retrieve the USB drive and report back to Handshake"
     ],
     "reward_text": "Rewards Reputation with Handshake Specialized Equipment Repair Kit",
-    "category": "unknown"
+    "category": "squad_strike"
   },
   {
     "id": "unlra-ii",
@@ -1897,23 +1897,23 @@
     "name": "Letters from Lamang",
     "vendor": "Turncoat",
     "area": "Blue Lagoon",
-    "type": "hidden",
-    "category": "hidden_task"
+    "type": "side",
+    "category": "side_task"
   },
   {
     "id": "needle-in-a-jungle",
     "name": "Needle in a Jungle",
     "vendor": "Gunny",
     "area": "Lamang Island",
-    "type": "hidden",
-    "category": "hidden_task"
+    "type": "side",
+    "category": "side_task"
   },
   {
     "id": "the-last-broadcast",
     "name": "The Last Broadcast",
     "vendor": "Lab Rat",
     "area": "Ban Pa",
-    "type": "hidden",
-    "category": "hidden_task"
+    "type": "side",
+    "category": "side_task"
   }
 ]
