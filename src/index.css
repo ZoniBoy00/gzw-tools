@@ -268,6 +268,9 @@ select.input {
   width: 1em;
   height: 1em;
 }
+/* Allow per-column alignment overrides */
+.table-wrap th.text-center { text-align: center !important; }
+.table-wrap th.text-right { text-align: right !important; }
 /* Header separator: 2px solid border-bottom on ths */
 /* (thead tr::after removed — th backgrounds obscure it) */
 .table-wrap td {
