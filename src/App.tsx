@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { BrowserRouter, Routes, Route, Navigate, useLocation } from 'react-router-dom';
 import Dashboard from './components/Dashboard';
 import RepCalculator from './components/RepCalculator';
 import DollarCalculator from './components/DollarCalculator';
@@ -11,28 +11,24 @@ import LoadoutBuilder from './components/LoadoutBuilder';
 import LogAnalyzer from './components/LogAnalyzer';
 import ApiDocs from './components/ApiDocs';
 import TabBar from './components/ui/TabBar';
-import { calcRepToDollars } from './lib/calc';
 import './index.css';
 
-type Tab = 'dashboard' | 'rep' | 'dollar' | 'missions' | 'ammo' | 'weapons' | 'armor' | 'vendors' | 'loadouts' | 'logs' | 'api-docs';
+const TABS = [
+  { id: 'dashboard', label: 'Overview', icon: 'fas fa-gauge', path: '/' },
+  { id: 'rep', label: 'Rep → $', icon: 'fas fa-bullseye', path: '/rep' },
+  { id: 'dollar', label: '$ → Rep', icon: 'fas fa-coins', path: '/dollar' },
+  { id: 'missions', label: 'Missions', icon: 'fas fa-clipboard-list', path: '/missions' },
+  { id: 'ammo', label: 'Ammo', icon: 'fas fa-bolt', path: '/ammo' },
+  { id: 'weapons', label: 'Weapons', icon: 'fas fa-crosshairs', path: '/weapons' },
+  { id: 'armor', label: 'Armor', icon: 'fas fa-shield-halved', path: '/armor' },
+  { id: 'vendors', label: 'Vendors', icon: 'fas fa-store', path: '/vendors' },
+  { id: 'loadouts', label: 'Loadouts', icon: 'fas fa-screwdriver-wrench', path: '/loadouts' },
+  { id: 'logs', label: 'Log Analyzer', icon: 'fas fa-file-lines', path: '/logs' },
+  { id: 'api-docs', label: 'API', icon: 'fas fa-code', path: '/api-docs' },
+] as const;
 
-const TABS: { id: Tab; label: string; icon: string }[] = [
-  { id: 'dashboard', label: 'Overview', icon: 'fas fa-gauge' },
-  { id: 'rep', label: 'Rep → $', icon: 'fas fa-bullseye' },
-  { id: 'dollar', label: '$ → Rep', icon: 'fas fa-coins' },
-  { id: 'missions', label: 'Missions', icon: 'fas fa-clipboard-list' },
-  { id: 'ammo', label: 'Ammo', icon: 'fas fa-bolt' },
-  { id: 'weapons', label: 'Weapons', icon: 'fas fa-crosshairs' },
-  { id: 'armor', label: 'Armor', icon: 'fas fa-shield-halved' },
-  { id: 'vendors', label: 'Vendors', icon: 'fas fa-store' },
-  { id: 'loadouts', label: 'Loadouts', icon: 'fas fa-screwdriver-wrench' },
-  { id: 'logs', label: 'Log Analyzer', icon: 'fas fa-file-lines' },
-  { id: 'api-docs', label: 'API', icon: 'fas fa-code' },
-];
-
-function App() {
-  const [activeTab, setActiveTab] = useState<Tab>('dashboard');
-  const [repResult, setRepResult] = useState<ReturnType<typeof calcRepToDollars> | null>(null);
+function Layout() {
+  const location = useLocation();
 
   return (
     <div className="scanlines min-h-screen bg-bg text-text">
@@ -64,21 +60,24 @@ function App() {
 
       <main className="max-w-5xl mx-auto px-4 py-6">
         {/* Tab bar */}
-        <TabBar tabs={TABS} active={activeTab} onChange={setActiveTab} />
+        <TabBar tabs={TABS} />
 
         {/* Content */}
         <div className="mt-5 card p-5 md:p-6 tab-content">
-          {activeTab === 'dashboard' && <Dashboard />}
-          {activeTab === 'rep' && <RepCalculator result={repResult} setResult={setRepResult} />}
-          {activeTab === 'dollar' && <DollarCalculator />}
-          {activeTab === 'missions' && <MissionFinder />}
-          {activeTab === 'ammo' && <AmmoGuide />}
-          {activeTab === 'weapons' && <WeaponsGuide />}
-          {activeTab === 'armor' && <ArmorGuide />}
-          {activeTab === 'vendors' && <VendorGuide />}
-          {activeTab === 'loadouts' && <LoadoutBuilder />}
-          {activeTab === 'logs' && <LogAnalyzer />}
-          {activeTab === 'api-docs' && <ApiDocs />}
+          <Routes location={location}>
+            <Route path="/" element={<Dashboard />} />
+            <Route path="/rep" element={<RepCalculator />} />
+            <Route path="/dollar" element={<DollarCalculator />} />
+            <Route path="/missions" element={<MissionFinder />} />
+            <Route path="/ammo" element={<AmmoGuide />} />
+            <Route path="/weapons" element={<WeaponsGuide />} />
+            <Route path="/armor" element={<ArmorGuide />} />
+            <Route path="/vendors" element={<VendorGuide />} />
+            <Route path="/loadouts" element={<LoadoutBuilder />} />
+            <Route path="/logs" element={<LogAnalyzer />} />
+            <Route path="/api-docs" element={<ApiDocs />} />
+            <Route path="*" element={<Navigate to="/" replace />} />
+          </Routes>
         </div>
       </main>
 
@@ -97,4 +96,10 @@ function App() {
   );
 }
 
-export default App;
+export default function App() {
+  return (
+    <BrowserRouter>
+      <Layout />
+    </BrowserRouter>
+  );
+}

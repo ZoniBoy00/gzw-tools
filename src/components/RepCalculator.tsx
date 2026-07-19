@@ -1,11 +1,6 @@
 import { useState, useEffect, useCallback, useMemo } from 'react';
 import { calcRepToDollars, formatCurrency, formatNumber, MAX_REP, VENDORS } from '../lib/calc';
 
-interface Props {
-  result: ReturnType<typeof calcRepToDollars> | null;
-  setResult: (r: ReturnType<typeof calcRepToDollars>) => void;
-}
-
 const LS_KEY = 'gzw-rep-calc';
 
 function loadSaved() {
@@ -16,11 +11,12 @@ function loadSaved() {
   return { current: '0', target: String(MAX_REP) };
 }
 
-export default function RepCalculator({ result, setResult }: Props) {
+export default function RepCalculator() {
   const [current, setCurrent] = useState(loadSaved().current);
   const [target, setTarget] = useState(loadSaved().target);
   const [rate, setRate] = useState('100');
   const [selectedVendor, setSelectedVendor] = useState<string | null>(null);
+  const [result, setResult] = useState<ReturnType<typeof calcRepToDollars> | null>(null);
 
   useEffect(() => {
     localStorage.setItem(LS_KEY, JSON.stringify({ current, target }));
