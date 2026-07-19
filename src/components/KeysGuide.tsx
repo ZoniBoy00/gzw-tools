@@ -1,21 +1,24 @@
 import { useState, useMemo } from 'react';
 import keysData from '../data/keys.json';
+import ItemModal from './ui/ItemModal';
+import type { ModalItem } from './ui/ItemModal';
 
 interface KeyEntry {
   name: string;
   location: string;
-  url: string;
+  wikiUrl: string;
+  image: string;
   inTask: boolean;
 }
 
 const keys = keysData as KeyEntry[];
-
 const LOCATIONS = [...new Set(keys.map((k) => k.location))].sort();
 
 export default function KeysGuide() {
   const [search, setSearch] = useState('');
   const [locationFilter, setLocationFilter] = useState('');
   const [taskFilter, setTaskFilter] = useState<'all' | 'task' | 'loot'>('all');
+  const [modalItem, setModalItem] = useState<ModalItem | null>(null);
 
   const filtered = useMemo(() => {
     let data = [...keys];
@@ -37,6 +40,19 @@ export default function KeysGuide() {
     }
     return groups;
   }, [filtered]);
+
+  const openModal = (key: KeyEntry) => {
+    setModalItem({
+      name: key.name,
+      image: key.image || undefined,
+      type: 'gear',
+      fields: [
+        { label: 'Location', value: key.location, desc: 'Area where this key is found or used' },
+        { label: 'Type', value: key.inTask ? 'Task Key' : 'Loot Key', desc: 'Task keys have static spawn points, loot keys are random drops' },
+        { label: 'Source', value: key.wikiUrl ? 'GZW Wiki' : '-', desc: 'View the wiki page for spawn locations' },
+      ],
+    });
+  };
 
   return (
     <div className="tab-content">
@@ -92,23 +108,36 @@ export default function KeysGuide() {
               <span className="text-[10px] font-bold uppercase tracking-[0.1em] text-text-muted">{loc}</span>
               <span className="text-[9px] font-mono text-text-muted/50">{locKeys.length} keys</span>
             </div>
-            <div className="space-y-0.5">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-1">
               {locKeys.map((k, i) => (
-                <div
+                <button
                   key={i}
-                  className="flex items-center gap-2 px-3 py-2 border border-border hover:border-border-light transition-colors text-sm"
+                  onClick={() => openModal(k)}
+                  className="flex items-center gap-2 px-3 py-2 border border-border hover:border-accent/30 transition-colors text-left w-full"
                 >
-                  <i className={`fas fa-${k.inTask ? 'fa-check-circle text-green/60' : 'fa-circle text-text-muted/30'} text-[8px]`} />
-                  <span className="flex-1 min-w-0 truncate">{k.name}</span>
-                  <span className={`text-[9px] font-mono px-1.5 py-0.5 ${k.inTask ? 'tag tag-amber' : 'text-text-muted/40'}`}>
+                  {k.image && (
+                    <img src={k.image} alt="" className="w-8 h-8 object-contain shrink-0" loading="lazy" />
+                  )}
+                  <div className="min-w-0 flex-1">
+                    <div className="text-xs font-medium truncate">{k.name}</div>
+                    <div className="text-[9px] font-mono text-text-muted/70 truncate">{k.location}</div>
+                  </div>
+                  <span className={`text-[9px] font-mono px-1.5 py-0.5 shrink-0 ${k.inTask ? 'tag tag-amber' : 'text-text-muted/40'}`}>
                     {k.inTask ? 'Task' : 'Loot'}
                   </span>
-                  {k.url && (
-                    <a href={k.url} target="_blank" rel="noopener noreferrer" className="text-text-muted/30 hover:text-accent transition-colors text-[10px]" title="View on Wiki">
+                  {k.wikiUrl && (
+                    <a
+                      href={k.wikiUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      onClick={(e) => e.stopPropagation()}
+                      className="text-text-muted/30 hover:text-accent transition-colors text-[10px]"
+                      title="View on Wiki"
+                    >
                       <i className="fas fa-external-link-alt" />
                     </a>
                   )}
-                </div>
+                </button>
               ))}
             </div>
           </div>
@@ -120,6 +149,8 @@ export default function KeysGuide() {
         {filtered.length} / {keys.length} keys
         <span className="text-accent/60">· {keys.filter((k) => k.inTask).length} task keys</span>
       </div>
+
+      {modalItem && <ItemModal item={modalItem} onClose={() => setModalItem(null)} />}
     </div>
   );
 }
