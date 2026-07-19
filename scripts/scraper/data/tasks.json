@@ -15,7 +15,8 @@
       "Fourth cache",
       "and report back to"
     ],
-    "reward_text": "Rewards Reputation with All four accounted for. Good work. We\u2019ll handle the recovery, so consider your part done. Here\u2019s your reward."
+    "reward_text": "Rewards Reputation with All four accounted for. Good work. We\u2019ll handle the recovery, so consider your part done. Here\u2019s your reward.",
+    "category": "unknown"
   },
   {
     "id": "cache-report-ix",
@@ -33,7 +34,8 @@
       "Fourth cache",
       "and report back to"
     ],
-    "reward_text": "Rewards Reputation with All four accounted for. Good work. We\u2019ll handle the recovery, so consider your part done. Here\u2019s your reward."
+    "reward_text": "Rewards Reputation with All four accounted for. Good work. We\u2019ll handle the recovery, so consider your part done. Here\u2019s your reward.",
+    "category": "unknown"
   },
   {
     "id": "they-are-everywhere",
@@ -45,7 +47,8 @@
       "Search around the camp west of Tiger Bay and find out what happened to the rival PMC operative",
       "Search along the river for the other PMC operatives"
     ],
-    "reward_text": "Rewards Reputation with Reputation with after the first completion. It's official. I've confirmed that the dead contractors were working for our competition. It seems they got too close to the jungle, and someone definitely didn\u2019t appreciate it. We need to exercise extreme caution around those woods; you never know who might be watching and waiting for the chance to take us out."
+    "reward_text": "Rewards Reputation with Reputation with after the first completion. It's official. I've confirmed that the dead contractors were working for our competition. It seems they got too close to the jungle, and someone definitely didn\u2019t appreciate it. We need to exercise extreme caution around those woods; you never know who might be watching and waiting for the chance to take us out.",
+    "category": "unknown"
   },
   {
     "id": "a-small-favor",
@@ -57,7 +60,8 @@
       "Shred the folder and report back to Turncoat.",
       "Locate the folder in Fort Narith HQ"
     ],
-    "reward_text": "Rewards Reputation with Turncoat $1,200 AK-74M"
+    "reward_text": "Rewards Reputation with Turncoat $1,200 AK-74M",
+    "category": "unknown"
   },
   {
     "id": "artisans-list",
@@ -69,7 +73,8 @@
       "Retrieve a list of evacuees from the UNLRA camp at Tiger Bay",
       "Locate the list"
     ],
-    "reward_text": "Rewards after first completion Reputation with Artisan Reputation with"
+    "reward_text": "Rewards after first completion Reputation with Artisan Reputation with",
+    "category": "unknown"
   },
   {
     "id": "artisans-list-ii",
@@ -81,19 +86,21 @@
       "Retrieve the documents from the UNLRA refugee camp at Tiger Bay",
       "Locate the documents"
     ],
-    "reward_text": "Rewards after first completion Reputation with Artisan Reputation with"
+    "reward_text": "Rewards after first completion Reputation with Artisan Reputation with",
+    "category": "unknown"
   },
   {
     "id": "at-dooms-gate",
     "name": "At Doom's Gate",
     "vendor": "Handshake",
     "area": "Lamang Island",
-    "type": "unknown",
+    "type": "hidden",
     "objectives": [
       "Retrieve the intel from the LAF Ground Zero checkpoint and report back to Handshake.",
       "Locate the intel"
     ],
-    "reward_text": "Rewards Reputation with Handshake Vudu 1-6x24 FFP Rifle Scope 7.62x51mm AP (M61)"
+    "reward_text": "Rewards Reputation with Handshake Vudu 1-6x24 FFP Rifle Scope 7.62x51mm AP (M61)",
+    "category": "hidden_task"
   },
   {
     "id": "at-the-mounds-of-madness",
@@ -108,7 +115,8 @@
       "Find a chilling mural",
       "Find a disturbing statue"
     ],
-    "reward_text": "Rewards Reputation with Artisan Mosin-Nagant (Sniper) 7.62x54R Sniper Round (7N1)"
+    "reward_text": "Rewards Reputation with Artisan Mosin-Nagant (Sniper) 7.62x54R Sniper Round (7N1)",
+    "category": "unknown"
   },
   {
     "id": "at-the-mounds-of-madness-ii",
@@ -119,7 +127,8 @@
     "objectives": [
       "Retrieve the intel from Ban Pa and report back to Artisan (22:00 - 5:00)"
     ],
-    "reward_text": "Rewards Reputation with Artisan This... this is nonsense! Complete fucking nonsense! These people were playing us all for fools. Now I'm not even sure if those tales about mutilated bodies hold any truth. Likely a part of the same scam to scare folks away. I just can't wrap my head around why those bastards from the LAF turned a blind eye to it. They had no qualms about cracking down on everyone else on this island, so why let this slide? Keep at it, merc. Maybe you'll unearth more."
+    "reward_text": "Rewards Reputation with Artisan This... this is nonsense! Complete fucking nonsense! These people were playing us all for fools. Now I'm not even sure if those tales about mutilated bodies hold any truth. Likely a part of the same scam to scare folks away. I just can't wrap my head around why those bastards from the LAF turned a blind eye to it. They had no qualms about cracking down on everyone else on this island, so why let this slide? Keep at it, merc. Maybe you'll unearth more.",
+    "category": "unknown"
   },
   {
     "id": "aye-aye-captain",
@@ -135,7 +144,8 @@
       "Interact with red boat to complete task.",
       "Interact with red boat to complete task."
     ],
-    "reward_text": "Rewards after first completion Reputation with Reputation with after first completion"
+    "reward_text": "Rewards after first completion Reputation with Reputation with after first completion",
+    "category": "unknown"
   },
   {
     "id": "baked",
@@ -147,7 +157,8 @@
       "Retrieve evidence of drug trade in Tiger Bay Central and report back to Banshee",
       "Locate the evidence"
     ],
-    "reward_text": "Rewards after first completion Reputation with Banshee Reputation with"
+    "reward_text": "Rewards after first completion Reputation with Banshee Reputation with",
+    "category": "unknown"
   },
   {
     "id": "big-entrance",
@@ -158,7 +169,8 @@
     "objectives": [
       "Find and mark all the LAF weapon caches in Tiger Bay Central (22:00 - 5:00)"
     ],
-    "reward_text": "Rewards Reputation with $4,200 Muxxum Rifle Case You did well. The exact locations of their weapon caches will be golden when we launch our strike against them. And knowing they don't have as much as we expected is a nice bonus."
+    "reward_text": "Rewards Reputation with $4,200 Muxxum Rifle Case You did well. The exact locations of their weapon caches will be golden when we launch our strike against them. And knowing they don't have as much as we expected is a nice bonus.",
+    "category": "unknown"
   },
   {
     "id": "buyer-of-untold-truths",
@@ -169,7 +181,8 @@
     "objectives": [
       "Retrieve the medical records in Tiger Bay and report back to Turncoat"
     ],
-    "reward_text": "Rewards Reputation with Turncoat $2,800 Friend, this is marvelous! These documents are packed with groundbreaking and shocking information. Just skimming through them, I think I\u2019ll have to raise the price a little! You have my heartfelt thanks. And as always, don\u2019t worry - I\u2019ll put them to good use..."
+    "reward_text": "Rewards Reputation with Turncoat $2,800 Friend, this is marvelous! These documents are packed with groundbreaking and shocking information. Just skimming through them, I think I\u2019ll have to raise the price a little! You have my heartfelt thanks. And as always, don\u2019t worry - I\u2019ll put them to good use...",
+    "category": "unknown"
   },
   {
     "id": "carnivore",
@@ -180,7 +193,8 @@
     "objectives": [
       "Collect biological samples from Hunter's Paradise"
     ],
-    "reward_text": "Rewards Reputation with Lab Rat $6,300 Basic Surgical &amp; Suture Kit"
+    "reward_text": "Rewards Reputation with Lab Rat $6,300 Basic Surgical &amp; Suture Kit",
+    "category": "unknown"
   },
   {
     "id": "crumb-collector",
@@ -192,7 +206,8 @@
       "Retrieve the medical records and report back to Lab Rat",
       "Locate the medical records in Tiger Bay"
     ],
-    "reward_text": "Rewards Reputation with Lab Rat EPO V2 ORI-12 V2"
+    "reward_text": "Rewards Reputation with Lab Rat EPO V2 ORI-12 V2",
+    "category": "unknown"
   },
   {
     "id": "deal-of-the-century",
@@ -204,7 +219,8 @@
       "Retrieve the evidence and report back to Banshee",
       "Locate the Evidence"
     ],
-    "reward_text": "Rewards Reputation with Banshee Mossberg 590 M590 12GA 10-Round Magazine"
+    "reward_text": "Rewards Reputation with Banshee Mossberg 590 M590 12GA 10-Round Magazine",
+    "category": "unknown"
   },
   {
     "id": "deep-depravity",
@@ -217,7 +233,8 @@
       "Bring evidence of atrocities to Banshee",
       "Locate the evidence"
     ],
-    "reward_text": "Rewards 1,000 Experience Reputation with Banshee This is exactly what we needed. The VHS contains definitive evidence that we can use in our case against the Democratic Republic of Lamang. Anyone who criticized the government - whether opposition, dissenters, or just those deemed unnecessary - disappeared into The Hole. Thank you for your cooperation; your help is greatly appreciated."
+    "reward_text": "Rewards 1,000 Experience Reputation with Banshee This is exactly what we needed. The VHS contains definitive evidence that we can use in our case against the Democratic Republic of Lamang. Anyone who criticized the government - whether opposition, dissenters, or just those deemed unnecessary - disappeared into The Hole. Thank you for your cooperation; your help is greatly appreciated.",
+    "category": "unknown"
   },
   {
     "id": "dishonest-practices",
@@ -228,7 +245,8 @@
     "objectives": [
       "Place the tracker in a weapon crate in a restaurant in Tiger Bay (22:00-5:00)"
     ],
-    "reward_text": "Rewards Reputation with Turncoat M2 Plate Carrier Friend, excellent job! I hope the weapons arrive at that annoying buyer soon enough. I'm looking forward to having a \"friendly\" chat with him. Here is your promised reward."
+    "reward_text": "Rewards Reputation with Turncoat M2 Plate Carrier Friend, excellent job! I hope the weapons arrive at that annoying buyer soon enough. I'm looking forward to having a \"friendly\" chat with him. Here is your promised reward.",
+    "category": "unknown"
   },
   {
     "id": "domesticated-rat",
@@ -241,7 +259,8 @@
       "Go to the hut in the woods east of the shack and secure intel from the contact",
       "Retrieve the intel and report back to Handshake"
     ],
-    "reward_text": "Rewards Reputation with Handshake Reputation with Handshake"
+    "reward_text": "Rewards Reputation with Handshake Reputation with Handshake",
+    "category": "unknown"
   },
   {
     "id": "double-exposure",
@@ -256,7 +275,8 @@
       "Pick up the first package inside a barn at the Xiong Family Farm",
       "Ensure your survival and do not lose those packages"
     ],
-    "reward_text": "Rewards Reputation with Turncoat $1,880 I applaud your expertise, friend! I'm sure that once the two gentlemen learn what I know about them, they will hastily fall in line. Thank you very much for taking care of this little matter for me."
+    "reward_text": "Rewards Reputation with Turncoat $1,880 I applaud your expertise, friend! I'm sure that once the two gentlemen learn what I know about them, they will hastily fall in line. Thank you very much for taking care of this little matter for me.",
+    "category": "unknown"
   },
   {
     "id": "downsizing",
@@ -267,7 +287,8 @@
     "objectives": [
       "Retrieve dog tags from five of the LAF officers at Forth Narith 0/5"
     ],
-    "reward_text": "Rewards Reputation with Turncoat $2,300 Friend, great job! The soldiers must be running around the base like chickens hit by a hawk. I'm happy that you're happy. Now I'll sleep a little easier... I mean because you did what was best for you. Yes, that's why! Ha Ha!"
+    "reward_text": "Rewards Reputation with Turncoat $2,300 Friend, great job! The soldiers must be running around the base like chickens hit by a hawk. I'm happy that you're happy. Now I'll sleep a little easier... I mean because you did what was best for you. Yes, that's why! Ha Ha!",
+    "category": "unknown"
   },
   {
     "id": "dragonslayer",
@@ -283,7 +304,8 @@
       "What the commander looks like.",
       "What the commander looks like."
     ],
-    "reward_text": "Rewards Reputation with Turncoat Mosin-Nagant (Sniper) Friend, you are an unstoppable force of nature. Such a beautiful display of pure violence. I'm sure even Mr. Handshake will be happy to see your company spread its wings a little further. You have my gratitude for getting rid of the alien worm."
+    "reward_text": "Rewards Reputation with Turncoat Mosin-Nagant (Sniper) Friend, you are an unstoppable force of nature. Such a beautiful display of pure violence. I'm sure even Mr. Handshake will be happy to see your company spread its wings a little further. You have my gratitude for getting rid of the alien worm.",
+    "category": "unknown"
   },
   {
     "id": "evacuation-question",
@@ -295,7 +317,8 @@
       "Retrieve the intel and report back to Artisan",
       "Locate the official orders regarding the UNLRA evacuation"
     ],
-    "reward_text": "Rewards Reputation with Artisan Mosin-Nagant (Sniper) According to this document... the army was ordered to actively prevent civilians from evacuating?! What a bunch of monsters! Using innocent people as shields. But why? And... where is everyone? I need to think. This doesn\u2019t make any fucking sense..."
+    "reward_text": "Rewards Reputation with Artisan Mosin-Nagant (Sniper) According to this document... the army was ordered to actively prevent civilians from evacuating?! What a bunch of monsters! Using innocent people as shields. But why? And... where is everyone? I need to think. This doesn\u2019t make any fucking sense...",
+    "category": "unknown"
   },
   {
     "id": "expansion",
@@ -307,7 +330,8 @@
       "Retrieve the LLA plans east of YBL-1 and report back to Gunny",
       "Locate the LLA Plans"
     ],
-    "reward_text": "Rewards Reputation with This looks promising. Good work. It seems like the rebels are indeed gearing up for the huge op on the island's east side. We'll decode what we can from the intel. In the meantime, take a well-deserved rest and enjoy your reward. You've earned it."
+    "reward_text": "Rewards Reputation with This looks promising. Good work. It seems like the rebels are indeed gearing up for the huge op on the island's east side. We'll decode what we can from the intel. In the meantime, take a well-deserved rest and enjoy your reward. You've earned it.",
+    "category": "unknown"
   },
   {
     "id": "family-heirloom",
@@ -319,7 +343,8 @@
       "Retrieve the valuables from Nakasa village and report back to Turncoat",
       "Locate the valuables"
     ],
-    "reward_text": "Rewards Reputation with Turncoat 6B23-1(Flora) Friend, you did it! You are a true treasure. I'm sure you've figured out that I wouldn't send you for some shitty baubles. You just made the current commander of Fort Narith a lot poorer. Ha ha ha! He stashed his money in this briefcase, and you... Ha ha ha, the look on your face! I'm sorry I had to deceive you. You know how it is with money and friends - you just don't ask a friend for cash."
+    "reward_text": "Rewards Reputation with Turncoat 6B23-1(Flora) Friend, you did it! You are a true treasure. I'm sure you've figured out that I wouldn't send you for some shitty baubles. You just made the current commander of Fort Narith a lot poorer. Ha ha ha! He stashed his money in this briefcase, and you... Ha ha ha, the look on your face! I'm sorry I had to deceive you. You know how it is with money and friends - you just don't ask a friend for cash.",
+    "category": "unknown"
   },
   {
     "id": "final-liberation",
@@ -330,7 +355,8 @@
     "objectives": [
       "Eliminate the rebel leader in YBL-1."
     ],
-    "reward_text": "Rewards Reputation with Turncoat $3,000 Ha ha ha! Friend, you are a wise and merciless man. I love it! The death of old Lani will strike fear into the hearts of the LLA assholes. Long have I waited for this moment. Sweet, sweet revenge. You have my gratitude."
+    "reward_text": "Rewards Reputation with Turncoat $3,000 Ha ha ha! Friend, you are a wise and merciless man. I love it! The death of old Lani will strike fear into the hearts of the LLA assholes. Long have I waited for this moment. Sweet, sweet revenge. You have my gratitude.",
+    "category": "unknown"
   },
   {
     "id": "firestarter",
@@ -342,7 +368,8 @@
       "Find out what happened in Khamphet village",
       "Investigate who is responsible for the atrocities"
     ],
-    "reward_text": "Rewards Reputation with Lab Rat Strychnine I feel like everyone I\u2019ve ever tried to help here ends up dead sooner or later. Is it me? Could it all be my fault? I was just trying to do some good..."
+    "reward_text": "Rewards Reputation with Lab Rat Strychnine I feel like everyone I\u2019ve ever tried to help here ends up dead sooner or later. Is it me? Could it all be my fault? I was just trying to do some good...",
+    "category": "unknown"
   },
   {
     "id": "first-hit",
@@ -358,7 +385,8 @@
       "Picture of the equipment of the criminal leader.",
       "Picture of the equipment of the criminal leader."
     ],
-    "reward_text": "Rewards Reputation with Handshake $2,300 EXFIL(Multicam)"
+    "reward_text": "Rewards Reputation with Handshake $2,300 EXFIL(Multicam)",
+    "category": "unknown"
   },
   {
     "id": "fort-narith-stroll",
@@ -373,7 +401,8 @@
       "Check the fuel supply entrance",
       "Check the airfield back entrance"
     ],
-    "reward_text": "Rewards Reputation with Handshake $4,600 Recon Chest Rig"
+    "reward_text": "Rewards Reputation with Handshake $4,600 Recon Chest Rig",
+    "category": "unknown"
   },
   {
     "id": "fresh-meat-ii",
@@ -391,7 +420,8 @@
       "Inspect and report the matress.",
       "Inspect and report the matress."
     ],
-    "reward_text": "Rewards Reputation with Banshee MP5 Standard 30-Round Magazine It doesn't matter how often I find places like this, it always makes me sick to my stomach. It never gets easier, that\u2019s for sure. I think we\u2019re starting to get the complete picture now, but there\u2019s still one piece missing. I\u2019ll talk to you soon."
+    "reward_text": "Rewards Reputation with Banshee MP5 Standard 30-Round Magazine It doesn't matter how often I find places like this, it always makes me sick to my stomach. It never gets easier, that\u2019s for sure. I think we\u2019re starting to get the complete picture now, but there\u2019s still one piece missing. I\u2019ll talk to you soon.",
+    "category": "unknown"
   },
   {
     "id": "fresh-meat-iii",
@@ -407,7 +437,8 @@
       "Search the body and pick-up the intel.",
       "Search the body and pick-up the intel."
     ],
-    "reward_text": "Rewards Reputation with Banshee 7.62x51mm FMJ (M80A1) Just as I thought, it looks like the vast majority of the tourists were transported to the Midnight Sapphire Resort. As for the rest, we cannot be sure yet, but I\u2019m confident we\u2019ll get to the bottom of it eventually. Thank you for your help. While there\u2019s only a slim chance that we may be able to help these people, we can at least bring those responsible to justice and ensure that this doesn\u2019t happen again."
+    "reward_text": "Rewards Reputation with Banshee 7.62x51mm FMJ (M80A1) Just as I thought, it looks like the vast majority of the tourists were transported to the Midnight Sapphire Resort. As for the rest, we cannot be sure yet, but I\u2019m confident we\u2019ll get to the bottom of it eventually. Thank you for your help. While there\u2019s only a slim chance that we may be able to help these people, we can at least bring those responsible to justice and ensure that this doesn\u2019t happen again.",
+    "category": "unknown"
   },
   {
     "id": "friendly-suggestion",
@@ -419,7 +450,8 @@
       "Location of the commander on the map.",
       "Location of the commander on the map."
     ],
-    "reward_text": "Rewards Reputation with Turncoat Friend, my gratitude knows no bounds. That scoundrel had it coming for far too long - his obstructionism was intolerable. I'm glad that your actions not only benefit me and your company but also contribute to the betterment of this land!"
+    "reward_text": "Rewards Reputation with Turncoat Friend, my gratitude knows no bounds. That scoundrel had it coming for far too long - his obstructionism was intolerable. I'm glad that your actions not only benefit me and your company but also contribute to the betterment of this land!",
+    "category": "unknown"
   },
   {
     "id": "garbage-disposal",
@@ -431,7 +463,8 @@
       "Go to Savanpha village and find out what happened to Jai Tan",
       "Go to the dumping ground near Savanpha village and locate Jai Tan"
     ],
-    "reward_text": "Rewards Reputation with Artisan 7.62x54R AP (7N13) I had my suspicions that Jai was working with the LLA, but now they say he was Narith's lapdog - a spy! I knew him from childhood... No! This must be a mistake. I refuse to believe he was just full of shit after all this time. But the LLA... I have to do something. This isn't right!"
+    "reward_text": "Rewards Reputation with Artisan 7.62x54R AP (7N13) I had my suspicions that Jai was working with the LLA, but now they say he was Narith's lapdog - a spy! I knew him from childhood... No! This must be a mistake. I refuse to believe he was just full of shit after all this time. But the LLA... I have to do something. This isn't right!",
+    "category": "unknown"
   },
   {
     "id": "girls-just-wanna-have-fun",
@@ -442,14 +475,15 @@
     "objectives": [
       "Search the Midnight Sapphire and uncover what happened to Ying Vilaysack"
     ],
-    "reward_text": "Rewards Reputation with Artisan $3,800 AK 7.62 Mag"
+    "reward_text": "Rewards Reputation with Artisan $3,800 AK 7.62 Mag",
+    "category": "unknown"
   },
   {
     "id": "goods-hunting",
     "name": "Goods Hunting",
     "vendor": "Gunny",
     "area": "Khonwan Village (East of Nam Thaven)",
-    "type": "unknown",
+    "type": "hidden",
     "objectives": [
       "Location of objective on map (183 :124)",
       "Location of objective on map (183 :124)",
@@ -460,7 +494,8 @@
       "Inside of Khonwan Village (181 : 120) interact with this  folder to start the task",
       "Inside of Khonwan Village (181 : 120) interact with this  folder to start the task"
     ],
-    "reward_text": "Rewards Reputation with SOCOM 3 Prong Flash Hider SOCOM556 RC1 Suppressor I was starting to think those supplies were gone for good. Good work, this'll help us a lot."
+    "reward_text": "Rewards Reputation with SOCOM 3 Prong Flash Hider SOCOM556 RC1 Suppressor I was starting to think those supplies were gone for good. Good work, this'll help us a lot.",
+    "category": "hidden_task"
   },
   {
     "id": "hacker-ii",
@@ -475,7 +510,8 @@
       "Retrieve the codebook and report back to Handshake",
       "Locate the codebook in the radio room (22:00-5:00)"
     ],
-    "reward_text": "Rewards Reputation with Handshake $4,600 Unlocks"
+    "reward_text": "Rewards Reputation with Handshake $4,600 Unlocks",
+    "category": "unknown"
   },
   {
     "id": "hazardous-treasures",
@@ -493,7 +529,8 @@
       "Eliminate hostiles at Hunter's Paradise 0/10",
       "Retrieve the container from Hunter's Paradise"
     ],
-    "reward_text": "Rewards $6,870 after the first completion +1,125 Reputation with"
+    "reward_text": "Rewards $6,870 after the first completion +1,125 Reputation with",
+    "category": "unknown"
   },
   {
     "id": "hide-and-seek",
@@ -511,7 +548,8 @@
       "Gather intel from the LAF Hideout in Tiger Bay Central",
       "Gather intel from a laptop in the comms room"
     ],
-    "reward_text": "Rewards +1,125 Reputation with $6,870 5.56x45mm AP (M995)"
+    "reward_text": "Rewards +1,125 Reputation with $6,870 5.56x45mm AP (M995)",
+    "category": "unknown"
   },
   {
     "id": "i-went-i-saw-i-conquered-ii",
@@ -524,7 +562,8 @@
       "Find an explosives workshop",
       "Find barrels of kerosene"
     ],
-    "reward_text": "Rewards Reputation with Handshake $2,800 Well, this is just getting better and better, doesn\u2019t it? Not only are they supposedly some assholes from afar, but from what you\u2019re telling me, they\u2019re making fucking explosives! Only God knows what they\u2019re planning to do with them\u2026 This has to be dealt with pronto, understand?"
+    "reward_text": "Rewards Reputation with Handshake $2,800 Well, this is just getting better and better, doesn\u2019t it? Not only are they supposedly some assholes from afar, but from what you\u2019re telling me, they\u2019re making fucking explosives! Only God knows what they\u2019re planning to do with them\u2026 This has to be dealt with pronto, understand?",
+    "category": "unknown"
   },
   {
     "id": "i-went-i-saw-i-conquered-iii",
@@ -535,7 +574,8 @@
     "objectives": [
       "Neutralize the hostiles at the sawmill 0/20"
     ],
-    "reward_text": "Rewards Reputation with Handshake $3,900 Recon Chest Rig"
+    "reward_text": "Rewards Reputation with Handshake $3,900 Recon Chest Rig",
+    "category": "unknown"
   },
   {
     "id": "in-the-right-hands",
@@ -553,19 +593,21 @@
       "The room where the objective is.",
       "The room where the objective is."
     ],
-    "reward_text": "Rewards Reputation with Turncoat $2,400 AK15 7.62x39mm 30-Round Magazine"
+    "reward_text": "Rewards Reputation with Turncoat $2,400 AK15 7.62x39mm 30-Round Magazine",
+    "category": "unknown"
   },
   {
     "id": "incognito",
     "name": "Incognito",
     "vendor": "Gunny",
     "area": "Tiger Bay",
-    "type": "unknown",
+    "type": "hidden",
     "objectives": [
       "Retrieve intel from the house of the mysterious individual west of Tiger Bay Central",
       "Locate the intel"
     ],
-    "reward_text": "Rewards Reputation with $3,300 Recon Plate Carrier I knew my hunch was correct! According to this intel, this guy was a trained contractor who disappeared into the jungle just before the Event. He\u2019s probably working for the bastards who attacked us, and now we know they\u2019ve been preparing for something like this for a long-ass time! Damn it, the more we learn, the more I feel like we\u2019re being kept in the dark."
+    "reward_text": "Rewards Reputation with $3,300 Recon Plate Carrier I knew my hunch was correct! According to this intel, this guy was a trained contractor who disappeared into the jungle just before the Event. He\u2019s probably working for the bastards who attacked us, and now we know they\u2019ve been preparing for something like this for a long-ass time! Damn it, the more we learn, the more I feel like we\u2019re being kept in the dark.",
+    "category": "hidden_task"
   },
   {
     "id": "interrupted-aid",
@@ -576,7 +618,8 @@
     "objectives": [
       "Find out what happened to the PMC squad south of Pha Lang"
     ],
-    "reward_text": "Rewards Reputation with Lab Rat $1,050 7.62x54R Sniper Round (7N1)"
+    "reward_text": "Rewards Reputation with Lab Rat $1,050 7.62x54R Sniper Round (7N1)",
+    "category": "unknown"
   },
   {
     "id": "invaders-from-afar",
@@ -589,7 +632,8 @@
       "Locate  the medic's notes",
       "Find out what happened to the deserters"
     ],
-    "reward_text": "Rewards Reputation with Artisan M700 Suppressed Barrel - 20\" M700 7.62x51mm 10-Round Magazine"
+    "reward_text": "Rewards Reputation with Artisan M700 Suppressed Barrel - 20\" M700 7.62x51mm 10-Round Magazine",
+    "category": "unknown"
   },
   {
     "id": "its-in-the-water",
@@ -605,7 +649,8 @@
       "Bring the ground samples to Lab Rat",
       "Collect samples from a mound of soil in Ban Pa"
     ],
-    "reward_text": "Rewards Reputation with Lab Rat $6,300 Small Blood Bag"
+    "reward_text": "Rewards Reputation with Lab Rat $6,300 Small Blood Bag",
+    "category": "unknown"
   },
   {
     "id": "its-in-the-water-ii",
@@ -616,7 +661,8 @@
     "objectives": [
       "Search Ban Pa and find anything related to chemical production"
     ],
-    "reward_text": "Rewards Reputation with Lab Rat $3,900 Meloxicam"
+    "reward_text": "Rewards Reputation with Lab Rat $3,900 Meloxicam",
+    "category": "unknown"
   },
   {
     "id": "jetsnmarks",
@@ -627,7 +673,8 @@
     "objectives": [
       "Mark all the jets in Fort Narith (22:00 - 5:00)"
     ],
-    "reward_text": "Rewards Reputation with Banshee Only three, huh? So much for air superiority. Still, even though it's far from a proper squadron, those birds might be worth something. Anyway, thanks for your work. Come find me again if you want to make some more coin."
+    "reward_text": "Rewards Reputation with Banshee Only three, huh? So much for air superiority. Still, even though it's far from a proper squadron, those birds might be worth something. Anyway, thanks for your work. Come find me again if you want to make some more coin.",
+    "category": "unknown"
   },
   {
     "id": "king-of-the-crossroads",
@@ -645,7 +692,8 @@
       "The transshipment point to visit.",
       "The transshipment point to visit."
     ],
-    "reward_text": "Rewards Reputation with Handshake Reputation with Handshake"
+    "reward_text": "Rewards Reputation with Handshake Reputation with Handshake",
+    "category": "unknown"
   },
   {
     "id": "lamang-connection",
@@ -661,7 +709,8 @@
       "Window to climb over",
       "Window to climb over"
     ],
-    "reward_text": "Rewards Reputation with Banshee 870 USD I see. So, our suspicions were spot on. The merch was intended for both foreign and domestic markets. That logbook you brought paints a much clearer picture, but we don\u2019t have all the information yet. I\u2019ll work on it and let you know once I discover more. Great work, by the way."
+    "reward_text": "Rewards Reputation with Banshee 870 USD I see. So, our suspicions were spot on. The merch was intended for both foreign and domestic markets. That logbook you brought paints a much clearer picture, but we don\u2019t have all the information yet. I\u2019ll work on it and let you know once I discover more. Great work, by the way.",
+    "category": "unknown"
   },
   {
     "id": "last-farewell-ii",
@@ -675,7 +724,8 @@
       "Mark the body to complete the task",
       "Mark the body to complete the task"
     ],
-    "reward_text": "Rewards Reputation with Reputation with after first completion $1,880"
+    "reward_text": "Rewards Reputation with Reputation with after first completion $1,880",
+    "category": "unknown"
   },
   {
     "id": "last-flight",
@@ -689,7 +739,8 @@
       "The pilot laying next to the plane to inspect.",
       "The pilot laying next to the plane to inspect."
     ],
-    "reward_text": "Rewards after first completion Reputation with Artisan Reputation with"
+    "reward_text": "Rewards after first completion Reputation with Artisan Reputation with",
+    "category": "unknown"
   },
   {
     "id": "last-resort",
@@ -699,7 +750,8 @@
     "type": "unknown",
     "objectives": [
       "Neutralize the LAF commander in charge of Midnight Sapphire"
-    ]
+    ],
+    "category": "unknown"
   },
   {
     "id": "left-behind-ii",
@@ -713,7 +765,8 @@
       "Mark the body to complete the task",
       "Mark the body to complete the task"
     ],
-    "reward_text": "Rewards Reputation with Handshake Reputation with Handshake"
+    "reward_text": "Rewards Reputation with Handshake Reputation with Handshake",
+    "category": "unknown"
   },
   {
     "id": "line-in-the-sand",
@@ -724,7 +777,8 @@
     "objectives": [
       "Bring the fentanyl from Ban Pa to Gunny"
     ],
-    "reward_text": "Rewards Reputation with $3,200 You did the right thing. Trust me, stuff like this is never worth the profit, and I know what I\u2019m talking about, ok? Now get lost and keep your shit clean, you got me?"
+    "reward_text": "Rewards Reputation with $3,200 You did the right thing. Trust me, stuff like this is never worth the profit, and I know what I\u2019m talking about, ok? Now get lost and keep your shit clean, you got me?",
+    "category": "unknown"
   },
   {
     "id": "lip-out",
@@ -737,7 +791,8 @@
       "Gather any clues about what happened",
       "Find out where Donald J. Dortmunder resides"
     ],
-    "reward_text": "Rewards Reputation with Handshake Reputation with Handshake"
+    "reward_text": "Rewards Reputation with Handshake Reputation with Handshake",
+    "category": "unknown"
   },
   {
     "id": "living-in-burrows",
@@ -750,7 +805,8 @@
       "Locate the water filter",
       "Retrieve the water filter from YBL-1 and report back to Lab Rat"
     ],
-    "reward_text": "Rewards Reputation with Lab Rat $3,500 Activated Charcoal"
+    "reward_text": "Rewards Reputation with Lab Rat $3,500 Activated Charcoal",
+    "category": "unknown"
   },
   {
     "id": "lost-girl-ii",
@@ -762,7 +818,8 @@
       "Retrieve any clues from the Blue Lagoon and report back to Gunny",
       "Locate clues about the missing girl's whereabouts"
     ],
-    "reward_text": "Rewards Reputation with $2,400 Damn, looking at the last entry in her diary does not look good. She met some \u201ccool people\u201d who like to party, and they were about to show her their \u201cspecial place.\u201d Goddammit! Why are kids so stupid!? I have a really bad feeling about this. Let\u2019s just hope I\u2019m wrong."
+    "reward_text": "Rewards Reputation with $2,400 Damn, looking at the last entry in her diary does not look good. She met some \u201ccool people\u201d who like to party, and they were about to show her their \u201cspecial place.\u201d Goddammit! Why are kids so stupid!? I have a really bad feeling about this. Let\u2019s just hope I\u2019m wrong.",
+    "category": "unknown"
   },
   {
     "id": "lost-hope",
@@ -773,7 +830,8 @@
     "objectives": [
       "Find out what happened to the UNLRA Evac Convoy"
     ],
-    "reward_text": "Rewards Reputation with Artisan $1,050 Schmeisser AK 7.63x39 60-Round Magazine"
+    "reward_text": "Rewards Reputation with Artisan $1,050 Schmeisser AK 7.63x39 60-Round Magazine",
+    "category": "unknown"
   },
   {
     "id": "lost-lover",
@@ -786,7 +844,8 @@
       "Head to Fort Narith barracks and locate Atsawin Xiong's quarters",
       "Investigate the infirmary at Fort Narith and locate Atsawin Xiong"
     ],
-    "reward_text": "Rewards Reputation with Lab Rat $3,300 Combat Tourniquet"
+    "reward_text": "Rewards Reputation with Lab Rat $3,300 Combat Tourniquet",
+    "category": "unknown"
   },
   {
     "id": "mall-vigilante",
@@ -797,7 +856,8 @@
     "objectives": [
       "Neutralize the LAF forces at Tiger Bay (30)"
     ],
-    "reward_text": "Rewards Reputation with Handshake $2,300 EXFIL (Multicam)"
+    "reward_text": "Rewards Reputation with Handshake $2,300 EXFIL (Multicam)",
+    "category": "unknown"
   },
   {
     "id": "manifest-destiny",
@@ -815,7 +875,8 @@
       "Once in the second room, head in the small dark corner on the left. There will be a small office with a computer.",
       "Once in the second room, head in the small dark corner on the left. There will be a small office with a computer."
     ],
-    "reward_text": "Rewards Reputation with Handshake $2,400 Recon Chest Rig"
+    "reward_text": "Rewards Reputation with Handshake $2,400 Recon Chest Rig",
+    "category": "unknown"
   },
   {
     "id": "missing-colleague",
@@ -827,7 +888,8 @@
       "Find out what happened to Artisan's colleague.",
       "Locate any intel about the colleague's whereabouts."
     ],
-    "reward_text": "Rewards Reputation with Artisan So he was arrested? Ah, fuck! You stupid old idealist, what the hell have you done this time? Merc, I need some time to think. Why don\u2019t you go away and kill some babies or whatever it is you do for fun, hm?"
+    "reward_text": "Rewards Reputation with Artisan So he was arrested? Ah, fuck! You stupid old idealist, what the hell have you done this time? Merc, I need some time to think. Why don\u2019t you go away and kill some babies or whatever it is you do for fun, hm?",
+    "category": "unknown"
   },
   {
     "id": "missing-colleague-ii",
@@ -839,7 +901,8 @@
       "Retrieve the interrogation transcript and report back to Artisan",
       "Locate the interrogation transcript"
     ],
-    "reward_text": "Rewards Reputation with Artisan $1,880 So he sabotaged the vehicles at Fort Narith? God, you old fool! He was always opposing the government, but to be so reckless... it's not like him at all. I must make some calls and find him quickly..."
+    "reward_text": "Rewards Reputation with Artisan $1,880 So he sabotaged the vehicles at Fort Narith? God, you old fool! He was always opposing the government, but to be so reckless... it's not like him at all. I must make some calls and find him quickly...",
+    "category": "unknown"
   },
   {
     "id": "name-your-poison",
@@ -857,7 +920,8 @@
       "Location of the water truck on the map.",
       "Location of the water truck on the map."
     ],
-    "reward_text": "Rewards Reputation with Turncoat Friend, I must say that your unscrupulous approach to this task is truly laudable. Your actions have increased my respect for you."
+    "reward_text": "Rewards Reputation with Turncoat Friend, I must say that your unscrupulous approach to this task is truly laudable. Your actions have increased my respect for you.",
+    "category": "unknown"
   },
   {
     "id": "narcotic-bargain",
@@ -868,7 +932,8 @@
     "objectives": [
       "Retrieve the evidence of drug trade in the Tiger Bay Central and bring it to Turncoat's drop-off point"
     ],
-    "reward_text": "Rewards Reputation with Turncoat Light Anatomical Belt Type 2 (Olive) Friend, you are a miracle! It is truly educational to learn how drug distribution works. I feel like a drug archaeologist discovering long-lost treasures. Don't worry, I won't forget your friendliness."
+    "reward_text": "Rewards Reputation with Turncoat Light Anatomical Belt Type 2 (Olive) Friend, you are a miracle! It is truly educational to learn how drug distribution works. I feel like a drug archaeologist discovering long-lost treasures. Don't worry, I won't forget your friendliness.",
+    "category": "unknown"
   },
   {
     "id": "native-negotiations",
@@ -881,7 +946,8 @@
       "Collect the",
       "at the command tent in the Base Camp"
     ],
-    "reward_text": "Rewards Reputation with Lab Rat Excellent work. The drop went smoothly, and that\u2019s all I needed from you. Now we wait and see if our new friend keeps his word. It might take a while, but either way, we\u2019ll be ready."
+    "reward_text": "Rewards Reputation with Lab Rat Excellent work. The drop went smoothly, and that\u2019s all I needed from you. Now we wait and see if our new friend keeps his word. It might take a while, but either way, we\u2019ll be ready.",
+    "category": "unknown"
   },
   {
     "id": "neighborly-help",
@@ -897,7 +963,8 @@
       "Interact with both to complete the task",
       "Interact with both to complete the task"
     ],
-    "reward_text": "Rewards Reputation with $1,250 On one hand, it's a relief that they can\u2019t use their vehicles against us. On the other hand, it means we\u2019ll have to find fuel elsewhere. If it weren\u2019t for that damned blockade..."
+    "reward_text": "Rewards Reputation with $1,250 On one hand, it's a relief that they can\u2019t use their vehicles against us. On the other hand, it means we\u2019ll have to find fuel elsewhere. If it weren\u2019t for that damned blockade...",
+    "category": "unknown"
   },
   {
     "id": "no-casualties",
@@ -913,7 +980,8 @@
       "The box to place the supplies in",
       "The box to place the supplies in"
     ],
-    "reward_text": "Rewards after first completion Reputation with Artisan Reputation with"
+    "reward_text": "Rewards after first completion Reputation with Artisan Reputation with",
+    "category": "unknown"
   },
   {
     "id": "no-escape",
@@ -931,7 +999,8 @@
       "The room is located on the first floor.",
       "The room is located on the first floor."
     ],
-    "reward_text": "Rewards Reputation with Banshee Well, this is something! This folder contains a wealth of interesting and valuable information about a suspect I\u2019m after. Thank you very much for your assistance. Your cooperation is greatly appreciated."
+    "reward_text": "Rewards Reputation with Banshee Well, this is something! This folder contains a wealth of interesting and valuable information about a suspect I\u2019m after. Thank you very much for your assistance. Your cooperation is greatly appreciated.",
+    "category": "unknown"
   },
   {
     "id": "no-questions-asked",
@@ -949,7 +1018,8 @@
       "The room in which the cigars are located.",
       "The room in which the cigars are located."
     ],
-    "reward_text": "Rewards Reputation with Turncoat $1,880 Dollars"
+    "reward_text": "Rewards Reputation with Turncoat $1,880 Dollars",
+    "category": "unknown"
   },
   {
     "id": "observation-duty",
@@ -960,7 +1030,8 @@
     "objectives": [
       "Determine the status of the reconnaissance team deployed in the jungle northeast of Savanpha village"
     ],
-    "reward_text": "Rewards Reputation with $2,100 DD Vertical Foregrip 5.56x45mm AP (M855A1)"
+    "reward_text": "Rewards Reputation with $2,100 DD Vertical Foregrip 5.56x45mm AP (M855A1)",
+    "category": "unknown"
   },
   {
     "id": "on-the-range",
@@ -973,7 +1044,8 @@
       "Scout the Campsite",
       "Scout the Motel"
     ],
-    "reward_text": "Rewards Reputation with Good work. I guess we aren\u2019t the only ones that need more weapons and ammo, but now it\u2019ll be much easier to take it over from whoever is occupying it."
+    "reward_text": "Rewards Reputation with Good work. I guess we aren\u2019t the only ones that need more weapons and ammo, but now it\u2019ll be much easier to take it over from whoever is occupying it.",
+    "category": "unknown"
   },
   {
     "id": "one-mans-trash",
@@ -988,7 +1060,8 @@
       "The view of the minivan on the road.",
       "The box to take.",
       "The box to take."
-    ]
+    ],
+    "category": "unknown"
   },
   {
     "id": "one-shot-one-kill",
@@ -999,7 +1072,8 @@
     "objectives": [
       "Eliminate the hostile commander in Hunter's Paradise"
     ],
-    "reward_text": "Rewards Reputation with Handshake $3,900 Commander (Black)"
+    "reward_text": "Rewards Reputation with Handshake $3,900 Commander (Black)",
+    "category": "unknown"
   },
   {
     "id": "out-of-the-blue",
@@ -1011,7 +1085,8 @@
       "Investigate what happened to the  recon team sent to Blue Lagoon",
       "Locate a suitable LZ near the Blue Lagoon"
     ],
-    "reward_text": "Rewards Reputation with $2,800 Alright, you know what? Fuck it. We've got way too much shit on our plate right now to be chasing revenge for every damn act of violence on this rock. I'm not risking more of our people just to take over some goddamn tourist spot. There\u2019s nothing of real value there anyway. For now, we\u2019ll avoid it and focus our efforts elsewhere. But once we\u2019ve got our situation under control, those bastards will pay..."
+    "reward_text": "Rewards Reputation with $2,800 Alright, you know what? Fuck it. We've got way too much shit on our plate right now to be chasing revenge for every damn act of violence on this rock. I'm not risking more of our people just to take over some goddamn tourist spot. There\u2019s nothing of real value there anyway. For now, we\u2019ll avoid it and focus our efforts elsewhere. But once we\u2019ve got our situation under control, those bastards will pay...",
+    "category": "unknown"
   },
   {
     "id": "paparazzi",
@@ -1023,7 +1098,8 @@
       "Search the Midnight Sapphire Hotel and uncover what happened to Richard S. Parker",
       "Search the Interrogation room near the lakeside villa"
     ],
-    "reward_text": "Rewards Reputation with Handshake Reputation with Handshake"
+    "reward_text": "Rewards Reputation with Handshake Reputation with Handshake",
+    "category": "unknown"
   },
   {
     "id": "peacekeeper",
@@ -1034,7 +1110,8 @@
     "objectives": [
       "Search the UNLRA camp in Tiger Bay and uncover what happened to the peacekeeper"
     ],
-    "reward_text": "Rewards Reputation with Lab Rat $2,600 Fenethylline"
+    "reward_text": "Rewards Reputation with Lab Rat $2,600 Fenethylline",
+    "category": "unknown"
   },
   {
     "id": "postman-rings-twice",
@@ -1046,7 +1123,8 @@
       "Find the Chichir family and bring them the supplies",
       "Bring the supplies to the house in Namhou Village"
     ],
-    "reward_text": "Rewards after first completion Reputation with Lab Rat Reputation with"
+    "reward_text": "Rewards after first completion Reputation with Lab Rat Reputation with",
+    "category": "unknown"
   },
   {
     "id": "prisoner-23",
@@ -1058,7 +1136,8 @@
       "Retrieve information about prisoner 23 in  the west section of YBL-1 and report back to Artisan",
       "Locate the intel"
     ],
-    "reward_text": "Rewards Reputation with Artisan Fuck! Those motherfuckers tortured him! Sick bastards! I'm gonna kill every last one of them! Thank God he wasn't executed, but they've transported him somewhere else, and I have no idea where! All this time, and I'm back to square one! Po, I'm so sorry... Why the FUCK are you still here!? Just get lost, okay!? I need to be alone!"
+    "reward_text": "Rewards Reputation with Artisan Fuck! Those motherfuckers tortured him! Sick bastards! I'm gonna kill every last one of them! Thank God he wasn't executed, but they've transported him somewhere else, and I have no idea where! All this time, and I'm back to square one! Po, I'm so sorry... Why the FUCK are you still here!? Just get lost, okay!? I need to be alone!",
+    "category": "unknown"
   },
   {
     "id": "propaganda-problems",
@@ -1074,7 +1153,8 @@
       "The pile of box under the billboard.",
       "The pile of box under the billboard."
     ],
-    "reward_text": "Rewards Reputation with Reputation with after the first completion Well, that\u2019s a bummer. I\u2019ll need to have a talk with the scouts. They should have their damn eyes checked if they\u2019re mistaking a bunch of boxes for a weapon cache. This\u2019ll be on their plate for a long time. Sloppy work won\u2019t be tolerated."
+    "reward_text": "Rewards Reputation with Reputation with after the first completion Well, that\u2019s a bummer. I\u2019ll need to have a talk with the scouts. They should have their damn eyes checked if they\u2019re mistaking a bunch of boxes for a weapon cache. This\u2019ll be on their plate for a long time. Sloppy work won\u2019t be tolerated.",
+    "category": "unknown"
   },
   {
     "id": "radio-star",
@@ -1090,7 +1170,8 @@
       "Interior of the building with the radio equipment",
       "Interior of the building with the radio equipment"
     ],
-    "reward_text": "Rewards Reputation with Handshake Great fucking job, man. You made sure these radio amateurs won't be overhearing shit from now on. I just hope this is the last of them."
+    "reward_text": "Rewards Reputation with Handshake Great fucking job, man. You made sure these radio amateurs won't be overhearing shit from now on. I just hope this is the last of them.",
+    "category": "unknown"
   },
   {
     "id": "rebel-scum",
@@ -1098,7 +1179,8 @@
     "vendor": "Handshake",
     "area": "YBL-1",
     "type": "unknown",
-    "reward_text": "Rewards Reputation with Handshake $2,000"
+    "reward_text": "Rewards Reputation with Handshake $2,000",
+    "category": "unknown"
   },
   {
     "id": "reconnaissance-in-force",
@@ -1109,7 +1191,8 @@
     "objectives": [
       "Eliminate 30 soldiers at Fort Narith"
     ],
-    "reward_text": "Rewards Reputation with Handshake $2,300"
+    "reward_text": "Rewards Reputation with Handshake $2,300",
+    "category": "unknown"
   },
   {
     "id": "ripper",
@@ -1127,7 +1210,8 @@
       "Interact with one of the medical tables in the back room",
       "Interact with one of the medical tables in the back room"
     ],
-    "reward_text": "Rewards Reputation with Lab Rat Reputation with Lab Rat"
+    "reward_text": "Rewards Reputation with Lab Rat Reputation with Lab Rat",
+    "category": "unknown"
   },
   {
     "id": "riverfront-view",
@@ -1143,7 +1227,8 @@
       "On the ledge overlooking the lake you will find the missing scouts.",
       "On the ledge overlooking the lake you will find the missing scouts."
     ],
-    "reward_text": "Rewards Reputation with Handshake $1,700 AMP-1 TP LC (Ranger Green)"
+    "reward_text": "Rewards Reputation with Handshake $1,700 AMP-1 TP LC (Ranger Green)",
+    "category": "unknown"
   },
   {
     "id": "save-the-rebellion",
@@ -1157,7 +1242,8 @@
       "Place the flash drive in the guardhouse (22:00 - 5:00)",
       "Collect the flash drive at the command tent in the Base Camp"
     ],
-    "reward_text": "Rewards Reputation with Artisan \"Well, color me surprised. When I saw you heading into The Hole, I was sure you were going to kill everyone. You had murder in your eyes. But you did the right thing by delivering the flash drive... and not killing them all. Those rebels deserved at least that."
+    "reward_text": "Rewards Reputation with Artisan \"Well, color me surprised. When I saw you heading into The Hole, I was sure you were going to kill everyone. You had murder in your eyes. But you did the right thing by delivering the flash drive... and not killing them all. Those rebels deserved at least that.",
+    "category": "unknown"
   },
   {
     "id": "shooting-gallery",
@@ -1165,7 +1251,8 @@
     "vendor": "Handshake",
     "area": "Hunter's Paradise",
     "type": "unknown",
-    "reward_text": "Rewards Reputation with Handshake $2,000 MICH TC-2002 (Green)"
+    "reward_text": "Rewards Reputation with Handshake $2,000 MICH TC-2002 (Green)",
+    "category": "unknown"
   },
   {
     "id": "shortcut",
@@ -1183,7 +1270,8 @@
       "In the middle of the corridor, there will be a stairs access, take it and go downstairs.",
       "In the middle of the corridor, there will be a stairs access, take it and go downstairs."
     ],
-    "reward_text": "Rewards Reputation with Handshake $3,500 Recon Chest Rig"
+    "reward_text": "Rewards Reputation with Handshake $3,500 Recon Chest Rig",
+    "category": "unknown"
   },
   {
     "id": "sisyphus",
@@ -1199,7 +1287,8 @@
       "Neutralize 10 enemies east of Nam Thaven",
       "Neutralize 10 enemies around the crossroads southwest of Kiu Vongsa"
     ],
-    "reward_text": "Rewards Reputation with Handshake $1,500 MICH TC-2002 (Green)"
+    "reward_text": "Rewards Reputation with Handshake $1,500 MICH TC-2002 (Green)",
+    "category": "unknown"
   },
   {
     "id": "skycrawlers-ii",
@@ -1217,7 +1306,8 @@
       "Logbook on top of a box next to a desk.",
       "Logbook on top of a box next to a desk."
     ],
-    "reward_text": "Rewards Reputation with Banshee $5,500 Okay, judging by this logbook, the narcotics were transported here from a yet unknown location, probably the production plant, and then processed, packed, and shipped off by planes with oblivious tourists inside. Laos, Cambodia, Vietnam, Thailand\u2026 they were quite busy, I see. With tourists on board the planes, the volume of the shipments wasn\u2019t great, but they clearly made up for it with the frequent flights. You did well. Now we need to find the source."
+    "reward_text": "Rewards Reputation with Banshee $5,500 Okay, judging by this logbook, the narcotics were transported here from a yet unknown location, probably the production plant, and then processed, packed, and shipped off by planes with oblivious tourists inside. Laos, Cambodia, Vietnam, Thailand\u2026 they were quite busy, I see. With tourists on board the planes, the volume of the shipments wasn\u2019t great, but they clearly made up for it with the frequent flights. You did well. Now we need to find the source.",
+    "category": "unknown"
   },
   {
     "id": "snooper",
@@ -1231,7 +1321,8 @@
       "Secure the supplies in the bathroom",
       "Secure the supplies next to a large truck"
     ],
-    "reward_text": "Rewards Reputation with That stupid girl\u2026 I knew she was trouble from the moment I first met her. Look, I won't lie to you. I'm not happy about this. Those things are meant for our soldiers, for our mission. But I'm also not blind to the bigger picture. Some of these people that got left here, they're in dire need too. We can't just turn our backs on them. I'll sweep this incident under the rug, but this is the last time, got it? And you better keep your mouth shut about it. The last thing we need is the higher-ups breathing down our necks. We're in enough shit as is."
+    "reward_text": "Rewards Reputation with That stupid girl\u2026 I knew she was trouble from the moment I first met her. Look, I won't lie to you. I'm not happy about this. Those things are meant for our soldiers, for our mission. But I'm also not blind to the bigger picture. Some of these people that got left here, they're in dire need too. We can't just turn our backs on them. I'll sweep this incident under the rug, but this is the last time, got it? And you better keep your mouth shut about it. The last thing we need is the higher-ups breathing down our necks. We're in enough shit as is.",
+    "category": "unknown"
   },
   {
     "id": "snow-white",
@@ -1243,7 +1334,8 @@
       "Search the restaurant west of Pha Lang and find out what happened to Fah Vongphachanh",
       "Find Fah Vongphachanh north of the restaurant"
     ],
-    "reward_text": "Rewards Reputation with Artisan $1,050 7.62x54R Sniper Round (7N1)"
+    "reward_text": "Rewards Reputation with Artisan $1,050 7.62x54R Sniper Round (7N1)",
+    "category": "unknown"
   },
   {
     "id": "spit-out-the-poison",
@@ -1254,7 +1346,8 @@
     "objectives": [
       "Bring the poison to Lab Rat"
     ],
-    "reward_text": "Rewards Reputation with Lab Rat $2,800 Large Blood Bag"
+    "reward_text": "Rewards Reputation with Lab Rat $2,800 Large Blood Bag",
+    "category": "unknown"
   },
   {
     "id": "state-of-weapon-shipment",
@@ -1272,7 +1365,8 @@
       "Get into the office, there is an extra guard inside.",
       "Get into the office, there is an extra guard inside."
     ],
-    "reward_text": "Rewards Reputation with Banshee Reputation with Banshee"
+    "reward_text": "Rewards Reputation with Banshee Reputation with Banshee",
+    "category": "unknown"
   },
   {
     "id": "supernatural",
@@ -1284,7 +1378,8 @@
       "Investigate Liebert's tent near the river north of Ban Pa",
       "Investigate the secluded house north of Ban Pa and find Hans Liebert"
     ],
-    "reward_text": "Rewards Reputation with $1,050 SOCOM556 RC1 Suppressor SOCOM 3 Prong Flash Hider"
+    "reward_text": "Rewards Reputation with $1,050 SOCOM556 RC1 Suppressor SOCOM 3 Prong Flash Hider",
+    "category": "unknown"
   },
   {
     "id": "sweet-little-lies",
@@ -1297,7 +1392,8 @@
       "Locate the intel",
       "Retrieve the hardware key from Either Midnight Sapphire, Tiger Bay, or Fort Narith"
     ],
-    "reward_text": "Rewards Reputation with Handshake $4,600 EXFIL (Multicam)"
+    "reward_text": "Rewards Reputation with Handshake $4,600 EXFIL (Multicam)",
+    "category": "unknown"
   },
   {
     "id": "test-results",
@@ -1309,7 +1405,8 @@
       "Retrieve the testing kit and report back to Lab Rat",
       "Find the testing kit in Tiger Bay Central"
     ],
-    "reward_text": "Rewards Reputation with Lab Rat $4,600 Large Blood Bag"
+    "reward_text": "Rewards Reputation with Lab Rat $4,600 Large Blood Bag",
+    "category": "unknown"
   },
   {
     "id": "the-art-of-deception",
@@ -1324,7 +1421,8 @@
       "Plant the falsified documents in the Midnight Sapphire Hotel office (22:00 - 5:00)",
       "Collect the falsified documents at the command tent in the Base Camp"
     ],
-    "reward_text": "Rewards Reputation with Handshake $4,600 AN/PVS-31A Night Vision Device"
+    "reward_text": "Rewards Reputation with Handshake $4,600 AN/PVS-31A Night Vision Device",
+    "category": "unknown"
   },
   {
     "id": "the-brave",
@@ -1337,7 +1435,8 @@
       "Find a proof of identity",
       "Bring the proof of identity back to Lab Rat"
     ],
-    "reward_text": "Rewards Reputation with Lab Rat $2,800 Large Blood Bag"
+    "reward_text": "Rewards Reputation with Lab Rat $2,800 Large Blood Bag",
+    "category": "unknown"
   },
   {
     "id": "the-cleaner",
@@ -1345,7 +1444,8 @@
     "vendor": "Handshake",
     "area": "Lamang Island",
     "type": "unknown",
-    "reward_text": "Rewards Reputation with Handshake $1,500"
+    "reward_text": "Rewards Reputation with Handshake $1,500",
+    "category": "unknown"
   },
   {
     "id": "the-man-who-disappeared",
@@ -1358,7 +1458,8 @@
       "Collect the passport at the command tent in the Base Camp",
       "Ensure your survival and not lose the passport"
     ],
-    "reward_text": "Rewards Reputation with Handshake $3,300 Recon Plate Carrier"
+    "reward_text": "Rewards Reputation with Handshake $3,300 Recon Plate Carrier",
+    "category": "unknown"
   },
   {
     "id": "the-mistress",
@@ -1371,7 +1472,8 @@
       "Search the UNLRA dorms in Tiger Bay and find more clues about Lae Sayasane",
       "Locate the pond southwest of Tiger Bay Central and find out what happened to Lae Sayasane"
     ],
-    "reward_text": "Rewards Reputation with Artisan $1,880 We didn't find Lae, but at least we know she's probably alive. A girl with her skills is definitely a survivor. I'll inform her friend of our findings... Why are you looking at me like that? Should I shed tears for that pig? No way. I wouldn\u2019t be surprised if he abused her or something and got what he deserved. Your job is done, mercenary; you can return to your own killings."
+    "reward_text": "Rewards Reputation with Artisan $1,880 We didn't find Lae, but at least we know she's probably alive. A girl with her skills is definitely a survivor. I'll inform her friend of our findings... Why are you looking at me like that? Should I shed tears for that pig? No way. I wouldn\u2019t be surprised if he abused her or something and got what he deserved. Your job is done, mercenary; you can return to your own killings.",
+    "category": "unknown"
   },
   {
     "id": "the-more-the-merrier",
@@ -1383,14 +1485,15 @@
       "Retrieve intel from the barracks and report back to Handshake",
       "Locate patrol documents"
     ],
-    "reward_text": "Rewards Reputation with Handshake $1,800 Well done! With information like this, we are one step closer to seizing Fort Narith. And it gets better - this document reveals why the LAF is still hanging around. They were ordered by El Presidente himself to protect high-value targets after the UNLRA cleared everyone out. It\u2019s not just Fort Narith; they\u2019re guarding Midnight Sapphire and Tiger Bay too. Seems like the main man was worried someone might do some snooping around after all the dust settled. Well, he was right about that..."
+    "reward_text": "Rewards Reputation with Handshake $1,800 Well done! With information like this, we are one step closer to seizing Fort Narith. And it gets better - this document reveals why the LAF is still hanging around. They were ordered by El Presidente himself to protect high-value targets after the UNLRA cleared everyone out. It\u2019s not just Fort Narith; they\u2019re guarding Midnight Sapphire and Tiger Bay too. Seems like the main man was worried someone might do some snooping around after all the dust settled. Well, he was right about that...",
+    "category": "unknown"
   },
   {
     "id": "the-rebel-path",
     "name": "The Rebel Path",
     "vendor": "Gunny",
     "area": "YBL-1, Tiger Bay, Ban Pa, Midnight Sapphire",
-    "type": "unknown",
+    "type": "hidden",
     "objectives": [
       "Locate all hidden LLA outposts",
       "Locate the LLA outpost northeast of Ban Pa",
@@ -1398,7 +1501,8 @@
       "Locate the LLA outpost northwest of YBL-1",
       "Locate the LLA outpost west of Midnight Sapphire"
     ],
-    "reward_text": "Rewards Reputation with Razor 1-6x Rifle Scope Nicely done. Let\u2019s hope that\u2019s really all of their camps. Stay sharp and watch your back. You never know when one of those bastards might pop out of the ground like a pissed-off gopher."
+    "reward_text": "Rewards Reputation with Razor 1-6x Rifle Scope Nicely done. Let\u2019s hope that\u2019s really all of their camps. Stay sharp and watch your back. You never know when one of those bastards might pop out of the ground like a pissed-off gopher.",
+    "category": "hidden_task"
   },
   {
     "id": "the-runaway",
@@ -1409,7 +1513,8 @@
     "objectives": [
       "Find out what happened to the tourists that managed to escape from the Blue Lagoon"
     ],
-    "reward_text": "Rewards Reputation with Lab Rat Thank you for looking into this, even though it ended up as always. I honestly don't think I can keep doing this. Always getting my hopes up and then... I better focus on my research, yes. That's why I agreed to all of this in the first place. No more drama, no more needless death. I just need to take a step back..."
+    "reward_text": "Rewards Reputation with Lab Rat Thank you for looking into this, even though it ended up as always. I honestly don't think I can keep doing this. Always getting my hopes up and then... I better focus on my research, yes. That's why I agreed to all of this in the first place. No more drama, no more needless death. I just need to take a step back...",
+    "category": "unknown"
   },
   {
     "id": "the-shadow-over-ban-pa-ii",
@@ -1421,7 +1526,8 @@
       "Bring the intel from Ban Pa to Handshake",
       "Find intel regarding the cult Ban Pa (22:00 - 5:00)"
     ],
-    "reward_text": "Rewards Reputation with Handshake $3,500 MC50 Laser Edition"
+    "reward_text": "Rewards Reputation with Handshake $3,500 MC50 Laser Edition",
+    "category": "unknown"
   },
   {
     "id": "the-snitch",
@@ -1433,7 +1539,8 @@
       "Go to the informant's house in Tiger Bay and find out what happened to him",
       "Go to the cement factory in Tiger Bay and find out what happened to the informant"
     ],
-    "reward_text": "Rewards Reputation with Turncoat What a tragedy, friend. If you had brought him back alive, I would have rewarded you handsomely.. Regrettably, you've only brought information about his sorrowful demise. But don't grieve, friend. I know you did your best. Here is a small reward for your efforts; hopefully, it will motivate you to accomplish your next task. I will tell you more soon."
+    "reward_text": "Rewards Reputation with Turncoat What a tragedy, friend. If you had brought him back alive, I would have rewarded you handsomely.. Regrettably, you've only brought information about his sorrowful demise. But don't grieve, friend. I know you did your best. Here is a small reward for your efforts; hopefully, it will motivate you to accomplish your next task. I will tell you more soon.",
+    "category": "unknown"
   },
   {
     "id": "the-trickster",
@@ -1444,7 +1551,8 @@
     "objectives": [
       "Find out what happened to Somsak Pornnarai"
     ],
-    "reward_text": "Rewards"
+    "reward_text": "Rewards",
+    "category": "unknown"
   },
   {
     "id": "the-value-of-sharing",
@@ -1456,7 +1564,8 @@
       "Bring the fentanyl to Turncoat's drop-off point.",
       "Locate a stash of high-grade fentanyl around Ban Pa."
     ],
-    "reward_text": "Rewards Reputation with Turncoat Very good! I am glad to see that you are an intelligent man who is not afraid to seize the day, and I have to say I feel genuinely delighted by our friendship. To future endeavors!"
+    "reward_text": "Rewards Reputation with Turncoat Very good! I am glad to see that you are an intelligent man who is not afraid to seize the day, and I have to say I feel genuinely delighted by our friendship. To future endeavors!",
+    "category": "unknown"
   },
   {
     "id": "the-way-below",
@@ -1474,7 +1583,8 @@
       "A climbable wall section on the western side of YBL",
       "A climbable wall section on the western side of YBL"
     ],
-    "reward_text": "Rewards Reputation with $1,600"
+    "reward_text": "Rewards Reputation with $1,600",
+    "category": "unknown"
   },
   {
     "id": "timber",
@@ -1490,7 +1600,8 @@
       "Picture of the loadout of the leader.",
       "Picture of the loadout of the leader."
     ],
-    "reward_text": "Rewards Reputation with Banshee Very good! Thank you for solving that little problem for me. If you're interested, I might have some other jobs lying around. I am sure most of them would b e a walk in the park for a man of your talents."
+    "reward_text": "Rewards Reputation with Banshee Very good! Thank you for solving that little problem for me. If you're interested, I might have some other jobs lying around. I am sure most of them would b e a walk in the park for a man of your talents.",
+    "category": "unknown"
   },
   {
     "id": "troll-bridge",
@@ -1501,7 +1612,8 @@
     "objectives": [
       "Investigate the potentially mined bridge west of Tiger Bay"
     ],
-    "reward_text": "Rewards Reputation with Handshake"
+    "reward_text": "Rewards Reputation with Handshake",
+    "category": "unknown"
   },
   {
     "id": "uncanny-files",
@@ -1513,7 +1625,8 @@
       "Retrieve the medical records and report back to Lab Rat.",
       "Locate Medical Records"
     ],
-    "reward_text": "Rewards Reputation with Lab Rat $2,800 USD Large Blood Bag"
+    "reward_text": "Rewards Reputation with Lab Rat $2,800 USD Large Blood Bag",
+    "category": "unknown"
   },
   {
     "id": "under-our-noses",
@@ -1531,7 +1644,8 @@
       "Find the boxes behind a fence",
       "Locate the second tracker further along the road"
     ],
-    "reward_text": "Rewards Reputation with $1,500 Goddammit! The bastards are smarter than I gave them credit for. They took what they could and left the tracker to taunt us. This couldn't have happened at a worse time..."
+    "reward_text": "Rewards Reputation with $1,500 Goddammit! The bastards are smarter than I gave them credit for. They took what they could and left the tracker to taunt us. This couldn't have happened at a worse time...",
+    "category": "unknown"
   },
   {
     "id": "uninvited-guests",
@@ -1543,7 +1657,8 @@
       "Zones where you can kill NPCs for the quest.",
       "Zones where you can kill NPCs for the quest."
     ],
-    "reward_text": "Rewards Reputation with Turncoat AK-74M Friend, I am in awe of your efficiency. I think they now understand what kind of message we are trying to convey. Let's just hope that we don't have to repeat ourselves. You have my gratitude, and I look forward to our next meeting."
+    "reward_text": "Rewards Reputation with Turncoat AK-74M Friend, I am in awe of your efficiency. I think they now understand what kind of message we are trying to convey. Let's just hope that we don't have to repeat ourselves. You have my gratitude, and I look forward to our next meeting.",
+    "category": "unknown"
   },
   {
     "id": "unlra",
@@ -1561,7 +1676,8 @@
       "Find R. Taylor's security card",
       "Retrieve the USB drive and report back to Handshake"
     ],
-    "reward_text": "Rewards Reputation with Handshake Specialized Equipment Repair Kit"
+    "reward_text": "Rewards Reputation with Handshake Specialized Equipment Repair Kit",
+    "category": "unknown"
   },
   {
     "id": "unlra-ii",
@@ -1575,7 +1691,8 @@
       "Gather intel from the second LAF checkpoint in Tiger Bay (22:00-5:00)",
       "Gather intel from the third LAF checkpoint in Tiger Bay (22:00-5:00)"
     ],
-    "reward_text": "Rewards Reputation with Handshake $2,800 EXFIL (Multicam)"
+    "reward_text": "Rewards Reputation with Handshake $2,800 EXFIL (Multicam)",
+    "category": "unknown"
   },
   {
     "id": "unlra-iii",
@@ -1589,7 +1706,8 @@
       "Use the security card to access the terminal and download the data from the server",
       "Find R. Taylor's Security Card"
     ],
-    "reward_text": "Rewards Reputation with Handshake $4,600 Recon Plate Carrier"
+    "reward_text": "Rewards Reputation with Handshake $4,600 Recon Plate Carrier",
+    "category": "unknown"
   },
   {
     "id": "unnameable",
@@ -1600,7 +1718,8 @@
     "objectives": [
       "Find out what happened to the UNLRA staff member in Tiger Bay"
     ],
-    "reward_text": "Rewards after first completion Reputation with Reputation with after first completion"
+    "reward_text": "Rewards after first completion Reputation with Reputation with after first completion",
+    "category": "unknown"
   },
   {
     "id": "unrefusable-offer",
@@ -1616,7 +1735,8 @@
       "The bodies to interact with inside the house.",
       "The bodies to interact with inside the house."
     ],
-    "reward_text": "Rewards Reputation with Handshake $1,500 Chest Rig 901 Elite 4"
+    "reward_text": "Rewards Reputation with Handshake $1,500 Chest Rig 901 Elite 4",
+    "category": "unknown"
   },
   {
     "id": "wanted-man",
@@ -1634,7 +1754,8 @@
       "Retrieve intel about the prisoner from Fort Narith and report back to Gunny",
       "Locate the intel"
     ],
-    "reward_text": "Rewards after first completion +1,125 Reputation with Reputation with"
+    "reward_text": "Rewards after first completion +1,125 Reputation with Reputation with",
+    "category": "unknown"
   },
   {
     "id": "wanted-man-ii",
@@ -1646,7 +1767,8 @@
       "Retrieve the interrogation transcript and report back to Gunny",
       "Locate the Interrogation transcript"
     ],
-    "reward_text": "Rewards Reputation with $4,200 Well... he wasn\u2019t much of a talker, that\u2019s for sure. The only intel the LAF managed to squeeze out of him is that he\u2019s a contractor from Russia, and his company was operating on this damn island even before we got here. We need to keep digging for more on these pricks. There\u2019s still too much we don\u2019t know, and it could cost us big time. You did well. Get some rest."
+    "reward_text": "Rewards Reputation with $4,200 Well... he wasn\u2019t much of a talker, that\u2019s for sure. The only intel the LAF managed to squeeze out of him is that he\u2019s a contractor from Russia, and his company was operating on this damn island even before we got here. We need to keep digging for more on these pricks. There\u2019s still too much we don\u2019t know, and it could cost us big time. You did well. Get some rest.",
+    "category": "unknown"
   },
   {
     "id": "warm-welcome",
@@ -1664,7 +1786,8 @@
       "Equipment of the gang leader.",
       "Equipment of the gang leader."
     ],
-    "reward_text": "Rewards Reputation with Turncoat Beautifully done! Now, let\u2019s just hope they won\u2019t find a replacement anytime soon."
+    "reward_text": "Rewards Reputation with Turncoat Beautifully done! Now, let\u2019s just hope they won\u2019t find a replacement anytime soon.",
+    "category": "unknown"
   },
   {
     "id": "weeding",
@@ -1672,7 +1795,8 @@
     "vendor": "Handshake",
     "area": "Midnight Sapphire",
     "type": "unknown",
-    "reward_text": "Rewards Reputation with Handshake $2,300 AMP-1 TP MC (Ranger Green)"
+    "reward_text": "Rewards Reputation with Handshake $2,300 AMP-1 TP MC (Ranger Green)",
+    "category": "unknown"
   },
   {
     "id": "what-remains",
@@ -1684,7 +1808,8 @@
       "Retrieve samples from the UNLRA camp and bring them to Lab Rat",
       "Locate the samples"
     ],
-    "reward_text": "Rewards Reputation with Lab Rat $4,600 HpR 3-S"
+    "reward_text": "Rewards Reputation with Lab Rat $4,600 HpR 3-S",
+    "category": "unknown"
   },
   {
     "id": "what-was-left",
@@ -1697,7 +1822,8 @@
       "House containing box of passports.",
       "Location of box of passports to take.",
       "Location of box of passports to take."
-    ]
+    ],
+    "category": "unknown"
   },
   {
     "id": "whats-in-store",
@@ -1715,7 +1841,8 @@
       "The little building against the warehouse.",
       "The little building against the warehouse."
     ],
-    "reward_text": "Rewards Reputation with $3,300 HARDE Case"
+    "reward_text": "Rewards Reputation with $3,300 HARDE Case",
+    "category": "unknown"
   },
   {
     "id": "whats-in-the-box",
@@ -1731,7 +1858,8 @@
       "The computer to interact with.",
       "The computer to interact with."
     ],
-    "reward_text": "Rewards Reputation with Banshee 7.62x51mm AP (M61) 5.56x45mm AP (M855A1)"
+    "reward_text": "Rewards Reputation with Banshee 7.62x51mm AP (M61) 5.56x45mm AP (M855A1)",
+    "category": "unknown"
   },
   {
     "id": "whos-in-charge",
@@ -1749,7 +1877,8 @@
       "The second computer.",
       "The second computer."
     ],
-    "reward_text": "Rewards Reputation with Turncoat AK-74M MM24 Case"
+    "reward_text": "Rewards Reputation with Turncoat AK-74M MM24 Case",
+    "category": "unknown"
   },
   {
     "id": "wing-clipping",
@@ -1760,6 +1889,31 @@
     "objectives": [
       "Neutralize the hostiles at the airfield 0/20"
     ],
-    "reward_text": "Rewards Reputation with Handshake $3,900 Chest Rig 901 Elite 4"
+    "reward_text": "Rewards Reputation with Handshake $3,900 Chest Rig 901 Elite 4",
+    "category": "unknown"
+  },
+  {
+    "id": "letters-from-lamang",
+    "name": "Letters from Lamang",
+    "vendor": "",
+    "area": "",
+    "type": "hidden",
+    "category": "hidden_task"
+  },
+  {
+    "id": "needle-in-a-jungle",
+    "name": "Needle in a Jungle",
+    "vendor": "",
+    "area": "",
+    "type": "hidden",
+    "category": "hidden_task"
+  },
+  {
+    "id": "the-last-broadcast",
+    "name": "The Last Broadcast",
+    "vendor": "",
+    "area": "",
+    "type": "hidden",
+    "category": "hidden_task"
   }
 ]

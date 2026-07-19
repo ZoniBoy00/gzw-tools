@@ -7,6 +7,7 @@ interface Task {
   vendor: string;
   area: string;
   type: string;
+  category?: string;
   objectives?: string[];
   reward_text?: string;
   difficulty?: string;
@@ -28,26 +29,48 @@ export default function MissionFinder() {
   const [vendorFilter, setVendorFilter] = useState('');
   const [areaFilter, setAreaFilter] = useState('');
   const [typeFilter, setTypeFilter] = useState('');
+  const [categoryFilter, setCategoryFilter] = useState('');
   const [sortBy, setSortBy] = useState<'name' | 'vendor'>('vendor');
   const [expanded, setExpanded] = useState<string | null>(null);
+
+  const categories = useMemo(() => {
+    const cats = ['main', 'side', 'hidden', 'squad', 'contract', 'unknown'];
+    const result: { key: string; label: string; icon: string }[] = [];
+    for (const c of cats) {
+      const count = tasks.filter((t) => (t.category || t.type) === c).length;
+      if (count > 0) {
+        const labels: Record<string, string> = { main: 'Main Tasks', side: 'Side Tasks', hidden: 'Hidden Tasks', squad: 'Squad Strikes', contract: 'Contracts', unknown: 'Other' };
+        const icons: Record<string, string> = { main: 'fas fa-star', side: 'fas fa-list', hidden: 'fas fa-eye-slash', squad: 'fas fa-people-group', contract: 'fas fa-file-contract', unknown: 'fas fa-question' };
+        result.push({ key: c, label: `${labels[c] || c} (${count})`, icon: icons[c] || 'fas fa-circle' });
+      }
+    }
+    return result;
+  }, []);
 
   const filtered = useMemo(() => {
     let data = [...tasks];
     if (search.trim()) {
       const q = search.toLowerCase();
-      data = data.filter(
-        (t) =>
-          t.name.toLowerCase().includes(q) ||
-          (t.vendor && t.vendor.toLowerCase().includes(q)) ||
-          (t.area && t.area.toLowerCase().includes(q)),
-      );
+      data = data.filter((t) => t.name.toLowerCase().includes(q) || (t.vendor && t.vendor.toLowerCase().includes(q)) || (t.area && t.area.toLowerCase().includes(q)));
     }
     if (vendorFilter) data = data.filter((t) => t.vendor === vendorFilter);
     if (areaFilter) data = data.filter((t) => t.area === areaFilter);
     if (typeFilter) data = data.filter((t) => t.type === typeFilter);
+    if (categoryFilter) data = data.filter((t) => (t.category || t.type) === categoryFilter);
     data.sort((a, b) => (sortBy === 'name' ? a.name.localeCompare(b.name) : (a.vendor || '').localeCompare(b.vendor || '')));
     return data;
-  }, [search, vendorFilter, areaFilter, typeFilter, sortBy]);
+  }, [search, vendorFilter, areaFilter, typeFilter, categoryFilter, sortBy]);
+
+  // Group filtered by category
+  const grouped = useMemo(() => {
+    const groups: Record<string, Task[]> = {};
+    for (const t of filtered) {
+      const cat = t.category || t.type || 'unknown';
+      if (!groups[cat]) groups[cat] = [];
+      groups[cat].push(t);
+    }
+    return groups;
+  }, [filtered]);
 
   return (
     <div className="tab-content">
@@ -91,107 +114,50 @@ export default function MissionFinder() {
         </button>
       </div>
 
-      {/* Results */}
-      <div className="space-y-1 animate-stagger">
-        {filtered.map((t) => {
-          const isExpanded = expanded === t.id;
-          return (
-            <div
-              key={t.id}
-              className={`border transition-colors ${
-                isExpanded ? 'border-accent/40 bg-accent/[0.02]' : 'border-border hover:border-border-light'
-              }`}
-            >
-              <button
-                onClick={() => setExpanded(isExpanded ? null : t.id)}
-                className="w-full text-left px-3.5 py-2.5 flex items-center justify-between gap-3"
-              >
-                <div className="flex items-center gap-3 min-w-0">
-                  <span className={`w-1.5 h-1.5 shrink-0 ${vendorColor(t.vendor)}`} />
-                  <div className="min-w-0">
-                    <div className="text-sm font-medium truncate">{t.name}</div>
-                    <div className="text-[10px] font-mono text-text-muted flex items-center gap-2">
-                      {t.vendor && <span className="tag tag-drab text-[8px]">{t.vendor}</span>}
-                      {t.area && <span className="truncate">{t.area}</span>}
-                    </div>
-                  </div>
-                </div>
-                <div className="flex items-center gap-2 shrink-0">
-                  {t.type && t.type !== 'unknown' && (
-                    <span className="text-[9px] font-mono text-text-muted/50 uppercase">{t.type}</span>
-                  )}
-                  <i className={`fas fa-chevron-down text-[9px] text-text-muted transition-transform ${isExpanded ? 'rotate-180' : ''}`} />
-                </div>
-              </button>
-              {isExpanded && (
-                <div className="px-3.5 pb-3 border-t border-border/50 pt-2 text-xs font-mono space-y-1.5">
-                  <div className="grid grid-cols-2 gap-x-4 gap-y-1">
-                    {t.vendor && <div><span className="text-text-muted">Vendor </span><span className="tag tag-drab text-[9px]">{t.vendor}</span></div>}
-                    {t.area && <div><span className="text-text-muted">Area </span><span>{t.area}</span></div>}
-                    {t.type && t.type !== 'unknown' && <div><span className="text-text-muted">Type </span><span className="uppercase">{t.type}</span></div>}
-                    {t.difficulty && <div><span className="text-text-muted">Difficulty </span><span>{t.difficulty}</span></div>}
-                    {t.quest_type && <div><span className="text-text-muted">Quest Type </span><span>{t.quest_type}</span></div>}
-                  </div>
-
-                  {t.objectives && t.objectives.length > 0 && (
-                    <div>
-                      <div className="text-text-muted text-[9px] uppercase tracking-wider mb-1 flex items-center gap-1">
-                        <i className="fas fa-list-check text-accent/60" />
-                        Objectives
-                      </div>
-                      <ul className="space-y-0.5">
-                        {t.objectives.map((o, i) => (
-                          <li key={i} className="flex items-start gap-1.5 text-text-muted/90">
-                            <span className="text-accent/60 mt-0.5 shrink-0">{i + 1}.</span>
-                            <span>{o}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  )}
-
-                  {t.reward_text && (
-                    <div>
-                      <div className="text-text-muted text-[9px] uppercase tracking-wider mb-0.5 flex items-center gap-1">
-                        <i className="fas fa-gift text-accent/60" />
-                        Rewards
-                      </div>
-                      <p className="text-text-muted/90">{t.reward_text}</p>
-                    </div>
-                  )}
-
-                  {t.requirements && (
-                    <div>
-                      <div className="text-text-muted text-[9px] uppercase tracking-wider mb-0.5">Requires</div>
-                      <span className="text-text-muted/90">{t.requirements}</span>
-                    </div>
-                  )}
-
-                  <div className="pt-2 flex items-center gap-3 text-[9px]">
-                    <a
-                      href={`https://gray-zone-warfare.fandom.com/wiki/${encodeURIComponent(t.name)}`}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-accent/70 hover:text-accent transition-colors flex items-center gap-1"
-                    >
-                      <i className="fas fa-external-link-alt text-[8px]" />
-                      View on Wiki
-                    </a>
-                    <span className="text-text-muted/30">ID: {t.id}</span>
-                    {t.objectives && <span className="text-text-muted/30">{t.objectives.length} objectives</span>}
-                  </div>
-                </div>
-              )}
-            </div>
-          );
-        })}
-        {filtered.length === 0 && (
-          <div className="empty-state">
-            <i className="fas fa-clipboard-list" aria-hidden="true" />
-            <p>No missions match your filters</p>
-          </div>
-        )}
+      {/* Category filter chips */}
+      <div className="flex flex-wrap gap-1.5 mb-3">
+        <button onClick={() => setCategoryFilter('')} className={`chip chip-sm ${!categoryFilter ? 'active' : ''}`}>
+          <i className="fas fa-list text-[9px]" /> All
+        </button>
+        {categories.map((c) => (
+          <button key={c.key} onClick={() => setCategoryFilter(c.key)} className={`chip chip-sm ${categoryFilter === c.key ? 'active' : ''}`}>
+            <i className={`${c.icon} text-[9px]`} /> {c.label}
+          </button>
+        ))}
       </div>
+
+      {/* Results */}
+      {categoryFilter ? (
+        /* Single category view */
+        <div className="space-y-1 animate-stagger">
+          {filtered.map((t) => <MissionRow key={t.id} task={t} expanded={expanded} setExpanded={setExpanded} />)}
+          {filtered.length === 0 && (
+            <div className="empty-state">
+              <i className="fas fa-clipboard-list" aria-hidden="true" />
+              <p>No missions match your filters</p>
+            </div>
+          )}
+        </div>
+      ) : (
+        /* Grouped view */
+        <div className="space-y-4">
+          {Object.entries(grouped).map(([cat, missions]) => {
+            const catInfo = categories.find((c) => c.key === cat);
+            if (!catInfo) return null;
+            return (
+              <div key={cat}>
+                <div className="flex items-center gap-2 mb-2">
+                  <i className={`${catInfo.icon} text-accent/60 text-xs`} />
+                  <span className="text-[10px] font-bold uppercase tracking-[0.1em] text-text-muted">{catInfo.label}</span>
+                </div>
+                <div className="space-y-1">
+                  {missions.map((t) => <MissionRow key={t.id} task={t} expanded={expanded} setExpanded={setExpanded} />)}
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      )}
 
       {/* Footer summary */}
       <div className="mt-3 flex flex-wrap items-center gap-2 text-[10px] font-mono text-text-muted/60">
@@ -214,4 +180,68 @@ function vendorColor(vendor: string): string {
     Banshee: 'bg-[#a855f7]',
   };
   return colors[vendor] || 'bg-text-muted';
+}
+
+function MissionRow({ task, expanded, setExpanded }: { task: Task; expanded: string | null; setExpanded: (id: string | null) => void }) {
+  const isExpanded = expanded === task.id;
+  return (
+    <div className={`border transition-colors ${isExpanded ? 'border-accent/40 bg-accent/[0.02]' : 'border-border hover:border-border-light'}`}>
+      <button onClick={() => setExpanded(isExpanded ? null : task.id)} className="w-full text-left px-3.5 py-2.5 flex items-center justify-between gap-3">
+        <div className="flex items-center gap-3 min-w-0">
+          <span className={`w-1.5 h-1.5 shrink-0 ${vendorColor(task.vendor)}`} />
+          <div className="min-w-0">
+            <div className="text-sm font-medium truncate">{task.name}
+              {task.category === 'hidden_task' && <span className="tag tag-amber text-[8px] ml-2">Hidden</span>}
+            </div>
+            <div className="text-[10px] font-mono text-text-muted flex items-center gap-2">
+              {task.vendor && <span className="tag tag-drab text-[8px]">{task.vendor}</span>}
+              {task.area && <span className="truncate">{task.area}</span>}
+            </div>
+          </div>
+        </div>
+        <div className="flex items-center gap-2 shrink-0">
+          <i className={`fas fa-chevron-down text-[9px] text-text-muted transition-transform ${isExpanded ? 'rotate-180' : ''}`} />
+        </div>
+      </button>
+      {isExpanded && (
+        <div className="px-3.5 pb-3 border-t border-border/50 pt-2 text-xs font-mono space-y-1.5">
+          <div className="grid grid-cols-2 gap-x-4 gap-y-1">
+            {task.vendor && <div><span className="text-text-muted">Vendor </span><span className="tag tag-drab text-[9px]">{task.vendor}</span></div>}
+            {task.area && <div><span className="text-text-muted">Area </span><span>{task.area}</span></div>}
+            {task.difficulty && <div><span className="text-text-muted">Difficulty </span><span>{task.difficulty}</span></div>}
+          </div>
+          {task.objectives && task.objectives.length > 0 && (
+            <div>
+              <div className="text-text-muted text-[9px] uppercase tracking-wider mb-1 flex items-center gap-1">
+                <i className="fas fa-list-check text-accent/60" /> Objectives
+              </div>
+              <ul className="space-y-0.5">
+                {task.objectives.map((o, i) => (
+                  <li key={i} className="flex items-start gap-1.5 text-text-muted/90">
+                    <span className="text-accent/60 mt-0.5 shrink-0">{i + 1}.</span>
+                    <span>{o}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+          {task.reward_text && (
+            <div>
+              <div className="text-text-muted text-[9px] uppercase tracking-wider mb-0.5 flex items-center gap-1">
+                <i className="fas fa-gift text-accent/60" /> Rewards
+              </div>
+              <p className="text-text-muted/90">{task.reward_text}</p>
+            </div>
+          )}
+          <div className="pt-2 flex items-center gap-3 text-[9px]">
+            <a href={`https://gray-zone-warfare.fandom.com/wiki/${encodeURIComponent(task.name)}`} target="_blank" rel="noopener noreferrer" className="text-accent/70 hover:text-accent transition-colors flex items-center gap-1">
+              <i className="fas fa-external-link-alt text-[8px]" /> View on Wiki
+            </a>
+            <span className="text-text-muted/30">ID: {task.id}</span>
+            {task.objectives && <span className="text-text-muted/30">{task.objectives.length} objectives</span>}
+          </div>
+        </div>
+      )}
+    </div>
+  );
 }
