@@ -1,5 +1,5 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node';
-import { createHandler } from '../_lib/handler';
+import { createHandler } from '../_lib/handler.js';
 
 const DOCS = {
   name: 'GZW Tools API',

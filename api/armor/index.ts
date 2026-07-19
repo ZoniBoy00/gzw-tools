@@ -1,7 +1,7 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node';
-import { VESTS, HELMETS, RECOMMENDATIONS, MATERIAL_RANK } from '../_data/index';
-import type { ApiResponse } from '../_data/types';
-import { createHandler } from '../_lib/handler';
+import { VESTS, HELMETS, RECOMMENDATIONS, MATERIAL_RANK } from '../_data/index.js';
+import type { ApiResponse } from '../_data/types.js';
+import { createHandler } from '../_lib/handler.js';
 
 async function handler(req: VercelRequest, res: VercelResponse) {
   const response: ApiResponse<{

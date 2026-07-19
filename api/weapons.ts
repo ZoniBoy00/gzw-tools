@@ -1,7 +1,7 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node';
-import { WEAPONS, WEAPON_TYPES } from '../_data/index';
-import type { ApiResponse, WeaponEntry } from '../_data/types';
-import { createHandler } from '../_lib/handler';
+import { WEAPONS, WEAPON_TYPES } from '../_data/index.js';
+import type { ApiResponse, WeaponEntry } from '../_data/types.js';
+import { createHandler } from '../_lib/handler.js';
 
 async function handler(req: VercelRequest, res: VercelResponse) {
   const { type, caliber, search } = req.query;

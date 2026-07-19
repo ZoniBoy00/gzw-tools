@@ -3,7 +3,7 @@
  * Applies CORS, caching, and rate limiting.
  */
 import type { VercelRequest, VercelResponse } from '@vercel/node';
-import { checkRateLimit, getClientIp } from './rate-limit';
+import { checkRateLimit, getClientIp } from './rate-limit.js';
 
 export interface HandlerOptions {
   /** Cache-Control max-age in seconds (default: 3600) */

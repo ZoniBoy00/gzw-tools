@@ -1,6 +1,6 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node';
-import { VENDORS } from '../../src/lib/calc';
-import { createHandler } from '../_lib/handler';
+import { VENDORS } from '../../src/lib/calc.js';
+import { createHandler } from '../_lib/handler.js';
 
 async function handler(req: VercelRequest, res: VercelResponse) {
   res.status(200).json({
