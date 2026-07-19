@@ -2,6 +2,8 @@ import { useState, useMemo } from 'react';
 import { VESTS, HELMETS, RECOMMENDATIONS, MATERIAL_RANK } from '../data/armor';
 import TabBar from './ui/TabBar';
 import itemImages from '../data/item_images.json';
+import ItemModal from './ui/ItemModal';
+import type { ModalItem } from './ui/ItemModal';
 
 type SubTab = 'recommend' | 'vests' | 'helmets' | 'vendors';
 const SUB: { id: SubTab; label: string; icon?: string }[] = [
@@ -75,6 +77,7 @@ function Recommendations() {
 
 function VestSection() {
   const [compare, setCompare] = useState<string[]>([]);
+  const [modalItem, setModalItem] = useState<ModalItem | null>(null);
 
   const sorted = useMemo(() => [...VESTS].sort((a, b) => nij(b.nij) - nij(a.nij)), []);
 
@@ -155,12 +158,24 @@ function VestSection() {
                   </button>
                 </td>
                 <td data-label="" className="font-medium">
-                  <div className="flex items-center gap-2">
+                  <button onClick={() => setModalItem({
+                    name: v.name,
+                    image: itemImages[v.name as keyof typeof itemImages] as string | undefined,
+                    type: 'vest',
+                    fields: [
+                      { label: 'NIJ Class', value: v.nij, color: nijColor(v.nij) },
+                      { label: 'Material', value: v.material, color: matColor(v.material) },
+                      { label: 'Plates', value: v.plates },
+                      { label: 'Grid', value: v.grid },
+                      { label: 'Weight', value: `${v.weight} kg` },
+                      { label: 'Source', value: v.source },
+                    ],
+                  })} className="flex items-center gap-2 text-left w-full hover:text-accent transition-colors">
                     {itemImages[v.name as keyof typeof itemImages] && (
-                      <img src={itemImages[v.name as keyof typeof itemImages]} alt="" className="w-8 h-8 object-contain shrink-0 bg-surface-2 border border-border" loading="lazy" />
+                      <img src={itemImages[v.name as keyof typeof itemImages] as string} alt="" className="w-8 h-8 object-contain shrink-0 bg-surface-2 border border-border" loading="lazy" />
                     )}
                     {v.name}
-                  </div>
+                  </button>
                 </td>
                 <td data-label="NIJ" className={`text-center font-bold ${nijColor(v.nij)}`}>{v.nij}</td>
                 <td data-label="Mat" className={`text-center ${matColor(v.material)}`}>{v.material.slice(0, 4)}</td>
@@ -173,6 +188,7 @@ function VestSection() {
           </tbody>
         </table>
       </div>
+      {modalItem && <ItemModal item={modalItem} onClose={() => setModalItem(null)} />}
     </div>
   );
 }
@@ -181,6 +197,7 @@ function VestSection() {
 
 function HelmetSection() {
   const [compare, setCompare] = useState<string[]>([]);
+  const [modalItem, setModalItem] = useState<ModalItem | null>(null);
 
   const sorted = useMemo(() => [...HELMETS].sort((a, b) => nij(b.nij) - nij(a.nij)), []);
 
@@ -257,12 +274,22 @@ function HelmetSection() {
                   </button>
                 </td>
                 <td data-label="" className="font-medium">
-                  <div className="flex items-center gap-2">
+                  <button onClick={() => setModalItem({
+                    name: h.name,
+                    image: itemImages[h.name as keyof typeof itemImages] as string | undefined,
+                    type: 'helmet',
+                    fields: [
+                      { label: 'NIJ Class', value: h.nij, color: nijColor(h.nij) },
+                      { label: 'Material', value: h.material, color: matColor(h.material) },
+                      { label: 'Weight', value: `${h.weight} kg` },
+                      { label: 'Source', value: h.source },
+                    ],
+                  })} className="flex items-center gap-2 text-left w-full hover:text-accent transition-colors">
                     {itemImages[h.name as keyof typeof itemImages] && (
-                      <img src={itemImages[h.name as keyof typeof itemImages]} alt="" className="w-8 h-8 object-contain shrink-0 bg-surface-2 border border-border" loading="lazy" />
+                      <img src={itemImages[h.name as keyof typeof itemImages] as string} alt="" className="w-8 h-8 object-contain shrink-0 bg-surface-2 border border-border" loading="lazy" />
                     )}
                     {h.name}
-                  </div>
+                  </button>
                 </td>
                 <td data-label="NIJ" className={`text-center font-bold ${nijColor(h.nij)}`}>{h.nij}</td>
                 <td data-label="Mat" className={`text-center ${matColor(h.material)}`}>{h.material}</td>
@@ -273,6 +300,7 @@ function HelmetSection() {
           </tbody>
         </table>
       </div>
+      {modalItem && <ItemModal item={modalItem} onClose={() => setModalItem(null)} />}
     </div>
   );
 }

@@ -1,11 +1,14 @@
 import { useState, useMemo, useEffect } from 'react';
 import { WEAPONS, WEAPON_TYPES } from '../data/weapons';
 import itemImages from '../data/item_images.json';
+import ItemModal from './ui/ItemModal';
+import type { ModalItem } from './ui/ItemModal';
 
 export default function WeaponsGuide() {
   const [type, setType] = useState(() => new URLSearchParams(window.location.search).get('wtype') || 'All');
   const [search, setSearch] = useState(() => new URLSearchParams(window.location.search).get('wsearch') || '');
   const [compare, setCompare] = useState<string[]>([]);
+  const [modalItem, setModalItem] = useState<ModalItem | null>(null);
 
   // Sync to URL
   useEffect(() => {
@@ -112,10 +115,21 @@ export default function WeaponsGuide() {
           >
             <div className="flex-1 flex items-center gap-2">
               {itemImages[w.name as keyof typeof itemImages] && (
-                <img src={itemImages[w.name as keyof typeof itemImages]} alt="" className="w-10 h-10 object-contain shrink-0 bg-surface-2 border border-border" loading="lazy" />
+                <img src={itemImages[w.name as keyof typeof itemImages] as string} alt="" className="w-10 h-10 object-contain shrink-0 bg-surface-2 border border-border" loading="lazy" />
               )}
               <div>
-                <div className="text-sm font-medium">{w.name}</div>
+                <button onClick={() => setModalItem({
+                  name: w.name,
+                  image: itemImages[w.name as keyof typeof itemImages] as string | undefined,
+                  type: 'weapon',
+                  fields: [
+                    { label: 'Type', value: w.type },
+                    { label: 'Caliber', value: w.caliber },
+                    { label: 'Mag Size', value: `${w.magSize} rds` },
+                    { label: 'Fire Rate', value: w.fireRate ? `${w.fireRate} RPM` : '-' },
+                    { label: 'Source', value: w.source },
+                  ],
+                })} className="text-sm font-medium text-left hover:text-accent transition-colors">{w.name}</button>
                 <div className="text-[10px] text-text-muted font-mono">{w.type}</div>
               </div>
             </div>
@@ -178,12 +192,23 @@ export default function WeaponsGuide() {
                     </button>
                   </td>
                   <td className="font-medium">
-                    <div className="flex items-center gap-2">
+                    <button onClick={() => setModalItem({
+                      name: w.name,
+                      image: itemImages[w.name as keyof typeof itemImages] as string | undefined,
+                      type: 'weapon',
+                      fields: [
+                        { label: 'Type', value: w.type },
+                        { label: 'Caliber', value: w.caliber },
+                        { label: 'Mag Size', value: `${w.magSize} rds` },
+                        { label: 'Fire Rate', value: w.fireRate ? `${w.fireRate} RPM` : '-' },
+                        { label: 'Source', value: w.source },
+                      ],
+                    })} className="flex items-center gap-2 text-left w-full hover:text-accent transition-colors">
                     {itemImages[w.name as keyof typeof itemImages] && (
-                      <img src={itemImages[w.name as keyof typeof itemImages]} alt="" className="w-8 h-8 object-contain shrink-0 bg-surface-2 border border-border" loading="lazy" />
+                      <img src={itemImages[w.name as keyof typeof itemImages] as string} alt="" className="w-8 h-8 object-contain shrink-0 bg-surface-2 border border-border" loading="lazy" />
                     )}
                     {w.name}
-                    </div>
+                    </button>
                   </td>
                   <td className="text-text-muted">{w.type}</td>
                   <td className="text-accent">{w.caliber}</td>
@@ -212,6 +237,9 @@ export default function WeaponsGuide() {
           <span className="text-accent/60">· {comparedWeapons.length} selected</span>
         )}
       </div>
+
+      {/* Item detail modal */}
+      {modalItem && <ItemModal item={modalItem} onClose={() => setModalItem(null)} />}
     </div>
   );
 }
