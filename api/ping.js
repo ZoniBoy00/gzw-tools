@@ -1,7 +1,5 @@
-// Minimal test — works?
-export default async function handler(req) {
-  return new Response(JSON.stringify({ ok: true, url: req.url }), {
-    status: 200,
-    headers: { 'Content-Type': 'application/json' },
-  });
+// Minimal test — Express-style (req, res)
+export default async function handler(req, res) {
+  res.setHeader('Content-Type', 'application/json');
+  res.status(200).json({ ok: true, url: req.url, method: req.method });
 }
