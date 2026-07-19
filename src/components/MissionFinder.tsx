@@ -110,7 +110,9 @@ export default function MissionFinder() {
                   </div>
                 </div>
                 <div className="flex items-center gap-2 shrink-0">
-                  <span className="text-[9px] font-mono text-text-muted/50 uppercase">{t.type}</span>
+                  {t.type && t.type !== 'unknown' && (
+                    <span className="text-[9px] font-mono text-text-muted/50 uppercase">{t.type}</span>
+                  )}
                   <i className={`fas fa-chevron-down text-[9px] text-text-muted transition-transform ${isExpanded ? 'rotate-180' : ''}`} />
                 </div>
               </button>
@@ -118,7 +120,7 @@ export default function MissionFinder() {
                 <div className="px-3.5 pb-3 border-t border-border/50 pt-2 text-xs font-mono space-y-1">
                   {t.vendor && <div><span className="text-text-muted">Vendor </span><span className="tag tag-drab text-[9px]">{t.vendor}</span></div>}
                   {t.area && <div><span className="text-text-muted">Area </span><span>{t.area}</span></div>}
-                  {t.type && <div><span className="text-text-muted">Type </span><span className="uppercase">{t.type}</span></div>}
+                  {t.type && t.type !== 'unknown' && <div><span className="text-text-muted">Type </span><span className="uppercase">{t.type}</span></div>}
                   {t.objectives && t.objectives.length > 0 && (
                     <div>
                       <span className="text-text-muted">Objectives</span>
