@@ -167,9 +167,18 @@ export default function MissionFinder() {
                     </div>
                   )}
 
-                  <div className="pt-1 flex items-center gap-3 text-[9px] text-text-muted/30">
-                    <span>ID: {t.id}</span>
-                    {t.objectives && <span>{t.objectives.length} objectives</span>}
+                  <div className="pt-2 flex items-center gap-3 text-[9px]">
+                    <a
+                      href={`https://gray-zone-warfare.fandom.com/wiki/${encodeURIComponent(t.name)}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-accent/70 hover:text-accent transition-colors flex items-center gap-1"
+                    >
+                      <i className="fas fa-external-link-alt text-[8px]" />
+                      View on Wiki
+                    </a>
+                    <span className="text-text-muted/30">ID: {t.id}</span>
+                    {t.objectives && <span className="text-text-muted/30">{t.objectives.length} objectives</span>}
                   </div>
                 </div>
               )}

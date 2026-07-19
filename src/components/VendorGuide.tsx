@@ -5,6 +5,7 @@ import { AMMO } from '../data/ammo';
 import { WEAPONS } from '../data/weapons';
 import { VESTS, HELMETS, VENDOR_GEAR } from '../data/armor';
 import itemImages from '../data/item_images.json';
+import vendorImages from '../data/vendor_images.json';
 
 interface VendorItem {
   name: string;
@@ -124,8 +125,12 @@ export default function VendorGuide() {
             {/* Top: vendor identity */}
             <div className="p-4 flex items-start justify-between flex-wrap gap-3" style={{ background: `${meta.color}04` }}>
               <div className="flex items-center gap-3">
-                <div className="w-12 h-12 flex items-center justify-center border" style={{ borderColor: meta.color + '40', background: meta.color + '12' }}>
-                  <i className={`${meta.icon} text-xl`} style={{ color: meta.color }} />
+                <div className="w-14 h-14 flex items-center justify-center border overflow-hidden" style={{ borderColor: meta.color + '40', background: meta.color + '12' }}>
+                  {vendorImages[selected as keyof typeof vendorImages] ? (
+                    <img src={vendorImages[selected as keyof typeof vendorImages] as string} alt={vendor.name} className="w-full h-full object-contain" />
+                  ) : (
+                    <i className={`${meta.icon} text-xl`} style={{ color: meta.color }} />
+                  )}
                 </div>
                 <div>
                   <div className="text-lg font-bold" style={{ color: meta.color }}>{vendor.name}</div>
