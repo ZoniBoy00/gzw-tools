@@ -245,7 +245,7 @@ select.input {
   position: sticky;
   top: 0;
   text-align: left;
-  padding: 8px 10px;
+  padding: 0 10px;
   color: var(--color-text-muted);
   font-weight: 600;
   text-transform: uppercase;
@@ -255,17 +255,17 @@ select.input {
   white-space: nowrap;
   background: var(--color-surface);
   z-index: 10;
+  height: 36px;
   vertical-align: middle;
   line-height: 1;
+  box-sizing: border-box;
 }
+/* Match all th content — text and icons — in a single line box */
 .table-wrap th i,
 .table-wrap th svg {
-  display: inline-block;
-  vertical-align: middle;
   font-size: 10px;
   line-height: 1;
-  width: auto;
-  height: auto;
+  vertical-align: baseline;
 }
 /* Header separator: 2px solid border-bottom on ths */
 /* (thead tr::after removed — th backgrounds obscure it) */
