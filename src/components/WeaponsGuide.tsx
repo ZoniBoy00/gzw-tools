@@ -1,5 +1,6 @@
 import { useState, useMemo, useEffect } from 'react';
 import { WEAPONS, WEAPON_TYPES } from '../data/weapons';
+import itemImages from '../data/item_images.json';
 
 export default function WeaponsGuide() {
   const [type, setType] = useState(() => new URLSearchParams(window.location.search).get('wtype') || 'All');
@@ -109,9 +110,14 @@ export default function WeaponsGuide() {
               compare.includes(w.name) ? 'border-accent/50 bg-accent/5' : 'border-border hover:border-border-light'
             }`}
           >
-            <div className="flex-1">
-              <div className="text-sm font-medium">{w.name}</div>
-              <div className="text-[10px] text-text-muted font-mono">{w.type}</div>
+            <div className="flex-1 flex items-center gap-2">
+              {itemImages[w.name as keyof typeof itemImages] && (
+                <img src={itemImages[w.name as keyof typeof itemImages]} alt="" className="w-10 h-10 object-contain shrink-0 bg-surface-2 border border-border" loading="lazy" />
+              )}
+              <div>
+                <div className="text-sm font-medium">{w.name}</div>
+                <div className="text-[10px] text-text-muted font-mono">{w.type}</div>
+              </div>
             </div>
             <div className="text-right mr-2">
               <div className="text-sm font-mono text-accent">{w.caliber}</div>
@@ -171,7 +177,14 @@ export default function WeaponsGuide() {
                       <i className={`fas fa-${compare.includes(w.name) ? 'check' : 'plus'}`} />
                     </button>
                   </td>
-                  <td className="font-medium">{w.name}</td>
+                  <td className="font-medium">
+                    <div className="flex items-center gap-2">
+                    {itemImages[w.name as keyof typeof itemImages] && (
+                      <img src={itemImages[w.name as keyof typeof itemImages]} alt="" className="w-8 h-8 object-contain shrink-0 bg-surface-2 border border-border" loading="lazy" />
+                    )}
+                    {w.name}
+                    </div>
+                  </td>
                   <td className="text-text-muted">{w.type}</td>
                   <td className="text-accent">{w.caliber}</td>
                   <td className="text-center text-text-muted">{w.magSize}</td>

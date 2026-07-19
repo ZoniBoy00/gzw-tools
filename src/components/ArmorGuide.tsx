@@ -1,6 +1,7 @@
 import { useState, useMemo } from 'react';
 import { VESTS, HELMETS, RECOMMENDATIONS, MATERIAL_RANK } from '../data/armor';
 import TabBar from './ui/TabBar';
+import itemImages from '../data/item_images.json';
 
 type SubTab = 'recommend' | 'vests' | 'helmets' | 'vendors';
 const SUB: { id: SubTab; label: string; icon?: string }[] = [
@@ -153,7 +154,14 @@ function VestSection() {
                     <i className={`fas fa-${compare.includes(v.name) ? 'check' : 'plus'}`} />
                   </button>
                 </td>
-                <td data-label="" className="font-medium">{v.name}</td>
+                <td data-label="" className="font-medium">
+                  <div className="flex items-center gap-2">
+                    {itemImages[v.name as keyof typeof itemImages] && (
+                      <img src={itemImages[v.name as keyof typeof itemImages]} alt="" className="w-8 h-8 object-contain shrink-0 bg-surface-2 border border-border" loading="lazy" />
+                    )}
+                    {v.name}
+                  </div>
+                </td>
                 <td data-label="NIJ" className={`text-center font-bold ${nijColor(v.nij)}`}>{v.nij}</td>
                 <td data-label="Mat" className={`text-center ${matColor(v.material)}`}>{v.material.slice(0, 4)}</td>
                 <td data-label="Plates" className="text-center text-text-muted">{v.plates.replace(', ', '/')}</td>
@@ -248,7 +256,14 @@ function HelmetSection() {
                     <i className={`fas fa-${compare.includes(h.name) ? 'check' : 'plus'}`} />
                   </button>
                 </td>
-                <td data-label="" className="font-medium">{h.name}</td>
+                <td data-label="" className="font-medium">
+                  <div className="flex items-center gap-2">
+                    {itemImages[h.name as keyof typeof itemImages] && (
+                      <img src={itemImages[h.name as keyof typeof itemImages]} alt="" className="w-8 h-8 object-contain shrink-0 bg-surface-2 border border-border" loading="lazy" />
+                    )}
+                    {h.name}
+                  </div>
+                </td>
                 <td data-label="NIJ" className={`text-center font-bold ${nijColor(h.nij)}`}>{h.nij}</td>
                 <td data-label="Mat" className={`text-center ${matColor(h.material)}`}>{h.material}</td>
                 <td data-label="Wt" className="text-right text-text-muted">{h.weight}kg</td>
