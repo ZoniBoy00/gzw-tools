@@ -1,0 +1,947 @@
+[
+  {
+    "id": "cache-report-ii",
+    "name": "Cache Report II",
+    "vendor": "Gunny",
+    "area": "North of Fort Narith",
+    "type": "contract"
+  },
+  {
+    "id": "cache-report-ix",
+    "name": "Cache Report IX",
+    "vendor": "Gunny",
+    "area": "North of Blue Lagoon",
+    "type": "contract"
+  },
+  {
+    "id": "they-are-everywhere",
+    "name": "They Are Everywhere",
+    "vendor": "Gunny",
+    "area": "Blue Lagoon",
+    "type": "contract"
+  },
+  {
+    "id": "a-small-favor",
+    "name": "A Small Favor",
+    "vendor": "Turncoat",
+    "area": "Fort Narith",
+    "type": "unknown"
+  },
+  {
+    "id": "artisans-list",
+    "name": "Artisan's List",
+    "vendor": "Artisan",
+    "area": "Tiger Bay",
+    "type": "unknown"
+  },
+  {
+    "id": "artisans-list-ii",
+    "name": "Artisan's List II",
+    "vendor": "Artisan",
+    "area": "Tiger Bay",
+    "type": "unknown"
+  },
+  {
+    "id": "at-dooms-gate",
+    "name": "At Doom's Gate",
+    "vendor": "Handshake",
+    "area": "Lamang Island",
+    "type": "unknown"
+  },
+  {
+    "id": "at-the-mounds-of-madness",
+    "name": "At the Mounds of Madness",
+    "vendor": "Artisan",
+    "area": "Ban pa",
+    "type": "unknown"
+  },
+  {
+    "id": "at-the-mounds-of-madness-ii",
+    "name": "At the Mounds of Madness II",
+    "vendor": "Artisan",
+    "area": "Ban Pa",
+    "type": "unknown"
+  },
+  {
+    "id": "aye-aye-captain",
+    "name": "Aye Aye, Captain",
+    "vendor": "Gunny",
+    "area": "Tiger Bay",
+    "type": "unknown"
+  },
+  {
+    "id": "baked",
+    "name": "Baked",
+    "vendor": "Banshee",
+    "area": "Tiger Bay",
+    "type": "unknown"
+  },
+  {
+    "id": "big-entrance",
+    "name": "Big Entrance",
+    "vendor": "Gunny",
+    "area": "Tiger Bay",
+    "type": "unknown"
+  },
+  {
+    "id": "buyer-of-untold-truths",
+    "name": "Buyer of Untold Truths",
+    "vendor": "Turncoat",
+    "area": "Tiger Bay",
+    "type": "unknown"
+  },
+  {
+    "id": "carnivore",
+    "name": "Carnivore",
+    "vendor": "Lab Rat",
+    "area": "Hunter's Paradise",
+    "type": "unknown"
+  },
+  {
+    "id": "crumb-collector",
+    "name": "Crumb Collector",
+    "vendor": "Lab Rat",
+    "area": "Tiger Bay",
+    "type": "unknown"
+  },
+  {
+    "id": "deal-of-the-century",
+    "name": "Deal of the Century",
+    "vendor": "Banshee",
+    "area": "Fort Narith",
+    "type": "unknown"
+  },
+  {
+    "id": "deep-depravity",
+    "name": "Deep Depravity",
+    "vendor": "Banshee",
+    "area": "YBL-1",
+    "type": "unknown"
+  },
+  {
+    "id": "dishonest-practices",
+    "name": "Dishonest Practices",
+    "vendor": "Turncoat",
+    "area": "Tiger Bay",
+    "type": "unknown"
+  },
+  {
+    "id": "domesticated-rat",
+    "name": "Domesticated Rat",
+    "vendor": "Handshake",
+    "area": "Hunter's Paradise",
+    "type": "unknown"
+  },
+  {
+    "id": "double-exposure",
+    "name": "Double Exposure",
+    "vendor": "Turncoat",
+    "area": "Fort Narith",
+    "type": "unknown"
+  },
+  {
+    "id": "downsizing",
+    "name": "Downsizing",
+    "vendor": "Turncoat",
+    "area": "Fort Narith",
+    "type": "unknown"
+  },
+  {
+    "id": "dragonslayer",
+    "name": "Dragonslayer",
+    "vendor": "Turncoat",
+    "area": "Fort Narith",
+    "type": "unknown"
+  },
+  {
+    "id": "evacuation-question",
+    "name": "Evacuation Question",
+    "vendor": "Artisan",
+    "area": "Fort Narith",
+    "type": "unknown"
+  },
+  {
+    "id": "expansion",
+    "name": "Expansion",
+    "vendor": "Gunny",
+    "area": "YBL-1",
+    "type": "unknown"
+  },
+  {
+    "id": "family-heirloom",
+    "name": "Family Heirloom",
+    "vendor": "Turncoat",
+    "area": "Fort Narith",
+    "type": "unknown"
+  },
+  {
+    "id": "final-liberation",
+    "name": "Final Liberation",
+    "vendor": "Turncoat",
+    "area": "YBL-1",
+    "type": "unknown"
+  },
+  {
+    "id": "firestarter",
+    "name": "Firestarter",
+    "vendor": "Lab Rat",
+    "area": "Lamang Island",
+    "type": "unknown"
+  },
+  {
+    "id": "first-hit",
+    "name": "First Hit",
+    "vendor": "Handshake",
+    "area": "Starting town",
+    "type": "unknown"
+  },
+  {
+    "id": "fort-narith-stroll",
+    "name": "Fort Narith Stroll",
+    "vendor": "Handshake",
+    "area": "Fort Narith",
+    "type": "unknown"
+  },
+  {
+    "id": "fresh-meat-ii",
+    "name": "Fresh Meat II",
+    "vendor": "Banshee",
+    "area": "Blue Lagoon",
+    "type": "unknown"
+  },
+  {
+    "id": "fresh-meat-iii",
+    "name": "Fresh Meat III",
+    "vendor": "Banshee",
+    "area": "Blue Lagoon",
+    "type": "unknown"
+  },
+  {
+    "id": "friendly-suggestion",
+    "name": "Friendly Suggestion",
+    "vendor": "Turncoat",
+    "area": "Tiger Bay",
+    "type": "unknown"
+  },
+  {
+    "id": "garbage-disposal",
+    "name": "Garbage Disposal",
+    "vendor": "Artisan",
+    "area": "Fort Narith",
+    "type": "unknown"
+  },
+  {
+    "id": "girls-just-wanna-have-fun",
+    "name": "Girls Just Wanna Have Fun",
+    "vendor": "Artisan",
+    "area": "Midnight Sapphire",
+    "type": "unknown"
+  },
+  {
+    "id": "goods-hunting",
+    "name": "Goods Hunting",
+    "vendor": "Gunny",
+    "area": "Khonwan Village (East of Nam Thaven)",
+    "type": "unknown"
+  },
+  {
+    "id": "hacker-ii",
+    "name": "Hacker II",
+    "vendor": "Handshake",
+    "area": "Fort Narith",
+    "type": "unknown"
+  },
+  {
+    "id": "hazardous-treasures",
+    "name": "Hazardous Treasures",
+    "vendor": "Handshake",
+    "area": "Sawmill Blue Lagoon Hunter's Paradise Ban Pa Pha Lang Airfield YBL-1",
+    "type": "unknown"
+  },
+  {
+    "id": "hide-and-seek",
+    "name": "Hide And Seek",
+    "vendor": "Gunny",
+    "area": "Tiger Bay",
+    "type": "unknown"
+  },
+  {
+    "id": "i-went-i-saw-i-conquered-ii",
+    "name": "I Went, I Saw, I Conquered II",
+    "vendor": "Handshake",
+    "area": "Sawmill",
+    "type": "unknown"
+  },
+  {
+    "id": "i-went-i-saw-i-conquered-iii",
+    "name": "I Went, I Saw, I Conquered III",
+    "vendor": "Handshake",
+    "area": "Sawmill",
+    "type": "unknown"
+  },
+  {
+    "id": "in-the-right-hands",
+    "name": "In The Right Hands",
+    "vendor": "Turncoat",
+    "area": "Fort Narith",
+    "type": "unknown"
+  },
+  {
+    "id": "incognito",
+    "name": "Incognito",
+    "vendor": "Gunny",
+    "area": "Tiger Bay",
+    "type": "unknown"
+  },
+  {
+    "id": "interrupted-aid",
+    "name": "Interrupted Aid",
+    "vendor": "Lab Rat",
+    "area": "Lamang Island",
+    "type": "unknown"
+  },
+  {
+    "id": "invaders-from-afar",
+    "name": "Invaders From Afar",
+    "vendor": "Artisan",
+    "area": "Sawmill",
+    "type": "unknown"
+  },
+  {
+    "id": "its-in-the-water",
+    "name": "It's in the Water",
+    "vendor": "Lab Rat",
+    "area": "Ban Pa",
+    "type": "unknown"
+  },
+  {
+    "id": "its-in-the-water-ii",
+    "name": "It's in the Water II",
+    "vendor": "Lab Rat",
+    "area": "Ban Pa",
+    "type": "unknown"
+  },
+  {
+    "id": "jetsnmarks",
+    "name": "Jets'N'Marks",
+    "vendor": "Banshee",
+    "area": "Fort Narith",
+    "type": "unknown"
+  },
+  {
+    "id": "king-of-the-crossroads",
+    "name": "King of the Crossroads",
+    "vendor": "Handshake",
+    "area": "Blue Lagoon",
+    "type": "unknown"
+  },
+  {
+    "id": "lamang-connection",
+    "name": "Lamang Connection",
+    "vendor": "Banshee",
+    "area": "Ban Pa",
+    "type": "unknown"
+  },
+  {
+    "id": "last-farewell-ii",
+    "name": "Last Farewell II",
+    "vendor": "Gunny",
+    "area": "",
+    "type": "unknown"
+  },
+  {
+    "id": "last-flight",
+    "name": "Last Flight",
+    "vendor": "Artisan",
+    "area": "Pha Lang Airfield",
+    "type": "unknown"
+  },
+  {
+    "id": "last-resort",
+    "name": "Last Resort",
+    "vendor": "Handshake",
+    "area": "Midnight Sapphire",
+    "type": "unknown"
+  },
+  {
+    "id": "left-behind-ii",
+    "name": "Left Behind II",
+    "vendor": "Handshake",
+    "area": "",
+    "type": "unknown"
+  },
+  {
+    "id": "line-in-the-sand",
+    "name": "Line in the sand",
+    "vendor": "Gunny",
+    "area": "Ban Pa",
+    "type": "unknown"
+  },
+  {
+    "id": "lip-out",
+    "name": "Lip Out",
+    "vendor": "Handshake",
+    "area": "Midnight Sapphire",
+    "type": "unknown"
+  },
+  {
+    "id": "living-in-burrows",
+    "name": "Living In Burrows",
+    "vendor": "Lab Rat",
+    "area": "YBL-1",
+    "type": "unknown"
+  },
+  {
+    "id": "lost-girl-ii",
+    "name": "Lost Girl II",
+    "vendor": "Gunny",
+    "area": "Blue Lagoon",
+    "type": "unknown"
+  },
+  {
+    "id": "lost-hope",
+    "name": "Lost Hope",
+    "vendor": "Artisan",
+    "area": "Ban Pa",
+    "type": "unknown"
+  },
+  {
+    "id": "lost-lover",
+    "name": "Lost Lover",
+    "vendor": "Lab Rat",
+    "area": "Fort Narith",
+    "type": "unknown"
+  },
+  {
+    "id": "mall-vigilante",
+    "name": "Mall Vigilante",
+    "vendor": "Handshake",
+    "area": "Tiger Bay",
+    "type": "unknown"
+  },
+  {
+    "id": "manifest-destiny",
+    "name": "Manifest Destiny",
+    "vendor": "Handshake",
+    "area": "Pha Lang Airfield",
+    "type": "unknown"
+  },
+  {
+    "id": "missing-colleague",
+    "name": "Missing Colleague",
+    "vendor": "Artisan",
+    "area": "Fort Narith",
+    "type": "unknown"
+  },
+  {
+    "id": "missing-colleague-ii",
+    "name": "Missing Colleague II",
+    "vendor": "Artisan",
+    "area": "Fort narith",
+    "type": "unknown"
+  },
+  {
+    "id": "name-your-poison",
+    "name": "Name Your Poison",
+    "vendor": "Turncoat",
+    "area": "Fort Narith",
+    "type": "unknown"
+  },
+  {
+    "id": "narcotic-bargain",
+    "name": "Narcotic Bargain",
+    "vendor": "Turncoat",
+    "area": "Tiger Bay",
+    "type": "unknown"
+  },
+  {
+    "id": "native-negotiations",
+    "name": "Native Negotiations",
+    "vendor": "Handshake",
+    "area": "Kiu Vongsa, Nam Thaven, Pha Lang",
+    "type": "unknown"
+  },
+  {
+    "id": "neighborly-help",
+    "name": "Neighborly Help",
+    "vendor": "Gunny",
+    "area": "Fort Narith",
+    "type": "unknown"
+  },
+  {
+    "id": "no-casualties",
+    "name": "No Casualties",
+    "vendor": "Artisan",
+    "area": "YBL-1",
+    "type": "unknown"
+  },
+  {
+    "id": "no-escape",
+    "name": "No Escape",
+    "vendor": "Banshee",
+    "area": "Fort Narith",
+    "type": "unknown"
+  },
+  {
+    "id": "no-questions-asked",
+    "name": "No Questions Asked",
+    "vendor": "Turncoat",
+    "area": "Midnight Sapphire",
+    "type": "unknown"
+  },
+  {
+    "id": "observation-duty",
+    "name": "Observation Duty",
+    "vendor": "Gunny",
+    "area": "Fort Narith",
+    "type": "unknown"
+  },
+  {
+    "id": "on-the-range",
+    "name": "On the Range",
+    "vendor": "Gunny",
+    "area": "Hunter's Paradise",
+    "type": "unknown"
+  },
+  {
+    "id": "one-mans-trash",
+    "name": "One Man's Trash",
+    "vendor": "Turncoat",
+    "area": "Blue Lagoon",
+    "type": "unknown"
+  },
+  {
+    "id": "one-shot-one-kill",
+    "name": "One Shot, One Kill",
+    "vendor": "Handshake",
+    "area": "Hunter's Paradise",
+    "type": "unknown"
+  },
+  {
+    "id": "out-of-the-blue",
+    "name": "Out Of the Blue",
+    "vendor": "Gunny",
+    "area": "Blue Lagoon",
+    "type": "unknown"
+  },
+  {
+    "id": "paparazzi",
+    "name": "Paparazzi",
+    "vendor": "Handshake",
+    "area": "Midnight Sapphire",
+    "type": "unknown"
+  },
+  {
+    "id": "peacekeeper",
+    "name": "Peacekeeper",
+    "vendor": "Lab Rat",
+    "area": "Tiger Bay",
+    "type": "unknown"
+  },
+  {
+    "id": "postman-rings-twice",
+    "name": "Postman Rings Twice",
+    "vendor": "Lab Rat",
+    "area": "Pha Lang Airfield",
+    "type": "unknown"
+  },
+  {
+    "id": "prisoner-23",
+    "name": "Prisoner 23",
+    "vendor": "Artisan",
+    "area": "YBL-1",
+    "type": "unknown"
+  },
+  {
+    "id": "propaganda-problems",
+    "name": "Propaganda Problems",
+    "vendor": "Gunny",
+    "area": "Lamang Island",
+    "type": "unknown"
+  },
+  {
+    "id": "radio-star",
+    "name": "Radio Star",
+    "vendor": "Handshake",
+    "area": "Lamang",
+    "type": "unknown"
+  },
+  {
+    "id": "rebel-scum",
+    "name": "Rebel Scum",
+    "vendor": "Handshake",
+    "area": "YBL-1",
+    "type": "unknown"
+  },
+  {
+    "id": "reconnaissance-in-force",
+    "name": "Reconnaissance-in-Force",
+    "vendor": "Handshake",
+    "area": "Fort Narith",
+    "type": "unknown"
+  },
+  {
+    "id": "ripper",
+    "name": "Ripper",
+    "vendor": "Lab Rat",
+    "area": "Tiger Bay",
+    "type": "unknown"
+  },
+  {
+    "id": "riverfront-view",
+    "name": "Riverfront View",
+    "vendor": "Handshake",
+    "area": "Midnight Sapphire",
+    "type": "unknown"
+  },
+  {
+    "id": "save-the-rebellion",
+    "name": "Save The Rebellion",
+    "vendor": "Artisan",
+    "area": "YBL-1",
+    "type": "unknown"
+  },
+  {
+    "id": "shooting-gallery",
+    "name": "Shooting Gallery",
+    "vendor": "Handshake",
+    "area": "Hunter's Paradise",
+    "type": "unknown"
+  },
+  {
+    "id": "shortcut",
+    "name": "Shortcut",
+    "vendor": "Handshake",
+    "area": "YBL-1",
+    "type": "unknown"
+  },
+  {
+    "id": "sisyphus",
+    "name": "Sisyphus",
+    "vendor": "Handshake",
+    "area": "Lamang Island",
+    "type": "unknown"
+  },
+  {
+    "id": "skycrawlers-ii",
+    "name": "Skycrawlers II",
+    "vendor": "Banshee",
+    "area": "Pha Lang Airfield",
+    "type": "unknown"
+  },
+  {
+    "id": "snooper",
+    "name": "Snooper",
+    "vendor": "Gunny",
+    "area": "Lamang Island",
+    "type": "unknown"
+  },
+  {
+    "id": "snow-white",
+    "name": "Snow White",
+    "vendor": "Artisan",
+    "area": "Lamang Island",
+    "type": "unknown"
+  },
+  {
+    "id": "spit-out-the-poison",
+    "name": "Spit Out the Poison",
+    "vendor": "Lab Rat",
+    "area": "Fort Narith",
+    "type": "unknown"
+  },
+  {
+    "id": "state-of-weapon-shipment",
+    "name": "State of Weapon Shipment",
+    "vendor": "Banshee",
+    "area": "Fort Narith",
+    "type": "unknown"
+  },
+  {
+    "id": "supernatural",
+    "name": "Supernatural",
+    "vendor": "Gunny",
+    "area": "North of Ban Pa",
+    "type": "unknown"
+  },
+  {
+    "id": "sweet-little-lies",
+    "name": "Sweet Little Lies",
+    "vendor": "Handshake",
+    "area": "Midnight Sapphire Tiger Bay Fort Narith",
+    "type": "unknown"
+  },
+  {
+    "id": "tasks",
+    "name": "Tasks",
+    "vendor": "",
+    "area": "",
+    "type": "unknown"
+  },
+  {
+    "id": "test-results",
+    "name": "Test Results",
+    "vendor": "Lab Rat",
+    "area": "Tiger Bay",
+    "type": "unknown"
+  },
+  {
+    "id": "the-art-of-deception",
+    "name": "The Art of Deception",
+    "vendor": "Handshake",
+    "area": "Fort Narith Midnight Sapphire",
+    "type": "unknown"
+  },
+  {
+    "id": "the-brave",
+    "name": "The Brave",
+    "vendor": "Lab Rat",
+    "area": "Hunter's Paradise",
+    "type": "unknown"
+  },
+  {
+    "id": "the-cleaner",
+    "name": "The Cleaner",
+    "vendor": "Handshake",
+    "area": "Lamang Island",
+    "type": "unknown"
+  },
+  {
+    "id": "the-man-who-disappeared",
+    "name": "The Man Who Disappeared",
+    "vendor": "Handshake",
+    "area": "Midnight Sapphire",
+    "type": "unknown"
+  },
+  {
+    "id": "the-mistress",
+    "name": "The Mistress",
+    "vendor": "Artisan",
+    "area": "Tiger Bay",
+    "type": "unknown"
+  },
+  {
+    "id": "the-more-the-merrier",
+    "name": "The More the Merrier",
+    "vendor": "Handshake",
+    "area": "Fort Narith",
+    "type": "unknown"
+  },
+  {
+    "id": "the-rebel-path",
+    "name": "The Rebel Path",
+    "vendor": "Gunny",
+    "area": "YBL-1, Tiger Bay, Ban Pa, Midnight Sapphire",
+    "type": "unknown"
+  },
+  {
+    "id": "the-runaway",
+    "name": "The Runaway",
+    "vendor": "Lab Rat",
+    "area": "Blue Lagoon",
+    "type": "unknown"
+  },
+  {
+    "id": "the-shadow-over-ban-pa-ii",
+    "name": "The Shadow Over Ban Pa II",
+    "vendor": "Handshake",
+    "area": "Ban Pa",
+    "type": "unknown"
+  },
+  {
+    "id": "the-snitch",
+    "name": "The Snitch",
+    "vendor": "Turncoat",
+    "area": "Tiger Bay",
+    "type": "unknown"
+  },
+  {
+    "id": "the-trickster",
+    "name": "The Trickster",
+    "vendor": "Lab Rat",
+    "area": "Tiger Bay",
+    "type": "unknown"
+  },
+  {
+    "id": "the-value-of-sharing",
+    "name": "The Value of Sharing",
+    "vendor": "Turncoat",
+    "area": "Ban Pa",
+    "type": "unknown"
+  },
+  {
+    "id": "the-way-below",
+    "name": "The Way Below",
+    "vendor": "Gunny",
+    "area": "YBL-1",
+    "type": "unknown"
+  },
+  {
+    "id": "timber",
+    "name": "Timber",
+    "vendor": "Banshee",
+    "area": "Sawmill",
+    "type": "unknown"
+  },
+  {
+    "id": "troll-bridge",
+    "name": "Troll Bridge",
+    "vendor": "Handshake",
+    "area": "Tiger Bay",
+    "type": "unknown"
+  },
+  {
+    "id": "uncanny-files",
+    "name": "Uncanny Files",
+    "vendor": "Lab Rat",
+    "area": "Fort Narith",
+    "type": "unknown"
+  },
+  {
+    "id": "under-our-noses",
+    "name": "Under Our Noses",
+    "vendor": "Gunny",
+    "area": "Lamang Island",
+    "type": "unknown"
+  },
+  {
+    "id": "uninvited-guests",
+    "name": "Uninvited Guests",
+    "vendor": "Turncoat",
+    "area": "Ban Pa",
+    "type": "unknown"
+  },
+  {
+    "id": "unlra",
+    "name": "UNLRA",
+    "vendor": "Handshake",
+    "area": "Tiger Bay",
+    "type": "unknown"
+  },
+  {
+    "id": "unlra-ii",
+    "name": "UNLRA II",
+    "vendor": "Handshake",
+    "area": "Tiger Bay",
+    "type": "unknown"
+  },
+  {
+    "id": "unlra-iii",
+    "name": "UNLRA III",
+    "vendor": "Handshake",
+    "area": "Tiger Bay",
+    "type": "unknown"
+  },
+  {
+    "id": "unnameable",
+    "name": "Unnameable",
+    "vendor": "Gunny",
+    "area": "Tiger Bay",
+    "type": "unknown"
+  },
+  {
+    "id": "unrefusable-offer",
+    "name": "Unrefusable Offer",
+    "vendor": "Handshake",
+    "area": "Lamang Island",
+    "type": "unknown"
+  },
+  {
+    "id": "wanted-man",
+    "name": "Wanted Man",
+    "vendor": "Gunny",
+    "area": "Fort Narith",
+    "type": "unknown"
+  },
+  {
+    "id": "wanted-man-ii",
+    "name": "Wanted Man II",
+    "vendor": "Gunny",
+    "area": "Fort Narith",
+    "type": "unknown"
+  },
+  {
+    "id": "warm-welcome",
+    "name": "Warm Welcome",
+    "vendor": "Turncoat",
+    "area": "Ban Pa",
+    "type": "unknown"
+  },
+  {
+    "id": "weeding",
+    "name": "Weeding",
+    "vendor": "Handshake",
+    "area": "Midnight Sapphire",
+    "type": "unknown"
+  },
+  {
+    "id": "what-remains",
+    "name": "What Remains",
+    "vendor": "Lab Rat",
+    "area": "Tiger Bay",
+    "type": "unknown"
+  },
+  {
+    "id": "what-was-left",
+    "name": "What Was Left",
+    "vendor": "Banshee",
+    "area": "Blue Lagoon",
+    "type": "unknown"
+  },
+  {
+    "id": "whats-in-store",
+    "name": "What's in Store",
+    "vendor": "Gunny",
+    "area": "Tiger Bay",
+    "type": "unknown"
+  },
+  {
+    "id": "whats-in-the-box",
+    "name": "What's in the Box",
+    "vendor": "Banshee",
+    "area": "Midnight Sapphire",
+    "type": "unknown"
+  },
+  {
+    "id": "whos-in-charge",
+    "name": "Who's In Charge",
+    "vendor": "Turncoat",
+    "area": "Fort Narith",
+    "type": "unknown"
+  },
+  {
+    "id": "wing-clipping",
+    "name": "Wing Clipping",
+    "vendor": "Handshake",
+    "area": "Pha Lang Airfield",
+    "type": "unknown"
+  },
+  {
+    "id": "category:hidden-task",
+    "name": "Category:Hidden Task",
+    "vendor": "",
+    "area": "",
+    "type": "unknown"
+  },
+  {
+    "id": "category:main-task",
+    "name": "Category:Main task",
+    "vendor": "",
+    "area": "",
+    "type": "unknown"
+  },
+  {
+    "id": "category:side-task",
+    "name": "Category:Side task",
+    "vendor": "",
+    "area": "",
+    "type": "unknown"
+  },
+  {
+    "id": "category:squad-strike-missions",
+    "name": "Category:Squad Strike Missions",
+    "vendor": "",
+    "area": "",
+    "type": "unknown"
+  }
+]

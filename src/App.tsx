@@ -2,7 +2,7 @@ import { useState } from 'react';
 import Dashboard from './components/Dashboard';
 import RepCalculator from './components/RepCalculator';
 import DollarCalculator from './components/DollarCalculator';
-import MissionCalculator from './components/MissionCalculator';
+import MissionFinder from './components/MissionFinder';
 import AmmoGuide from './components/AmmoGuide';
 import ArmorGuide from './components/ArmorGuide';
 import WeaponsGuide from './components/WeaponsGuide';
@@ -50,9 +50,12 @@ function App() {
               </p>
             </div>
           </div>
-          <div className="ts-badge text-[9px]">
-            <i className="fas fa-cloud-arrow-down" />
-            <span>Data: Jul 2026</span>
+          <div className="flex items-center gap-2">
+            <span className="text-[9px] font-bold px-1.5 py-0.5 border border-accent/40 text-accent bg-accent/5 tracking-wider">BETA</span>
+            <div className="ts-badge text-[9px]">
+              <i className="fas fa-cloud-arrow-down" />
+              <span>Data: Jul 2026</span>
+            </div>
           </div>
         </div>
       </header>
@@ -66,7 +69,7 @@ function App() {
           {activeTab === 'dashboard' && <Dashboard />}
           {activeTab === 'rep' && <RepCalculator result={repResult} setResult={setRepResult} />}
           {activeTab === 'dollar' && <DollarCalculator />}
-          {activeTab === 'missions' && <MissionCalculator />}
+          {activeTab === 'missions' && <MissionFinder />}
           {activeTab === 'ammo' && <AmmoGuide />}
           {activeTab === 'weapons' && <WeaponsGuide />}
           {activeTab === 'armor' && <ArmorGuide />}
