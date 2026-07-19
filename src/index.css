@@ -258,10 +258,15 @@ select.input {
   vertical-align: middle;
   line-height: 1;
 }
-/* Icons in headers: match font size, let alignment inherit */
+/* Icons in headers: use flex centering for perfect alignment */
 .table-wrap th i,
 .table-wrap th svg {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   font-size: 10px;
+  width: 1em;
+  height: 1em;
 }
 /* Header separator: 2px solid border-bottom on ths */
 /* (thead tr::after removed — th backgrounds obscure it) */
