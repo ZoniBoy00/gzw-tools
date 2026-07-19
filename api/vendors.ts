@@ -9,7 +9,7 @@ async function handler(req: VercelRequest, res: VercelResponse) {
       slug: v.slug,
       currentRep: v.rep,
       description: v.desc,
-      maxRep: 9750,
+      maxRep: 13000,
     })),
     count: VENDORS.length,
     source: 'GZW Community',

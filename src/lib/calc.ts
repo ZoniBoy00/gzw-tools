@@ -1,6 +1,6 @@
 // Gray Zone Warfare — Rep & Tool Calculator
 
-export const MAX_REP = 9750;
+export const MAX_REP = 13000;
 export const DEFAULT_RATE = 100;
 
 /* GZW Vendors */
@@ -12,7 +12,7 @@ export const VENDORS = [
   { name: 'Mithras', slug: 'mithras', rep: 1500, desc: 'General Equipment' },
 ];
 
-export const VENDOR_MAX = 9750;
+export const VENDOR_MAX = 13000;
 
 /* Mission types (GZW-style) */
 export const MISSION_TYPES = [
