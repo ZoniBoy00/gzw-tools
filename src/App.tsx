@@ -1,4 +1,5 @@
 import { BrowserRouter, Routes, Route, Navigate, useLocation, Link } from 'react-router-dom';
+import { useState } from 'react';
 import Dashboard from './components/Dashboard';
 import RepCalculator from './components/RepCalculator';
 import DollarCalculator from './components/DollarCalculator';
@@ -12,6 +13,7 @@ import LogAnalyzer from './components/LogAnalyzer';
 import ApiDocs from './components/ApiDocs';
 import PrivacyPolicy from './components/PrivacyPolicy';
 import TermsOfService from './components/TermsOfService';
+import FaqModal from './components/FaqModal';
 import TabBar from './components/ui/TabBar';
 import './index.css';
 
@@ -31,6 +33,7 @@ const TABS = [
 
 function Layout() {
   const location = useLocation();
+  const [showFaq, setShowFaq] = useState(false);
 
   return (
     <div className="scanlines min-h-screen bg-bg text-text">
@@ -51,6 +54,9 @@ function Layout() {
             </div>
           </div>
           <div className="flex items-center gap-2">
+            <button onClick={() => setShowFaq(true)} className="text-text-muted/50 hover:text-accent transition-colors text-sm px-1" aria-label="FAQ">
+              <i className="fas fa-circle-question" />
+            </button>
             <span className="text-[9px] font-bold px-1.5 py-0.5 border border-accent/40 text-accent bg-accent/5 tracking-wider">BETA</span>
             <div className="ts-badge text-[9px]">
               <i className="fas fa-cloud-arrow-down" />
@@ -105,6 +111,7 @@ function Layout() {
           </div>
         </div>
       </footer>
+      {showFaq && <FaqModal onClose={() => setShowFaq(false)} />}
     </div>
   );
 }
