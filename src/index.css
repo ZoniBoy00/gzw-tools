@@ -256,6 +256,7 @@ select.input {
   background: var(--color-surface);
   z-index: 10;
   line-height: 1;
+  vertical-align: top;
 }
 /* Match all th content — text and icons — in a single line box */
 .table-wrap th i,
