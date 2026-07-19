@@ -915,33 +915,5 @@
     "vendor": "Handshake",
     "area": "Pha Lang Airfield",
     "type": "unknown"
-  },
-  {
-    "id": "category:hidden-task",
-    "name": "Category:Hidden Task",
-    "vendor": "",
-    "area": "",
-    "type": "unknown"
-  },
-  {
-    "id": "category:main-task",
-    "name": "Category:Main task",
-    "vendor": "",
-    "area": "",
-    "type": "unknown"
-  },
-  {
-    "id": "category:side-task",
-    "name": "Category:Side task",
-    "vendor": "",
-    "area": "",
-    "type": "unknown"
-  },
-  {
-    "id": "category:squad-strike-missions",
-    "name": "Category:Squad Strike Missions",
-    "vendor": "",
-    "area": "",
-    "type": "unknown"
   }
 ]
