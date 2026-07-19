@@ -87,6 +87,69 @@ const ENDPOINTS: Endpoint[] = [
     example: `{\n  "data": {\n    "recommendations": [\n      {\n        "tier": "T1",\n        "label": "Budget",\n        "vest": "Molle Vest IIIA",\n        "helmet": "SS-27 IIA",\n        "ammo": "FMJ / M193",\n        "notes": "Good vs AI"\n      }\n    ],\n    "vendorGear": [\n      { "vendor": "Handshake", "rep": 1, "items": "Commander IIIA, LVS Overt IIIA+" }\n    ]\n  }\n}`,
     group: 'Data',
   },
+  {
+    method: 'GET',
+    path: '/api/keys',
+    desc: 'All keys & keycards across 12 locations, with wiki links and images. Filter by location.',
+    params: [
+      { name: 'location', type: 'string', required: false, desc: 'Filter by location (e.g. "Fort Narith", "Tiger Bay")' },
+    ],
+    example: `// GET /api/keys?location=Fort%20Narith\\n{\\n  "data": {\\n    "keys": [\\n      {\\n        "name": "A103 Key",\\n        "location": "Fort Narith",\\n        "wikiUrl": "https://...",\\n        "image": "https://...",\\n        "inTask": false\\n      }\\n    ],\\n    "locations": ["Ban Pa", "Blue Lagoon", ...]\\n  }\\n}`,
+    group: 'Data',
+  },
+  {
+    method: 'GET',
+    path: '/api/missions',
+    desc: 'Mission database with vendor and area filters.',
+    params: [
+      { name: 'vendor', type: 'string', required: false, desc: 'Filter by vendor name' },
+      { name: 'area', type: 'string', required: false, desc: 'Filter by area name' },
+      { name: 'search', type: 'string', required: false, desc: 'Text search across name, area, and vendor' },
+    ],
+    example: `// GET /api/missions?vendor=Handshake\\n{\\n  "data": [\\n    {\\n      "id": "fresh-meat",\\n      "name": "Fresh Meat",\\n      "vendor": "Handshake",\\n      "area": "Lamang"\\n    }\\n  ]\\n}`,
+    group: 'Data',
+  },
+  {
+    method: 'GET',
+    path: '/api/stats',
+    desc: 'Aggregate statistics: totals for weapons, ammo, armor, vendors, missions, and keys.',
+    params: [],
+    example: `{\\n  "data": {\\n    "weapons": { "total": 43, "types": ["Pistol", "SMG", ...] },\\n    "ammo": { "total": 52, "calibers": ["5.56x45mm", ...] },\\n    "armor": { "vests": 19, "helmets": 7 },\\n    "keys": { "total": 105, "locations": ["Ban Pa", ...] }\\n  }\\n}`,
+    group: 'Data',
+  },
+  {
+    method: 'GET',
+    path: '/api/search',
+    desc: 'Unified search across weapons, ammo, armor, and missions.',
+    params: [
+      { name: 'q', type: 'string', required: true, desc: 'Search query' },
+    ],
+    example: `// GET /api/search?q=AK\\n{\\n  "data": {\\n    "query": "AK",\\n    "weapons": [...],\\n    "ammo": [...],\\n    "vests": [...],\\n    "helmets": [...],\\n    "missions": [...]\\n  }\\n}`,
+    group: 'System',
+  },
+  {
+    method: 'GET',
+    path: '/api/calculator/rep-to-dollars',
+    desc: 'Calculate total cost to reach a target reputation.',
+    params: [
+      { name: 'current', type: 'number', required: false, desc: 'Current reputation (default: 0)' },
+      { name: 'target', type: 'number', required: false, desc: 'Target reputation (default: 13000)' },
+      { name: 'rate', type: 'number', required: false, desc: 'Dollars per rep point (default: 100)' },
+    ],
+    example: `// GET /api/calculator/rep-to-dollars?current=5000&target=13000&rate=100\\n{\\n  "data": {\\n    "current": 5000,\\n    "target": 13000,\\n    "diff": 8000,\\n    "cost": 800000,\\n    "progressPct": 38.46\\n  }\\n}`,
+    group: 'Calculators',
+  },
+  {
+    method: 'GET',
+    path: '/api/calculator/missions',
+    desc: 'Calculate how many missions of each type are needed to reach a rep goal.',
+    params: [
+      { name: 'current', type: 'number', required: false, desc: 'Current reputation (default: 0)' },
+      { name: 'target', type: 'number', required: false, desc: 'Target reputation (default: 13000)' },
+    ],
+    example: `// GET /api/calculator/missions?current=0&target=5000\\n{\\n  "data": {\\n    "current": 0,\\n    "target": 5000,\\n    "needed": 5000,\\n    "breakdown": [\\n      { "type": "Critical Op", "repEach": 200, "count": 25 }\\n    ]\\n  }\\n}`,
+    group: 'Calculators',
+  },
 ];
 
 const GROUPS = [...new Set(ENDPOINTS.map((e) => e.group))];

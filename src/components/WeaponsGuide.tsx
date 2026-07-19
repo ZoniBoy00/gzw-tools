@@ -163,7 +163,7 @@ export default function WeaponsGuide() {
       {/* Desktop: table */}
       <div className="hidden sm:block">
         <div className="table-wrap table-mobile-cards">
-          <table role="table" aria-label="Weapons database">
+          <table className="weapons-table" role="table" aria-label="Weapons database">
             <thead>
               <tr>
                 <th role="columnheader" className="w-8"></th>

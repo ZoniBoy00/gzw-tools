@@ -128,7 +128,7 @@ function VestSection() {
       )}
 
       <div className="table-wrap table-mobile-cards">
-        <table role="table" aria-label="Armor vest comparison">
+        <table className="armor-table" role="table" aria-label="Armor vest comparison">
           <thead>
             <tr>
               <th className="w-8 text-center" role="columnheader"></th>
@@ -246,7 +246,7 @@ function HelmetSection() {
       )}
 
       <div className="table-wrap table-mobile-cards">
-        <table role="table" aria-label="Helmet comparison">
+        <table className="armor-table" role="table" aria-label="Helmet comparison">
           <thead>
             <tr>
               <th className="w-8 text-center" role="columnheader"></th>
