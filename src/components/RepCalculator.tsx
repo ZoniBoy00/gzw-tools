@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { calcRepToDollars, formatCurrency, formatNumber, MAX_REP, VENDORS } from '../lib/calc';
 import StatRow from './ui/StatRow';
 
@@ -21,16 +21,29 @@ export default function RepCalculator({ result, setResult }: Props) {
   const [current, setCurrent] = useState(loadSaved().current);
   const [target, setTarget] = useState(loadSaved().target);
   const [rate, setRate] = useState('100');
+  const [selectedVendor, setSelectedVendor] = useState<string | null>(null);
 
   useEffect(() => {
     localStorage.setItem(LS_KEY, JSON.stringify({ current, target }));
   }, [current, target]);
 
-  const calculate = () => {
+  const calculate = useCallback(() => {
     const c = parseInt(current) || 0;
     const t = parseInt(target) || MAX_REP;
     const r = parseInt(rate) || 100;
-    setResult(calcRepToDollars(c, t, r));
+    // Get maxRep from vendor or use default
+    const vendor = VENDORS.find((v) => v.slug === selectedVendor);
+    const maxRep = vendor?.maxRep ?? Math.max(t, MAX_REP);
+    setResult(calcRepToDollars(c, t, r, maxRep));
+  }, [current, target, rate, selectedVendor, setResult]);
+
+  const pickVendor = (slug: string) => {
+    const vendor = VENDORS.find((v) => v.slug === slug);
+    if (vendor) {
+      setCurrent(String(vendor.rep));
+      setTarget(String(vendor.maxRep));
+      setSelectedVendor(slug);
+    }
   };
 
   return (
@@ -67,11 +80,17 @@ export default function RepCalculator({ result, setResult }: Props) {
           {VENDORS.map((v) => (
             <button
               key={v.slug}
-              onClick={() => { setCurrent(String(v.rep)); setTarget(String(MAX_REP)); }}
-              className="group relative px-3 py-2 text-xs font-medium bg-carbon-light/50 border border-carbon-border rounded-lg text-slate/70 hover:border-drab hover:text-sand transition-all"
+              onClick={() => pickVendor(v.slug)}
+              className={`group relative px-3 py-2 text-xs font-medium border rounded-lg transition-all ${
+                selectedVendor === v.slug
+                  ? 'bg-drab/30 border-drab text-sand'
+                  : 'bg-carbon-light/50 border-carbon-border text-slate/70 hover:border-drab hover:text-sand'
+              }`}
             >
               <span className="block font-semibold">{v.name}</span>
-              <span className="block text-[10px] opacity-50">{formatNumber(v.rep)} rep</span>
+              <span className="block text-[10px] opacity-50">
+                {formatNumber(v.rep)} → {formatNumber(v.maxRep)}
+              </span>
             </button>
           ))}
         </div>
@@ -98,12 +117,13 @@ export default function RepCalculator({ result, setResult }: Props) {
             <StatRow label="Target Rep" value={formatNumber(result.target)} mono />
             <StatRow label="Rep Needed" value={`+${formatNumber(result.diff)}`} highlight mono />
             <StatRow label="Rate" value={formatCurrency(result.rate)} mono />
+            <StatRow label="Max Rep" value={formatNumber(result.maxRep)} mono />
           </div>
 
           <div className="mt-4 pt-4 border-t border-carbon-border/50">
             <div className="flex justify-between text-xs text-slate/50 mb-1.5">
               <span>0</span>
-              <span>{formatNumber(result.current)} / {MAX_REP}</span>
+              <span>{formatNumber(result.current)} / {formatNumber(result.maxRep)}</span>
             </div>
             <div className="h-2 bg-carbon-border/30 rounded-full overflow-hidden">
               <div

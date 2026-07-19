@@ -73,6 +73,7 @@ function VendorBar() {
         <span key={v.slug} className="flex items-center gap-1">
           <span className="w-1.5 h-1.5 rounded-full bg-drab/50" />
           {v.name}: <span className="text-slate/60">{formatNumber(v.rep)}</span>
+          <span className="text-[9px] text-slate/40">/ {formatNumber(v.maxRep)}</span>
         </span>
       ))}
     </div>

@@ -3,16 +3,19 @@
 export const MAX_REP = 13000;
 export const DEFAULT_RATE = 100;
 
-/* GZW Vendors */
+/* GZW Vendors with per-vendor max rep */
 export const VENDORS = [
-  { name: 'Artisan', slug: 'artisan', rep: 7277, desc: 'Weapons & Attachments' },
-  { name: 'Gunny', slug: 'gunny', rep: 5000, desc: 'Ammo & Weapon Mods' },
-  { name: 'Banshee', slug: 'banshee', rep: 3500, desc: 'Armor & Tactical Gear' },
-  { name: 'Lab Rat', slug: 'labrat', rep: 2500, desc: 'Medical Supplies' },
-  { name: 'Mithras', slug: 'mithras', rep: 1500, desc: 'General Equipment' },
+  { name: 'Handshake', slug: 'handshake', rep: 7277, maxRep: 13000, desc: 'Early missions & gear' },
+  { name: 'Gunny', slug: 'gunny', rep: 5000, maxRep: 13000, desc: 'Ammo & Weapon Mods' },
+  { name: 'Lab Rat', slug: 'labrat', rep: 2500, maxRep: 13000, desc: 'Medical Supplies' },
+  { name: 'Artisan', slug: 'artisan', rep: 7277, maxRep: 9750, desc: 'Weapons & Attachments' },
+  { name: 'Turncoat', slug: 'turncoat', rep: 3500, maxRep: 9750, desc: 'Suspicious Goods' },
+  { name: 'Banshee', slug: 'banshee', rep: 3500, maxRep: 9750, desc: 'Armor & Tactical Gear' },
 ];
 
-export const VENDOR_MAX = 13000;
+export function getVendorMaxRep(slug: string): number {
+  return VENDORS.find((v) => v.slug === slug)?.maxRep ?? MAX_REP;
+}
 
 /* Mission types (GZW-style) */
 export const MISSION_TYPES = [
@@ -32,6 +35,7 @@ export interface RepCalcResult {
   cost: number;
   progressPct: number;
   progressAfterPct: number;
+  maxRep: number;
 }
 
 export interface MissionCalcResult {
@@ -43,7 +47,8 @@ export interface MissionCalcResult {
 export function calcRepToDollars(
   current: number,
   target: number,
-  rate: number = DEFAULT_RATE
+  rate: number = DEFAULT_RATE,
+  maxRep: number = MAX_REP,
 ): RepCalcResult {
   const diff = Math.max(0, target - current);
   return {
@@ -52,14 +57,15 @@ export function calcRepToDollars(
     diff,
     rate,
     cost: diff * rate,
-    progressPct: Math.min((current / MAX_REP) * 100, 100),
-    progressAfterPct: Math.min((target / MAX_REP) * 100, 100),
+    progressPct: Math.min((current / maxRep) * 100, 100),
+    progressAfterPct: Math.min((target / maxRep) * 100, 100),
+    maxRep,
   };
 }
 
 export function calcDollarsToRep(
   dollars: number,
-  rate: number = DEFAULT_RATE
+  rate: number = DEFAULT_RATE,
 ): number {
   return Math.floor(dollars / rate);
 }
@@ -67,7 +73,7 @@ export function calcDollarsToRep(
 export function calcMissionsToGoal(
   current: number,
   target: number,
-  missionTypes: { name: string; rep: number }[]
+  missionTypes: { name: string; rep: number }[],
 ): MissionCalcResult[] {
   const needed = Math.max(0, target - current);
   if (needed <= 0 || missionTypes.length === 0) return [];
