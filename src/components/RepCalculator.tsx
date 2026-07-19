@@ -47,9 +47,18 @@ export default function RepCalculator({ result, setResult }: Props) {
   }, [current, target, rate, selectedVendor]);
 
   const pickVendor = (slug: string) => {
+    // Use user's actual rep from vendor tracker (defaults to 0), not hardcoded example values
     const v = VENDORS.find((x) => x.slug === slug);
     if (v) {
-      setCurrent(String(v.rep));
+      let userRep = 0;
+      try {
+        const saved = localStorage.getItem('gzw-vendor-reps');
+        if (saved) {
+          const reps = JSON.parse(saved);
+          userRep = reps[slug] ?? 0;
+        }
+      } catch {}
+      setCurrent(String(userRep));
       setTarget(String(v.maxRep));
       setSelectedVendor(slug);
     }
