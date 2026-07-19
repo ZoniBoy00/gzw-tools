@@ -68,7 +68,7 @@ export default function Dashboard() {
       {/* Stats grid */}
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-8 animate-stagger">
         {STATS.map((s) => (
-          <div key={s.label} className="card card-highlight p-4 card-pulse">
+          <div key={s.label} className="card card-highlight p-4">
             <div className="flex items-center gap-2 mb-2">
               <i className={`${s.icon} ${s.color} text-xs`} />
               <span className="text-[9px] font-mono uppercase tracking-[0.12em] text-text-muted">{s.label}</span>

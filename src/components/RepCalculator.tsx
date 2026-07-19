@@ -13,7 +13,7 @@ function loadSaved() {
     const saved = localStorage.getItem(LS_KEY);
     if (saved) return JSON.parse(saved);
   } catch { /* noop */ }
-  return { current: '7277', target: String(MAX_REP) };
+  return { current: '0', target: String(MAX_REP) };
 }
 
 export default function RepCalculator({ result, setResult }: Props) {

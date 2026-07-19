@@ -581,13 +581,6 @@ th.sortable.desc::after {
   animation: fillBar 0.8s ease-out forwards;
 }
 
-.card-pulse {
-  transition: border-color 0.2s, box-shadow 0.2s;
-}
-.card-pulse:hover {
-  box-shadow: 0 0 20px rgba(240, 180, 41, 0.2);
-}
-
 .stat-number {
   animation: countPop 0.4s ease-out;
 }
