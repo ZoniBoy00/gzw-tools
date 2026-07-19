@@ -3,7 +3,7 @@ import { VENDORS, formatNumber } from '../lib/calc';
 import { getVendorReps, setVendorRep } from '../lib/vendortracker';
 import { AMMO } from '../data/ammo';
 import { WEAPONS } from '../data/weapons';
-import { VESTS, HELMETS, VENDOR_GEAR } from '../data/armor';
+import { VESTS, HELMETS } from '../data/armor';
 import { VENDOR_ITEMS } from '../data/vendor_items';
 import itemImages from '../data/item_images.json';
 import vendorImages from '../data/vendor_images.json';
@@ -347,40 +347,6 @@ export default function VendorGuide() {
               <p>No items found for this vendor</p>
             </div>
           )}
-
-          {/* Vendor gear table */}
-          <div className="mt-6">
-            <div className="flex items-center gap-2 mb-3">
-              <i className="fas fa-table-list text-accent/60 text-xs" />
-              <span className="section-title">Vendor Gear Unlocks</span>
-            </div>
-            <div className="table-wrap table-mobile-cards">
-              <table role="table" aria-label="Vendor gear unlocks">
-                <thead>
-                  <tr>
-                    <th role="columnheader">Rep</th>
-                    <th role="columnheader">Items Unlocked</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {VENDOR_GEAR
-                    .filter((g) => g.vendor === vendor.name)
-                    .sort((a, b) => a.rep - b.rep)
-                    .map((g, i) => (
-                      <tr key={i}>
-                        <td data-label="Rep" className="text-center"><span className="tag tag-drab">R.{g.rep}</span></td>
-                        <td data-label="Items" className="text-text-muted">{g.items}</td>
-                      </tr>
-                    ))}
-                  {VENDOR_GEAR.filter((g) => g.vendor === vendor.name).length === 0 && (
-                    <tr>
-                      <td colSpan={2} className="text-center py-4 text-text-muted text-xs">No unlock data available</td>
-                    </tr>
-                  )}
-                </tbody>
-              </table>
-            </div>
-          </div>
         </>
       )}
       {modalItem && <ItemModal item={modalItem} onClose={() => setModalItem(null)} />}

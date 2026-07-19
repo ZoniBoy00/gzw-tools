@@ -62,6 +62,12 @@ export const VENDOR_ITEMS: VendorSoldItem[] = [
   { vendor: 'Artisan', repLevel: 3, name: 'Advanced Attachments', type: 'attachment', detail: 'Tier 2 weapon mods' },
   { vendor: 'Artisan', repLevel: 4, name: 'Premium Attachments', type: 'attachment', detail: 'High-tier weapon parts and containers' },
 
+  // ─── Turncoat — Armor & Gear ───
+  { vendor: 'Turncoat', repLevel: 2, name: 'SK-S III', type: 'vest', detail: 'III-rated plate carrier — lightweight' },
+  { vendor: 'Turncoat', repLevel: 2, name: 'ATBV III', type: 'vest', detail: 'III-rated tactical vest' },
+  { vendor: 'Turncoat', repLevel: 2, name: 'ACH IIIA', type: 'helmet', detail: 'IIIA-rated advanced combat helmet' },
+  { vendor: 'Turncoat', repLevel: 3, name: '6B23-1 III+', type: 'vest', detail: 'III+-rated steel plate vest' },
+
   // ─── Banshee — High-Tier Armor & Gear ───
   // Banshee sells weapons, armor, attachments and gear at high rep levels.
   { vendor: 'Banshee', repLevel: 2, name: 'FAST Carbon IIIA', type: 'helmet', detail: 'IIIA-rated carbon composite FAST helmet' },
