@@ -1,27 +1,31 @@
 import { useState } from 'react';
+import Dashboard from './components/Dashboard';
 import RepCalculator from './components/RepCalculator';
 import DollarCalculator from './components/DollarCalculator';
 import MissionCalculator from './components/MissionCalculator';
 import AmmoGuide from './components/AmmoGuide';
 import ArmorGuide from './components/ArmorGuide';
 import WeaponsGuide from './components/WeaponsGuide';
+import ApiDocs from './components/ApiDocs';
 import TabBar from './components/ui/TabBar';
-import { calcRepToDollars, VENDORS, formatNumber } from './lib/calc';
+import { calcRepToDollars } from './lib/calc';
 import './index.css';
 
-type Tab = 'rep' | 'dollar' | 'missions' | 'ammo' | 'weapons' | 'armor';
+type Tab = 'dashboard' | 'rep' | 'dollar' | 'missions' | 'ammo' | 'weapons' | 'armor' | 'api-docs';
 
 const TABS: { id: Tab; label: string; icon: string }[] = [
+  { id: 'dashboard', label: 'Overview', icon: 'fas fa-gauge' },
   { id: 'rep', label: 'Rep → $', icon: 'fas fa-bullseye' },
   { id: 'dollar', label: '$ → Rep', icon: 'fas fa-coins' },
   { id: 'missions', label: 'Missions', icon: 'fas fa-clipboard-list' },
   { id: 'ammo', label: 'Ammo', icon: 'fas fa-bolt' },
   { id: 'weapons', label: 'Weapons', icon: 'fas fa-crosshairs' },
   { id: 'armor', label: 'Armor', icon: 'fas fa-shield-halved' },
+  { id: 'api-docs', label: 'API', icon: 'fas fa-code' },
 ];
 
 function App() {
-  const [activeTab, setActiveTab] = useState<Tab>('rep');
+  const [activeTab, setActiveTab] = useState<Tab>('dashboard');
   const [repResult, setRepResult] = useState<ReturnType<typeof calcRepToDollars> | null>(null);
 
   return (
@@ -42,16 +46,6 @@ function App() {
               </p>
             </div>
           </div>
-          <div className="hidden md:flex items-center gap-3 text-[11px] font-mono text-text-muted">
-            {VENDORS.slice(0, 3).map((v) => (
-              <span key={v.slug} className="flex items-center gap-1.5">
-                <span className="w-1.5 h-1.5 bg-drab" />
-                <span className="text-text-muted">{v.name}</span>
-                <span className="text-text/60">{formatNumber(v.rep)}</span>
-                <span className="text-text-muted/40">/ {formatNumber(v.maxRep)}</span>
-              </span>
-            ))}
-          </div>
         </div>
       </header>
 
@@ -60,13 +54,15 @@ function App() {
         <TabBar tabs={TABS} active={activeTab} onChange={setActiveTab} />
 
         {/* Content */}
-        <div className="mt-5 card p-5 md:p-6">
+        <div className="mt-5 card p-5 md:p-6 tab-content">
+          {activeTab === 'dashboard' && <Dashboard />}
           {activeTab === 'rep' && <RepCalculator result={repResult} setResult={setRepResult} />}
           {activeTab === 'dollar' && <DollarCalculator />}
           {activeTab === 'missions' && <MissionCalculator />}
           {activeTab === 'ammo' && <AmmoGuide />}
           {activeTab === 'weapons' && <WeaponsGuide />}
           {activeTab === 'armor' && <ArmorGuide />}
+          {activeTab === 'api-docs' && <ApiDocs />}
         </div>
       </main>
 
