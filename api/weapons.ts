@@ -1,11 +1,9 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node';
 import { WEAPONS, WEAPON_TYPES } from '../_data/index';
 import type { ApiResponse, WeaponEntry } from '../_data/types';
+import { createHandler } from '../_lib/handler';
 
-export default function handler(req: VercelRequest, res: VercelResponse) {
-  res.setHeader('Access-Control-Allow-Origin', '*');
-  res.setHeader('Cache-Control', 'public, max-age=3600, s-maxage=3600');
-
+async function handler(req: VercelRequest, res: VercelResponse) {
   const { type, caliber, search } = req.query;
   let data: WeaponEntry[] = WEAPONS;
 
@@ -23,9 +21,11 @@ export default function handler(req: VercelRequest, res: VercelResponse) {
   const response: ApiResponse<typeof data & { availableTypes: string[] }> = {
     data: { ...data, availableTypes: WEAPON_TYPES } as any,
     count: data.length,
-    source: 'GZW Wiki',
+    source: 'GZW Wiki — Weapons page',
     timestamp: new Date().toISOString(),
   };
 
   res.status(200).json(response);
 }
+
+export default createHandler(handler);
