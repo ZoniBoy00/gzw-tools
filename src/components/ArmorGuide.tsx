@@ -456,7 +456,7 @@ function Legend() {
         NIJ Protection Levels
       </div>
       <div className="flex flex-wrap gap-2 text-xs font-mono items-center mb-2">
-        {['IIA', '→', 'IIIA', '→', 'IIIA+', '→', 'III', '→', 'III+', '→', 'III++'].map((s, i) =>
+        {['I', '→', 'II', '→', 'II+', '→', 'IIIA', '→', 'IIIA+', '→', 'III', '→', 'III+', '→', 'III++'].map((s, i) =>
           s === '→' ? (
             <span key={i} className="text-text-muted/40">{s}</span>
           ) : (

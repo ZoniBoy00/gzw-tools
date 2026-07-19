@@ -16,7 +16,7 @@ export const RECOMMENDATIONS: GearRecommendation[] = [
   { tier: 'T1', label: 'Budget / Early', vest: 'Molle Vest (IIIA) or Commander (IIIA)', helmet: 'SSh-68N (I) or SSh-60 (I)', ammo: ['5.56x45mm FMJ / M193', '7.62x39mm PS', '9x19mm FMJ'], notes: 'Good vs AI. Avoid geared PvP. Steel helmets from Artisan R.1.' },
   { tier: 'T2', label: 'Mid Tier', vest: 'SK-S (III) or ATBV (III) or Covert Woodland (III)', helmet: '6B47 Ratnik (II) or PASGT (II+)', ammo: ['5.56x45mm AP M855', '5.45x39mm PP 7N10'], notes: 'Can fight players. SK-S is only 3.15kg. Turncoat R.2.' },
   { tier: 'T3', label: 'High Tier', vest: 'CZ 4M Hornet (III+) or 6B23-1 (III+)', helmet: 'LSHZ 1+ (IIIA) or BK-ACH (IIIA)', ammo: ['5.56x45mm AP M855A1', '7.62x51mm AP M61'], notes: 'Ceramic plates stop most rifle rounds. Handshake R.3 / Turncoat R.3.' },
-  { tier: 'T4', label: 'End Game', vest: 'LVS Tactical (III++) or Plate6 PC (III++)', helmet: 'EXFIL (IIIA) or AMP-1 TP LC (IIIA+)', ammo: ['5.56x45mm AP M995', '7.62x54R AP 7N13'], notes: 'Best in slot. Full coverage. Handshake R.4 / Turncoat R.4.' },
+  { tier: 'T4', label: 'End Game', vest: 'LVS Tactical (III++) or Plate6 PC (III++)', helmet: 'EXFIL (IIIA) or AMP-1 TP LC (IIIA+)', ammo: ['5.56x45mm AP M995', '7.62x54R AP 7N13'], notes: 'Best in slot. Also LBT-6094, Phantom Type 2, FAST MT. Handshake R.4.' },
 ];
 export const VENDOR_GEAR = [
   { vendor: 'Handshake', rep: 1, items: 'Commander IIIA vest, LVS Overt IIIA+ vest, Specter IIIA PC, CGPC3 TQS IIIA PC, Modular Operator Carrier Gen II IIIA PC' },

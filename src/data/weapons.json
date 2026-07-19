@@ -157,14 +157,14 @@
     "name": "M14 Rifle",
     "type": "DMR",
     "caliber": "7.62x51mm",
-    "magSize": 30,
+    "magSize": 20,
     "source": "Looting"
   },
   {
     "name": "M1A Rifle",
     "type": "DMR",
     "caliber": "7.62x51mm",
-    "magSize": 30,
+    "magSize": 20,
     "fireRate": "700",
     "source": "Looting"
   },
@@ -172,14 +172,14 @@
     "name": "M700",
     "type": "DMR",
     "caliber": "7.62x51mm",
-    "magSize": 30,
+    "magSize": 5,
     "source": "Looting"
   },
   {
     "name": "Mosin-Nagant",
     "type": "DMR",
     "caliber": "7.62x54mm R",
-    "magSize": 30,
+    "magSize": 5,
     "fireRate": "20",
     "source": "Looting"
   },
@@ -187,7 +187,7 @@
     "name": "Mosin-Nagant (Sniper)",
     "type": "DMR",
     "caliber": "-",
-    "magSize": 30,
+    "magSize": 5,
     "fireRate": "20",
     "source": "Turncoat R.2"
   },
@@ -195,14 +195,14 @@
     "name": "Remington 788",
     "type": "DMR",
     "caliber": ".222 Remington",
-    "magSize": 30,
+    "magSize": 5,
     "source": "Looting"
   },
   {
     "name": "SVD",
     "type": "DMR",
     "caliber": "7.62x54mm R",
-    "magSize": 30,
+    "magSize": 10,
     "fireRate": "600",
     "source": "Turncoat R.3"
   },
@@ -210,14 +210,14 @@
     "name": "USMC Fighting Knife",
     "type": "Melee",
     "caliber": "-",
-    "magSize": 30,
+    "magSize": 0,
     "source": "Looting"
   },
   {
     "name": "Beretta M9A1",
     "type": "Pistol",
     "caliber": "9x19mm",
-    "magSize": 30,
+    "magSize": 15,
     "fireRate": "600",
     "source": "Handshake R.1"
   },
@@ -225,7 +225,7 @@
     "name": "Colt 1911",
     "type": "Pistol",
     "caliber": ".45 ACP",
-    "magSize": 30,
+    "magSize": 7,
     "fireRate": "600",
     "source": "Looting"
   },
@@ -233,7 +233,7 @@
     "name": "Colt Combat Commander",
     "type": "Pistol",
     "caliber": ".45 ACP",
-    "magSize": 30,
+    "magSize": 7,
     "fireRate": "600",
     "source": "Handshake R.1"
   },
@@ -241,7 +241,7 @@
     "name": "Glock 17",
     "type": "Pistol",
     "caliber": "9x19mm",
-    "magSize": 30,
+    "magSize": 17,
     "fireRate": "600",
     "source": "Handshake R.1"
   },
@@ -249,7 +249,7 @@
     "name": "Grin's Colt 1911 Commander",
     "type": "Pistol",
     "caliber": ".45 ACP",
-    "magSize": 30,
+    "magSize": 7,
     "fireRate": "600",
     "source": "Looting"
   },
@@ -257,7 +257,7 @@
     "name": "Laugo alien",
     "type": "Pistol",
     "caliber": "9x19mm",
-    "magSize": 30,
+    "magSize": 17,
     "fireRate": "700",
     "source": "Looting"
   },
@@ -265,14 +265,14 @@
     "name": "M201C",
     "type": "Pistol",
     "caliber": "7.62x25mm",
-    "magSize": 30,
+    "magSize": 8,
     "source": "Looting"
   },
   {
     "name": "Type 51",
     "type": "Pistol",
     "caliber": "7.62x25mm",
-    "magSize": 30,
+    "magSize": 8,
     "fireRate": "600",
     "source": "Turncoat R.2"
   },
@@ -288,7 +288,7 @@
     "name": "MP7",
     "type": "SMG",
     "caliber": "4.6x30mm",
-    "magSize": 30,
+    "magSize": 40,
     "fireRate": "950",
     "source": "Looting"
   },
@@ -296,21 +296,21 @@
     "name": "MP7A1",
     "type": "SMG",
     "caliber": "4.6x30mm",
-    "magSize": 30,
+    "magSize": 40,
     "source": "Gunny R.2"
   },
   {
     "name": "MP7A2",
     "type": "SMG",
     "caliber": "4.6x30mm",
-    "magSize": 30,
+    "magSize": 40,
     "source": "Looting"
   },
   {
     "name": "Vz. 61 Skorpion",
     "type": "SMG",
     "caliber": "7.65mm Browning",
-    "magSize": 30,
+    "magSize": 20,
     "fireRate": "800",
     "source": "Handshake R.1"
   },
@@ -318,7 +318,7 @@
     "name": "M870",
     "type": "Shotgun",
     "caliber": "12 Gauge",
-    "magSize": 30,
+    "magSize": 7,
     "fireRate": "300",
     "source": "Handshake R.1"
   },
@@ -326,7 +326,7 @@
     "name": "Mossberg 590",
     "type": "Shotgun",
     "caliber": "12 Gauge",
-    "magSize": 30,
+    "magSize": 7,
     "fireRate": "300",
     "source": "Handshake R.2"
   }
