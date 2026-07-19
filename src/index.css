@@ -245,7 +245,7 @@ select.input {
   position: sticky;
   top: 0;
   text-align: left;
-  padding: 15px 10px 9px;
+  padding: 12px 10px;
   color: var(--color-text-muted);
   font-weight: 600;
   text-transform: uppercase;
