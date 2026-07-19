@@ -64,4 +64,12 @@ export const VENDOR_ITEMS: VendorSoldItem[] = [
   { vendor: 'Banshee', repLevel: 2, name: 'FAST Carbon IIIA', type: 'helmet', detail: 'IIIA-rated carbon composite FAST helmet' },
   { vendor: 'Banshee', repLevel: 3, name: 'High-Tier Armor', type: 'vest', detail: 'Advanced armor plates and vests' },
   { vendor: 'Banshee', repLevel: 4, name: 'Premium Gear', type: 'gear', detail: 'High-end attachments and equipment' },
+
+  // ─── Vulture — Roaming Trader ───
+  // Vulture roams Major COPs weekly, accepts valuables as currency.
+  // Items rotate and change — these are examples of what he may offer.
+  { vendor: 'Vulture', repLevel: 1, name: 'Weapon Parts', type: 'gear', detail: 'Basic weapon repair and mod parts' },
+  { vendor: 'Vulture', repLevel: 2, name: 'Special Ammo', type: 'ammo', detail: 'Rare ammunition types' },
+  { vendor: 'Vulture', repLevel: 2, name: 'Unique Weapon Parts', type: 'attachment', detail: 'Rare attachment variants' },
+  { vendor: 'Vulture', repLevel: 3, name: 'Premium Weapon Parts', type: 'gear', detail: 'High-tier weapon modification parts' },
 ];

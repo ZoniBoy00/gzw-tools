@@ -191,6 +191,7 @@ const VENDOR_META: Record<string, { icon: string; color: string }> = {
   artisan: { icon: 'fas fa-wrench', color: '#8ba34e' },
   turncoat: { icon: 'fas fa-user-secret', color: '#a855f7' },
   banshee: { icon: 'fas fa-ghost', color: '#ec4899' },
+  vulture: { icon: 'fas fa-dove', color: '#78716c' },
 };
 
 export default function VendorGuide() {
@@ -300,7 +301,9 @@ export default function VendorGuide() {
           {/* Items per level */}
           {levels.map((level) => {
             const levelItems = items.filter((i) => i.repLevel === level);
-            const levelRepNeeded = level * 2500;
+            const idx = level - 1; // levels are 1-indexed, array is 0-indexed
+            const levelRepNeeded = vendor?.rankCumulative?.[idx] ?? level * 2500;
+            const nextRepNeeded = vendor?.rankCumulative?.[idx + 1];
             const isUnlocked = repData.rep >= levelRepNeeded;
             return (
               <div key={level} className="mb-4">
@@ -308,10 +311,11 @@ export default function VendorGuide() {
                   <span className="tag" style={{ background: meta.color + '20', color: meta.color, borderColor: meta.color + '40' }}>R.{level}</span>
                   <span className="text-[10px] font-mono text-text-muted uppercase tracking-wider">
                     Rep Level {level} — {levelItems.length} item{levelItems.length !== 1 ? 's' : ''}
+                    <span className="ml-2 text-text-muted/50">({formatNumber(levelRepNeeded)} rep)</span>
                   </span>
                   <span className={`text-[10px] font-mono ml-auto flex items-center gap-1 ${isUnlocked ? 'text-green' : 'text-text-muted/50'}`}>
                     <i className={`fas fa-${isUnlocked ? 'lock-open' : 'lock'}`} />
-                    {isUnlocked ? 'Unlocked' : `R.${level} needed`}
+                    {isUnlocked ? 'Unlocked' : `${formatNumber(levelRepNeeded)} rep needed`}
                   </span>
                 </div>
 

@@ -3,14 +3,32 @@
 export const MAX_REP = 13000;
 export const DEFAULT_RATE = 100;
 
-/* GZW Vendors with per-vendor max rep */
-export const VENDORS = [
-  { name: 'Handshake', slug: 'handshake', rep: 7277, maxRep: 13000, desc: 'Early missions & gear' },
-  { name: 'Gunny', slug: 'gunny', rep: 5000, maxRep: 13000, desc: 'Ammo & Weapon Mods' },
-  { name: 'Lab Rat', slug: 'labrat', rep: 2500, maxRep: 13000, desc: 'Medical Supplies' },
-  { name: 'Artisan', slug: 'artisan', rep: 7277, maxRep: 9750, desc: 'Weapons & Attachments' },
-  { name: 'Turncoat', slug: 'turncoat', rep: 3500, maxRep: 9750, desc: 'Suspicious Goods' },
-  { name: 'Banshee', slug: 'banshee', rep: 3500, maxRep: 9750, desc: 'Armor & Tactical Gear' },
+/* GZW Vendors with per-vendor max rep and rank thresholds */
+export interface VendorInfo {
+  name: string;
+  slug: string;
+  rep: number;
+  maxRep: number;
+  desc: string;
+  /** Cumulative rep needed for each rank (index 0 = R.1, 1 = R.2, etc.) */
+  rankCumulative: number[];
+}
+
+export const VENDORS: VendorInfo[] = [
+  { name: 'Handshake', slug: 'handshake', rep: 7277, maxRep: 13000, desc: 'Early missions & gear',
+    rankCumulative: [0, 1250, 9500, 13000] },
+  { name: 'Gunny', slug: 'gunny', rep: 5000, maxRep: 13000, desc: 'Ammo & Weapon Mods',
+    rankCumulative: [0, 800, 9500, 13000] },
+  { name: 'Lab Rat', slug: 'labrat', rep: 2500, maxRep: 13000, desc: 'Medical Supplies',
+    rankCumulative: [0, 800, 9500, 13000] },
+  { name: 'Artisan', slug: 'artisan', rep: 7277, maxRep: 9750, desc: 'Weapons & Attachments',
+    rankCumulative: [0, 700, 3750, 9750] },
+  { name: 'Turncoat', slug: 'turncoat', rep: 3500, maxRep: 9750, desc: 'Suspicious Goods',
+    rankCumulative: [0, 700, 3750, 9750] },
+  { name: 'Banshee', slug: 'banshee', rep: 3500, maxRep: 9750, desc: 'Armor & Tactical Gear',
+    rankCumulative: [0, 700, 3750, 9750] },
+  { name: 'Vulture', slug: 'vulture', rep: 0, maxRep: 5000, desc: 'Roaming Trader — Special Items',
+    rankCumulative: [0, 700, 3750, 5000] },
 ];
 
 export function getVendorMaxRep(slug: string): number {
