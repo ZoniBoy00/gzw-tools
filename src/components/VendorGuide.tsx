@@ -4,15 +4,24 @@ import { getVendorReps, setVendorRep } from '../lib/vendortracker';
 import { AMMO } from '../data/ammo';
 import { WEAPONS } from '../data/weapons';
 import { VESTS, HELMETS, VENDOR_GEAR } from '../data/armor';
+import { VENDOR_ITEMS } from '../data/vendor_items';
 import itemImages from '../data/item_images.json';
 import vendorImages from '../data/vendor_images.json';
+import ItemModal from './ui/ItemModal';
+import type { ModalItem } from './ui/ItemModal';
 
 interface VendorItem {
   name: string;
-  type: 'weapon' | 'ammo' | 'vest' | 'helmet';
+  type: 'weapon' | 'ammo' | 'vest' | 'helmet' | 'medical' | 'gear';
   repLevel: number;
   detail: string;
   image?: string;
+  /** Full source reference (e.g. "Turncoat R.3") */
+  source?: string;
+  /** Vendor slug for building modal fields */
+  vendorName?: string;
+  /** Raw data ref for modal field generation */
+  raw?: Record<string, unknown>;
 }
 
 function parseRepLevel(source: string): number {
@@ -26,28 +35,141 @@ function getVendorItems(vendorName: string): VendorItem[] {
   for (const w of WEAPONS) {
     const rl = parseRepLevel(w.source);
     if (rl > 0 && w.source.toLowerCase().includes(vendorName.toLowerCase())) {
-      items.push({ name: w.name, type: 'weapon', repLevel: rl, detail: `${w.type} · ${w.caliber} · ${w.magSize}rds` });
+      items.push({
+        name: w.name, type: 'weapon', repLevel: rl,
+        detail: `${w.type} · ${w.caliber} · ${w.magSize}rds${w.fireRate ? ` · ${w.fireRate}RPM` : ''}`,
+        source: w.source,
+        vendorName: vendorName,
+        raw: w as unknown as Record<string, unknown>,
+      });
     }
   }
   for (const a of AMMO) {
     if (a.vendor?.toLowerCase() === vendorName.toLowerCase() && a.repLevel) {
-      items.push({ name: a.name, type: 'ammo', repLevel: a.repLevel, detail: `${a.caliber} · ${a.speed}m/s` });
+      items.push({
+        name: a.name, type: 'ammo', repLevel: a.repLevel,
+        detail: `${a.caliber} · ${a.speed}m/s`,
+        source: `${a.vendor} R.${a.repLevel}`,
+        vendorName: vendorName,
+        raw: a as unknown as Record<string, unknown>,
+      });
     }
   }
   for (const v of VESTS) {
     const rl = parseRepLevel(v.source);
     if (rl > 0 && v.source.toLowerCase().includes(vendorName.toLowerCase())) {
-      items.push({ name: v.name, type: 'vest', repLevel: rl, detail: `NIJ ${v.nij} · ${v.material} · ${v.weight}kg` });
+      items.push({
+        name: v.name, type: 'vest', repLevel: rl,
+        detail: `NIJ ${v.nij} · ${v.material} · ${v.weight}kg`,
+        source: v.source,
+        vendorName: vendorName,
+        raw: v as unknown as Record<string, unknown>,
+      });
     }
   }
   for (const h of HELMETS) {
     const rl = parseRepLevel(h.source);
     if (rl > 0 && h.source.toLowerCase().includes(vendorName.toLowerCase())) {
-      items.push({ name: h.name, type: 'helmet', repLevel: rl, detail: `NIJ ${h.nij} · ${h.material} · ${h.weight}kg` });
+      items.push({
+        name: h.name, type: 'helmet', repLevel: rl,
+        detail: `NIJ ${h.nij} · ${h.material} · ${h.weight}kg`,
+        source: h.source,
+        vendorName: vendorName,
+        raw: h as unknown as Record<string, unknown>,
+      });
+    }
+  }
+  // Vendor-specific items (medical, gear, etc.)
+  for (const vi of VENDOR_ITEMS) {
+    if (vi.vendor.toLowerCase() === vendorName.toLowerCase()) {
+      items.push({
+        name: vi.name, type: vi.type, repLevel: vi.repLevel,
+        detail: vi.detail,
+        source: `${vi.vendor} R.${vi.repLevel}`,
+        vendorName: vendorName,
+      });
     }
   }
 
   return items.sort((a, b) => a.repLevel - b.repLevel || a.name.localeCompare(b.name));
+}
+
+function buildModal(item: VendorItem): ModalItem {
+  const base = { name: item.name, image: itemImages[item.name as keyof typeof itemImages] as string | undefined };
+
+  if (item.type === 'weapon') {
+    if (item.raw) {
+      const w = item.raw as Record<string, string>;
+      return {
+        ...base, type: 'weapon',
+        fields: [
+          { label: 'Type', value: w.type || '-', desc: 'Weapon classification' },
+          { label: 'Caliber', value: w.caliber || '-', desc: 'Ammunition type' },
+          { label: 'Mag Size', value: w.magSize ? `${w.magSize} rds` : '-', desc: 'Standard magazine capacity' },
+          { label: 'Fire Rate', value: w.fireRate ? `${w.fireRate} RPM` : '-', desc: 'Rounds per minute' },
+          { label: 'Source', value: item.source || '-', desc: 'Where to obtain this item' },
+        ],
+      };
+    }
+    return { ...base, type: 'weapon', fields: [{ label: 'Vendor', value: item.source || '-', desc: 'Selling vendor' }, { label: 'Details', value: item.detail, desc: 'Item description' }] };
+  }
+  if (item.type === 'ammo' && item.raw) {
+    const a = item.raw as Record<string, string | number | Record<string, number>>;
+    const pen = a.pen as Record<string, number> | undefined;
+    const penStr = pen ? Object.entries(pen).filter(([, v]) => v > 0).map(([k]) => k).join(' / ') : '-';
+    return {
+      ...base, type: 'ammo',
+      fields: [
+        { label: 'Caliber', value: a.caliber as string || '-', desc: 'Ammunition caliber' },
+        { label: 'Speed', value: a.speed ? `${a.speed} m/s` : '-', desc: 'Muzzle velocity' },
+        { label: 'Penetration', value: penStr, desc: 'Armor classes this round can penetrate' },
+        { label: 'Source', value: item.source || '-', desc: 'Where to obtain this item' },
+      ],
+    };
+  }
+  if (item.type === 'vest') {
+    if (item.raw) {
+      const v = item.raw as Record<string, string | number>;
+      return {
+        ...base, type: 'vest',
+        fields: [
+          { label: 'NIJ Class', value: v.nij as string || '-', desc: 'Protection rating' },
+          { label: 'Material', value: v.material as string || '-', desc: 'Armor material type' },
+          { label: 'Plates', value: v.plates as string || '-', desc: 'Plate coverage areas' },
+          { label: 'Grid', value: v.grid as string || '-', desc: 'Inventory grid size' },
+          { label: 'Weight', value: v.weight ? `${v.weight} kg` : '-', desc: 'Carry weight' },
+          { label: 'Source', value: item.source || '-', desc: 'Where to obtain this item' },
+        ],
+      };
+    }
+    return { ...base, type: 'vest', fields: [{ label: 'Vendor', value: item.source || '-', desc: 'Selling vendor' }, { label: 'Details', value: item.detail, desc: 'Item description' }] };
+  }
+  if (item.type === 'helmet') {
+    if (item.raw) {
+      const h = item.raw as Record<string, string | number>;
+      return {
+        ...base, type: 'helmet',
+        fields: [
+          { label: 'NIJ Class', value: h.nij as string || '-', desc: 'Protection rating' },
+          { label: 'Material', value: h.material as string || '-', desc: 'Helmet material type' },
+          { label: 'Weight', value: h.weight ? `${h.weight} kg` : '-', desc: 'Carry weight' },
+          { label: 'Source', value: item.source || '-', desc: 'Where to obtain this item' },
+        ],
+      };
+    }
+    return { ...base, type: 'helmet', fields: [{ label: 'Vendor', value: item.source || '-', desc: 'Selling vendor' }, { label: 'Details', value: item.detail, desc: 'Item description' }] };
+  }
+  // Generic items (medical, gear, attachment, container, tool)
+  return {
+    ...base, type: item.type as ModalItem['type'],
+    fields: [
+      { label: 'Vendor', value: item.vendorName || '-', desc: 'Selling vendor' },
+      { label: 'Rep Required', value: `R.${item.repLevel}`, desc: 'Reputation level needed to purchase' },
+      { label: 'Type', value: item.type, desc: 'Item category' },
+      { label: 'Details', value: item.detail, desc: 'Item description' },
+      { label: 'Source', value: item.source || '-', desc: 'Where to obtain this item' },
+    ],
+  };
 }
 
 const TYPE_ICONS: Record<string, string> = {
@@ -55,6 +177,11 @@ const TYPE_ICONS: Record<string, string> = {
   ammo: 'fas fa-bolt',
   vest: 'fas fa-vest',
   helmet: 'fas fa-hard-hat',
+  medical: 'fas fa-kit-medical',
+  gear: 'fas fa-box-open',
+  attachment: 'fas fa-screwdriver-wrench',
+  container: 'fas fa-box',
+  tool: 'fas fa-toolbox',
 };
 
 const VENDOR_META: Record<string, { icon: string; color: string }> = {
@@ -74,6 +201,7 @@ export default function VendorGuide() {
   const repData = reps.find((r) => r.slug === selected);
   const items = vendor ? getVendorItems(vendor.name) : [];
   const meta = VENDOR_META[selected] || VENDOR_META.handshake;
+  const [modalItem, setModalItem] = useState<ModalItem | null>(null);
 
   const levels = useMemo(() => {
     const ls = new Set(items.map((i) => i.repLevel));
@@ -183,13 +311,18 @@ export default function VendorGuide() {
                   </span>
                   <span className={`text-[10px] font-mono ml-auto flex items-center gap-1 ${isUnlocked ? 'text-green' : 'text-text-muted/50'}`}>
                     <i className={`fas fa-${isUnlocked ? 'lock-open' : 'lock'}`} />
-                    {isUnlocked ? 'Unlocked' : `R.{level} needed`}
+                    {isUnlocked ? 'Unlocked' : `R.${level} needed`}
                   </span>
                 </div>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-1.5">
                   {levelItems.map((item, i) => (
-                    <div key={i} className="flex items-center gap-2 bg-surface-2 border p-2.5" style={{ borderColor: meta.color + '15' }}>
+                    <button
+                      key={i}
+                      onClick={() => setModalItem(buildModal(item))}
+                      className="flex items-center gap-2 bg-surface-2 border p-2.5 text-left w-full hover:border-accent/30 transition-colors"
+                      style={{ borderColor: meta.color + '15' }}
+                    >
                       {itemImages[item.name as keyof typeof itemImages] && (
                         <img src={itemImages[item.name as keyof typeof itemImages] as string} alt="" className="w-9 h-9 object-contain shrink-0 bg-surface border" style={{ borderColor: meta.color + '20' }} loading="lazy" />
                       )}
@@ -201,7 +334,7 @@ export default function VendorGuide() {
                         <div className="text-[9px] font-mono text-text-muted/70 truncate">{item.detail}</div>
                       </div>
                       <span className="text-[8px] font-mono uppercase text-text-muted/40 shrink-0">{item.type}</span>
-                    </div>
+                    </button>
                   ))}
                 </div>
               </div>
@@ -250,6 +383,7 @@ export default function VendorGuide() {
           </div>
         </>
       )}
+      {modalItem && <ItemModal item={modalItem} onClose={() => setModalItem(null)} />}
     </div>
   );
 }

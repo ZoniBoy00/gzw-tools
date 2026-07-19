@@ -4,7 +4,7 @@ export interface ModalItem {
   name: string;
   image?: string;
   fields: { label: string; value: string; color?: string; desc?: string }[];
-  type: 'weapon' | 'vest' | 'helmet';
+  type: 'weapon' | 'vest' | 'helmet' | 'ammo' | 'medical' | 'gear' | 'attachment' | 'container' | 'tool';
 }
 
 interface Props {
@@ -16,6 +16,12 @@ const TYPE_ICONS = {
   weapon: 'fas fa-crosshairs',
   vest: 'fas fa-vest',
   helmet: 'fas fa-hard-hat',
+  ammo: 'fas fa-bolt',
+  medical: 'fas fa-kit-medical',
+  gear: 'fas fa-box-open',
+  attachment: 'fas fa-screwdriver-wrench',
+  container: 'fas fa-box',
+  tool: 'fas fa-toolbox',
 };
 
 export default function ItemModal({ item, onClose }: Props) {
