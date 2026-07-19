@@ -525,6 +525,13 @@
     "inTask": false
   },
   {
+    "name": "Sunny Skies Guest House Basement Key",
+    "location": "Pha Lang Airfield",
+    "wikiUrl": "",
+    "image": "https://static.wikia.nocookie.net/gray-zone-warfare/images/e/e2/Sunny_Skies_Guest_House_Basement_Key_icon.png/revision/latest?cb=20260524201949",
+    "inTask": false
+  },
+  {
     "name": "Khamhao Rice Depot Room Key",
     "location": "Sawmill",
     "wikiUrl": "https://gray-zone-warfare.fandom.com/wiki/Khamhao_Rice_Depot_Room_Key",
@@ -600,6 +607,13 @@
     "wikiUrl": "https://gray-zone-warfare.fandom.com/wiki/Tiger_Bay_Central_Armory_Card",
     "image": "https://static.wikia.nocookie.net/gray-zone-warfare/images/0/07/Tiger_Bay_Central_Armory_Card_icon.png/revision/latest?cb=20260613084422",
     "inTask": true
+  },
+  {
+    "name": "Tiger Bay Municipal Office Building Makeshift Storage Key",
+    "location": "Tiger Bay",
+    "wikiUrl": "",
+    "image": "https://static.wikia.nocookie.net/gray-zone-warfare/images/4/49/Tiger_Bay_Municipal_Office_Building_Makeshift_Storage_Key_icon.png/revision/latest?cb=20260613084504",
+    "inTask": false
   },
   {
     "name": "Tiger Bay Outskirts Garage Key",
