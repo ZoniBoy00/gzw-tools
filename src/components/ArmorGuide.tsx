@@ -163,12 +163,12 @@ function VestSection() {
                     image: itemImages[v.name as keyof typeof itemImages] as string | undefined,
                     type: 'vest',
                     fields: [
-                      { label: 'NIJ Class', value: v.nij, color: nijColor(v.nij) },
-                      { label: 'Material', value: v.material, color: matColor(v.material) },
-                      { label: 'Plates', value: v.plates },
-                      { label: 'Grid', value: v.grid },
-                      { label: 'Weight', value: `${v.weight} kg` },
-                      { label: 'Source', value: v.source },
+                      { label: 'NIJ Class', value: v.nij, color: nijColor(v.nij), desc: 'National Institute of Justice protection rating — higher classes stop more powerful rounds' },
+                      { label: 'Material', value: v.material, color: matColor(v.material), desc: 'Armor material — affects weight, durability and protection level. Aramid=light, Steel=heavy, Ceramic=best but brittle' },
+                      { label: 'Plates', value: v.plates, desc: 'Areas protected by armor plates — Front, Back, or Sides coverage' },
+                      { label: 'Grid', value: v.grid, desc: 'Inventory grid size in slots — determines how much space the vest takes in your inventory' },
+                      { label: 'Weight', value: `${v.weight} kg`, desc: 'Carry weight in kilograms — heavier armor provides better protection but slows you down' },
+                      { label: 'Source', value: v.source, desc: 'Where to obtain this vest — from a vendor at a specific rep level, or found by looting' },
                     ],
                   })} className="flex items-center gap-2 text-left w-full hover:text-accent transition-colors">
                     {itemImages[v.name as keyof typeof itemImages] && (
@@ -279,10 +279,10 @@ function HelmetSection() {
                     image: itemImages[h.name as keyof typeof itemImages] as string | undefined,
                     type: 'helmet',
                     fields: [
-                      { label: 'NIJ Class', value: h.nij, color: nijColor(h.nij) },
-                      { label: 'Material', value: h.material, color: matColor(h.material) },
-                      { label: 'Weight', value: `${h.weight} kg` },
-                      { label: 'Source', value: h.source },
+                      { label: 'NIJ Class', value: h.nij, color: nijColor(h.nij), desc: 'National Institute of Justice protection rating — higher classes stop more powerful rounds' },
+                      { label: 'Material', value: h.material, color: matColor(h.material), desc: 'Helmet material — affects weight, durability and protection' },
+                      { label: 'Weight', value: `${h.weight} kg`, desc: 'Carry weight in kilograms — lighter helmets allow faster movement' },
+                      { label: 'Source', value: h.source, desc: 'Where to obtain this helmet — from a vendor at a specific rep level, or found by looting' },
                     ],
                   })} className="flex items-center gap-2 text-left w-full hover:text-accent transition-colors">
                     {itemImages[h.name as keyof typeof itemImages] && (

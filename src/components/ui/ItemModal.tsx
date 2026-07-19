@@ -3,7 +3,7 @@ import { useEffect, useRef } from 'react';
 export interface ModalItem {
   name: string;
   image?: string;
-  fields: { label: string; value: string; color?: string }[];
+  fields: { label: string; value: string; color?: string; desc?: string }[];
   type: 'weapon' | 'vest' | 'helmet';
 }
 
@@ -78,11 +78,20 @@ export default function ItemModal({ item, onClose }: Props) {
           </div>
         )}
 
-        {/* Fields */}
+        {/* Fields with tooltips */}
         <div className="p-4 space-y-2">
           {item.fields.map((f) => (
             <div key={f.label} className="flex justify-between items-center text-sm font-mono py-1.5 border-b border-border/30">
-              <span className="text-text-muted text-[11px] uppercase tracking-wider">{f.label}</span>
+              <span className="tooltip-item text-text-muted text-[11px] uppercase tracking-wider">
+                {f.desc ? (
+                  <>
+                    {f.label}
+                    <span className="tooltip-bubble">{f.desc}</span>
+                  </>
+                ) : (
+                  f.label
+                )}
+              </span>
               <span className={`font-medium text-right ${f.color || 'text-text'}`}>{f.value}</span>
             </div>
           ))}

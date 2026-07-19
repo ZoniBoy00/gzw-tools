@@ -148,13 +148,13 @@ export default function AmmoGuide() {
                     name: r.name,
                     type: 'weapon',
                     fields: [
-                      { label: 'Caliber', value: r.caliber },
-                      { label: 'Speed', value: `${r.speed} m/s` },
-                      { label: 'Acc Mod', value: `${r.accMod > 0 ? '+' : ''}${r.accMod}`, color: r.accMod > 0 ? 'pen-high' : r.accMod < 0 ? 'pen-low' : '' },
-                      { label: 'Dur Mod', value: r.durMod ? `${r.durMod}` : '-', color: r.durMod < -50 ? 'durability-bad' : r.durMod < 0 ? 'pen-low' : '' },
-                      { label: 'Subsonic', value: r.subsonic ? 'Yes' : 'No' },
-                      { label: 'Tracer', value: r.tracer ? 'Yes' : 'No' },
-                      { label: 'Source', value: r.vendor ? `${r.vendor} R.${r.repLevel}` : r.source || 'Looting' },
+                      { label: 'Caliber', value: r.caliber, desc: 'The diameter and case length of the ammunition cartridge' },
+                      { label: 'Speed', value: `${r.speed} m/s`, desc: 'Muzzle velocity — higher velocity means flatter trajectory and less bullet drop over distance' },
+                      { label: 'Acc Mod', value: `${r.accMod > 0 ? '+' : ''}${r.accMod}`, color: r.accMod > 0 ? 'pen-high' : r.accMod < 0 ? 'pen-low' : '', desc: 'Accuracy modifier — negative values reduce weapon accuracy, positive values improve it' },
+                      { label: 'Dur Mod', value: r.durMod ? `${r.durMod}` : '-', color: r.durMod < -50 ? 'durability-bad' : r.durMod < 0 ? 'pen-low' : '', desc: 'Durability modifier — negative values increase weapon wear and degradation per shot' },
+                      { label: 'Subsonic', value: r.subsonic ? 'Yes' : 'No', desc: 'Subsonic rounds travel below the speed of sound — they are quieter and do not appear on the enemy minimap when fired' },
+                      { label: 'Tracer', value: r.tracer ? 'Yes' : 'No', desc: 'Tracer rounds leave a visible trail of light — helps with aiming but reveals your position' },
+                      { label: 'Source', value: r.vendor ? `${r.vendor} R.${r.repLevel}` : r.source || 'Looting', desc: 'Where to obtain this ammunition — from a vendor at a specific rep level, or found by looting' },
                     ],
                   })} className="hover:text-accent transition-colors text-left w-full">
                     {r.name}

@@ -123,12 +123,12 @@ export default function WeaponsGuide() {
                   image: itemImages[w.name as keyof typeof itemImages] as string | undefined,
                   type: 'weapon',
                   fields: [
-                    { label: 'Type', value: w.type },
-                    { label: 'Caliber', value: w.caliber },
-                    { label: 'Mag Size', value: `${w.magSize} rds` },
-                    { label: 'Fire Rate', value: w.fireRate ? `${w.fireRate} RPM` : '-' },
-                    { label: 'Source', value: w.source },
-                  ],
+                        { label: 'Type', value: w.type, desc: 'Weapon classification — determines handling, role and available attachments' },
+                        { label: 'Caliber', value: w.caliber, desc: 'The ammunition type the weapon uses — determines damage and penetration' },
+                        { label: 'Mag Size', value: `${w.magSize} rds`, desc: 'Number of rounds a standard magazine can hold' },
+                        { label: 'Fire Rate', value: w.fireRate ? `${w.fireRate} RPM` : '-', desc: 'Cyclic rate of fire — rounds per minute the weapon can fire in automatic mode' },
+                        { label: 'Source', value: w.source, desc: 'Where to obtain this weapon — from a vendor at a specific rep level, or found by looting' },
+                      ],
                 })} className="text-sm font-medium text-left hover:text-accent transition-colors">{w.name}</button>
                 <div className="text-[10px] text-text-muted font-mono">{w.type}</div>
               </div>
@@ -197,11 +197,11 @@ export default function WeaponsGuide() {
                       image: itemImages[w.name as keyof typeof itemImages] as string | undefined,
                       type: 'weapon',
                       fields: [
-                        { label: 'Type', value: w.type },
-                        { label: 'Caliber', value: w.caliber },
-                        { label: 'Mag Size', value: `${w.magSize} rds` },
-                        { label: 'Fire Rate', value: w.fireRate ? `${w.fireRate} RPM` : '-' },
-                        { label: 'Source', value: w.source },
+                        { label: 'Type', value: w.type, desc: 'Weapon classification — determines handling, role and available attachments' },
+                        { label: 'Caliber', value: w.caliber, desc: 'The ammunition type the weapon uses — determines damage and penetration' },
+                        { label: 'Mag Size', value: `${w.magSize} rds`, desc: 'Number of rounds a standard magazine can hold' },
+                        { label: 'Fire Rate', value: w.fireRate ? `${w.fireRate} RPM` : '-', desc: 'Cyclic rate of fire — rounds per minute the weapon can fire in automatic mode' },
+                        { label: 'Source', value: w.source, desc: 'Where to obtain this weapon — from a vendor at a specific rep level, or found by looting' },
                       ],
                     })} className="flex items-center gap-2 text-left w-full hover:text-accent transition-colors">
                     {itemImages[w.name as keyof typeof itemImages] && (
