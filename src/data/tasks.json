@@ -1922,7 +1922,13 @@
     "vendor": "",
     "area": "Pha Lang Airfield",
     "type": "contract",
-    "category": "contract"
+    "category": "contract",
+    "objectives": [
+      "Investigate the first house for clues",
+      "Investigate the second house for clues",
+      "Investigate the logging shed for clues"
+    ],
+    "reward_text": "Rewards Reputation with Reputation with after the first completion. Sounds like they were after the deserter, torturing and killing anyone who might've known something. Ruthless bastards. We'll deal with 'em soon enough. You did well. Take your reward and get some rest."
   },
   {
     "id": "cache-report",
@@ -1930,7 +1936,14 @@
     "vendor": "",
     "area": "YBL-1",
     "type": "contract",
-    "category": "contract"
+    "category": "contract",
+    "objectives": [
+      "Locate the cache and report back to",
+      "Locate the cache and report back to",
+      "Locate the cache and report back to",
+      "Locate the cache and report back to"
+    ],
+    "reward_text": "Rewards Reputation with Reputation with after the first completion. All four accounted for. Good work. We\u2019ll handle the recovery, so consider your part done. Here\u2019s your reward."
   },
   {
     "id": "cache-report-iii",
@@ -1938,7 +1951,14 @@
     "vendor": "",
     "area": "Sawmill",
     "type": "contract",
-    "category": "contract"
+    "category": "contract",
+    "objectives": [
+      "Locate the cache and report back to",
+      "Locate the cache and report back to",
+      "Locate the cache and report back to",
+      "Locate the cache and report back to"
+    ],
+    "reward_text": "Rewards Reputation with Reputation with after the first completion. All four accounted for. Good work. We\u2019ll handle the recovery, so consider your part done. Here\u2019s your reward."
   },
   {
     "id": "cache-report-iv",
@@ -1946,7 +1966,14 @@
     "vendor": "",
     "area": "Hunter's Paradise",
     "type": "contract",
-    "category": "contract"
+    "category": "contract",
+    "objectives": [
+      "Locate the cache and report back to",
+      "Locate the cache and report back to",
+      "Locate the cache and report back to",
+      "Locate the cache and report back to"
+    ],
+    "reward_text": "Rewards Reputation with Reputation with after the first completion. All four accounted for. Good work. We\u2019ll handle the recovery, so consider your part done. Here\u2019s your reward."
   },
   {
     "id": "cache-report-v",
@@ -1954,7 +1981,14 @@
     "vendor": "",
     "area": "Midnight Sapphire",
     "type": "contract",
-    "category": "contract"
+    "category": "contract",
+    "objectives": [
+      "Locate the cache and report back to",
+      "Locate the cache and report back to",
+      "Locate the cache and report back to",
+      "Locate the cache and report back to"
+    ],
+    "reward_text": "Rewards Reputation with Reputation with after the first completion. $1,250"
   },
   {
     "id": "cache-report-vi",
@@ -1962,7 +1996,18 @@
     "vendor": "",
     "area": "South east ofPha Lang Airfield",
     "type": "contract",
-    "category": "contract"
+    "category": "contract",
+    "objectives": [
+      "First cache",
+      "and report back to",
+      "Second cache",
+      "and report back to",
+      "Third cache",
+      "and report back to",
+      "Fourth cache",
+      "and report back to"
+    ],
+    "reward_text": "Rewards Reputation with All four accounted for. Good work. We\u2019ll handle the recovery, so consider your part done. Here\u2019s your reward."
   },
   {
     "id": "cache-report-vii",
@@ -1970,7 +2015,14 @@
     "vendor": "",
     "area": "Tiger Bay",
     "type": "contract",
-    "category": "contract"
+    "category": "contract",
+    "objectives": [
+      "Locate the cache and report back to",
+      "Locate the cache and report back to",
+      "Locate the cache and report back to",
+      "Locate the cache and report back to"
+    ],
+    "reward_text": "Rewards Reputation with Reputation with after the first completion. All four accounted for. Good work. We\u2019ll handle the recovery, so consider your part done. Here\u2019s your reward."
   },
   {
     "id": "cache-report-viii",
@@ -1978,7 +2030,14 @@
     "vendor": "",
     "area": "Blue Lagoon",
     "type": "contract",
-    "category": "contract"
+    "category": "contract",
+    "objectives": [
+      "Locate the cache and report back to",
+      "Locate the cache and report back to",
+      "Locate the cache and report back to",
+      "Locate the cache and report back to"
+    ],
+    "reward_text": "Rewards Reputation with All four accounted for. Good work. We\u2019ll handle the recovery, so consider your part done. Here\u2019s your reward."
   },
   {
     "id": "combat-sweep-ii",
@@ -1986,7 +2045,13 @@
     "vendor": "",
     "area": "Sawmill",
     "type": "contract",
-    "category": "contract"
+    "category": "contract",
+    "objectives": [
+      "Recon the farm",
+      "Recon the shelter",
+      "Recon the shelter near a pond"
+    ],
+    "reward_text": "Rewards Reputation with Handshake Reputation with Handshake"
   },
   {
     "id": "combat-sweep-v",
@@ -1994,7 +2059,13 @@
     "vendor": "",
     "area": "Midnight Sapphire",
     "type": "contract",
-    "category": "contract"
+    "category": "contract",
+    "objectives": [
+      "Recon the car repair shop",
+      "Recon the area around the house",
+      "Recon the roadside market"
+    ],
+    "reward_text": "Rewards Reputation with Handshake Reputation with Handshake"
   },
   {
     "id": "combat-sweep-vii",
@@ -2002,7 +2073,13 @@
     "vendor": "",
     "area": "Ban Pa",
     "type": "contract",
-    "category": "contract"
+    "category": "contract",
+    "objectives": [
+      "Recon the house",
+      "Recon the house",
+      "Recon the roadside shelter"
+    ],
+    "reward_text": "Rewards Reputation with Handshake Reputation with Handshake"
   },
   {
     "id": "escort-ii",
@@ -2010,7 +2087,12 @@
     "vendor": "",
     "area": "Blue Lagoon",
     "type": "contract",
-    "category": "contract"
+    "category": "contract",
+    "objectives": [
+      "Meet the woman at the designated location",
+      "Look for the woman and report what happened"
+    ],
+    "reward_text": "Rewards Reputation with Lab Rat Reputation with Lab Rat"
   },
   {
     "id": "fuel-shortage",
@@ -2018,7 +2100,11 @@
     "vendor": "",
     "area": "Sawmill",
     "type": "contract",
-    "category": "contract"
+    "category": "contract",
+    "objectives": [
+      "Check the fuel levels in the tanker truck on the road south of the sawmill"
+    ],
+    "reward_text": "Rewards Reputation with Reputation with after the first completion It almost seems like there\u2019s not a single drop of fuel left on this entire godforsaken island. Just what the hell happened to all of it? Maybe that girl should look into this\u2026"
   },
   {
     "id": "muddy-buddy",
@@ -2026,7 +2112,12 @@
     "vendor": "",
     "area": "Ban Pa",
     "type": "contract",
-    "category": "contract"
+    "category": "contract",
+    "objectives": [
+      "in a barrel on the riverbank south of Pha Lang, downstream from a confluence, and bring it back to Handshake",
+      "Pick up the"
+    ],
+    "reward_text": "Rewards Reputation with Handshake Reputation with Handshake"
   },
   {
     "id": "nicked-shipment",
@@ -2034,7 +2125,15 @@
     "vendor": "",
     "area": "Hunter's Paradise",
     "type": "contract",
-    "category": "contract"
+    "category": "contract",
+    "objectives": [
+      "Find out what happened to the stolen shipment",
+      "Find the boxes next to a house",
+      "Find an empty house",
+      "Find the boxes behind a fence",
+      "Locate the second tracker further along the road"
+    ],
+    "reward_text": "Rewards Reputation with Reputation with after the first completion Damn! It looks like the thieves were no rookies either. They left the tracker just to waste our time and laugh at us. You did what you could, but I would have preferred that we recover our property."
   },
   {
     "id": "repossession",
@@ -2042,7 +2141,12 @@
     "vendor": "",
     "area": "Fort Narith",
     "type": "contract",
-    "category": "contract"
+    "category": "contract",
+    "objectives": [
+      "Store the valuable item under a storage shed near the Xiong Family Farm",
+      "Search the house in Savanpha village and retrieve the valuable item"
+    ],
+    "reward_text": "Rewards Reputation with Turncoat Reputation with Turncoat"
   },
   {
     "id": "repossession-iii",
@@ -2050,7 +2154,13 @@
     "vendor": "",
     "area": "Blue Lagoon",
     "type": "contract",
-    "category": "contract"
+    "category": "contract",
+    "objectives": [
+      "inside an empty jug at Inthavong Farm.",
+      "Search the mansion north of Kiu Vongsa and retrieve the",
+      "valuable item"
+    ],
+    "reward_text": "Rewards Reputation with Turncoat Reputation with Turncoat"
   },
   {
     "id": "repossession-iv",
@@ -2058,7 +2168,12 @@
     "vendor": "",
     "area": "Pha Lang Airfield",
     "type": "contract",
-    "category": "contract"
+    "category": "contract",
+    "objectives": [
+      "at a shelter south of Gas Station in Namhou Village",
+      "Search the houses in Namhou Village and retrieve the"
+    ],
+    "reward_text": "Rewards Reputation with Turncoat Reputation with Turncoat"
   },
   {
     "id": "repossession-ix",
@@ -2066,7 +2181,13 @@
     "vendor": "",
     "area": "Tiger Bay",
     "type": "contract",
-    "category": "contract"
+    "category": "contract",
+    "objectives": [
+      "inside a cooler at a farmhouse southwest of the pond",
+      "Search the house next to a pond at the southeast end of",
+      "and retrieve the"
+    ],
+    "reward_text": "Rewards Reputation with Turncoat Reputation with Turncoat"
   },
   {
     "id": "repossession-v",
@@ -2074,7 +2195,12 @@
     "vendor": "",
     "area": "Blue Lagoon",
     "type": "contract",
-    "category": "contract"
+    "category": "contract",
+    "objectives": [
+      "Store the package in a shelter south of Fanny Paradise",
+      "Search the restaurant near Fanny Paradise and retrieve the package"
+    ],
+    "reward_text": "Rewards Reputation with Turncoat Reputation with Turncoat"
   },
   {
     "id": "repossession-vi",
@@ -2082,7 +2208,12 @@
     "vendor": "",
     "area": "Pha Lang Airfield",
     "type": "contract",
-    "category": "contract"
+    "category": "contract",
+    "objectives": [
+      "Store the package in a shed south of the camp",
+      "Search the lookout tower at the Dongphou Hiking Camp and retrieve the package"
+    ],
+    "reward_text": "Rewards Reputation with Turncoat Reputation with Turncoat"
   },
   {
     "id": "repossession-vii",
@@ -2090,7 +2221,12 @@
     "vendor": "",
     "area": "YBL-1",
     "type": "contract",
-    "category": "contract"
+    "category": "contract",
+    "objectives": [
+      "Store the package inside an empty jug at a shelter southeast of the farm",
+      "Search underneath the house at Phon Chai Farm and retrieve the package"
+    ],
+    "reward_text": "Rewards Reputation with Turncoat Reputation with Turncoat"
   },
   {
     "id": "repossession-viii",
@@ -2098,7 +2234,12 @@
     "vendor": "",
     "area": "Blue Lagoon",
     "type": "contract",
-    "category": "contract"
+    "category": "contract",
+    "objectives": [
+      "in a shelter northeast of the restaurant",
+      "Search the Phouarun Restaurant and retrieve the"
+    ],
+    "reward_text": "Rewards Reputation with Turncoat Reputation with Turncoat"
   },
   {
     "id": "restoring-order",
@@ -2106,7 +2247,11 @@
     "vendor": "",
     "area": "Kiu Vongsa,Nam Thaven,Pha Lang",
     "type": "contract",
-    "category": "contract"
+    "category": "contract",
+    "objectives": [
+      "Neutralize 10 enemies in the nearby town."
+    ],
+    "reward_text": "Rewards Reputation with Handshake Excellent! I knew you wouldn\u2019t have any problems handling those lowlifes. They\u2019ll think twice before crossing our path again. A little display of force goes a long way in maintaining control."
   },
   {
     "id": "the-liberator",
@@ -2114,7 +2259,11 @@
     "vendor": "",
     "area": "Ban Pa",
     "type": "contract",
-    "category": "contract"
+    "category": "contract",
+    "objectives": [
+      "Investigate a potential hidden communications hub northwest of Ban Pa"
+    ],
+    "reward_text": "Rewards Reputation with Handshake Reputation with Handshake"
   },
   {
     "id": "unstable-meeting",
@@ -2122,6 +2271,11 @@
     "vendor": "",
     "area": "YBL-1",
     "type": "contract",
-    "category": "contract"
+    "category": "contract",
+    "objectives": [
+      "Go to the small bridge northeast of",
+      "to meet the contact"
+    ],
+    "reward_text": "Rewards Reputation with Banshee Reputation with Banshee"
   }
 ]
