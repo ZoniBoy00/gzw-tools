@@ -16,17 +16,8 @@ export interface VendorSoldItem {
 /** Items sold by non-weapon/armor vendor inventories. */
 export const VENDOR_ITEMS: VendorSoldItem[] = [
   // ─── Handshake — Starter Weapons & Gear ───
-  // These are sold at Handshake R.1 in-game but the wiki weapons table
-  // doesn't list "Handshake" in the acquisition column.
-  { vendor: 'Handshake', repLevel: 1, name: 'Beretta M9A1', type: 'weapon', detail: '9x19mm pistol — standard sidearm' },
-  { vendor: 'Handshake', repLevel: 1, name: 'Glock 17', type: 'weapon', detail: '9x19mm pistol — reliable sidearm' },
-  { vendor: 'Handshake', repLevel: 1, name: 'Colt Combat Commander', type: 'weapon', detail: '.45 ACP pistol — high stopping power' },
-  { vendor: 'Handshake', repLevel: 1, name: 'Vz. 61 Skorpion', type: 'weapon', detail: '7.65mm Browning SMG — compact full-auto' },
-  { vendor: 'Handshake', repLevel: 1, name: 'M870', type: 'weapon', detail: '12 Gauge pump-action shotgun' },
-  { vendor: 'Handshake', repLevel: 2, name: 'MP5', type: 'weapon', detail: '9x19mm SMG — tactical standard' },
-  { vendor: 'Handshake', repLevel: 2, name: 'Mossberg 590', type: 'weapon', detail: '12 Gauge pump shotgun — improved capacity' },
-
-  // ─── Handshake — Gear & Containers ───
+  // Weapons come from weapons.json with corrected source field.
+  // Only non-weapon items (armor, gear) are listed here.
   { vendor: 'Handshake', repLevel: 1, name: 'Commander IIIA', type: 'vest', detail: 'IIIA-rated body armor — basic protection' },
   { vendor: 'Handshake', repLevel: 1, name: 'LVS Overt IIIA+', type: 'vest', detail: 'IIIA+-rated body armor — improved coverage' },
   { vendor: 'Handshake', repLevel: 1, name: 'MICH IIA', type: 'helmet', detail: 'IIA-rated ballistic helmet' },

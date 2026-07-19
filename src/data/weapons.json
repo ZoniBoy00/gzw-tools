@@ -219,7 +219,7 @@
     "caliber": "9x19mm",
     "magSize": 30,
     "fireRate": "600",
-    "source": "Gunny R.1"
+    "source": "Handshake R.1"
   },
   {
     "name": "Colt 1911",
@@ -235,7 +235,7 @@
     "caliber": ".45 ACP",
     "magSize": 30,
     "fireRate": "600",
-    "source": "Gunny R.1"
+    "source": "Handshake R.1"
   },
   {
     "name": "Glock 17",
@@ -243,7 +243,7 @@
     "caliber": "9x19mm",
     "magSize": 30,
     "fireRate": "600",
-    "source": "Gunny R.1"
+    "source": "Handshake R.1"
   },
   {
     "name": "Grin's Colt 1911 Commander",
@@ -282,7 +282,7 @@
     "caliber": "9x19mm",
     "magSize": 30,
     "fireRate": "800",
-    "source": "Gunny R.2"
+    "source": "Handshake R.2"
   },
   {
     "name": "MP7",
@@ -312,7 +312,7 @@
     "caliber": "7.65mm Browning",
     "magSize": 30,
     "fireRate": "800",
-    "source": "Gunny R.1"
+    "source": "Handshake R.1"
   },
   {
     "name": "M870",
@@ -320,7 +320,7 @@
     "caliber": "12 Gauge",
     "magSize": 30,
     "fireRate": "300",
-    "source": "Gunny R.1"
+    "source": "Handshake R.1"
   },
   {
     "name": "Mossberg 590",
@@ -328,6 +328,6 @@
     "caliber": "12 Gauge",
     "magSize": 30,
     "fireRate": "300",
-    "source": "Gunny R.2"
+    "source": "Handshake R.2"
   }
 ]
