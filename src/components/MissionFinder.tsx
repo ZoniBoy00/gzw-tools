@@ -34,13 +34,13 @@ export default function MissionFinder() {
   const [expanded, setExpanded] = useState<string | null>(null);
 
   const categories = useMemo(() => {
-    const cats = ['main', 'side', 'hidden', 'squad', 'contract', 'unknown'];
+    const cats = ['main', 'side', 'hidden_task', 'squad', 'contract', 'unknown'];
     const result: { key: string; label: string; icon: string }[] = [];
     for (const c of cats) {
-      const count = tasks.filter((t) => (t.category || t.type) === c).length;
+      const count = tasks.filter((t) => t.category === c || t.type === c).length;
       if (count > 0) {
-        const labels: Record<string, string> = { main: 'Main Tasks', side: 'Side Tasks', hidden: 'Hidden Tasks', squad: 'Squad Strikes', contract: 'Contracts', unknown: 'Other' };
-        const icons: Record<string, string> = { main: 'fas fa-star', side: 'fas fa-list', hidden: 'fas fa-eye-slash', squad: 'fas fa-people-group', contract: 'fas fa-file-contract', unknown: 'fas fa-question' };
+        const labels: Record<string, string> = { main: 'Main Tasks', side: 'Side Tasks', hidden_task: 'Hidden Tasks', squad: 'Squad Strikes', contract: 'Contracts', unknown: 'Other' };
+        const icons: Record<string, string> = { main: 'fas fa-star', side: 'fas fa-list', hidden_task: 'fas fa-eye-slash', squad: 'fas fa-people-group', contract: 'fas fa-file-contract', unknown: 'fas fa-question' };
         result.push({ key: c, label: `${labels[c] || c} (${count})`, icon: icons[c] || 'fas fa-circle' });
       }
     }
@@ -56,7 +56,7 @@ export default function MissionFinder() {
     if (vendorFilter) data = data.filter((t) => t.vendor === vendorFilter);
     if (areaFilter) data = data.filter((t) => t.area === areaFilter);
     if (typeFilter) data = data.filter((t) => t.type === typeFilter);
-    if (categoryFilter) data = data.filter((t) => (t.category || t.type) === categoryFilter);
+    if (categoryFilter) data = data.filter((t) => t.category === categoryFilter || t.type === categoryFilter);
     data.sort((a, b) => (sortBy === 'name' ? a.name.localeCompare(b.name) : (a.vendor || '').localeCompare(b.vendor || '')));
     return data;
   }, [search, vendorFilter, areaFilter, typeFilter, categoryFilter, sortBy]);
