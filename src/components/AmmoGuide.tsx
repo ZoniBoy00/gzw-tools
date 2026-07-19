@@ -1,4 +1,4 @@
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect } from 'react';
 import { AMMO, CALIBERS } from '../data/ammo';
 import { ARMOR_CLASSES } from '../data/types';
 
@@ -15,9 +15,18 @@ const PEN_LABELS: Record<number, string> = {
 };
 
 export default function AmmoGuide() {
-  const [caliber, setCaliber] = useState('5.56x45mm');
-  const [search, setSearch] = useState('');
+  const [caliber, setCaliber] = useState(() => new URLSearchParams(window.location.search).get('caliber') || '5.56x45mm');
+  const [search, setSearch] = useState(() => new URLSearchParams(window.location.search).get('asearch') || '');
   const [compare, setCompare] = useState<string[]>([]);
+
+  // Sync to URL
+  useEffect(() => {
+    const p = new URLSearchParams();
+    if (caliber !== '5.56x45mm') p.set('caliber', caliber);
+    if (search) p.set('asearch', search);
+    const qs = p.toString();
+    window.history.replaceState(null, '', qs ? `?${qs}` : window.location.pathname);
+  }, [caliber, search]);
 
   const filtered = useMemo(() => {
     const byCal = AMMO.filter((a) => a.caliber === caliber);
