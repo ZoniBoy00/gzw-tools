@@ -245,7 +245,7 @@ select.input {
   position: sticky;
   top: 0;
   text-align: left;
-  padding: 10px 10px;
+  padding: 8px 10px;
   color: var(--color-text-muted);
   font-weight: 600;
   text-transform: uppercase;
@@ -256,19 +256,30 @@ select.input {
   background: var(--color-surface);
   z-index: 10;
   vertical-align: middle;
-}
-.table-wrap th i {
-  vertical-align: middle;
   line-height: 1;
 }
-.table-wrap th::after {
+.table-wrap th i,
+.table-wrap th svg {
+  display: inline-block;
+  vertical-align: middle;
+  font-size: 10px;
+  line-height: 1;
+  width: auto;
+  height: auto;
+}
+/* Header separator line: single continuous line across thead */
+.table-wrap thead tr {
+  position: relative;
+}
+.table-wrap thead tr::after {
   content: '';
   position: absolute;
-  left: 0;
-  right: 0;
+  left: 10px;
+  right: 10px;
   bottom: 0;
   height: 1px;
   background: var(--color-border-light);
+  pointer-events: none;
 }
 .table-wrap td {
   padding: 8px 10px;
@@ -388,12 +399,6 @@ select.input {
   min-width: 70px;
   max-width: 70px;
   text-align: center !important;
-}
-/* Fix shield icon alignment in plates header */
-.armor-table th:nth-child(5) i {
-  vertical-align: middle;
-  font-size: 13px;
-  line-height: 1;
 }
 /* Fixed width for last two columns (Wt + Source) */
 .armor-table th:nth-last-child(2),
