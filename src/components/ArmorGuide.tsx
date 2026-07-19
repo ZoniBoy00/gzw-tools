@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 import { VESTS, HELMETS, RECOMMENDATIONS, MATERIAL_RANK } from '../data/armor';
 import TabBar from './ui/TabBar';
 
@@ -24,8 +24,8 @@ export default function ArmorGuide() {
 
       <div className="mt-4">
         {tab === 'recommend' && <Recommendations />}
-        {tab === 'vests' && <VestTable />}
-        {tab === 'helmets' && <HelmetTable />}
+        {tab === 'vests' && <VestSection />}
+        {tab === 'helmets' && <HelmetSection />}
         {tab === 'vendors' && <VendorTable />}
       </div>
 
@@ -70,64 +70,194 @@ function Recommendations() {
   );
 }
 
-function VestTable() {
+// ─── Vest compare ───
+
+function VestSection() {
+  const [compare, setCompare] = useState<string[]>([]);
+
+  const sorted = useMemo(() => [...VESTS].sort((a, b) => nij(b.nij) - nij(a.nij)), []);
+
+  const toggleCompare = (name: string) => {
+    setCompare((prev) =>
+      prev.includes(name) ? prev.filter((n) => n !== name) : prev.length < 3 ? [...prev, name] : prev,
+    );
+  };
+
+  const comparedVests = useMemo(() => VESTS.filter((v) => compare.includes(v.name)), [compare]);
+
   return (
-    <div className="table-wrap table-mobile-cards">
-      <table role="table" aria-label="Armor vest comparison">
-        <thead>
-          <tr>
-            <th role="columnheader">Name</th>
-            <th className="text-center" role="columnheader">NIJ</th>
-            <th className="text-center" role="columnheader">Mat</th>
-            <th className="text-center" role="columnheader"><i className="fas fa-shield" aria-hidden="true" /> <span className="sr-only">Plates</span></th>
-            <th className="text-center" role="columnheader">Grid</th>
-            <th className="text-right" role="columnheader">Wt</th>
-            <th className="text-right" role="columnheader">Source</th>
-          </tr>
-        </thead>
-        <tbody>
-          {[...VESTS].sort((a, b) => nij(b.nij) - nij(a.nij)).map((v, i) => (
-            <tr key={i}>
-              <td data-label="" className="font-medium">{v.name}</td>
-              <td data-label="NIJ" className={`text-center font-bold ${nijColor(v.nij)}`}>{v.nij}</td>
-              <td data-label="Mat" className={`text-center ${matColor(v.material)}`}>{v.material.slice(0, 4)}</td>
-              <td data-label="Plates" className="text-center text-text-muted">{v.plates.replace(', ', '/')}</td>
-              <td data-label="Grid" className="text-center text-text-muted">{v.grid}</td>
-              <td data-label="Wt" className="text-right text-text-muted">{v.weight}kg</td>
-              <td data-label="Source" className="text-right text-text-muted">{v.source}</td>
+    <div>
+      {/* Compare section */}
+      {comparedVests.length > 0 && (
+        <div className="mb-4 p-3 border border-accent/20 bg-accent/5">
+          <div className="text-[10px] font-bold uppercase tracking-[0.12em] text-accent mb-2 flex items-center gap-2">
+            <i className="fas fa-not-equal text-xs" />
+            Compare Mode — {comparedVests.length} vest{comparedVests.length > 1 ? 's' : ''} selected
+            <button
+              onClick={() => setCompare([])}
+              className="ml-auto text-[9px] font-mono text-text-muted hover:text-text"
+            >
+              Clear
+            </button>
+          </div>
+          <div className="compare-grid">
+            {comparedVests.map((v) => (
+              <div key={v.name} className="compare-card selected">
+                <div className="text-sm font-bold mb-2 text-accent">{v.name}</div>
+                {[
+                  { label: 'NIJ Class', value: v.nij, cls: nijColor(v.nij) },
+                  { label: 'Material', value: v.material, cls: matColor(v.material) },
+                  { label: 'Plates', value: v.plates },
+                  { label: 'Grid', value: v.grid },
+                  { label: 'Weight', value: `${v.weight} kg` },
+                  { label: 'Source', value: v.source },
+                ].map((f) => (
+                  <div key={f.label} className="compare-field">
+                    <span className="text-text-muted">{f.label}</span>
+                    <span className={f.cls || 'text-text'}>{f.value}</span>
+                  </div>
+                ))}
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+
+      <div className="table-wrap table-mobile-cards">
+        <table role="table" aria-label="Armor vest comparison">
+          <thead>
+            <tr>
+              <th className="w-8 text-center" role="columnheader"></th>
+              <th role="columnheader">Name</th>
+              <th className="text-center" role="columnheader">NIJ</th>
+              <th className="text-center" role="columnheader">Mat</th>
+              <th className="text-center" role="columnheader"><i className="fas fa-shield" aria-hidden="true" /><span className="sr-only">Plates</span></th>
+              <th className="text-center" role="columnheader">Grid</th>
+              <th className="text-right" role="columnheader">Wt</th>
+              <th className="text-right" role="columnheader">Source</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {sorted.map((v, i) => (
+              <tr key={i}>
+                <td className="text-center">
+                  <button
+                    onClick={() => toggleCompare(v.name)}
+                    className={`text-[10px] px-1 py-0.5 border ${
+                      compare.includes(v.name)
+                        ? 'border-accent/50 text-accent bg-accent/10'
+                        : 'border-border text-text-muted hover:border-text-muted/30'
+                    }`}
+                    aria-label={`${compare.includes(v.name) ? 'Remove' : 'Add'} ${v.name}`}
+                  >
+                    <i className={`fas fa-${compare.includes(v.name) ? 'check' : 'plus'}`} />
+                  </button>
+                </td>
+                <td data-label="" className="font-medium">{v.name}</td>
+                <td data-label="NIJ" className={`text-center font-bold ${nijColor(v.nij)}`}>{v.nij}</td>
+                <td data-label="Mat" className={`text-center ${matColor(v.material)}`}>{v.material.slice(0, 4)}</td>
+                <td data-label="Plates" className="text-center text-text-muted">{v.plates.replace(', ', '/')}</td>
+                <td data-label="Grid" className="text-center text-text-muted">{v.grid}</td>
+                <td data-label="Wt" className="text-right text-text-muted">{v.weight}kg</td>
+                <td data-label="Source" className="text-right text-text-muted">{v.source}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 }
 
-function HelmetTable() {
+// ─── Helmet compare ───
+
+function HelmetSection() {
+  const [compare, setCompare] = useState<string[]>([]);
+
+  const sorted = useMemo(() => [...HELMETS].sort((a, b) => nij(b.nij) - nij(a.nij)), []);
+
+  const toggleCompare = (name: string) => {
+    setCompare((prev) =>
+      prev.includes(name) ? prev.filter((n) => n !== name) : prev.length < 3 ? [...prev, name] : prev,
+    );
+  };
+
+  const comparedHelmets = useMemo(() => HELMETS.filter((h) => compare.includes(h.name)), [compare]);
+
   return (
-    <div className="table-wrap table-mobile-cards">
-      <table role="table" aria-label="Helmet comparison">
-        <thead>
-          <tr>
-            <th role="columnheader">Name</th>
-            <th className="text-center" role="columnheader">NIJ</th>
-            <th className="text-center" role="columnheader">Mat</th>
-            <th className="text-right" role="columnheader">Wt</th>
-            <th className="text-right" role="columnheader">Source</th>
-          </tr>
-        </thead>
-        <tbody>
-          {[...HELMETS].sort((a, b) => nij(b.nij) - nij(a.nij)).map((h, i) => (
-            <tr key={i}>
-              <td data-label="" className="font-medium">{h.name}</td>
-              <td data-label="NIJ" className={`text-center font-bold ${nijColor(h.nij)}`}>{h.nij}</td>
-              <td data-label="Mat" className={`text-center ${matColor(h.material)}`}>{h.material}</td>
-              <td data-label="Wt" className="text-right text-text-muted">{h.weight}kg</td>
-              <td data-label="Source" className="text-right text-text-muted">{h.source}</td>
+    <div>
+      {/* Compare section */}
+      {comparedHelmets.length > 0 && (
+        <div className="mb-4 p-3 border border-accent/20 bg-accent/5">
+          <div className="text-[10px] font-bold uppercase tracking-[0.12em] text-accent mb-2 flex items-center gap-2">
+            <i className="fas fa-not-equal text-xs" />
+            Compare Mode — {comparedHelmets.length} helmet{comparedHelmets.length > 1 ? 's' : ''} selected
+            <button
+              onClick={() => setCompare([])}
+              className="ml-auto text-[9px] font-mono text-text-muted hover:text-text"
+            >
+              Clear
+            </button>
+          </div>
+          <div className="compare-grid">
+            {comparedHelmets.map((h) => (
+              <div key={h.name} className="compare-card selected">
+                <div className="text-sm font-bold mb-2 text-accent">{h.name}</div>
+                {[
+                  { label: 'NIJ Class', value: h.nij, cls: nijColor(h.nij) },
+                  { label: 'Material', value: h.material, cls: matColor(h.material) },
+                  { label: 'Weight', value: `${h.weight} kg` },
+                  { label: 'Source', value: h.source },
+                ].map((f) => (
+                  <div key={f.label} className="compare-field">
+                    <span className="text-text-muted">{f.label}</span>
+                    <span className={f.cls || 'text-text'}>{f.value}</span>
+                  </div>
+                ))}
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+
+      <div className="table-wrap table-mobile-cards">
+        <table role="table" aria-label="Helmet comparison">
+          <thead>
+            <tr>
+              <th className="w-8 text-center" role="columnheader"></th>
+              <th role="columnheader">Name</th>
+              <th className="text-center" role="columnheader">NIJ</th>
+              <th className="text-center" role="columnheader">Mat</th>
+              <th className="text-right" role="columnheader">Wt</th>
+              <th className="text-right" role="columnheader">Source</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {sorted.map((h, i) => (
+              <tr key={i}>
+                <td className="text-center">
+                  <button
+                    onClick={() => toggleCompare(h.name)}
+                    className={`text-[10px] px-1 py-0.5 border ${
+                      compare.includes(h.name)
+                        ? 'border-accent/50 text-accent bg-accent/10'
+                        : 'border-border text-text-muted hover:border-text-muted/30'
+                    }`}
+                    aria-label={`${compare.includes(h.name) ? 'Remove' : 'Add'} ${h.name}`}
+                  >
+                    <i className={`fas fa-${compare.includes(h.name) ? 'check' : 'plus'}`} />
+                  </button>
+                </td>
+                <td data-label="" className="font-medium">{h.name}</td>
+                <td data-label="NIJ" className={`text-center font-bold ${nijColor(h.nij)}`}>{h.nij}</td>
+                <td data-label="Mat" className={`text-center ${matColor(h.material)}`}>{h.material}</td>
+                <td data-label="Wt" className="text-right text-text-muted">{h.weight}kg</td>
+                <td data-label="Source" className="text-right text-text-muted">{h.source}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 }

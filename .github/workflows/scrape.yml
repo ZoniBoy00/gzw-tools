@@ -4,36 +4,67 @@ on:
     - cron: '0 6 * * 1'   # Every Monday at 06:00 UTC
   workflow_dispatch:       # Manual trigger
 
+permissions:
+  contents: write
+  pull-requests: write
+
 jobs:
   scrape:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+
       - uses: actions/setup-python@v5
         with:
           python-version: '3.11'
+
       - name: Install dependencies
-        run: pip install requests beautifulsoup4 2>/dev/null || true
-      - name: Run scraper
-        run: python scripts/scraper/scrape.py 2>&1 || echo "No scraper found — skipping"
-      - name: Check for changes
+        run: |
+          pip install requests beautifulsoup4 lxml 2>&1 | tail -5
+
+      - name: Run scraper (all categories)
+        run: |
+          cd scripts/scraper
+          python scrape.py --all 2>&1
+        continue-on-error: true
+
+      - name: Check for data changes
         id: changed
         run: |
-          if [[ -n "$(git status --porcelain scripts/)" ]]; then
-            echo "changed=true" >> $GITHUB_OUTPUT
+          # Track only the scraped data files
+          FILES=("scripts/scraper/data/tasks.json" "scripts/scraper/data/weapons.json")
+          CHANGED=false
+          for f in "${FILES[@]}"; do
+            if git status --porcelain "$f" 2>/dev/null | grep -q .; then
+              echo "  Changed: $f"
+              CHANGED=true
+            fi
+          done
+          echo "changed=$CHANGED" >> "$GITHUB_OUTPUT"
+          if $CHANGED; then
+            echo "Data files changed — will open PR."
           else
-            echo "changed=false" >> $GITHUB_OUTPUT
+            echo "No data changes detected."
           fi
-      - name: Create PR
+
+      - name: Create Pull Request with updated data
         if: steps.changed.outputs.changed == 'true'
         run: |
+          BRANCH="data/update-$(date +%Y%m%d)"
           git config user.name "gzw-bot"
           git config user.email "bot@gzw-tools.dev"
-          BRANCH="data/update-$(date +%Y%m%d)"
           git checkout -b "$BRANCH"
-          git add -A
-          git commit -m "auto: update scraped data $(date +%Y-%m-%d)"
+          git add scripts/scraper/data/
+          git commit -m "auto: update scraped data ($(date +%Y-%m-%d))"
           git push origin "$BRANCH"
-          gh pr create --fill --base main --head "$BRANCH"
+          gh pr create \
+            --title "Auto: Data update $(date +%Y-%m-%d)" \
+            --body "Automated weekly wiki scrape updated the following files:
+            - \`scripts/scraper/data/tasks.json\`
+            - \`scripts/scraper/data/weapons.json\`
+
+            Review changes before merging to main." \
+            --base main \
+            --head "$BRANCH"
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
