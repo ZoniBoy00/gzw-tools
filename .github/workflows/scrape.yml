@@ -43,14 +43,19 @@ jobs:
           python categorize_tasks.py 2>&1
         continue-on-error: true
 
-      # ── Step 4: Copy data to frontend ──
+      # ── Step 4: Generate frontend data files (JSON + TS wrappers) ──
+      - name: Generate frontend data
+        run: |
+          cd scripts/scraper
+          python gen_frontend_data.py 2>&1
+
+      # ── Step 5: Copy tasks to frontend ──
       - name: Copy data to frontend
         run: |
-          # Tasks JSON
           cp scripts/scraper/data/tasks.json src/data/tasks.json
           echo "✅ Copied tasks.json (src/data/)"
 
-      # ── Step 5: Check for data changes ──
+      # ── Step 6: Check for data changes ──
       - name: Check for data changes
         id: changed
         run: |
@@ -87,17 +92,17 @@ jobs:
           git config user.name "gzw-bot"
           git config user.email "bot@gzw-tools.dev"
           git checkout -b "$BRANCH"
-          git add scripts/scraper/data/ src/data/tasks.json
+          git add scripts/scraper/data/ src/data/tasks.json src/data/weapons.json src/data/weapons.ts src/data/armor.json src/data/armor.ts
           git commit -m "auto: update scraped data ($(date +%Y-%m-%d))"
           git push origin "$BRANCH"
           gh pr create \
             --title "Auto: Data update $(date +%Y-%m-%d)" \
-            --body "Automated weekly wiki scrape updated the following:
-            - Weapons (\`scripts/scraper/data/weapons.json\`)
-            - Armor (vests, helmets, rigs)
-            - Tasks/missions (\`src/data/tasks.json\`)
-            - Medical, gear, containers
+            --body "Automated weekly wiki scrape updated:
+            - Weapons (\`weapons.json\`, \`weapons.ts\`)
+            - Armor (\`armor.json\`, \`armor.ts\` - vests, helmets)
+            - Tasks/missions (\`tasks.json\`)
             - Task objectives, rewards, categories
+            - Medical, gear, containers
 
             Review changes before merging to main." \
             --base main \

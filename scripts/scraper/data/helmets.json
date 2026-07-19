@@ -1,0 +1,17 @@
+[
+  {
+    "name": "AMP-1 TP LC (Ranger Green)",
+    "id": "amp-1-tp-lc-(ranger-green)",
+    "material": "Aramid",
+    "weight": 1.4,
+    "grid": "2x2",
+    "image": "https://static.wikia.nocookie.net/gray-zone-warfare/images/8/8c/AMP-1_TP_LC%28Ranger_Green%29_inspect.png/revision/latest/scale-to-width-down/200?cb=20240505152450"
+  },
+  {
+    "name": "AMP-1 TP LC (UNLRA)",
+    "id": "amp-1-tp-lc-(unlra)",
+    "material": "Aramid",
+    "weight": 1.69,
+    "grid": "2x2"
+  }
+]

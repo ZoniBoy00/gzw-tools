@@ -1,0 +1,191 @@
+{
+  "vests": [
+    {
+      "name": "6B23-1(Digital)",
+      "nij": "-",
+      "material": "Steel",
+      "weight": 7.9,
+      "plates": "Front",
+      "grid": "3x3",
+      "source": "Looting"
+    },
+    {
+      "name": "6B23-1(Flora)",
+      "nij": "-",
+      "material": "Steel",
+      "weight": 7.4,
+      "plates": "Front",
+      "grid": "3x3",
+      "source": "Looting"
+    },
+    {
+      "name": "Armor Vests",
+      "nij": "-",
+      "material": "-",
+      "weight": 0,
+      "plates": "Front",
+      "grid": "3x3",
+      "source": "Looting"
+    },
+    {
+      "name": "ATBV Vest",
+      "nij": "-",
+      "material": "UHMWPE",
+      "weight": 3.8,
+      "plates": "Front",
+      "grid": "3x3",
+      "source": "Looting"
+    },
+    {
+      "name": "B Krogan",
+      "nij": "-",
+      "material": "???",
+      "weight": 0,
+      "plates": "Front",
+      "grid": "3x3",
+      "source": "Looting"
+    },
+    {
+      "name": "Commander (Black)",
+      "nij": "-",
+      "material": "UHMWPE",
+      "weight": 2.45,
+      "plates": "Front",
+      "grid": "3x3",
+      "source": "Looting"
+    },
+    {
+      "name": "Commander (Navy)",
+      "nij": "-",
+      "material": "Aramid",
+      "weight": 2.45,
+      "plates": "Front",
+      "grid": "3x3",
+      "source": "Looting"
+    },
+    {
+      "name": "Commander (Olive)",
+      "nij": "-",
+      "material": "UHMWPE",
+      "weight": 2.45,
+      "plates": "Front",
+      "grid": "3x3",
+      "source": "Looting"
+    },
+    {
+      "name": "Coolmax Covert Vest",
+      "nij": "-",
+      "material": "Aramid",
+      "weight": 1.76,
+      "plates": "Front",
+      "grid": "3x3",
+      "source": "Looting"
+    },
+    {
+      "name": "Covert Tactical Body Armour (Police)",
+      "nij": "-",
+      "material": "UHMWPE",
+      "weight": 5.77,
+      "plates": "Front",
+      "grid": "3x3",
+      "source": "Looting"
+    },
+    {
+      "name": "Covert Tactical Body Armour (Press)",
+      "nij": "-",
+      "material": "Steel",
+      "weight": 10.41,
+      "plates": "Front",
+      "grid": "3x3",
+      "source": "Looting"
+    },
+    {
+      "name": "Covert Tactical Body Armour (UNLRA)",
+      "nij": "-",
+      "material": "Aramid",
+      "weight": 2.1,
+      "plates": "Front",
+      "grid": "3x3",
+      "source": "Looting"
+    },
+    {
+      "name": "CZ 4M Hornet (UNLRA)",
+      "nij": "-",
+      "material": "Ceramic",
+      "weight": 6.45,
+      "plates": "Front",
+      "grid": "3x3",
+      "source": "Looting"
+    },
+    {
+      "name": "CZ VIP (Black)",
+      "nij": "-",
+      "material": "Steel",
+      "weight": 4.8,
+      "plates": "Front",
+      "grid": "3x3",
+      "source": "Looting"
+    },
+    {
+      "name": "LVS Overt (Ranger Green)",
+      "nij": "-",
+      "material": "Steel",
+      "weight": 7.5,
+      "plates": "Front",
+      "grid": "3x3",
+      "source": "Looting"
+    },
+    {
+      "name": "LVS Tactical (Multicam)",
+      "nij": "-",
+      "material": "Ceramic",
+      "weight": 8.2,
+      "plates": "Front",
+      "grid": "3\u00d73",
+      "source": "Looting"
+    },
+    {
+      "name": "LVS Tactical (Ranger Green)",
+      "nij": "-",
+      "material": "Steel",
+      "weight": 10.8,
+      "plates": "Front",
+      "grid": "3x3",
+      "source": "Looting"
+    },
+    {
+      "name": "Molle Vest",
+      "nij": "-",
+      "material": "Steel",
+      "weight": 2.6,
+      "plates": "Front",
+      "grid": "3x3",
+      "source": "Looting"
+    },
+    {
+      "name": "SK-S Ballistic Vest",
+      "nij": "-",
+      "material": "UHMWPE",
+      "weight": 3.15,
+      "plates": "Front",
+      "grid": "3x3",
+      "source": "Looting"
+    }
+  ],
+  "helmets": [
+    {
+      "name": "AMP-1 TP LC (Ranger Green)",
+      "nij": "-",
+      "material": "Aramid",
+      "weight": 1.4,
+      "source": "Looting"
+    },
+    {
+      "name": "AMP-1 TP LC (UNLRA)",
+      "nij": "-",
+      "material": "Aramid",
+      "weight": 1.69,
+      "source": "Looting"
+    }
+  ]
+}
