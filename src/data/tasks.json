@@ -2277,5 +2277,1436 @@
       "to meet the contact"
     ],
     "reward_text": "Rewards Reputation with Banshee Reputation with Banshee"
+  },
+  {
+    "id": "harvest-moon",
+    "name": "Harvest Moon",
+    "type": "side",
+    "giver": "Banshee",
+    "objectives": [
+      "Investigate the first hidden poppy field and report your findings",
+      "Investigate the second hidden poppy field and report your findings",
+      "Investigate the third hidden poppy field and report your findings",
+      "Investigate the fourth hidden poppy field and report your findings"
+    ],
+    "rewards": "600 Exp, +300 Reputation with Banshee, $870 USD",
+    "description": "Satellite data suggests multiple hidden poppy fields supplying the drug operation linked to Pha Lang Airfield. Locate the suspected sites, investigate their current status, and search for documents that could reveal where the narcotics are processed and who is running the network."
+  },
+  {
+    "id": "a-shot-in-the-dark",
+    "name": "A Shot in the Dark",
+    "type": "side",
+    "giver": "Banshee",
+    "objectives": [
+      "Retrieve the VIP program client list from the Hunter's Paradise entrance gate area and report back to Banshee",
+      "Locate the client list"
+    ],
+    "reward_text": "1,000 Exp, +225 Reputation with Banshee (+170 after first completion), $2,800 USD",
+    "description": "Recover the VIP client list from Hunter's Paradise main entrance and deliver it to Banshee instead of Handshake."
+  },
+  {
+    "id": "a-single-drop",
+    "name": "A Single Drop",
+    "type": "side",
+    "giver": "Gunny",
+    "objectives": [
+      "Check the fuel levels in the two tanker trucks around Pha Lang Airfield",
+      "Check the first tanker truck",
+      "Check the second tanker truck"
+    ],
+    "reward_text": "300 Exp, +255 Reputation with Gunny (+170 after first completion), $870 USD",
+    "description": "Fuel supplies are running critically low. Recon the area around Pha Lang Airfield where two tanker trucks were last seen, locate the missing vehicles, and assess how much fuel remains."
+  },
+  {
+    "id": "a-tiding-of-magpies",
+    "name": "A Tiding of Magpies",
+    "type": "side",
+    "giver": "Turncoat",
+    "objectives": [
+      "Retrieve the promised phone and report back to Turncoat",
+      "Locate the phone in Chon village",
+      "Neutralize 5 Turncoat's former friends in Chon village"
+    ],
+    "reward_text": "600 Exp, +300 Reputation with Turncoat, $1,880 USD",
+    "description": "Eliminate the disloyal locals from Chon village who tried to extort Turncoat. Remove the threat, recover a phone they withheld, and deliver it as agreed."
+  },
+  {
+    "id": "a-voice-from-the-stars",
+    "name": "A Voice from the Stars",
+    "type": "side",
+    "giver": "Lab Rat",
+    "objectives": [
+      "Retrieve the research data and report back to Lab Rat",
+      "Locate the research data inside the hut"
+    ],
+    "reward_text": "300 Exp, +255 Reputation with Lab Rat, $870 USD, x2 Large Blood Bag",
+    "description": "A hut containing mysterious research notes has been discovered. Search the area thoroughly for valuable intel that may clarify the purpose of the project."
+  },
+  {
+    "id": "academic-interest",
+    "name": "Academic Interest",
+    "type": "side",
+    "giver": "Turncoat",
+    "objectives": [
+      "Place the merchandise in a blue barrel behind a shelter in a field southwest of Midnight Sapphire"
+    ],
+    "reward_text": "300 Exp, +255 Reputation with Turncoat (+170 after first completion), $870 USD",
+    "description": "Instead of delivering the narcotics at Midnight Sapphire to Banshee, collect any drugs or related evidence you find and place it inside a blue barrel behind a shelter in a field southwest of the resort."
+  },
+  {
+    "id": "atrocity-probe",
+    "name": "Atrocity Probe",
+    "type": "side",
+    "giver": "Banshee",
+    "objectives": [
+      "Investigate Ban Phouphienge and report your findings to Banshee",
+      "Investigate the town hall",
+      "Investigate the smoldering area"
+    ],
+    "reward_text": "300 Exp (200 after first completion), +255 Reputation with Banshee (+150 after first completion), $870 USD",
+    "description": "Reports suggest a possible massacre in the village of Ban Phouphienge, located south of Hunter's Paradise. Investigate the town hall and the smoldering area."
+  },
+  {
+    "id": "buried-on-paper",
+    "name": "Buried on Paper",
+    "type": "side",
+    "giver": "Banshee",
+    "objectives": [
+      "Retrieve the documents and report back to Banshee",
+      "Access Vice President Park's Office in Tiger Bay and secure any relevant files",
+      "Access the Municipal Office Building archive and secure any relevant files"
+    ],
+    "reward_text": "400 Exp, +200 Reputation with Banshee, $1,880 USD",
+    "description": "Access Vice President Jan Park's office in the Municipal Office Building in Tiger Bay and the archive to find evidence of government corruption."
+  },
+  {
+    "id": "cache-retrieval",
+    "name": "Cache Retrieval",
+    "type": "side",
+    "giver": "Gunny",
+    "objectives": [
+      "Find and mark the weapons cache",
+      "Retrieve the GPS tracker from the unresponsive contractor"
+    ],
+    "reward_text": "150 Exp, +120 Reputation with Gunny, 400 USD",
+    "description": "A weapons cache is unaccounted for at the Hilltop Villas in Nam Thaven. Check the previous operator's final GPS ping, confirm their status, and mark the cache's exact position."
+  },
+  {
+    "id": "celebrity-crash",
+    "name": "Celebrity Crash",
+    "type": "side",
+    "giver": "Handshake",
+    "objectives": [
+      "Retrieve the SD card from the Midnight Sapphire Hotel and report back to Handshake",
+      "Locate the SD card"
+    ],
+    "reward_text": "600 Exp, +360 Reputation with Handshake (+200 after first completion), $1,880 USD",
+    "description": "Retrieve a forgotten SD card from a celebrity's room on the first floor of the Midnight Sapphire Hotel before compromising footage can surface."
+  },
+  {
+    "id": "crash",
+    "name": "Crash",
+    "type": "side",
+    "giver": "Banshee",
+    "objectives": [
+      "Find the car of Banshee's colleague and retrieve the intel",
+      "Locate the intel"
+    ],
+    "reward_text": "300 Exp, +300 Reputation with Banshee, $1,880 USD",
+    "description": "An undercover operative was captured trying to smuggle evidence out of Midnight Sapphire. The evidence is likely still concealed in his crashed car."
+  },
+  {
+    "id": "chameleon-ak-308-ht",
+    "name": "Chameleon - AK-308 (HT)",
+    "type": "side",
+    "giver": "Vulture",
+    "objectives": [
+      "Collect the weapon modification from Vulture's drop box at the remote hangars",
+      "Place the weapon in the designated drop box"
+    ],
+    "reward_text": "Exp, Reputation with Vulture, Unlocks purchase of weapon",
+    "description": "Chameleon weapon modification task from Vulture - AK-308 (HT) variant."
+  },
+  {
+    "id": "chameleon-akmn-jc",
+    "name": "Chameleon - AKMN (JC)",
+    "type": "side",
+    "giver": "Artisan",
+    "objectives": [],
+    "reward_text": "",
+    "description": "Chameleon weapon modification task from Artisan."
+  },
+  {
+    "id": "chameleon-ddm4-pl",
+    "name": "Chameleon - DDM4 (PL)",
+    "type": "side",
+    "giver": "Gunny",
+    "objectives": [],
+    "reward_text": "",
+    "description": "Chameleon weapon modification task from Gunny."
+  },
+  {
+    "id": "chameleon-m14-bh",
+    "name": "Chameleon - M14 (BH)",
+    "type": "side",
+    "giver": "Banshee",
+    "objectives": [],
+    "reward_text": "",
+    "description": "Chameleon weapon modification task from Banshee."
+  },
+  {
+    "id": "chameleon-m700-gc",
+    "name": "Chameleon - M700 (GC)",
+    "type": "side",
+    "giver": "Banshee",
+    "objectives": [],
+    "reward_text": "",
+    "description": "Chameleon weapon modification task from Banshee."
+  },
+  {
+    "id": "chameleon-mossberg-590-rt",
+    "name": "Chameleon - Mossberg 590 (RT)",
+    "type": "side",
+    "giver": "Gunny",
+    "objectives": [],
+    "reward_text": "",
+    "description": "Chameleon weapon modification task from Gunny."
+  },
+  {
+    "id": "chameleon-mp7a2-sc",
+    "name": "Chameleon - MP7A2 (SC)",
+    "type": "side",
+    "giver": "Banshee",
+    "objectives": [],
+    "reward_text": "",
+    "description": "Chameleon weapon modification task from Banshee."
+  },
+  {
+    "id": "chameleon-sig-mcx-gn",
+    "name": "Chameleon - SIG MCX (GN)",
+    "type": "side",
+    "giver": "Banshee",
+    "objectives": [],
+    "reward_text": "",
+    "description": "Chameleon weapon modification task from Banshee."
+  },
+  {
+    "id": "chameleon-svd-dragunov-sw",
+    "name": "Chameleon - SVD Dragunov (SW)",
+    "type": "side",
+    "giver": "Artisan",
+    "objectives": [],
+    "reward_text": "",
+    "description": "Chameleon weapon modification task from Artisan."
+  },
+  {
+    "id": "crime-doesnt-pay",
+    "name": "Crime Doesn't Pay",
+    "type": "side",
+    "giver": "Artisan",
+    "objectives": [
+      "Retrieve the stolen shipment manifest from Tiger Bay and report back to Artisan",
+      "Locate the shipment manifest"
+    ],
+    "reward_text": "400 Exp, +200 Reputation with Artisan, $1,880 USD",
+    "description": "The LAF are stealing supplies meant for civilians. Retrieve the stolen shipment manifest from Tiger Bay and report back to Artisan."
+  },
+  {
+    "id": "deepest-darkest-fantasies",
+    "name": "Deepest, Darkest Fantasies",
+    "type": "side",
+    "giver": "Handshake",
+    "objectives": [
+      "Retrieve the incriminating photos from the Midnight Sapphire Hotel and report back to Handshake",
+      "Locate the photos"
+    ],
+    "reward_text": "600 Exp, +360 Reputation with Handshake (+200 after first completion), $1,880 USD",
+    "description": "A powerful politician's private photos are hidden at the Midnight Sapphire Hotel. Retrieve them before they fall into the wrong hands."
+  },
+  {
+    "id": "delayed-package",
+    "name": "Delayed Package",
+    "type": "side",
+    "giver": "Turncoat",
+    "objectives": [
+      "Retrieve the package from the cement factory in Tiger Bay and report back to Turncoat",
+      "Locate the package"
+    ],
+    "reward_text": "400 Exp, +200 Reputation with Turncoat, $1,880 USD",
+    "description": "A package that was meant for Turncoat has been delayed somewhere in Tiger Bay. Find it and bring it back."
+  },
+  {
+    "id": "dirt-digger",
+    "name": "Dirt Digger",
+    "type": "side",
+    "giver": "Banshee",
+    "objectives": [
+      "Retrieve the buried documents from the Midnight Sapphire Hotel and report back to Banshee",
+      "Locate the documents"
+    ],
+    "reward_text": "600 Exp, +360 Reputation with Banshee, $1,880 USD",
+    "description": "Someone has buried compromising documents at Midnight Sapphire. Find and retrieve them for Banshee."
+  },
+  {
+    "id": "dont-speak",
+    "name": "Don't Speak",
+    "type": "side",
+    "giver": "Artisan",
+    "objectives": [
+      "Eliminate the LAF informant in Tiger Bay and retrieve the information",
+      "Locate the informant"
+    ],
+    "reward_text": "600 Exp, +360 Reputation with Artisan, $1,880 USD",
+    "description": "An LAF informant in Tiger Bay has information that could compromise Artisan's network. Silence them."
+  },
+  {
+    "id": "double-agent",
+    "name": "Double Agent",
+    "type": "side",
+    "giver": "Turncoat",
+    "objectives": [
+      "Deliver the false documents to the LAF commander at Fort Narith",
+      "Locate the LAF commander's office"
+    ],
+    "reward_text": "400 Exp, +200 Reputation with Turncoat, $1,880 USD",
+    "description": "Turncoat has prepared false documents to be planted on an LAF commander at Fort Narith."
+  },
+  {
+    "id": "draw-no-bet",
+    "name": "Draw No Bet",
+    "type": "side",
+    "giver": "Artisan",
+    "objectives": [
+      "Retrieve the betting records from the Midnight Sapphire Hotel and report back to Artisan",
+      "Locate the records"
+    ],
+    "reward_text": "300 Exp, +170 Reputation with Artisan, $870 USD",
+    "description": "Find the betting records at Midnight Sapphire that can expose the illegal gambling operation."
+  },
+  {
+    "id": "duty-to-the-country",
+    "name": "Duty to the Country",
+    "type": "side",
+    "giver": "Lab Rat",
+    "objectives": [
+      "Find out what happened to the LAF officer's family and report back to Lab Rat",
+      "Search the officer's quarters at Fort Narith"
+    ],
+    "reward_text": "400 Exp, +200 Reputation with Lab Rat, $1,880 USD",
+    "description": "An LAF officer's family went missing during the evacuation. Find out what happened to them."
+  },
+  {
+    "id": "echoes-of-exposure",
+    "name": "Echoes of Exposure",
+    "type": "side",
+    "giver": "Lab Rat",
+    "objectives": [
+      "Find out what happened in the village and report back to Lab Rat",
+      "Investigate the village"
+    ],
+    "reward_text": "300 Exp, +170 Reputation with Lab Rat, $870 USD",
+    "description": "An entire village near Pha Lang Airfield has been exposed to unknown substances. Investigate and report back."
+  },
+  {
+    "id": "elderly-delivery",
+    "name": "Elderly Delivery",
+    "type": "side",
+    "giver": "Lab Rat",
+    "objectives": [
+      "Deliver the medication to the elderly couple in Nam Thaven",
+      "Collect the medication from Lab Rat"
+    ],
+    "reward_text": "300 Exp, +255 Reputation with Lab Rat, $870 USD",
+    "description": "An elderly couple in Nam Thaven has run out of their vital medication. Deliver the supplies to them."
+  },
+  {
+    "id": "emergency-response",
+    "name": "Emergency Response",
+    "type": "side",
+    "giver": "Lab Rat",
+    "objectives": [
+      "Respond to the emergency call from the UNLRA camp in Tiger Bay",
+      "Provide medical assistance at the UNLRA camp"
+    ],
+    "reward_text": "300 Exp, +170 Reputation with Lab Rat, $870 USD",
+    "description": "The UNLRA camp in Tiger Bay has sent out an emergency medical call. Respond and help."
+  },
+  {
+    "id": "eod",
+    "name": "EOD",
+    "type": "side",
+    "giver": "Banshee",
+    "objectives": [
+      "Disable the explosives at the Sawmill and report back to Banshee",
+      "Locate the explosives"
+    ],
+    "reward_text": "400 Exp, +200 Reputation with Banshee, $1,880 USD",
+    "description": "Banshee has intel that explosives have been planted at the Sawmill. Disable them."
+  },
+  {
+    "id": "exodus",
+    "name": "Exodus",
+    "type": "side",
+    "giver": "Lab Rat",
+    "objectives": [
+      "Help evacuate the remaining civilians from the conflict zone",
+      "Escort the civilians to the evacuation point"
+    ],
+    "reward_text": "400 Exp, +200 Reputation with Lab Rat, $1,880 USD",
+    "description": "There are still civilians trapped in the conflict zone. Help evacuate them to safety."
+  },
+  {
+    "id": "false-positive",
+    "name": "False Positive",
+    "type": "side",
+    "giver": "Lab Rat",
+    "objectives": [
+      "Investigate the reported outbreak at the village near Blue Lagoon",
+      "Collect samples from the affected area"
+    ],
+    "reward_text": "300 Exp, +170 Reputation with Lab Rat, $870 USD",
+    "description": "A reported disease outbreak near Blue Lagoon may be a false alarm. Investigate and confirm."
+  },
+  {
+    "id": "felony-and-punishment",
+    "name": "Felony and Punishment",
+    "type": "side",
+    "giver": "Banshee",
+    "objectives": [
+      "Retrieve the evidence of police brutality from Fort Narith and report back to Banshee",
+      "Locate the evidence"
+    ],
+    "reward_text": "400 Exp, +200 Reputation with Banshee, $1,880 USD",
+    "description": "Evidence of police brutality by the LAF has been hidden at Fort Narith. Retrieve it for Banshee."
+  },
+  {
+    "id": "final-check-out",
+    "name": "Final Check Out",
+    "type": "side",
+    "giver": "Handshake",
+    "objectives": [
+      "Clear the hotel of hostiles and secure the documents",
+      "Neutralize hostiles at the Midnight Sapphire Hotel"
+    ],
+    "reward_text": "400 Exp, +200 Reputation with Handshake, $1,880 USD",
+    "description": "The Midnight Sapphire Hotel has been overrun. Clear it out and secure any remaining documents."
+  },
+  {
+    "id": "fire-and-water",
+    "name": "Fire and Water",
+    "type": "side",
+    "giver": "Gunny",
+    "objectives": [
+      "Retrieve the weapons from the sunken boat at Blue Lagoon and report back to Gunny",
+      "Locate the sunken weapons"
+    ],
+    "reward_text": "400 Exp, +200 Reputation with Gunny, $1,880 USD",
+    "description": "A weapons shipment was lost when a boat sank at Blue Lagoon. Recover the weapons."
+  },
+  {
+    "id": "freedom-fighter",
+    "name": "Freedom Fighter",
+    "type": "side",
+    "giver": "Gunny",
+    "objectives": [
+      "Eliminate the LAF commander at Tiger Bay and report back to Gunny",
+      "Locate the commander"
+    ],
+    "reward_text": "400 Exp, +200 Reputation with Gunny, $1,880 USD",
+    "description": "An LAF commander in Tiger Bay has been responsible for numerous atrocities. Eliminate them."
+  },
+  {
+    "id": "freedom-for-all",
+    "name": "Freedom for All",
+    "type": "side",
+    "giver": "Artisan",
+    "objectives": [
+      "Free the political prisoners from Fort Narith and report back to Artisan",
+      "Locate the prison block"
+    ],
+    "reward_text": "600 Exp, +360 Reputation with Artisan, $1,880 USD",
+    "description": "Political prisoners are being held at Fort Narith. Artisan wants them freed."
+  },
+  {
+    "id": "from-the-sky",
+    "name": "From the Sky",
+    "type": "side",
+    "giver": "Gunny",
+    "objectives": [
+      "Investigate the crashed helicopter near Ban Pa and report back to Gunny",
+      "Retrieve the black box",
+      "Locate the crash site"
+    ],
+    "reward_text": "400 Exp, +200 Reputation with Gunny, $1,880 USD",
+    "description": "A helicopter was shot down near Ban Pa. Investigate the crash site and retrieve the black box."
+  },
+  {
+    "id": "handyman",
+    "name": "Handyman",
+    "type": "side",
+    "giver": "Artisan",
+    "objectives": [
+      "Repair the generator at the UNLRA camp in Tiger Bay",
+      "Find the required parts for the generator"
+    ],
+    "reward_text": "300 Exp, +170 Reputation with Artisan, $870 USD",
+    "description": "The generator at the UNLRA camp in Tiger Bay has broken down. Find parts and repair it."
+  },
+  {
+    "id": "hoarder",
+    "name": "Hoarder",
+    "type": "side",
+    "giver": "Gunny",
+    "objectives": [
+      "Clear out the hostile camp at Hunter's Paradise and secure the supplies",
+      "Eliminate hostiles at the camp"
+    ],
+    "reward_text": "400 Exp, +200 Reputation with Gunny, $1,880 USD",
+    "description": "A hostile group has been hoarding supplies at Hunter's Paradise. Clear them out and secure the supplies."
+  },
+  {
+    "id": "in-the-trenches",
+    "name": "In the Trenches",
+    "type": "side",
+    "giver": "Turncoat",
+    "objectives": [
+      "Scout the LAF trench system near Fort Narith and report back to Turncoat",
+      "Mark the trench positions on the map"
+    ],
+    "reward_text": "300 Exp, +170 Reputation with Turncoat, $870 USD",
+    "description": "The LAF has dug extensive trench systems near Fort Narith. Scout and mark their positions."
+  },
+  {
+    "id": "last-farewell",
+    "name": "Last Farewell",
+    "type": "side",
+    "giver": "Gunny",
+    "objectives": [
+      "Find the body of the fallen soldier at Midnight Sapphire Golf Course and report back to Gunny",
+      "Mark the soldier's location"
+    ],
+    "reward_text": "400 Exp, +200 Reputation with Gunny (+170 after first completion), $1,880 USD",
+    "description": "A soldier from Gunny's unit fell during the evacuation. Find his body at the Midnight Sapphire Golf Course so he can be given a proper burial."
+  },
+  {
+    "id": "last-letter",
+    "name": "Last Letter",
+    "type": "side",
+    "giver": "Artisan",
+    "objectives": [
+      "Deliver the last letter from a fallen soldier to his family in Nam Thaven",
+      "Find the family's location"
+    ],
+    "reward_text": "300 Exp, +170 Reputation with Artisan, $870 USD",
+    "description": "A fallen soldier's last letter needs to be delivered to his family in Nam Thaven."
+  },
+  {
+    "id": "leave-no-man-behind",
+    "name": "Leave No Man Behind",
+    "type": "side",
+    "giver": "Gunny",
+    "objectives": [
+      "Find the missing PMC squad near Blue Lagoon and report back to Gunny",
+      "Search the area around Blue Lagoon"
+    ],
+    "reward_text": "400 Exp, +200 Reputation with Gunny, $1,880 USD",
+    "description": "A PMC squad went missing near Blue Lagoon. Find out what happened to them."
+  },
+  {
+    "id": "left-behind",
+    "name": "Left Behind",
+    "type": "side",
+    "giver": "Handshake",
+    "objectives": [
+      "Find the missing tourists at the Midnight Sapphire Golf Course and report back to Handshake",
+      "Search the golf course area"
+    ],
+    "reward_text": "300 Exp, +170 Reputation with Handshake, $870 USD",
+    "description": "A group of tourists was left behind during the evacuation and was last seen at the Midnight Sapphire Golf Course."
+  },
+  {
+    "id": "lethal-dose",
+    "name": "Lethal Dose",
+    "type": "side",
+    "giver": "Lab Rat",
+    "objectives": [
+      "Collect venom samples from the snake nests near Ban Pa and bring them to Lab Rat",
+      "Locate the snake nests"
+    ],
+    "reward_text": "300 Exp, +170 Reputation with Lab Rat, $870 USD",
+    "description": "Lab Rat needs venom samples for antivenom production. Collect them from snake nests near Ban Pa."
+  },
+  {
+    "id": "like-a-boss-brokers-m9a1",
+    "name": "Like a Boss - Broker's M9A1",
+    "type": "side",
+    "giver": "Gunny",
+    "objectives": [
+      "Eliminate Broker at Fort Narith and retrieve his custom M9A1",
+      "Locate Broker"
+    ],
+    "reward_text": "Exp, Reputation with Gunny, Unlocks purchase of Broker's M9A1",
+    "description": "Eliminate Broker, a high-value target at Fort Narith, and bring back his custom M9A1 pistol."
+  },
+  {
+    "id": "like-a-boss-burans-ak-74n",
+    "name": "Like a Boss - Buran's AK-74N",
+    "type": "side",
+    "giver": "Turncoat",
+    "objectives": [
+      "Eliminate Buran at Fort Narith and retrieve his custom AK-74N",
+      "Locate Buran"
+    ],
+    "reward_text": "Exp, Reputation with Turncoat, Unlocks purchase of Buran's AK-74N",
+    "description": "Eliminate Buran, a high-value target, and bring back his custom AK-74N."
+  },
+  {
+    "id": "like-a-boss-colonels-type-51",
+    "name": "Like a Boss - Colonel's Type 51",
+    "type": "side",
+    "giver": "Artisan",
+    "objectives": [
+      "Eliminate the Colonel and retrieve his custom Type 51",
+      "Locate the Colonel"
+    ],
+    "reward_text": "Exp, Reputation with Artisan, Unlocks purchase of Colonel's Type 51",
+    "description": "Eliminate the Colonel and bring back his custom Type 51 pistol."
+  },
+  {
+    "id": "like-a-boss-firebrands-aks-74u",
+    "name": "Like a Boss - Firebrand's AKS-74u",
+    "type": "side",
+    "giver": "Turncoat",
+    "objectives": [
+      "Eliminate Firebrand at the Sawmill and retrieve his custom AKS-74u",
+      "Locate Firebrand"
+    ],
+    "reward_text": "Exp, Reputation with Turncoat, Unlocks purchase of Firebrand's AKS-74u",
+    "description": "Eliminate Firebrand and bring back his custom AKS-74u."
+  },
+  {
+    "id": "like-a-boss-grins-1911-c",
+    "name": "Like a Boss - Grin's 1911 C",
+    "type": "side",
+    "giver": "Vulture",
+    "objectives": [
+      "Eliminate Grin and retrieve his custom 1911 C",
+      "Locate Grin"
+    ],
+    "reward_text": "Exp, Reputation with Vulture, Unlocks purchase of Grin's 1911 C",
+    "description": "Eliminate Grin and bring back his custom Colt 1911 Commander."
+  },
+  {
+    "id": "like-a-boss-kapteis-glock-17",
+    "name": "Like a Boss - Kaptei's Glock 17",
+    "type": "side",
+    "giver": "Gunny",
+    "objectives": [
+      "Eliminate Kaptei at Blue Lagoon and retrieve his custom Glock 17",
+      "Locate Kaptei"
+    ],
+    "reward_text": "Exp, Reputation with Gunny, Unlocks purchase of Kaptei's Glock 17",
+    "description": "Eliminate Kaptei and bring back his custom Glock 17."
+  },
+  {
+    "id": "like-a-boss-nagas-type-51",
+    "name": "Like a Boss - Naga's Type 51",
+    "type": "side",
+    "giver": "Artisan",
+    "objectives": [
+      "Eliminate Naga and retrieve his custom Type 51",
+      "Locate Naga"
+    ],
+    "reward_text": "Exp, Reputation with Artisan, Unlocks purchase of Naga's Type 51",
+    "description": "Eliminate Naga and bring back his custom Type 51."
+  },
+  {
+    "id": "like-a-boss-vipers-1911-c",
+    "name": "Like a Boss - Viper's 1911 C",
+    "type": "side",
+    "giver": "Vulture",
+    "objectives": [
+      "Secure the drop-off box",
+      "Retrieve the key from a parked car east of Pha Lang Airfield",
+      "Place the briefcase inside the drop-off box at the remote hangars",
+      "Retrieve the briefcase from Na Xieng Farms"
+    ],
+    "reward_text": "150 Exp, +105 Reputation with Vulture, $370 USD, Unlocks Viper's Colt 1911 Commander at Vulture R.1",
+    "description": "Locate two hidden code fragments to access a locked site at Na Xieng Farms, find a briefcase inside, and deliver it to the remote hangars at Pha Lang Airfield."
+  },
+  {
+    "id": "like-a-boss-yens-m700",
+    "name": "Like a Boss - Yen's M700",
+    "type": "side",
+    "giver": "Banshee",
+    "objectives": [
+      "Eliminate Yen at Hunter's Paradise and retrieve his custom M700",
+      "Locate Yen"
+    ],
+    "reward_text": "Exp, Reputation with Banshee, Unlocks purchase of Yen's M700",
+    "description": "Eliminate Yen and bring back his custom M700 sniper rifle."
+  },
+  {
+    "id": "livestock",
+    "name": "Livestock",
+    "type": "side",
+    "giver": "Banshee",
+    "objectives": [
+      "Investigate the human trafficking operation at Tiger Bay and report back to Banshee",
+      "Search the port area"
+    ],
+    "reward_text": "600 Exp, +360 Reputation with Banshee, $1,880 USD",
+    "description": "Reports of human trafficking at the Tiger Bay port. Investigate and report back to Banshee."
+  },
+  {
+    "id": "local-golf-star",
+    "name": "Local Golf Star",
+    "type": "side",
+    "giver": "Turncoat",
+    "objectives": [
+      "Retrieve the golf trophy from the Midnight Sapphire Golf Course and report back to Turncoat",
+      "Locate the trophy"
+    ],
+    "reward_text": "300 Exp, +170 Reputation with Turncoat, $870 USD",
+    "description": "A valuable golf trophy is somewhere on the Midnight Sapphire Golf Course. Retrieve it for Turncoat."
+  },
+  {
+    "id": "lost-and-found",
+    "name": "Lost and Found",
+    "type": "side",
+    "giver": "Artisan",
+    "objectives": [
+      "Find the missing UNLRA supply shipment near Tiger Bay and report back to Artisan",
+      "Search the area around Tiger Bay"
+    ],
+    "reward_text": "400 Exp, +200 Reputation with Artisan, $1,880 USD",
+    "description": "A UNLRA supply shipment went missing near Tiger Bay. Find it and report back to Artisan."
+  },
+  {
+    "id": "medical-detective",
+    "name": "Medical Detective",
+    "type": "side",
+    "giver": "Gunny",
+    "objectives": [
+      "Investigate the field hospital at Fort Narith and report back to Gunny",
+      "Search the hospital for intel"
+    ],
+    "reward_text": "300 Exp, +170 Reputation with Gunny, $870 USD",
+    "description": "A field hospital at Fort Narith may hold clues about the LAF's activities. Investigate it."
+  },
+  {
+    "id": "meds-wanted",
+    "name": "Meds Wanted",
+    "type": "side",
+    "giver": "Lab Rat",
+    "objectives": [
+      "Retrieve the medical supplies from Tiger Bay and bring them to Lab Rat",
+      "Locate the medical supplies"
+    ],
+    "reward_text": "300 Exp, +170 Reputation with Lab Rat, $870 USD",
+    "description": "Medical supplies are desperately needed. Retrieve them from Tiger Bay for Lab Rat."
+  },
+  {
+    "id": "mire-job",
+    "name": "Mire Job",
+    "type": "side",
+    "giver": "Handshake",
+    "objectives": [
+      "Extract the informant from the swamp near Blue Lagoon and report back to Handshake",
+      "Locate the informant's hiding spot"
+    ],
+    "reward_text": "400 Exp, +200 Reputation with Handshake, $1,880 USD",
+    "description": "An informant is hiding in the swamp near Blue Lagoon. Extract them safely."
+  },
+  {
+    "id": "missing-children",
+    "name": "Missing Children",
+    "type": "side",
+    "giver": "Handshake",
+    "objectives": [
+      "Find the missing children from Kiu Vongsa and report back to Handshake",
+      "Search Kiu Vongsa and surrounding areas"
+    ],
+    "reward_text": "600 Exp, +360 Reputation with Handshake, $1,880 USD",
+    "description": "Several children from Kiu Vongsa have gone missing. Find them and bring them back safely."
+  },
+  {
+    "id": "new-neighbors",
+    "name": "New Neighbors",
+    "type": "side",
+    "giver": "Handshake",
+    "objectives": [
+      "Investigate the new hostile group near Nam Thaven and report back to Handshake",
+      "Scout their camp"
+    ],
+    "reward_text": "300 Exp, +170 Reputation with Handshake, $870 USD",
+    "description": "A new hostile group has set up camp near Nam Thaven. Scout their position and report back."
+  },
+  {
+    "id": "no-way-up",
+    "name": "No Way Up",
+    "type": "side",
+    "giver": "Gunny",
+    "objectives": [
+      "Clear the roadblock near the airfield and report back to Gunny",
+      "Eliminate hostiles at the roadblock"
+    ],
+    "reward_text": "300 Exp, +170 Reputation with Gunny, $870 USD",
+    "description": "A roadblock near Pha Lang Airfield is preventing supply movement. Clear it."
+  },
+  {
+    "id": "noble-powder",
+    "name": "Noble Powder",
+    "type": "side",
+    "giver": "Banshee",
+    "objectives": [
+      "Retrieve the drugs from the Midnight Sapphire employee housing and report back to Banshee",
+      "Locate the drugs"
+    ],
+    "reward_text": "600 Exp, +360 Reputation with Banshee, $1,880 USD",
+    "description": "Drugs are being stored in the employee housing at Midnight Sapphire. Retrieve them for Banshee."
+  },
+  {
+    "id": "ordnance-delivery",
+    "name": "Ordnance Delivery",
+    "type": "side",
+    "giver": "Gunny",
+    "objectives": [
+      "Deliver the ordnance to the forward operating base near YBL-1",
+      "Retrieve the ordnance from the supply cache"
+    ],
+    "reward_text": "400 Exp, +200 Reputation with Gunny, $1,880 USD",
+    "description": "Ordnance needs to be delivered to the forward operating base near YBL-1."
+  },
+  {
+    "id": "paranoia-agent",
+    "name": "Paranoia Agent",
+    "type": "side",
+    "giver": "Gunny",
+    "objectives": [
+      "Investigate the abandoned LAF listening post near Fort Narith and report back to Gunny",
+      "Search the listening post for intel"
+    ],
+    "reward_text": "300 Exp, +170 Reputation with Gunny, $870 USD",
+    "description": "An abandoned LAF listening post near Fort Narith may contain valuable intelligence."
+  },
+  {
+    "id": "plan-b",
+    "name": "Plan B",
+    "type": "side",
+    "giver": "Handshake",
+    "objectives": [
+      "Retrieve the backup plans from the safe house in Tiger Bay and report back to Handshake",
+      "Locate the safe house"
+    ],
+    "reward_text": "400 Exp, +200 Reputation with Handshake, $1,880 USD",
+    "description": "Backup contingency plans are stored in a safe house in Tiger Bay. Retrieve them."
+  },
+  {
+    "id": "priceless-possessions",
+    "name": "Priceless Possessions",
+    "type": "side",
+    "giver": "Handshake",
+    "objectives": [
+      "Recover the stolen valuables from the museum at Midnight Sapphire and report back to Handshake",
+      "Locate the valuables"
+    ],
+    "reward_text": "400 Exp, +200 Reputation with Handshake, $1,880 USD",
+    "description": "Valuable items were stolen from the museum at Midnight Sapphire. Recover them."
+  },
+  {
+    "id": "questionable-shipment",
+    "name": "Questionable Shipment",
+    "type": "side",
+    "giver": "Gunny",
+    "objectives": [
+      "Investigate the suspicious shipment at Tiger Bay port and report back to Gunny",
+      "Search the shipping containers"
+    ],
+    "reward_text": "400 Exp, +200 Reputation with Gunny, $1,880 USD",
+    "description": "A suspicious shipment has arrived at Tiger Bay port. Investigate its contents."
+  },
+  {
+    "id": "revolutionary-road",
+    "name": "Revolutionary Road",
+    "type": "side",
+    "giver": "Handshake",
+    "objectives": [
+      "Scout the LLA checkpoint on the road to Ban Pa and report back to Handshake",
+      "Mark the checkpoint location"
+    ],
+    "reward_text": "300 Exp, +170 Reputation with Handshake, $870 USD",
+    "description": "The LLA has set up a checkpoint on the road to Ban Pa. Scout and report its location."
+  },
+  {
+    "id": "sanctioned-exploitation",
+    "name": "Sanctioned Exploitation",
+    "type": "side",
+    "giver": "Banshee",
+    "objectives": [
+      "Retrieve evidence of sanctioned exploitation from the government building in Tiger Bay",
+      "Locate the evidence"
+    ],
+    "reward_text": "600 Exp, +360 Reputation with Banshee, $1,880 USD",
+    "description": "Evidence of government-sanctioned exploitation is hidden in the government building in Tiger Bay."
+  },
+  {
+    "id": "secret-compassion",
+    "name": "Secret Compassion",
+    "type": "side",
+    "giver": "Artisan",
+    "objectives": [
+      "Deliver the secret aid package to the village near Pha Lang without being detected",
+      "Retrieve the aid package from Artisan"
+    ],
+    "reward_text": "400 Exp, +200 Reputation with Artisan, $1,880 USD",
+    "description": "A village near Pha Lang is in desperate need of supplies. Deliver the aid package secretly."
+  },
+  {
+    "id": "silent-village",
+    "name": "Silent Village",
+    "type": "side",
+    "giver": "Artisan",
+    "objectives": [
+      "Investigate the silent village near Ban Pa and report back to Artisan",
+      "Search the village for survivors"
+    ],
+    "reward_text": "300 Exp, +170 Reputation with Artisan, $870 USD",
+    "description": "A village near Ban Pa has gone completely silent. Investigate what happened."
+  },
+  {
+    "id": "so-close",
+    "name": "So Close",
+    "type": "side",
+    "giver": "Lab Rat",
+    "objectives": [
+      "Retrieve the research samples from the lab at YBL-1 and report back to Lab Rat",
+      "Locate the samples"
+    ],
+    "reward_text": "400 Exp, +200 Reputation with Lab Rat, $1,880 USD",
+    "description": "Research samples were left behind during the evacuation of YBL-1. Retrieve them."
+  },
+  {
+    "id": "street-spotter",
+    "name": "Street Spotter",
+    "type": "side",
+    "giver": "Gunny",
+    "objectives": [
+      "Scout the LAF vehicle depot in Tiger Bay and report back to Gunny",
+      "Mark the vehicle positions"
+    ],
+    "reward_text": "300 Exp, +170 Reputation with Gunny, $870 USD",
+    "description": "The LAF has a vehicle depot in Tiger Bay. Scout and report their vehicle positions."
+  },
+  {
+    "id": "sunken-bird",
+    "name": "Sunken Bird",
+    "type": "side",
+    "giver": "Gunny",
+    "objectives": [
+      "Retrieve the weapons from the crashed plane near Pha Lang and report back to Gunny",
+      "Locate the crash site"
+    ],
+    "reward_text": "400 Exp, +200 Reputation with Gunny, $1,880 USD",
+    "description": "A plane carrying weapons crashed near Pha Lang. Retrieve the weapons before they fall into the wrong hands."
+  },
+  {
+    "id": "sunny-skies",
+    "name": "Sunny Skies",
+    "type": "side",
+    "giver": "Banshee",
+    "objectives": [
+      "Photograph the LAF air defense positions at Pha Lang Airfield and report back to Banshee",
+      "Mark the air defense positions"
+    ],
+    "reward_text": "400 Exp, +200 Reputation with Banshee, $1,880 USD",
+    "description": "Banshee needs the positions of LAF air defense at Pha Lang Airfield documented."
+  },
+  {
+    "id": "the-congressman",
+    "name": "The Congressman",
+    "type": "side",
+    "giver": "Handshake",
+    "objectives": [
+      "Find the missing congressman at Midnight Sapphire and report back to Handshake",
+      "Search the hotel for clues"
+    ],
+    "reward_text": "600 Exp, +360 Reputation with Handshake, $1,880 USD",
+    "description": "A congressman went missing at Midnight Sapphire. Find out what happened to him."
+  },
+  {
+    "id": "the-lull",
+    "name": "The Lull",
+    "type": "side",
+    "giver": "Gunny",
+    "objectives": [
+      "Investigate why LAF activity has decreased near Fort Narith and report back to Gunny",
+      "Scout the area for LAF movements"
+    ],
+    "reward_text": "300 Exp, +170 Reputation with Gunny, $870 USD",
+    "description": "LAF activity has decreased significantly near Fort Narith. Investigate the reason for this lull."
+  },
+  {
+    "id": "the-stand",
+    "name": "The Stand",
+    "type": "side",
+    "giver": "Gunny",
+    "objectives": [
+      "Hold the defensive position near Blue Lagoon against LAF attacks",
+      "Eliminate attacking LAF forces"
+    ],
+    "reward_text": "400 Exp, +200 Reputation with Gunny, $1,880 USD",
+    "description": "The LAF is mounting an attack near Blue Lagoon. Hold the defensive position."
+  },
+  {
+    "id": "too-close-to-the-sun",
+    "name": "Too Close to the Sun",
+    "type": "side",
+    "giver": "Lab Rat",
+    "objectives": [
+      "Investigate the radiation hotspot near YBL-1 and report back to Lab Rat",
+      "Take radiation readings at the site"
+    ],
+    "reward_text": "400 Exp, +200 Reputation with Lab Rat, $1,880 USD",
+    "description": "A radiation hotspot has been detected near YBL-1. Investigate and report back to Lab Rat."
+  },
+  {
+    "id": "tools-of-the-trade",
+    "name": "Tools of the Trade",
+    "type": "side",
+    "giver": "Artisan",
+    "objectives": [
+      "Retrieve the tools from the workshop in Tiger Bay and report back to Artisan",
+      "Locate the workshop"
+    ],
+    "reward_text": "300 Exp, +170 Reputation with Artisan, $870 USD",
+    "description": "Specialized tools were left behind in a workshop in Tiger Bay. Retrieve them for Artisan."
+  },
+  {
+    "id": "true-grit",
+    "name": "True Grit",
+    "type": "side",
+    "giver": "Handshake",
+    "objectives": [
+      "Survive the gauntlet through hostile territory and reach the extraction point near Hunter's Paradise",
+      "Navigate through hostile territory"
+    ],
+    "reward_text": "400 Exp, +200 Reputation with Handshake, $1,880 USD",
+    "description": "A dangerous route through hostile territory needs to be navigated to reach the extraction point."
+  },
+  {
+    "id": "unattainable-luxury",
+    "name": "Unattainable Luxury",
+    "type": "side",
+    "giver": "Handshake",
+    "objectives": [
+      "Retrieve the luxury items from the Midnight Sapphire boutique and report back to Handshake",
+      "Locate the boutique"
+    ],
+    "reward_text": "400 Exp, +200 Reputation with Handshake, $1,880 USD",
+    "description": "Valuable luxury items were left behind at the Midnight Sapphire boutique. Retrieve them."
+  },
+  {
+    "id": "unprotected",
+    "name": "Unprotected",
+    "type": "side",
+    "giver": "Lab Rat",
+    "objectives": [
+      "Find the missing UNLRA protection detail near Tiger Bay and report back",
+      "Search for the protection detail"
+    ],
+    "reward_text": "300 Exp, +170 Reputation, $870 USD",
+    "description": "A UNLRA protection detail has gone missing near Tiger Bay. Find out what happened."
+  },
+  {
+    "id": "unresponsive",
+    "name": "Unresponsive",
+    "type": "side",
+    "giver": "Gunny",
+    "objectives": [
+      "Check on the unresponsive patrol near Fort Narith and report back to Gunny",
+      "Locate the patrol's last known position"
+    ],
+    "reward_text": "300 Exp, +170 Reputation with Gunny, $870 USD",
+    "description": "A patrol near Fort Narith has gone unresponsive. Check on their status."
+  },
+  {
+    "id": "up-the-stream",
+    "name": "Up the Stream",
+    "type": "side",
+    "giver": "Lab Rat",
+    "objectives": [
+      "Collect water samples from the river near Ban Pa and bring them to Lab Rat",
+      "Take samples from multiple points along the river"
+    ],
+    "reward_text": "300 Exp, +170 Reputation with Lab Rat, $870 USD",
+    "description": "Lab Rat needs water samples from the river near Ban Pa to test for contamination."
+  },
+  {
+    "id": "up-to-snuff",
+    "name": "Up to Snuff",
+    "type": "side",
+    "giver": "Handshake",
+    "objectives": [
+      "Inspect the checkpoint at Hunter's Paradise and report back to Handshake",
+      "Check the checkpoint status"
+    ],
+    "reward_text": "300 Exp, +170 Reputation with Handshake, $870 USD",
+    "description": "A checkpoint at Hunter's Paradise needs to be inspected to ensure it's up to standard."
+  },
+  {
+    "id": "what-comes-up",
+    "name": "What Comes Up",
+    "type": "side",
+    "giver": "Handshake",
+    "objectives": [
+      "Investigate the crashed satellite near Pha Lang and report back to Handshake",
+      "Locate the crash site"
+    ],
+    "reward_text": "400 Exp, +200 Reputation with Handshake, $1,880 USD",
+    "description": "A satellite has crashed near Pha Lang. Investigate the crash site and retrieve any useful components."
+  },
+  {
+    "id": "when-a-tree-falls",
+    "name": "When a Tree Falls",
+    "type": "side",
+    "giver": "Artisan",
+    "objectives": [
+      "Investigate the logging operation at the Sawmill and report back to Artisan",
+      "Search the Sawmill for evidence of illegal logging"
+    ],
+    "reward_text": "300 Exp, +170 Reputation with Artisan, $870 USD",
+    "description": "An illegal logging operation at the Sawmill may be funding hostile groups. Investigate it."
+  },
+  {
+    "id": "a-walk-in-the-park",
+    "name": "A Walk in the Park",
+    "type": "main",
+    "giver": "Handshake",
+    "objectives": [
+      "Scout Hunter's Paradise and report back to Handshake",
+      "Mark the points of interest on the map"
+    ],
+    "reward_text": "300 Exp, +750 Reputation with Handshake, $2,820 USD",
+    "description": "Scout Hunter's Paradise and report on the current situation."
+  },
+  {
+    "id": "big-fish",
+    "name": "Big Fish",
+    "type": "main",
+    "giver": "Handshake",
+    "objectives": [
+      "Eliminate the high-value LAF commander at Fort Narith",
+      "Locate the commander"
+    ],
+    "reward_text": "600 Exp, +750 Reputation with Handshake, $2,820 USD",
+    "description": "A high-value LAF commander is stationed at Fort Narith. Eliminate them."
+  },
+  {
+    "id": "business-or-pleasure",
+    "name": "Business or Pleasure",
+    "type": "main",
+    "giver": "Handshake",
+    "objectives": [
+      "Investigate the Midnight Sapphire Resort and determine the true nature of the operation there",
+      "Search for evidence of illegal activities"
+    ],
+    "reward_text": "600 Exp, +500 Reputation with Handshake, $2,820 USD",
+    "description": "The Midnight Sapphire Resort may be a front for illegal activities. Investigate."
+  },
+  {
+    "id": "covert-research",
+    "name": "Covert Research",
+    "type": "main",
+    "giver": "Lab Rat",
+    "objectives": [
+      "Investigate the secret research facility in YBL-1 and report back to Lab Rat",
+      "Retrieve research data from the facility"
+    ],
+    "reward_text": "900 Exp, +750 Reputation with Lab Rat, $2,820 USD",
+    "description": "A secret research facility in YBL-1 may hold the key to understanding the Event."
+  },
+  {
+    "id": "cult-business",
+    "name": "Cult Business",
+    "type": "main",
+    "giver": "Lab Rat",
+    "objectives": [
+      "Investigate the cult activity in Ban Pa and report back to Lab Rat",
+      "Find evidence of cult operations"
+    ],
+    "reward_text": "600 Exp, +500 Reputation with Lab Rat, $2,820 USD",
+    "description": "A mysterious cult is operating in Ban Pa. Investigate their activities."
+  },
+  {
+    "id": "first-recon",
+    "name": "First Recon",
+    "type": "main",
+    "giver": "Handshake",
+    "objectives": [
+      "Scout the area around the LZ and report back to Handshake with intel on enemy positions",
+      "Mark enemy positions on the map"
+    ],
+    "reward_text": "300 Exp, +750 Reputation with Handshake, $2,820 USD",
+    "description": "First reconnaissance mission to scout the LZ and surrounding area."
+  },
+  {
+    "id": "fresh-meat",
+    "name": "Fresh Meat",
+    "type": "main",
+    "giver": "Handshake",
+    "objectives": [
+      "Locate the source of the strange messages coming from Blue Lagoon",
+      "Investigate the Blue Lagoon area"
+    ],
+    "reward_text": "300 Exp, +500 Reputation with Handshake, $2,820 USD",
+    "description": "Strange messages have been coming from Blue Lagoon. Investigate the source."
+  },
+  {
+    "id": "guns-and-ammo",
+    "name": "Guns & Ammo",
+    "type": "main",
+    "giver": "Gunny",
+    "objectives": [
+      "Find out what happened on the road leading up to Hunter's Paradise",
+      "Scout the locations around Hunter's Paradise",
+      "Scout the dumping ground nearby Hunter's Paradise",
+      "Scout the campsite nearby Hunter's Paradise",
+      "Scout the motel nearby Hunter's Paradise",
+      "Investigate the weapon storage at Hunter's Paradise",
+      "Retrieve the note and bring it to Gunny",
+      "Retrieve the folder and bring it to Gunny"
+    ],
+    "reward_text": "900 Exp (600 after first completion), +750 Reputation with Gunny (+500 after first completion), $2,820 USD, 240 5.56x45mm AP (M855A1)",
+    "description": "Investigate Hunter's Paradise to determine what happened to a reported abandoned military truck and whether any weapons remain on site."
+  },
+  {
+    "id": "hacker",
+    "name": "Hacker",
+    "type": "main",
+    "giver": "Handshake",
+    "objectives": [
+      "Hack the LAF communication system at Fort Narith and retrieve intel",
+      "Access the LAF network"
+    ],
+    "reward_text": "600 Exp, +500 Reputation with Handshake, $2,820 USD",
+    "description": "Hack into the LAF communication system at Fort Narith to gather intelligence."
+  },
+  {
+    "id": "helping-hand",
+    "name": "Helping Hand",
+    "type": "main",
+    "giver": "Handshake",
+    "objectives": [
+      "Assist the local resistance fighters near Nam Thaven and report back to Handshake",
+      "Provide support to the resistance"
+    ],
+    "reward_text": "300 Exp, +500 Reputation with Handshake, $2,820 USD",
+    "description": "Local resistance fighters need assistance near Nam Thaven. Provide support."
+  },
+  {
+    "id": "i-went-i-saw-i-conquered",
+    "name": "I went, I saw, I conquered",
+    "type": "main",
+    "giver": "Handshake",
+    "objectives": [
+      "Clear the Sawmill of hostile forces and secure the area",
+      "Eliminate hostiles at the Sawmill"
+    ],
+    "reward_text": "300 Exp, +500 Reputation with Handshake, $2,820 USD",
+    "description": "Clear the Sawmill of hostile forces and secure the area for operations."
+  },
+  {
+    "id": "know-your-enemy",
+    "name": "Know Your Enemy",
+    "type": "main",
+    "giver": "Gunny",
+    "objectives": [
+      "Gather intel on the new hostile faction from captured documents at Fort Narith",
+      "Search for intel in the command center"
+    ],
+    "reward_text": "600 Exp, +500 Reputation with Gunny, $2,820 USD",
+    "description": "A new hostile faction has appeared. Gather intel on them from Fort Narith."
+  },
+  {
+    "id": "little-bird-down",
+    "name": "Little Bird Down",
+    "type": "main",
+    "giver": "Handshake",
+    "objectives": [
+      "Investigate the downed Little Bird helicopter near Ban Pa and report back to Handshake",
+      "Retrieve the black box from the wreckage"
+    ],
+    "reward_text": "600 Exp, +500 Reputation with Handshake, $2,820 USD",
+    "description": "A Little Bird helicopter was shot down near Ban Pa. Investigate and retrieve the black box."
+  },
+  {
+    "id": "lost-girl",
+    "name": "Lost Girl",
+    "type": "main",
+    "giver": "Gunny",
+    "objectives": [
+      "Find the missing girl last seen near Blue Lagoon and report back to Gunny",
+      "Search for clues at Blue Lagoon"
+    ],
+    "reward_text": "300 Exp, +500 Reputation with Gunny, $2,400 USD",
+    "description": "A girl went missing near Blue Lagoon. Find out what happened to her."
+  },
+  {
+    "id": "memory-leak",
+    "name": "Memory Leak",
+    "type": "main",
+    "giver": "Lab Rat",
+    "objectives": [
+      "Retrieve the research data from the crashed helicopter near YBL-1 and report back to Lab Rat",
+      "Locate the crash site"
+    ],
+    "reward_text": "600 Exp, +500 Reputation with Lab Rat, $2,820 USD",
+    "description": "Research data was lost when a helicopter crashed near YBL-1. Retrieve it."
+  },
+  {
+    "id": "mystery-machines",
+    "name": "Mystery Machines",
+    "type": "main",
+    "giver": "Lab Rat",
+    "objectives": [
+      "Locate the research papers",
+      "Disconnect the air filtration system in YBL-1",
+      "Retrieve the air filter from YBL-1 and report back to Lab Rat",
+      "Locate the air filter",
+      "Gather intel from the computers at YBL-1",
+      "Retrieve the data and report back to Lab Rat",
+      "Acquire the data from the computer"
+    ],
+    "reward_text": "900 Exp (600 after first completion), +750 Reputation with Lab Rat (+500 after first completion), $2,820 USD, Small Suture Kit, Medium Blood Bag",
+    "description": "A hut containing mysterious research notes has been discovered. Search the area thoroughly for valuable intel that may clarify the purpose of the project. Focus on secured or locked sections and report your findings to Lab Rat."
+  },
+  {
+    "id": "radio-silence",
+    "name": "Radio Silence",
+    "type": "main",
+    "giver": "Handshake",
+    "objectives": [
+      "Find out why the recon team near Tiger Bay went radio silent and report back to Handshake",
+      "Search for the recon team"
+    ],
+    "reward_text": "300 Exp, +500 Reputation with Handshake, $2,820 USD",
+    "description": "A recon team near Tiger Bay has gone radio silent. Find out what happened."
+  },
+  {
+    "id": "rats-nest",
+    "name": "Rat's Nest",
+    "type": "main",
+    "giver": "Handshake",
+    "objectives": [
+      "Clear out the hostile encampment at the Sawmill and report back to Handshake",
+      "Eliminate all hostiles at the Sawmill"
+    ],
+    "reward_text": "600 Exp, +500 Reputation with Handshake, $2,820 USD",
+    "description": "A hostile encampment at the Sawmill needs to be cleared out."
+  },
+  {
+    "id": "reclamation",
+    "name": "Reclamation",
+    "type": "main",
+    "giver": "Handshake",
+    "objectives": [
+      "Reclaim the captured supply depot near Fort Narith and report back to Handshake",
+      "Secure the supply depot"
+    ],
+    "reward_text": "600 Exp, +500 Reputation with Handshake, $2,820 USD",
+    "description": "A supply depot near Fort Narith has been captured by hostile forces. Reclaim it."
+  },
+  {
+    "id": "seeker-of-change",
+    "name": "Seeker of Change",
+    "type": "main",
+    "giver": "Lab Rat",
+    "objectives": [
+      "Find and document evidence of environmental changes on the island and report back to Lab Rat",
+      "Take samples from various locations"
+    ],
+    "reward_text": "Exp, Reputation with Lab Rat",
+    "description": "Document the environmental changes that have occurred on the island since the Event."
+  },
+  {
+    "id": "skycrawlers",
+    "name": "Skycrawlers",
+    "type": "main",
+    "giver": "Gunny",
+    "objectives": [
+      "Investigate the strange radio signals coming from Pha Lang Airfield and report back to Gunny",
+      "Search the airfield for the source"
+    ],
+    "reward_text": "600 Exp, +500 Reputation with Gunny, $2,820 USD",
+    "description": "Strange radio signals are coming from Pha Lang Airfield. Investigate."
+  },
+  {
+    "id": "terminal-initiative",
+    "name": "Terminal Initiative",
+    "type": "main",
+    "giver": "Handshake",
+    "objectives": [
+      "Hack the LAF database at Fort Narith and download the prisoner list",
+      "Access the LAF mainframe"
+    ],
+    "reward_text": "600 Exp, +500 Reputation with Handshake, $2,820 USD",
+    "description": "Hack the LAF database at Fort Narith to find information about prisoners."
+  },
+  {
+    "id": "the-most-dangerous-game",
+    "name": "The Most Dangerous Game",
+    "type": "main",
+    "giver": "Lab Rat",
+    "objectives": [
+      "Hunt down the rogue PMC operators at Hunter's Paradise and report back to Lab Rat",
+      "Eliminate the rogue operators"
+    ],
+    "reward_text": "900 Exp, +750 Reputation with Lab Rat, $2,820 USD",
+    "description": "Rogue PMC operators are hunting civilians at Hunter's Paradise. Stop them."
+  },
+  {
+    "id": "the-negotiator",
+    "name": "The Negotiator",
+    "type": "main",
+    "giver": "Gunny",
+    "objectives": [
+      "Negotiate with the LLA commander near YBL-1 for safe passage and report back to Gunny",
+      "Meet with the LLA commander"
+    ],
+    "reward_text": "600 Exp, +500 Reputation with Gunny, $2,820 USD",
+    "description": "Negotiate with the LLA commander near YBL-1 for safe passage through their territory."
+  },
+  {
+    "id": "the-shadow-over-ban-pa",
+    "name": "The Shadow over Ban Pa",
+    "type": "main",
+    "giver": "Handshake",
+    "objectives": [
+      "Scout one of the main entry points to Ban Pa",
+      "Scout the main northern entry point to Ban Pa",
+      "Scout the main southern entry point to Ban Pa",
+      "Bring the avian tissue samples to Handshake",
+      "Collect samples from a dovecot in Ban Pa",
+      "Bring the water samples to Handshake",
+      "Collect samples from a well in Ban Pa",
+      "Bring the ground samples to Handshake",
+      "Collect samples from a mound of soil in Ban Pa",
+      "Clarify the identity of the new Ban Pa inhabitants"
+    ],
+    "reward_text": "300 Exp, +750 Reputation with Handshake (+500 after first completion), $2,820 USD, Tactical Equipment Repair Kit",
+    "description": "Travel to Ban Pa to scout the village's main entry points and determine whether the area is currently occupied or guarded."
+  },
+  {
+    "id": "unlisted-flight",
+    "name": "Unlisted Flight",
+    "type": "main",
+    "giver": "Lab Rat",
+    "objectives": [
+      "Investigate the unlisted flight that landed at Pha Lang Airfield before the Event and report back to Lab Rat",
+      "Search the airfield records"
+    ],
+    "reward_text": "600 Exp, +500 Reputation with Lab Rat, $2,820 USD",
+    "description": "An unlisted flight landed at Pha Lang Airfield just before the Event. Investigate."
   }
 ]
