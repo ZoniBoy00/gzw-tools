@@ -26,5 +26,11 @@
     "tailwindcss": "^4.3.3",
     "typescript": "~6.0.2",
     "vite": "^8.1.1"
+  },
+  "overrides": {
+    "ajv": "^8.18.0",
+    "esbuild": "^0.25.12",
+    "tar": "^7.5.16",
+    "undici": "^6.27.0"
   }
 }
