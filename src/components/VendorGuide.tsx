@@ -4,7 +4,6 @@ import { getVendorReps, setVendorRep } from '../lib/vendortracker';
 import { AMMO } from '../data/ammo';
 import { WEAPONS } from '../data/weapons';
 import { VESTS, HELMETS } from '../data/armor';
-import { VENDOR_ITEMS } from '../data/vendor_items';
 import itemImages from '../data/item_images.json';
 import vendorImages from '../data/vendor_images.json';
 import ItemModal from './ui/ItemModal';
@@ -12,7 +11,7 @@ import type { ModalItem } from './ui/ItemModal';
 
 interface VendorItem {
   name: string;
-  type: 'weapon' | 'ammo' | 'vest' | 'helmet' | 'medical' | 'gear' | 'attachment' | 'container' | 'tool';
+  type: 'weapon' | 'ammo' | 'vest' | 'helmet';
   repLevel: number;
   detail: string;
   image?: string;
@@ -76,17 +75,6 @@ function getVendorItems(vendorName: string): VendorItem[] {
         source: h.source,
         vendorName: vendorName,
         raw: h as unknown as Record<string, unknown>,
-      });
-    }
-  }
-  // Vendor-specific items (medical, gear, etc.)
-  for (const vi of VENDOR_ITEMS) {
-    if (vi.vendor.toLowerCase() === vendorName.toLowerCase()) {
-      items.push({
-        name: vi.name, type: vi.type, repLevel: vi.repLevel,
-        detail: vi.detail,
-        source: `${vi.vendor} R.${vi.repLevel}`,
-        vendorName: vendorName,
       });
     }
   }
@@ -159,17 +147,8 @@ function buildModal(item: VendorItem): ModalItem {
     }
     return { ...base, type: 'helmet', fields: [{ label: 'Vendor', value: item.source || '-', desc: 'Selling vendor' }, { label: 'Details', value: item.detail, desc: 'Item description' }] };
   }
-  // Generic items (medical, gear, attachment, container, tool)
-  return {
-    ...base, type: item.type as ModalItem['type'],
-    fields: [
-      { label: 'Vendor', value: item.vendorName || '-', desc: 'Selling vendor' },
-      { label: 'Rep Required', value: `R.${item.repLevel}`, desc: 'Reputation level needed to purchase' },
-      { label: 'Type', value: item.type, desc: 'Item category' },
-      { label: 'Details', value: item.detail, desc: 'Item description' },
-      { label: 'Source', value: item.source || '-', desc: 'Where to obtain this item' },
-    ],
-  };
+  // Fallback - shouldn't reach here with current data
+  return { ...base, type: 'ammo', fields: [{ label: 'Source', value: item.source || '-' }] };
 }
 
 const TYPE_ICONS: Record<string, string> = {
@@ -177,11 +156,6 @@ const TYPE_ICONS: Record<string, string> = {
   ammo: 'fas fa-bolt',
   vest: 'fas fa-vest',
   helmet: 'fas fa-hard-hat',
-  medical: 'fas fa-kit-medical',
-  gear: 'fas fa-box-open',
-  attachment: 'fas fa-screwdriver-wrench',
-  container: 'fas fa-box',
-  tool: 'fas fa-toolbox',
 };
 
 const VENDOR_META: Record<string, { icon: string; color: string }> = {
@@ -348,7 +322,8 @@ export default function VendorGuide() {
           {items.length === 0 && (
             <div className="empty-state">
               <i className="fas fa-store" aria-hidden="true" />
-              <p>No items found for this vendor</p>
+              <p>No scraped item data available for this vendor</p>
+              <p className="text-[9px] text-text-muted/50 mt-1">Weapon and ammo data from wiki — gear/medical/attachments not available as text</p>
             </div>
           )}
         </>
