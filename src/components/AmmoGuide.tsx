@@ -1,6 +1,8 @@
 import { useState, useMemo, useEffect } from 'react';
 import { AMMO, CALIBERS } from '../data/ammo';
 import { ARMOR_CLASSES } from '../data/types';
+import ItemModal from './ui/ItemModal';
+import type { ModalItem } from './ui/ItemModal';
 
 const PEN: Record<number, { label: string; cls: string }> = {
   0: { label: '✕', cls: 'pen-none' },
@@ -18,6 +20,7 @@ export default function AmmoGuide() {
   const [caliber, setCaliber] = useState(() => new URLSearchParams(window.location.search).get('caliber') || '5.56x45mm');
   const [search, setSearch] = useState(() => new URLSearchParams(window.location.search).get('asearch') || '');
   const [compare, setCompare] = useState<string[]>([]);
+  const [modalItem, setModalItem] = useState<ModalItem | null>(null);
 
   // Sync to URL
   useEffect(() => {
@@ -141,10 +144,24 @@ export default function AmmoGuide() {
             {filtered.map((r, i) => (
               <tr key={i}>
                 <td data-label="" className="font-medium">
-                  {r.name}
-                  <span className="text-[10px] text-text-muted ml-1.5 font-normal">
-                    {r.vendor ? `${r.vendor} R.${r.repLevel}` : r.source || 'Looting'}
-                  </span>
+                  <button onClick={() => setModalItem({
+                    name: r.name,
+                    type: 'weapon',
+                    fields: [
+                      { label: 'Caliber', value: r.caliber },
+                      { label: 'Speed', value: `${r.speed} m/s` },
+                      { label: 'Acc Mod', value: `${r.accMod > 0 ? '+' : ''}${r.accMod}`, color: r.accMod > 0 ? 'pen-high' : r.accMod < 0 ? 'pen-low' : '' },
+                      { label: 'Dur Mod', value: r.durMod ? `${r.durMod}` : '-', color: r.durMod < -50 ? 'durability-bad' : r.durMod < 0 ? 'pen-low' : '' },
+                      { label: 'Subsonic', value: r.subsonic ? 'Yes' : 'No' },
+                      { label: 'Tracer', value: r.tracer ? 'Yes' : 'No' },
+                      { label: 'Source', value: r.vendor ? `${r.vendor} R.${r.repLevel}` : r.source || 'Looting' },
+                    ],
+                  })} className="hover:text-accent transition-colors text-left w-full">
+                    {r.name}
+                    <span className="text-[10px] text-text-muted ml-1.5 font-normal block">
+                      {r.vendor ? `${r.vendor} R.${r.repLevel}` : r.source || 'Looting'}
+                    </span>
+                  </button>
                 </td>
                 <td data-label="Speed" className="text-right text-text-muted">{r.speed}</td>
                 <td data-label="Acc" className={`text-right ${r.accMod > 0 ? 'pen-high' : r.accMod < 0 ? 'pen-low' : 'text-text-muted'}`}>
@@ -212,6 +229,8 @@ export default function AmmoGuide() {
         <span className="flex items-center gap-1"><i className="fas fa-fire text-accent/60" /> Tracer</span>
         <span className="flex items-center gap-1"><i className="fas fa-check text-accent/60" /> Compare mode</span>
       </div>
+
+      {modalItem && <ItemModal item={modalItem} onClose={() => setModalItem(null)} />}
     </div>
   );
 }

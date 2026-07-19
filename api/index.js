@@ -1,6 +1,6 @@
-// GZW Tools API v1 — Single handler for all endpoints
+// GZW Tools API v2 — Expanded endpoints
 // Plain JavaScript to avoid Vercel TypeScript compilation issues
-// Features: ETag caching, CORS, rate limiting
+// Features: ETag caching, CORS, calculator, search, stats
 
 import { createHash } from 'node:crypto';
 
@@ -141,6 +141,73 @@ const WEAPONS = [
   { name: 'Mossberg 590', type: 'Shotgun', caliber: '12 Gauge', magSize: 8, source: 'Gunny R.2' },
 ];
 
+const MISSIONS = [
+  { id: 'cache-report-ii', name: 'Cache Report II', vendor: 'Gunny', area: 'North of Fort Narith', type: 'contract' },
+  { id: 'cache-report-ix', name: 'Cache Report IX', vendor: 'Gunny', area: 'North of Blue Lagoon', type: 'contract' },
+  { id: 'they-are-everywhere', name: 'They Are Everywhere', vendor: 'Gunny', area: 'Blue Lagoon', type: 'contract' },
+  { id: 'a-small-favor', name: 'A Small Favor', vendor: 'Turncoat', area: 'Fort Narith' },
+  { id: 'artisans-list', name: "Artisan's List", vendor: 'Artisan', area: 'Tiger Bay' },
+  { id: 'artisans-list-ii', name: "Artisan's List II", vendor: 'Artisan', area: 'Tiger Bay' },
+  { id: 'at-dooms-gate', name: "At Doom's Gate", vendor: 'Handshake', area: 'Lamang Island' },
+  { id: 'at-the-mounds-of-madness', name: 'At the Mounds of Madness', vendor: 'Artisan', area: 'Ban pa' },
+  { id: 'at-the-mounds-of-madness-ii', name: 'At the Mounds of Madness II', vendor: 'Artisan', area: 'Ban pa' },
+  { id: 'aye-aye-captain', name: 'Aye Aye, Captain', vendor: 'Handshake', area: 'Blue Lagoon' },
+  { id: 'bad-idea', name: 'Bad Idea', vendor: 'Banshee', area: 'Tiger Bay' },
+  { id: 'big-fish', name: 'Big Fish', vendor: 'Handshake', area: 'Blue Lagoon' },
+  { id: 'breadcrumbs', name: 'Breadcrumbs', vendor: 'Lab Rat', area: 'Ban Pa' },
+  { id: 'business-or-pleasure', name: 'Business or Pleasure', vendor: 'Turncoat', area: 'Fort Narith' },
+  { id: 'cache-report-iii', name: 'Cache Report III', vendor: 'Gunny', area: 'Sawmill' },
+  { id: 'cache-report-v', name: 'Cache Report V', vendor: 'Gunny', area: 'Midnight Sapphire' },
+  { id: 'combat-sweep-iii', name: 'Combat Sweep III', vendor: 'Gunny', area: 'Pha Lang Airfield' },
+  { id: 'combat-sweep-v', name: 'Combat Sweep V', vendor: 'Gunny', area: 'Fort Narith' },
+  { id: 'combat-sweep-vi', name: 'Combat Sweep VI', vendor: 'Gunny', area: 'Tiger Bay' },
+  { id: 'combat-sweep-vii', name: 'Combat Sweep VII', vendor: 'Gunny', area: 'Blue Lagoon' },
+  { id: 'combat-sweep-viii', name: 'Combat Sweep VIII', vendor: 'Gunny', area: 'Ban Pa' },
+  { id: 'cryptic-signals-ii', name: 'Cryptic Signals II', vendor: 'Lab Rat', area: 'Sawmill' },
+  { id: 'cryptic-signals-iii', name: 'Cryptic Signals III', vendor: 'Lab Rat', area: 'Blue Lagoon' },
+  { id: 'cryptic-signals-v', name: 'Cryptic Signals V', vendor: 'Lab Rat', area: 'Pha Lang Airfield' },
+  { id: 'cryptic-signals-vi', name: 'Cryptic Signals VI', vendor: 'Lab Rat', area: 'Tiger Bay' },
+  { id: 'cryptic-signals-viii', name: 'Cryptic Signals VIII', vendor: 'Lab Rat', area: 'Fort Narith' },
+  { id: 'cryptic-signals-ix', name: 'Cryptic Signals IX', vendor: 'Lab Rat', area: 'Midnight Sapphire' },
+  { id: 'deal-of-the-century', name: 'Deal of the Century', vendor: 'Turncoat', area: 'Fort Narith' },
+  { id: 'domesticated-rat', name: 'Domesticated Rat', vendor: 'Lab Rat', area: 'Starting town' },
+  { id: 'double-exposure', name: 'Double Exposure', vendor: 'Banshee', area: 'Fort Narith' },
+  { id: 'escort', name: 'Escort', vendor: 'Handshake', area: 'Sawmill' },
+  { id: 'escort-ii', name: 'Escort II', vendor: 'Handshake', area: 'Fort Narith' },
+  { id: 'family-heirloom', name: 'Family Heirloom', vendor: 'Banshee', area: 'Sawmill' },
+  { id: 'fire-and-water', name: 'Fire and Water', vendor: 'Handshake', area: 'Pha Lang Airfield' },
+  { id: 'fort-narith-stroll', name: 'Fort Narith Stroll', vendor: 'Banshee', area: 'Fort Narith' },
+  { id: 'freedom-fighter', name: 'Freedom Fighter', vendor: 'Turncoat', area: 'Tiger Bay' },
+  { id: 'fresh-meat', name: 'Fresh Meat', vendor: 'Handshake', area: 'Lamang' },
+  { id: 'from-the-sky', name: 'From the Sky', vendor: 'Handshake', area: 'Sawmill' },
+  { id: 'hacker', name: 'Hacker', vendor: 'Banshee', area: 'Tiger Bay' },
+  { id: 'irrefusable-offer', name: 'Irrefusable Offer', vendor: 'Turncoat', area: 'Tiger Bay' },
+  { id: 'livestock', name: 'Livestock', vendor: 'Handshake', area: 'Ban Pa' },
+  { id: 'mystery-machines', name: 'Mystery Machines', vendor: 'Lab Rat', area: 'Ban Pa' },
+  { id: 'new-neighbors', name: 'New Neighbors', vendor: 'Handshake', area: 'Nam Thaven' },
+  { id: 'no-way-up', name: 'No Way Up', vendor: 'Handshake', area: 'Midnight Sapphire' },
+  { id: 'radio-star', name: 'Radio Star', vendor: 'Artisan', area: 'Ban Pa' },
+  { id: 'schadenfreude', name: 'Schadenfreude', vendor: 'Turncoat', area: 'Sawmill' },
+  { id: 'so-close', name: 'So Close', vendor: 'Handshake', area: 'YBL-1' },
+  { id: 'sunken-bird', name: 'Sunken Bird', vendor: 'Handshake', area: 'Blue Lagoon' },
+  { id: 'supernatural', name: 'Supernatural', vendor: 'Banshee', area: 'Ban Pa' },
+  { id: 'the-liberator', name: 'The Liberator', vendor: 'Turncoat', area: 'Fort Narith' },
+  { id: 'the-negotiator', name: 'The Negotiator', vendor: 'Handshake', area: 'Fort Narith' },
+  { id: 'the-runaway', name: 'The Runaway', vendor: 'Banshee', area: 'Tiger Bay' },
+  { id: 'the-shadow-over-ban-pa', name: 'The Shadow over Ban Pa', vendor: 'Lab Rat', area: 'Ban Pa' },
+  { id: 'the-stand', name: 'The Stand', vendor: 'Banshee', area: 'Midnight Sapphire' },
+  { id: 'unattainable-luxury', name: 'Unattainable Luxury', vendor: 'Turncoat', area: 'Midnight Sapphire' },
+  { id: 'unstable-meeting', name: 'Unstable Meeting', vendor: 'Turncoat', area: 'Ban Pa' },
+  { id: 'up-the-stream', name: 'Up the Stream', vendor: 'Handshake', area: 'Sawmill' },
+];
+
+const RECOMMENDATIONS = [
+  { tier: 'T1', label: 'Budget / Early', vest: 'Molle Vest (IIIA)', helmet: 'SS-27 (IIA)', ammo: ['5.56x45mm FMJ / M193', '7.62x39mm PS', '9x19mm FMJ'], notes: 'Good vs AI. Avoid geared PvP.' },
+  { tier: 'T2', label: 'Mid Tier', vest: 'SK-S (III) or ATBV (III)', helmet: 'ACH (IIIA)', ammo: ['5.56x45mm AP M855', '5.45x39mm PP 7N10'], notes: 'Can fight players. SK-S is only 3.15kg.' },
+  { tier: 'T3', label: 'High Tier', vest: 'CZ 4M Hornet (III+)', helmet: 'FAST Carbon (IIIA)', ammo: ['5.56x45mm AP M855A1', '7.62x51mm AP M61'], notes: 'Ceramic plates stop most rifle rounds.' },
+  { tier: 'T4', label: 'End Game', vest: 'LVS Tactical (III++)', helmet: 'FAST Carbon (IIIA)', ammo: ['5.56x45mm AP M995', '7.62x54R AP 7N13'], notes: 'Best in slot. Full coverage.' },
+];
+
 // ─── Helpers ───
 
 function etag(payload) {
@@ -150,21 +217,19 @@ function etag(payload) {
 function json(data, code = 200, req) {
   const body = JSON.stringify({
     data,
-    count: Array.isArray(data) ? data.length : 1,
-    source: 'GZW Tools API',
-    timestamp: new Date().toISOString(),
+    meta: {
+      count: Array.isArray(data) ? data.length : 1,
+      source: 'GZW Tools API',
+      version: '2.0.0',
+      timestamp: new Date().toISOString(),
+    },
   }, null, 2);
 
   const tag = etag(body);
-
-  // ETag / 304 support
   if (req) {
     const ifNoneMatch = req.headers.get('if-none-match');
     if (ifNoneMatch === `"${tag}"`) {
-      return new Response(null, {
-        status: 304,
-        headers: { 'ETag': `"${tag}"` },
-      });
+      return new Response(null, { status: 304, headers: { 'ETag': `"${tag}"` } });
     }
   }
 
@@ -190,48 +255,49 @@ export default async function handler(req) {
   const path = url.pathname.replace(/\/$/, '').replace('/api', '') || '/';
   const method = req.method;
 
-  // CORS preflight
   if (method === 'OPTIONS') {
-    return new Response(null, {
-      status: 204,
-      headers: { 'Access-Control-Allow-Origin': '*', 'Access-Control-Allow-Methods': 'GET, OPTIONS' },
-    });
+    return new Response(null, { status: 204, headers: { 'Access-Control-Allow-Origin': '*', 'Access-Control-Allow-Methods': 'GET, OPTIONS' } });
   }
-
   if (method !== 'GET') return error('Method not allowed', 405, req);
 
   try {
-    // /api/ — docs
+    // ── /api/ — Root / docs ──
     if (path === '/') {
       return json({
         name: 'GZW Tools API',
-        version: '1.0.0',
+        description: 'Gray Zone Warfare fan companion data API',
         endpoints: [
-          '/api/ammo?caliber=5.56x45mm',
-          '/api/vendors',
-          '/api/weapons?type=Assault%20Rifle',
-          '/api/armor',
-          '/api/armor/vests',
-          '/api/armor/helmets',
-          '/api/recommendations',
+          { path: '/api', desc: 'API info & documentation' },
+          { path: '/api/ammo?caliber=', desc: 'Ammunition data (optional caliber filter)' },
+          { path: '/api/vendors', desc: 'All vendor reputation data' },
+          { path: '/api/weapons?type=&caliber=&search=', desc: 'Weapons database with filters' },
+          { path: '/api/armor', desc: 'All armor vests and helmets' },
+          { path: '/api/armor/vests', desc: 'Vests only' },
+          { path: '/api/armor/helmets', desc: 'Helmets only' },
+          { path: '/api/recommendations', desc: 'Gear recommendations' },
+          { path: '/api/missions?vendor=&area=', desc: 'Mission database with filters' },
+          { path: '/api/stats', desc: 'Aggregate stats & counts' },
+          { path: '/api/calculator/rep-to-dollars?current=&target=&rate=', desc: 'Rep to dollars calculator' },
+          { path: '/api/calculator/missions?current=&target=', desc: 'Mission count calculator' },
+          { path: '/api/search?q=', desc: 'Unified search across all data' },
         ],
       }, 200, req);
     }
 
-    // /api/ammo
+    // ── /api/ammo ──
     if (path === '/ammo') {
       const caliber = url.searchParams.get('caliber');
       let data = AMMO;
       if (caliber) data = data.filter(a => a.caliber === caliber);
-      return json({ ...data, calibers: CALIBERS }, 200, req);
+      return json({ rounds: data, calibers: CALIBERS }, 200, req);
     }
 
-    // /api/vendors
+    // ── /api/vendors ──
     if (path === '/vendors') {
       return json(VENDORS, 200, req);
     }
 
-    // /api/weapons
+    // ── /api/weapons ──
     if (path === '/weapons') {
       let data = WEAPONS;
       const type = url.searchParams.get('type');
@@ -239,45 +305,109 @@ export default async function handler(req) {
       const search = url.searchParams.get('search');
       if (type) data = data.filter(w => w.type === type);
       if (caliber) data = data.filter(w => w.caliber === caliber);
-      if (search) {
-        const q = search.toLowerCase();
-        data = data.filter(w => w.name.toLowerCase().includes(q) || w.caliber.includes(q));
-      }
+      if (search) { const q = search.toLowerCase(); data = data.filter(w => w.name.toLowerCase().includes(q) || w.caliber.includes(q)); }
       return json(data, 200, req);
     }
 
-    // /api/armor
+    // ── /api/armor ──
     if (path === '/armor') {
       return json({ vests: VESTS, helmets: HELMETS }, 200, req);
     }
+    if (path === '/armor/vests') return json(VESTS, 200, req);
+    if (path === '/armor/helmets') return json(HELMETS, 200, req);
 
-    // /api/armor/vests
-    if (path === '/armor/vests') {
-      return json(VESTS, 200, req);
-    }
-
-    // /api/armor/helmets
-    if (path === '/armor/helmets') {
-      return json(HELMETS, 200, req);
-    }
-
-    // /api/recommendations
+    // ── /api/recommendations ──
     if (path === '/recommendations') {
+      return json({ recommendations: RECOMMENDATIONS, vendorGear: [
+        { vendor: 'Handshake', rep: 1, items: 'Commander IIIA, LVS Overt IIIA+' },
+        { vendor: 'Handshake', rep: 4, items: 'LVS Tactical Multicam III++' },
+        { vendor: 'Artisan', rep: 1, items: 'Molle Vest IIIA, SS-27 IIA' },
+        { vendor: 'Turncoat', rep: 2, items: 'SK-S III, ATBV III, ACH IIIA' },
+        { vendor: 'Banshee', rep: 2, items: 'FAST Carbon IIIA' },
+      ] }, 200, req);
+    }
+
+    // ── /api/missions ── (NEW)
+    if (path === '/missions') {
+      let data = MISSIONS;
+      const vendor = url.searchParams.get('vendor');
+      const area = url.searchParams.get('area');
+      const search = url.searchParams.get('search');
+      if (vendor) data = data.filter(m => m.vendor?.toLowerCase() === vendor.toLowerCase());
+      if (area) data = data.filter(m => m.area?.toLowerCase().includes(area.toLowerCase()));
+      if (search) { const q = search.toLowerCase(); data = data.filter(m => m.name.toLowerCase().includes(q) || (m.area || '').toLowerCase().includes(q)); }
+      return json(data, 200, req);
+    }
+
+    // ── /api/stats ── (NEW)
+    if (path === '/stats') {
       return json({
-        recommendations: [
-          { tier: 'T1', label: 'Budget / Early', vest: 'Molle Vest (IIIA)', helmet: 'SS-27 (IIA)', ammo: ['5.56x45mm FMJ / M193', '7.62x39mm PS', '9x19mm FMJ'], notes: 'Good vs AI. Avoid geared PvP.' },
-          { tier: 'T2', label: 'Mid Tier', vest: 'SK-S (III) or ATBV (III)', helmet: 'ACH (IIIA)', ammo: ['5.56x45mm AP M855', '5.45x39mm PP 7N10'], notes: 'Can fight players. SK-S is only 3.15kg.' },
-          { tier: 'T3', label: 'High Tier', vest: 'CZ 4M Hornet (III+)', helmet: 'FAST Carbon (IIIA)', ammo: ['5.56x45mm AP M855A1', '7.62x51mm AP M61'], notes: 'Ceramic plates stop most rifle rounds.' },
-          { tier: 'T4', label: 'End Game', vest: 'LVS Tactical (III++)', helmet: 'FAST Carbon (IIIA)', ammo: ['5.56x45mm AP M995', '7.62x54R AP 7N13'], notes: 'Best in slot. Full coverage.' },
-        ],
-        vendorGear: [
-          { vendor: 'Handshake', rep: 1, items: 'Commander IIIA, LVS Overt IIIA+' },
-          { vendor: 'Handshake', rep: 4, items: 'LVS Tactical Multicam III++' },
-          { vendor: 'Artisan', rep: 1, items: 'Molle Vest IIIA, SS-27 IIA' },
-          { vendor: 'Turncoat', rep: 2, items: 'SK-S III, ATBV III, ACH IIIA' },
-          { vendor: 'Banshee', rep: 2, items: 'FAST Carbon IIIA' },
-        ],
+        weapons: { total: WEAPONS.length, types: [...new Set(WEAPONS.map(w => w.type))] },
+        ammo: { total: AMMO.length, calibers: CALIBERS },
+        armor: { vests: VESTS.length, helmets: HELMETS.length },
+        vendors: { total: VENDORS.length, list: VENDORS.map(v => ({ name: v.name, rep: v.currentRep, maxRep: v.maxRep })) },
+        missions: { total: MISSIONS.length, vendors: [...new Set(MISSIONS.map(m => m.vendor).filter(Boolean))] },
+        totalRep: VENDORS.reduce((a, v) => a + v.currentRep, 0),
+        maxTotalRep: VENDORS.reduce((a, v) => a + v.maxRep, 0),
+        avgProgress: Math.round(VENDORS.reduce((a, v) => a + (v.currentRep / v.maxRep) * 100, 0) / VENDORS.length),
       }, 200, req);
+    }
+
+    // ── /api/calculator/rep-to-dollars ── (NEW)
+    if (path === '/calculator/rep-to-dollars') {
+      const current = parseInt(url.searchParams.get('current')) || 0;
+      const target = parseInt(url.searchParams.get('target')) || 13000;
+      const rate = parseInt(url.searchParams.get('rate')) || 100;
+      const diff = Math.max(0, target - current);
+      return json({
+        current, target, diff, rate,
+        cost: diff * rate,
+        progressPct: Math.min((current / target) * 100, 100),
+        progressAfterPct: Math.min((target / target) * 100, 100),
+      }, 200, req);
+    }
+
+    // ── /api/calculator/missions ── (NEW)
+    if (path === '/calculator/missions') {
+      const current = parseInt(url.searchParams.get('current')) || 0;
+      const target = parseInt(url.searchParams.get('target')) || 13000;
+      const missionTypes = [
+        { name: 'Task Mission', rep: 25 },
+        { name: 'Supply Run', rep: 50 },
+        { name: 'Recon Mission', rep: 75 },
+        { name: 'Elimination', rep: 100 },
+        { name: 'Elite Task', rep: 150 },
+        { name: 'Critical Op', rep: 200 },
+      ];
+      const needed = Math.max(0, target - current);
+      const sorted = [...missionTypes].sort((a, b) => b.rep - a.rep);
+      const results = [];
+      let remaining = needed;
+      for (const m of sorted) {
+        if (remaining <= 0) break;
+        const count = Math.floor(remaining / m.rep);
+        if (count > 0) { results.push({ type: m.name, repEach: m.rep, count }); remaining -= count * m.rep; }
+      }
+      if (remaining > 0 && missionTypes.length > 0) {
+        const smallest = [...missionTypes].sort((a, b) => a.rep - b.rep)[0];
+        const existing = results.find(r => r.type === smallest.name);
+        if (existing) existing.count += 1; else results.push({ type: smallest.name, repEach: smallest.rep, count: 1 });
+      }
+      return json({ current, target, needed, totalMissions: results.reduce((a, r) => a + r.count, 0), breakdown: results }, 200, req);
+    }
+
+    // ── /api/search ── (NEW)
+    if (path === '/search') {
+      const q = (url.searchParams.get('q') || '').toLowerCase();
+      if (!q) return error('Query parameter "q" is required', 400, req);
+
+      const weap = WEAPONS.filter(w => w.name.toLowerCase().includes(q) || w.caliber.includes(q)).slice(0, 10);
+      const ammo = AMMO.filter(a => a.name.toLowerCase().includes(q) || a.caliber.includes(q)).slice(0, 10);
+      const vest = VESTS.filter(v => v.name.toLowerCase().includes(q)).slice(0, 5);
+      const hel = HELMETS.filter(h => h.name.toLowerCase().includes(q)).slice(0, 5);
+      const miss = MISSIONS.filter(m => m.name.toLowerCase().includes(q) || (m.area || '').toLowerCase().includes(q) || (m.vendor || '').toLowerCase().includes(q)).slice(0, 10);
+
+      return json({ query: q, weapons: weap, ammo, vests: vest, helmets: hel, missions: miss }, 200, req);
     }
 
     return error('Not found', 404, req);
