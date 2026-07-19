@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route, Navigate, useLocation } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Navigate, useLocation, Link } from 'react-router-dom';
 import Dashboard from './components/Dashboard';
 import RepCalculator from './components/RepCalculator';
 import DollarCalculator from './components/DollarCalculator';
@@ -10,6 +10,8 @@ import VendorGuide from './components/VendorGuide';
 import LoadoutBuilder from './components/LoadoutBuilder';
 import LogAnalyzer from './components/LogAnalyzer';
 import ApiDocs from './components/ApiDocs';
+import PrivacyPolicy from './components/PrivacyPolicy';
+import TermsOfService from './components/TermsOfService';
 import TabBar from './components/ui/TabBar';
 import './index.css';
 
@@ -76,6 +78,8 @@ function Layout() {
             <Route path="/loadouts" element={<LoadoutBuilder />} />
             <Route path="/logs" element={<LogAnalyzer />} />
             <Route path="/api-docs" element={<ApiDocs />} />
+            <Route path="/privacy" element={<PrivacyPolicy />} />
+            <Route path="/tos" element={<TermsOfService />} />
             <Route path="*" element={<Navigate to="/" replace />} />
           </Routes>
         </div>
@@ -90,6 +94,15 @@ function Layout() {
           <p className="text-[10px] text-text-muted/30 font-mono mt-1">
             Built with React + TypeScript · Data from GZW Wiki
           </p>
+          <div className="mt-3 flex items-center justify-center gap-3 text-[10px] font-mono">
+            <Link to="/privacy" className="text-text-muted/40 hover:text-accent/70 transition-colors">Privacy Policy</Link>
+            <span className="text-text-muted/20">·</span>
+            <Link to="/tos" className="text-text-muted/40 hover:text-accent/70 transition-colors">Terms of Service</Link>
+            <span className="text-text-muted/20">·</span>
+            <a href="https://github.com/ZoniBoy00/gzw-tools" target="_blank" rel="noopener noreferrer" className="text-text-muted/40 hover:text-accent/70 transition-colors">
+              <i className="fab fa-github mr-1" />GitHub
+            </a>
+          </div>
         </div>
       </footer>
     </div>
