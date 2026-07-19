@@ -3,6 +3,7 @@
 // Features: ETag caching, CORS, calculator, search, stats
 
 import { createHash } from 'node:crypto';
+import keys from '../src/data/keys.json' with { type: 'json' };
 
 const CACHE = 'public, max-age=3600, s-maxage=3600, stale-while-revalidate=86400';
 
@@ -15,6 +16,7 @@ const VENDORS = [
   { name: 'Artisan', slug: 'artisan', currentRep: 7277, maxRep: 9750, description: 'Weapons & Attachments' },
   { name: 'Turncoat', slug: 'turncoat', currentRep: 3500, maxRep: 9750, description: 'Suspicious Goods' },
   { name: 'Banshee', slug: 'banshee', currentRep: 3500, maxRep: 9750, description: 'Armor & Tactical Gear' },
+  { name: 'Vulture', slug: 'vulture', currentRep: 0, maxRep: 9750, description: 'Player-dropped Loot & Special Gear' },
 ];
 
 const ARMOR_CLASSES = ['I', 'IIA', 'IIA+', 'IIIA', 'IIIA+', 'III', 'III+', 'III++'];
@@ -273,6 +275,8 @@ export default async function handler(req, res) {
           { path: '/api/recommendations', desc: 'Gear recommendations' },
           { path: '/api/missions?vendor=&area=', desc: 'Mission database with filters' },
           { path: '/api/stats', desc: 'Aggregate stats & counts' },
+          { path: '/api/keys', desc: 'All keys & keycards by location' },
+          { path: '/api/keys?location=', desc: 'Keys filtered by location' },
           { path: '/api/calculator/rep-to-dollars?current=&target=&rate=', desc: 'Rep to dollars calculator' },
           { path: '/api/calculator/missions?current=&target=', desc: 'Mission count calculator' },
           { path: '/api/search?q=', desc: 'Unified search across all data' },
@@ -335,7 +339,7 @@ export default async function handler(req, res) {
       return json(data, 200, res);
     }
 
-    // ── /api/stats ── (NEW)
+    // ── /api/stats ──
     if (path === '/stats') {
       return json({
         weapons: { total: WEAPONS.length, types: [...new Set(WEAPONS.map(w => w.type))] },
@@ -343,10 +347,19 @@ export default async function handler(req, res) {
         armor: { vests: VESTS.length, helmets: HELMETS.length },
         vendors: { total: VENDORS.length, list: VENDORS.map(v => ({ name: v.name, rep: v.currentRep, maxRep: v.maxRep })) },
         missions: { total: MISSIONS.length, vendors: [...new Set(MISSIONS.map(m => m.vendor).filter(Boolean))] },
+        keys: { total: keys.length, locations: [...new Set(keys.map(k => k.location))] },
         totalRep: VENDORS.reduce((a, v) => a + v.currentRep, 0),
         maxTotalRep: VENDORS.reduce((a, v) => a + v.maxRep, 0),
         avgProgress: Math.round(VENDORS.reduce((a, v) => a + (v.currentRep / v.maxRep) * 100, 0) / VENDORS.length),
       }, 200, res);
+    }
+
+    // ── /api/keys ── (NEW)
+    if (path === '/keys') {
+      const location = url.searchParams.get('location');
+      let data = keys;
+      if (location) data = data.filter(k => k.location.toLowerCase() === location.toLowerCase());
+      return json({ keys: data, locations: [...new Set(keys.map(k => k.location))].sort() }, 200, res);
     }
 
     // ── /api/calculator/rep-to-dollars ── (NEW)
