@@ -256,14 +256,12 @@ select.input {
   background: var(--color-surface);
   z-index: 10;
   vertical-align: middle;
-  line-height: normal;
+  line-height: 1;
 }
-/* Match all th content — text and icons — in a single line box */
+/* Icons in headers: match font size, let alignment inherit */
 .table-wrap th i,
 .table-wrap th svg {
   font-size: 10px;
-  line-height: 1;
-  vertical-align: middle;
 }
 /* Header separator: 2px solid border-bottom on ths */
 /* (thead tr::after removed — th backgrounds obscure it) */
