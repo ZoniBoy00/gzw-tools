@@ -1300,13 +1300,6 @@
     "reward_text": "Rewards Reputation with Handshake $4,600 EXFIL (Multicam)"
   },
   {
-    "id": "tasks",
-    "name": "Tasks",
-    "vendor": "",
-    "area": "",
-    "type": "unknown"
-  },
-  {
     "id": "test-results",
     "name": "Test Results",
     "vendor": "Lab Rat",
