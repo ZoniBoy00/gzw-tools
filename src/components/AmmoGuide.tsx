@@ -3,6 +3,7 @@ import { AMMO, CALIBERS } from '../data/ammo';
 import { ARMOR_CLASSES } from '../data/types';
 import ItemModal from './ui/ItemModal';
 import type { ModalItem } from './ui/ItemModal';
+import itemImages from '../data/item_images.json';
 
 const PEN: Record<number, { label: string; cls: string }> = {
   0: { label: '✕', cls: 'pen-none' },
@@ -156,11 +157,16 @@ export default function AmmoGuide() {
                       { label: 'Tracer', value: r.tracer ? 'Yes' : 'No', desc: 'Tracer rounds leave a visible trail of light — helps with aiming but reveals your position' },
                       { label: 'Source', value: r.vendor ? `${r.vendor} R.${r.repLevel}` : r.source || 'Looting', desc: 'Where to obtain this ammunition — from a vendor at a specific rep level, or found by looting' },
                     ],
-                  })} className="hover:text-accent transition-colors text-left w-full">
-                    {r.name}
-                    <span className="text-[10px] text-text-muted ml-1.5 font-normal block">
-                      {r.vendor ? `${r.vendor} R.${r.repLevel}` : r.source || 'Looting'}
-                    </span>
+                  })} className="flex items-center gap-2 text-left w-full hover:text-accent transition-colors">
+                    {itemImages[`${r.caliber} ${r.name}` as keyof typeof itemImages] && (
+                      <img src={itemImages[`${r.caliber} ${r.name}` as keyof typeof itemImages] as string} alt="" className="w-8 h-8 object-contain shrink-0 bg-surface-2 border border-border" loading="lazy" />
+                    )}
+                    <div className="min-w-0">
+                      <span>{r.name}</span>
+                      <span className="text-[10px] text-text-muted font-normal block truncate">
+                        {r.vendor ? `${r.vendor} R.${r.repLevel}` : r.source || 'Looting'}
+                      </span>
+                    </div>
                   </button>
                 </td>
                 <td data-label="Speed" className="text-right text-text-muted">{r.speed}</td>
