@@ -1919,7 +1919,7 @@
   {
     "id": "breadcrumbs",
     "name": "Breadcrumbs",
-    "vendor": "",
+    "vendor": "Gunny",
     "area": "Pha Lang Airfield",
     "type": "contract",
     "category": "contract",
@@ -1933,7 +1933,7 @@
   {
     "id": "cache-report",
     "name": "Cache Report",
-    "vendor": "",
+    "vendor": "Gunny",
     "area": "YBL-1",
     "type": "contract",
     "category": "contract",
@@ -1948,7 +1948,7 @@
   {
     "id": "cache-report-iii",
     "name": "Cache Report III",
-    "vendor": "",
+    "vendor": "Gunny",
     "area": "Sawmill",
     "type": "contract",
     "category": "contract",
@@ -1963,7 +1963,7 @@
   {
     "id": "cache-report-iv",
     "name": "Cache Report IV",
-    "vendor": "",
+    "vendor": "Gunny",
     "area": "Hunter's Paradise",
     "type": "contract",
     "category": "contract",
@@ -1978,7 +1978,7 @@
   {
     "id": "cache-report-v",
     "name": "Cache Report V",
-    "vendor": "",
+    "vendor": "Gunny",
     "area": "Midnight Sapphire",
     "type": "contract",
     "category": "contract",
@@ -1993,7 +1993,7 @@
   {
     "id": "cache-report-vi",
     "name": "Cache Report VI",
-    "vendor": "",
+    "vendor": "Gunny",
     "area": "South east ofPha Lang Airfield",
     "type": "contract",
     "category": "contract",
@@ -2012,7 +2012,7 @@
   {
     "id": "cache-report-vii",
     "name": "Cache Report VII",
-    "vendor": "",
+    "vendor": "Gunny",
     "area": "Tiger Bay",
     "type": "contract",
     "category": "contract",
@@ -2027,7 +2027,7 @@
   {
     "id": "cache-report-viii",
     "name": "Cache Report VIII",
-    "vendor": "",
+    "vendor": "Gunny",
     "area": "Blue Lagoon",
     "type": "contract",
     "category": "contract",
@@ -2042,7 +2042,7 @@
   {
     "id": "combat-sweep-ii",
     "name": "Combat Sweep II",
-    "vendor": "",
+    "vendor": "Gunny",
     "area": "Sawmill",
     "type": "contract",
     "category": "contract",
@@ -2056,7 +2056,7 @@
   {
     "id": "combat-sweep-v",
     "name": "Combat Sweep V",
-    "vendor": "",
+    "vendor": "Gunny",
     "area": "Midnight Sapphire",
     "type": "contract",
     "category": "contract",
@@ -2070,7 +2070,7 @@
   {
     "id": "combat-sweep-vii",
     "name": "Combat Sweep VII",
-    "vendor": "",
+    "vendor": "Gunny",
     "area": "Ban Pa",
     "type": "contract",
     "category": "contract",
@@ -2084,7 +2084,7 @@
   {
     "id": "escort-ii",
     "name": "Escort II",
-    "vendor": "",
+    "vendor": "Gunny",
     "area": "Blue Lagoon",
     "type": "contract",
     "category": "contract",
@@ -2097,7 +2097,7 @@
   {
     "id": "fuel-shortage",
     "name": "Fuel Shortage",
-    "vendor": "",
+    "vendor": "Gunny",
     "area": "Sawmill",
     "type": "contract",
     "category": "contract",
@@ -2109,7 +2109,7 @@
   {
     "id": "muddy-buddy",
     "name": "Muddy Buddy",
-    "vendor": "",
+    "vendor": "Gunny",
     "area": "Ban Pa",
     "type": "contract",
     "category": "contract",
@@ -2122,7 +2122,7 @@
   {
     "id": "nicked-shipment",
     "name": "Nicked Shipment",
-    "vendor": "",
+    "vendor": "Gunny",
     "area": "Hunter's Paradise",
     "type": "contract",
     "category": "contract",
@@ -2138,7 +2138,7 @@
   {
     "id": "repossession",
     "name": "Repossession",
-    "vendor": "",
+    "vendor": "Gunny",
     "area": "Fort Narith",
     "type": "contract",
     "category": "contract",
@@ -2151,7 +2151,7 @@
   {
     "id": "repossession-iii",
     "name": "Repossession III",
-    "vendor": "",
+    "vendor": "Gunny",
     "area": "Blue Lagoon",
     "type": "contract",
     "category": "contract",
@@ -2165,7 +2165,7 @@
   {
     "id": "repossession-iv",
     "name": "Repossession IV",
-    "vendor": "",
+    "vendor": "Gunny",
     "area": "Pha Lang Airfield",
     "type": "contract",
     "category": "contract",
@@ -2178,7 +2178,7 @@
   {
     "id": "repossession-ix",
     "name": "Repossession IX",
-    "vendor": "",
+    "vendor": "Gunny",
     "area": "Tiger Bay",
     "type": "contract",
     "category": "contract",
@@ -2192,7 +2192,7 @@
   {
     "id": "repossession-v",
     "name": "Repossession V",
-    "vendor": "",
+    "vendor": "Gunny",
     "area": "Blue Lagoon",
     "type": "contract",
     "category": "contract",
@@ -2205,7 +2205,7 @@
   {
     "id": "repossession-vi",
     "name": "Repossession VI",
-    "vendor": "",
+    "vendor": "Gunny",
     "area": "Pha Lang Airfield",
     "type": "contract",
     "category": "contract",
@@ -2218,7 +2218,7 @@
   {
     "id": "repossession-vii",
     "name": "Repossession VII",
-    "vendor": "",
+    "vendor": "Gunny",
     "area": "YBL-1",
     "type": "contract",
     "category": "contract",
@@ -2231,7 +2231,7 @@
   {
     "id": "repossession-viii",
     "name": "Repossession VIII",
-    "vendor": "",
+    "vendor": "Gunny",
     "area": "Blue Lagoon",
     "type": "contract",
     "category": "contract",
@@ -2244,7 +2244,7 @@
   {
     "id": "restoring-order",
     "name": "Restoring Order",
-    "vendor": "",
+    "vendor": "Gunny",
     "area": "Kiu Vongsa,Nam Thaven,Pha Lang",
     "type": "contract",
     "category": "contract",
@@ -2256,7 +2256,7 @@
   {
     "id": "the-liberator",
     "name": "The Liberator",
-    "vendor": "",
+    "vendor": "Gunny",
     "area": "Ban Pa",
     "type": "contract",
     "category": "contract",
@@ -2268,7 +2268,7 @@
   {
     "id": "unstable-meeting",
     "name": "Unstable Meeting",
-    "vendor": "",
+    "vendor": "Gunny",
     "area": "YBL-1",
     "type": "contract",
     "category": "contract",

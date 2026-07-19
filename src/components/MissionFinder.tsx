@@ -103,7 +103,7 @@ export default function MissionFinder() {
         </select>
         <select value={typeFilter} onChange={(e) => setTypeFilter(e.target.value)} className="input w-auto input-sm" aria-label="Filter by type">
           <option value="">All Types</option>
-          {TYPES.map((t) => <option key={t} value={t}>{t}</option>)}
+          {TYPES.map((t) => <option key={t} value={t}>{t.charAt(0).toUpperCase() + t.slice(1)}</option>)}
         </select>
         <button
           onClick={() => setSortBy((s) => (s === 'name' ? 'vendor' : 'name'))}
