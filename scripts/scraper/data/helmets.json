@@ -13,5 +13,647 @@
     "material": "Aramid",
     "weight": 1.69,
     "grid": "2x2"
+  },
+  {
+    "name": "Skull Crusher",
+    "id": "skull-crusher",
+    "source": "Handshake R.1 Banshee R.1",
+    "weight": 0.28,
+    "image": "https://static.wikia.nocookie.net/gray-zone-warfare/images/c/ce/Crusher_icon.png/revision/latest?cb=20250612131038"
+  },
+  {
+    "name": "SSh-68N",
+    "id": "ssh-68n",
+    "source": "Artisan R.1",
+    "weight": 2.0,
+    "nij": "I",
+    "material": "Steel",
+    "image": "https://static.wikia.nocookie.net/gray-zone-warfare/images/5/59/SSh-68N_icon.png/revision/latest?cb=20250612134309"
+  },
+  {
+    "name": "TYPE 66",
+    "id": "type-66",
+    "source": "Artisan R.1",
+    "weight": 1.4,
+    "nij": "I",
+    "material": "Steel",
+    "image": "https://static.wikia.nocookie.net/gray-zone-warfare/images/8/8e/TYPE_66_icon.png/revision/latest?cb=20260406210454"
+  },
+  {
+    "name": "SSh-60",
+    "id": "ssh-60",
+    "source": "Artisan R.1",
+    "weight": 1.3,
+    "nij": "I",
+    "material": "Steel",
+    "image": ""
+  },
+  {
+    "name": "6B47 Ratnik",
+    "id": "6b47-ratnik",
+    "source": "Turncoat R.1",
+    "weight": 1.1,
+    "nij": "II",
+    "material": "Aramid",
+    "image": ""
+  },
+  {
+    "name": "LSHZ 1+ (Multicam)",
+    "id": "lshz-1+-(multicam)",
+    "source": "Turncoat R.3",
+    "weight": 1.3,
+    "nij": "IIIA",
+    "material": "Aramid",
+    "image": ""
+  },
+  {
+    "name": "LSHZ 1+ (Black)",
+    "id": "lshz-1+-(black)",
+    "source": "Turncoat R.3",
+    "weight": 1.3,
+    "nij": "IIIA",
+    "material": "Aramid",
+    "image": ""
+  },
+  {
+    "name": "PASGT",
+    "id": "pasgt",
+    "source": "Handshake R.2",
+    "weight": 1.6,
+    "nij": "II+",
+    "material": "Aramid",
+    "image": ""
+  },
+  {
+    "name": "Mich TC-2000 (Green)",
+    "id": "mich-tc-2000-(green)",
+    "source": "Handshake R.2",
+    "weight": 1.5,
+    "nij": "IIIA",
+    "material": "Aramid",
+    "image": ""
+  },
+  {
+    "name": "Mich TC-2000 (Black)",
+    "id": "mich-tc-2000-(black)",
+    "source": "Handshake R.2",
+    "weight": 1.5,
+    "nij": "IIIA",
+    "material": "Aramid",
+    "image": ""
+  },
+  {
+    "name": "Mich TC-2000 (UNLRA)",
+    "id": "mich-tc-2000-(unlra)",
+    "source": "Loot only",
+    "weight": 1.5,
+    "nij": "IIIA",
+    "material": "Aramid",
+    "image": ""
+  },
+  {
+    "name": "EXFIL (Coyote Brown)",
+    "id": "exfil-(coyote-brown)",
+    "source": "Handshake R.4",
+    "weight": 1.18,
+    "nij": "IIIA",
+    "material": "UHMWPE",
+    "image": ""
+  },
+  {
+    "name": "EXFIL (Multicam)",
+    "id": "exfil-(multicam)",
+    "source": "Handshake R.4",
+    "weight": 1.18,
+    "nij": "IIIA",
+    "material": "UHMWPE",
+    "image": ""
+  },
+  {
+    "name": "MICH TC-2002 (Green)",
+    "id": "mich-tc-2002-(green)",
+    "source": "Handshake R.3",
+    "weight": 1.5,
+    "nij": "IIIA",
+    "material": "Aramid",
+    "image": ""
+  },
+  {
+    "name": "MICH TC-2002 (Tan)",
+    "id": "mich-tc-2002-(tan)",
+    "source": "Handshake R.3",
+    "weight": 1.5,
+    "nij": "IIIA",
+    "material": "MSA",
+    "image": ""
+  },
+  {
+    "name": "MICH TC-2002 (Black)",
+    "id": "mich-tc-2002-(black)",
+    "source": "Loot only",
+    "weight": 1.23,
+    "nij": "IIIA",
+    "material": "Aramid"
+  },
+  {
+    "name": "FAST MT (Multicam)",
+    "id": "fast-mt-(multicam)",
+    "source": "Handshake R.4",
+    "weight": 1.1,
+    "nij": "IIIA",
+    "material": "UHMWPE",
+    "image": ""
+  },
+  {
+    "name": "FAST MT (Tan)",
+    "id": "fast-mt-(tan)",
+    "source": "Handshake R.4",
+    "weight": 1.05,
+    "nij": "IIIA",
+    "material": "Aramid",
+    "image": ""
+  },
+  {
+    "name": "AMP-1 TP MC (Ranger Green)",
+    "id": "amp-1-tp-mc-(ranger-green)",
+    "source": "Loot only",
+    "weight": 1.63,
+    "nij": "IIIA+",
+    "material": "Aramid",
+    "image": ""
+  },
+  {
+    "name": "MICH LC",
+    "id": "mich-lc",
+    "source": "Handshake R.2",
+    "weight": 1.6,
+    "nij": "IIIA",
+    "material": "Aramid",
+    "image": ""
+  },
+  {
+    "name": "BK-ACH",
+    "id": "bk-ach",
+    "source": "Handshake R.3",
+    "weight": 1.4,
+    "nij": "IIIA",
+    "material": "Aramid",
+    "image": ""
+  },
+  {
+    "name": "BK-ACH-HC",
+    "id": "bk-ach-hc",
+    "source": "Handshake R.3",
+    "weight": 1.3,
+    "nij": "IIIA",
+    "material": "Aramid",
+    "image": ""
+  },
+  {
+    "name": "Baseball Cap (Black)",
+    "id": "baseball-cap-(black)",
+    "source": "Loot only",
+    "weight": 0.11,
+    "image": ""
+  },
+  {
+    "name": "Baseball Cap (Khaki)",
+    "id": "baseball-cap-(khaki)",
+    "source": "Handshake R.1",
+    "weight": 0.11,
+    "image": ""
+  },
+  {
+    "name": "Baseball Cap (Green)",
+    "id": "baseball-cap-(green)",
+    "source": "Loot only",
+    "weight": 0.11,
+    "image": ""
+  },
+  {
+    "name": "Baseball Cap (Red)",
+    "id": "baseball-cap-(red)",
+    "source": "Loot only",
+    "weight": 0.11,
+    "image": ""
+  },
+  {
+    "name": "Baseball Cap (Blue)",
+    "id": "baseball-cap-(blue)",
+    "source": "Loot only",
+    "weight": 0.11,
+    "image": ""
+  },
+  {
+    "name": "Pandatac Trucker Cap",
+    "id": "pandatac-trucker-cap",
+    "source": "Handshake R.2",
+    "weight": 0.11,
+    "image": ""
+  },
+  {
+    "name": "ExSOF Cap",
+    "id": "exsof-cap",
+    "source": "Banshee R.1",
+    "weight": 0.08,
+    "image": ""
+  },
+  {
+    "name": "Regiment Cap",
+    "id": "regiment-cap",
+    "source": "Banshee R.4",
+    "weight": 0.11,
+    "image": ""
+  },
+  {
+    "name": "Stack Up Cap",
+    "id": "stack-up-cap",
+    "source": "Banshee R.4",
+    "weight": 0.11,
+    "image": ""
+  },
+  {
+    "name": "Military Cap",
+    "id": "military-cap",
+    "source": "Looting",
+    "weight": 0.07,
+    "image": ""
+  },
+  {
+    "name": "CPU Hat Nyco Ripstop",
+    "id": "cpu-hat-nyco-ripstop",
+    "source": "Handshake R.3",
+    "weight": 0.113,
+    "image": ""
+  },
+  {
+    "name": "Leafy Boonie (Camo)",
+    "id": "leafy-boonie-(camo)",
+    "source": "Handshake R.4",
+    "weight": 0.14,
+    "image": ""
+  },
+  {
+    "name": "Headscarf (Black)",
+    "id": "headscarf-(black)",
+    "source": "Loot only",
+    "weight": 0.06,
+    "image": ""
+  },
+  {
+    "name": "Bandana (Red)",
+    "id": "bandana-(red)",
+    "source": "Loot only",
+    "weight": 0.06,
+    "image": ""
+  },
+  {
+    "name": "Bandana (Blue)",
+    "id": "bandana-(blue)",
+    "source": "Loot only",
+    "weight": 0.06,
+    "image": ""
+  },
+  {
+    "name": "Beret (Black)",
+    "id": "beret-(black)",
+    "source": "Loot only",
+    "weight": 0.06,
+    "image": ""
+  },
+  {
+    "name": "Beret (Red)",
+    "id": "beret-(red)",
+    "source": "Loot only",
+    "weight": 0.06,
+    "image": ""
+  },
+  {
+    "name": "Beret (Green)",
+    "id": "beret-(green)",
+    "source": "Loot only",
+    "weight": 0.06,
+    "image": ""
+  },
+  {
+    "name": "Skull Crusher",
+    "id": "skull-crusher",
+    "source": "Handshake R.1 Banshee R.1",
+    "weight": 0.28,
+    "image": "https://static.wikia.nocookie.net/gray-zone-warfare/images/c/ce/Crusher_icon.png/revision/latest?cb=20250612131038"
+  },
+  {
+    "name": "SSh-68N",
+    "id": "ssh-68n",
+    "source": "Artisan R.1",
+    "weight": 2.0,
+    "nij": "I",
+    "material": "Steel",
+    "image": "https://static.wikia.nocookie.net/gray-zone-warfare/images/5/59/SSh-68N_icon.png/revision/latest?cb=20250612134309"
+  },
+  {
+    "name": "TYPE 66",
+    "id": "type-66",
+    "source": "Artisan R.1",
+    "weight": 1.4,
+    "nij": "I",
+    "material": "Steel",
+    "image": "https://static.wikia.nocookie.net/gray-zone-warfare/images/8/8e/TYPE_66_icon.png/revision/latest?cb=20260406210454"
+  },
+  {
+    "name": "SSh-60",
+    "id": "ssh-60",
+    "source": "Artisan R.1",
+    "weight": 1.3,
+    "nij": "I",
+    "material": "Steel",
+    "image": ""
+  },
+  {
+    "name": "6B47 Ratnik",
+    "id": "6b47-ratnik",
+    "source": "Turncoat R.1",
+    "weight": 1.1,
+    "nij": "II",
+    "material": "Aramid",
+    "image": ""
+  },
+  {
+    "name": "LSHZ 1+ (Multicam)",
+    "id": "lshz-1+-(multicam)",
+    "source": "Turncoat R.3",
+    "weight": 1.3,
+    "nij": "IIIA",
+    "material": "Aramid",
+    "image": ""
+  },
+  {
+    "name": "LSHZ 1+ (Black)",
+    "id": "lshz-1+-(black)",
+    "source": "Turncoat R.3",
+    "weight": 1.3,
+    "nij": "IIIA",
+    "material": "Aramid",
+    "image": ""
+  },
+  {
+    "name": "PASGT",
+    "id": "pasgt",
+    "source": "Handshake R.2",
+    "weight": 1.6,
+    "nij": "II+",
+    "material": "Aramid",
+    "image": ""
+  },
+  {
+    "name": "Mich TC-2000 (Green)",
+    "id": "mich-tc-2000-(green)",
+    "source": "Handshake R.2",
+    "weight": 1.5,
+    "nij": "IIIA",
+    "material": "Aramid",
+    "image": ""
+  },
+  {
+    "name": "Mich TC-2000 (Black)",
+    "id": "mich-tc-2000-(black)",
+    "source": "Handshake R.2",
+    "weight": 1.5,
+    "nij": "IIIA",
+    "material": "Aramid",
+    "image": ""
+  },
+  {
+    "name": "Mich TC-2000 (UNLRA)",
+    "id": "mich-tc-2000-(unlra)",
+    "source": "Loot only",
+    "weight": 1.5,
+    "nij": "IIIA",
+    "material": "Aramid",
+    "image": ""
+  },
+  {
+    "name": "EXFIL (Coyote Brown)",
+    "id": "exfil-(coyote-brown)",
+    "source": "Handshake R.4",
+    "weight": 1.18,
+    "nij": "IIIA",
+    "material": "UHMWPE",
+    "image": ""
+  },
+  {
+    "name": "EXFIL (Multicam)",
+    "id": "exfil-(multicam)",
+    "source": "Handshake R.4",
+    "weight": 1.18,
+    "nij": "IIIA",
+    "material": "UHMWPE",
+    "image": ""
+  },
+  {
+    "name": "MICH TC-2002 (Green)",
+    "id": "mich-tc-2002-(green)",
+    "source": "Handshake R.3",
+    "weight": 1.5,
+    "nij": "IIIA",
+    "material": "Aramid",
+    "image": ""
+  },
+  {
+    "name": "MICH TC-2002 (Tan)",
+    "id": "mich-tc-2002-(tan)",
+    "source": "Handshake R.3",
+    "weight": 1.5,
+    "nij": "IIIA",
+    "material": "MSA",
+    "image": ""
+  },
+  {
+    "name": "MICH TC-2002 (Black)",
+    "id": "mich-tc-2002-(black)",
+    "source": "Loot only",
+    "weight": 1.23,
+    "nij": "IIIA",
+    "material": "Aramid"
+  },
+  {
+    "name": "FAST MT (Multicam)",
+    "id": "fast-mt-(multicam)",
+    "source": "Handshake R.4",
+    "weight": 1.1,
+    "nij": "IIIA",
+    "material": "UHMWPE",
+    "image": ""
+  },
+  {
+    "name": "FAST MT (Tan)",
+    "id": "fast-mt-(tan)",
+    "source": "Handshake R.4",
+    "weight": 1.05,
+    "nij": "IIIA",
+    "material": "Aramid",
+    "image": ""
+  },
+  {
+    "name": "AMP-1 TP MC (Ranger Green)",
+    "id": "amp-1-tp-mc-(ranger-green)",
+    "source": "Loot only",
+    "weight": 1.63,
+    "nij": "IIIA+",
+    "material": "Aramid",
+    "image": ""
+  },
+  {
+    "name": "MICH LC",
+    "id": "mich-lc",
+    "source": "Handshake R.2",
+    "weight": 1.6,
+    "nij": "IIIA",
+    "material": "Aramid",
+    "image": ""
+  },
+  {
+    "name": "BK-ACH",
+    "id": "bk-ach",
+    "source": "Handshake R.3",
+    "weight": 1.4,
+    "nij": "IIIA",
+    "material": "Aramid",
+    "image": ""
+  },
+  {
+    "name": "BK-ACH-HC",
+    "id": "bk-ach-hc",
+    "source": "Handshake R.3",
+    "weight": 1.3,
+    "nij": "IIIA",
+    "material": "Aramid",
+    "image": ""
+  },
+  {
+    "name": "Baseball Cap (Black)",
+    "id": "baseball-cap-(black)",
+    "source": "Loot only",
+    "weight": 0.11,
+    "image": ""
+  },
+  {
+    "name": "Baseball Cap (Khaki)",
+    "id": "baseball-cap-(khaki)",
+    "source": "Handshake R.1",
+    "weight": 0.11,
+    "image": ""
+  },
+  {
+    "name": "Baseball Cap (Green)",
+    "id": "baseball-cap-(green)",
+    "source": "Loot only",
+    "weight": 0.11,
+    "image": ""
+  },
+  {
+    "name": "Baseball Cap (Red)",
+    "id": "baseball-cap-(red)",
+    "source": "Loot only",
+    "weight": 0.11,
+    "image": ""
+  },
+  {
+    "name": "Baseball Cap (Blue)",
+    "id": "baseball-cap-(blue)",
+    "source": "Loot only",
+    "weight": 0.11,
+    "image": ""
+  },
+  {
+    "name": "Pandatac Trucker Cap",
+    "id": "pandatac-trucker-cap",
+    "source": "Handshake R.2",
+    "weight": 0.11,
+    "image": ""
+  },
+  {
+    "name": "ExSOF Cap",
+    "id": "exsof-cap",
+    "source": "Banshee R.1",
+    "weight": 0.08,
+    "image": ""
+  },
+  {
+    "name": "Regiment Cap",
+    "id": "regiment-cap",
+    "source": "Banshee R.4",
+    "weight": 0.11,
+    "image": ""
+  },
+  {
+    "name": "Stack Up Cap",
+    "id": "stack-up-cap",
+    "source": "Banshee R.4",
+    "weight": 0.11,
+    "image": ""
+  },
+  {
+    "name": "Military Cap",
+    "id": "military-cap",
+    "source": "Looting",
+    "weight": 0.07,
+    "image": ""
+  },
+  {
+    "name": "CPU Hat Nyco Ripstop",
+    "id": "cpu-hat-nyco-ripstop",
+    "source": "Handshake R.3",
+    "weight": 0.113,
+    "image": ""
+  },
+  {
+    "name": "Leafy Boonie (Camo)",
+    "id": "leafy-boonie-(camo)",
+    "source": "Handshake R.4",
+    "weight": 0.14,
+    "image": ""
+  },
+  {
+    "name": "Headscarf (Black)",
+    "id": "headscarf-(black)",
+    "source": "Loot only",
+    "weight": 0.06,
+    "image": ""
+  },
+  {
+    "name": "Bandana (Red)",
+    "id": "bandana-(red)",
+    "source": "Loot only",
+    "weight": 0.06,
+    "image": ""
+  },
+  {
+    "name": "Bandana (Blue)",
+    "id": "bandana-(blue)",
+    "source": "Loot only",
+    "weight": 0.06,
+    "image": ""
+  },
+  {
+    "name": "Beret (Black)",
+    "id": "beret-(black)",
+    "source": "Loot only",
+    "weight": 0.06,
+    "image": ""
+  },
+  {
+    "name": "Beret (Red)",
+    "id": "beret-(red)",
+    "source": "Loot only",
+    "weight": 0.06,
+    "image": ""
+  },
+  {
+    "name": "Beret (Green)",
+    "id": "beret-(green)",
+    "source": "Loot only",
+    "weight": 0.06,
+    "image": ""
   }
 ]

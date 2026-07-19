@@ -23,20 +23,20 @@ jobs:
           pip install requests beautifulsoup4 lxml 2>&1 | tail -5
 
       # ── Step 1: Scrape all categories from wiki ──
-      - name: Run scraper (weapons, armor, tasks, attachments)
+      - name: Run scraper (weapons, armor, tasks, attachments, throwables, keys, images)
         run: |
           cd scripts/scraper
           python scrape.py --all 2>&1
         continue-on-error: true
 
-      # ── Step 2: Enrich tasks with objectives/rewards ──
+      # ── Step 2: Enrich tasks with objectives/rewards and find ALL tasks ──
       - name: Enrich task data
         run: |
           cd scripts/scraper
           python enrich_tasks.py 2>&1
         continue-on-error: true
 
-      # ── Step 3: Categorize tasks (main/side/hidden/contract) ──
+      # ── Step 3: Categorize tasks (main/side/hidden/contract/squad) ──
       - name: Categorize tasks
         run: |
           cd scripts/scraper
@@ -49,11 +49,15 @@ jobs:
           cd scripts/scraper
           python gen_frontend_data.py 2>&1
 
-      # ── Step 5: Copy data to frontend ──
+      # ── Step 5: Copy all data to frontend ──
       - name: Copy data to frontend
         run: |
           cp scripts/scraper/data/tasks.json src/data/tasks.json
           cp scripts/scraper/data/weapons.json src/data/weapons.json
+          cp scripts/scraper/data/item_images.json src/data/item_images.json 2>/dev/null || echo "No item_images.json to copy"
+          cp scripts/scraper/data/throwables.json src/data/throwables.json 2>/dev/null || echo "No throwables.json to copy"
+          cp scripts/scraper/data/keys.json src/data/keys.json 2>/dev/null || echo "No keys.json to copy"
+          cp scripts/scraper/data/keycards.json src/data/keycards.json 2>/dev/null || echo "No keycards.json to copy"
           echo "✅ Copied data files to src/data/"
 
       # ── Step 6: Check for data changes ──
@@ -65,6 +69,9 @@ jobs:
             "src/data/weapons.json"
             "src/data/armor.json"
             "src/data/keys.json"
+            "src/data/ammo.json"
+            "src/data/item_images.json"
+            "src/data/throwables.json"
           )
           CHANGED=false
           for f in "${FILES[@]}"; do
@@ -96,9 +103,12 @@ jobs:
             --body "Automated weekly wiki scrape updated:
             - Weapons (\`weapons.json\`)
             - Armor (\`armor.json\`)
-            - Tasks/missions (\`tasks.json\`)
+            - Ammo with penetration data (\`ammo.json\`)
+            - Tasks/missions (\`tasks.json\`) — all categories scraped
             - Task objectives, rewards, categories
-            - Keys (\`keys.json\`)
+            - Keys/Keycards (\`keys.json\`)
+            - Throwables/Grenades (\`throwables.json\`)
+            - Item images (\`item_images.json\`)
 
             Review changes before merging to main." \
             --base main \

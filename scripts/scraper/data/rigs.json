@@ -1,0 +1,93 @@
+[
+  {
+    "name": "6Sh104",
+    "id": "6sh104",
+    "type": "Tactical Rig",
+    "weight": 2.1,
+    "grid": "4x4",
+    "image": "https://static.wikia.nocookie.net/gray-zone-warfare/images/b/b1/4x4_Inventory.png/revision/latest/scale-to-width-down/200?cb=20240509033911"
+  },
+  {
+    "name": "ALICE",
+    "id": "alice",
+    "type": "Tactical Rig",
+    "weight": 0.5,
+    "grid": "2x4"
+  },
+  {
+    "name": "Biker Chest Rig",
+    "id": "biker-chest-rig",
+    "type": "Tactical Rig",
+    "weight": 0.35,
+    "grid": "2x3",
+    "image": "https://static.wikia.nocookie.net/gray-zone-warfare/images/4/49/Biker_inspect.png/revision/latest/scale-to-width-down/200?cb=20240509070242"
+  },
+  {
+    "name": "Broker's Training Mini Rig",
+    "id": "brokers-training-mini-rig",
+    "type": "Tactical Rig",
+    "weight": 0.7,
+    "grid": "3x3",
+    "image": "https://static.wikia.nocookie.net/gray-zone-warfare/images/e/eb/Broker_TMR_inspect.png/revision/latest/scale-to-width-down/193?cb=20260527042204"
+  },
+  {
+    "name": "Improvized Rig",
+    "id": "improvized-rig",
+    "type": "Tactical Rig",
+    "weight": 0.3,
+    "grid": "2x3",
+    "image": "https://static.wikia.nocookie.net/gray-zone-warfare/images/7/7d/IRig_inspect.png/revision/latest/scale-to-width-down/200?cb=20250621182804"
+  },
+  {
+    "name": "Recon Chest Rig",
+    "id": "recon-chest-rig",
+    "type": "Tactical Rig",
+    "weight": 0.82,
+    "grid": "4x3",
+    "image": "https://static.wikia.nocookie.net/gray-zone-warfare/images/3/34/4x3_Inventory.png/revision/latest/scale-to-width-down/200?cb=20250608162448"
+  },
+  {
+    "name": "Small Rig",
+    "id": "small-rig",
+    "type": "Tactical Rig",
+    "weight": 0.3,
+    "grid": "2x3",
+    "image": "https://static.wikia.nocookie.net/gray-zone-warfare/images/d/d6/SRig_inspect.png/revision/latest/scale-to-width-down/173?cb=20240509070417"
+  },
+  {
+    "name": "TacTec Chest Rig",
+    "id": "tactec-chest-rig",
+    "type": "Tactical Rig",
+    "weight": 0.55,
+    "grid": "2x5",
+    "image": "https://static.wikia.nocookie.net/gray-zone-warfare/images/7/72/TacTec_inspect.png/revision/latest/scale-to-width-down/200?cb=20240505172154"
+  },
+  {
+    "name": "Tactical Rigs",
+    "id": "tactical-rigs",
+    "image": "https://static.wikia.nocookie.net/gray-zone-warfare/images/2/25/SRig_icon.png/revision/latest/scale-to-width-down/132?cb=20240509065540"
+  },
+  {
+    "name": "Training Mini Rig",
+    "id": "training-mini-rig",
+    "type": "Tactical Rig",
+    "weight": 0.622,
+    "grid": "3x3",
+    "image": "https://static.wikia.nocookie.net/gray-zone-warfare/images/8/8c/TMR_inspect.png/revision/latest/scale-to-width-down/200?cb=20240505172547"
+  },
+  {
+    "name": "Type 56 AK",
+    "id": "type-56-ak",
+    "type": "Tactical Rig",
+    "weight": 0.4,
+    "grid": "3x2",
+    "image": "https://static.wikia.nocookie.net/gray-zone-warfare/images/b/bb/3x2_Inventory.png/revision/latest/scale-to-width-down/200?cb=20240510000746"
+  },
+  {
+    "name": "Universal Chest Bag",
+    "id": "universal-chest-bag",
+    "type": "Tactical Rig",
+    "weight": 0.3,
+    "image": "https://static.wikia.nocookie.net/gray-zone-warfare/images/d/df/Chest_Bag_inspect.png/revision/latest/scale-to-width-down/199?cb=20240509070313"
+  }
+]

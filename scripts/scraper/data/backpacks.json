@@ -1,0 +1,134 @@
+[
+  {
+    "name": "6Sh118 Ratnik V2",
+    "id": "6sh118-ratnik-v2",
+    "type": "Backpack",
+    "weight": 2.8,
+    "grid": "5x6",
+    "image": "https://static.wikia.nocookie.net/gray-zone-warfare/images/8/84/6Sh118_Ratnik_V2_inspect.png/revision/latest/scale-to-width-down/181?cb=20260404183325"
+  },
+  {
+    "name": "AMP12",
+    "id": "amp12",
+    "type": "Backpack",
+    "weight": 2.63,
+    "grid": "4x5",
+    "image": "https://static.wikia.nocookie.net/gray-zone-warfare/images/5/5d/AMP12_inspect.png/revision/latest/scale-to-width-down/200?cb=20240510004947"
+  },
+  {
+    "name": "Assault Backpack",
+    "id": "assault-backpack",
+    "type": "Backpack",
+    "weight": 1.25,
+    "grid": "3x4",
+    "image": "https://static.wikia.nocookie.net/gray-zone-warfare/images/f/f7/Assault_inspect.png/revision/latest/scale-to-width-down/200?cb=20240512024613"
+  },
+  {
+    "name": "Backpacks",
+    "id": "backpacks",
+    "image": "https://static.wikia.nocookie.net/gray-zone-warfare/images/3/35/2x2_Inventory.png/revision/latest?cb=20240509033218"
+  },
+  {
+    "name": "C2 Bag combat compact backpack",
+    "id": "c2-bag-combat-compact-backpack",
+    "type": "Backpack",
+    "weight": 1.33,
+    "grid": "3x4",
+    "image": "https://static.wikia.nocookie.net/gray-zone-warfare/images/7/7a/C2_Bag_Combat_Compact_Backpack.png/revision/latest/scale-to-width-down/149?cb=20260629194552"
+  },
+  {
+    "name": "Civilian Trekstars 70L Backpack",
+    "id": "civilian-trekstars-70l-backpack",
+    "type": "Backpack",
+    "weight": 2.32,
+    "grid": "6x7",
+    "image": "https://static.wikia.nocookie.net/gray-zone-warfare/images/3/3b/Trekstars_inspect.png/revision/latest/scale-to-width-down/160?cb=20260422184817"
+  },
+  {
+    "name": "Delta Backpack",
+    "id": "delta-backpack",
+    "type": "Backpack",
+    "weight": 2.63,
+    "grid": "6x6",
+    "image": "https://static.wikia.nocookie.net/gray-zone-warfare/images/0/09/Delta_inspect.png/revision/latest/scale-to-width-down/181?cb=20240509053520"
+  },
+  {
+    "name": "Drawstring Backpack",
+    "id": "drawstring-backpack",
+    "type": "Backpack",
+    "weight": 0.1,
+    "grid": "2x2",
+    "image": "https://static.wikia.nocookie.net/gray-zone-warfare/images/9/99/Drawstring_inspect.png/revision/latest/scale-to-width-down/164?cb=20240509070327"
+  },
+  {
+    "name": "Falang 28",
+    "id": "falang-28",
+    "type": "Backpack",
+    "weight": 1.3,
+    "grid": "3x4",
+    "image": "https://static.wikia.nocookie.net/gray-zone-warfare/images/6/6d/Falang_inspect.png/revision/latest/scale-to-width-down/182?cb=20240511180522"
+  },
+  {
+    "name": "Gunfighter 14",
+    "id": "gunfighter-14",
+    "type": "Backpack",
+    "weight": 0.9,
+    "grid": "3x3",
+    "image": "https://static.wikia.nocookie.net/gray-zone-warfare/images/0/02/3x3_Backpack.png/revision/latest/scale-to-width-down/200?cb=20240509033526"
+  },
+  {
+    "name": "JDEN Jam Ball",
+    "id": "jden-jam-ball",
+    "type": "Backpack",
+    "weight": 0.9,
+    "grid": "3x4",
+    "image": "https://static.wikia.nocookie.net/gray-zone-warfare/images/4/47/JDEN_inspect.png/revision/latest/scale-to-width-down/164?cb=20240512024534"
+  },
+  {
+    "name": "Patrol Backpack",
+    "id": "patrol-backpack",
+    "type": "Backpack",
+    "weight": 1.5,
+    "grid": "4x5",
+    "image": "https://static.wikia.nocookie.net/gray-zone-warfare/images/4/41/Patrol_inspect.png/revision/latest/scale-to-width-down/182?cb=20240509205614"
+  },
+  {
+    "name": "Patrol backpack (Coyote)",
+    "id": "patrol-backpack-(coyote)",
+    "type": "Backpack",
+    "weight": 1.5,
+    "image": "https://static.wikia.nocookie.net/gray-zone-warfare/images/0/02/3x3_Backpack.png/revision/latest/scale-to-width-down/200?cb=20240509033526"
+  },
+  {
+    "name": "Rush 72 2.0",
+    "id": "rush-72-2.0",
+    "type": "Backpack",
+    "weight": 2.4,
+    "grid": "5x5",
+    "image": "https://static.wikia.nocookie.net/gray-zone-warfare/images/0/07/Rush_inspect.png/revision/latest/scale-to-width-down/200?cb=20240509054757"
+  },
+  {
+    "name": "Scorpion OCP Convoy Pack",
+    "id": "scorpion-ocp-convoy-pack",
+    "type": "Backpack",
+    "weight": 1.36,
+    "grid": "4x4",
+    "image": "https://static.wikia.nocookie.net/gray-zone-warfare/images/5/51/Scorpion_icon.png/revision/latest/scale-to-width-down/199?cb=20250622125342"
+  },
+  {
+    "name": "Small Tourist Backpack",
+    "id": "small-tourist-backpack",
+    "type": "Backpack",
+    "weight": 0.072,
+    "grid": "2x3",
+    "image": "https://static.wikia.nocookie.net/gray-zone-warfare/images/0/06/STourist_inspect.png/revision/latest/scale-to-width-down/171?cb=20240509070434"
+  },
+  {
+    "name": "Sport Backpack",
+    "id": "sport-backpack",
+    "type": "Backpack",
+    "weight": 0.49,
+    "grid": "3x3",
+    "image": "https://static.wikia.nocookie.net/gray-zone-warfare/images/b/bf/Sport_inspect.png/revision/latest/scale-to-width-down/200?cb=20240509070402"
+  }
+]
