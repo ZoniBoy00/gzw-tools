@@ -244,10 +244,8 @@ select.input {
 .table-wrap th {
   position: sticky;
   top: 0;
-  display: flex;
-  align-items: center;
-  padding: 0 10px;
-  min-height: 36px;
+  text-align: left;
+  padding: 12px 10px;
   color: var(--color-text-muted);
   font-weight: 600;
   text-transform: uppercase;
@@ -257,8 +255,8 @@ select.input {
   white-space: nowrap;
   background: var(--color-surface);
   z-index: 10;
-  line-height: 1;
-  box-sizing: border-box;
+  vertical-align: middle;
+  line-height: normal;
 }
 /* Match all th content — text and icons — in a single line box */
 .table-wrap th i,
