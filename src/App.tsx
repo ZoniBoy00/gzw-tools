@@ -9,15 +9,15 @@ import TabBar from './components/ui/TabBar';
 import { calcRepToDollars, VENDORS, formatNumber } from './lib/calc';
 import './index.css';
 
-type Tab = 'rep' | 'dollar' | 'missions' | 'ammo' | 'armor' | 'weapons';
+type Tab = 'rep' | 'dollar' | 'missions' | 'ammo' | 'weapons' | 'armor';
 
 const TABS: { id: Tab; label: string; icon: string }[] = [
-  { id: 'rep', label: 'Rep → $', icon: '🎯' },
-  { id: 'dollar', label: '$ → Rep', icon: '💰' },
-  { id: 'missions', label: 'Missions', icon: '📋' },
-  { id: 'ammo', label: 'Ammo', icon: '🔫' },
-  { id: 'weapons', label: 'Weapons', icon: '🔧' },
-  { id: 'armor', label: 'Armor', icon: '🛡️' },
+  { id: 'rep', label: 'Rep → $', icon: 'fas fa-bullseye' },
+  { id: 'dollar', label: '$ → Rep', icon: 'fas fa-coins' },
+  { id: 'missions', label: 'Missions', icon: 'fas fa-clipboard-list' },
+  { id: 'ammo', label: 'Ammo', icon: 'fas fa-bolt' },
+  { id: 'weapons', label: 'Weapons', icon: 'fas fa-crosshairs' },
+  { id: 'armor', label: 'Armor', icon: 'fas fa-shield-halved' },
 ];
 
 function App() {
@@ -25,57 +25,62 @@ function App() {
   const [repResult, setRepResult] = useState<ReturnType<typeof calcRepToDollars> | null>(null);
 
   return (
-    <div className="scanlines min-h-screen bg-carbon text-white flex items-start justify-center p-4">
-      <div className="w-full max-w-2xl mt-6 mb-12">
-        {/* Header */}
-        <header className="text-center mb-8">
-          <h1 className="text-3xl font-black tracking-widest uppercase">
-            <span className="text-3xl mr-3">⚔️</span>
-            <span className="text-drab-light">GZW</span>{' '}
-            <span className="text-white">Tools</span>
-          </h1>
-          <p className="text-slate/50 text-sm tracking-wide mt-2">
-            Gray Zone Warfare — Tools & Reference
-          </p>
-          <VendorBar />
-        </header>
+    <div className="scanlines min-h-screen bg-bg text-text">
+      {/* Header */}
+      <header className="border-b border-border">
+        <div className="max-w-5xl mx-auto px-4 py-4 flex items-center justify-between">
+          <div className="flex items-center gap-3">
+            <div className="w-8 h-8 border border-accent/40 flex items-center justify-center">
+              <i className="fas fa-crosshairs text-accent text-sm" />
+            </div>
+            <div>
+              <h1 className="text-sm font-bold tracking-[0.2em] uppercase text-white">
+                <span className="text-accent">GZW</span> Tools
+              </h1>
+              <p className="text-[10px] text-text-muted tracking-[0.1em] uppercase -mt-0.5">
+                Gray Zone Warfare
+              </p>
+            </div>
+          </div>
+          <div className="hidden md:flex items-center gap-3 text-[11px] font-mono text-text-muted">
+            {VENDORS.slice(0, 3).map((v) => (
+              <span key={v.slug} className="flex items-center gap-1.5">
+                <span className="w-1.5 h-1.5 bg-drab" />
+                <span className="text-text-muted">{v.name}</span>
+                <span className="text-text/60">{formatNumber(v.rep)}</span>
+                <span className="text-text-muted/40">/ {formatNumber(v.maxRep)}</span>
+              </span>
+            ))}
+          </div>
+        </div>
+      </header>
 
+      <main className="max-w-5xl mx-auto px-4 py-6">
+        {/* Tab bar */}
         <TabBar tabs={TABS} active={activeTab} onChange={setActiveTab} />
 
         {/* Content */}
-        <main className="mt-6 bg-carbon-light/30 border border-carbon-border/60 rounded-2xl p-5 shadow-2xl backdrop-blur">
+        <div className="mt-5 card p-5 md:p-6">
           {activeTab === 'rep' && <RepCalculator result={repResult} setResult={setRepResult} />}
           {activeTab === 'dollar' && <DollarCalculator />}
           {activeTab === 'missions' && <MissionCalculator />}
           {activeTab === 'ammo' && <AmmoGuide />}
           {activeTab === 'weapons' && <WeaponsGuide />}
           {activeTab === 'armor' && <ArmorGuide />}
-        </main>
+        </div>
+      </main>
 
-        {/* Footer */}
-        <footer className="text-center mt-8 space-y-1">
-          <p className="text-[10px] text-slate/30 font-mono tracking-widest uppercase">
+      {/* Footer */}
+      <footer className="border-t border-border mt-12">
+        <div className="max-w-5xl mx-auto px-4 py-4 text-center">
+          <p className="text-[10px] text-text-muted/40 font-mono tracking-[0.2em] uppercase">
             Gray Zone Warfare · Fan Tool · Not affiliated with M.A.G. Studios
           </p>
-          <p className="text-[11px] text-slate/40">
-            Data from GZW Wiki · Built with React + TypeScript · Hosted on Vercel
+          <p className="text-[10px] text-text-muted/30 font-mono mt-1">
+            Built with React + TypeScript · Data from GZW Wiki
           </p>
-        </footer>
-      </div>
-    </div>
-  );
-}
-
-function VendorBar() {
-  return (
-    <div className="mt-4 flex flex-wrap justify-center gap-x-4 gap-y-1 text-[11px] font-mono text-slate/40">
-      {VENDORS.map((v) => (
-        <span key={v.slug} className="flex items-center gap-1">
-          <span className="w-1.5 h-1.5 rounded-full bg-drab/50" />
-          {v.name}: <span className="text-slate/60">{formatNumber(v.rep)}</span>
-          <span className="text-[9px] text-slate/40">/ {formatNumber(v.maxRep)}</span>
-        </span>
-      ))}
+        </div>
+      </footer>
     </div>
   );
 }

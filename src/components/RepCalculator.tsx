@@ -1,6 +1,5 @@
 import { useState, useEffect, useCallback } from 'react';
 import { calcRepToDollars, formatCurrency, formatNumber, MAX_REP, VENDORS } from '../lib/calc';
-import StatRow from './ui/StatRow';
 
 interface Props {
   result: ReturnType<typeof calcRepToDollars> | null;
@@ -9,11 +8,11 @@ interface Props {
 
 const LS_KEY = 'gzw-rep-calc';
 
-function loadSaved(): { current: string; target: string } {
+function loadSaved() {
   try {
     const saved = localStorage.getItem(LS_KEY);
     if (saved) return JSON.parse(saved);
-  } catch { /* ignore */ }
+  } catch { /* noop */ }
   return { current: '7277', target: String(MAX_REP) };
 }
 
@@ -31,127 +30,109 @@ export default function RepCalculator({ result, setResult }: Props) {
     const c = parseInt(current) || 0;
     const t = parseInt(target) || MAX_REP;
     const r = parseInt(rate) || 100;
-    // Get maxRep from vendor or use default
     const vendor = VENDORS.find((v) => v.slug === selectedVendor);
     const maxRep = vendor?.maxRep ?? Math.max(t, MAX_REP);
     setResult(calcRepToDollars(c, t, r, maxRep));
   }, [current, target, rate, selectedVendor, setResult]);
 
   const pickVendor = (slug: string) => {
-    const vendor = VENDORS.find((v) => v.slug === slug);
-    if (vendor) {
-      setCurrent(String(vendor.rep));
-      setTarget(String(vendor.maxRep));
-      setSelectedVendor(slug);
-    }
+    const v = VENDORS.find((x) => x.slug === slug);
+    if (v) { setCurrent(String(v.rep)); setTarget(String(v.maxRep)); setSelectedVendor(slug); }
   };
 
   return (
     <div>
-      <p className="text-sm text-slate/70 mb-5 leading-relaxed">
-        Calculate how much money you need to reach a target reputation level with a vendor.
-        Every <strong className="text-amber">$100</strong> spent grants{' '}
-        <strong className="text-amber">1 rep point</strong>.
-      </p>
+      <div className="flex items-center gap-2 mb-4">
+        <i className="fas fa-bullseye text-accent text-sm" />
+        <span className="section-title">Rep to Dollars</span>
+      </div>
 
       <div className="grid grid-cols-2 gap-3 mb-4">
-        <InputField label="Current Rep" value={current} onChange={setCurrent} max={MAX_REP} />
-        <InputField label="Target Rep" value={target} onChange={setTarget} max={MAX_REP} />
+        <div>
+          <label className="text-[10px] font-mono font-bold uppercase tracking-[0.1em] text-text-muted mb-1.5 block">
+            <i className="fas fa-arrow-right-to-bracket text-accent/60 mr-1" />
+            Current Rep
+          </label>
+          <input type="number" value={current} onChange={(e) => setCurrent(e.target.value)} min="0" max={MAX_REP} className="input" />
+        </div>
+        <div>
+          <label className="text-[10px] font-mono font-bold uppercase tracking-[0.1em] text-text-muted mb-1.5 block">
+            <i className="fas fa-bullseye text-accent/60 mr-1" />
+            Target Rep
+          </label>
+          <input type="number" value={target} onChange={(e) => setTarget(e.target.value)} min="0" max={MAX_REP} className="input" />
+        </div>
       </div>
 
       <div className="mb-4">
-        <label className="block text-xs font-semibold text-slate/50 uppercase tracking-widest mb-1.5">
+        <label className="text-[10px] font-mono font-bold uppercase tracking-[0.1em] text-text-muted mb-1.5 block">
+          <i className="fas fa-dollar-sign text-accent/60 mr-1" />
           $ / Rep Point
         </label>
-        <input
-          type="number"
-          value={rate}
-          onChange={(e) => setRate(e.target.value)}
-          min="1"
-          className="w-full bg-carbon-light border border-carbon-border rounded-lg px-3 py-2.5 text-white font-mono font-medium focus:border-amber focus:outline-none transition-colors"
-        />
+        <input type="number" value={rate} onChange={(e) => setRate(e.target.value)} min="1" className="input" />
       </div>
 
       <div className="mb-5">
-        <label className="block text-xs font-semibold text-slate/50 uppercase tracking-widest mb-2">
-          Quick Pick — Vendor
+        <label className="text-[10px] font-mono font-bold uppercase tracking-[0.1em] text-text-muted mb-2 block">
+          <i className="fas fa-user text-accent/60 mr-1" />
+          Vendor Quick Pick
         </label>
-        <div className="flex flex-wrap gap-2">
+        <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
           {VENDORS.map((v) => (
             <button
               key={v.slug}
               onClick={() => pickVendor(v.slug)}
-              className={`group relative px-3 py-2 text-xs font-medium border rounded-lg transition-all ${
+              className={`text-left px-3 py-2 text-xs font-mono border transition-colors ${
                 selectedVendor === v.slug
-                  ? 'bg-drab/30 border-drab text-sand'
-                  : 'bg-carbon-light/50 border-carbon-border text-slate/70 hover:border-drab hover:text-sand'
+                  ? 'border-accent/50 bg-accent/5 text-accent'
+                  : 'border-border text-text-muted hover:border-text-muted/30 hover:text-text/80'
               }`}
             >
-              <span className="block font-semibold">{v.name}</span>
-              <span className="block text-[10px] opacity-50">
-                {formatNumber(v.rep)} → {formatNumber(v.maxRep)}
-              </span>
+              <div className="font-bold tracking-wide">{v.name}</div>
+              <div className="text-[10px] opacity-60">{formatNumber(v.rep)} → {formatNumber(v.maxRep)}</div>
             </button>
           ))}
         </div>
       </div>
 
-      <button
-        onClick={calculate}
-        className="w-full py-3 bg-drab hover:bg-drab-light text-white font-bold rounded-lg transition-all text-base tracking-wide uppercase"
-      >
+      <button onClick={calculate} className="btn btn-primary w-full">
+        <i className="fas fa-calculator" />
         Calculate
       </button>
 
       {result && (
-        <div className="mt-5 p-4 bg-carbon-light/50 rounded-lg border border-carbon-border/50">
-          <div className="flex justify-between items-center mb-4 pb-4 border-b border-carbon-border/50">
-            <span className="text-sm text-slate/60">Total Required</span>
-            <span className="text-2xl font-bold font-mono text-amber">
+        <div className="mt-5 p-4 bg-surface-2 border border-border">
+          <div className="flex justify-between items-center mb-3">
+            <span className="text-xs text-text-muted uppercase tracking-wide font-mono">Total Required</span>
+            <span className="text-2xl font-bold font-mono text-accent text-glow">
               {formatCurrency(result.cost)}
             </span>
           </div>
-
-          <div className="space-y-2 text-sm font-mono">
-            <StatRow label="Current Rep" value={formatNumber(result.current)} mono />
-            <StatRow label="Target Rep" value={formatNumber(result.target)} mono />
-            <StatRow label="Rep Needed" value={`+${formatNumber(result.diff)}`} highlight mono />
-            <StatRow label="Rate" value={formatCurrency(result.rate)} mono />
-            <StatRow label="Max Rep" value={formatNumber(result.maxRep)} mono />
+          <div className="divider" />
+          <div className="space-y-1.5 text-xs font-mono">
+            {[
+              { label: 'Current Rep', value: formatNumber(result.current) },
+              { label: 'Target Rep', value: formatNumber(result.target) },
+              { label: 'Rep Needed', value: `+${formatNumber(result.diff)}`, accent: true },
+              { label: 'Rate', value: formatCurrency(result.rate) },
+              { label: 'Max Rep', value: formatNumber(result.maxRep) },
+            ].map((r) => (
+              <div key={r.label} className="flex justify-between">
+                <span className="text-text-muted">{r.label}</span>
+                <span className={`font-medium ${r.accent ? 'text-accent' : 'text-text'}`}>{r.value}</span>
+              </div>
+            ))}
           </div>
-
-          <div className="mt-4 pt-4 border-t border-carbon-border/50">
-            <div className="flex justify-between text-xs text-slate/50 mb-1.5">
-              <span>0</span>
-              <span>{formatNumber(result.current)} / {formatNumber(result.maxRep)}</span>
-            </div>
-            <div className="h-2 bg-carbon-border/30 rounded-full overflow-hidden">
-              <div
-                className="h-full rounded-full bg-gradient-to-r from-drab to-amber transition-all duration-700"
-                style={{ width: `${result.progressAfterPct}%` }}
-              />
-            </div>
+          <div className="divider" />
+          <div className="flex justify-between text-[10px] font-mono text-text-muted mb-1">
+            <span>0</span>
+            <span>{formatNumber(result.current)} / {formatNumber(result.maxRep)}</span>
+          </div>
+          <div className="progress">
+            <div className="progress-fill amber" style={{ width: `${result.progressAfterPct}%` }} />
           </div>
         </div>
       )}
-    </div>
-  );
-}
-
-function InputField({ label, value, onChange, max }: { label: string; value: string; onChange: (v: string) => void; max: number }) {
-  return (
-    <div>
-      <label className="block text-xs font-semibold text-slate/50 uppercase tracking-widest mb-1.5">
-        {label}
-      </label>
-      <input
-        type="number"
-        value={value}
-        onChange={(e) => onChange(e.target.value)}
-        min="0"
-        max={max}
-        className="w-full bg-carbon-light border border-carbon-border rounded-lg px-3 py-2.5 text-white font-mono font-medium focus:border-amber focus:outline-none transition-colors"
-      />
     </div>
   );
 }

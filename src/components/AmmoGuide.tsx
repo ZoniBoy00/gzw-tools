@@ -1,11 +1,11 @@
 import { useState, useMemo } from 'react';
-import { CALIBERS, AMMO } from '../data/ammo';
+import { AMMO, CALIBERS } from '../data/ammo';
 import { ARMOR_CLASSES } from '../data/types';
 
 const PEN: Record<number, { label: string; cls: string }> = {
-  0: { label: '✕', cls: 'bg-red-900/60 text-red-300' },
-  1: { label: '~', cls: 'bg-amber-900/60 text-amber-300' },
-  2: { label: '✓', cls: 'bg-green-900/60 text-green-300' },
+  0: { label: '✕', cls: 'text-red-400 bg-red-900/20' },
+  1: { label: '~', cls: 'text-amber-400 bg-amber-900/20' },
+  2: { label: '•', cls: 'text-green-400 bg-green-900/20' },
 };
 
 export default function AmmoGuide() {
@@ -13,101 +13,80 @@ export default function AmmoGuide() {
   const [search, setSearch] = useState('');
 
   const filtered = useMemo(() => {
-    const byCaliber = AMMO.filter((a) => a.caliber === caliber);
-    if (!search.trim()) return byCaliber;
+    const byCal = AMMO.filter((a) => a.caliber === caliber);
+    if (!search.trim()) return byCal;
     const q = search.toLowerCase();
-    return byCaliber.filter((a) => a.name.toLowerCase().includes(q));
+    return byCal.filter((a) => a.name.toLowerCase().includes(q));
   }, [caliber, search]);
 
   return (
     <div>
-      <p className="text-sm text-slate/70 mb-4 leading-relaxed">
-        Ammunition penetration chart. Ratings reflect effectiveness against each NIJ armor class.
-      </p>
+      <div className="flex items-center gap-2 mb-4">
+        <i className="fas fa-bolt text-accent text-sm" />
+        <span className="section-title">Ammunition Penetration Chart</span>
+      </div>
 
-      <div className="flex gap-2 mb-4 flex-wrap">
+      <div className="flex gap-2 mb-4">
         <input
           type="text"
           value={search}
           onChange={(e) => setSearch(e.target.value)}
           placeholder="Search ammo..."
-          className="flex-1 min-w-[140px] bg-carbon-light border border-carbon-border rounded-lg px-3 py-2 text-sm text-white font-mono placeholder:text-slate/50 focus:border-drab focus:outline-none transition-colors"
+          className="input flex-1 min-w-[120px]"
         />
-        <select
-          value={caliber}
-          onChange={(e) => setCaliber(e.target.value)}
-          className="bg-carbon-light border border-carbon-border rounded-lg px-3 py-2 text-sm text-white font-mono focus:border-drab focus:outline-none transition-colors"
-        >
-          {CALIBERS.map((c) => (
-            <option key={c} value={c}>{c}</option>
-          ))}
+        <select value={caliber} onChange={(e) => setCaliber(e.target.value)} className="input w-auto">
+          {CALIBERS.map((c) => <option key={c} value={c}>{c}</option>)}
         </select>
       </div>
 
-      <div className="overflow-x-auto">
-        <table className="w-full text-xs font-mono">
+      <div className="table-wrap">
+        <table>
           <thead>
-            <tr className="border-b border-carbon-border">
-              <TH>Name</TH>
-              <TH right>m/s</TH>
-              <TH right>Acc</TH>
-              <TH right>Dur</TH>
-              <TH center title="Subsonic">S</TH>
-              <TH center title="Tracer">T</TH>
-              {ARMOR_CLASSES.map((ac) => <TH key={ac} center>{ac}</TH>)}
+            <tr>
+              <th>Name</th><th className="text-right">m/s</th><th className="text-right">Acc</th><th className="text-right">Dur</th>
+              <th className="text-center" title="Subsonic"><i className="fas fa-ear-deaf text-xs" /></th>
+              <th className="text-center" title="Tracer"><i className="fas fa-fire text-xs" /></th>
+              {ARMOR_CLASSES.map((ac) => <th key={ac} className="text-center">{ac}</th>)}
             </tr>
           </thead>
           <tbody>
-            {filtered.map((round, i) => (
-              <tr key={i} className="border-b border-carbon-border/30 hover:bg-carbon-light/30 transition-colors">
-                <td className="py-2 pr-3 text-white font-medium sticky left-0 bg-carbon-light/95">
-                  {round.name}
-                  <span className="text-[10px] text-slate/50 ml-1.5 font-normal">
-                    {round.vendor ? `${round.vendor} R.${round.repLevel}` : round.source}
+            {filtered.map((r, i) => (
+              <tr key={i}>
+                <td className="font-medium">
+                  {r.name}
+                  <span className="text-[10px] text-text-muted ml-1.5 font-normal">
+                    {r.vendor ? `${r.vendor} R.${r.repLevel}` : r.source}
                   </span>
                 </td>
-                <td className="text-right py-2 px-2 text-slate/60">{round.speed}</td>
-                <td className={`text-right py-2 px-2 ${accColor(round.accMod)}`}>{fmtAcc(round.accMod)}</td>
-                <td className={`text-right py-2 px-2 ${round.durMod < 0 ? 'text-red-400' : 'text-slate/60'}`}>
-                  {round.durMod || '-'}
+                <td className="text-right text-text-muted">{r.speed}</td>
+                <td className={`text-right ${r.accMod > 0 ? 'text-green' : r.accMod < 0 ? 'text-red' : 'text-text-muted'}`}>
+                  {r.accMod > 0 ? `+${r.accMod}` : r.accMod || '0'}
                 </td>
-                <td className="text-center py-2 px-2 text-slate/60">{round.subsonic ? '🔇' : '-'}</td>
-                <td className="text-center py-2 px-2 text-slate/60">{round.tracer ? '🔥' : '-'}</td>
+                <td className={`text-right ${r.durMod < 0 ? 'text-red' : 'text-text-muted'}`}>{r.durMod || '-'}</td>
+                <td className="text-center text-text-muted">{r.subsonic ? <i className="fas fa-ear-deaf text-green/60" /> : '-'}</td>
+                <td className="text-center text-text-muted">{r.tracer ? <i className="fas fa-fire text-accent/60" /> : '-'}</td>
                 {ARMOR_CLASSES.map((ac) => {
-                  const p = PEN[round.pen[ac] ?? 0];
-                  return <td key={ac} className={`text-center py-2 px-1.5 rounded-sm ${p.cls}`}>{p.label}</td>;
+                  const p = PEN[r.pen[ac] ?? 0];
+                  return <td key={ac} className={`text-center text-xs ${p.cls}`}>{p.label}</td>;
                 })}
               </tr>
             ))}
             {filtered.length === 0 && (
-              <tr><td colSpan={14} className="text-center py-8 text-slate/50">No ammo found</td></tr>
+              <tr><td colSpan={14} className="text-center py-8 text-text-muted">No ammo found</td></tr>
             )}
           </tbody>
         </table>
       </div>
 
-      <div className="mt-4 flex flex-wrap gap-4 text-xs text-slate/50 font-mono">
+      <div className="flex flex-wrap gap-4 mt-4 text-[11px] font-mono text-text-muted">
         {Object.entries(PEN).map(([k, v]) => (
           <span key={k} className="flex items-center gap-1.5">
-            <span className={`w-3 h-3 rounded ${v.cls}`} /> {v.label} = {['Pointless', 'Magdump only', 'Usually ignores'][+k]}
+            <span className={`w-2.5 h-2.5 ${v.cls}`} /> {v.label} = {['Pointless', 'Magdump only', 'Usually ignores'][+k]}
           </span>
         ))}
-        <span>🔇 = Subsonic</span>
-        <span>🔥 = Tracer</span>
+        <span className="flex items-center gap-1"><i className="fas fa-ear-deaf text-green/60" /> Subsonic</span>
+        <span className="flex items-center gap-1"><i className="fas fa-fire text-accent/60" /> Tracer</span>
       </div>
     </div>
   );
-}
-
-function TH({ children, right, center, title }: { children: React.ReactNode; right?: boolean; center?: boolean; title?: string }) {
-  const align = right ? 'text-right' : center ? 'text-center' : 'text-left';
-  return <th className={`${align} py-2 px-1.5 text-slate/50 font-semibold min-w-[28px]`} title={title}>{children}</th>;
-}
-
-function accColor(v: number): string {
-  return v > 0 ? 'text-green-400' : v < 0 ? 'text-red-400' : 'text-slate/60';
-}
-
-function fmtAcc(v: number): string {
-  return v > 0 ? `+${v}` : String(v || '0');
 }

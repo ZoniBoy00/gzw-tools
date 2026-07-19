@@ -1,63 +1,287 @@
 @import "tailwindcss";
+@import "@fortawesome/fontawesome-free/css/all.min.css";
 
-/* ── Gray Zone Warfare — Tactical Theme ── */
+/* ── GZW Tools — Tactical Modern Theme ── */
 
 @theme {
   --color-*: initial;
-  --color-og: #1b2b1b;
-  --color-og-light: #2a3f2a;
-  --color-og-lighter: #3a5a3a;
+  --color-bg: #0a0c10;
+  --color-surface: #111318;
+  --color-surface-2: #181b24;
+  --color-surface-3: #1e2230;
+  --color-border: #1e2230;
+  --color-border-light: #2a3044;
+  --color-text: #e8eaed;
+  --color-text-muted: #7a7f8e;
+  --color-accent: #f0b429;
+  --color-accent-hover: #f5c542;
+  --color-green: #22c55e;
+  --color-green-dim: #166534;
+  --color-red: #ef4444;
+  --color-blue: #3b82f6;
   --color-drab: #4a5d23;
-  --color-drab-light: #5e7330;
-  --color-sand: #c4a56e;
-  --color-sand-light: #d4c08a;
-  --color-amber: #f0b429;
-  --color-amber-light: #f5c542;
-  --color-crimson: #8b1a1a;
-  --color-crimson-light: #b91c1c;
-  --color-steel: #4a5568;
-  --color-steel-light: #6b7a8f;
-  --color-carbon: #0f1215;
-  --color-carbon-light: #1a1f26;
-  --color-carbon-lighter: #242b36;
-  --color-carbon-border: #2d3645;
-  --color-slate: #8892a0;
-  --color-slate-light: #a0aaba;
-  --color-white: #f0f2f5;
-  --color-danger: #dc2626;
+  --color-drab-hover: #5e7330;
 }
 
 :root {
-  font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+  font-family: 'JetBrains Mono', 'Fira Code', monospace;
   color-scheme: dark;
 }
 
 body {
-  background: var(--color-carbon);
-  color: var(--color-white);
+  background: var(--color-bg);
+  color: var(--color-text);
   min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
 }
 
-/* Military HUD digits */
-.font-mono {
-  font-family: 'JetBrains Mono', 'Fira Code', 'Consolas', monospace;
-}
-
-/* Scanline overlay for tactical feel */
+/* ── Scanline overlay ── */
 .scanlines::after {
   content: '';
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
+  inset: 0;
   pointer-events: none;
-  background: repeating-linear-gradient(
-    0deg,
-    transparent,
-    transparent 2px,
-    rgba(0, 0, 0, 0.03) 2px,
-    rgba(0, 0, 0, 0.03) 4px
-  );
+  background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,0.03) 2px, rgba(0,0,0,0.03) 4px);
   z-index: 9999;
 }
+
+/* ── Glow effects ── */
+.glow-amber {
+  box-shadow: 0 0 20px rgba(240, 180, 41, 0.15);
+}
+.glow-green {
+  box-shadow: 0 0 20px rgba(34, 197, 94, 0.15);
+}
+.text-glow {
+  text-shadow: 0 0 20px rgba(240, 180, 41, 0.3);
+}
+.text-glow-green {
+  text-shadow: 0 0 20px rgba(34, 197, 94, 0.3);
+}
+
+/* ── Card ── */
+.card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 0;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+.card:hover {
+  border-color: var(--color-border-light);
+}
+.card-highlight {
+  border-color: rgba(240, 180, 41, 0.2);
+}
+.card-highlight:hover {
+  border-color: rgba(240, 180, 41, 0.4);
+  box-shadow: 0 0 30px rgba(240, 180, 41, 0.08);
+}
+
+/* ── Buttons ── */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 10px 24px;
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 600;
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: all 0.2s;
+  border-radius: 0;
+}
+.btn-primary {
+  background: var(--color-accent);
+  color: #0a0c10;
+  border-color: var(--color-accent);
+}
+.btn-primary:hover {
+  background: var(--color-accent-hover);
+  box-shadow: 0 0 25px rgba(240, 180, 41, 0.25);
+}
+.btn-outline {
+  background: transparent;
+  color: var(--color-text-muted);
+  border-color: var(--color-border-light);
+}
+.btn-outline:hover {
+  color: var(--color-text);
+  border-color: var(--color-text-muted);
+  background: var(--color-surface-2);
+}
+.btn-drab {
+  background: var(--color-drab);
+  color: #fff;
+  border-color: var(--color-drab);
+}
+.btn-drab:hover {
+  background: var(--color-drab-hover);
+  box-shadow: 0 0 25px rgba(74, 93, 35, 0.3);
+}
+.btn-sm {
+  padding: 6px 14px;
+  font-size: 11px;
+}
+
+/* ── Inputs ── */
+.input {
+  width: 100%;
+  padding: 10px 14px;
+  background: var(--color-surface-2);
+  border: 1px solid var(--color-border);
+  color: var(--color-text);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 14px;
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  border-radius: 0;
+}
+.input:focus {
+  border-color: var(--color-accent);
+  box-shadow: 0 0 15px rgba(240, 180, 41, 0.1);
+}
+.input::placeholder {
+  color: var(--color-text-muted);
+  opacity: 0.4;
+}
+.input-sm {
+  padding: 8px 12px;
+  font-size: 12px;
+}
+
+/* ── Select ── */
+select.input {
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%237a7f8e' stroke-width='1.5' fill='none'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  padding-right: 36px;
+}
+
+/* ── Tabs ── */
+.tab-bar {
+  display: flex;
+  gap: 2px;
+  background: var(--color-surface-2);
+  padding: 3px;
+  overflow-x: auto;
+}
+.tab {
+  flex-shrink: 0;
+  padding: 8px 16px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--color-text-muted);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s;
+  border-radius: 0;
+}
+.tab:hover {
+  color: var(--color-text);
+}
+.tab.active {
+  background: var(--color-surface-3);
+  color: var(--color-accent);
+  box-shadow: 0 0 15px rgba(240, 180, 41, 0.08);
+}
+
+/* ── Table ── */
+.table-wrap {
+  overflow-x: auto;
+}
+.table-wrap table {
+  width: 100%;
+  font-size: 12px;
+  font-family: 'JetBrains Mono', monospace;
+  border-collapse: collapse;
+}
+.table-wrap th {
+  text-align: left;
+  padding: 10px 10px;
+  color: var(--color-text-muted);
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 10px;
+  letter-spacing: 0.5px;
+  border-bottom: 1px solid var(--color-border);
+  white-space: nowrap;
+}
+.table-wrap td {
+  padding: 8px 10px;
+  border-bottom: 1px solid rgba(30, 34, 48, 0.5);
+}
+.table-wrap tr:hover td {
+  background: rgba(30, 34, 48, 0.3);
+}
+
+/* ── Tags / Badges ── */
+.tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 8px;
+  font-size: 10px;
+  font-weight: 600;
+  font-family: 'JetBrains Mono', monospace;
+  text-transform: uppercase;
+}
+.tag-amber {
+  background: rgba(240, 180, 41, 0.15);
+  color: var(--color-accent);
+}
+.tag-green {
+  background: rgba(34, 197, 94, 0.15);
+  color: var(--color-green);
+}
+.tag-drab {
+  background: rgba(74, 93, 35, 0.2);
+  color: #8ba34e;
+}
+
+/* ── Progress bar ── */
+.progress {
+  height: 4px;
+  background: var(--color-surface-2);
+  overflow: hidden;
+}
+.progress-fill {
+  height: 100%;
+  transition: width 0.5s ease;
+}
+.progress-fill.amber {
+  background: linear-gradient(90deg, var(--color-drab), var(--color-accent));
+}
+.progress-fill.green {
+  background: linear-gradient(90deg, var(--color-drab), var(--color-green));
+}
+
+/* ── Misc ── */
+.section-title {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: var(--color-text-muted);
+  margin-bottom: 12px;
+}
+.divider {
+  height: 1px;
+  background: var(--color-border);
+  margin: 16px 0;
+}
+
+/* ── Scrollbar ── */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: var(--color-bg); }
+::-webkit-scrollbar-thumb { background: var(--color-border-light); }
+::-webkit-scrollbar-thumb:hover { background: var(--color-text-muted); }
