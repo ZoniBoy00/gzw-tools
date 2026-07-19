@@ -117,7 +117,7 @@ export default function AmmoGuide() {
 
       {/* Main table */}
       <div className="table-wrap table-mobile-cards">
-        <table role="table" aria-label="Ammunition penetration data">
+        <table className="ammo-table" role="table" aria-label="Ammunition penetration data">
           <thead>
             <tr>
               <th role="columnheader">Name</th>
