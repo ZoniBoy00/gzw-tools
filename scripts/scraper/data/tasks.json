@@ -267,7 +267,7 @@
     "name": "Double Exposure",
     "vendor": "Turncoat",
     "area": "Fort Narith",
-    "type": "unknown",
+    "type": "side",
     "objectives": [
       "Bring the first package to an office building near Fort Narith main entrance",
       "Pick up the first package inside a barn at the Xiong Family Farm",
@@ -276,7 +276,7 @@
       "Ensure your survival and do not lose those packages"
     ],
     "reward_text": "Rewards Reputation with Turncoat $1,880 I applaud your expertise, friend! I'm sure that once the two gentlemen learn what I know about them, they will hastily fall in line. Thank you very much for taking care of this little matter for me.",
-    "category": "unknown"
+    "category": "side_task"
   },
   {
     "id": "downsizing",
@@ -1161,7 +1161,7 @@
     "name": "Radio Star",
     "vendor": "Handshake",
     "area": "Lamang",
-    "type": "unknown",
+    "type": "main",
     "objectives": [
       "Exterior of the objective building",
       "Exterior of the objective building",
@@ -1171,7 +1171,7 @@
       "Interior of the building with the radio equipment"
     ],
     "reward_text": "Rewards Reputation with Handshake Great fucking job, man. You made sure these radio amateurs won't be overhearing shit from now on. I just hope this is the last of them.",
-    "category": "unknown"
+    "category": "main_task"
   },
   {
     "id": "rebel-scum",
@@ -1915,5 +1915,213 @@
     "area": "Ban Pa",
     "type": "side",
     "category": "side_task"
+  },
+  {
+    "id": "breadcrumbs",
+    "name": "Breadcrumbs",
+    "vendor": "",
+    "area": "Pha Lang Airfield",
+    "type": "contract",
+    "category": "contract"
+  },
+  {
+    "id": "cache-report",
+    "name": "Cache Report",
+    "vendor": "",
+    "area": "YBL-1",
+    "type": "contract",
+    "category": "contract"
+  },
+  {
+    "id": "cache-report-iii",
+    "name": "Cache Report III",
+    "vendor": "",
+    "area": "Sawmill",
+    "type": "contract",
+    "category": "contract"
+  },
+  {
+    "id": "cache-report-iv",
+    "name": "Cache Report IV",
+    "vendor": "",
+    "area": "Hunter's Paradise",
+    "type": "contract",
+    "category": "contract"
+  },
+  {
+    "id": "cache-report-v",
+    "name": "Cache Report V",
+    "vendor": "",
+    "area": "Midnight Sapphire",
+    "type": "contract",
+    "category": "contract"
+  },
+  {
+    "id": "cache-report-vi",
+    "name": "Cache Report VI",
+    "vendor": "",
+    "area": "South east ofPha Lang Airfield",
+    "type": "contract",
+    "category": "contract"
+  },
+  {
+    "id": "cache-report-vii",
+    "name": "Cache Report VII",
+    "vendor": "",
+    "area": "Tiger Bay",
+    "type": "contract",
+    "category": "contract"
+  },
+  {
+    "id": "cache-report-viii",
+    "name": "Cache Report VIII",
+    "vendor": "",
+    "area": "Blue Lagoon",
+    "type": "contract",
+    "category": "contract"
+  },
+  {
+    "id": "combat-sweep-ii",
+    "name": "Combat Sweep II",
+    "vendor": "",
+    "area": "Sawmill",
+    "type": "contract",
+    "category": "contract"
+  },
+  {
+    "id": "combat-sweep-v",
+    "name": "Combat Sweep V",
+    "vendor": "",
+    "area": "Midnight Sapphire",
+    "type": "contract",
+    "category": "contract"
+  },
+  {
+    "id": "combat-sweep-vii",
+    "name": "Combat Sweep VII",
+    "vendor": "",
+    "area": "Ban Pa",
+    "type": "contract",
+    "category": "contract"
+  },
+  {
+    "id": "escort-ii",
+    "name": "Escort II",
+    "vendor": "",
+    "area": "Blue Lagoon",
+    "type": "contract",
+    "category": "contract"
+  },
+  {
+    "id": "fuel-shortage",
+    "name": "Fuel Shortage",
+    "vendor": "",
+    "area": "Sawmill",
+    "type": "contract",
+    "category": "contract"
+  },
+  {
+    "id": "muddy-buddy",
+    "name": "Muddy Buddy",
+    "vendor": "",
+    "area": "Ban Pa",
+    "type": "contract",
+    "category": "contract"
+  },
+  {
+    "id": "nicked-shipment",
+    "name": "Nicked Shipment",
+    "vendor": "",
+    "area": "Hunter's Paradise",
+    "type": "contract",
+    "category": "contract"
+  },
+  {
+    "id": "repossession",
+    "name": "Repossession",
+    "vendor": "",
+    "area": "Fort Narith",
+    "type": "contract",
+    "category": "contract"
+  },
+  {
+    "id": "repossession-iii",
+    "name": "Repossession III",
+    "vendor": "",
+    "area": "Blue Lagoon",
+    "type": "contract",
+    "category": "contract"
+  },
+  {
+    "id": "repossession-iv",
+    "name": "Repossession IV",
+    "vendor": "",
+    "area": "Pha Lang Airfield",
+    "type": "contract",
+    "category": "contract"
+  },
+  {
+    "id": "repossession-ix",
+    "name": "Repossession IX",
+    "vendor": "",
+    "area": "Tiger Bay",
+    "type": "contract",
+    "category": "contract"
+  },
+  {
+    "id": "repossession-v",
+    "name": "Repossession V",
+    "vendor": "",
+    "area": "Blue Lagoon",
+    "type": "contract",
+    "category": "contract"
+  },
+  {
+    "id": "repossession-vi",
+    "name": "Repossession VI",
+    "vendor": "",
+    "area": "Pha Lang Airfield",
+    "type": "contract",
+    "category": "contract"
+  },
+  {
+    "id": "repossession-vii",
+    "name": "Repossession VII",
+    "vendor": "",
+    "area": "YBL-1",
+    "type": "contract",
+    "category": "contract"
+  },
+  {
+    "id": "repossession-viii",
+    "name": "Repossession VIII",
+    "vendor": "",
+    "area": "Blue Lagoon",
+    "type": "contract",
+    "category": "contract"
+  },
+  {
+    "id": "restoring-order",
+    "name": "Restoring Order",
+    "vendor": "",
+    "area": "Kiu Vongsa,Nam Thaven,Pha Lang",
+    "type": "contract",
+    "category": "contract"
+  },
+  {
+    "id": "the-liberator",
+    "name": "The Liberator",
+    "vendor": "",
+    "area": "Ban Pa",
+    "type": "contract",
+    "category": "contract"
+  },
+  {
+    "id": "unstable-meeting",
+    "name": "Unstable Meeting",
+    "vendor": "",
+    "area": "YBL-1",
+    "type": "contract",
+    "category": "contract"
   }
 ]
