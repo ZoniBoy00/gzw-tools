@@ -3,14 +3,14 @@ import { NavLink } from 'react-router-dom';
 type TabItem = { id: string; label: string; icon?: string; path?: string };
 
 interface NavProps {
-  tabs: TabItem[];
+  tabs: readonly TabItem[];
   /** If set, uses NavLink routing. Otherwise uses button+onChange */
   active?: never;
   onChange?: never;
 }
 
 interface SelectorProps<T extends string> {
-  tabs: { id: T; label: string; icon?: string; path?: never }[];
+  tabs: readonly { id: T; label: string; icon?: string; path?: never }[];
   active: T;
   onChange: (id: T) => void;
 }
@@ -28,7 +28,7 @@ export default function TabBar<T extends string>(props: Props<T>) {
             key={tab.id}
             to={tab.path || '/'}
             end={tab.path === '/'}
-            className={({ isActive }) => `tab ${isActive ? 'active' : ''}`}
+            className={({ isActive }: { isActive: boolean }) => `tab ${isActive ? 'active' : ''}`}
           >
             {tab.icon && <i className={`${tab.icon} mr-1.5`} />}
             {tab.label}
