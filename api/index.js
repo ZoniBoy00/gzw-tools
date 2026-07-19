@@ -227,7 +227,7 @@ function json(data, code = 200, req) {
 
   const tag = etag(body);
   if (req) {
-    const ifNoneMatch = req.headers.get('if-none-match');
+    const ifNoneMatch = typeof req.headers.get === 'function' ? req.headers.get('if-none-match') : req.headers['if-none-match'];
     if (ifNoneMatch === `"${tag}"`) {
       return new Response(null, { status: 304, headers: { 'ETag': `"${tag}"` } });
     }
@@ -251,7 +251,8 @@ function error(msg, code = 400, req) {
 // ─── Router ───
 
 export default async function handler(req) {
-  const url = new URL(req.url);
+  const host = req.headers?.get ? req.headers.get('host') : (req.headers?.host || 'localhost');
+  const url = new URL(req.url, `https://${host}`);
   const path = url.pathname.replace(/\/$/, '').replace('/api', '') || '/';
   const method = req.method;
 
