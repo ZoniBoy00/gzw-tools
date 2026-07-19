@@ -39,7 +39,7 @@ export default function MissionFinder() {
     for (const c of cats) {
       const count = tasks.filter((t) => t.category === c || t.type === c).length;
       if (count > 0) {
-        const labels: Record<string, string> = { main_task: 'Main Tasks', side_task: 'Side Tasks', hidden_task: 'Hidden Tasks', squad_strike: 'Squad Strikes', contract: 'Long-Term Contracts', unknown: 'Other' };
+        const labels: Record<string, string> = { main_task: 'Main Tasks', side_task: 'Side Tasks', hidden_task: 'Hidden Tasks', squad_strike: 'Squad Strikes', contract: 'Contracts', unknown: 'Other' };
         const icons: Record<string, string> = { main_task: 'fas fa-star', side_task: 'fas fa-list', hidden_task: 'fas fa-eye-slash', squad_strike: 'fas fa-people-group', contract: 'fas fa-file-contract', unknown: 'fas fa-question' };
         result.push({ key: c, label: `${labels[c] || c} (${count})`, icon: icons[c] || 'fas fa-circle' });
       }
