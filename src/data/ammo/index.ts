@@ -1,166 +1,59 @@
 import type { AmmoRound } from '../types';
 
 export const AMMO: AmmoRound[] = [
-  // ─── 5.56x45mm NATO ───
-  { caliber: '5.56x45mm', name: 'SP', speed: 930, accMod: -3, durMod: 0, pen: { I: 0, IIA: 0, 'IIA+': 0, IIIA: 0, 'IIIA+': 0, III: 0, 'III+': 0, 'III++': 0 }, source: 'Looting' },
-  { caliber: '5.56x45mm', name: 'HPBT', speed: 861, accMod: -3, durMod: -15, pen: { I: 2, IIA: 2, 'IIA+': 2, IIIA: 2, 'IIIA+': 2, III: 1, 'III+': 0, 'III++': 0 } },
-  { caliber: '5.56x45mm', name: 'FMJ', speed: 880, accMod: 0, durMod: 0, pen: { I: 2, IIA: 2, 'IIA+': 2, IIIA: 2, 'IIIA+': 2, III: 1, 'III+': 0, 'III++': 0 }, vendor: 'Gunny', repLevel: 1 },
-  { caliber: '5.56x45mm', name: 'Tracer (M856)', speed: 917, accMod: -3, durMod: -15, tracer: true, pen: { I: 2, IIA: 2, 'IIA+': 2, IIIA: 2, 'IIIA+': 2, III: 1, 'III+': 0, 'III++': 0 } },
-  { caliber: '5.56x45mm', name: 'M193', speed: 1006, accMod: 2, durMod: -15, pen: { I: 2, IIA: 2, 'IIA+': 2, IIIA: 2, 'IIIA+': 2, III: 1, 'III+': 0, 'III++': 0 }, vendor: 'Gunny', repLevel: 2 },
-  { caliber: '5.56x45mm', name: 'AP (M855)', speed: 920, accMod: 2, durMod: -15, pen: { I: 2, IIA: 2, 'IIA+': 2, IIIA: 2, 'IIIA+': 2, III: 2, 'III+': 2, 'III++': 1 }, vendor: 'Gunny', repLevel: 2 },
-  { caliber: '5.56x45mm', name: 'Tracer (M856A1)', speed: 945, accMod: -4, durMod: -40, tracer: true, pen: { I: 2, IIA: 2, 'IIA+': 2, IIIA: 2, 'IIIA+': 2, III: 2, 'III+': 2, 'III++': 1 } },
-  { caliber: '5.56x45mm', name: 'AP (M855A1)', speed: 970, accMod: 7, durMod: -40, pen: { I: 2, IIA: 2, 'IIA+': 2, IIIA: 2, 'IIIA+': 2, III: 2, 'III+': 2, 'III++': 2 }, vendor: 'Gunny', repLevel: 3 },
-  { caliber: '5.56x45mm', name: 'AP (M995)', speed: 1030, accMod: 5, durMod: -100, pen: { I: 2, IIA: 2, 'IIA+': 2, IIIA: 2, 'IIIA+': 2, III: 2, 'III+': 2, 'III++': 2 } },
-
-  // ─── 5.45x39mm ───
-  { caliber: '5.45x39mm', name: 'WOLF', speed: 840, accMod: -2, durMod: 0, pen: { I: 0, IIA: 0, 'IIA+': 0, IIIA: 0, 'IIIA+': 0, III: 0, 'III+': 0, 'III++': 0 } },
-  { caliber: '5.45x39mm', name: 'US (7U1)', speed: 303, accMod: -6, durMod: 0, subsonic: true, pen: { I: 2, IIA: 2, 'IIA+': 2, IIIA: 1, 'IIIA+': 0, III: 0, 'III+': 0, 'III++': 0 } },
-  { caliber: '5.45x39mm', name: 'HP', speed: 880, accMod: -6, durMod: -15, pen: { I: 2, IIA: 2, 'IIA+': 2, IIIA: 2, 'IIIA+': 1, III: 0, 'III+': 0, 'III++': 0 } },
-  { caliber: '5.45x39mm', name: 'FMJ', speed: 855, accMod: 0, durMod: -15, pen: { I: 2, IIA: 2, 'IIA+': 2, IIIA: 2, 'IIIA+': 1, III: 0, 'III+': 0, 'III++': 0 }, vendor: 'Gunny', repLevel: 2 },
-  { caliber: '5.45x39mm', name: 'PS (7N6)', speed: 900, accMod: -2, durMod: -15, pen: { I: 2, IIA: 2, 'IIA+': 2, IIIA: 2, 'IIIA+': 2, III: 1, 'III+': 0, 'III++': 0 } },
-  { caliber: '5.45x39mm', name: 'BT (7BT4)', speed: 915, accMod: 2, durMod: -40, tracer: true, pen: { I: 2, IIA: 2, 'IIA+': 2, IIIA: 2, 'IIIA+': 2, III: 2, 'III+': 1, 'III++': 0 } },
-  { caliber: '5.45x39mm', name: 'PP (7N10)', speed: 870, accMod: 2, durMod: -40, pen: { I: 2, IIA: 2, 'IIA+': 2, IIIA: 2, 'IIIA+': 2, III: 2, 'III+': 1, 'III++': 0 } },
-  { caliber: '5.45x39mm', name: 'BP (7N22)', speed: 860, accMod: 1, durMod: -100, pen: { I: 2, IIA: 2, 'IIA+': 2, IIIA: 2, 'IIIA+': 2, III: 2, 'III+': 2, 'III++': 2 }, vendor: 'Gunny', repLevel: 3 },
-  { caliber: '5.45x39mm', name: 'BS (7N24)', speed: 840, accMod: 6, durMod: -100, pen: { I: 2, IIA: 2, 'IIA+': 2, IIIA: 2, 'IIIA+': 2, III: 2, 'III+': 2, 'III++': 1 } },
-
-  // ─── 7.62x39mm ───
-  { caliber: '7.62x39mm', name: 'SP', speed: 743, accMod: -2, durMod: 0, pen: { I: 0, IIA: 0, 'IIA+': 0, IIIA: 0, 'IIIA+': 0, III: 0, 'III+': 0, 'III++': 0 } },
-  { caliber: '7.62x39mm', name: 'US', speed: 310, accMod: -6, durMod: 0, subsonic: true, pen: { I: 2, IIA: 2, 'IIA+': 2, IIIA: 1, 'IIIA+': 0, III: 0, 'III+': 0, 'III++': 0 } },
-  { caliber: '7.62x39mm', name: 'Tracer (57-N-231P)', speed: 725, accMod: -3, durMod: 0, tracer: true, pen: { I: 2, IIA: 2, 'IIA+': 2, IIIA: 2, 'IIIA+': 2, III: 2, 'III+': 1, 'III++': 0 } },
-  { caliber: '7.62x39mm', name: 'PS (57-N-231C)', speed: 725, accMod: 1, durMod: -15, pen: { I: 2, IIA: 2, 'IIA+': 2, IIIA: 2, 'IIIA+': 2, III: 2, 'III+': 1, 'III++': 0 }, vendor: 'Gunny', repLevel: 2 },
-  { caliber: '7.62x39mm', name: 'FMJ', speed: 738, accMod: -6, durMod: 0, pen: { I: 2, IIA: 2, 'IIA+': 2, IIIA: 2, 'IIIA+': 2, III: 1, 'III+': 0, 'III++': 0 } },
-  { caliber: '7.62x39mm', name: 'BP (7N23)', speed: 740, accMod: 2, durMod: -100, pen: { I: 2, IIA: 2, 'IIA+': 2, IIIA: 2, 'IIIA+': 2, III: 2, 'III+': 2, 'III++': 1 }, vendor: 'Gunny', repLevel: 3 },
-  { caliber: '7.62x39mm', name: 'PP (7N27)', speed: 740, accMod: 1, durMod: -40, pen: { I: 2, IIA: 2, 'IIA+': 2, IIIA: 2, 'IIIA+': 2, III: 2, 'III+': 2, 'III++': 1 } },
-
-  // ─── .300 AAC Blackout ───
-  { caliber: '.300 AAC', name: 'Subsonic', speed: 310, accMod: -6, durMod: 0, subsonic: true, pen: { I: 2, IIA: 2, 'IIA+': 2, IIIA: 1, 'IIIA+': 0, III: 0, 'III+': 0, 'III++': 0 } },
-  { caliber: '.300 AAC', name: 'FMJ', speed: 633, accMod: 0, durMod: 0, pen: { I: 2, IIA: 2, 'IIA+': 2, IIIA: 2, 'IIIA+': 1, III: 0, 'III+': 0, 'III++': 0 } },
-  { caliber: '.300 AAC', name: 'V-MAX', speed: 724, accMod: 2, durMod: -15, pen: { I: 2, IIA: 2, 'IIA+': 2, IIIA: 2, 'IIIA+': 1, III: 0, 'III+': 0, 'III++': 0 } },
-  { caliber: '.300 AAC', name: 'CQ', speed: 853, accMod: 1, durMod: -15, pen: { I: 2, IIA: 2, 'IIA+': 2, IIIA: 2, 'IIIA+': 2, III: 1, 'III+': 0, 'III++': 0 } },
-  { caliber: '.300 AAC', name: 'AP', speed: 725, accMod: 4, durMod: -100, pen: { I: 2, IIA: 2, 'IIA+': 2, IIIA: 2, 'IIIA+': 2, III: 2, 'III+': 2, 'III++': 2 }, vendor: 'Gunny', repLevel: 3 },
-
-  // ─── 7.62x51mm NATO ───
-  { caliber: '7.62x51mm', name: 'FMJ (M80)', speed: 817, accMod: 0, durMod: 0, pen: { I: 2, IIA: 2, 'IIA+': 2, IIIA: 2, 'IIIA+': 2, III: 1, 'III+': 0, 'III++': 0 } },
-  { caliber: '7.62x51mm', name: 'HPBT', speed: 800, accMod: 4, durMod: -40, pen: { I: 2, IIA: 2, 'IIA+': 2, IIIA: 2, 'IIIA+': 2, III: 1, 'III+': 0, 'III++': 0 } },
-  { caliber: '7.62x51mm', name: 'FMJ (M80A1)', speed: 835, accMod: 3, durMod: -40, pen: { I: 2, IIA: 2, 'IIA+': 2, IIIA: 2, 'IIIA+': 2, III: 2, 'III+': 2, 'III++': 1 } },
-  { caliber: '7.62x51mm', name: 'Tracer (M62)', speed: 820, accMod: -4, durMod: 0, tracer: true, pen: { I: 2, IIA: 2, 'IIA+': 2, IIIA: 2, 'IIIA+': 2, III: 2, 'III+': 2, 'III++': 1 } },
-  { caliber: '7.62x51mm', name: 'AP (M61)', speed: 838, accMod: 4, durMod: -100, pen: { I: 2, IIA: 2, 'IIA+': 2, IIIA: 2, 'IIIA+': 2, III: 2, 'III+': 2, 'III++': 2 }, vendor: 'Gunny', repLevel: 3 },
-
-  // ─── 7.62x54mmR ───
-  { caliber: '7.62x54R', name: 'LPS (57-N-323S)', speed: 828, accMod: 1, durMod: -15, pen: { I: 2, IIA: 2, 'IIA+': 2, IIIA: 2, 'IIIA+': 2, III: 2, 'III+': 1, 'III++': 0 } },
-  { caliber: '7.62x54R', name: 'Tracer (T-46M)', speed: 830, accMod: -3, durMod: -40, tracer: true, pen: { I: 2, IIA: 2, 'IIA+': 2, IIIA: 2, 'IIIA+': 2, III: 2, 'III+': 1, 'III++': 0 } },
-  { caliber: '7.62x54R', name: 'Sniper (7N1)', speed: 830, accMod: 5, durMod: -100, pen: { I: 2, IIA: 2, 'IIA+': 2, IIIA: 2, 'IIIA+': 2, III: 2, 'III+': 2, 'III++': 1 } },
-  { caliber: '7.62x54R', name: 'AP (7N13)', speed: 828, accMod: 2, durMod: -100, pen: { I: 2, IIA: 2, 'IIA+': 2, IIIA: 2, 'IIIA+': 2, III: 2, 'III+': 2, 'III++': 2 } },
-
-  // ─── 9x19mm ───
-  { caliber: '9x19mm', name: 'FMJ', speed: 390, accMod: 0, durMod: 0, pen: { I: 2, IIA: 1, 'IIA+': 0, IIIA: 0, 'IIIA+': 0, III: 0, 'III+': 0, 'III++': 0 }, vendor: 'Gunny', repLevel: 1 },
-  { caliber: '9x19mm', name: 'HP', speed: 377, accMod: -3, durMod: 0, pen: { I: 2, IIA: 1, 'IIA+': 0, IIIA: 0, 'IIIA+': 0, III: 0, 'III+': 0, 'III++': 0 }, vendor: 'Gunny', repLevel: 1 },
-  { caliber: '9x19mm', name: 'Tracer', speed: 342, accMod: -4, durMod: 0, tracer: true, pen: { I: 2, IIA: 1, 'IIA+': 0, IIIA: 0, 'IIIA+': 0, III: 0, 'III+': 0, 'III++': 0 } },
-  { caliber: '9x19mm', name: 'Xtreme Penetrator P+', speed: 381, accMod: 2, durMod: 0, pen: { I: 2, IIA: 2, 'IIA+': 2, IIIA: 1, 'IIIA+': 0, III: 0, 'III+': 0, 'III++': 0 }, vendor: 'Gunny', repLevel: 2 },
-  { caliber: '9x19mm', name: 'Libra Snail', speed: 700, accMod: 0, durMod: -40, pen: { I: 2, IIA: 2, 'IIA+': 2, IIIA: 2, 'IIIA+': 2, III: 1, 'III+': 0, 'III++': 0 }, vendor: 'Gunny', repLevel: 3 },
-
-  // ─── 4.6x30mm HK ───
-  { caliber: '4.6x30mm', name: 'Subsonic SX', speed: 290, accMod: 0, durMod: 0, subsonic: true, pen: { I: 2, IIA: 2, 'IIA+': 2, IIIA: 1, 'IIIA+': 0, III: 0, 'III+': 0, 'III++': 0 } },
-  { caliber: '4.6x30mm', name: 'FMJ SX', speed: 620, accMod: 0, durMod: 0, pen: { I: 2, IIA: 2, 'IIA+': 2, IIIA: 1, 'IIIA+': 0, III: 0, 'III+': 0, 'III++': 0 } },
-  { caliber: '4.6x30mm', name: 'Action SX', speed: 690, accMod: 0, durMod: 0, pen: { I: 2, IIA: 2, 'IIA+': 1, IIIA: 0, 'IIIA+': 0, III: 0, 'III+': 0, 'III++': 0 } },
-  { caliber: '4.6x30mm', name: 'AP SX', speed: 680, accMod: 0, durMod: -40, pen: { I: 2, IIA: 2, 'IIA+': 2, IIIA: 1, 'IIIA+': 0, III: 0, 'III+': 0, 'III++': 0 } },
-  { caliber: '4.6x30mm', name: 'V-MAX', speed: 640, accMod: 0, durMod: -15, pen: { I: 2, IIA: 2, 'IIA+': 2, IIIA: 2, 'IIIA+': 1, III: 0, 'III+': 0, 'III++': 0 } },
-
-  // ─── .45 ACP ───
-  { caliber: '.45 ACP', name: 'JHP +P', speed: 290, accMod: -2, durMod: 0, pen: { I: 0, IIA: 0, 'IIA+': 0, IIIA: 0, 'IIIA+': 0, III: 0, 'III+': 0, 'III++': 0 } },
-  { caliber: '.45 ACP', name: 'FMJ', speed: 260, accMod: 0, durMod: 0, pen: { I: 2, IIA: 1, 'IIA+': 0, IIIA: 0, 'IIIA+': 0, III: 0, 'III+': 0, 'III++': 0 } },
-  { caliber: '.45 ACP', name: 'Hydra-Shok', speed: 274, accMod: 0, durMod: -15, pen: { I: 0, IIA: 0, 'IIA+': 0, IIIA: 0, 'IIIA+': 0, III: 0, 'III+': 0, 'III++': 0 } },
-  { caliber: '.45 ACP', name: 'AP', speed: 450, accMod: 0, durMod: -40, pen: { I: 2, IIA: 2, 'IIA+': 2, IIIA: 1, 'IIIA+': 0, III: 0, 'III+': 0, 'III++': 0 } },
-
-  // ─── 12 Gauge ───
-  { caliber: '12 Gauge', name: '00 Buckshot', speed: 370, accMod: 38, durMod: 0, pen: { I: 0, IIA: 0, 'IIA+': 0, IIIA: 0, 'IIIA+': 0, III: 0, 'III+': 0, 'III++': 0 } },
-  { caliber: '12 Gauge', name: 'FC 00 Buckshot', speed: 349, accMod: 27, durMod: -15, pen: { I: 2, IIA: 2, 'IIA+': 2, IIIA: 1, 'IIIA+': 0, III: 0, 'III+': 0, 'III++': 0 } },
-  { caliber: '12 Gauge', name: 'Slug', speed: 420, accMod: 42, durMod: -15, pen: { I: 0, IIA: 0, 'IIA+': 0, IIIA: 0, 'IIIA+': 0, III: 0, 'III+': 0, 'III++': 0 } },
-  { caliber: '12 Gauge', name: 'SST Sabot Slug', speed: 609, accMod: 50, durMod: -40, pen: { I: 2, IIA: 2, 'IIA+': 2, IIIA: 2, 'IIIA+': 2, III: 1, 'III+': 0, 'III++': 0 } },
+{ caliber: '5.56x45mm', name: 'SP', speed: 930, accMod: -3, durMod: 0, pen: { I: 0, IIA: 0, 'IIA+': 0, IIIA: 0, 'IIIA+': 0, III: 0, 'III+': 0, 'III++': 0 }, source: 'Looting' },
+{ caliber: '5.56x45mm', name: 'HPBT', speed: 861, accMod: -3, durMod: -15, pen: { I: 2, IIA: 2, 'IIA+': 2, IIIA: 2, 'IIIA+': 2, III: 1, 'III+': 0, 'III++': 0 } },
+{ caliber: '5.56x45mm', name: 'FMJ', speed: 880, accMod: 0, durMod: 0, pen: { I: 2, IIA: 2, 'IIA+': 2, IIIA: 2, 'IIIA+': 2, III: 1, 'III+': 0, 'III++': 0 }, vendor: 'Gunny', repLevel: 1 },
+{ caliber: '5.56x45mm', name: 'Tracer (M856)', speed: 917, accMod: -3, durMod: -15, tracer: true, pen: { I: 2, IIA: 2, 'IIA+': 2, IIIA: 2, 'IIIA+': 2, III: 1, 'III+': 0, 'III++': 0 } },
+{ caliber: '5.56x45mm', name: 'M193', speed: 1006, accMod: 2, durMod: -15, pen: { I: 2, IIA: 2, 'IIA+': 2, IIIA: 2, 'IIIA+': 2, III: 1, 'III+': 0, 'III++': 0 }, vendor: 'Gunny', repLevel: 2 },
+{ caliber: '5.56x45mm', name: 'AP (M855)', speed: 920, accMod: 2, durMod: -15, pen: { I: 2, IIA: 2, 'IIA+': 2, IIIA: 2, 'IIIA+': 2, III: 2, 'III+': 2, 'III++': 1 }, vendor: 'Gunny', repLevel: 2 },
+{ caliber: '5.56x45mm', name: 'Tracer (M856A1)', speed: 945, accMod: -4, durMod: -40, tracer: true, pen: { I: 2, IIA: 2, 'IIA+': 2, IIIA: 2, 'IIIA+': 2, III: 2, 'III+': 2, 'III++': 1 } },
+{ caliber: '5.56x45mm', name: 'AP (M855A1)', speed: 970, accMod: 7, durMod: -40, pen: { I: 2, IIA: 2, 'IIA+': 2, IIIA: 2, 'IIIA+': 2, III: 2, 'III+': 2, 'III++': 2 }, vendor: 'Gunny', repLevel: 3 },
+{ caliber: '5.56x45mm', name: 'AP (M995)', speed: 1030, accMod: 5, durMod: -100, pen: { I: 2, IIA: 2, 'IIA+': 2, IIIA: 2, 'IIIA+': 2, III: 2, 'III+': 2, 'III++': 2 } },
+{ caliber: '5.45x39mm', name: 'WOLF', speed: 840, accMod: -2, durMod: 0, pen: { I: 0, IIA: 0, 'IIA+': 0, IIIA: 0, 'IIIA+': 0, III: 0, 'III+': 0, 'III++': 0 } },
+{ caliber: '5.45x39mm', name: 'US (7U1)', speed: 303, accMod: -6, durMod: 0, subsonic: true, pen: { I: 2, IIA: 2, 'IIA+': 2, IIIA: 1, 'IIIA+': 0, III: 0, 'III+': 0, 'III++': 0 } },
+{ caliber: '5.45x39mm', name: 'HP', speed: 880, accMod: -6, durMod: -15, pen: { I: 2, IIA: 2, 'IIA+': 2, IIIA: 2, 'IIIA+': 1, III: 0, 'III+': 0, 'III++': 0 } },
+{ caliber: '5.45x39mm', name: 'PS (7N6)', speed: 900, accMod: -2, durMod: -15, pen: { I: 2, IIA: 2, 'IIA+': 2, IIIA: 2, 'IIIA+': 2, III: 1, 'III+': 0, 'III++': 0 } },
+{ caliber: '5.45x39mm', name: 'BT (7BT4)', speed: 915, accMod: 2, durMod: -40, tracer: true, pen: { I: 2, IIA: 2, 'IIA+': 2, IIIA: 2, 'IIIA+': 2, III: 2, 'III+': 1, 'III++': 0 } },
+{ caliber: '5.45x39mm', name: 'PP (7N10)', speed: 870, accMod: 2, durMod: -40, pen: { I: 2, IIA: 2, 'IIA+': 2, IIIA: 2, 'IIIA+': 2, III: 2, 'III+': 1, 'III++': 0 } },
+{ caliber: '5.45x39mm', name: 'BP (7N22)', speed: 860, accMod: 1, durMod: -100, pen: { I: 2, IIA: 2, 'IIA+': 2, IIIA: 2, 'IIIA+': 2, III: 2, 'III+': 2, 'III++': 2 }, vendor: 'Gunny', repLevel: 3 },
+{ caliber: '5.45x39mm', name: 'BS (7N24)', speed: 840, accMod: 6, durMod: -100, pen: { I: 2, IIA: 2, 'IIA+': 2, IIIA: 2, 'IIIA+': 2, III: 2, 'III+': 2, 'III++': 1 } },
+{ caliber: '7.62x39mm', name: 'US', speed: 310, accMod: -6, durMod: 0, subsonic: true, pen: { I: 2, IIA: 2, 'IIA+': 2, IIIA: 1, 'IIIA+': 0, III: 0, 'III+': 0, 'III++': 0 } },
+{ caliber: '7.62x39mm', name: 'Tracer (57-N-231P)', speed: 725, accMod: -3, durMod: 0, tracer: true, pen: { I: 2, IIA: 2, 'IIA+': 2, IIIA: 2, 'IIIA+': 2, III: 2, 'III+': 1, 'III++': 0 } },
+{ caliber: '7.62x39mm', name: 'PS (57-N-231C)', speed: 725, accMod: 1, durMod: -15, pen: { I: 2, IIA: 2, 'IIA+': 2, IIIA: 2, 'IIIA+': 2, III: 2, 'III+': 1, 'III++': 0 }, vendor: 'Gunny', repLevel: 2 },
+{ caliber: '7.62x39mm', name: 'BP (7N23)', speed: 740, accMod: 2, durMod: -100, pen: { I: 2, IIA: 2, 'IIA+': 2, IIIA: 2, 'IIIA+': 2, III: 2, 'III+': 2, 'III++': 1 }, vendor: 'Gunny', repLevel: 3 },
+{ caliber: '7.62x39mm', name: 'PP (7N27)', speed: 740, accMod: 1, durMod: -40, pen: { I: 2, IIA: 2, 'IIA+': 2, IIIA: 2, 'IIIA+': 2, III: 2, 'III+': 2, 'III++': 1 } },
+{ caliber: '.300 AAC', name: 'Subsonic', speed: 310, accMod: -6, durMod: 0, subsonic: true, pen: { I: 2, IIA: 2, 'IIA+': 2, IIIA: 1, 'IIIA+': 0, III: 0, 'III+': 0, 'III++': 0 } },
+{ caliber: '.300 AAC', name: 'V-MAX', speed: 724, accMod: 2, durMod: -15, pen: { I: 2, IIA: 2, 'IIA+': 2, IIIA: 2, 'IIIA+': 1, III: 0, 'III+': 0, 'III++': 0 } },
+{ caliber: '.300 AAC', name: 'CQ', speed: 853, accMod: 1, durMod: -15, pen: { I: 2, IIA: 2, 'IIA+': 2, IIIA: 2, 'IIIA+': 2, III: 1, 'III+': 0, 'III++': 0 } },
+{ caliber: '.300 AAC', name: 'AP', speed: 725, accMod: 4, durMod: -100, pen: { I: 2, IIA: 2, 'IIA+': 2, IIIA: 2, 'IIIA+': 2, III: 2, 'III+': 2, 'III++': 2 }, vendor: 'Gunny', repLevel: 3 },
+{ caliber: '7.62x51mm', name: 'FMJ (M80)', speed: 817, accMod: 0, durMod: 0, pen: { I: 2, IIA: 2, 'IIA+': 2, IIIA: 2, 'IIIA+': 2, III: 1, 'III+': 0, 'III++': 0 } },
+{ caliber: '7.62x51mm', name: 'FMJ (M80A1)', speed: 835, accMod: 3, durMod: -40, pen: { I: 2, IIA: 2, 'IIA+': 2, IIIA: 2, 'IIIA+': 2, III: 2, 'III+': 2, 'III++': 1 } },
+{ caliber: '7.62x51mm', name: 'Tracer (M62)', speed: 820, accMod: -4, durMod: 0, tracer: true, pen: { I: 2, IIA: 2, 'IIA+': 2, IIIA: 2, 'IIIA+': 2, III: 2, 'III+': 2, 'III++': 1 } },
+{ caliber: '7.62x51mm', name: 'AP (M61)', speed: 838, accMod: 4, durMod: -100, pen: { I: 2, IIA: 2, 'IIA+': 2, IIIA: 2, 'IIIA+': 2, III: 2, 'III+': 2, 'III++': 2 }, vendor: 'Gunny', repLevel: 3 },
+{ caliber: '7.62x54R', name: 'LPS (57-N-323S)', speed: 828, accMod: 1, durMod: -15, pen: { I: 2, IIA: 2, 'IIA+': 2, IIIA: 2, 'IIIA+': 2, III: 2, 'III+': 1, 'III++': 0 } },
+{ caliber: '7.62x54R', name: 'Tracer (T-46M)', speed: 830, accMod: -3, durMod: -40, tracer: true, pen: { I: 2, IIA: 2, 'IIA+': 2, IIIA: 2, 'IIIA+': 2, III: 2, 'III+': 1, 'III++': 0 } },
+{ caliber: '7.62x54R', name: 'Sniper (7N1)', speed: 830, accMod: 5, durMod: -100, pen: { I: 2, IIA: 2, 'IIA+': 2, IIIA: 2, 'IIIA+': 2, III: 2, 'III+': 2, 'III++': 1 } },
+{ caliber: '7.62x54R', name: 'AP (7N13)', speed: 828, accMod: 2, durMod: -100, pen: { I: 2, IIA: 2, 'IIA+': 2, IIIA: 2, 'IIIA+': 2, III: 2, 'III+': 2, 'III++': 2 } },
+{ caliber: '9x19mm', name: 'Tracer', speed: 342, accMod: -4, durMod: 0, tracer: true, pen: { I: 2, IIA: 1, 'IIA+': 0, IIIA: 0, 'IIIA+': 0, III: 0, 'III+': 0, 'III++': 0 } },
+{ caliber: '9x19mm', name: 'Xtreme Penetrator P+', speed: 381, accMod: 2, durMod: 0, pen: { I: 2, IIA: 2, 'IIA+': 2, IIIA: 1, 'IIIA+': 0, III: 0, 'III+': 0, 'III++': 0 }, vendor: 'Gunny', repLevel: 2 },
+{ caliber: '9x19mm', name: 'Libra Snail', speed: 700, accMod: 0, durMod: -40, pen: { I: 2, IIA: 2, 'IIA+': 2, IIIA: 2, 'IIIA+': 2, III: 1, 'III+': 0, 'III++': 0 }, vendor: 'Gunny', repLevel: 3 },
+{ caliber: '4.6x30mm', name: 'Subsonic SX', speed: 290, accMod: 0, durMod: 0, subsonic: true, pen: { I: 2, IIA: 2, 'IIA+': 2, IIIA: 1, 'IIIA+': 0, III: 0, 'III+': 0, 'III++': 0 } },
+{ caliber: '4.6x30mm', name: 'FMJ SX', speed: 620, accMod: 0, durMod: 0, pen: { I: 2, IIA: 2, 'IIA+': 2, IIIA: 1, 'IIIA+': 0, III: 0, 'III+': 0, 'III++': 0 } },
+{ caliber: '4.6x30mm', name: 'Action SX', speed: 690, accMod: 0, durMod: 0, pen: { I: 2, IIA: 2, 'IIA+': 1, IIIA: 0, 'IIIA+': 0, III: 0, 'III+': 0, 'III++': 0 } },
+{ caliber: '4.6x30mm', name: 'AP SX', speed: 680, accMod: 0, durMod: -40, pen: { I: 2, IIA: 2, 'IIA+': 2, IIIA: 1, 'IIIA+': 0, III: 0, 'III+': 0, 'III++': 0 } },
+{ caliber: '.45 ACP', name: 'JHP +P', speed: 290, accMod: -2, durMod: 0, pen: { I: 0, IIA: 0, 'IIA+': 0, IIIA: 0, 'IIIA+': 0, III: 0, 'III+': 0, 'III++': 0 } },
+{ caliber: '.45 ACP', name: 'Hydra-Shok', speed: 274, accMod: 0, durMod: -15, pen: { I: 0, IIA: 0, 'IIA+': 0, IIIA: 0, 'IIIA+': 0, III: 0, 'III+': 0, 'III++': 0 } },
+{ caliber: '12 Gauge', name: '00 Buckshot', speed: 370, accMod: 38, durMod: 0, pen: { I: 0, IIA: 0, 'IIA+': 0, IIIA: 0, 'IIIA+': 0, III: 0, 'III+': 0, 'III++': 0 } },
+{ caliber: '12 Gauge', name: 'FC 00 Buckshot', speed: 349, accMod: 27, durMod: -15, pen: { I: 2, IIA: 2, 'IIA+': 2, IIIA: 1, 'IIIA+': 0, III: 0, 'III+': 0, 'III++': 0 } },
+{ caliber: '12 Gauge', name: 'Slug', speed: 420, accMod: 42, durMod: -15, pen: { I: 0, IIA: 0, 'IIA+': 0, IIIA: 0, 'IIIA+': 0, III: 0, 'III+': 0, 'III++': 0 } },
+{ caliber: '12 Gauge', name: 'SST Sabot Slug', speed: 609, accMod: 50, durMod: -40, pen: { I: 2, IIA: 2, 'IIA+': 2, IIIA: 2, 'IIIA+': 2, III: 1, 'III+': 0, 'III++': 0 } },
+{ caliber: '7.62x25mm', name: 'FMJ', speed: 427, accMod: 0, durMod: -15, pen: { I: 2, IIA: 2, 'IIA+': 2, IIIA: 1, 'IIIA+': 1, III: 0, 'III+': 0, 'III++': 0 }, vendor: 'Artisan', repLevel: 1 },
+{ caliber: '7.62x25mm', name: 'PT', speed: 415, accMod: 2, durMod: -15, tracer: true, pen: { I: 2, IIA: 2, 'IIA+': 2, IIIA: 1, 'IIIA+': 1, III: 0, 'III+': 0, 'III++': 0 }, vendor: 'Artisan', repLevel: 2 },
+{ caliber: '7.62x25mm', name: 'PST', speed: 430, accMod: -24, durMod: -15, pen: { I: 2, IIA: 2, 'IIA+': 2, IIIA: 2, 'IIIA+': 1, III: 0, 'III+': 0, 'III++': 0 }, vendor: 'Artisan', repLevel: 2 },
+{ caliber: '7.65mm Browning', name: 'FMJ', speed: 318, accMod: 0, durMod: -15, pen: { I: 2, IIA: 1, 'IIA+': 1, IIIA: 0, 'IIIA+': 0, III: 0, 'III+': 0, 'III++': 0 }, vendor: 'Artisan', repLevel: 1 },
+{ caliber: '7.65mm Browning', name: 'JHP', speed: 238, accMod: 4, durMod: -15, pen: { I: 1, IIA: 1, 'IIA+': 0, IIIA: 0, 'IIIA+': 0, III: 0, 'III+': 0, 'III++': 0 }, vendor: 'Artisan', repLevel: 1 },
+{ caliber: '7.65mm Browning', name: 'Xtreme Defender', speed: 289, accMod: 2, durMod: -15, pen: { I: 2, IIA: 2, 'IIA+': 1, IIIA: 1, 'IIIA+': 0, III: 0, 'III+': 0, 'III++': 0 }, source: 'Looting' }
 ];
 
 export const CALIBERS = Array.from(new Set(AMMO.map((a) => a.caliber)));
-  {
-    name: '7.62x25mm FMJ',
-    caliber: '7.62x25mm',
-    speed: 427,
-    accMod: 0,
-    durMod: -15,
-    tracer: false,
-    subsonic: false,
-    pen: {"I": 2, "IIA": 2, "IIA+": 2, "IIIA": 1, "IIIA+": 1, "III": 0, "III+": 0, "III++": 0},
-    vendor: 'Artisan',
-    repLevel: 1,
-    source: 'Artisan R.1'
-  },
-];
-  {
-    name: '7.62x25mm PT',
-    caliber: '7.62x25mm',
-    speed: 415,
-    accMod: 2,
-    durMod: -15,
-    tracer: true,
-    subsonic: false,
-    pen: {"I": 2, "IIA": 2, "IIA+": 2, "IIIA": 1, "IIIA+": 1, "III": 0, "III+": 0, "III++": 0},
-    vendor: 'Artisan',
-    repLevel: 2,
-    source: 'Artisan R.2'
-  },
-];
-  {
-    name: '7.62x25mm PST',
-    caliber: '7.62x25mm',
-    speed: 430,
-    accMod: -24,
-    durMod: -15,
-    tracer: false,
-    subsonic: false,
-    pen: {"I": 2, "IIA": 2, "IIA+": 2, "IIIA": 2, "IIIA+": 1, "III": 0, "III+": 0, "III++": 0},
-    vendor: 'Artisan',
-    repLevel: 2,
-    source: 'Artisan R.2'
-  },
-];
-  {
-    name: '7.65 Browning FMJ',
-    caliber: '7.65mm Browning',
-    speed: 318,
-    accMod: 0,
-    durMod: -15,
-    tracer: false,
-    subsonic: false,
-    pen: {"I": 2, "IIA": 1, "IIA+": 1, "IIIA": 0, "IIIA+": 0, "III": 0, "III+": 0, "III++": 0},
-    vendor: 'Artisan',
-    repLevel: 1,
-    source: 'Artisan R.1'
-  },
-];
-  {
-    name: '7.65 Browning JHP',
-    caliber: '7.65mm Browning',
-    speed: 238,
-    accMod: 4,
-    durMod: -15,
-    tracer: false,
-    subsonic: false,
-    pen: {"I": 1, "IIA": 1, "IIA+": 0, "IIIA": 0, "IIIA+": 0, "III": 0, "III+": 0, "III++": 0},
-    vendor: 'Artisan',
-    repLevel: 1,
-    source: 'Artisan R.1'
-  },
-];
-  {
-    name: '7.65 Browning Xtreme Defender',
-    caliber: '7.65mm Browning',
-    speed: 289,
-    accMod: 2,
-    durMod: -15,
-    tracer: false,
-    subsonic: false,
-    pen: {"I": 2, "IIA": 2, "IIA+": 1, "IIIA": 1, "IIIA+": 0, "III": 0, "III+": 0, "III++": 0},
-    vendor: '',
-    repLevel: 0,
-    source: 'Looting'
-  },
-];
