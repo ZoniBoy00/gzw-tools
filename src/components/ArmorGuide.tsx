@@ -1,14 +1,15 @@
 import { useState, useMemo } from 'react';
-import { VESTS, HELMETS, RECOMMENDATIONS, MATERIAL_RANK } from '../data/armor';
+import { VESTS, HELMETS, PLATE_CARRIERS, RECOMMENDATIONS, MATERIAL_RANK } from '../data/armor';
 import TabBar from './ui/TabBar';
 import itemImages from '../data/item_images.json';
 import ItemModal from './ui/ItemModal';
 import type { ModalItem } from './ui/ItemModal';
 
-type SubTab = 'recommend' | 'vests' | 'helmets' | 'vendors';
+type SubTab = 'recommend' | 'vests' | 'plate_carriers' | 'helmets' | 'vendors';
 const SUB: { id: SubTab; label: string; icon?: string }[] = [
   { id: 'recommend', label: 'Recommendations', icon: 'fas fa-star' },
   { id: 'vests', label: 'Vests', icon: 'fas fa-vest' },
+  { id: 'plate_carriers', label: 'Plate Carriers', icon: 'fas fa-shield' },
   { id: 'helmets', label: 'Helmets', icon: 'fas fa-hard-hat' },
   { id: 'vendors', label: 'Vendor Gear', icon: 'fas fa-store' },
 ];
@@ -28,6 +29,7 @@ export default function ArmorGuide() {
       <div className="mt-4">
         {tab === 'recommend' && <Recommendations />}
         {tab === 'vests' && <VestSection />}
+        {tab === 'plate_carriers' && <PlateCarrierSection />}
         {tab === 'helmets' && <HelmetSection />}
         {tab === 'vendors' && <VendorTable />}
       </div>
@@ -169,6 +171,113 @@ function VestSection() {
                       { label: 'Grid', value: v.grid, desc: 'Inventory grid size in slots — determines how much space the vest takes in your inventory' },
                       { label: 'Weight', value: `${v.weight} kg`, desc: 'Carry weight in kilograms — heavier armor provides better protection but slows you down' },
                       { label: 'Source', value: v.source, desc: 'Where to obtain this vest — from a vendor at a specific rep level, or found by looting' },
+                    ],
+                  })} className="flex items-center gap-2 text-left w-full hover:text-accent transition-colors">
+                    {itemImages[v.name as keyof typeof itemImages] && (
+                      <img src={itemImages[v.name as keyof typeof itemImages] as string} alt="" className="w-8 h-8 object-contain shrink-0 bg-surface-2 border border-border" loading="lazy" />
+                    )}
+                    {v.name}
+                  </button>
+                </td>
+                <td data-label="NIJ" className={`text-center font-bold ${nijColor(v.nij)}`}>{v.nij}</td>
+                <td data-label="Mat" className={`text-center ${matColor(v.material)}`}>{v.material.slice(0, 4)}</td>
+                <td data-label="Plates" className="text-center text-text-muted">{v.plates.replace(', ', '/')}</td>
+                <td data-label="Grid" className="text-center text-text-muted">{v.grid}</td>
+                <td data-label="Wt" className="text-right text-text-muted">{v.weight}kg</td>
+                <td data-label="Source" className="text-right text-text-muted">{v.source}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      {modalItem && <ItemModal item={modalItem} onClose={() => setModalItem(null)} />}
+    </div>
+  );
+}
+
+// ─── Plate Carrier compare ───
+
+function PlateCarrierSection() {
+  const [compare, setCompare] = useState<string[]>([]);
+  const [modalItem, setModalItem] = useState<ModalItem | null>(null);
+
+  const sorted = useMemo(() => [...PLATE_CARRIERS].sort((a, b) => nij(b.nij) - nij(a.nij)), []);
+
+  const toggleCompare = (name: string) => {
+    setCompare((prev) =>
+      prev.includes(name) ? prev.filter((n) => n !== name) : prev.length < 3 ? [...prev, name] : prev,
+    );
+  };
+
+  const comparedPC = useMemo(() => PLATE_CARRIERS.filter((v) => compare.includes(v.name)), [compare]);
+
+  return (
+    <div>
+      {comparedPC.length > 0 && (
+        <div className="mb-4 p-3 border border-accent/20 bg-accent/5">
+          <div className="text-[10px] font-bold uppercase tracking-[0.12em] text-accent mb-2 flex items-center gap-2">
+            <i className="fas fa-not-equal text-xs" />
+            Compare Mode — {comparedPC.length} carrier{comparedPC.length > 1 ? 's' : ''} selected
+            <button onClick={() => setCompare([])} className="ml-auto text-[9px] font-mono text-text-muted hover:text-text">Clear</button>
+          </div>
+          <div className="compare-grid">
+            {comparedPC.map((v) => (
+              <div key={v.name} className="compare-card selected">
+                <div className="text-sm font-bold mb-2 text-accent">{v.name}</div>
+                {[
+                  { label: 'NIJ Class', value: v.nij, cls: nijColor(v.nij) },
+                  { label: 'Material', value: v.material, cls: matColor(v.material) },
+                  { label: 'Plates', value: v.plates },
+                  { label: 'Grid', value: v.grid },
+                  { label: 'Weight', value: `${v.weight} kg` },
+                  { label: 'Source', value: v.source },
+                ].map((f) => (
+                  <div key={f.label} className="compare-field">
+                    <span className="text-text-muted">{f.label}</span>
+                    <span className={f.cls || 'text-text'}>{f.value}</span>
+                  </div>
+                ))}
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+
+      <div className="table-wrap table-mobile-cards">
+        <table className="armor-table" role="table" aria-label="Plate carrier comparison">
+          <thead>
+            <tr>
+              <th className="w-8 text-center" role="columnheader"></th>
+              <th role="columnheader">Name</th>
+              <th className="text-center" role="columnheader">NIJ</th>
+              <th className="text-center" role="columnheader">Mat</th>
+              <th className="text-center" role="columnheader"><i className="fas fa-shield" /><span className="sr-only">Plates</span></th>
+              <th className="text-center" role="columnheader">Grid</th>
+              <th className="text-right" role="columnheader">Wt</th>
+              <th className="text-right" role="columnheader">Source</th>
+            </tr>
+          </thead>
+          <tbody>
+            {sorted.map((v, i) => (
+              <tr key={i}>
+                <td className="text-center">
+                  <button onClick={() => toggleCompare(v.name)}
+                    className={`text-[10px] px-1 py-0.5 border ${compare.includes(v.name) ? 'border-accent/50 text-accent bg-accent/10' : 'border-border text-text-muted hover:border-text-muted/30'}`}
+                    aria-label={`${compare.includes(v.name) ? 'Remove' : 'Add'} ${v.name}`}
+                  ><i className={`fas fa-${compare.includes(v.name) ? 'check' : 'plus'}`} /></button>
+                </td>
+                <td data-label="" className="font-medium">
+                  <button onClick={() => setModalItem({
+                    name: v.name,
+                    image: itemImages[v.name as keyof typeof itemImages] as string | undefined,
+                    type: 'vest',
+                    fields: [
+                      { label: 'NIJ Class', value: v.nij, color: nijColor(v.nij), desc: 'National Institute of Justice protection rating' },
+                      { label: 'Material', value: v.material, color: matColor(v.material), desc: 'Armor material type' },
+                      { label: 'Plates', value: v.plates, desc: 'Areas protected by armor plates' },
+                      { label: 'Grid', value: v.grid, desc: 'Inventory grid size' },
+                      { label: 'Weight', value: `${v.weight} kg`, desc: 'Carry weight' },
+                      { label: 'Source', value: v.source, desc: 'Where to obtain this item' },
                     ],
                   })} className="flex items-center gap-2 text-left w-full hover:text-accent transition-colors">
                     {itemImages[v.name as keyof typeof itemImages] && (

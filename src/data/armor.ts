@@ -3,6 +3,7 @@ import type { ArmorVest, Helmet, GearRecommendation } from "./types";
 import data from "./armor.json" with { type: "json" };
 export const VESTS = data.vests as ArmorVest[];
 export const HELMETS = data.helmets as Helmet[];
+export const PLATE_CARRIERS = data.plate_carriers as ArmorVest[];
 
 // Manual data (not from wiki scraper):
 export const MATERIAL_RANK: Record<string, { rank: number; desc: string; color: string }> = {
