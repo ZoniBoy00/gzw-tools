@@ -8,6 +8,13 @@ interface Task {
   area: string;
   type: string;
   objectives?: string[];
+  reward_text?: string;
+  difficulty?: string;
+  quest_type?: string;
+  requirements?: string;
+  xp?: string;
+  rep_reward?: string;
+  money_reward?: string;
 }
 
 const tasks = tasksData as Task[];
@@ -117,20 +124,52 @@ export default function MissionFinder() {
                 </div>
               </button>
               {isExpanded && (
-                <div className="px-3.5 pb-3 border-t border-border/50 pt-2 text-xs font-mono space-y-1">
-                  {t.vendor && <div><span className="text-text-muted">Vendor </span><span className="tag tag-drab text-[9px]">{t.vendor}</span></div>}
-                  {t.area && <div><span className="text-text-muted">Area </span><span>{t.area}</span></div>}
-                  {t.type && t.type !== 'unknown' && <div><span className="text-text-muted">Type </span><span className="uppercase">{t.type}</span></div>}
+                <div className="px-3.5 pb-3 border-t border-border/50 pt-2 text-xs font-mono space-y-1.5">
+                  <div className="grid grid-cols-2 gap-x-4 gap-y-1">
+                    {t.vendor && <div><span className="text-text-muted">Vendor </span><span className="tag tag-drab text-[9px]">{t.vendor}</span></div>}
+                    {t.area && <div><span className="text-text-muted">Area </span><span>{t.area}</span></div>}
+                    {t.type && t.type !== 'unknown' && <div><span className="text-text-muted">Type </span><span className="uppercase">{t.type}</span></div>}
+                    {t.difficulty && <div><span className="text-text-muted">Difficulty </span><span>{t.difficulty}</span></div>}
+                    {t.quest_type && <div><span className="text-text-muted">Quest Type </span><span>{t.quest_type}</span></div>}
+                  </div>
+
                   {t.objectives && t.objectives.length > 0 && (
                     <div>
-                      <span className="text-text-muted">Objectives</span>
-                      <ul className="list-disc list-inside text-text-muted/80 mt-1 space-y-0.5">
-                        {t.objectives.map((o, i) => <li key={i}>{o}</li>)}
+                      <div className="text-text-muted text-[9px] uppercase tracking-wider mb-1 flex items-center gap-1">
+                        <i className="fas fa-list-check text-accent/60" />
+                        Objectives
+                      </div>
+                      <ul className="space-y-0.5">
+                        {t.objectives.map((o, i) => (
+                          <li key={i} className="flex items-start gap-1.5 text-text-muted/90">
+                            <span className="text-accent/60 mt-0.5 shrink-0">{i + 1}.</span>
+                            <span>{o}</span>
+                          </li>
+                        ))}
                       </ul>
                     </div>
                   )}
-                  <div className="pt-1">
-                    <span className="text-[9px] text-text-muted/40">ID: {t.id}</span>
+
+                  {t.reward_text && (
+                    <div>
+                      <div className="text-text-muted text-[9px] uppercase tracking-wider mb-0.5 flex items-center gap-1">
+                        <i className="fas fa-gift text-accent/60" />
+                        Rewards
+                      </div>
+                      <p className="text-text-muted/90">{t.reward_text}</p>
+                    </div>
+                  )}
+
+                  {t.requirements && (
+                    <div>
+                      <div className="text-text-muted text-[9px] uppercase tracking-wider mb-0.5">Requires</div>
+                      <span className="text-text-muted/90">{t.requirements}</span>
+                    </div>
+                  )}
+
+                  <div className="pt-1 flex items-center gap-3 text-[9px] text-text-muted/30">
+                    <span>ID: {t.id}</span>
+                    {t.objectives && <span>{t.objectives.length} objectives</span>}
                   </div>
                 </div>
               )}
