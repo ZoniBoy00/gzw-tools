@@ -335,55 +335,63 @@
     "type": "Throwable",
     "caliber": "",
     "magSize": 0,
-    "fireRate": null
+    "fireRate": null,
+    "source": "Looting"
   },
   {
     "name": "M26",
     "type": "Throwable",
     "caliber": "",
     "magSize": 0,
-    "fireRate": null
+    "fireRate": null,
+    "source": "Looting"
   },
   {
     "name": "M67",
     "type": "Throwable",
     "caliber": "",
     "magSize": 0,
-    "fireRate": null
+    "fireRate": null,
+    "source": "Looting"
   },
   {
     "name": "F-1",
     "type": "Throwable",
     "caliber": "",
     "magSize": 0,
-    "fireRate": null
+    "fireRate": null,
+    "source": "Looting"
   },
   {
     "name": "M84 Stun Grenade",
     "type": "Throwable",
     "caliber": "",
     "magSize": 0,
-    "fireRate": null
+    "fireRate": null,
+    "source": "Looting"
   },
   {
     "name": "M18 Smoke Grenade (Yellow)",
     "type": "Throwable",
     "caliber": "",
     "magSize": 0,
-    "fireRate": null
+    "fireRate": null,
+    "source": "Looting"
   },
   {
     "name": "M18 Smoke Grenade (Green)",
     "type": "Throwable",
     "caliber": "",
     "magSize": 0,
-    "fireRate": null
+    "fireRate": null,
+    "source": "Looting"
   },
   {
     "name": "M18 Smoke Grenade (Red)",
     "type": "Throwable",
     "caliber": "",
     "magSize": 0,
-    "fireRate": null
+    "fireRate": null,
+    "source": "Looting"
   }
 ]
