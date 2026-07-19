@@ -1895,24 +1895,24 @@
   {
     "id": "letters-from-lamang",
     "name": "Letters from Lamang",
-    "vendor": "",
-    "area": "",
+    "vendor": "Turncoat",
+    "area": "Blue Lagoon",
     "type": "hidden",
     "category": "hidden_task"
   },
   {
     "id": "needle-in-a-jungle",
     "name": "Needle in a Jungle",
-    "vendor": "",
-    "area": "",
+    "vendor": "Gunny",
+    "area": "Lamang Island",
     "type": "hidden",
     "category": "hidden_task"
   },
   {
     "id": "the-last-broadcast",
     "name": "The Last Broadcast",
-    "vendor": "",
-    "area": "",
+    "vendor": "Lab Rat",
+    "area": "Ban Pa",
     "type": "hidden",
     "category": "hidden_task"
   }
