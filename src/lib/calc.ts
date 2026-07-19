@@ -27,8 +27,8 @@ export const VENDORS: VendorInfo[] = [
     rankCumulative: [0, 700, 3750, 9750] },
   { name: 'Banshee', slug: 'banshee', rep: 3500, maxRep: 9750, desc: 'Armor & Tactical Gear',
     rankCumulative: [0, 700, 3750, 9750] },
-  { name: 'Vulture', slug: 'vulture', rep: 0, maxRep: 5000, desc: 'Roaming Trader — Special Items',
-    rankCumulative: [0, 700, 3750, 5000] },
+  { name: 'Vulture', slug: 'vulture', rep: 0, maxRep: 9750, desc: 'Player-dropped Loot & Special Gear',
+    rankCumulative: [0, 750, 3750, 9750] },
 ];
 
 export function getVendorMaxRep(slug: string): number {

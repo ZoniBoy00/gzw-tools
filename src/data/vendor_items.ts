@@ -66,10 +66,10 @@ export const VENDOR_ITEMS: VendorSoldItem[] = [
   { vendor: 'Banshee', repLevel: 4, name: 'Premium Gear', type: 'gear', detail: 'High-end attachments and equipment' },
 
   // ─── Vulture — Roaming Trader ───
-  // Vulture roams Major COPs weekly, accepts valuables as currency.
-  // Items rotate and change — these are examples of what he may offer.
-  { vendor: 'Vulture', repLevel: 1, name: 'Weapon Parts', type: 'gear', detail: 'Basic weapon repair and mod parts' },
-  { vendor: 'Vulture', repLevel: 2, name: 'Special Ammo', type: 'ammo', detail: 'Rare ammunition types' },
-  { vendor: 'Vulture', repLevel: 2, name: 'Unique Weapon Parts', type: 'attachment', detail: 'Rare attachment variants' },
-  { vendor: 'Vulture', repLevel: 3, name: 'Premium Weapon Parts', type: 'gear', detail: 'High-tier weapon modification parts' },
+  // Vulture roams Major COPs weekly (rotates 2 per week).
+  // Sells player-dropped items (≥95% durability) plus static inventory.
+  { vendor: 'Vulture', repLevel: 1, name: 'Sights', type: 'attachment', detail: 'Various scopes and red dot sights' },
+  { vendor: 'Vulture', repLevel: 1, name: 'Weapon Parts', type: 'attachment', detail: 'Basic weapon modification parts' },
+  { vendor: 'Vulture', repLevel: 3, name: 'Containers', type: 'container', detail: 'Storage containers and cases' },
+  { vendor: 'Vulture', repLevel: 4, name: 'Premium Containers', type: 'container', detail: 'High-capacity storage solutions' },
 ];
