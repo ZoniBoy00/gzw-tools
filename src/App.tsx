@@ -6,6 +6,7 @@ import MissionFinder from './components/MissionFinder';
 import AmmoGuide from './components/AmmoGuide';
 import ArmorGuide from './components/ArmorGuide';
 import WeaponsGuide from './components/WeaponsGuide';
+import VendorGuide from './components/VendorGuide';
 import LoadoutBuilder from './components/LoadoutBuilder';
 import LogAnalyzer from './components/LogAnalyzer';
 import ApiDocs from './components/ApiDocs';
@@ -13,7 +14,7 @@ import TabBar from './components/ui/TabBar';
 import { calcRepToDollars } from './lib/calc';
 import './index.css';
 
-type Tab = 'dashboard' | 'rep' | 'dollar' | 'missions' | 'ammo' | 'weapons' | 'armor' | 'loadouts' | 'logs' | 'api-docs';
+type Tab = 'dashboard' | 'rep' | 'dollar' | 'missions' | 'ammo' | 'weapons' | 'armor' | 'vendors' | 'loadouts' | 'logs' | 'api-docs';
 
 const TABS: { id: Tab; label: string; icon: string }[] = [
   { id: 'dashboard', label: 'Overview', icon: 'fas fa-gauge' },
@@ -23,6 +24,7 @@ const TABS: { id: Tab; label: string; icon: string }[] = [
   { id: 'ammo', label: 'Ammo', icon: 'fas fa-bolt' },
   { id: 'weapons', label: 'Weapons', icon: 'fas fa-crosshairs' },
   { id: 'armor', label: 'Armor', icon: 'fas fa-shield-halved' },
+  { id: 'vendors', label: 'Vendors', icon: 'fas fa-store' },
   { id: 'loadouts', label: 'Loadouts', icon: 'fas fa-screwdriver-wrench' },
   { id: 'logs', label: 'Log Analyzer', icon: 'fas fa-file-lines' },
   { id: 'api-docs', label: 'API', icon: 'fas fa-code' },
@@ -73,6 +75,7 @@ function App() {
           {activeTab === 'ammo' && <AmmoGuide />}
           {activeTab === 'weapons' && <WeaponsGuide />}
           {activeTab === 'armor' && <ArmorGuide />}
+          {activeTab === 'vendors' && <VendorGuide />}
           {activeTab === 'loadouts' && <LoadoutBuilder />}
           {activeTab === 'logs' && <LogAnalyzer />}
           {activeTab === 'api-docs' && <ApiDocs />}

@@ -1,35 +1,6 @@
-import { VENDORS, formatNumber } from '../lib/calc';
-
-const STATS = [
-  {
-    label: 'Total Rep',
-    value: formatNumber(VENDORS.reduce((a, v) => a + v.rep, 0)),
-    icon: 'fas fa-trophy',
-    color: 'text-accent',
-    desc: 'Combined vendor reputation',
-  },
-  {
-    label: 'Average',
-    value: `${Math.round(VENDORS.reduce((a, v) => a + (v.rep / v.maxRep) * 100, 0) / VENDORS.length)}%`,
-    icon: 'fas fa-chart-simple',
-    color: 'text-green',
-    desc: 'Mean progress across vendors',
-  },
-  {
-    label: 'Max Possible',
-    value: formatNumber(VENDORS.reduce((a, v) => a + v.maxRep, 0)),
-    icon: 'fas fa-arrow-up',
-    color: 'text-blue',
-    desc: 'Combined max reputation',
-  },
-  {
-    label: 'Active Vendors',
-    value: String(VENDORS.length),
-    icon: 'fas fa-store',
-    color: 'text-accent',
-    desc: 'Vendors in Gray Zone Warfare',
-  },
-];
+import { useState, useEffect } from 'react';
+import { formatNumber } from '../lib/calc';
+import { getVendorReps, setVendorRep, type VendorRep } from '../lib/vendortracker';
 
 function ProgressRing({ pct, size = 32 }: { pct: number; size?: number }) {
   const r = (size - 8) / 2;
@@ -57,9 +28,37 @@ function ProgressRing({ pct, size = 32 }: { pct: number; size?: number }) {
 }
 
 export default function Dashboard() {
+  const [reps, setReps] = useState<VendorRep[]>([]);
+  const [editing, setEditing] = useState<string | null>(null);
+  const [editValue, setEditValue] = useState('');
+
+  // Load on mount and on focus (so other tabs can update)
+  const load = () => setReps(getVendorReps());
+
+  useEffect(() => {
+    load();
+    window.addEventListener('focus', load);
+    return () => window.removeEventListener('focus', load);
+  }, []);
+
+  const totalRep = reps.reduce((a, v) => a + v.rep, 0);
+  const maxTotal = reps.reduce((a, v) => a + v.maxRep, 0);
+  const avgPct = reps.length > 0 ? Math.round(reps.reduce((a, v) => a + (v.rep / v.maxRep) * 100, 0) / reps.length) : 0;
+
+  const startEdit = (slug: string, val: number) => {
+    setEditing(slug);
+    setEditValue(String(val));
+  };
+
+  const saveEdit = (slug: string) => {
+    const val = parseInt(editValue) || 0;
+    setVendorRep(slug, val);
+    setEditing(null);
+    load();
+  };
+
   return (
     <div className="tab-content">
-      {/* Header */}
       <div className="flex items-center gap-2 mb-6">
         <i className="fas fa-gauge text-accent text-sm" />
         <span className="section-title">Overview</span>
@@ -67,7 +66,12 @@ export default function Dashboard() {
 
       {/* Stats grid */}
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-8 animate-stagger">
-        {STATS.map((s) => (
+        {[
+          { label: 'Total Rep', value: formatNumber(totalRep), icon: 'fas fa-trophy', color: 'text-accent', desc: 'Combined vendor reputation' },
+          { label: 'Average', value: `${avgPct}%`, icon: 'fas fa-chart-simple', color: 'text-green', desc: 'Mean progress across vendors' },
+          { label: 'Max Possible', value: formatNumber(maxTotal), icon: 'fas fa-arrow-up', color: 'text-blue', desc: 'Combined max reputation' },
+          { label: 'Active Vendors', value: String(reps.length), icon: 'fas fa-store', color: 'text-accent', desc: 'Vendors in Gray Zone Warfare' },
+        ].map((s) => (
           <div key={s.label} className="card card-highlight p-4">
             <div className="flex items-center gap-2 mb-2">
               <i className={`${s.icon} ${s.color} text-xs`} />
@@ -80,19 +84,20 @@ export default function Dashboard() {
       </div>
 
       {/* Section title */}
-      <div className="flex items-center gap-2 mb-4">
-        <i className="fas fa-users text-accent/60 text-xs" />
-        <span className="section-title">Vendor Progress</span>
+      <div className="flex items-center justify-between gap-2 mb-4">
+        <div className="flex items-center gap-2">
+          <i className="fas fa-users text-accent/60 text-xs" />
+          <span className="section-title">Vendor Progress</span>
+        </div>
+        <span className="text-[9px] font-mono text-text-muted/40">Click rep value to edit</span>
       </div>
 
       {/* Vendor cards */}
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 animate-stagger">
-        {VENDORS.map((v) => {
-          const pct = Math.round((v.rep / v.maxRep) * 100);
-          const group = VENDORS.filter((x) => x.maxRep === v.maxRep);
+        {reps.map((v) => {
+          const pct = v.maxRep > 0 ? Math.round((v.rep / v.maxRep) * 100) : 0;
           return (
             <div key={v.slug} className="card card-highlight p-4">
-              {/* Top row */}
               <div className="flex items-start justify-between mb-3">
                 <div className="flex items-center gap-2.5">
                   <div className="w-8 h-8 border border-accent/20 flex items-center justify-center">
@@ -108,27 +113,58 @@ export default function Dashboard() {
                 </span>
               </div>
 
-              {/* Progress bar */}
-              <div className="progress mb-1">
-                <div
-                  className="progress-fill amber animate"
-                  style={{ width: `${pct}%` }}
-                />
-              </div>
-
-              {/* Bottom row */}
-              <div className="flex items-center justify-between text-[10px] font-mono">
-                <span className="text-text-muted">
-                  {formatNumber(v.rep)}
-                  <span className="text-text-muted/40"> / {formatNumber(v.maxRep)}</span>
-                </span>
-                <span className="text-text-muted/40">
-                  {group.length > 1 ? `${group.map((x) => x.name).join(', ')} — ${formatNumber(v.maxRep)}` : `Max ${formatNumber(v.maxRep)}`}
-                </span>
+              {/* Editable rep */}
+              <div className="mb-2">
+                {editing === v.slug ? (
+                  <div className="flex gap-1">
+                    <input
+                      type="number"
+                      value={editValue}
+                      onChange={(e) => setEditValue(e.target.value)}
+                      className="input input-sm flex-1"
+                      min={0}
+                      max={v.maxRep}
+                      autoFocus
+                      aria-label={`Set ${v.name} reputation`}
+                    />
+                    <button onClick={() => saveEdit(v.slug)} className="btn btn-primary btn-sm px-3">
+                      <i className="fas fa-check text-[10px]" />
+                    </button>
+                    <button onClick={() => setEditing(null)} className="btn btn-outline btn-sm px-3">
+                      <i className="fas fa-xmark text-[10px]" />
+                    </button>
+                  </div>
+                ) : (
+                  <button
+                    onClick={() => startEdit(v.slug, v.rep)}
+                    className="w-full text-left"
+                  >
+                    <div className="progress mb-1">
+                      <div className="progress-fill amber animate" style={{ width: `${pct}%` }} />
+                    </div>
+                    <div className="flex items-center justify-between text-[10px] font-mono">
+                      <span className="text-text-muted">
+                        <span className="text-accent font-bold">{formatNumber(v.rep)}</span>
+                        <span className="text-text-muted/40"> / {formatNumber(v.maxRep)}</span>
+                      </span>
+                      <span className="text-text-muted/40 text-[8px]">Click to edit</span>
+                    </div>
+                  </button>
+                )}
               </div>
             </div>
           );
         })}
+      </div>
+
+      {/* Reset */}
+      <div className="mt-3 flex justify-end">
+        <button
+          onClick={() => { localStorage.removeItem('gzw-vendor-reps'); load(); }}
+          className="text-[9px] font-mono text-text-muted/30 hover:text-red/60 transition-colors"
+        >
+          Reset all vendor rep values
+        </button>
       </div>
 
       {/* Quick info */}
