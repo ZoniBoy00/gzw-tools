@@ -1,259 +1,360 @@
 [
   {
     "name": "AK-12",
+    "id": "ak-12",
     "type": "Assault Rifle",
-    "fireRate": "700 RPM",
-    "caliber": "5.45x39mm"
+    "caliber": "5.45x39mm",
+    "fireRate": "700",
+    "weight": 3.553,
+    "image": "https://static.wikia.nocookie.net/gray-zone-warfare/images/3/30/AK-12_inspect.png/revision/latest/scale-to-width-down/200?cb=20250602231732"
   },
   {
     "name": "AK-15",
+    "id": "ak-15",
     "type": "Assault Rifle",
-    "fireRate": "700 RPM",
-    "caliber": "7.62x39mm"
+    "caliber": "7.62x39mm",
+    "fireRate": "700",
+    "weight": 3.81,
+    "image": "https://static.wikia.nocookie.net/gray-zone-warfare/images/e/e3/AK-15_inspect.png/revision/latest/scale-to-width-down/200?cb=20250617155725"
   },
   {
     "name": "AK-19",
+    "id": "ak-19",
     "type": "Assault Rifle",
-    "fireRate": "700 RPM",
-    "caliber": "5.56x45mm"
+    "caliber": "5.56x45mm",
+    "fireRate": "700",
+    "weight": 3.69,
+    "image": "https://static.wikia.nocookie.net/gray-zone-warfare/images/b/b6/AK-19_inspect.png/revision/latest/scale-to-width-down/200?cb=20250605225258"
   },
   {
     "name": "AK-308",
+    "id": "ak-308",
     "type": "Assault Rifle",
-    "caliber": "7.62x51mm"
+    "caliber": "7.62x51mm",
+    "weight": 5.712,
+    "image": "https://static.wikia.nocookie.net/gray-zone-warfare/images/9/9d/AK-308_inspect.png/revision/latest/scale-to-width-down/200?cb=20250617154126"
   },
   {
     "name": "AK-74M",
+    "id": "ak-74m",
     "type": "Assault Rifle",
-    "fireRate": "Single / Full Auto",
-    "caliber": "5.45x39mm"
+    "caliber": "5.45x39mm",
+    "image": "https://static.wikia.nocookie.net/gray-zone-warfare/images/5/52/AK-74M_inspect.png/revision/latest/scale-to-width-down/200?cb=20250617235259"
   },
   {
     "name": "AK-74N",
+    "id": "ak-74n",
     "type": "Assault Rifle",
-    "fireRate": "Single / Full Auto",
-    "caliber": "5.45x39mm"
+    "caliber": "5.45x39mm",
+    "image": "https://static.wikia.nocookie.net/gray-zone-warfare/images/e/e2/AK-74N_inspect.png/revision/latest/scale-to-width-down/200?cb=20250617155544"
   },
   {
     "name": "AKM",
+    "id": "akm",
     "type": "Assault Rifle",
-    "fireRate": "600 RPM",
-    "caliber": "7.62x39mm"
+    "caliber": "7.62x39mm",
+    "fireRate": "600",
+    "weight": 3.0,
+    "image": "https://static.wikia.nocookie.net/gray-zone-warfare/images/9/94/AKM_inspect.png/revision/latest/scale-to-width-down/200?cb=20250617155444"
   },
   {
     "name": "AKMN",
+    "id": "akmn",
     "type": "Assault Rifle",
-    "fireRate": "Single / Full Auto",
-    "caliber": "7.62x39mm"
+    "caliber": "7.62x39mm",
+    "image": "https://static.wikia.nocookie.net/gray-zone-warfare/images/9/94/AKM_inspect.png/revision/latest/scale-to-width-down/200?cb=20250617155444"
   },
   {
     "name": "AKMSN",
+    "id": "akmsn",
     "type": "Assault Rifle",
-    "fireRate": "Single / Full Auto",
-    "caliber": "7.62x39mm"
+    "caliber": "7.62x39mm",
+    "image": "https://static.wikia.nocookie.net/gray-zone-warfare/images/5/51/AKMSN_inspect.png/revision/latest/scale-to-width-down/200?cb=20250617155359"
   },
   {
     "name": "AKS-74U",
+    "id": "aks-74u",
     "type": "Assault Rifle",
-    "fireRate": "650 RPM",
-    "caliber": "5.45x39mm"
+    "caliber": "5.45x39mm",
+    "fireRate": "650",
+    "weight": 2.757,
+    "image": "https://static.wikia.nocookie.net/gray-zone-warfare/images/9/90/AKS-74U_inspect.png/revision/latest/scale-to-width-down/200?cb=20250324154314"
   },
   {
     "name": "Beretta M9A1",
+    "id": "beretta-m9a1",
     "type": "Pistol",
-    "fireRate": "600 RPM",
-    "caliber": "9x19mm"
+    "caliber": "9x19mm",
+    "fireRate": "600",
+    "weight": 1.045,
+    "image": "https://static.wikia.nocookie.net/gray-zone-warfare/images/b/bc/M9A1_inspect.png/revision/latest/scale-to-width-down/200?cb=20250527013326"
   },
   {
     "name": "Buran's AK-74N",
+    "id": "burans-ak-74n",
     "type": "Assault Rifle",
-    "fireRate": "650 RPM",
-    "caliber": "5.45x39mm"
+    "caliber": "5.45x39mm",
+    "fireRate": "650",
+    "weight": 3.405,
+    "image": "https://static.wikia.nocookie.net/gray-zone-warfare/images/c/cd/Buran%27s_AK-74N_inspect.png/revision/latest/scale-to-width-down/200?cb=20260606044029"
   },
   {
     "name": "Colt 1911",
+    "id": "colt-1911",
     "type": "Pistol",
-    "fireRate": "600 RPM",
-    "caliber": ".45 ACP"
+    "caliber": ".45 ACP",
+    "fireRate": "600",
+    "weight": 1.052,
+    "image": "https://static.wikia.nocookie.net/gray-zone-warfare/images/9/96/1911_inspect.png/revision/latest/scale-to-width-down/200?cb=20250603001636"
   },
   {
     "name": "Colt Combat Commander",
+    "id": "colt-combat-commander",
     "type": "Pistol",
-    "fireRate": "600 RPM",
-    "caliber": ".45 ACP"
+    "caliber": ".45 ACP",
+    "fireRate": "600",
+    "weight": 1.203,
+    "image": "https://static.wikia.nocookie.net/gray-zone-warfare/images/d/dc/1911_Com_inspect.png/revision/latest/scale-to-width-down/200?cb=20250618010637"
   },
   {
     "name": "CQ A1",
+    "id": "cq-a1",
     "type": "Assault Rifle",
-    "fireRate": "800 RPM",
-    "caliber": "5.56x45mm"
+    "caliber": "5.56x45mm",
+    "fireRate": "800",
+    "weight": 2.674,
+    "image": "https://static.wikia.nocookie.net/gray-zone-warfare/images/a/a6/CQ_A1_inspect.PNG/revision/latest/scale-to-width-down/200?cb=20251105171848"
   },
   {
     "name": "DDM4",
+    "id": "ddm4",
     "type": "Assault Rifle",
-    "fireRate": "800 RPM",
-    "caliber": "5.56x45mm NATO"
+    "caliber": "5.56x45mm NATO",
+    "fireRate": "800",
+    "weight": 3.451,
+    "image": "https://static.wikia.nocookie.net/gray-zone-warfare/images/4/43/DDM4_inspect.png/revision/latest/scale-to-width-down/200?cb=20250613225202"
   },
   {
     "name": "Firebrand's AKS-74U",
+    "id": "firebrands-aks-74u",
     "type": "Assault Rifle",
-    "fireRate": "650 RPM",
-    "caliber": "5.45x39mm"
+    "caliber": "5.45x39mm",
+    "fireRate": "650",
+    "weight": 2.74,
+    "image": "https://static.wikia.nocookie.net/gray-zone-warfare/images/3/34/Firebrands_AKS-74U_inspect.png/revision/latest/scale-to-width-down/200?cb=20260512115450"
   },
   {
     "name": "Glock 17",
+    "id": "glock-17",
     "type": "Handgun",
-    "fireRate": "600 RPM",
-    "caliber": "9x19mm"
+    "caliber": "9x19mm",
+    "fireRate": "600",
+    "weight": 0.81,
+    "image": "https://static.wikia.nocookie.net/gray-zone-warfare/images/8/85/G17_inspect.png/revision/latest/scale-to-width-down/200?cb=20240509115145"
   },
   {
     "name": "Grin's Colt 1911 Commander",
+    "id": "grins-colt-1911-commander",
     "type": "Pistol",
-    "fireRate": "600 RPM",
-    "caliber": ".45 ACP"
+    "caliber": ".45 ACP",
+    "fireRate": "600",
+    "weight": 1.116,
+    "image": "https://static.wikia.nocookie.net/gray-zone-warfare/images/1/15/Grins_1911_inspect.png/revision/latest/scale-to-width-down/200?cb=20260512044104"
   },
   {
     "name": "L403A1",
+    "id": "l403a1",
     "type": "Assault Rifle",
-    "fireRate": "800 RPM",
-    "caliber": "5.56x45mm"
+    "caliber": "5.56x45mm",
+    "fireRate": "800",
+    "weight": 4.438,
+    "image": "https://static.wikia.nocookie.net/gray-zone-warfare/images/c/c4/L403A1_inspect.png/revision/latest/scale-to-width-down/200?cb=20260406225421"
   },
   {
     "name": "Laugo alien",
+    "id": "laugo-alien",
     "type": "Pistol",
-    "fireRate": "700 RPM",
-    "caliber": "9x19mm"
+    "caliber": "9x19mm",
+    "fireRate": "700",
+    "weight": 1.404,
+    "image": "https://static.wikia.nocookie.net/gray-zone-warfare/images/4/4b/Alien_Inspect.png/revision/latest/scale-to-width-down/200?cb=20260406043129"
   },
   {
     "name": "M14 Rifle",
+    "id": "m14-rifle",
     "type": "Rifle",
-    "fireRate": "???? RPM",
     "caliber": "7.62x51mm"
   },
   {
     "name": "M16 A1",
+    "id": "m16-a1",
     "type": "Assault Rifle",
-    "fireRate": "800 rpm RPM",
-    "caliber": "5.56x45mm"
+    "caliber": "5.56x45mm",
+    "fireRate": "800",
+    "weight": 3.595,
+    "image": "https://static.wikia.nocookie.net/gray-zone-warfare/images/5/57/M16A1-Inspect.png/revision/latest/scale-to-width-down/200?cb=20260525042725"
   },
   {
     "name": "M1A Rifle",
+    "id": "m1a-rifle",
     "type": "Rifle",
-    "fireRate": "700 RPM",
-    "caliber": "7.62x51mm"
+    "caliber": "7.62x51mm",
+    "fireRate": "700",
+    "weight": 4.137,
+    "image": "https://static.wikia.nocookie.net/gray-zone-warfare/images/0/04/M1A_inspect.png/revision/latest/scale-to-width-down/200?cb=20260412223432"
   },
   {
     "name": "M201C",
+    "id": "m201c",
     "type": "Pistol",
-    "fireRate": "??? RPM",
     "caliber": "7.62x25mm"
   },
   {
     "name": "M4A1",
+    "id": "m4a1",
     "type": "Assault Rifle",
-    "fireRate": "800 RPM",
-    "caliber": "5.56x45mm NATO"
+    "caliber": "5.56x45mm NATO",
+    "fireRate": "800",
+    "weight": 3.299,
+    "image": "https://static.wikia.nocookie.net/gray-zone-warfare/images/4/43/M4A1_inspect.png/revision/latest/scale-to-width-down/200?cb=20250617155019"
   },
   {
     "name": "M700",
+    "id": "m700",
     "type": "Rifle",
-    "caliber": "7.62x51mm"
+    "caliber": "7.62x51mm",
+    "image": "https://static.wikia.nocookie.net/gray-zone-warfare/images/a/a8/M700_inspect.png/revision/latest/scale-to-width-down/200?cb=20240513214530"
   },
   {
     "name": "M870",
+    "id": "m870",
     "type": "Shotgun",
-    "fireRate": "300 RPM",
-    "caliber": "12 Gauge"
+    "caliber": "12 Gauge",
+    "fireRate": "300",
+    "weight": 4.502,
+    "image": "https://static.wikia.nocookie.net/gray-zone-warfare/images/d/db/M870_inspect.png/revision/latest/scale-to-width-down/200?cb=20250329022139"
   },
   {
     "name": "Mosin-Nagant",
+    "id": "mosin-nagant",
     "type": "Rifle",
-    "fireRate": "20 RPM",
-    "caliber": "7.62x54mm R"
+    "caliber": "7.62x54mm R",
+    "fireRate": "20",
+    "weight": 3.525,
+    "image": "https://static.wikia.nocookie.net/gray-zone-warfare/images/8/8f/Mosin_inspect.png/revision/latest/scale-to-width-down/200?cb=20250618000700"
   },
   {
     "name": "Mosin-Nagant (Sniper)",
+    "id": "mosin-nagant-(sniper)",
     "type": "Rifle",
-    "fireRate": "20 RPM"
+    "fireRate": "20",
+    "image": "https://static.wikia.nocookie.net/gray-zone-warfare/images/5/51/Mosin_%28S%29_inspect.png/revision/latest/scale-to-width-down/200?cb=20250620012557"
   },
   {
     "name": "Mossberg 590",
+    "id": "mossberg-590",
     "type": "Shotgun",
-    "fireRate": "300 RPM",
-    "caliber": "12 Gauge"
+    "caliber": "12 Gauge",
+    "fireRate": "300",
+    "weight": 3.412,
+    "image": "https://static.wikia.nocookie.net/gray-zone-warfare/images/9/96/M590_inspect.png/revision/latest/scale-to-width-down/200?cb=20250329030452"
   },
   {
     "name": "MP5",
+    "id": "mp5",
     "type": "Submachine Gun",
-    "fireRate": "800 RPM",
-    "caliber": "9x19mm"
+    "caliber": "9x19mm",
+    "fireRate": "800",
+    "weight": 2.507,
+    "image": "https://static.wikia.nocookie.net/gray-zone-warfare/images/5/52/MP5_inspect.png/revision/latest/scale-to-width-down/200?cb=20250620012946"
   },
   {
     "name": "MP7",
+    "id": "mp7",
     "type": "SMG",
-    "fireRate": "950 RPM",
-    "caliber": "4.6x30mm"
+    "caliber": "4.6x30mm",
+    "fireRate": "950",
+    "weight": 2.165,
+    "image": "https://static.wikia.nocookie.net/gray-zone-warfare/images/5/50/MP7.png/revision/latest/scale-to-width-down/200?cb=20250527122700"
   },
   {
     "name": "MP7A1",
+    "id": "mp7a1",
     "type": "Submachine Gun",
-    "fireRate": "Single/Full-Auto",
     "caliber": "4.6x30mm"
   },
   {
     "name": "MP7A2",
+    "id": "mp7a2",
     "type": "Submachine Gun",
-    "fireRate": "Single/Full-Auto",
     "caliber": "4.6x30mm"
   },
   {
     "name": "Remington 788",
+    "id": "remington-788",
     "type": "Rifle",
     "caliber": ".222 Remington"
   },
   {
     "name": "Sa vz. 58",
+    "id": "sa-vz.-58",
     "type": "Assault Rifle",
-    "fireRate": "800 RPM",
-    "caliber": "7.62x39mm"
+    "caliber": "7.62x39mm",
+    "fireRate": "800",
+    "weight": 3.287,
+    "image": "https://static.wikia.nocookie.net/gray-zone-warfare/images/0/00/SA_vz._58_inspect.png/revision/latest/scale-to-width-down/200?cb=20260602022249"
   },
   {
     "name": "SIG MCX",
+    "id": "sig-mcx",
     "type": "Assault Rifle",
-    "fireRate": "800 RPM",
-    "caliber": ".300 AAC Blackout"
+    "caliber": ".300 AAC Blackout",
+    "fireRate": "800",
+    "weight": 4.31,
+    "image": "https://static.wikia.nocookie.net/gray-zone-warfare/images/2/2d/SIG_MCX_inspect.png/revision/latest/scale-to-width-down/200?cb=20250617154913"
   },
   {
     "name": "SKS",
-    "fireRate": "Single",
-    "caliber": "7.62x39mm"
+    "id": "sks",
+    "caliber": "7.62x39mm",
+    "image": "https://static.wikia.nocookie.net/gray-zone-warfare/images/2/20/SKS_inspect.png/revision/latest/scale-to-width-down/200?cb=20250618000429"
   },
   {
     "name": "SVD",
+    "id": "svd",
     "type": "Rifle",
-    "fireRate": "600 rpm RPM",
-    "caliber": "7.62x54mm R"
+    "caliber": "7.62x54mm R",
+    "fireRate": "600",
+    "weight": 4.542,
+    "image": "https://static.wikia.nocookie.net/gray-zone-warfare/images/8/85/SVD_inspect.png/revision/latest/scale-to-width-down/200?cb=20250527011855"
   },
   {
     "name": "Type 51",
+    "id": "type-51",
     "type": "Pistol",
-    "fireRate": "600 RPM",
-    "caliber": "7.62x25mm"
+    "caliber": "7.62x25mm",
+    "fireRate": "600",
+    "weight": 0.828,
+    "image": "https://static.wikia.nocookie.net/gray-zone-warfare/images/f/fd/Type51_inspect.png/revision/latest/scale-to-width-down/200?cb=20250617154811"
   },
   {
     "name": "USMC Fighting Knife",
-    "type": "Melee"
+    "id": "usmc-fighting-knife",
+    "type": "Melee",
+    "image": "https://static.wikia.nocookie.net/gray-zone-warfare/images/6/6b/Ka-Bar_inspect.png/revision/latest/scale-to-width-down/200?cb=20240504042130"
   },
   {
     "name": "VZ. 58",
+    "id": "vz.-58",
     "type": "Assault Rifle",
-    "fireRate": "???? RPM",
     "caliber": "7.62x39mm"
   },
   {
     "name": "Vz. 61 Skorpion",
+    "id": "vz.-61-skorpion",
     "type": "SMG",
-    "fireRate": "800 RPM",
-    "caliber": "7.65mm Browning"
+    "caliber": "7.65mm Browning",
+    "fireRate": "800",
+    "weight": 1.375
   }
 ]
