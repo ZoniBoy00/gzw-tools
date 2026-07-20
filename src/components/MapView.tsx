@@ -18,9 +18,9 @@ const GRID_MAX_Y = 190;
 const DATA_RANGE_X = GRID_MAX_X - GRID_MIN_X; // 140
 const DATA_RANGE_Y = GRID_MAX_Y - GRID_MIN_Y; // 100
 
-// Image pixel dimensions (wiki map: 1861×936) — used to render at native aspect ratio
-const MAP_W = 1861;
-const MAP_H = 936;
+// Image pixel dimensions (IGN map: 1657×927) — clean, no UI overlays
+const MAP_W = 1657;
+const MAP_H = 927;
 
 const COLORS: Record<string, string> = {
   city: '#f59e0b',
