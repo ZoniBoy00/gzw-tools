@@ -18,11 +18,10 @@
 | **Ammo** | Full ammo database with caliber, pen values, vendor sources |
 | **Weapons** | Weapons database (51) with type/source filters, grouped by source, detail modals |
 | **Armor** | Armor & gear guide with vests (19), plate carriers (16), helmets (26), recommendations, vendor tables |
-| **Backpacks** 🎒 | Backpacks (16) & tactical rigs (11) with search, sort, grid/weight display |
-| **Keys** 🔑 | 124 keys & keycards across 12 locations — search by location or name |
+| **Backpacks** 🎒 | Backpacks & tactical rigs with search, sort, grid/weight display |
+| **Keys** 🔑 | Keys & keycards across 12 locations — search by location or name |
 | **Vendors** | Vendor guide with rep tracking, per-rank item lists, unlock status (7 vendors) |
 | **Loadouts** | Build and save weapon loadouts in your browser |
-| **Log Analyzer** | Parse GZW.log files to extract match data |
 | **API** | [gzw-data.vercel.app](https://gzw-data.vercel.app) — public game data API |
 
 ## Tech Stack
@@ -58,18 +57,26 @@ All endpoints return JSON with CORS headers, rate limiting (100 req/min), and fi
 
 ### Endpoints
 
-| Endpoint | Description |
-|----------|-------------|
-| `GET /api/armor` | All armor items (`?type=`, `?material=`, `?nij=`) |
-| `GET /api/weapons` | Weapons database (`?type=`, `?caliber=`, `?search=`) |
-| `GET /api/backpacks` | Backpacks & rigs (`?type=Backpack\|Tactical Rig`) |
-| `GET /api/keys` | Keys & keycards (`?location=`) |
-| `GET /api/tasks` | Mission database (`?vendor=`, `?area=`, `?search=`) |
-| `GET /api/throwables` | Grenade data |
-| `GET /api/images` | Image URL lookup |
-| `GET /api/stats` | Aggregate statistics |
-| `GET /api/search?q=` | Unified search |
-| `GET /api/spec` | OpenAPI 3.0 spec |
+Every dataset is automatically available as `/api/<name>` — no manual registration needed.
+
+| Endpoint | Description | Filters |
+|----------|-------------|---------|
+| `GET /api/weapons` | Weapons database | `?type=`, `?caliber=`, `?search=` |
+| `GET /api/vests` | Armor vests & plate carriers | `?nij=`, `?material=`, `?type=` |
+| `GET /api/helmets` | Helmets | `?material=`, `?type=` |
+| `GET /api/ammo` | Ammunition & penetration | `?caliber=`, `?search=` |
+| `GET /api/backpacks` | Backpacks | `?type=`, `?capacity=` |
+| `GET /api/rigs` | Tactical rigs | `?capacity=` |
+| `GET /api/keys` | Keys & keycards | `?location=`, `?type=` |
+| `GET /api/tasks` | Mission database | `?vendor=`, `?area=`, `?search=` |
+| `GET /api/medical` | Medical items | `?type=`, `?effect=` |
+| `GET /api/provisions` | Food & drink | `?type=` |
+| `GET /api/glasses` | Eyewear | `?type=` |
+| `GET /api/factions` | Faction info | — |
+| `GET /api/<dataset>` | Any dataset | Auto: filter by any field |
+| `GET /api/search?q=` | Cross-dataset search | — |
+| `GET /api/stats` | Aggregate stats | — |
+| `GET /api/spec` | OpenAPI 3.0 spec | — |
 
 ## Development
 
