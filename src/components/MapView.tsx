@@ -15,9 +15,9 @@ const GRID_MAX_Y = 190;
 const DATA_RANGE_X = GRID_MAX_X - GRID_MIN_X; // 140
 const DATA_RANGE_Y = GRID_MAX_Y - GRID_MIN_Y; // 100
 
-// IGN clean map dimensions (no UI overlays)
-const MAP_W = 1657;
-const MAP_H = 927;
+// IGN clean map (814×455, resized for fast loading)
+const MAP_W = 814;
+const MAP_H = 455;
 
 const COLORS: Record<string, string> = {
   city: '#f59e0b',

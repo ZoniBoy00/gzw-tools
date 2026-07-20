@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="fi">
+<head>
+<meta charset="UTF-8">
+<title>GZW Map Calibration Tool</title>
+<style>
+  :root {
+    --bg: #0d1117;
+    --panel: #161b22;
+    --border: #30363d;
+    --accent: #3b82f6;
+    --good: #22c55e;
+    --bad: #ef4444;
+    --text: #e6edf3;
+    --muted: #8b949e;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    display: flex;
+    height: 100vh;
+    overflow: hidden;
+  }
+  #mapPane {
+    flex: 1;
+    overflow: auto;
+    position: relative;
+    background:
+      linear-gradient(45deg, #111 25%, transparent 25%),
+      linear-gradient(-45deg, #111 25%, transparent 25%),
+      linear-gradient(45deg, transparent 75%, #111 75%),
+      linear-gradient(-45deg, transparent 75%, #111 75%);
+    background-size: 20px 20px;
+    background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
+  }
+  #imgWrap { position: relative; display: inline-block; }
+  #mapImg { display: block; user-select: none; -webkit-user-drag: none; }
+  .pin {
+    position: absolute;
+    width: 16px; height: 16px;
+    margin-left: -8px; margin-top: -8px;
+    border-radius: 50%;
+    background: var(--accent);
+    border: 2px solid #fff;
+    box-shadow: 0 0 8px rgba(0,0,0,0.6);
+    cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 9px; font-weight: 700; color: #fff;
+    z-index: 5;
+  }
+  .pin.done { background: var(--good); }
+  #sidebar {
+    width: 360px;
+    background: var(--panel);
+    border-left: 1px solid var(--border);
+    padding: 16px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+  h1 { font-size: 15px; margin: 0 0 2px; }
+  .sub { color: var(--muted); font-size: 12px; margin: 0 0 10px; line-height: 1.5; }
+  .field { display: flex; flex-direction: column; gap: 4px; }
+  label { font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: .04em; }
+  input, select, button, textarea {
+    background: #0d1117; color: var(--text); border: 1px solid var(--border);
+    border-radius: 6px; padding: 8px; font-size: 13px; font-family: inherit;
+  }
+  button {
+    background: var(--accent); border: none; cursor: pointer; font-weight: 600;
+  }
+  button:hover { filter: brightness(1.1); }
+  button.secondary { background: #21262d; color: var(--text); }
+  #poiList { display: flex; flex-direction: column; gap: 4px; max-height: 260px; overflow-y: auto; }
+  .poiRow {
+    display: flex; align-items: center; gap: 6px;
+    padding: 5px 6px; border-radius: 5px; font-size: 12px;
+    border: 1px solid transparent;
+  }
+  .poiRow.active { border-color: var(--accent); background: rgba(59,130,246,0.1); }
+  .poiRow .dot { width: 8px; height: 8px; border-radius: 50%; background: #444; flex-shrink:0; }
+  .poiRow.marked .dot { background: var(--good); }
+  .poiRow .name { flex: 1; }
+  .poiRow .grid { color: var(--muted); font-family: monospace; font-size: 11px; }
+  .poiRow button { padding: 2px 8px; font-size: 11px; }
+  #zoomRow { display: flex; gap: 6px; align-items: center; }
+  #zoomRow input[type=range] { flex: 1; }
+  #status { font-size: 12px; padding: 8px 10px; border-radius: 6px; background: #21262d; }
+  #status.err { background: rgba(239,68,68,0.15); color: #ff8080; }
+  #status.ok { background: rgba(34,197,94,0.12); color: #7ee2a0; }
+  pre {
+    background: #0d1117; border: 1px solid var(--border); border-radius: 6px;
+    padding: 10px; font-size: 11px; overflow-x: auto; white-space: pre-wrap; word-break: break-word;
+  }
+  .rowbtns { display: flex; gap: 8px; }
+  .rowbtns button { flex: 1; }
+  .residual { font-family: monospace; font-size: 11px; color: var(--muted); }
+  .residual.bad { color: var(--bad); }
+</style>
+</head>
+<body>
+
+<div id="mapPane">
+  <div id="imgWrap">
+    <img id="mapImg" draggable="false">
+  </div>
+</div>
+
+<div id="sidebar">
+  <div>
+    <h1>GZW Map Calibration</h1>
+    <p class="sub">1. Valitse IGN-kuva. 2. Klikkaa POI nimeä listasta, klikkaa sen oikea sijainti kartalta (zoomaa tarkkuuden parantamiseksi). 3. Toista vähintään 4-5 pisteelle. 4. Laske kalibrointi. 5. Kopioi koodi + liitä MapView.tsx:ään.</p>
+  </div>
+
+  <div class="field">
+    <label>Karttakuvan URL</label>
+    <input id="imgUrl" value="https://oyster.ignimgs.com/mediawiki/apis.ign.com/gray-zone-warfare/2/20/Ign-gray-zone-warfare-map.PNG">
+    <div class="rowbtns">
+      <button class="secondary" onclick="loadImage()">Lataa IGN-kuva</button>
+      <button class="secondary" onclick="document.getElementById('imgUrl').value='https://static.wikia.nocookie.net/gray-zone-warfare/images/8/8b/Lamang_Island_Full_Map_Large.png/revision/latest?cb=20260405084540';loadImage()">Lataa Wiki-kuva</button>
+    </div>
+  </div>
+
+  <div class="field">
+    <label>Zoom <span id="zoomVal">100%</span></label>
+    <div id="zoomRow">
+      <input type="range" id="zoom" min="20" max="400" value="100">
+    </div>
+  </div>
+
+  <div class="field">
+    <label>POIt (klikkaa nimeä valitaksesi, sitten klikkaa kartalta)</label>
+    <div id="poiList"></div>
+    <div class="rowbtns">
+      <button class="secondary" onclick="addCustomPoi()">+ Lisää oma piste</button>
+      <button class="secondary" onclick="clearAll()">Tyhjennä kaikki</button>
+    </div>
+  </div>
+
+  <div id="status">Lataa kuva, valitse POI ja klikkaa sen sijainti kartalta.</div>
+
+  <button onclick="calibrate()">Laske kalibrointi</button>
+
+  <div id="result" style="display:none;">
+    <div class="field">
+      <label>Tarkkuus (residuaalit, px)</label>
+      <div id="residuals"></div>
+    </div>
+    <div class="field">
+      <label>Valmis koodi (korvaa parseGrid + päivitä MouseTracker/GridOverlay)</label>
+      <pre id="codeOut"></pre>
+      <button class="secondary" onclick="copyCode()">Kopioi koodi</button>
+    </div>
+  </div>
+</div>
+
+<script>
+let pois = [
+  { name: "Kiu Vongsa", grid: [141,164] },
+  { name: "Nam Thaven", grid: [171,118] },
+  { name: "Pha Lang", grid: [202,162] },
+  { name: "Sawmill", grid: [139,144] },
+  { name: "Hunter's Paradise", grid: [159,168] },
+  { name: "Ban Pa", grid: [205,137] },
+  { name: "Pha Lang Airfield", grid: [182,158] },
+  { name: "YBL-1", grid: [143,122] },
+  { name: "Blue Lagoon", grid: [203,117] },
+  { name: "Midnight Sapphire", grid: [171,166] },
+  { name: "Fort Narith", grid: [143,129] },
+  { name: "Tiger Bay", grid: [198,130] },
+  { name: "Ground Zero", grid: [170,140] },
+  { name: "UNLRA HQ", grid: [189,142] },
+].map(p => ({ ...p, px: null }));
+
+let activeIdx = 0;
+let naturalW = 0, naturalH = 0;
+
+const img = document.getElementById('mapImg');
+const imgWrap = document.getElementById('imgWrap');
+const mapPane = document.getElementById('mapPane');
+const zoom = document.getElementById('zoom');
+const zoomVal = document.getElementById('zoomVal');
+const status = document.getElementById('status');
+
+function loadImage() {
+  const url = document.getElementById('imgUrl').value.trim();
+  img.onload = () => {
+    naturalW = img.naturalWidth;
+    naturalH = img.naturalHeight;
+    applyZoom();
+    setStatus(`Kuva ladattu (${naturalW}×${naturalH}px). Valitse POI ja klikkaa sijainti kartalta.`, '');
+    renderPins();
+  };
+  img.onerror = () => setStatus('Kuvan lataus epäonnistui — tarkista URL tai CORS.', 'err');
+  img.src = url;
+}
+
+function applyZoom() {
+  const scale = zoom.value / 100;
+  img.style.width = (naturalW * scale) + 'px';
+  img.style.height = (naturalH * scale) + 'px';
+  zoomVal.textContent = zoom.value + '%';
+  renderPins();
+}
+zoom.addEventListener('input', applyZoom);
+
+mapPane.addEventListener('click', (e) => {
+  if (e.target !== img) return;
+  const rect = img.getBoundingClientRect();
+  const scale = zoom.value / 100;
+  const px = Math.round((e.clientX - rect.left) / scale);
+  const py = Math.round((e.clientY - rect.top) / scale);
+  pois[activeIdx].px = [px, py];
+  renderPins();
+  renderPoiList();
+  const next = pois.findIndex(p => p.px === null);
+  if (next !== -1) activeIdx = next;
+  renderPoiList();
+  setStatus(`"${pois[activeIdx].name}" merkitty kuvapisteeseen (${px}, ${py}).`, 'ok');
+});
+
+function renderPins() {
+  document.querySelectorAll('.pin').forEach(p => p.remove());
+  const scale = zoom.value / 100;
+  pois.forEach((p, i) => {
+    if (!p.px) return;
+    const pin = document.createElement('div');
+    pin.className = 'pin done';
+    pin.style.left = (p.px[0] * scale) + 'px';
+    pin.style.top = (p.px[1] * scale) + 'px';
+    pin.title = p.name;
+    pin.textContent = i + 1;
+    pin.onclick = (ev) => { ev.stopPropagation(); activeIdx = i; renderPoiList(); };
+    imgWrap.appendChild(pin);
+  });
+}
+
+function renderPoiList() {
+  const list = document.getElementById('poiList');
+  list.innerHTML = '';
+  pois.forEach((p, i) => {
+    const row = document.createElement('div');
+    row.className = 'poiRow' + (i === activeIdx ? ' active' : '') + (p.px ? ' marked' : '');
+    row.innerHTML = `
+      <span class="dot"></span>
+      <span class="name">${p.name}</span>
+      <span class="grid">${p.grid[0]}:${p.grid[1]}</span>
+      <button onclick="selectPoi(${i})">${p.px ? '✓' : 'Valitse'}</button>
+    `;
+    list.appendChild(row);
+  });
+}
+function selectPoi(i) { activeIdx = i; renderPoiList(); }
+
+function addCustomPoi() {
+  const name = prompt('Paikan nimi:');
+  if (!name) return;
+  const gridStr = prompt('Grid-koordinaatti (esim. 150:130):');
+  if (!gridStr || !gridStr.includes(':')) return;
+  const [gx, gy] = gridStr.split(':').map(Number);
+  pois.push({ name, grid: [gx, gy], px: null });
+  activeIdx = pois.length - 1;
+  renderPoiList();
+}
+
+function clearAll() {
+  pois.forEach(p => p.px = null);
+  activeIdx = 0;
+  renderPins();
+  renderPoiList();
+  document.getElementById('result').style.display = 'none';
+  setStatus('Kaikki pisteet tyhjennetty. Valitse POI ja klikkaa sen sijainti.', '');
+}
+
+function setStatus(msg, cls) {
+  status.textContent = msg;
+  status.className = cls;
+}
+
+function linreg(xs, ys) {
+  const n = xs.length;
+  const sx = xs.reduce((a,b)=>a+b,0);
+  const sy = ys.reduce((a,b)=>a+b,0);
+  const sxy = xs.reduce((a,x,i)=>a+x*ys[i],0);
+  const sxx = xs.reduce((a,x)=>a+x*x,0);
+  const denom = (n*sxx - sx*sx);
+  if (denom === 0) return null;
+  const m = (n*sxy - sx*sy) / denom;
+  const b = (sy - m*sx) / n;
+  return { m, b };
+}
+
+function calibrate() {
+  const marked = pois.filter(p => p.px);
+  if (marked.length < 2) {
+    setStatus('Tarvitset vähintään 2 merkittyä pistettä (suositus 5+).', 'err');
+    return;
+  }
+  const gx = marked.map(p => p.grid[0]);
+  const gy = marked.map(p => p.grid[1]);
+  const pxArr = marked.map(p => p.px[0]);
+  const pyArr = marked.map(p => p.px[1]);
+
+  const rx = linreg(gx, pxArr);
+  const ry = linreg(gy, pyArr);
+
+  if (!rx || !ry) {
+    setStatus('Kalibrointi epäonnistui (kaikki pisteet samalla x- tai y-arvolla?).', 'err');
+    return;
+  }
+
+  const resHtml = marked.map(p => {
+    const predX = rx.m * p.grid[0] + rx.b;
+    const predY = ry.m * p.grid[1] + ry.b;
+    const errX = predX - p.px[0];
+    const errY = predY - p.px[1];
+    const dist = Math.sqrt(errX*errX + errY*errY);
+    const cls = dist > 15 ? 'bad' : '';
+    return `<div class="residual ${cls}">${p.name}: ${dist.toFixed(1)} px virhe (grid ${p.grid[0]}:${p.grid[1]})</div>`;
+  }).join('');
+  document.getElementById('residuals').innerHTML = resHtml;
+
+  const code = `// Kalibroitu ${marked.length} pisteestä — korvaa nykyiset GRID_MIN/MAX ja parseGrid
+const SCALE_X = ${rx.m.toFixed(6)};
+const OFFSET_X = ${rx.b.toFixed(2)};
+const SCALE_Y = ${ry.m.toFixed(6)};
+const OFFSET_Y = ${ry.b.toFixed(2)};
+
+// Grid-koordinaatti (esim. "141:164") → Leaflet-pikseli [y, x]
+function parseGrid(g) {
+  const [x, y] = g.replace(/\\s/g, '').split(':').map(Number);
+  const px = SCALE_X * x + OFFSET_X;
+  const py = SCALE_Y * y + OFFSET_Y;
+  return [py, px];
+}
+
+// Pikseli → grid-koordinaatti (MouseTracker, GridOverlay, Popupit)
+function pixelToGrid(lx, ly) {
+  const gx = Math.round((lx - OFFSET_X) / SCALE_X);
+  const gy = Math.round((ly - OFFSET_Y) / SCALE_Y);
+  return [gx, gy];
+}
+
+// Poista nämä käytöstä:
+// GRID_MIN_X, GRID_MAX_X, GRID_MIN_Y, GRID_MAX_Y
+// DATA_RANGE_X, DATA_RANGE_Y`;
+  document.getElementById('codeOut').textContent = code;
+  document.getElementById('result').style.display = 'flex';
+  document.getElementById('result').style.flexDirection = 'column';
+  document.getElementById('result').style.gap = '10px';
+  setStatus(`Kalibroitu ${marked.length} pisteestä. Tarkista residuaalit — jos jokin erottuu paljon, klikkasit sen väärään kohtaan.`, marked.length >= 4 ? 'ok' : '');
+}
+
+function copyCode() {
+  navigator.clipboard.writeText(document.getElementById('codeOut').textContent);
+  setStatus('Koodi kopioitu leikepöydälle.', 'ok');
+}
+
+renderPoiList();
+loadImage();
+</script>
+</body>
+</html>
