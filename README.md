@@ -22,6 +22,7 @@
 | **Keys** 🔑 | Keys & keycards across 12 locations — search by location or name |
 | **Vendors** | Vendor guide with rep tracking, per-rank item lists, unlock status (7 vendors) |
 | **Loadouts** | Build and save weapon loadouts in your browser |
+| **Log Analyzer** | Parse GZW.log files to extract match data |
 | **API** | [gzw-data.vercel.app](https://gzw-data.vercel.app) — public game data API |
 
 ## Tech Stack
