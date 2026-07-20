@@ -231,7 +231,7 @@ export default function VendorGuide() {
               <div className="flex items-center gap-3">
                 <div className="w-14 h-14 flex items-center justify-center border overflow-hidden" style={{ borderColor: meta.color + '40', background: meta.color + '12' }}>
                   {vendorImages[selected as keyof typeof vendorImages] ? (
-                    <img src={vendorImages[selected as keyof typeof vendorImages] as string} alt={vendor.name} className="w-full h-full object-contain" />
+                    <img src={vendorImages[selected as keyof typeof vendorImages] as string} alt={vendor.name} className="w-full h-full object-cover object-top" />
                   ) : (
                     <i className={`${meta.icon} text-xl`} style={{ color: meta.color }} />
                   )}
@@ -254,9 +254,8 @@ export default function VendorGuide() {
                   </span>
                 </div>
                 {vendor.slug === 'vulture' && (
-                  <div className="text-[8px] font-mono text-text-muted/60 mb-2 leading-tight">
-                    <i className="fas fa-info-circle mr-1" />
-                    Vulture rep is earned via tasks and selling valuables (half price). Buying/selling regular items doesn't give rep.
+                  <div className="text-[7px] font-mono text-text-muted/50 mb-1.5">
+                    <i className="fas fa-info-circle mr-0.5" /> Tasks &amp; valuables (½ price) only
                   </div>
                 )}
                 <div className="progress mb-2" style={{ height: 6 }}>
