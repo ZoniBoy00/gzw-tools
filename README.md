@@ -28,44 +28,48 @@
 ## Tech Stack
 
 - **Frontend:** React 19, TypeScript, Vite, Tailwind CSS
-- **Backend:** Vercel serverless functions (Node.js)
-- **Data:** Scraped from [GZW Fandom Wiki](https://gray-zone-warfare.fandom.com)
+- **Data API:** [gzw-data](https://github.com/ZoniBoy00/gzw-data) — Vercel serverless API + Swagger UI
+- **Scraper:** [gzw-scraper](https://github.com/ZoniBoy00/gzw-scraper) — GitHub Actions weekly scrape
 - **Hosting:** Vercel (Hobby)
 
 ## Data Sources
 
-All game data is scraped from the [GZW Fandom Wiki](https://gray-zone-warfare.fandom.com) via GitHub Actions:
+All game data is scraped from the [GZW Fandom Wiki](https://gray-zone-warfare.fandom.com) via [gzw-scraper](https://github.com/ZoniBoy00/gzw-scraper) (weekly GitHub Actions):
 - Weapon stats, ammo values, armor data
 - Mission objectives & rewards
 - Vendor reputation requirements
 - Keys & keycards
 
-Data refreshes automatically every Monday via the GitHub Actions scraper.
+Data is served via the public [gzw-data API](https://gzw-data.vercel.app).
 
 ## API
 
-The tool includes a REST API at `/api`:
+The public game data API is hosted at **[gzw-data.vercel.app](https://gzw-data.vercel.app)** ([repo](https://github.com/ZoniBoy00/gzw-data)).
 
-```
-GET /api                    API documentation
-GET /api/ammo               All ammunition data
-GET /api/vendors            Vendor reputation data
-GET /api/weapons            Weapons database
-GET /api/armor              Armor vests, plate carriers & helmets
-GET /api/armor/vests        Vests only
-GET /api/armor/helmets      Helmets only
-GET /api/armor/plate-carriers  Plate carriers only
-GET /api/recommendations    Gear recommendations
-GET /api/backpacks          Backpacks & tactical rigs
-GET /api/missions           Mission database
-GET /api/keys               Keys & keycards (124 keys)
-GET /api/stats              Aggregate statistics
-GET /api/search?q=          Unified search
-GET /api/calculator/rep-to-dollars?current=&target=&rate=
-GET /api/calculator/missions?current=&target=
+```bash
+curl https://gzw-data.vercel.app/api/weapons
+curl https://gzw-data.vercel.app/api/armor
+curl https://gzw-data.vercel.app/api/keys?location=Ban%20Pa
 ```
 
-All endpoints support `?caliber=`, `?vendor=`, `?location=` and other filters.
+Full API docs with Swagger UI: **[gzw-data.vercel.app](https://gzw-data.vercel.app)**
+
+All endpoints return JSON with CORS headers, rate limiting (100 req/min), and filtering support.
+
+### Endpoints
+
+| Endpoint | Description |
+|----------|-------------|
+| `GET /api/armor` | All armor items (`?type=`, `?material=`, `?nij=`) |
+| `GET /api/weapons` | Weapons database (`?type=`, `?caliber=`, `?search=`) |
+| `GET /api/backpacks` | Backpacks & rigs (`?type=Backpack\|Tactical Rig`) |
+| `GET /api/keys` | Keys & keycards (`?location=`) |
+| `GET /api/tasks` | Mission database (`?vendor=`, `?area=`, `?search=`) |
+| `GET /api/throwables` | Grenade data |
+| `GET /api/images` | Image URL lookup |
+| `GET /api/stats` | Aggregate statistics |
+| `GET /api/search?q=` | Unified search |
+| `GET /api/spec` | OpenAPI 3.0 spec |
 
 ## Development
 
@@ -78,12 +82,6 @@ npm run dev
 
 # Build for production
 npm run build
-
-# Scrape wiki data
-python3 scripts/scraper/scrape.py --all
-python3 scripts/scraper/enrich_tasks.py
-python3 scripts/scraper/categorize_tasks.py
-python3 scripts/scraper/gen_frontend_data.py
 ```
 
 ## Project Structure
@@ -94,12 +92,10 @@ python3 scripts/scraper/gen_frontend_data.py
 ├── src/
 │   ├── components/       # React components
 │   │   └── ui/          # Shared UI components (TabBar, ItemModal)
-│   ├── data/            # Game data (JSON + TS)
+│   ├── data/            # Game data JSON (synced from gzw-data)
 │   ├── lib/             # Utilities (calculators, vendor tracker)
 │   └── App.tsx          # Root component with routing
-├── scripts/
-│   └── scraper/         # Wiki scraping pipeline
-├── .github/workflows/   # GitHub Actions (weekly data refresh)
+├── .github/workflows/   # GitHub Actions (data sync from gzw-data)
 └── vercel.json          # Vercel deployment config
 ```
 

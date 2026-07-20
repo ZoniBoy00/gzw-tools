@@ -1,0 +1,40 @@
+name: Sync Data from gzw-data
+
+on:
+  schedule:
+    - cron: '30 6 * * 1'   # Monday 06:30 UTC (30min after scraper)
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Download data from gzw-data
+        run: |
+          FILES="armor.json weapons.json backpacks.json rigs.json keys.json tasks.json throwables.json images.json"
+          for f in $FILES; do
+            curl -sL "https://raw.githubusercontent.com/ZoniBoy00/gzw-data/main/data/$f" -o "src/data/$f"
+            echo "  ✅ $f"
+          done
+
+      - name: Normalise data
+        run: |
+          python3 scripts/normalise_data.py 2>&1 || true
+          python3 scripts/reorder_data.py 2>&1 || true
+
+      - name: Commit
+        run: |
+          git config user.name "gzw-bot"
+          git config user.email "bot@gzw-tools.dev"
+          if git status --porcelain src/data/ | grep -q .; then
+            git add src/data/
+            git commit -m "auto: sync data from gzw-data ($(date +%Y-%m-%d))"
+            git push
+          else
+            echo "No changes."
+          fi
