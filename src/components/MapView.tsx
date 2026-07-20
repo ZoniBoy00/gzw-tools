@@ -8,17 +8,15 @@ import 'leaflet/dist/leaflet.css';
 import mapData from '../data/map_data.json';
 
 /* ── Constants ── */
-// Actual data ranges from the wiki data (not guessed)
-const GRID_MIN_X = 133;
-const GRID_MAX_X = 209;
-const GRID_MIN_Y = 107;
-const GRID_MAX_Y = 172;
-const DATA_RANGE_X = GRID_MAX_X - GRID_MIN_X; // 76
-const DATA_RANGE_Y = GRID_MAX_Y - GRID_MIN_Y; // 65
+// Kalibroitu IGN-kuvalle (1657×927) — 12 pisteellä
+const SCALE_X = 21.801036;
+const OFFSET_X = -2899.48;
+const SCALE_Y = -14.252818;
+const OFFSET_Y = 2451.72;
 
-// Wiki map with grid labels (1861×936)
-const MAP_W = 1861;
-const MAP_H = 936;
+// Image pixel dimensions (must match calibrated image)
+const MAP_W = 1657;
+const MAP_H = 927;
 
 const COLORS: Record<string, string> = {
   city: '#f59e0b',
@@ -58,13 +56,10 @@ const GROUP_LABELS: Record<string, string> = {
 };
 
 /* ── Coordinate helpers ── */
-// Convert wiki grid "X:Y" (e.g. "141:164") to Leaflet pixel position [y, x]
-// World Y goes north (up) but Leaflet Y goes south (down), so we flip Y
+// Kalibroitu grid → pikseli
 function parseGrid(g: string): [number, number] {
   const [x, y] = g.replace(/\s/g, '').split(':').map(Number);
-  const px = ((x - GRID_MIN_X) / DATA_RANGE_X) * MAP_W;
-  const py = MAP_H - ((y - GRID_MIN_Y) / DATA_RANGE_Y) * MAP_H;
-  return [py, px];
+  return [SCALE_Y * y + OFFSET_Y, SCALE_X * x + OFFSET_X];
 }
 
 /* ── Marker icon factory (pin-style) ── */
@@ -104,11 +99,11 @@ function FitBounds() {
 function GridOverlay() {
   const lines: { from: [number, number]; to: [number, number] }[] = [];
   for (let gx = 100; gx <= 220; gx += 10) {
-    const lx = ((gx - GRID_MIN_X) / DATA_RANGE_X) * MAP_W;
+    const lx = SCALE_X * gx + OFFSET_X;
     lines.push({ from: [0, lx], to: [MAP_H, lx] });
   }
   for (let gy = 100; gy <= 180; gy += 10) {
-    const ly = ((gy - GRID_MIN_Y) / DATA_RANGE_Y) * MAP_H;
+    const ly = SCALE_Y * gy + OFFSET_Y;
     lines.push({ from: [ly, 0], to: [ly, MAP_W] });
   }
   return (
@@ -124,11 +119,11 @@ function GridOverlay() {
 function GridLabels() {
   const labels: { pos: [number, number]; text: string }[] = [];
   for (let gx = 100; gx <= 220; gx += 10) {
-    const lx = ((gx - GRID_MIN_X) / DATA_RANGE_X) * MAP_W;
+    const lx = SCALE_X * gx + OFFSET_X;
     labels.push({ pos: [MAP_H + 14, lx], text: `${gx}` });
   }
   for (let gy = 100; gy <= 180; gy += 10) {
-    const ly = ((gy - GRID_MIN_Y) / DATA_RANGE_Y) * MAP_H;
+    const ly = SCALE_Y * gy + OFFSET_Y;
     labels.push({ pos: [ly, -14], text: `${gy}` });
   }
   return (
@@ -150,9 +145,9 @@ function GridLabels() {
 function MouseTracker({ onMove, onZoom }: { onMove: (g: [number, number]) => void; onZoom: (z: number) => void }) {
   useMapEvents({
     mousemove: (e) => {
-      const gx = Math.round((e.latlng.lng / MAP_W) * DATA_RANGE_X + GRID_MIN_X);
-      const gy = Math.round(((MAP_H - e.latlng.lat) / MAP_H) * DATA_RANGE_Y + GRID_MIN_Y);
-      if (gx >= GRID_MIN_X && gx <= GRID_MAX_X && gy >= GRID_MIN_Y && gy <= GRID_MAX_Y) {
+      const gx = Math.round((e.latlng.lng - OFFSET_X) / SCALE_X);
+      const gy = Math.round((e.latlng.lat - OFFSET_Y) / SCALE_Y);
+      if (gx >= 100 && gx <= 240 && gy >= 90 && gy <= 190) {
         onMove([gx, gy]);
       }
     },
@@ -378,7 +373,7 @@ export default function MapView() {
                 <div className="map-popup">
                   <div className="map-popup-header"><i className={m.icon} style={{ color: m.color }} /><span>{m.name}</span></div>
                   {m.desc && <div className="map-popup-desc">{m.desc}</div>}
-                  <div className="map-popup-grid">Grid: {Math.round((m.pos[1] / MAP_W) * DATA_RANGE_X + GRID_MIN_X)}:{Math.round(((MAP_H - m.pos[0]) / MAP_H) * DATA_RANGE_Y + GRID_MIN_Y)}</div>
+                  <div className="map-popup-grid">Grid: {Math.round((m.pos[1] - OFFSET_X) / SCALE_X)}:{Math.round((m.pos[0] - OFFSET_Y) / SCALE_Y)}</div>
                 </div>
               </Popup>
             </Marker>
