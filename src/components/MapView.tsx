@@ -180,7 +180,7 @@ interface MarkerItem {
 /* ── MapView component ── */
 export default function MapView() {
   const [filter, setFilter] = useState('all');
-  const [showGrid, setShowGrid] = useState(true);
+  const [showGrid, setShowGrid] = useState(false);
   const [cursorGrid, setCursorGrid] = useState<[number, number] | null>(null);
   const [zoom, setZoom] = useState(0);
   const [searchQuery, setSearchQuery] = useState('');

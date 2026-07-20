@@ -1,5 +1,5 @@
 import { BrowserRouter, Routes, Route, Navigate, Link, useLocation } from 'react-router-dom';
-import { useState } from 'react';
+import { useState, lazy, Suspense } from 'react';
 import Dashboard from './components/Dashboard';
 import RepCalculator from './components/RepCalculator';
 import DollarCalculator from './components/DollarCalculator';
@@ -15,9 +15,11 @@ import ApiDocs from './components/ApiDocs';
 import PrivacyPolicy from './components/PrivacyPolicy';
 import TermsOfService from './components/TermsOfService';
 import FaqModal from './components/FaqModal';
-import MapView from './components/MapView';
 import TabBar from './components/ui/TabBar';
 import './index.css';
+
+/* Lazy load map (code splitting) */
+const MapView = lazy(() => import('./components/MapView'));
 
 const TABS = [
   { id: 'dashboard', label: 'Overview', icon: 'fas fa-gauge', path: '/' },
@@ -150,7 +152,16 @@ function MapLayout() {
       </header>
       {/* Full-screen map */}
       <div className="flex-1 relative overflow-hidden">
-        <MapView />
+        <Suspense fallback={
+          <div className="h-full flex items-center justify-center bg-bg">
+            <div className="text-center">
+              <i className="fas fa-map text-accent text-2xl mb-3 opacity-50" />
+              <div className="skeleton-text w-32 mx-auto" />
+            </div>
+          </div>
+        }>
+          <MapView />
+        </Suspense>
       </div>
     </div>
   );
