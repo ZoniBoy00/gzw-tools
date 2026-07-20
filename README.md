@@ -14,11 +14,12 @@
 | **Overview** | Dashboard with quick stats, rep progress, gear recommendations |
 | **Rep → $** | Calculate cost to reach a target reputation |
 | **$ → Rep** | Calculate how much rep you can buy with your budget |
-| **Missions** | Browse 159 missions from 7 vendors — search, filter, expand |
+| **Missions** | Browse 278 missions from 7 vendors — search, filter, expand |
 | **Ammo** | Full ammo database with caliber, pen values, vendor sources |
-| **Weapons** | Weapons database with compare mode, filters, detail modals |
-| **Armor** | Armor & gear guide with vests, plate carriers, helmets, recommendations |
-| **Keys** 🔑 | 105 keys & keycards across 12 locations — search by location or name |
+| **Weapons** | Weapons database (51) with type/source filters, grouped by source, detail modals |
+| **Armor** | Armor & gear guide with vests (19), plate carriers (16), helmets (26), recommendations, vendor tables |
+| **Backpacks** 🎒 | Backpacks (16) & tactical rigs (11) with search, sort, grid/weight display |
+| **Keys** 🔑 | 124 keys & keycards across 12 locations — search by location or name |
 | **Vendors** | Vendor guide with rep tracking, per-rank item lists, unlock status (7 vendors) |
 | **Loadouts** | Build and save weapon loadouts in your browser |
 | **Log Analyzer** | Parse GZW.log files to extract match data |
@@ -53,9 +54,11 @@ GET /api/weapons            Weapons database
 GET /api/armor              Armor vests, plate carriers & helmets
 GET /api/armor/vests        Vests only
 GET /api/armor/helmets      Helmets only
+GET /api/armor/plate-carriers  Plate carriers only
 GET /api/recommendations    Gear recommendations
+GET /api/backpacks          Backpacks & tactical rigs
 GET /api/missions           Mission database
-GET /api/keys               Keys & keycards (105 keys)
+GET /api/keys               Keys & keycards (124 keys)
 GET /api/stats              Aggregate statistics
 GET /api/search?q=          Unified search
 GET /api/calculator/rep-to-dollars?current=&target=&rate=

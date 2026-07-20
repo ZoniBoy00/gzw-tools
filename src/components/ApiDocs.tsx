@@ -22,7 +22,7 @@ const ENDPOINTS: Endpoint[] = [
     path: '/api',
     desc: 'Root endpoint — returns API metadata, version, and a list of all available endpoints.',
     params: [],
-    example: `{\n  "data": {\n    "name": "GZW Tools API",\n    "version": "1.0.0",\n    "endpoints": [\n      "/api/ammo?caliber=5.56x45mm",\n      "/api/vendors",\n      "/api/weapons",\n      "/api/armor",\n      "/api/recommendations"\n    ]\n  },\n  "count": 1,\n  "source": "GZW Tools API",\n  "timestamp": "2026-01-15T12:00:00.000Z"\n}`,
+    example: `{\n  "data": {\n    "name": "GZW Tools API",\n    "version": "1.0.0",\n    "endpoints": [\n      "/api/ammo?caliber=5.56x45mm",\n      "/api/vendors",\n      "/api/weapons",\n      "/api/armor",\n      "/api/armor/vests",\n      "/api/armor/helmets",\n      "/api/armor/plate-carriers",\n      "/api/recommendations",\n      "/api/backpacks",\n      "/api/keys?location=Fort%20Narith",\n      "/api/missions?vendor=Handshake",\n      "/api/stats",\n      "/api/search?q=AK",\n      "/api/calculator/rep-to-dollars?current=5000&target=13000"\n    ]\n  },\n  "count": 1,\n  "source": "GZW Tools API",\n  "timestamp": "2026-01-15T12:00:00.000Z"\n}`,
     group: 'System',
   },
   {
@@ -58,9 +58,9 @@ const ENDPOINTS: Endpoint[] = [
   {
     method: 'GET',
     path: '/api/armor',
-    desc: 'Returns all vests and helmets in a single response.',
+    desc: 'Returns all vests, plate carriers, and helmets in a single response.',
     params: [],
-    example: `{\n  "data": {\n    "vests": [\n      { "name": "Molle Vest", "nij": "IIIA", "material": "Steel", "weight": 2.6, "source": "Artisan R.1" }\n    ],\n    "helmets": [\n      { "name": "FAST Carbon", "nij": "IIIA", "material": "Aramid", "weight": 1.1, "source": "Banshee R.2" }\n    ]\n  }\n}`,
+    example: `{\n  "data": {\n    "vests": [\n      { "name": "Molle Vest", "nij": "IIIA", "material": "Steel", "weight": 2.6, "source": "Artisan R.1" }\n    ],\n    "plateCarriers": [\n      { "name": "Specter", "nij": "IIIA", "material": "Aramid", "weight": 2.8, "source": "Handshake R.1" }\n    ],\n    "helmets": [\n      { "name": "FAST Carbon", "nij": "IIIA", "material": "Aramid", "weight": 1.1, "source": "Banshee R.2" }\n    ]\n  }\n}`,
     group: 'Data',
   },
   {
@@ -81,10 +81,26 @@ const ENDPOINTS: Endpoint[] = [
   },
   {
     method: 'GET',
+    path: '/api/armor/plate-carriers',
+    desc: 'Returns only plate carrier data.',
+    params: [],
+    example: `{\n  "data": [\n    {\n      "name": "Plate6 Plate Carrier",\n      "nij": "III++",\n      "material": "Ceramic",\n      "plates": "Front, Back",\n      "grid": "4x4",\n      "weight": 9.6,\n      "source": "Handshake R.4"\n    }\n  ]\n}`,
+    group: 'Data',
+  },
+  {
+    method: 'GET',
     path: '/api/recommendations',
     desc: 'Gear loadout recommendations from budget to end-game, plus vendor gear unlock table.',
     params: [],
     example: `{\n  "data": {\n    "recommendations": [\n      {\n        "tier": "T1",\n        "label": "Budget",\n        "vest": "Molle Vest IIIA",\n        "helmet": "SS-27 IIA",\n        "ammo": "FMJ / M193",\n        "notes": "Good vs AI"\n      }\n    ],\n    "vendorGear": [\n      { "vendor": "Handshake", "rep": 1, "items": "Commander IIIA, LVS Overt IIIA+" }\n    ]\n  }\n}`,
+    group: 'Data',
+  },
+  {
+    method: 'GET',
+    path: '/api/backpacks',
+    desc: 'Returns all backpacks and tactical rigs with weight, grid size, and images.',
+    params: [],
+    example: `{\n  "data": {\n    "backpacks": [\n      { "name": "Assault Backpack", "id": "assault-backpack", "type": "Backpack", "weight": 1.5, "grid": "4x4", "image": "https://..." }\n    ],\n    "rigs": [\n      { "name": "Biker Chest Rig", "id": "biker-chest-rig", "type": "Tactical Rig", "weight": 0.35, "grid": "2x3", "image": "https://..." }\n    ]\n  }\n}`,
     group: 'Data',
   },
   {
@@ -114,7 +130,7 @@ const ENDPOINTS: Endpoint[] = [
     path: '/api/stats',
     desc: 'Aggregate statistics: totals for weapons, ammo, armor, vendors, missions, and keys.',
     params: [],
-    example: `{\\n  "data": {\\n    "weapons": { "total": 43, "types": ["Pistol", "SMG", ...] },\\n    "ammo": { "total": 52, "calibers": ["5.56x45mm", ...] },\\n    "armor": { "vests": 19, "helmets": 7 },\\n    "keys": { "total": 105, "locations": ["Ban Pa", ...] }\\n  }\\n}`,
+    example: `{\\n  "data": {\\n    "weapons": { "total": 51, "types": ["Assault Rifle", "DMR", ...] },\\n    "ammo": { "total": 56, "calibers": ["5.56x45mm", ...] },\\n    "armor": { "vests": 19, "helmets": 26, "plateCarriers": 16 },\\n    "backpacks": { "total": 16 },\\n    "rigs": { "total": 11 },\\n    "keys": { "total": 124, "locations": ["Ban Pa", ...] }\\n  }\\n}`,
     group: 'Data',
   },
   {
