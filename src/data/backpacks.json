@@ -69,7 +69,7 @@
     "type": "Backpack",
     "weight": 0.9,
     "grid": "3x3",
-    "image": "https://static.wikia.nocookie.net/gray-zone-warfare/images/0/02/3x3_Backpack.png/revision/latest/scale-to-width-down/200?cb=20240509033526"
+    "image": "https://static.wikia.nocookie.net/gray-zone-warfare/images/3/3e/Gunfighter_icon.png/revision/latest?cb=20250622125301"
   },
   {
     "name": "JDEN Jam Ball",
@@ -92,7 +92,8 @@
     "id": "patrol-backpack-(coyote)",
     "type": "Backpack",
     "weight": 1.5,
-    "image": "https://static.wikia.nocookie.net/gray-zone-warfare/images/0/02/3x3_Backpack.png/revision/latest/scale-to-width-down/200?cb=20240509033526"
+    "image": "https://static.wikia.nocookie.net/gray-zone-warfare/images/0/02/3x3_Backpack.png/revision/latest/scale-to-width-down/200?cb=20240509033526",
+    "grid": "3x3"
   },
   {
     "name": "Rush 72 2.0",
