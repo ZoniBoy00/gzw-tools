@@ -5,14 +5,15 @@
     "type": "Tactical Rig",
     "weight": 2.1,
     "grid": "4x4",
-    "image": "https://static.wikia.nocookie.net/gray-zone-warfare/images/b/b1/4x4_Inventory.png/revision/latest/scale-to-width-down/200?cb=20240509033911"
+    "image": "https://static.wikia.nocookie.net/gray-zone-warfare/images/7/7a/6Sh104_icon.png/revision/latest/scale-to-width-down/180?cb=20240520074128"
   },
   {
     "name": "ALICE",
     "id": "alice",
     "type": "Tactical Rig",
     "weight": 0.5,
-    "grid": "2x4"
+    "grid": "2x4",
+    "image": "https://static.wikia.nocookie.net/gray-zone-warfare/images/6/66/ALICE_icon.png/revision/latest?cb=20250610070034"
   },
   {
     "name": "Biker Chest Rig",
@@ -44,7 +45,7 @@
     "type": "Tactical Rig",
     "weight": 0.82,
     "grid": "4x3",
-    "image": "https://static.wikia.nocookie.net/gray-zone-warfare/images/3/34/4x3_Inventory.png/revision/latest/scale-to-width-down/200?cb=20250608162448"
+    "image": "https://static.wikia.nocookie.net/gray-zone-warfare/images/d/db/Recon_icon.png/revision/latest/scale-to-width-down/180?cb=20250610075620"
   },
   {
     "name": "Small Rig",
@@ -81,7 +82,7 @@
     "type": "Tactical Rig",
     "weight": 0.4,
     "grid": "3x2",
-    "image": "https://static.wikia.nocookie.net/gray-zone-warfare/images/b/bb/3x2_Inventory.png/revision/latest/scale-to-width-down/200?cb=20240510000746"
+    "image": "https://static.wikia.nocookie.net/gray-zone-warfare/images/0/06/Type_56_icon.png/revision/latest?cb=20250610070602"
   },
   {
     "name": "Universal Chest Bag",

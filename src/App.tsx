@@ -27,12 +27,12 @@ const TABS = [
   { id: 'ammo', label: 'Ammo', icon: 'fas fa-bolt', path: '/ammo' },
   { id: 'weapons', label: 'Weapons', icon: 'fas fa-crosshairs', path: '/weapons' },
   { id: 'armor', label: 'Armor', icon: 'fas fa-shield-halved', path: '/armor' },
+  { id: 'backpacks', label: 'Backpacks', icon: 'fas fa-bag-shopping', path: '/backpacks' },
   { id: 'keys', label: 'Keys', icon: 'fas fa-key', path: '/keys' },
   { id: 'vendors', label: 'Vendors', icon: 'fas fa-store', path: '/vendors' },
   { id: 'loadouts', label: 'Loadouts', icon: 'fas fa-screwdriver-wrench', path: '/loadouts' },
   { id: 'logs', label: 'Log Analyzer', icon: 'fas fa-file-lines', path: '/logs' },
   { id: 'api-docs', label: 'API', icon: 'fas fa-code', path: '/api-docs' },
-  { id: 'backpacks', label: 'Backpacks', icon: 'fas fa-bag-shopping', path: '/backpacks' },
 ] as const;
 
 function Layout() {
@@ -80,12 +80,12 @@ function Layout() {
             <Route path="/ammo" element={<AmmoGuide />} />
             <Route path="/weapons" element={<WeaponsGuide />} />
             <Route path="/armor" element={<ArmorGuide />} />
+            <Route path="/backpacks" element={<BackpackGuide />} />
             <Route path="/vendors" element={<VendorGuide />} />
             <Route path="/loadouts" element={<LoadoutBuilder />} />
             <Route path="/logs" element={<LogAnalyzer />} />
             <Route path="/api-docs" element={<ApiDocs />} />
             <Route path="/keys" element={<KeysGuide />} />
-            <Route path="/backpacks" element={<BackpackGuide />} />
             <Route path="/privacy" element={<PrivacyPolicy />} />
             <Route path="/tos" element={<TermsOfService />} />
             <Route path="*" element={<Navigate to="/" replace />} />
