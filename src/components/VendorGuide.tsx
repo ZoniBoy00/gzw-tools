@@ -254,7 +254,7 @@ export default function VendorGuide() {
                   </span>
                 </div>
                 {vendor.slug === 'vulture' && (
-                  <div className="text-[7px] font-mono text-text-muted/50 mb-1.5">
+                  <div className="text-[8px] font-mono text-text-muted/60 mb-1.5">
                     <i className="fas fa-info-circle mr-0.5" /> Tasks &amp; valuables (½ price) only
                   </div>
                 )}
