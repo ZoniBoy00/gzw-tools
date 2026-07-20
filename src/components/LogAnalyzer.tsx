@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useRef, useCallback } from 'react';
 import { parseLog, type ParsedLog } from '../lib/logparser';
 
 function friendlySize(mb: number): string {
@@ -10,10 +10,51 @@ export default function LogAnalyzer() {
   const [logText, setLogText] = useState('');
   const [parsed, setParsed] = useState<ParsedLog | null>(null);
   const [timelineFilter, setTimelineFilter] = useState<string>('all');
+  const [dragging, setDragging] = useState(false);
+  const [fileName, setFileName] = useState('');
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
-  const handleAnalyze = () => {
-    if (!logText.trim()) return;
-    setParsed(parseLog(logText));
+  const handleAnalyze = useCallback((text: string) => {
+    if (!text.trim()) return;
+    setParsed(parseLog(text));
+  }, []);
+
+  const readFile = useCallback((file: File) => {
+    if (!file.name.endsWith('.log') && !file.name.endsWith('.txt')) return;
+    setFileName(file.name);
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      const text = e.target?.result as string;
+      setLogText(text);
+      handleAnalyze(text);
+    };
+    reader.readAsText(file);
+  }, [handleAnalyze]);
+
+  const handleDrop = useCallback((e: React.DragEvent) => {
+    e.preventDefault();
+    setDragging(false);
+    const file = e.dataTransfer.files[0];
+    if (file) readFile(file);
+  }, [readFile]);
+
+  const handleDragOver = (e: React.DragEvent) => {
+    e.preventDefault();
+    setDragging(true);
+  };
+
+  const handleDragLeave = (e: React.DragEvent) => {
+    e.preventDefault();
+    // Only hide if leaving the drop zone, not entering a child
+    if (e.currentTarget === e.target || !e.currentTarget.contains(e.relatedTarget as Node)) {
+      setDragging(false);
+    }
+  };
+
+  const handleFileSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) readFile(file);
+    e.target.value = '';
   };
 
   return (
@@ -24,25 +65,66 @@ export default function LogAnalyzer() {
       </div>
 
       <p className="text-[11px] font-mono text-text-muted mb-4 leading-relaxed">
-        Paste your <code className="text-accent">GZW.log</code> contents to extract gameplay data.
+        Paste your <code className="text-accent">GZW.log</code> contents or drag & drop a log file to extract gameplay data.
         Log location:{' '}
         <code className="text-accent/70">%localappdata%\GrayZoneWarfare\Saved\Logs\</code>
       </p>
 
-      <div className="mb-3">
+      {/* Drag-drop zone */}
+      <div
+        onDrop={handleDrop}
+        onDragOver={handleDragOver}
+        onDragLeave={handleDragLeave}
+        className="relative"
+      >
+        {/* Drop overlay */}
+        {dragging && (
+          <div className="absolute inset-0 z-10 flex items-center justify-center bg-accent/10 border-2 border-dashed border-accent/60 rounded"
+            style={{ pointerEvents: 'none' }}
+          >
+            <div className="text-center">
+              <i className="fas fa-cloud-arrow-up text-2xl text-accent mb-2" />
+              <div className="text-sm font-bold text-accent">Drop .log file here</div>
+            </div>
+          </div>
+        )}
+
         <textarea
           value={logText}
           onChange={(e) => setLogText(e.target.value)}
-          placeholder="Paste GZW.log contents here..."
+          placeholder="Paste GZW.log contents here, or drag & drop a .log file..."
           className="input resize-none font-mono text-[11px]"
           rows={8}
           aria-label="GZW log contents"
         />
       </div>
 
-      <button onClick={handleAnalyze} className="btn btn-primary w-full btn-sm" disabled={!logText.trim()}>
-        <i className="fas fa-microchip" /> Analyze Log
-      </button>
+      <div className="flex gap-2 mt-3">
+        <button onClick={() => handleAnalyze(logText)} className="btn btn-primary flex-1 btn-sm" disabled={!logText.trim()}>
+          <i className="fas fa-microchip" /> Analyze Log
+        </button>
+        <button onClick={() => fileInputRef.current?.click()} className="btn btn-outline btn-sm">
+          <i className="fas fa-folder-open" /> Browse…
+        </button>
+        <input
+          ref={fileInputRef}
+          type="file"
+          accept=".log,.txt"
+          onChange={handleFileSelect}
+          className="hidden"
+        />
+        {logText && (
+          <button onClick={() => { setLogText(''); setParsed(null); setFileName(''); }} className="btn btn-outline btn-sm">
+            <i className="fas fa-xmark" />
+          </button>
+        )}
+      </div>
+
+      {fileName && (
+        <div className="mt-2 text-[10px] font-mono text-text-muted/60 flex items-center gap-1">
+          <i className="fas fa-file" /> {fileName}
+        </div>
+      )}
 
       {parsed && (
         <div className="mt-5 animate-stagger">
@@ -204,8 +286,6 @@ export default function LogAnalyzer() {
                   <i className="fas fa-timeline text-accent/60" />
                   Event Timeline
                   <span className="text-text-muted/50 font-mono text-[9px]">{parsed.events.length} events</span>
-
-                  {/* Category filter chips */}
                   <span className="ml-auto" />
                   {['all', ...new Set(parsed.events.map(e => e.category).slice(0, 12))].slice(0, 8).map(cat => (
                     <button
