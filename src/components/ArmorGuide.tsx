@@ -40,6 +40,7 @@ interface ArmorItem {
   source: string;
   plates?: string;
   grid?: string;
+  image?: string;
 }
 
 function itemModal(item: ArmorItem, type: 'vest' | 'helmet'): ModalItem {
@@ -53,7 +54,7 @@ function itemModal(item: ArmorItem, type: 'vest' | 'helmet'): ModalItem {
   if (item.grid) fields.splice(3, 0, { label: 'Grid', value: item.grid, desc: 'Inventory size' });
   return {
     name: item.name,
-    image: itemImages[item.name as keyof typeof itemImages] as string | undefined,
+    image: (itemImages[item.name as keyof typeof itemImages] || item.image) as string | undefined,
     type,
     fields,
   };
@@ -116,8 +117,8 @@ function ArmorList({ items, type }: { items: ArmorItem[]; type: 'vest' | 'helmet
                 <button key={`${v.name}-${i}`} onClick={() => setModalItem(itemModal(v, type))}
                   className="flex items-center gap-2 px-3 py-2 border border-border hover:border-accent/30 transition-colors text-left w-full"
                 >
-                  {itemImages[v.name as keyof typeof itemImages] ? (
-                    <img src={itemImages[v.name as keyof typeof itemImages] as string} alt="" className="w-8 h-8 object-contain shrink-0" loading="lazy" />
+                  {itemImages[v.name as keyof typeof itemImages] || v.image ? (
+                    <img src={(itemImages[v.name as keyof typeof itemImages] as string) || v.image || ''} alt="" className="w-8 h-8 object-contain shrink-0" loading="lazy" />
                   ) : (
                     <div className="w-8 h-8 flex items-center justify-center bg-surface-2 border border-border shrink-0">
                       <i className={`fas ${type === 'vest' ? 'fa-vest' : 'fa-hard-hat'} text-text-muted/30 text-sm`} />

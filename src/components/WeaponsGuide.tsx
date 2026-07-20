@@ -36,7 +36,7 @@ export default function WeaponsGuide() {
   const openModal = (w: (typeof WEAPONS)[number]) => {
     setModalItem({
       name: w.name,
-      image: itemImages[w.name as keyof typeof itemImages] as string | undefined,
+      image: (itemImages[w.name as keyof typeof itemImages] || w.image) as string | undefined,
       type: 'weapon',
       fields: [
         { label: 'Type', value: w.type, desc: 'Weapon classification — determines handling, role and available attachments' },
@@ -99,8 +99,8 @@ export default function WeaponsGuide() {
                   onClick={() => openModal(w)}
                   className="flex items-center gap-2 px-3 py-2 border border-border hover:border-accent/30 transition-colors text-left w-full"
                 >
-                  {itemImages[w.name as keyof typeof itemImages] ? (
-                    <img src={itemImages[w.name as keyof typeof itemImages] as string} alt="" className="w-8 h-8 object-contain shrink-0" loading="lazy" />
+                  {itemImages[w.name as keyof typeof itemImages] || w.image ? (
+                    <img src={(itemImages[w.name as keyof typeof itemImages] as string) || w.image || ''} alt="" className="w-8 h-8 object-contain shrink-0" loading="lazy" />
                   ) : (
                     <div className="w-8 h-8 flex items-center justify-center bg-surface-2 border border-border shrink-0">
                       <i className="fas fa-crosshairs text-text-muted/30 text-sm" />

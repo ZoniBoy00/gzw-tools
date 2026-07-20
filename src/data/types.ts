@@ -57,6 +57,7 @@ export interface WeaponEntry {
   magSize: number;
   fireRate?: string;
   source: string;
+  image?: string;
 }
 
 export const ARMOR_CLASSES: ArmorClass[] = ['I', 'IIA', 'IIA+', 'IIIA', 'IIIA+', 'III', 'III+', 'III++'];
