@@ -128,7 +128,7 @@ function NormalLayout() {
 /* ── Full-screen map layout ── */
 function MapLayout() {
   return (
-    <div className="scanlines h-screen bg-bg text-text flex flex-col overflow-hidden">
+    <div className="h-screen bg-bg text-text flex flex-col overflow-hidden">
       {/* Minimal map header */}
       <header className="border-b border-border bg-surface z-50 shrink-0">
         <div className="px-4 py-1.5 flex items-center justify-between">

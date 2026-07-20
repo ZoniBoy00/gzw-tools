@@ -61,41 +61,45 @@ function parseGrid(g: string): [number, number] {
   return [GRID_MAX_Y - y, x - GRID_MIN_X]; // [leafletY, leafletX]
 }
 
-/* ── Marker icon factory ── */
+/* ── Marker icon factory (pin-style) ── */
 function createIcon(color: string, size: number, icon?: string, label?: string) {
   const iconSize = Math.max(size, 18);
-  const fontSize = icon ? Math.round(iconSize * 0.45) : Math.round(iconSize * 0.4);
+  const iconF = icon ? Math.round(iconSize * 0.42) : Math.round(iconSize * 0.38);
   const borderW = Math.max(2, Math.round(iconSize * 0.1));
+  const pinH = Math.round(iconSize * 0.28);
+  const totalH = iconSize + pinH;
   return L.divIcon({
     className: '',
-    html: `<div style="position:relative;width:${iconSize}px;height:${iconSize}px;">
+    html: `<div style="position:relative;width:${iconSize + 8}px;height:${totalH + 4}px;">
       <div style="
         width:${iconSize}px;height:${iconSize}px;
-        background:${color}22;
-        border:${borderW}px solid ${color};
-        border-radius:50%;
-        box-shadow:0 0 12px ${color}44, 0 2px 8px rgba(0,0,0,0.6);
+        background:${color};
+        border:${borderW}px solid rgba(255,255,255,0.3);
+        border-radius:50% 50% 50% 0;
+        transform:rotate(-45deg);
+        box-shadow:0 2px 8px rgba(0,0,0,0.5), 0 0 12px ${color}66;
         display:flex;align-items:center;justify-content:center;
-        font-size:${fontSize}px;font-weight:700;
-        color:#fff;text-shadow:0 1px 4px rgba(0,0,0,0.8);
+        position:absolute;top:0;left:4px;
       ">
-        ${icon ? `<i class="${icon}" style="font-size:${fontSize}px"></i>`
-          : label ? `<span style="font-size:${fontSize - 2}px;font-family:'Rajdhani','JetBrains Mono',monospace">${label}</span>` : ''}
+        <div style="transform:rotate(45deg);display:flex;align-items:center;justify-content:center;width:100%;height:100%;">
+          ${icon ? `<i class="${icon}" style="font-size:${iconF}px;color:#fff;text-shadow:0 1px 3px rgba(0,0,0,0.6);"></i>`
+            : label ? `<span style="font-size:${iconF - 2}px;font-weight:700;color:#fff;font-family:'Rajdhani','JetBrains Mono',monospace;text-shadow:0 1px 3px rgba(0,0,0,0.6);">${label}</span>` : ''}
+        </div>
       </div>
       ${label && icon
         ? `<span style="
-            position:absolute;top:-6px;left:50%;transform:translateX(-50%);
+            position:absolute;top:-10px;left:50%;transform:translateX(-50%);
             font-size:7px;font-weight:700;font-family:'Rajdhani',sans-serif;
             color:#fff;text-shadow:0 1px 6px rgba(0,0,0,0.9);
-            white-space:nowrap;letter-spacing:0.5px;
-            background:${color}88;padding:0 4px;border-radius:2px;
-            backdrop-filter:blur(4px);
+            white-space:nowrap;letter-spacing:0.3px;
+            background:${color}cc;padding:1px 5px;border-radius:2px;
+            backdrop-filter:blur(4px);border:1px solid rgba(255,255,255,0.15);
           ">${label}</span>`
         : ''}
     </div>`,
-    iconSize: [iconSize + 6, iconSize + 6],
-    iconAnchor: [iconSize / 2, iconSize / 2],
-    popupAnchor: [0, -iconSize / 2 - 8],
+    iconSize: [iconSize + 8, totalH + 4],
+    iconAnchor: [iconSize / 2 + 4, totalH],
+    popupAnchor: [0, -totalH - 4],
   });
 }
 
