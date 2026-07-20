@@ -476,5 +476,739 @@
         "The Rebel Path"
       ]
     }
+  ],
+  "landingZones": [
+    {
+      "name": "CHARLIE-1",
+      "grid": "142:167",
+      "region": "Kiu Vongsa"
+    },
+    {
+      "name": "CHARLIE-2",
+      "grid": "138:158",
+      "region": "Kiu Vongsa"
+    },
+    {
+      "name": "CHARLIE-3",
+      "grid": "145:158",
+      "region": "Kiu Vongsa"
+    },
+    {
+      "name": "BRAVO-1",
+      "grid": "176:120",
+      "region": "Nam Thaven"
+    },
+    {
+      "name": "BRAVO-2",
+      "grid": "167:115",
+      "region": "Nam Thaven"
+    },
+    {
+      "name": "BRAVO-3",
+      "grid": "171:124",
+      "region": "Nam Thaven"
+    },
+    {
+      "name": "ALPHA-1",
+      "grid": "206:162",
+      "region": "Pha Lang"
+    },
+    {
+      "name": "ALPHA-2",
+      "grid": "197:164",
+      "region": "Pha Lang"
+    },
+    {
+      "name": "ALPHA-3",
+      "grid": "198:158",
+      "region": "Pha Lang"
+    },
+    {
+      "name": "LZ ECHO-1",
+      "grid": null,
+      "region": "Sawmill"
+    },
+    {
+      "name": "LZ ECHO-2",
+      "grid": null,
+      "region": "Sawmill"
+    },
+    {
+      "name": "LZ ECHO-3",
+      "grid": null,
+      "region": "Sawmill"
+    },
+    {
+      "name": "LZ FOXTROT-1",
+      "grid": null,
+      "region": "Hunter's Paradise"
+    },
+    {
+      "name": "INDIA-1",
+      "grid": "206:142",
+      "region": "Ban Pa"
+    },
+    {
+      "name": "INDIA-2",
+      "grid": "202:136",
+      "region": "Ban Pa"
+    },
+    {
+      "name": "INDIA-3",
+      "grid": "202:141",
+      "region": "Ban Pa"
+    },
+    {
+      "name": "OSCAR-1",
+      "grid": "203:152",
+      "region": "Ban Pa"
+    },
+    {
+      "name": "OSCAR-2",
+      "grid": "196:151",
+      "region": "Ban Pa"
+    },
+    {
+      "name": "OSCAR-3",
+      "grid": "196:141",
+      "region": "Ban Pa"
+    },
+    {
+      "name": "LZ GOLF-1",
+      "grid": "175:160",
+      "region": "Pha Lang Airfield"
+    },
+    {
+      "name": "LZ GOLF-2",
+      "grid": "186:155",
+      "region": "Pha Lang Airfield"
+    },
+    {
+      "name": "LZ GOLF-3",
+      "grid": "178:155",
+      "region": "Pha Lang Airfield"
+    },
+    {
+      "name": "LIMA-1",
+      "grid": "142:124",
+      "region": "YBL-1"
+    },
+    {
+      "name": "LIMA-2",
+      "grid": "148:120",
+      "region": "YBL-1"
+    },
+    {
+      "name": "LIMA-3",
+      "grid": "136:122",
+      "region": "YBL-1"
+    },
+    {
+      "name": "MIKE-1",
+      "grid": "161:119",
+      "region": "YBL-1"
+    },
+    {
+      "name": "MIKE-2",
+      "grid": "157:126",
+      "region": "YBL-1"
+    },
+    {
+      "name": "MIKE-3",
+      "grid": "153:119",
+      "region": "YBL-1"
+    },
+    {
+      "name": "MIKE-4",
+      "grid": "153:132",
+      "region": "YBL-1"
+    },
+    {
+      "name": "JULIETT-4",
+      "grid": "190:131",
+      "region": "Blue Lagoon"
+    },
+    {
+      "name": "KILO-1",
+      "grid": "202:118",
+      "region": "Blue Lagoon"
+    },
+    {
+      "name": "KILO-2",
+      "grid": "207:118",
+      "region": "Blue Lagoon"
+    },
+    {
+      "name": "KILO-3",
+      "grid": "205:122",
+      "region": "Blue Lagoon"
+    },
+    {
+      "name": "NOVEMBER-1",
+      "grid": "180:125",
+      "region": "Blue Lagoon"
+    },
+    {
+      "name": "NOVEMBER-2",
+      "grid": "185:125",
+      "region": "Blue Lagoon"
+    },
+    {
+      "name": "NOVEMBER-3",
+      "grid": "195:118",
+      "region": "Blue Lagoon"
+    },
+    {
+      "name": "LZ HOTEL-1",
+      "grid": null,
+      "region": "Midnight Sapphire"
+    },
+    {
+      "name": "LZ DELTA-1",
+      "grid": null,
+      "region": "Fort Narith"
+    },
+    {
+      "name": "LZ JULIET-1",
+      "grid": "197:136",
+      "region": "Tiger Bay"
+    },
+    {
+      "name": "LZ JULIET-2",
+      "grid": "194:126",
+      "region": "Tiger Bay"
+    },
+    {
+      "name": "LZ JULIET-3",
+      "grid": "201:124",
+      "region": "Tiger Bay"
+    }
+  ],
+  "keyLocations": [
+    {
+      "name": "Kiu Vongsa Doctor's Office Key",
+      "grid": null,
+      "region": "Kiu Vongsa"
+    },
+    {
+      "name": "Kiu Vongsa Restaurant Storage Key",
+      "grid": null,
+      "region": "Kiu Vongsa"
+    },
+    {
+      "name": "Kiu Vongsa Marketplace Office Key",
+      "grid": null,
+      "region": "Kiu Vongsa"
+    },
+    {
+      "name": "Kiu Vongsa Occupied Villa Bedroom Key",
+      "grid": null,
+      "region": "Kiu Vongsa"
+    },
+    {
+      "name": "Kiu Vongsa Lumberyard Maintenance Room Key",
+      "grid": null,
+      "region": "Kiu Vongsa"
+    },
+    {
+      "name": "Kiu Vongsa Town Hall Finance Department Key Card",
+      "grid": null,
+      "region": "Kiu Vongsa"
+    },
+    {
+      "name": "Nam Thaven Doctor's Office Key",
+      "grid": null,
+      "region": "Nam Thaven"
+    },
+    {
+      "name": "Nam Thaven Restaurant Storage Key",
+      "grid": null,
+      "region": "Nam Thaven"
+    },
+    {
+      "name": "Nam Thaven Marketplace Office Key",
+      "grid": null,
+      "region": "Nam Thaven"
+    },
+    {
+      "name": "Nam Thaven Occupied Villa Bedroom Key",
+      "grid": null,
+      "region": "Nam Thaven"
+    },
+    {
+      "name": "Nam Thaven Lumberyard Maintenance Room Key",
+      "grid": null,
+      "region": "Nam Thaven"
+    },
+    {
+      "name": "Nam Thaven Town Hall Finance Department Key Card",
+      "grid": null,
+      "region": "Nam Thaven"
+    },
+    {
+      "name": "Pha Lang Doctor's Office Key",
+      "grid": null,
+      "region": "Pha Lang"
+    },
+    {
+      "name": "Pha Lang Restaurant Storage Key",
+      "grid": null,
+      "region": "Pha Lang"
+    },
+    {
+      "name": "Pha Lang Marketplace Office Key",
+      "grid": null,
+      "region": "Pha Lang"
+    },
+    {
+      "name": "Pha Lang Occupied Villa Bedroom Key",
+      "grid": null,
+      "region": "Pha Lang"
+    },
+    {
+      "name": "Pha Lang Lumberyard Maintenance Room Key",
+      "grid": null,
+      "region": "Pha Lang"
+    },
+    {
+      "name": "Pha Lang Town Hall Finance Department Key Card",
+      "grid": null,
+      "region": "Pha Lang"
+    },
+    {
+      "name": "Khamhao Rice Depot Room Key",
+      "grid": null,
+      "region": "Sawmill"
+    },
+    {
+      "name": "LAF Radio Tower Room Key",
+      "grid": null,
+      "region": "Sawmill"
+    },
+    {
+      "name": "Sawmill Office Key",
+      "grid": null,
+      "region": "Sawmill"
+    },
+    {
+      "name": "Sawmill Office Storage Room Key",
+      "grid": null,
+      "region": "Sawmill"
+    },
+    {
+      "name": "Sawmill Storage Shed Key",
+      "grid": null,
+      "region": "Sawmill"
+    },
+    {
+      "name": "Sawmill Toilet Key",
+      "grid": null,
+      "region": "Sawmill"
+    },
+    {
+      "name": "Ban Phouphienge Room Key",
+      "grid": null,
+      "region": "Hunter's Paradise"
+    },
+    {
+      "name": "Construction Site Storage Key",
+      "grid": null,
+      "region": "Hunter's Paradise"
+    },
+    {
+      "name": "Hunter's Paradise Bunker Key",
+      "grid": null,
+      "region": "Hunter's Paradise"
+    },
+    {
+      "name": "Hunter's Paradise Makeshift Motel Armory Key",
+      "grid": null,
+      "region": "Hunter's Paradise"
+    },
+    {
+      "name": "Hunter's Paradise Shooting Lines Storage Key",
+      "grid": null,
+      "region": "Hunter's Paradise"
+    },
+    {
+      "name": "Hunter's Paradise Weapon Storage Key",
+      "grid": null,
+      "region": "Hunter's Paradise"
+    },
+    {
+      "name": "Kiu Vongsa Mayor's Mansion Room Key",
+      "grid": null,
+      "region": "Hunter's Paradise"
+    },
+    {
+      "name": "Sunset Chalet Cottage Key",
+      "grid": null,
+      "region": "Hunter's Paradise"
+    },
+    {
+      "name": "Sunset Chalet Firearms Case Key",
+      "grid": null,
+      "region": "Hunter's Paradise"
+    },
+    {
+      "name": "Ban Pa Elder's House Key",
+      "grid": null,
+      "region": "Ban Pa"
+    },
+    {
+      "name": "Ban Pa Elder's Room Key",
+      "grid": null,
+      "region": "Ban Pa"
+    },
+    {
+      "name": "Ban Pa Fishing Hut Key",
+      "grid": null,
+      "region": "Ban Pa"
+    },
+    {
+      "name": "Ban Pa Warehouse Key",
+      "grid": null,
+      "region": "Ban Pa"
+    },
+    {
+      "name": "Siang Radio Station Room Key",
+      "grid": null,
+      "region": "Ban Pa"
+    },
+    {
+      "name": "Villa Vongphet Room Key",
+      "grid": null,
+      "region": "Ban Pa"
+    },
+    {
+      "name": "Airport Storage Shed Key",
+      "grid": null,
+      "region": "Pha Lang Airfield"
+    },
+    {
+      "name": "Dongphou Hiking Camp Cottage Key",
+      "grid": null,
+      "region": "Pha Lang Airfield"
+    },
+    {
+      "name": "Hangar 03 Key",
+      "grid": null,
+      "region": "Pha Lang Airfield"
+    },
+    {
+      "name": "Hidden Fields 02 Hut Key",
+      "grid": null,
+      "region": "Pha Lang Airfield"
+    },
+    {
+      "name": "Pha Lang Airfield Meeting Room Key",
+      "grid": null,
+      "region": "Pha Lang Airfield"
+    },
+    {
+      "name": "Pha Lang Airfield Storage Office Key",
+      "grid": null,
+      "region": "Pha Lang Airfield"
+    },
+    {
+      "name": "Small Marketplace House Key",
+      "grid": null,
+      "region": "Pha Lang Airfield"
+    },
+    {
+      "name": "Sunny Skies Guest House Basement Key",
+      "grid": null,
+      "region": "Pha Lang Airfield"
+    },
+    {
+      "name": "Inthavong Farm Shed Key",
+      "grid": null,
+      "region": "YBL-1"
+    },
+    {
+      "name": "School Room Key",
+      "grid": null,
+      "region": "YBL-1"
+    },
+    {
+      "name": "YBL-1 Bedroom Key",
+      "grid": null,
+      "region": "YBL-1"
+    },
+    {
+      "name": "YBL-1 Generator Room Key",
+      "grid": null,
+      "region": "YBL-1"
+    },
+    {
+      "name": "YBL-1 Maintenance Door Key",
+      "grid": null,
+      "region": "YBL-1"
+    },
+    {
+      "name": "YBL-1 Office Key 01",
+      "grid": null,
+      "region": "YBL-1"
+    },
+    {
+      "name": "YBL-1 Office 02 Key",
+      "grid": null,
+      "region": "YBL-1"
+    },
+    {
+      "name": "YBL-1 Corridor D Storage Room Key",
+      "grid": null,
+      "region": "YBL-1"
+    },
+    {
+      "name": "YBL-1 Weapon Storage Key",
+      "grid": null,
+      "region": "YBL-1"
+    },
+    {
+      "name": "Ban Khamphet House Key",
+      "grid": null,
+      "region": "Blue Lagoon"
+    },
+    {
+      "name": "Blue Lagoon Office Storage Key",
+      "grid": null,
+      "region": "Blue Lagoon"
+    },
+    {
+      "name": "Blue Lagoon Shack Key",
+      "grid": null,
+      "region": "Blue Lagoon"
+    },
+    {
+      "name": "Blue Lagoon Restaurant Storage Key",
+      "grid": null,
+      "region": "Blue Lagoon"
+    },
+    {
+      "name": "Fanny Paradise Office Key",
+      "grid": null,
+      "region": "Blue Lagoon"
+    },
+    {
+      "name": "Hidden Fields 03 Hut Key",
+      "grid": null,
+      "region": "Blue Lagoon"
+    },
+    {
+      "name": "Khonwan Village House Key",
+      "grid": null,
+      "region": "Blue Lagoon"
+    },
+    {
+      "name": "Phouarun Restaurant Attic Room Key",
+      "grid": null,
+      "region": "Blue Lagoon"
+    },
+    {
+      "name": "Golf Club Storage Key",
+      "grid": null,
+      "region": "Midnight Sapphire"
+    },
+    {
+      "name": "Hotel Supply Closet Key Card",
+      "grid": null,
+      "region": "Midnight Sapphire"
+    },
+    {
+      "name": "Midnight Sapphire Employee Housing Office Key",
+      "grid": null,
+      "region": "Midnight Sapphire"
+    },
+    {
+      "name": "Midnight Sapphire Hotel Office Key",
+      "grid": null,
+      "region": "Midnight Sapphire"
+    },
+    {
+      "name": "Midnight Sapphire Hotel \"Party Room\" Key",
+      "grid": null,
+      "region": "Midnight Sapphire"
+    },
+    {
+      "name": "Villa Anna Jana Key",
+      "grid": null,
+      "region": "Midnight Sapphire"
+    },
+    {
+      "name": "Villa Elena Garage Key",
+      "grid": null,
+      "region": "Midnight Sapphire"
+    },
+    {
+      "name": "Villa Katherine Key",
+      "grid": null,
+      "region": "Midnight Sapphire"
+    },
+    {
+      "name": "Villa Luisa Key",
+      "grid": null,
+      "region": "Midnight Sapphire"
+    },
+    {
+      "name": "Villa Marta Monica Garage Key",
+      "grid": null,
+      "region": "Midnight Sapphire"
+    },
+    {
+      "name": "A103 Key",
+      "grid": null,
+      "region": "Fort Narith"
+    },
+    {
+      "name": "A208 Key",
+      "grid": null,
+      "region": "Fort Narith"
+    },
+    {
+      "name": "A210 Key",
+      "grid": null,
+      "region": "Fort Narith"
+    },
+    {
+      "name": "C101 Key",
+      "grid": null,
+      "region": "Fort Narith"
+    },
+    {
+      "name": "C108 Key",
+      "grid": null,
+      "region": "Fort Narith"
+    },
+    {
+      "name": "Fort Narith Air Traffic Control Tower Key",
+      "grid": null,
+      "region": "Fort Narith"
+    },
+    {
+      "name": "Fort Narith Dumping Ground Storage Shed Key",
+      "grid": null,
+      "region": "Fort Narith"
+    },
+    {
+      "name": "Fort Narith Garage Office Key",
+      "grid": null,
+      "region": "Fort Narith"
+    },
+    {
+      "name": "Fort Narith HQ Archive Key",
+      "grid": null,
+      "region": "Fort Narith"
+    },
+    {
+      "name": "Fort Narith HQ Reception Storage Key Card",
+      "grid": null,
+      "region": "Fort Narith"
+    },
+    {
+      "name": "Fort Narith HQ Storage Room Key",
+      "grid": null,
+      "region": "Fort Narith"
+    },
+    {
+      "name": "Fort Narith Infirmary ICU Key",
+      "grid": null,
+      "region": "Fort Narith"
+    },
+    {
+      "name": "Fort Narith Motel Makeshift Armory Key",
+      "grid": null,
+      "region": "Fort Narith"
+    },
+    {
+      "name": "Fort Narith Operations Room Key Card",
+      "grid": null,
+      "region": "Fort Narith"
+    },
+    {
+      "name": "Fort Narith Outskirts Makeshift Armory Key",
+      "grid": null,
+      "region": "Fort Narith"
+    },
+    {
+      "name": "Fort Narith Shooting Range Office Key",
+      "grid": null,
+      "region": "Fort Narith"
+    },
+    {
+      "name": "Turncoat's House Key",
+      "grid": null,
+      "region": "Fort Narith"
+    },
+    {
+      "name": "Cement Factory Storage Key",
+      "grid": null,
+      "region": "Tiger Bay"
+    },
+    {
+      "name": "House by the Pond Key",
+      "grid": null,
+      "region": "Tiger Bay"
+    },
+    {
+      "name": "Makeshift Bandit Lookout Key",
+      "grid": null,
+      "region": "Tiger Bay"
+    },
+    {
+      "name": "Pier Storage Key",
+      "grid": null,
+      "region": "Tiger Bay"
+    },
+    {
+      "name": "Tiger Bay Central Armory Card",
+      "grid": null,
+      "region": "Tiger Bay"
+    },
+    {
+      "name": "Tiger Bay Municipal Office Building Makeshift Storage Key",
+      "grid": null,
+      "region": "Tiger Bay"
+    },
+    {
+      "name": "Tiger Bay Outskirts Garage Key",
+      "grid": null,
+      "region": "Tiger Bay"
+    },
+    {
+      "name": "Tiger Bay Trade Depot Office Key",
+      "grid": null,
+      "region": "Tiger Bay"
+    },
+    {
+      "name": "Toto Hardware Storage Key",
+      "grid": null,
+      "region": "Tiger Bay"
+    },
+    {
+      "name": "UNLRA Equipment Container Key",
+      "grid": null,
+      "region": "Tiger Bay"
+    },
+    {
+      "name": "UNLRA HQ Lab Key",
+      "grid": null,
+      "region": "Tiger Bay"
+    },
+    {
+      "name": "UNLRA HQ Office Key Card",
+      "grid": null,
+      "region": "Tiger Bay"
+    },
+    {
+      "name": "UNLRA Medical Container Key",
+      "grid": null,
+      "region": "Tiger Bay"
+    },
+    {
+      "name": "UNLRA Quarantine Key",
+      "grid": null,
+      "region": "Tiger Bay"
+    }
   ]
 }
