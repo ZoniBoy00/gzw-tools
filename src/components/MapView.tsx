@@ -444,6 +444,9 @@ export default function MapView() {
         <MapContainer
           center={[MAP_H / 2, MAP_W / 2]}
           zoom={0}
+          maxZoom={8}
+          minZoom={-1}
+          maxBounds={[[-5, -5], [MAP_H + 5, MAP_W + 5]]}
           style={{ width: '100%', height: '100%' }}
           crs={L.CRS.Simple}
           zoomControl={false}
