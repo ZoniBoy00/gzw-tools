@@ -1,6 +1,7 @@
 [
   {
     "name": "AK-12",
+    "id": "ak-12",
     "type": "Assault Rifle",
     "caliber": "5.45x39mm",
     "magSize": 30,
@@ -10,6 +11,7 @@
   },
   {
     "name": "AK-15",
+    "id": "ak-15",
     "type": "Assault Rifle",
     "caliber": "7.62x39mm",
     "magSize": 30,
@@ -19,6 +21,7 @@
   },
   {
     "name": "AK-19",
+    "id": "ak-19",
     "type": "Assault Rifle",
     "caliber": "5.56x45mm",
     "magSize": 30,
@@ -28,6 +31,7 @@
   },
   {
     "name": "AK-308",
+    "id": "ak-308",
     "type": "Assault Rifle",
     "caliber": "7.62x51mm",
     "magSize": 30,
@@ -36,6 +40,7 @@
   },
   {
     "name": "AK-74M",
+    "id": "ak-74m",
     "type": "Assault Rifle",
     "caliber": "5.45x39mm",
     "magSize": 30,
@@ -44,6 +49,7 @@
   },
   {
     "name": "AK-74N",
+    "id": "ak-74n",
     "type": "Assault Rifle",
     "caliber": "5.45x39mm",
     "magSize": 30,
@@ -52,6 +58,7 @@
   },
   {
     "name": "AKM",
+    "id": "akm",
     "type": "Assault Rifle",
     "caliber": "7.62x39mm",
     "magSize": 30,
@@ -61,6 +68,7 @@
   },
   {
     "name": "AKMN",
+    "id": "akmn",
     "type": "Assault Rifle",
     "caliber": "7.62x39mm",
     "magSize": 30,
@@ -69,6 +77,7 @@
   },
   {
     "name": "AKMSN",
+    "id": "akmsn",
     "type": "Assault Rifle",
     "caliber": "7.62x39mm",
     "magSize": 30,
@@ -77,6 +86,7 @@
   },
   {
     "name": "AKS-74U",
+    "id": "aks-74u",
     "type": "Assault Rifle",
     "caliber": "5.45x39mm",
     "magSize": 30,
@@ -86,6 +96,7 @@
   },
   {
     "name": "Buran's AK-74N",
+    "id": "buran-s-ak-74n",
     "type": "Assault Rifle",
     "caliber": "5.45x39mm",
     "magSize": 30,
@@ -95,6 +106,7 @@
   },
   {
     "name": "CQ A1",
+    "id": "cq-a1",
     "type": "Assault Rifle",
     "caliber": "5.56x45mm",
     "magSize": 30,
@@ -104,6 +116,7 @@
   },
   {
     "name": "DDM4",
+    "id": "ddm4",
     "type": "Assault Rifle",
     "caliber": "5.56x45mm NATO",
     "magSize": 30,
@@ -113,6 +126,7 @@
   },
   {
     "name": "Firebrand's AKS-74U",
+    "id": "firebrand-s-aks-74u",
     "type": "Assault Rifle",
     "caliber": "5.45x39mm",
     "magSize": 30,
@@ -122,6 +136,7 @@
   },
   {
     "name": "L403A1",
+    "id": "l403a1",
     "type": "Assault Rifle",
     "caliber": "5.56x45mm",
     "magSize": 30,
@@ -131,6 +146,7 @@
   },
   {
     "name": "M16 A1",
+    "id": "m16-a1",
     "type": "Assault Rifle",
     "caliber": "5.56x45mm",
     "magSize": 30,
@@ -140,6 +156,7 @@
   },
   {
     "name": "M4A1",
+    "id": "m4a1",
     "type": "Assault Rifle",
     "caliber": "5.56x45mm NATO",
     "magSize": 30,
@@ -149,6 +166,7 @@
   },
   {
     "name": "SIG MCX",
+    "id": "sig-mcx",
     "type": "Assault Rifle",
     "caliber": ".300 AAC Blackout",
     "magSize": 30,
@@ -158,6 +176,7 @@
   },
   {
     "name": "Sa vz. 58",
+    "id": "sa-vz-58",
     "type": "Assault Rifle",
     "caliber": "7.62x39mm",
     "magSize": 30,
@@ -167,20 +186,25 @@
   },
   {
     "name": "VZ. 58",
+    "id": "vz-58",
     "type": "Assault Rifle",
     "caliber": "7.62x39mm",
     "magSize": 30,
-    "source": "Looting"
+    "source": "Looting",
+    "image": "https://static.wikia.nocookie.net/gray-zone-warfare/images/0/00/SA_vz._58_inspect.png/revision/latest?cb=20260602022249"
   },
   {
     "name": "M14 Rifle",
+    "id": "m14-rifle",
     "type": "DMR",
     "caliber": "7.62x51mm",
     "magSize": 20,
-    "source": "Looting"
+    "source": "Looting",
+    "image": "https://static.wikia.nocookie.net/gray-zone-warfare/images/0/04/M1A_inspect.png/revision/latest/scale-to-width-down/200?cb=20260412223432"
   },
   {
     "name": "M1A Rifle",
+    "id": "m1a-rifle",
     "type": "DMR",
     "caliber": "7.62x51mm",
     "magSize": 20,
@@ -190,6 +214,7 @@
   },
   {
     "name": "M700",
+    "id": "m700",
     "type": "DMR",
     "caliber": "7.62x51mm",
     "magSize": 5,
@@ -198,6 +223,7 @@
   },
   {
     "name": "Mosin-Nagant",
+    "id": "mosin-nagant",
     "type": "DMR",
     "caliber": "7.62x54mm R",
     "magSize": 5,
@@ -207,6 +233,7 @@
   },
   {
     "name": "Mosin-Nagant (Sniper)",
+    "id": "mosin-nagant-sniper",
     "type": "DMR",
     "caliber": "-",
     "magSize": 5,
@@ -216,6 +243,7 @@
   },
   {
     "name": "Remington 788",
+    "id": "remington-788",
     "type": "DMR",
     "caliber": ".222 Remington",
     "magSize": 5,
@@ -223,6 +251,7 @@
   },
   {
     "name": "SVD",
+    "id": "svd",
     "type": "DMR",
     "caliber": "7.62x54mm R",
     "magSize": 10,
@@ -232,6 +261,7 @@
   },
   {
     "name": "USMC Fighting Knife",
+    "id": "usmc-fighting-knife",
     "type": "Melee",
     "caliber": "-",
     "magSize": 0,
@@ -240,6 +270,7 @@
   },
   {
     "name": "Beretta M9A1",
+    "id": "beretta-m9a1",
     "type": "Pistol",
     "caliber": "9x19mm",
     "magSize": 15,
@@ -249,6 +280,7 @@
   },
   {
     "name": "Colt 1911",
+    "id": "colt-1911",
     "type": "Pistol",
     "caliber": ".45 ACP",
     "magSize": 7,
@@ -258,6 +290,7 @@
   },
   {
     "name": "Colt Combat Commander",
+    "id": "colt-combat-commander",
     "type": "Pistol",
     "caliber": ".45 ACP",
     "magSize": 7,
@@ -267,6 +300,7 @@
   },
   {
     "name": "Glock 17",
+    "id": "glock-17",
     "type": "Pistol",
     "caliber": "9x19mm",
     "magSize": 17,
@@ -276,6 +310,7 @@
   },
   {
     "name": "Grin's Colt 1911 Commander",
+    "id": "grin-s-colt-1911-commander",
     "type": "Pistol",
     "caliber": ".45 ACP",
     "magSize": 7,
@@ -285,6 +320,7 @@
   },
   {
     "name": "Laugo alien",
+    "id": "laugo-alien",
     "type": "Pistol",
     "caliber": "9x19mm",
     "magSize": 17,
@@ -294,13 +330,16 @@
   },
   {
     "name": "M201C",
+    "id": "m201c",
     "type": "Pistol",
     "caliber": "7.62x25mm",
     "magSize": 8,
-    "source": "Looting"
+    "source": "Looting",
+    "image": "https://static.wikia.nocookie.net/gray-zone-warfare/images/f/fd/Type51_inspect.png/revision/latest/scale-to-width-down/200?cb=20250617154811"
   },
   {
     "name": "Type 51",
+    "id": "type-51",
     "type": "Pistol",
     "caliber": "7.62x25mm",
     "magSize": 8,
@@ -310,6 +349,7 @@
   },
   {
     "name": "MP5",
+    "id": "mp5",
     "type": "SMG",
     "caliber": "9x19mm",
     "magSize": 30,
@@ -319,6 +359,7 @@
   },
   {
     "name": "MP7",
+    "id": "mp7",
     "type": "SMG",
     "caliber": "4.6x30mm",
     "magSize": 40,
@@ -328,20 +369,25 @@
   },
   {
     "name": "MP7A1",
+    "id": "mp7a1",
     "type": "SMG",
     "caliber": "4.6x30mm",
     "magSize": 40,
-    "source": "Gunny R.2"
+    "source": "Gunny R.2",
+    "image": "https://static.wikia.nocookie.net/gray-zone-warfare/images/5/50/MP7.png/revision/latest/scale-to-width-down/200?cb=20250527122700"
   },
   {
     "name": "MP7A2",
+    "id": "mp7a2",
     "type": "SMG",
     "caliber": "4.6x30mm",
     "magSize": 40,
-    "source": "Looting"
+    "source": "Looting",
+    "image": "https://static.wikia.nocookie.net/gray-zone-warfare/images/5/50/MP7.png/revision/latest/scale-to-width-down/200?cb=20250527122700"
   },
   {
     "name": "Vz. 61 Skorpion",
+    "id": "vz-61-skorpion",
     "type": "SMG",
     "caliber": "7.65mm Browning",
     "magSize": 20,
@@ -351,6 +397,7 @@
   },
   {
     "name": "M870",
+    "id": "m870",
     "type": "Shotgun",
     "caliber": "12 Gauge",
     "magSize": 7,
@@ -360,6 +407,7 @@
   },
   {
     "name": "Mossberg 590",
+    "id": "mossberg-590",
     "type": "Shotgun",
     "caliber": "12 Gauge",
     "magSize": 7,
@@ -369,6 +417,7 @@
   },
   {
     "name": "RGD-5",
+    "id": "rgd-5",
     "type": "Throwable",
     "caliber": "",
     "magSize": 0,
@@ -378,6 +427,7 @@
   },
   {
     "name": "M26",
+    "id": "m26",
     "type": "Throwable",
     "caliber": "",
     "magSize": 0,
@@ -387,6 +437,7 @@
   },
   {
     "name": "M67",
+    "id": "m67",
     "type": "Throwable",
     "caliber": "",
     "magSize": 0,
@@ -396,6 +447,7 @@
   },
   {
     "name": "F-1",
+    "id": "f-1",
     "type": "Throwable",
     "caliber": "",
     "magSize": 0,
@@ -405,6 +457,7 @@
   },
   {
     "name": "M84 Stun Grenade",
+    "id": "m84-stun-grenade",
     "type": "Throwable",
     "caliber": "",
     "magSize": 0,
@@ -414,6 +467,7 @@
   },
   {
     "name": "M18 Smoke Grenade (Yellow)",
+    "id": "m18-smoke-grenade-yellow",
     "type": "Throwable",
     "caliber": "",
     "magSize": 0,
@@ -423,6 +477,7 @@
   },
   {
     "name": "M18 Smoke Grenade (Green)",
+    "id": "m18-smoke-grenade-green",
     "type": "Throwable",
     "caliber": "",
     "magSize": 0,
@@ -432,6 +487,7 @@
   },
   {
     "name": "M18 Smoke Grenade (Red)",
+    "id": "m18-smoke-grenade-red",
     "type": "Throwable",
     "caliber": "",
     "magSize": 0,
