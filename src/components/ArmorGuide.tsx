@@ -14,6 +14,141 @@ const SUB: { id: SubTab; label: string; icon?: string }[] = [
   { id: 'vendors', label: 'Vendor Gear', icon: 'fas fa-store' },
 ];
 
+function nijValue(n: string): number {
+  const map: Record<string, number> = { 'I': 1, 'IIA': 2, 'IIA+': 3, 'IIIA': 4, 'IIIA+': 5, 'III': 6, 'III+': 7, 'III++': 8, 'IV': 9 };
+  return map[n] || 0;
+}
+function nijColor(n: string): string {
+  const v = nijValue(n);
+  if (v >= 8) return 'text-red';
+  if (v >= 6) return 'text-amber-400';
+  if (v >= 4) return 'text-accent';
+  return 'text-green';
+}
+function matColor(m: string): string {
+  return MATERIAL_RANK[m]?.color || 'text-text-muted';
+}
+
+const NIJ_LEVELS = ['I', 'IIA', 'IIA+', 'IIIA', 'IIIA+', 'III', 'III+', 'III++', 'IV'];
+const MATERIALS = Object.keys(MATERIAL_RANK);
+
+interface ArmorItem {
+  name: string;
+  nij: string;
+  material: string;
+  weight: number;
+  source: string;
+  plates?: string;
+  grid?: string;
+}
+
+function itemModal(item: ArmorItem, type: 'vest' | 'helmet'): ModalItem {
+  const fields: ModalItem['fields'] = [
+    { label: 'NIJ Class', value: item.nij, color: nijColor(item.nij), desc: 'Protection rating' },
+    { label: 'Material', value: item.material, color: matColor(item.material), desc: 'Armor material type' },
+    { label: 'Weight', value: `${item.weight} kg`, desc: 'Carry weight' },
+    { label: 'Source', value: item.source, desc: 'Where to obtain' },
+  ];
+  if (item.plates) fields.splice(2, 0, { label: 'Plates', value: item.plates, desc: 'Areas protected' });
+  if (item.grid) fields.splice(3, 0, { label: 'Grid', value: item.grid, desc: 'Inventory size' });
+  return {
+    name: item.name,
+    image: itemImages[item.name as keyof typeof itemImages] as string | undefined,
+    type,
+    fields,
+  };
+}
+
+/* ── Reusable armor list (KeysGuide-style) ── */
+function ArmorList({ items, type }: { items: ArmorItem[]; type: 'vest' | 'helmet' }) {
+  const [search, setSearch] = useState('');
+  const [nijFilter, setNijFilter] = useState('');
+  const [matFilter, setMatFilter] = useState('');
+  const [modalItem, setModalItem] = useState<ModalItem | null>(null);
+
+  const filtered = useMemo(() => {
+    let data = [...items];
+    if (search.trim()) {
+      const q = search.toLowerCase();
+      data = data.filter((v) => v.name.toLowerCase().includes(q) || v.source.toLowerCase().includes(q));
+    }
+    if (nijFilter) data = data.filter((v) => v.nij === nijFilter);
+    if (matFilter) data = data.filter((v) => v.material === matFilter);
+    return data;
+  }, [items, search, nijFilter, matFilter]);
+
+  const grouped = useMemo(() => {
+    const g: Record<string, ArmorItem[]> = {};
+    for (const v of filtered) {
+      const key = v.source || 'Unknown';
+      if (!g[key]) g[key] = [];
+      g[key].push(v);
+    }
+    return g;
+  }, [filtered]);
+
+  return (
+    <div>
+      <div className="flex flex-wrap gap-2 mb-4">
+        <input type="text" value={search} onChange={(e) => setSearch(e.target.value)}
+          placeholder={`Search ${type}s...`}
+          className="input flex-1 min-w-[160px] input-sm" />
+        <select value={nijFilter} onChange={(e) => setNijFilter(e.target.value)} className="input w-auto input-sm">
+          <option value="">All NIJ</option>
+          {NIJ_LEVELS.map((n) => <option key={n} value={n}>{n}</option>)}
+        </select>
+        <select value={matFilter} onChange={(e) => setMatFilter(e.target.value)} className="input w-auto input-sm">
+          <option value="">All Materials</option>
+          {MATERIALS.map((m) => <option key={m} value={m}>{m}</option>)}
+        </select>
+      </div>
+
+      <div className="space-y-3">
+        {Object.entries(grouped).map(([source, arr]) => (
+          <div key={source}>
+            <div className="flex items-center gap-2 mb-2">
+              <i className="fas fa-tag text-accent/60 text-xs" />
+              <span className="text-[10px] font-bold uppercase tracking-[0.1em] text-text-muted">{source}</span>
+              <span className="text-[9px] font-mono text-text-muted/50">{arr.length}</span>
+            </div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-1">
+              {arr.map((v, i) => (
+                <button key={`${v.name}-${i}`} onClick={() => setModalItem(itemModal(v, type))}
+                  className="flex items-center gap-2 px-3 py-2 border border-border hover:border-accent/30 transition-colors text-left w-full"
+                >
+                  {itemImages[v.name as keyof typeof itemImages] ? (
+                    <img src={itemImages[v.name as keyof typeof itemImages] as string} alt="" className="w-8 h-8 object-contain shrink-0" loading="lazy" />
+                  ) : (
+                    <div className="w-8 h-8 flex items-center justify-center bg-surface-2 border border-border shrink-0">
+                      <i className={`fas ${type === 'vest' ? 'fa-vest' : 'fa-hard-hat'} text-text-muted/30 text-sm`} />
+                    </div>
+                  )}
+                  <div className="min-w-0 flex-1">
+                    <div className="text-xs font-medium truncate">{v.name}</div>
+                    <div className="text-[9px] font-mono text-text-muted/70 truncate">{v.material} · {v.weight}kg</div>
+                  </div>
+                  <span className={`text-[10px] font-bold font-mono shrink-0 ${nijColor(v.nij)}`}>{v.nij}</span>
+                </button>
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {filtered.length === 0 && (
+        <div className="empty-state"><i className="fas fa-shield-halved" /><p>No items match your filters</p></div>
+      )}
+
+      <div className="mt-3 text-[10px] text-text-muted/60 font-mono flex items-center gap-2">
+        <i className="fas fa-database" /> {filtered.length} / {items.length} {type}s
+      </div>
+      {modalItem && <ItemModal item={modalItem} onClose={() => setModalItem(null)} />}
+    </div>
+  );
+}
+
+// ─── Legacy sections kept intact ───
+
 export default function ArmorGuide() {
   const [tab, setTab] = useState<SubTab>('recommend');
 
@@ -23,18 +158,14 @@ export default function ArmorGuide() {
         <i className="fas fa-shield-halved text-accent text-sm" />
         <span className="section-title">Armor & Gear Guide</span>
       </div>
-
       <TabBar tabs={SUB} active={tab} onChange={setTab} />
-
       <div className="mt-4">
         {tab === 'recommend' && <Recommendations />}
-        {tab === 'vests' && <VestSection />}
-        {tab === 'plate_carriers' && <PlateCarrierSection />}
-        {tab === 'helmets' && <HelmetSection />}
+        {tab === 'vests' && <ArmorList items={VESTS} type="vest" />}
+        {tab === 'plate_carriers' && <ArmorList items={PLATE_CARRIERS} type="vest" />}
+        {tab === 'helmets' && <ArmorList items={HELMETS} type="helmet" />}
         {tab === 'vendors' && <VendorTable />}
       </div>
-
-      <Legend />
     </div>
   );
 }
@@ -50,21 +181,15 @@ function Recommendations() {
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs font-mono">
             <div className="bg-surface-2 p-2 border border-border">
-              <div className="text-[9px] uppercase tracking-wider text-text-muted mb-1 flex items-center gap-1">
-                <i className="fas fa-vest text-accent/60" /> Vest
-              </div>
+              <div className="text-[9px] uppercase tracking-wider text-text-muted mb-1 flex items-center gap-1"><i className="fas fa-vest text-accent/60" /> Vest</div>
               {rec.vest}
             </div>
             <div className="bg-surface-2 p-2 border border-border">
-              <div className="text-[9px] uppercase tracking-wider text-text-muted mb-1 flex items-center gap-1">
-                <i className="fas fa-hard-hat text-accent/60" /> Helmet
-              </div>
+              <div className="text-[9px] uppercase tracking-wider text-text-muted mb-1 flex items-center gap-1"><i className="fas fa-hard-hat text-accent/60" /> Helmet</div>
               {rec.helmet}
             </div>
             <div className="bg-surface-2 p-2 border border-border">
-              <div className="text-[9px] uppercase tracking-wider text-text-muted mb-1 flex items-center gap-1">
-                <i className="fas fa-bolt text-accent/60" /> Ammo
-              </div>
+              <div className="text-[9px] uppercase tracking-wider text-text-muted mb-1 flex items-center gap-1"><i className="fas fa-bolt text-accent/60" /> Ammo</div>
               <span className="text-text-muted">{rec.ammo.join(', ')}</span>
             </div>
           </div>
@@ -75,410 +200,48 @@ function Recommendations() {
   );
 }
 
-// ─── Vest compare ───
-
-function VestSection() {
-  const [compare, setCompare] = useState<string[]>([]);
-  const [modalItem, setModalItem] = useState<ModalItem | null>(null);
-
-  const sorted = useMemo(() => [...VESTS].sort((a, b) => nij(b.nij) - nij(a.nij)), []);
-
-  const toggleCompare = (name: string) => {
-    setCompare((prev) =>
-      prev.includes(name) ? prev.filter((n) => n !== name) : prev.length < 3 ? [...prev, name] : prev,
-    );
-  };
-
-  const comparedVests = useMemo(() => VESTS.filter((v) => compare.includes(v.name)), [compare]);
-
-  return (
-    <div>
-      {/* Compare section */}
-      {comparedVests.length > 0 && (
-        <div className="mb-4 p-3 border border-accent/20 bg-accent/5">
-          <div className="text-[10px] font-bold uppercase tracking-[0.12em] text-accent mb-2 flex items-center gap-2">
-            <i className="fas fa-not-equal text-xs" />
-            Compare Mode — {comparedVests.length} vest{comparedVests.length > 1 ? 's' : ''} selected
-            <button
-              onClick={() => setCompare([])}
-              className="ml-auto text-[9px] font-mono text-text-muted hover:text-text"
-            >
-              Clear
-            </button>
-          </div>
-          <div className="compare-grid">
-            {comparedVests.map((v) => (
-              <div key={v.name} className="compare-card selected">
-                <div className="text-sm font-bold mb-2 text-accent">{v.name}</div>
-                {[
-                  { label: 'NIJ Class', value: v.nij, cls: nijColor(v.nij) },
-                  { label: 'Material', value: v.material, cls: matColor(v.material) },
-                  { label: 'Plates', value: v.plates },
-                  { label: 'Grid', value: v.grid },
-                  { label: 'Weight', value: `${v.weight} kg` },
-                  { label: 'Source', value: v.source },
-                ].map((f) => (
-                  <div key={f.label} className="compare-field">
-                    <span className="text-text-muted">{f.label}</span>
-                    <span className={f.cls || 'text-text'}>{f.value}</span>
-                  </div>
-                ))}
-              </div>
-            ))}
-          </div>
-        </div>
-      )}
-
-      <div className="table-wrap table-mobile-cards">
-        <table className="armor-table" role="table" aria-label="Armor vest comparison">
-          <thead>
-            <tr>
-              <th className="w-8 text-center" role="columnheader"></th>
-              <th role="columnheader">Name</th>
-              <th className="text-center" role="columnheader">NIJ</th>
-              <th className="text-center" role="columnheader">Mat</th>
-              <th className="text-center" role="columnheader"><i className="fas fa-shield" aria-hidden="true" /><span className="sr-only">Plates</span></th>
-              <th className="text-center" role="columnheader">Grid</th>
-              <th className="text-right" role="columnheader">Wt</th>
-              <th className="text-right" role="columnheader">Source</th>
-            </tr>
-          </thead>
-          <tbody>
-            {sorted.map((v, i) => (
-              <tr key={i}>
-                <td className="text-center align-middle">
-                  <button
-                    onClick={() => toggleCompare(v.name)}
-                    className={`inline-flex items-center justify-center w-5 h-5 text-[10px] border ${
-                      compare.includes(v.name)
-                        ? 'border-accent/50 text-accent bg-accent/10'
-                        : 'border-border text-text-muted hover:border-text-muted/30'
-                    }`}
-                    aria-label={`${compare.includes(v.name) ? 'Remove' : 'Add'} ${v.name}`}
-                  >
-                    <i className={`fas fa-${compare.includes(v.name) ? 'check' : 'plus'}`} />
-                  </button>
-                </td>
-                <td data-label="" className="font-medium">
-                  <button onClick={() => setModalItem({
-                    name: v.name,
-                    image: itemImages[v.name as keyof typeof itemImages] as string | undefined,
-                    type: 'vest',
-                    fields: [
-                      { label: 'NIJ Class', value: v.nij, color: nijColor(v.nij), desc: 'National Institute of Justice protection rating — higher classes stop more powerful rounds' },
-                      { label: 'Material', value: v.material, color: matColor(v.material), desc: 'Armor material — affects weight, durability and protection level. Aramid=light, Steel=heavy, Ceramic=best but brittle' },
-                      { label: 'Plates', value: v.plates, desc: 'Areas protected by armor plates — Front, Back, or Sides coverage' },
-                      { label: 'Grid', value: v.grid, desc: 'Inventory grid size in slots — determines how much space the vest takes in your inventory' },
-                      { label: 'Weight', value: `${v.weight} kg`, desc: 'Carry weight in kilograms — heavier armor provides better protection but slows you down' },
-                      { label: 'Source', value: v.source, desc: 'Where to obtain this vest — from a vendor at a specific rep level, or found by looting' },
-                    ],
-                  })} className="flex items-center gap-2 text-left w-full hover:text-accent transition-colors">
-                    {itemImages[v.name as keyof typeof itemImages] && (
-                      <img src={itemImages[v.name as keyof typeof itemImages] as string} alt="" className="w-8 h-8 object-contain shrink-0 bg-surface-2 border border-border" loading="lazy" />
-                    )}
-                    {v.name}
-                  </button>
-                </td>
-                <td data-label="NIJ" className={`text-center font-bold ${nijColor(v.nij)}`}>{v.nij}</td>
-                <td data-label="Mat" className={`text-center ${matColor(v.material)}`}>{v.material.slice(0, 4)}</td>
-                <td data-label="Plates" className="text-center text-text-muted">{v.plates.replace(', ', '/')}</td>
-                <td data-label="Grid" className="text-center text-text-muted">{v.grid}</td>
-                <td data-label="Wt" className="text-right text-text-muted">{v.weight}kg</td>
-                <td data-label="Source" className="text-right text-text-muted">{v.source}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
-      {modalItem && <ItemModal item={modalItem} onClose={() => setModalItem(null)} />}
-    </div>
-  );
-}
-
-// ─── Plate Carrier compare ───
-
-function PlateCarrierSection() {
-  const [compare, setCompare] = useState<string[]>([]);
-  const [modalItem, setModalItem] = useState<ModalItem | null>(null);
-
-  const sorted = useMemo(() => [...PLATE_CARRIERS].sort((a, b) => nij(b.nij) - nij(a.nij)), []);
-
-  const toggleCompare = (name: string) => {
-    setCompare((prev) =>
-      prev.includes(name) ? prev.filter((n) => n !== name) : prev.length < 3 ? [...prev, name] : prev,
-    );
-  };
-
-  const comparedPC = useMemo(() => PLATE_CARRIERS.filter((v) => compare.includes(v.name)), [compare]);
-
-  return (
-    <div>
-      {comparedPC.length > 0 && (
-        <div className="mb-4 p-3 border border-accent/20 bg-accent/5">
-          <div className="text-[10px] font-bold uppercase tracking-[0.12em] text-accent mb-2 flex items-center gap-2">
-            <i className="fas fa-not-equal text-xs" />
-            Compare Mode — {comparedPC.length} carrier{comparedPC.length > 1 ? 's' : ''} selected
-            <button onClick={() => setCompare([])} className="ml-auto text-[9px] font-mono text-text-muted hover:text-text">Clear</button>
-          </div>
-          <div className="compare-grid">
-            {comparedPC.map((v) => (
-              <div key={v.name} className="compare-card selected">
-                <div className="text-sm font-bold mb-2 text-accent">{v.name}</div>
-                {[
-                  { label: 'NIJ Class', value: v.nij, cls: nijColor(v.nij) },
-                  { label: 'Material', value: v.material, cls: matColor(v.material) },
-                  { label: 'Plates', value: v.plates },
-                  { label: 'Grid', value: v.grid },
-                  { label: 'Weight', value: `${v.weight} kg` },
-                  { label: 'Source', value: v.source },
-                ].map((f) => (
-                  <div key={f.label} className="compare-field">
-                    <span className="text-text-muted">{f.label}</span>
-                    <span className={f.cls || 'text-text'}>{f.value}</span>
-                  </div>
-                ))}
-              </div>
-            ))}
-          </div>
-        </div>
-      )}
-
-      <div className="table-wrap table-mobile-cards">
-        <table className="armor-table" role="table" aria-label="Plate carrier comparison">
-          <thead>
-            <tr>
-              <th className="w-8 text-center" role="columnheader"></th>
-              <th role="columnheader">Name</th>
-              <th className="text-center" role="columnheader">NIJ</th>
-              <th className="text-center" role="columnheader">Mat</th>
-              <th className="text-center" role="columnheader"><i className="fas fa-shield" /><span className="sr-only">Plates</span></th>
-              <th className="text-center" role="columnheader">Grid</th>
-              <th className="text-right" role="columnheader">Wt</th>
-              <th className="text-right" role="columnheader">Source</th>
-            </tr>
-          </thead>
-          <tbody>
-            {sorted.map((v, i) => (
-              <tr key={i}>
-                <td className="text-center align-middle">
-                  <button onClick={() => toggleCompare(v.name)}
-                    className={`inline-flex items-center justify-center w-5 h-5 text-[10px] border ${compare.includes(v.name) ? 'border-accent/50 text-accent bg-accent/10' : 'border-border text-text-muted hover:border-text-muted/30'}`}
-                    aria-label={`${compare.includes(v.name) ? 'Remove' : 'Add'} ${v.name}`}
-                  ><i className={`fas fa-${compare.includes(v.name) ? 'check' : 'plus'}`} /></button>
-                </td>
-                <td data-label="" className="font-medium">
-                  <button onClick={() => setModalItem({
-                    name: v.name,
-                    image: itemImages[v.name as keyof typeof itemImages] as string | undefined,
-                    type: 'vest',
-                    fields: [
-                      { label: 'NIJ Class', value: v.nij, color: nijColor(v.nij), desc: 'National Institute of Justice protection rating' },
-                      { label: 'Material', value: v.material, color: matColor(v.material), desc: 'Armor material type' },
-                      { label: 'Plates', value: v.plates, desc: 'Areas protected by armor plates' },
-                      { label: 'Grid', value: v.grid, desc: 'Inventory grid size' },
-                      { label: 'Weight', value: `${v.weight} kg`, desc: 'Carry weight' },
-                      { label: 'Source', value: v.source, desc: 'Where to obtain this item' },
-                    ],
-                  })} className="flex items-center gap-2 text-left w-full hover:text-accent transition-colors">
-                    {itemImages[v.name as keyof typeof itemImages] && (
-                      <img src={itemImages[v.name as keyof typeof itemImages] as string} alt="" className="w-8 h-8 object-contain shrink-0 bg-surface-2 border border-border" loading="lazy" />
-                    )}
-                    {v.name}
-                  </button>
-                </td>
-                <td data-label="NIJ" className={`text-center font-bold ${nijColor(v.nij)}`}>{v.nij}</td>
-                <td data-label="Mat" className={`text-center ${matColor(v.material)}`}>{v.material.slice(0, 4)}</td>
-                <td data-label="Plates" className="text-center text-text-muted">{v.plates.replace(', ', '/')}</td>
-                <td data-label="Grid" className="text-center text-text-muted">{v.grid}</td>
-                <td data-label="Wt" className="text-right text-text-muted">{v.weight}kg</td>
-                <td data-label="Source" className="text-right text-text-muted">{v.source}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
-      {modalItem && <ItemModal item={modalItem} onClose={() => setModalItem(null)} />}
-    </div>
-  );
-}
-
-// ─── Helmet compare ───
-
-function HelmetSection() {
-  const [compare, setCompare] = useState<string[]>([]);
-  const [modalItem, setModalItem] = useState<ModalItem | null>(null);
-
-  const sorted = useMemo(() => [...HELMETS].sort((a, b) => nij(b.nij) - nij(a.nij)), []);
-
-  const toggleCompare = (name: string) => {
-    setCompare((prev) =>
-      prev.includes(name) ? prev.filter((n) => n !== name) : prev.length < 3 ? [...prev, name] : prev,
-    );
-  };
-
-  const comparedHelmets = useMemo(() => HELMETS.filter((h) => compare.includes(h.name)), [compare]);
-
-  return (
-    <div>
-      {/* Compare section */}
-      {comparedHelmets.length > 0 && (
-        <div className="mb-4 p-3 border border-accent/20 bg-accent/5">
-          <div className="text-[10px] font-bold uppercase tracking-[0.12em] text-accent mb-2 flex items-center gap-2">
-            <i className="fas fa-not-equal text-xs" />
-            Compare Mode — {comparedHelmets.length} helmet{comparedHelmets.length > 1 ? 's' : ''} selected
-            <button
-              onClick={() => setCompare([])}
-              className="ml-auto text-[9px] font-mono text-text-muted hover:text-text"
-            >
-              Clear
-            </button>
-          </div>
-          <div className="compare-grid">
-            {comparedHelmets.map((h) => (
-              <div key={h.name} className="compare-card selected">
-                <div className="text-sm font-bold mb-2 text-accent">{h.name}</div>
-                {[
-                  { label: 'NIJ Class', value: h.nij, cls: nijColor(h.nij) },
-                  { label: 'Material', value: h.material, cls: matColor(h.material) },
-                  { label: 'Weight', value: `${h.weight} kg` },
-                  { label: 'Source', value: h.source },
-                ].map((f) => (
-                  <div key={f.label} className="compare-field">
-                    <span className="text-text-muted">{f.label}</span>
-                    <span className={f.cls || 'text-text'}>{f.value}</span>
-                  </div>
-                ))}
-              </div>
-            ))}
-          </div>
-        </div>
-      )}
-
-      <div className="table-wrap table-mobile-cards">
-        <table className="armor-table" role="table" aria-label="Helmet comparison">
-          <thead>
-            <tr>
-              <th className="w-8 text-center" role="columnheader"></th>
-              <th role="columnheader">Name</th>
-              <th className="text-center" role="columnheader">NIJ</th>
-              <th className="text-center" role="columnheader">Mat</th>
-              <th className="text-right" role="columnheader">Wt</th>
-              <th className="text-right" role="columnheader">Source</th>
-            </tr>
-          </thead>
-          <tbody>
-            {sorted.map((h, i) => (
-              <tr key={i}>
-                <td className="text-center align-middle">
-                  <button
-                    onClick={() => toggleCompare(h.name)}
-                    className={`inline-flex items-center justify-center w-5 h-5 text-[10px] border ${
-                      compare.includes(h.name)
-                        ? 'border-accent/50 text-accent bg-accent/10'
-                        : 'border-border text-text-muted hover:border-text-muted/30'
-                    }`}
-                    aria-label={`${compare.includes(h.name) ? 'Remove' : 'Add'} ${h.name}`}
-                  >
-                    <i className={`fas fa-${compare.includes(h.name) ? 'check' : 'plus'}`} />
-                  </button>
-                </td>
-                <td data-label="" className="font-medium">
-                  <button onClick={() => setModalItem({
-                    name: h.name,
-                    image: itemImages[h.name as keyof typeof itemImages] as string | undefined,
-                    type: 'helmet',
-                    fields: [
-                      { label: 'NIJ Class', value: h.nij, color: nijColor(h.nij), desc: 'National Institute of Justice protection rating — higher classes stop more powerful rounds' },
-                      { label: 'Material', value: h.material, color: matColor(h.material), desc: 'Helmet material — affects weight, durability and protection' },
-                      { label: 'Weight', value: `${h.weight} kg`, desc: 'Carry weight in kilograms — lighter helmets allow faster movement' },
-                      { label: 'Source', value: h.source, desc: 'Where to obtain this helmet — from a vendor at a specific rep level, or found by looting' },
-                    ],
-                  })} className="flex items-center gap-2 text-left w-full hover:text-accent transition-colors">
-                    {itemImages[h.name as keyof typeof itemImages] && (
-                      <img src={itemImages[h.name as keyof typeof itemImages] as string} alt="" className="w-8 h-8 object-contain shrink-0 bg-surface-2 border border-border" loading="lazy" />
-                    )}
-                    {h.name}
-                  </button>
-                </td>
-                <td data-label="NIJ" className={`text-center font-bold ${nijColor(h.nij)}`}>{h.nij}</td>
-                <td data-label="Mat" className={`text-center ${matColor(h.material)}`}>{h.material.slice(0, 4)}</td>
-                <td data-label="Wt" className="text-right text-text-muted">{h.weight}kg</td>
-                <td data-label="Source" className="text-right text-text-muted">{h.source}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
-      {modalItem && <ItemModal item={modalItem} onClose={() => setModalItem(null)} />}
-    </div>
-  );
-}
+const VENDOR_GEAR = [
+  { vendor: 'Handshake', rep: 1, items: 'Commander IIIA vest, LVS Overt IIIA+ vest, Specter IIIA PC, CGPC3 TQS IIIA PC, Modular Operator Carrier Gen II IIIA PC' },
+  { vendor: 'Handshake', rep: 2, items: 'CZ VIP III vest, Covert Woodland III vest, LVS Tactical RG III vest, PASGT II+ helmet, Mich TC-2000 IIIA helmet, MICH LC IIIA helmet, Chest Rig 901 Elite 4 III PC, LCS Sentry III PC' },
+  { vendor: 'Handshake', rep: 3, items: 'CZ 4M Hornet Green III+ vest, MICH TC-2002 IIIA helmet, BK-ACH IIIA helmet, BK-ACH-HC IIIA helmet, Recon PC III+ PC' },
+  { vendor: 'Handshake', rep: 4, items: 'LVS Tactical Multicam III++ vest, EXFIL IIIA helmet, FAST MT IIIA helmet, AMP-1 TP LC IIIA+ helmet, Plate6 III++ PC, LBT-6094 G3v2 III++ PC' },
+  { vendor: 'Gunny', rep: 1, items: '9x19mm FMJ/HP, 5.56x45mm FMJ' },
+  { vendor: 'Gunny', rep: 2, items: '5.56x45mm M193/M855, 5.45x39mm FMJ, 7.62x39mm PS, 9x19mm Xtreme Pen' },
+  { vendor: 'Gunny', rep: 3, items: '5.56x45mm M855A1, 5.45x39mm BP, 7.62x39mm BP, .300 AAC AP, 7.62x51mm M61, 9x19mm Libra Snail' },
+  { vendor: 'Lab Rat', rep: 1, items: 'Basic Surgical Kit, Suture Kit, Small Blood Bag, Bandage, Splint' },
+  { vendor: 'Lab Rat', rep: 2, items: 'EPO V2, ORI-12 V2, Meloxicam, Combat Tourniquet, Activated Charcoal' },
+  { vendor: 'Lab Rat', rep: 3, items: 'Large Blood Bag, Fenethylline, Strychnine' },
+  { vendor: 'Lab Rat', rep: 4, items: 'HpR 3-S, Combat Medic Pack' },
+  { vendor: 'Artisan', rep: 1, items: 'Molle Vest IIIA, SSh-68N I helmet, TYPE 66 I helmet, SSh-60 I helmet' },
+  { vendor: 'Turncoat', rep: 1, items: '6B47 Ratnik II helmet' },
+  { vendor: 'Turncoat', rep: 2, items: 'SK-S III vest, ATBV III vest, Pantsir 2.0 III PC' },
+  { vendor: 'Turncoat', rep: 3, items: '6B23-1 Flora III+ vest, LSHZ 1+ IIIA helmet' },
+  { vendor: 'Turncoat', rep: 4, items: 'Phantom Type 2 III++ PC' },
+  { vendor: 'Banshee', rep: 2, items: 'FAST XP HC IIIA helmet (loot)' },
+  { vendor: 'Vulture', rep: 1, items: 'Assorted loot-bought gear' },
+];
 
 function VendorTable() {
   return (
-    <div className="table-wrap table-mobile-cards">
-      <table role="table" aria-label="Vendor gear unlock table">
+    <div className="table-wrap">
+      <table>
         <thead>
           <tr>
-            <th role="columnheader">Vendor</th>
-            <th className="text-center" role="columnheader">Rep</th>
-            <th role="columnheader">Items Unlocked</th>
+            <th>Vendor</th>
+            <th className="text-center">Rank</th>
+            <th>Unlocked Items</th>
           </tr>
         </thead>
         <tbody>
-          {[
-            { vendor: 'Handshake', rep: 1, items: 'Commander IIIA, LVS Overt IIIA+' },
-            { vendor: 'Handshake', rep: 2, items: 'Covert Woodland III, MICH helmet' },
-            { vendor: 'Handshake', rep: 3, items: 'CZ 4M Hornet Green III+' },
-            { vendor: 'Handshake', rep: 4, items: 'LVS Tactical Multicam III++' },
-            { vendor: 'Artisan', rep: 1, items: 'Molle Vest IIIA, SS-27 IIA helmet' },
-            { vendor: 'Turncoat', rep: 2, items: 'SK-S III, ATBV III, ACH IIIA' },
-            { vendor: 'Turncoat', rep: 3, items: '6B23-1 III+' },
-            { vendor: 'Banshee', rep: 2, items: 'FAST Carbon IIIA helmet' },
-          ].map((v, i) => (
+          {VENDOR_GEAR.map((vg, i) => (
             <tr key={i}>
-              <td data-label="" className="font-medium">{v.vendor}</td>
-              <td data-label="Rep" className="text-center"><span className="tag tag-drab">R.{v.rep}</span></td>
-              <td data-label="Items" className="text-text-muted">{v.items}</td>
+              <td className="font-medium">{vg.vendor}</td>
+              <td className="text-center"><span className="tag tag-amber text-[9px]">R.{vg.rep}</span></td>
+              <td className="text-text-muted text-xs">{vg.items}</td>
             </tr>
           ))}
         </tbody>
       </table>
     </div>
   );
-}
-
-function Legend() {
-  return (
-    <div className="mt-4 border border-border p-3">
-      <div className="text-[10px] font-bold uppercase tracking-wider text-text-muted mb-2 flex items-center gap-2">
-        <i className="fas fa-circle-info text-accent/60" />
-        NIJ Protection Levels
-      </div>
-      <div className="flex flex-wrap gap-2 text-xs font-mono items-center mb-2">
-        {['I', '→', 'II', '→', 'II+', '→', 'IIIA', '→', 'IIIA+', '→', 'III', '→', 'III+', '→', 'III++'].map((s, i) =>
-          s === '→' ? (
-            <span key={i} className="text-text-muted/40">{s}</span>
-          ) : (
-            <span key={i} className={`font-bold ${nijColor(s)}`}>{s}</span>
-          )
-        )}
-      </div>
-      <div className="flex flex-wrap gap-3 text-[10px] text-text-muted">
-        {Object.entries(MATERIAL_RANK).map(([mat, info]) => (
-          <span key={mat} className={info.color}>{mat} — {info.desc}</span>
-        ))}
-      </div>
-    </div>
-  );
-}
-
-function nij(n: string): number {
-  return ['IIA', 'IIA+', 'IIIA', 'IIIA+', 'III', 'III+', 'III++'].indexOf(n);
-}
-function nijColor(n: string): string {
-  return n.includes('++') ? 'text-red-400' : n.includes('+') ? 'text-amber-300' : n.startsWith('III') ? 'text-yellow-300' : 'text-blue-300';
-}
-function matColor(m: string): string {
-  return MATERIAL_RANK[m]?.color || 'text-text-muted';
 }
