@@ -146,8 +146,9 @@ export default function AmmoGuide() {
               <tr key={i}>
                 <td data-label="" className="font-medium">
                   <button onClick={() => setModalItem({
-                    name: r.name,
-                    type: 'weapon',
+                    name: r.caliber ? `${r.caliber} ${r.name}` : r.name,
+                    image: itemImages[`${r.caliber} ${r.name}` as keyof typeof itemImages] as string | undefined,
+                    type: 'ammo',
                     fields: [
                       { label: 'Caliber', value: r.caliber, desc: 'The diameter and case length of the ammunition cartridge' },
                       { label: 'Speed', value: `${r.speed} m/s`, desc: 'Muzzle velocity — higher velocity means flatter trajectory and less bullet drop over distance' },
