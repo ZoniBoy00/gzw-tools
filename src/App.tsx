@@ -15,6 +15,7 @@ import ApiDocs from './components/ApiDocs';
 import PrivacyPolicy from './components/PrivacyPolicy';
 import TermsOfService from './components/TermsOfService';
 import FaqModal from './components/FaqModal';
+import MapView from './components/MapView';
 import TabBar from './components/ui/TabBar';
 import './index.css';
 
@@ -27,6 +28,7 @@ const TABS = [
   { id: 'weapons', label: 'Weapons', icon: 'fas fa-crosshairs', path: '/weapons' },
   { id: 'armor', label: 'Armor', icon: 'fas fa-shield-halved', path: '/armor' },
   { id: 'keys', label: 'Keys', icon: 'fas fa-key', path: '/keys' },
+  { id: 'map', label: 'Map', icon: 'fas fa-map', path: '/map' },
   { id: 'vendors', label: 'Vendors', icon: 'fas fa-store', path: '/vendors' },
   { id: 'loadouts', label: 'Loadouts', icon: 'fas fa-screwdriver-wrench', path: '/loadouts' },
   { id: 'logs', label: 'Log Analyzer', icon: 'fas fa-file-lines', path: '/logs' },
@@ -87,6 +89,7 @@ function Layout() {
             <Route path="/logs" element={<LogAnalyzer />} />
             <Route path="/api-docs" element={<ApiDocs />} />
             <Route path="/keys" element={<KeysGuide />} />
+            <Route path="/map" element={<MapView />} />
             <Route path="/privacy" element={<PrivacyPolicy />} />
             <Route path="/tos" element={<TermsOfService />} />
             <Route path="*" element={<Navigate to="/" replace />} />
