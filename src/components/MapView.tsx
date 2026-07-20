@@ -15,8 +15,12 @@ const GRID_MIN_X = 90;
 const GRID_MAX_X = 230;
 const GRID_MIN_Y = 90;
 const GRID_MAX_Y = 190;
-const MAP_W = GRID_MAX_X - GRID_MIN_X; // 140
-const MAP_H = GRID_MAX_Y - GRID_MIN_Y; // 100
+const DATA_RANGE_X = GRID_MAX_X - GRID_MIN_X; // 140
+const DATA_RANGE_Y = GRID_MAX_Y - GRID_MIN_Y; // 100
+
+// Image pixel dimensions (wiki map: 1861×936) — used to render at native aspect ratio
+const MAP_W = 1861;
+const MAP_H = 936;
 
 const COLORS: Record<string, string> = {
   city: '#f59e0b',
@@ -56,21 +60,48 @@ const GROUP_LABELS: Record<string, string> = {
 };
 
 /* ── Coordinate helpers ── */
+
+// Convert wiki grid "X:Y" (e.g. "141:164") to Leaflet pixel position [y, x]
+// Uses proportional mapping: grid (90-230, 90-190) → image pixels (0-1861, 0-936)
 function parseGrid(g: string): [number, number] {
   const [x, y] = g.replace(/\s/g, '').split(':').map(Number);
-  return [GRID_MAX_Y - y, x - GRID_MIN_X]; // [leafletY, leafletX]
+  const px = ((x - GRID_MIN_X) / DATA_RANGE_X) * MAP_W;
+  const py = ((y - GRID_MIN_Y) / DATA_RANGE_Y) * MAP_H;
+  return [py, px]; // Leaflet CRS.Simple: [y, x]
 }
 
 /* ── Marker icon factory (pin-style) ── */
-function createIcon(color: string, size: number, icon?: string, label?: string) {
+function createIcon(color: string, size: number, icon?: string, label?: string, showName?: string) {
   const iconSize = Math.max(size, 18);
   const iconF = icon ? Math.round(iconSize * 0.42) : Math.round(iconSize * 0.38);
   const borderW = Math.max(2, Math.round(iconSize * 0.1));
   const pinH = Math.round(iconSize * 0.28);
   const totalH = iconSize + pinH;
+  const labelHtml = label && icon
+    ? `<span style="
+        position:absolute;top:-10px;left:50%;transform:translateX(-50%);
+        font-size:7px;font-weight:700;font-family:'Rajdhani',sans-serif;
+        color:#fff;text-shadow:0 1px 6px rgba(0,0,0,0.9);
+        white-space:nowrap;letter-spacing:0.3px;
+        background:${color}cc;padding:1px 5px;border-radius:2px;
+        backdrop-filter:blur(4px);border:1px solid rgba(255,255,255,0.15);
+      ">${label}</span>`
+    : '';
+  const nameHtml = showName
+    ? `<span style="
+        position:absolute;top:${totalH - 2}px;left:50%;transform:translateX(-50%);
+        font-size:8px;font-weight:700;font-family:'Rajdhani',sans-serif;
+        color:#fff;text-shadow:0 1px 8px rgba(0,0,0,0.95),0 0 4px rgba(0,0,0,0.8);
+        white-space:nowrap;letter-spacing:0.5px;
+        text-transform:uppercase;
+        background:rgba(0,0,0,0.5);padding:1px 6px;border-radius:2px;
+        border:1px solid rgba(255,255,255,0.1);
+      ">${showName}</span>`
+    : '';
   return L.divIcon({
     className: '',
-    html: `<div style="position:relative;width:${iconSize + 8}px;height:${totalH + 4}px;">
+    html: `<div style="position:relative;width:${iconSize + 8}px;height:${totalH + 24}px;">
+      ${labelHtml}
       <div style="
         width:${iconSize}px;height:${iconSize}px;
         background:${color};
@@ -86,20 +117,11 @@ function createIcon(color: string, size: number, icon?: string, label?: string) 
             : label ? `<span style="font-size:${iconF - 2}px;font-weight:700;color:#fff;font-family:'Rajdhani','JetBrains Mono',monospace;text-shadow:0 1px 3px rgba(0,0,0,0.6);">${label}</span>` : ''}
         </div>
       </div>
-      ${label && icon
-        ? `<span style="
-            position:absolute;top:-10px;left:50%;transform:translateX(-50%);
-            font-size:7px;font-weight:700;font-family:'Rajdhani',sans-serif;
-            color:#fff;text-shadow:0 1px 6px rgba(0,0,0,0.9);
-            white-space:nowrap;letter-spacing:0.3px;
-            background:${color}cc;padding:1px 5px;border-radius:2px;
-            backdrop-filter:blur(4px);border:1px solid rgba(255,255,255,0.15);
-          ">${label}</span>`
-        : ''}
+      ${nameHtml}
     </div>`,
-    iconSize: [iconSize + 8, totalH + 4],
+    iconSize: [iconSize + 8, totalH + 24],
     iconAnchor: [iconSize / 2 + 4, totalH],
-    popupAnchor: [0, -totalH - 4],
+    popupAnchor: [0, -totalH - 24],
   });
 }
 
@@ -113,12 +135,14 @@ function FitBounds() {
 /* ── Grid overlay ── */
 function GridOverlay() {
   const lines: { from: [number, number]; to: [number, number] }[] = [];
+  // Vertical lines (every 10 units in data coordinates)
   for (let gx = 100; gx <= 220; gx += 10) {
-    const lx = gx - GRID_MIN_X;
+    const lx = ((gx - GRID_MIN_X) / DATA_RANGE_X) * MAP_W;
     lines.push({ from: [0, lx], to: [MAP_H, lx] });
   }
+  // Horizontal lines (every 10 units)
   for (let gy = 100; gy <= 180; gy += 10) {
-    const ly = GRID_MAX_Y - gy;
+    const ly = ((gy - GRID_MIN_Y) / DATA_RANGE_Y) * MAP_H;
     lines.push({ from: [ly, 0], to: [ly, MAP_W] });
   }
   return (
@@ -133,11 +157,15 @@ function GridOverlay() {
 /* ── Grid labels on edges ── */
 function GridLabels() {
   const labels: { pos: [number, number]; text: string; isX: boolean }[] = [];
+  // X-axis labels (top edge)
   for (let gx = 100; gx <= 220; gx += 10) {
-    labels.push({ pos: [MAP_H + 2, gx - GRID_MIN_X], text: `${gx}`, isX: true });
+    const lx = ((gx - GRID_MIN_X) / DATA_RANGE_X) * MAP_W;
+    labels.push({ pos: [MAP_H + 2, lx], text: `${gx}`, isX: true });
   }
+  // Y-axis labels (left edge)
   for (let gy = 100; gy <= 180; gy += 10) {
-    labels.push({ pos: [GRID_MAX_Y - gy, -2], text: `${gy}`, isX: false });
+    const ly = ((gy - GRID_MIN_Y) / DATA_RANGE_Y) * MAP_H;
+    labels.push({ pos: [ly, -2], text: `${gy}`, isX: false });
   }
   return (
     <>
@@ -158,8 +186,9 @@ function GridLabels() {
 function MouseTracker({ onMove, onZoom }: { onMove: (g: [number, number]) => void; onZoom: (z: number) => void }) {
   useMapEvents({
     mousemove: (e) => {
-      const gx = Math.round(e.latlng.lng + GRID_MIN_X);
-      const gy = Math.round(GRID_MAX_Y - e.latlng.lat);
+      // e.latlng is [y, x] in CRS.Simple
+      const gx = Math.round((e.latlng.lng / MAP_W) * DATA_RANGE_X + GRID_MIN_X);
+      const gy = Math.round((e.latlng.lat / MAP_H) * DATA_RANGE_Y + GRID_MIN_Y);
       if (gx >= GRID_MIN_X && gx <= GRID_MAX_X && gy >= GRID_MIN_Y && gy <= GRID_MAX_Y) {
         onMove([gx, gy]);
       }
@@ -178,6 +207,7 @@ interface MarkerItem {
   icon: string;
   size: number;
   label?: string;
+  showName?: string;
   category: string;
 }
 
@@ -225,6 +255,7 @@ export default function MapView() {
           icon: poi.type === 'city' ? 'fas fa-building' : poi.type === 'town' ? 'fas fa-city' : 'fas fa-location-dot',
           size: poi.type === 'city' ? 30 : 22,
           label: poi.type === 'city' ? poi.name : undefined,
+          showName: poi.type === 'city' || poi.type === 'town' ? poi.name : undefined,
           category: cat,
         });
       }
@@ -474,7 +505,7 @@ export default function MapView() {
             disableClusteringAtZoom={5}
           >
             {filteredMarkers.map((m, i) => (
-              <Marker key={i} position={m.pos} icon={createIcon(m.color, m.size, m.icon, m.label)}>
+              <Marker key={i} position={m.pos} icon={createIcon(m.color, m.size, m.icon, m.label, m.showName)}>
               <Popup>
                 <div className="map-popup">
                   <div className="map-popup-header">
@@ -483,7 +514,7 @@ export default function MapView() {
                   </div>
                   {m.desc && <div className="map-popup-desc">{m.desc}</div>}
                   <div className="map-popup-grid">
-                    Grid: {Math.round(m.pos[1] + GRID_MIN_X)}:{Math.round(GRID_MAX_Y - m.pos[0])}
+                    Grid: {Math.round((m.pos[1] / MAP_W) * DATA_RANGE_X + GRID_MIN_X)}:{Math.round((m.pos[0] / MAP_H) * DATA_RANGE_Y + GRID_MIN_Y)}
                   </div>
                 </div>
               </Popup>
