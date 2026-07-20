@@ -1,505 +1,560 @@
-{
-  "vests": [
-    {
-      "name": "Coolmax Covert Vest",
-      "nij": "IIIA",
-      "material": "Aramid",
-      "plates": "Front, Back",
-      "grid": "3\u00d73",
-      "weight": 1.76,
-      "source": "Looting"
-    },
-    {
-      "name": "Covert Tactical (UNLRA)",
-      "nij": "IIIA",
-      "material": "Aramid",
-      "plates": "Front, Back",
-      "grid": "3\u00d73",
-      "weight": 2.1,
-      "source": "Looting"
-    },
-    {
-      "name": "Commander (Black)",
-      "nij": "IIIA",
-      "material": "Aramid",
-      "plates": "Front, Back",
-      "grid": "3\u00d73",
-      "weight": 2.45,
-      "source": "Handshake R.1"
-    },
-    {
-      "name": "Commander (Navy)",
-      "nij": "IIIA",
-      "material": "Aramid",
-      "plates": "Front, Back",
-      "grid": "3\u00d73",
-      "weight": 2.45,
-      "source": "Looting"
-    },
-    {
-      "name": "Commander (Olive)",
-      "nij": "IIIA",
-      "material": "Aramid",
-      "plates": "Front, Back",
-      "grid": "3\u00d73",
-      "weight": 2.45,
-      "source": "Looting"
-    },
-    {
-      "name": "Molle Vest",
-      "nij": "IIIA",
-      "material": "Steel",
-      "plates": "Front",
-      "grid": "3\u00d73",
-      "weight": 2.6,
-      "source": "Artisan R.1"
-    },
-    {
-      "name": "LVS Overt (Ranger Green)",
-      "nij": "IIIA+",
-      "material": "Steel",
-      "plates": "Front, Back",
-      "grid": "3\u00d73",
-      "weight": 7.5,
-      "source": "Handshake R.1"
-    },
-    {
-      "name": "SK-S Ballistic Vest",
-      "nij": "III",
-      "material": "UHMWPE",
-      "plates": "Front, Back",
-      "grid": "3\u00d73",
-      "weight": 3.15,
-      "source": "Turncoat R.2"
-    },
-    {
-      "name": "ATBV Vest",
-      "nij": "III",
-      "material": "UHMWPE",
-      "plates": "Front, Back",
-      "grid": "3\u00d73",
-      "weight": 3.8,
-      "source": "Turncoat R.2"
-    },
-    {
-      "name": "CZ VIP (Black)",
-      "nij": "III",
-      "material": "Steel",
-      "plates": "Front",
-      "grid": "3\u00d73",
-      "weight": 4.8,
-      "source": "Handshake R.2"
-    },
-    {
-      "name": "Covert Tactical (Police)",
-      "nij": "III",
-      "material": "UHMWPE",
-      "plates": "Front, Back",
-      "grid": "3\u00d73",
-      "weight": 5.77,
-      "source": "Looting"
-    },
-    {
-      "name": "Covert Tactical (Press)",
-      "nij": "III",
-      "material": "Steel",
-      "plates": "Front, Back",
-      "grid": "3\u00d73",
-      "weight": 10.41,
-      "source": "Looting"
-    },
-    {
-      "name": "Covert Tactical (Woodland)",
-      "nij": "III",
-      "material": "Steel",
-      "plates": "Front, Back",
-      "grid": "3\u00d73",
-      "weight": 8.8,
-      "source": "Handshake R.2"
-    },
-    {
-      "name": "CZ 4M Hornet (UNLRA)",
-      "nij": "III",
-      "material": "Ceramic",
-      "plates": "Front, Back",
-      "grid": "3\u00d73",
-      "weight": 6.45,
-      "source": "Looting"
-    },
-    {
-      "name": "LVS Tactical (Ranger Green)",
-      "nij": "III",
-      "material": "Steel",
-      "plates": "Front, Back, Sides",
-      "grid": "3\u00d73",
-      "weight": 10.8,
-      "source": "Handshake R.2"
-    },
-    {
-      "name": "6B23-1 (Flora)",
-      "nij": "III+",
-      "material": "Steel",
-      "plates": "Front",
-      "grid": "3\u00d74",
-      "weight": 7.4,
-      "source": "Turncoat R.3"
-    },
-    {
-      "name": "6B23-1 (Digital)",
-      "nij": "III+",
-      "material": "Steel",
-      "plates": "Front",
-      "grid": "3\u00d74",
-      "weight": 7.9,
-      "source": "Looting"
-    },
-    {
-      "name": "CZ 4M Hornet (Green)",
-      "nij": "III+",
-      "material": "Ceramic",
-      "plates": "Front, Back",
-      "grid": "3\u00d73",
-      "weight": 6.9,
-      "source": "Handshake R.3"
-    },
-    {
-      "name": "LVS Tactical (Multicam)",
-      "nij": "III++",
-      "material": "Ceramic",
-      "plates": "Front, Back, Sides",
-      "grid": "3\u00d73",
-      "weight": 8.2,
-      "source": "Handshake R.4"
-    }
-  ],
-  "helmets": [
-    {
-      "name": "SSh-68N",
-      "nij": "I",
-      "material": "Steel",
-      "weight": 2.0,
-      "source": "Artisan R.1"
-    },
-    {
-      "name": "TYPE 66",
-      "nij": "I",
-      "material": "Steel",
-      "weight": 1.4,
-      "source": "Artisan R.1"
-    },
-    {
-      "name": "SSh-60",
-      "nij": "I",
-      "material": "Steel",
-      "weight": 1.3,
-      "source": "Artisan R.1"
-    },
-    {
-      "name": "6B47 Ratnik",
-      "nij": "II",
-      "material": "Aramid",
-      "weight": 1.1,
-      "source": "Turncoat R.1"
-    },
-    {
-      "name": "PASGT",
-      "nij": "II+",
-      "material": "Aramid",
-      "weight": 1.6,
-      "source": "Handshake R.2"
-    },
-    {
-      "name": "LSHZ 1+ (Multicam)",
-      "nij": "IIIA",
-      "material": "Aramid",
-      "weight": 1.3,
-      "source": "Turncoat R.3"
-    },
-    {
-      "name": "LSHZ 1+ (Black)",
-      "nij": "IIIA",
-      "material": "Aramid",
-      "weight": 1.3,
-      "source": "Turncoat R.3"
-    },
-    {
-      "name": "Mich TC-2000 (Green)",
-      "nij": "IIIA",
-      "material": "Aramid",
-      "weight": 1.5,
-      "source": "Handshake R.2"
-    },
-    {
-      "name": "Mich TC-2000 (Black)",
-      "nij": "IIIA",
-      "material": "Aramid",
-      "weight": 1.5,
-      "source": "Handshake R.2"
-    },
-    {
-      "name": "Mich TC-2000 (UNLRA)",
-      "nij": "IIIA",
-      "material": "Aramid",
-      "weight": 1.5,
-      "source": "Looting"
-    },
-    {
-      "name": "MICH LC",
-      "nij": "IIIA",
-      "material": "Aramid",
-      "weight": 1.6,
-      "source": "Handshake R.2"
-    },
-    {
-      "name": "MICH TC-2002 (Green)",
-      "nij": "IIIA",
-      "material": "Aramid",
-      "weight": 1.5,
-      "source": "Handshake R.3"
-    },
-    {
-      "name": "MICH TC-2002 (Tan)",
-      "nij": "IIIA",
-      "material": "MSA",
-      "weight": 1.5,
-      "source": "Handshake R.3"
-    },
-    {
-      "name": "MICH TC-2002 (Black)",
-      "nij": "IIIA",
-      "material": "Aramid",
-      "weight": 1.23,
-      "source": "Looting"
-    },
-    {
-      "name": "BK-ACH",
-      "nij": "IIIA",
-      "material": "Aramid",
-      "weight": 1.4,
-      "source": "Handshake R.3"
-    },
-    {
-      "name": "BK-ACH-HC",
-      "nij": "IIIA",
-      "material": "Aramid",
-      "weight": 1.3,
-      "source": "Handshake R.3"
-    },
-    {
-      "name": "AMP-1 TP LC (Ranger Green)",
-      "nij": "IIIA+",
-      "material": "UHMWPE",
-      "weight": 1.4,
-      "source": "Handshake R.4"
-    },
-    {
-      "name": "AMP-1 TP LC (UNLRA)",
-      "nij": "IIIA+",
-      "material": "Aramid",
-      "weight": 1.69,
-      "source": "Looting"
-    },
-    {
-      "name": "AMP-1 TP MC (Ranger Green)",
-      "nij": "IIIA+",
-      "material": "Aramid",
-      "weight": 1.63,
-      "source": "Looting"
-    },
-    {
-      "name": "EXFIL (Coyote Brown)",
-      "nij": "IIIA",
-      "material": "UHMWPE",
-      "weight": 1.18,
-      "source": "Handshake R.4"
-    },
-    {
-      "name": "EXFIL (Multicam)",
-      "nij": "IIIA",
-      "material": "UHMWPE",
-      "weight": 1.18,
-      "source": "Handshake R.4"
-    },
-    {
-      "name": "FAST MT (Multicam)",
-      "nij": "IIIA",
-      "material": "UHMWPE",
-      "weight": 1.1,
-      "source": "Handshake R.4"
-    },
-    {
-      "name": "FAST MT (Tan)",
-      "nij": "IIIA",
-      "material": "Aramid",
-      "weight": 1.05,
-      "source": "Handshake R.4"
-    },
-    {
-      "name": "QGF-03 (Ghillie)",
-      "nij": "IIIA",
-      "material": "Aramid",
-      "weight": 1.5,
-      "source": "Looting"
-    },
-    {
-      "name": "FAST XP HC (Multicam)",
-      "nij": "IIIA",
-      "material": "UHMWPE",
-      "weight": 1.1,
-      "source": "Looting"
-    },
-    {
-      "name": "FAST XP HC (Olive)",
-      "nij": "IIIA",
-      "material": "UHMWPE",
-      "weight": 1.1,
-      "source": "Looting"
-    }
-  ],
-  "plate_carriers": [
-    {
-      "name": "Specter",
-      "nij": "IIIA",
-      "material": "Aramid",
-      "plates": "Front, Back",
-      "grid": "2\u00d73",
-      "weight": 2.8,
-      "source": "Handshake R.1"
-    },
-    {
-      "name": "CGPC3 TQS",
-      "nij": "IIIA",
-      "material": "UHMWPE",
-      "plates": "Front, Back",
-      "grid": "3\u00d73",
-      "weight": 3.7,
-      "source": "Handshake R.1"
-    },
-    {
-      "name": "Modular Operator Carrier Gen II",
-      "nij": "IIIA",
-      "material": "UHMWPE",
-      "plates": "Front, Back, Sides",
-      "grid": "3\u00d73",
-      "weight": 4.2,
-      "source": "Handshake R.1"
-    },
-    {
-      "name": "Chest Rig 901 Elite 4",
-      "nij": "III",
-      "material": "Steel",
-      "plates": "Front",
-      "grid": "5\u00d72",
-      "weight": 5.7,
-      "source": "Handshake R.2"
-    },
-    {
-      "name": "LCS Sentry",
-      "nij": "III",
-      "material": "UHMWPE",
-      "plates": "Front, Back",
-      "grid": "3\u00d73",
-      "weight": 3.9,
-      "source": "Handshake R.2"
-    },
-    {
-      "name": "LCS Sentry (UNLRA)",
-      "nij": "III",
-      "material": "UHMWPE",
-      "plates": "Front, Back",
-      "grid": "3\u00d73",
-      "weight": 4.7,
-      "source": "Looting"
-    },
-    {
-      "name": "Pantsir 2.0",
-      "nij": "III",
-      "material": "Steel",
-      "plates": "Front, Back, Sides",
-      "grid": "3\u00d74",
-      "weight": 12.1,
-      "source": "Turncoat R.2"
-    },
-    {
-      "name": "CZ 4M Lancer",
-      "nij": "III",
-      "material": "UHMWPE",
-      "plates": "Front, Back",
-      "grid": "3\u00d73",
-      "weight": 5.0,
-      "source": "Looting"
-    },
-    {
-      "name": "CZ 4M Lancer (UNLRA)",
-      "nij": "III",
-      "material": "UHMWPE",
-      "plates": "Front, Back",
-      "grid": "3\u00d73",
-      "weight": 5.75,
-      "source": "Looting"
-    },
-    {
-      "name": "Recon Plate Carrier",
-      "nij": "III+",
-      "material": "UHMWPE",
-      "plates": "Front, Back",
-      "grid": "3\u00d73",
-      "weight": 5.6,
-      "source": "Handshake R.3"
-    },
-    {
-      "name": "Plate6 Plate Carrier",
-      "nij": "III++",
-      "material": "Ceramic",
-      "plates": "Front, Back",
-      "grid": "4\u00d74",
-      "weight": 9.6,
-      "source": "Handshake R.4"
-    },
-    {
-      "name": "LBT-6094 G3v2",
-      "nij": "III++",
-      "material": "Ceramic",
-      "plates": "Front, Back",
-      "grid": "3\u00d73",
-      "weight": 7.1,
-      "source": "Handshake R.4"
-    },
-    {
-      "name": "M2 Plate Carrier",
-      "nij": "III++",
-      "material": "Ceramic",
-      "plates": "Front, Back",
-      "grid": "3\u00d74",
-      "weight": 8.9,
-      "source": "Looting"
-    },
-    {
-      "name": "Buran's Pantsir 2.0",
-      "nij": "III++",
-      "material": "Ceramic",
-      "plates": "Front, Back, Sides",
-      "grid": "3\u00d73",
-      "weight": 9.6,
-      "source": "Looting"
-    },
-    {
-      "name": "Yen's Pantsir 2.0",
-      "nij": "III++",
-      "material": "Ceramic",
-      "plates": "Front, Back, Sides",
-      "grid": "3\u00d73",
-      "weight": 9.6,
-      "source": "Looting"
-    },
-    {
-      "name": "Phantom Type 2",
-      "nij": "III++",
-      "material": "Ceramic",
-      "plates": "Front, Back, Sides",
-      "grid": "4\u00d73",
-      "weight": 13.2,
-      "source": "Turncoat R.4"
-    }
-  ]
-}
+[
+  {
+    "name": "Coolmax Covert Vest",
+    "nij": "IIIA",
+    "material": "Aramid",
+    "plates": "Front, Back",
+    "grid": "3×3",
+    "weight": 1.76,
+    "source": "Looting",
+    "category": "vests"
+  },
+  {
+    "name": "Covert Tactical (UNLRA)",
+    "nij": "IIIA",
+    "material": "Aramid",
+    "plates": "Front, Back",
+    "grid": "3×3",
+    "weight": 2.1,
+    "source": "Looting",
+    "category": "vests"
+  },
+  {
+    "name": "Commander (Black)",
+    "nij": "IIIA",
+    "material": "Aramid",
+    "plates": "Front, Back",
+    "grid": "3×3",
+    "weight": 2.45,
+    "source": "Handshake R.1",
+    "category": "vests"
+  },
+  {
+    "name": "Commander (Navy)",
+    "nij": "IIIA",
+    "material": "Aramid",
+    "plates": "Front, Back",
+    "grid": "3×3",
+    "weight": 2.45,
+    "source": "Looting",
+    "category": "vests"
+  },
+  {
+    "name": "Commander (Olive)",
+    "nij": "IIIA",
+    "material": "Aramid",
+    "plates": "Front, Back",
+    "grid": "3×3",
+    "weight": 2.45,
+    "source": "Looting",
+    "category": "vests"
+  },
+  {
+    "name": "Molle Vest",
+    "nij": "IIIA",
+    "material": "Steel",
+    "plates": "Front",
+    "grid": "3×3",
+    "weight": 2.6,
+    "source": "Artisan R.1",
+    "category": "vests"
+  },
+  {
+    "name": "LVS Overt (Ranger Green)",
+    "nij": "IIIA+",
+    "material": "Steel",
+    "plates": "Front, Back",
+    "grid": "3×3",
+    "weight": 7.5,
+    "source": "Handshake R.1",
+    "category": "vests"
+  },
+  {
+    "name": "SK-S Ballistic Vest",
+    "nij": "III",
+    "material": "UHMWPE",
+    "plates": "Front, Back",
+    "grid": "3×3",
+    "weight": 3.15,
+    "source": "Turncoat R.2",
+    "category": "vests"
+  },
+  {
+    "name": "ATBV Vest",
+    "nij": "III",
+    "material": "UHMWPE",
+    "plates": "Front, Back",
+    "grid": "3×3",
+    "weight": 3.8,
+    "source": "Turncoat R.2",
+    "category": "vests"
+  },
+  {
+    "name": "CZ VIP (Black)",
+    "nij": "III",
+    "material": "Steel",
+    "plates": "Front",
+    "grid": "3×3",
+    "weight": 4.8,
+    "source": "Handshake R.2",
+    "category": "vests"
+  },
+  {
+    "name": "Covert Tactical (Police)",
+    "nij": "III",
+    "material": "UHMWPE",
+    "plates": "Front, Back",
+    "grid": "3×3",
+    "weight": 5.77,
+    "source": "Looting",
+    "category": "vests"
+  },
+  {
+    "name": "Covert Tactical (Press)",
+    "nij": "III",
+    "material": "Steel",
+    "plates": "Front, Back",
+    "grid": "3×3",
+    "weight": 10.41,
+    "source": "Looting",
+    "category": "vests"
+  },
+  {
+    "name": "Covert Tactical (Woodland)",
+    "nij": "III",
+    "material": "Steel",
+    "plates": "Front, Back",
+    "grid": "3×3",
+    "weight": 8.8,
+    "source": "Handshake R.2",
+    "category": "vests"
+  },
+  {
+    "name": "CZ 4M Hornet (UNLRA)",
+    "nij": "III",
+    "material": "Ceramic",
+    "plates": "Front, Back",
+    "grid": "3×3",
+    "weight": 6.45,
+    "source": "Looting",
+    "category": "vests"
+  },
+  {
+    "name": "LVS Tactical (Ranger Green)",
+    "nij": "III",
+    "material": "Steel",
+    "plates": "Front, Back, Sides",
+    "grid": "3×3",
+    "weight": 10.8,
+    "source": "Handshake R.2",
+    "category": "vests"
+  },
+  {
+    "name": "6B23-1 (Flora)",
+    "nij": "III+",
+    "material": "Steel",
+    "plates": "Front",
+    "grid": "3×4",
+    "weight": 7.4,
+    "source": "Turncoat R.3",
+    "category": "vests"
+  },
+  {
+    "name": "6B23-1 (Digital)",
+    "nij": "III+",
+    "material": "Steel",
+    "plates": "Front",
+    "grid": "3×4",
+    "weight": 7.9,
+    "source": "Looting",
+    "category": "vests"
+  },
+  {
+    "name": "CZ 4M Hornet (Green)",
+    "nij": "III+",
+    "material": "Ceramic",
+    "plates": "Front, Back",
+    "grid": "3×3",
+    "weight": 6.9,
+    "source": "Handshake R.3",
+    "category": "vests"
+  },
+  {
+    "name": "LVS Tactical (Multicam)",
+    "nij": "III++",
+    "material": "Ceramic",
+    "plates": "Front, Back, Sides",
+    "grid": "3×3",
+    "weight": 8.2,
+    "source": "Handshake R.4",
+    "category": "vests"
+  },
+  {
+    "name": "SSh-68N",
+    "nij": "I",
+    "material": "Steel",
+    "weight": 2.0,
+    "source": "Artisan R.1",
+    "category": "helmets"
+  },
+  {
+    "name": "TYPE 66",
+    "nij": "I",
+    "material": "Steel",
+    "weight": 1.4,
+    "source": "Artisan R.1",
+    "category": "helmets"
+  },
+  {
+    "name": "SSh-60",
+    "nij": "I",
+    "material": "Steel",
+    "weight": 1.3,
+    "source": "Artisan R.1",
+    "category": "helmets"
+  },
+  {
+    "name": "6B47 Ratnik",
+    "nij": "II",
+    "material": "Aramid",
+    "weight": 1.1,
+    "source": "Turncoat R.1",
+    "category": "helmets"
+  },
+  {
+    "name": "PASGT",
+    "nij": "II+",
+    "material": "Aramid",
+    "weight": 1.6,
+    "source": "Handshake R.2",
+    "category": "helmets"
+  },
+  {
+    "name": "LSHZ 1+ (Multicam)",
+    "nij": "IIIA",
+    "material": "Aramid",
+    "weight": 1.3,
+    "source": "Turncoat R.3",
+    "category": "helmets"
+  },
+  {
+    "name": "LSHZ 1+ (Black)",
+    "nij": "IIIA",
+    "material": "Aramid",
+    "weight": 1.3,
+    "source": "Turncoat R.3",
+    "category": "helmets"
+  },
+  {
+    "name": "Mich TC-2000 (Green)",
+    "nij": "IIIA",
+    "material": "Aramid",
+    "weight": 1.5,
+    "source": "Handshake R.2",
+    "category": "helmets"
+  },
+  {
+    "name": "Mich TC-2000 (Black)",
+    "nij": "IIIA",
+    "material": "Aramid",
+    "weight": 1.5,
+    "source": "Handshake R.2",
+    "category": "helmets"
+  },
+  {
+    "name": "Mich TC-2000 (UNLRA)",
+    "nij": "IIIA",
+    "material": "Aramid",
+    "weight": 1.5,
+    "source": "Looting",
+    "category": "helmets"
+  },
+  {
+    "name": "MICH LC",
+    "nij": "IIIA",
+    "material": "Aramid",
+    "weight": 1.6,
+    "source": "Handshake R.2",
+    "category": "helmets"
+  },
+  {
+    "name": "MICH TC-2002 (Green)",
+    "nij": "IIIA",
+    "material": "Aramid",
+    "weight": 1.5,
+    "source": "Handshake R.3",
+    "category": "helmets"
+  },
+  {
+    "name": "MICH TC-2002 (Tan)",
+    "nij": "IIIA",
+    "material": "MSA",
+    "weight": 1.5,
+    "source": "Handshake R.3",
+    "category": "helmets"
+  },
+  {
+    "name": "MICH TC-2002 (Black)",
+    "nij": "IIIA",
+    "material": "Aramid",
+    "weight": 1.23,
+    "source": "Looting",
+    "category": "helmets"
+  },
+  {
+    "name": "BK-ACH",
+    "nij": "IIIA",
+    "material": "Aramid",
+    "weight": 1.4,
+    "source": "Handshake R.3",
+    "category": "helmets"
+  },
+  {
+    "name": "BK-ACH-HC",
+    "nij": "IIIA",
+    "material": "Aramid",
+    "weight": 1.3,
+    "source": "Handshake R.3",
+    "category": "helmets"
+  },
+  {
+    "name": "AMP-1 TP LC (Ranger Green)",
+    "nij": "IIIA+",
+    "material": "UHMWPE",
+    "weight": 1.4,
+    "source": "Handshake R.4",
+    "category": "helmets"
+  },
+  {
+    "name": "AMP-1 TP LC (UNLRA)",
+    "nij": "IIIA+",
+    "material": "Aramid",
+    "weight": 1.69,
+    "source": "Looting",
+    "category": "helmets"
+  },
+  {
+    "name": "AMP-1 TP MC (Ranger Green)",
+    "nij": "IIIA+",
+    "material": "Aramid",
+    "weight": 1.63,
+    "source": "Looting",
+    "category": "helmets"
+  },
+  {
+    "name": "EXFIL (Coyote Brown)",
+    "nij": "IIIA",
+    "material": "UHMWPE",
+    "weight": 1.18,
+    "source": "Handshake R.4",
+    "category": "helmets"
+  },
+  {
+    "name": "EXFIL (Multicam)",
+    "nij": "IIIA",
+    "material": "UHMWPE",
+    "weight": 1.18,
+    "source": "Handshake R.4",
+    "category": "helmets"
+  },
+  {
+    "name": "FAST MT (Multicam)",
+    "nij": "IIIA",
+    "material": "UHMWPE",
+    "weight": 1.1,
+    "source": "Handshake R.4",
+    "category": "helmets"
+  },
+  {
+    "name": "FAST MT (Tan)",
+    "nij": "IIIA",
+    "material": "Aramid",
+    "weight": 1.05,
+    "source": "Handshake R.4",
+    "category": "helmets"
+  },
+  {
+    "name": "QGF-03 (Ghillie)",
+    "nij": "IIIA",
+    "material": "Aramid",
+    "weight": 1.5,
+    "source": "Looting",
+    "category": "helmets"
+  },
+  {
+    "name": "FAST XP HC (Multicam)",
+    "nij": "IIIA",
+    "material": "UHMWPE",
+    "weight": 1.1,
+    "source": "Looting",
+    "category": "helmets"
+  },
+  {
+    "name": "FAST XP HC (Olive)",
+    "nij": "IIIA",
+    "material": "UHMWPE",
+    "weight": 1.1,
+    "source": "Looting",
+    "category": "helmets"
+  },
+  {
+    "name": "Specter",
+    "nij": "IIIA",
+    "material": "Aramid",
+    "plates": "Front, Back",
+    "grid": "2×3",
+    "weight": 2.8,
+    "source": "Handshake R.1",
+    "category": "plate_carriers"
+  },
+  {
+    "name": "CGPC3 TQS",
+    "nij": "IIIA",
+    "material": "UHMWPE",
+    "plates": "Front, Back",
+    "grid": "3×3",
+    "weight": 3.7,
+    "source": "Handshake R.1",
+    "category": "plate_carriers"
+  },
+  {
+    "name": "Modular Operator Carrier Gen II",
+    "nij": "IIIA",
+    "material": "UHMWPE",
+    "plates": "Front, Back, Sides",
+    "grid": "3×3",
+    "weight": 4.2,
+    "source": "Handshake R.1",
+    "category": "plate_carriers"
+  },
+  {
+    "name": "Chest Rig 901 Elite 4",
+    "nij": "III",
+    "material": "Steel",
+    "plates": "Front",
+    "grid": "5×2",
+    "weight": 5.7,
+    "source": "Handshake R.2",
+    "category": "plate_carriers"
+  },
+  {
+    "name": "LCS Sentry",
+    "nij": "III",
+    "material": "UHMWPE",
+    "plates": "Front, Back",
+    "grid": "3×3",
+    "weight": 3.9,
+    "source": "Handshake R.2",
+    "category": "plate_carriers"
+  },
+  {
+    "name": "LCS Sentry (UNLRA)",
+    "nij": "III",
+    "material": "UHMWPE",
+    "plates": "Front, Back",
+    "grid": "3×3",
+    "weight": 4.7,
+    "source": "Looting",
+    "category": "plate_carriers"
+  },
+  {
+    "name": "Pantsir 2.0",
+    "nij": "III",
+    "material": "Steel",
+    "plates": "Front, Back, Sides",
+    "grid": "3×4",
+    "weight": 12.1,
+    "source": "Turncoat R.2",
+    "category": "plate_carriers"
+  },
+  {
+    "name": "CZ 4M Lancer",
+    "nij": "III",
+    "material": "UHMWPE",
+    "plates": "Front, Back",
+    "grid": "3×3",
+    "weight": 5.0,
+    "source": "Looting",
+    "category": "plate_carriers"
+  },
+  {
+    "name": "CZ 4M Lancer (UNLRA)",
+    "nij": "III",
+    "material": "UHMWPE",
+    "plates": "Front, Back",
+    "grid": "3×3",
+    "weight": 5.75,
+    "source": "Looting",
+    "category": "plate_carriers"
+  },
+  {
+    "name": "Recon Plate Carrier",
+    "nij": "III+",
+    "material": "UHMWPE",
+    "plates": "Front, Back",
+    "grid": "3×3",
+    "weight": 5.6,
+    "source": "Handshake R.3",
+    "category": "plate_carriers"
+  },
+  {
+    "name": "Plate6 Plate Carrier",
+    "nij": "III++",
+    "material": "Ceramic",
+    "plates": "Front, Back",
+    "grid": "4×4",
+    "weight": 9.6,
+    "source": "Handshake R.4",
+    "category": "plate_carriers"
+  },
+  {
+    "name": "LBT-6094 G3v2",
+    "nij": "III++",
+    "material": "Ceramic",
+    "plates": "Front, Back",
+    "grid": "3×3",
+    "weight": 7.1,
+    "source": "Handshake R.4",
+    "category": "plate_carriers"
+  },
+  {
+    "name": "M2 Plate Carrier",
+    "nij": "III++",
+    "material": "Ceramic",
+    "plates": "Front, Back",
+    "grid": "3×4",
+    "weight": 8.9,
+    "source": "Looting",
+    "category": "plate_carriers"
+  },
+  {
+    "name": "Buran's Pantsir 2.0",
+    "nij": "III++",
+    "material": "Ceramic",
+    "plates": "Front, Back, Sides",
+    "grid": "3×3",
+    "weight": 9.6,
+    "source": "Looting",
+    "category": "plate_carriers"
+  },
+  {
+    "name": "Yen's Pantsir 2.0",
+    "nij": "III++",
+    "material": "Ceramic",
+    "plates": "Front, Back, Sides",
+    "grid": "3×3",
+    "weight": 9.6,
+    "source": "Looting",
+    "category": "plate_carriers"
+  },
+  {
+    "name": "Phantom Type 2",
+    "nij": "III++",
+    "material": "Ceramic",
+    "plates": "Front, Back, Sides",
+    "grid": "4×3",
+    "weight": 13.2,
+    "source": "Turncoat R.4",
+    "category": "plate_carriers"
+  }
+]
