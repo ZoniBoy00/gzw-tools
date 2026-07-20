@@ -113,7 +113,7 @@
 <div id="sidebar">
   <div>
     <h1>GZW Map Calibration</h1>
-    <p class="sub">1. Valitse IGN-kuva. 2. Klikkaa POI nimeä listasta, klikkaa sen oikea sijainti kartalta (zoomaa tarkkuuden parantamiseksi). 3. Toista vähintään 4-5 pisteelle. 4. Laske kalibrointi. 5. Kopioi koodi + liitä MapView.tsx:ään.</p>
+    <p class="sub">1. Valitse POI listasta. 2. Klikkaa sen oikea sijainti kartalta. 3. Toista vähintään 4-5 pisteelle. 4. Laske kalibrointi. 5. Kopioi koodi.</p>
   </div>
 
   <div class="field">
@@ -126,9 +126,9 @@
   </div>
 
   <div class="field">
-    <label>Zoom <span id="zoomVal">100%</span></label>
+    <label>Zoom <span id="zoomVal">150%</span></label>
     <div id="zoomRow">
-      <input type="range" id="zoom" min="20" max="400" value="100">
+      <input type="range" id="zoom" min="20" max="500" value="150">
     </div>
   </div>
 
@@ -141,17 +141,17 @@
     </div>
   </div>
 
-  <div id="status">Lataa kuva, valitse POI ja klikkaa sen sijainti kartalta.</div>
+  <div id="status">Lataa kuva, valitse POI ja klikkaa sen sijainti.</div>
 
   <button onclick="calibrate()">Laske kalibrointi</button>
 
   <div id="result" style="display:none;">
     <div class="field">
-      <label>Tarkkuus (residuaalit, px)</label>
+      <label>Tarkkuus (px-virhe per piste)</label>
       <div id="residuals"></div>
     </div>
     <div class="field">
-      <label>Valmis koodi (korvaa parseGrid + päivitä MouseTracker/GridOverlay)</label>
+      <label>Valmis koodi (korvaa parseGrid + päivitä GridOverlay/MouseTracker)</label>
       <pre id="codeOut"></pre>
       <button class="secondary" onclick="copyCode()">Kopioi koodi</button>
     </div>
@@ -172,8 +172,6 @@ let pois = [
   { name: "Midnight Sapphire", grid: [171,166] },
   { name: "Fort Narith", grid: [143,129] },
   { name: "Tiger Bay", grid: [198,130] },
-  { name: "Ground Zero", grid: [170,140] },
-  { name: "UNLRA HQ", grid: [189,142] },
 ].map(p => ({ ...p, px: null }));
 
 let activeIdx = 0;
@@ -192,10 +190,19 @@ function loadImage() {
     naturalW = img.naturalWidth;
     naturalH = img.naturalHeight;
     applyZoom();
-    setStatus(`Kuva ladattu (${naturalW}×${naturalH}px). Valitse POI ja klikkaa sijainti kartalta.`, '');
+    setStatus(`Ladattu ${naturalW}×${naturalH}px. Valitse POI ja klikkaa sijainti.`, '');
     renderPins();
   };
-  img.onerror = () => setStatus('Kuvan lataus epäonnistui — tarkista URL tai CORS.', 'err');
+  img.onerror = () => {
+    if (!url.includes('width=')) {
+      setStatus('Alkuperäinen ei latautunut, kokeillaan width=2000-versiota...', '');
+      const fallback = url + (url.includes('?') ? '&' : '?') + 'width=2000&quality=100';
+      document.getElementById('imgUrl').value = fallback;
+      img.src = fallback;
+    } else {
+      setStatus('Kuvan lataus epäonnistui — tarkista URL.', 'err');
+    }
+  };
   img.src = url;
 }
 
@@ -220,7 +227,7 @@ mapPane.addEventListener('click', (e) => {
   const next = pois.findIndex(p => p.px === null);
   if (next !== -1) activeIdx = next;
   renderPoiList();
-  setStatus(`"${pois[activeIdx].name}" merkitty kuvapisteeseen (${px}, ${py}).`, 'ok');
+  setStatus(`"${pois[activeIdx >= 0 ? activeIdx : 0].name}" → (${px}, ${py}). Seuraava: ${next !== -1 ? pois[next].name : 'kaikki valmiina!'}`, 'ok');
 });
 
 function renderPins() {
@@ -259,7 +266,7 @@ function selectPoi(i) { activeIdx = i; renderPoiList(); }
 function addCustomPoi() {
   const name = prompt('Paikan nimi:');
   if (!name) return;
-  const gridStr = prompt('Grid-koordinaatti (esim. 150:130):');
+  const gridStr = prompt('Grid (esim. 150:130):');
   if (!gridStr || !gridStr.includes(':')) return;
   const [gx, gy] = gridStr.split(':').map(Number);
   pois.push({ name, grid: [gx, gy], px: null });
@@ -270,15 +277,13 @@ function addCustomPoi() {
 function clearAll() {
   pois.forEach(p => p.px = null);
   activeIdx = 0;
-  renderPins();
-  renderPoiList();
+  renderPins(); renderPoiList();
   document.getElementById('result').style.display = 'none';
-  setStatus('Kaikki pisteet tyhjennetty. Valitse POI ja klikkaa sen sijainti.', '');
+  setStatus('Tyhjennetty.', '');
 }
 
 function setStatus(msg, cls) {
-  status.textContent = msg;
-  status.className = cls;
+  status.textContent = msg; status.className = cls;
 }
 
 function linreg(xs, ys) {
@@ -297,67 +302,52 @@ function linreg(xs, ys) {
 function calibrate() {
   const marked = pois.filter(p => p.px);
   if (marked.length < 2) {
-    setStatus('Tarvitset vähintään 2 merkittyä pistettä (suositus 5+).', 'err');
+    setStatus('Tarvitset vähintään 2 pistettä (suositus 5+).', 'err');
     return;
   }
   const gx = marked.map(p => p.grid[0]);
   const gy = marked.map(p => p.grid[1]);
   const pxArr = marked.map(p => p.px[0]);
   const pyArr = marked.map(p => p.px[1]);
-
   const rx = linreg(gx, pxArr);
   const ry = linreg(gy, pyArr);
-
   if (!rx || !ry) {
-    setStatus('Kalibrointi epäonnistui (kaikki pisteet samalla x- tai y-arvolla?).', 'err');
+    setStatus('Kalibrointi epäonnistui.', 'err');
     return;
   }
 
   const resHtml = marked.map(p => {
     const predX = rx.m * p.grid[0] + rx.b;
     const predY = ry.m * p.grid[1] + ry.b;
-    const errX = predX - p.px[0];
-    const errY = predY - p.px[1];
-    const dist = Math.sqrt(errX*errX + errY*errY);
-    const cls = dist > 15 ? 'bad' : '';
-    return `<div class="residual ${cls}">${p.name}: ${dist.toFixed(1)} px virhe (grid ${p.grid[0]}:${p.grid[1]})</div>`;
+    const dist = Math.sqrt((predX-p.px[0])**2 + (predY-p.px[1])**2);
+    return `<div class="residual ${dist > 15 ? 'bad' : ''}">${p.name}: ${dist.toFixed(1)}px (grid ${p.grid[0]}:${p.grid[1]})</div>`;
   }).join('');
   document.getElementById('residuals').innerHTML = resHtml;
 
-  const code = `// Kalibroitu ${marked.length} pisteestä — korvaa nykyiset GRID_MIN/MAX ja parseGrid
+  const code = `// Kalibroitu ${marked.length} pisteestä
 const SCALE_X = ${rx.m.toFixed(6)};
 const OFFSET_X = ${rx.b.toFixed(2)};
 const SCALE_Y = ${ry.m.toFixed(6)};
 const OFFSET_Y = ${ry.b.toFixed(2)};
 
-// Grid-koordinaatti (esim. "141:164") → Leaflet-pikseli [y, x]
 function parseGrid(g) {
   const [x, y] = g.replace(/\\s/g, '').split(':').map(Number);
-  const px = SCALE_X * x + OFFSET_X;
-  const py = SCALE_Y * y + OFFSET_Y;
-  return [py, px];
+  return [SCALE_Y * y + OFFSET_Y, SCALE_X * x + OFFSET_X];
 }
 
-// Pikseli → grid-koordinaatti (MouseTracker, GridOverlay, Popupit)
 function pixelToGrid(lx, ly) {
-  const gx = Math.round((lx - OFFSET_X) / SCALE_X);
-  const gy = Math.round((ly - OFFSET_Y) / SCALE_Y);
-  return [gx, gy];
-}
-
-// Poista nämä käytöstä:
-// GRID_MIN_X, GRID_MAX_X, GRID_MIN_Y, GRID_MAX_Y
-// DATA_RANGE_X, DATA_RANGE_Y`;
+  return [Math.round((lx - OFFSET_X) / SCALE_X), Math.round((ly - OFFSET_Y) / SCALE_Y)];
+}`;
   document.getElementById('codeOut').textContent = code;
   document.getElementById('result').style.display = 'flex';
   document.getElementById('result').style.flexDirection = 'column';
   document.getElementById('result').style.gap = '10px';
-  setStatus(`Kalibroitu ${marked.length} pisteestä. Tarkista residuaalit — jos jokin erottuu paljon, klikkasit sen väärään kohtaan.`, marked.length >= 4 ? 'ok' : '');
+  setStatus(`Kalibroitu ${marked.length} pisteestä. Tarkista residuaalit.`, marked.length >= 4 ? 'ok' : '');
 }
 
 function copyCode() {
   navigator.clipboard.writeText(document.getElementById('codeOut').textContent);
-  setStatus('Koodi kopioitu leikepöydälle.', 'ok');
+  setStatus('Koodi kopioitu!', 'ok');
 }
 
 renderPoiList();

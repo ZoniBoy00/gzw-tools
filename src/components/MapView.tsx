@@ -8,12 +8,13 @@ import 'leaflet/dist/leaflet.css';
 import mapData from '../data/map_data.json';
 
 /* ── Constants ── */
-const GRID_MIN_X = 90;
-const GRID_MAX_X = 230;
-const GRID_MIN_Y = 90;
-const GRID_MAX_Y = 190;
-const DATA_RANGE_X = GRID_MAX_X - GRID_MIN_X; // 140
-const DATA_RANGE_Y = GRID_MAX_Y - GRID_MIN_Y; // 100
+// Actual data ranges from the wiki data (not guessed)
+const GRID_MIN_X = 133;
+const GRID_MAX_X = 209;
+const GRID_MIN_Y = 107;
+const GRID_MAX_Y = 172;
+const DATA_RANGE_X = GRID_MAX_X - GRID_MIN_X; // 76
+const DATA_RANGE_Y = GRID_MAX_Y - GRID_MIN_Y; // 65
 
 // IGN clean map (814×455, resized for fast loading)
 const MAP_W = 814;
@@ -58,10 +59,11 @@ const GROUP_LABELS: Record<string, string> = {
 
 /* ── Coordinate helpers ── */
 // Convert wiki grid "X:Y" (e.g. "141:164") to Leaflet pixel position [y, x]
+// World Y goes north (up) but Leaflet Y goes south (down), so we flip Y
 function parseGrid(g: string): [number, number] {
   const [x, y] = g.replace(/\s/g, '').split(':').map(Number);
   const px = ((x - GRID_MIN_X) / DATA_RANGE_X) * MAP_W;
-  const py = ((y - GRID_MIN_Y) / DATA_RANGE_Y) * MAP_H;
+  const py = MAP_H - ((y - GRID_MIN_Y) / DATA_RANGE_Y) * MAP_H;
   return [py, px];
 }
 
@@ -149,7 +151,7 @@ function MouseTracker({ onMove, onZoom }: { onMove: (g: [number, number]) => voi
   useMapEvents({
     mousemove: (e) => {
       const gx = Math.round((e.latlng.lng / MAP_W) * DATA_RANGE_X + GRID_MIN_X);
-      const gy = Math.round((e.latlng.lat / MAP_H) * DATA_RANGE_Y + GRID_MIN_Y);
+      const gy = Math.round(((MAP_H - e.latlng.lat) / MAP_H) * DATA_RANGE_Y + GRID_MIN_Y);
       if (gx >= GRID_MIN_X && gx <= GRID_MAX_X && gy >= GRID_MIN_Y && gy <= GRID_MAX_Y) {
         onMove([gx, gy]);
       }
@@ -376,7 +378,7 @@ export default function MapView() {
                 <div className="map-popup">
                   <div className="map-popup-header"><i className={m.icon} style={{ color: m.color }} /><span>{m.name}</span></div>
                   {m.desc && <div className="map-popup-desc">{m.desc}</div>}
-                  <div className="map-popup-grid">Grid: {Math.round((m.pos[1] / MAP_W) * DATA_RANGE_X + GRID_MIN_X)}:{Math.round((m.pos[0] / MAP_H) * DATA_RANGE_Y + GRID_MIN_Y)}</div>
+                  <div className="map-popup-grid">Grid: {Math.round((m.pos[1] / MAP_W) * DATA_RANGE_X + GRID_MIN_X)}:{Math.round(((MAP_H - m.pos[0]) / MAP_H) * DATA_RANGE_Y + GRID_MIN_Y)}</div>
                 </div>
               </Popup>
             </Marker>
