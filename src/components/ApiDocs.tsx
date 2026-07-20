@@ -28,7 +28,7 @@ const ENDPOINTS: Endpoint[] = [
   {
     method: 'GET',
     path: '/api/vendors',
-    desc: 'Returns all six GZW vendors with their current reputation, max rep, and descriptions.',
+    desc: 'Returns all seven GZW vendors with their current reputation, max rep, and descriptions.',
     params: [],
     example: `{\n  "data": [\n    {\n      "name": "Handshake",\n      "slug": "handshake",\n      "currentRep": 7277,\n      "maxRep": 13000,\n      "description": "Early missions & gear"\n    },\n    {\n      "name": "Gunny",\n      "slug": "gunny",\n      "currentRep": 5000,\n      "maxRep": 13000,\n      "description": "Ammo & Weapon Mods"\n    }\n  ]\n}`,
     group: 'Data',

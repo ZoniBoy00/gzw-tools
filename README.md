@@ -14,9 +14,6 @@
 | **Overview** | Dashboard with quick stats, rep progress, gear recommendations |
 | **Rep → $** | Calculate cost to reach a target reputation |
 | **$ → Rep** | Calculate how much rep you can buy with your budget |
-| **Overview** | Dashboard with quick stats, rep progress, gear recommendations |
-| **Rep → $** | Calculate cost to reach a target reputation |
-| **$ → Rep** | Calculate how much rep you can buy with your budget |
 | **Missions** | Browse 159 missions from 7 vendors — search, filter, expand |
 | **Ammo** | Full ammo database with caliber, pen values, vendor sources |
 | **Weapons** | Weapons database with compare mode, filters, detail modals |
