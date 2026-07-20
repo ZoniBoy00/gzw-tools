@@ -23,7 +23,7 @@
 | **Vendors** | Vendor guide with rep tracking, per-rank item lists, unlock status (7 vendors) |
 | **Loadouts** | Build and save weapon loadouts in your browser |
 | **Log Analyzer** | Parse GZW.log files to extract match data |
-| **API** | REST API for all game data |
+| **API** | [gzw-data.vercel.app](https://gzw-data.vercel.app) — public game data API |
 
 ## Tech Stack
 
@@ -52,7 +52,7 @@ curl https://gzw-data.vercel.app/api/armor
 curl https://gzw-data.vercel.app/api/keys?location=Ban%20Pa
 ```
 
-Full API docs with Swagger UI: **[gzw-data.vercel.app](https://gzw-data.vercel.app)**
+Full API docs with interactive test page: **[gzw-data.vercel.app](https://gzw-data.vercel.app)**
 
 All endpoints return JSON with CORS headers, rate limiting (100 req/min), and filtering support.
 
@@ -87,15 +87,13 @@ npm run build
 ## Project Structure
 
 ```
-├── api/                  # Vercel serverless function (REST API)
-│   └── index.js
 ├── src/
 │   ├── components/       # React components
 │   │   └── ui/          # Shared UI components (TabBar, ItemModal)
 │   ├── data/            # Game data JSON (synced from gzw-data)
 │   ├── lib/             # Utilities (calculators, vendor tracker)
 │   └── App.tsx          # Root component with routing
-├── .github/workflows/   # GitHub Actions (data sync from gzw-data)
+├── .github/workflows/   # Data sync from gzw-data
 └── vercel.json          # Vercel deployment config
 ```
 
