@@ -1,13 +1,10 @@
-import { useState, useMemo, useEffect, useRef } from 'react';
+import { useState, useMemo, useEffect } from 'react';
 import {
   MapContainer, ImageOverlay, Marker, Popup, Polyline,
   useMap, useMapEvents,
 } from 'react-leaflet';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
-import 'leaflet.markercluster/dist/MarkerCluster.Default.css';
-import 'leaflet.markercluster/dist/MarkerCluster.css';
-import MarkerClusterGroup from 'react-leaflet-cluster';
 import mapData from '../data/map_data.json';
 
 /* ── Constants ── */
@@ -18,7 +15,7 @@ const GRID_MAX_Y = 190;
 const DATA_RANGE_X = GRID_MAX_X - GRID_MIN_X; // 140
 const DATA_RANGE_Y = GRID_MAX_Y - GRID_MIN_Y; // 100
 
-// Image pixel dimensions (IGN map: 1657×927) — clean, no UI overlays
+// IGN clean map dimensions (no UI overlays)
 const MAP_W = 1657;
 const MAP_H = 927;
 
@@ -60,14 +57,12 @@ const GROUP_LABELS: Record<string, string> = {
 };
 
 /* ── Coordinate helpers ── */
-
 // Convert wiki grid "X:Y" (e.g. "141:164") to Leaflet pixel position [y, x]
-// Uses proportional mapping: grid (90-230, 90-190) → image pixels (0-1861, 0-936)
 function parseGrid(g: string): [number, number] {
   const [x, y] = g.replace(/\s/g, '').split(':').map(Number);
   const px = ((x - GRID_MIN_X) / DATA_RANGE_X) * MAP_W;
   const py = ((y - GRID_MIN_Y) / DATA_RANGE_Y) * MAP_H;
-  return [py, px]; // Leaflet CRS.Simple: [y, x]
+  return [py, px];
 }
 
 /* ── Marker icon factory (pin-style) ── */
@@ -78,69 +73,38 @@ function createIcon(color: string, size: number, icon?: string, label?: string, 
   const pinH = Math.round(iconSize * 0.28);
   const totalH = iconSize + pinH;
   const labelHtml = label && icon
-    ? `<span style="
-        position:absolute;top:-10px;left:50%;transform:translateX(-50%);
-        font-size:7px;font-weight:700;font-family:'Rajdhani',sans-serif;
-        color:#fff;text-shadow:0 1px 6px rgba(0,0,0,0.9);
-        white-space:nowrap;letter-spacing:0.3px;
-        background:${color}cc;padding:1px 5px;border-radius:2px;
-        backdrop-filter:blur(4px);border:1px solid rgba(255,255,255,0.15);
-      ">${label}</span>`
+    ? `<span style="position:absolute;top:-10px;left:50%;transform:translateX(-50%);font-size:7px;font-weight:700;font-family:'Rajdhani',sans-serif;color:#fff;text-shadow:0 1px 6px rgba(0,0,0,0.9);white-space:nowrap;letter-spacing:0.3px;background:${color}cc;padding:1px 5px;border-radius:2px;backdrop-filter:blur(4px);border:1px solid rgba(255,255,255,0.15);">${label}</span>`
     : '';
   const nameHtml = showName
-    ? `<span style="
-        position:absolute;top:${totalH - 2}px;left:50%;transform:translateX(-50%);
-        font-size:8px;font-weight:700;font-family:'Rajdhani',sans-serif;
-        color:#fff;text-shadow:0 1px 8px rgba(0,0,0,0.95),0 0 4px rgba(0,0,0,0.8);
-        white-space:nowrap;letter-spacing:0.5px;
-        text-transform:uppercase;
-        background:rgba(0,0,0,0.5);padding:1px 6px;border-radius:2px;
-        border:1px solid rgba(255,255,255,0.1);
-      ">${showName}</span>`
+    ? `<span style="position:absolute;top:${totalH - 2}px;left:50%;transform:translateX(-50%);font-size:8px;font-weight:700;font-family:'Rajdhani',sans-serif;color:#fff;text-shadow:0 1px 8px rgba(0,0,0,0.95),0 0 4px rgba(0,0,0,0.8);white-space:nowrap;letter-spacing:0.5px;text-transform:uppercase;background:rgba(0,0,0,0.5);padding:1px 6px;border-radius:2px;border:1px solid rgba(255,255,255,0.1);">${showName}</span>`
     : '';
   return L.divIcon({
     className: '',
-    html: `<div style="position:relative;width:${iconSize + 8}px;height:${totalH + 24}px;">
-      ${labelHtml}
-      <div style="
-        width:${iconSize}px;height:${iconSize}px;
-        background:${color};
-        border:${borderW}px solid rgba(255,255,255,0.3);
-        border-radius:50% 50% 50% 0;
-        transform:rotate(-45deg);
-        box-shadow:0 2px 8px rgba(0,0,0,0.5), 0 0 12px ${color}66;
-        display:flex;align-items:center;justify-content:center;
-        position:absolute;top:0;left:4px;
-      ">
-        <div style="transform:rotate(45deg);display:flex;align-items:center;justify-content:center;width:100%;height:100%;">
-          ${icon ? `<i class="${icon}" style="font-size:${iconF}px;color:#fff;text-shadow:0 1px 3px rgba(0,0,0,0.6);"></i>`
-            : label ? `<span style="font-size:${iconF - 2}px;font-weight:700;color:#fff;font-family:'Rajdhani','JetBrains Mono',monospace;text-shadow:0 1px 3px rgba(0,0,0,0.6);">${label}</span>` : ''}
-        </div>
-      </div>
-      ${nameHtml}
-    </div>`,
+    html: `<div style="position:relative;width:${iconSize + 8}px;height:${totalH + 24}px;">${labelHtml}<div style="width:${iconSize}px;height:${iconSize}px;background:${color};border:${borderW}px solid rgba(255,255,255,0.3);border-radius:50% 50% 50% 0;transform:rotate(-45deg);box-shadow:0 2px 8px rgba(0,0,0,0.5), 0 0 12px ${color}66;display:flex;align-items:center;justify-content:center;position:absolute;top:0;left:4px;"><div style="transform:rotate(45deg);display:flex;align-items:center;justify-content:center;width:100%;height:100%;">${icon ? `<i class="${icon}" style="font-size:${iconF}px;color:#fff;text-shadow:0 1px 3px rgba(0,0,0,0.6);"></i>` : label ? `<span style="font-size:${iconF-2}px;font-weight:700;color:#fff;font-family:'Rajdhani','JetBrains Mono',monospace;text-shadow:0 1px 3px rgba(0,0,0,0.6);">${label}</span>` : ''}</div></div>${nameHtml}</div>`,
     iconSize: [iconSize + 8, totalH + 24],
     iconAnchor: [iconSize / 2 + 4, totalH],
     popupAnchor: [0, -totalH - 24],
   });
 }
 
-/* ── Fit map bounds on mount ── */
+/* ── Fit map bounds on mount with a small delay to ensure container is ready ── */
 function FitBounds() {
   const map = useMap();
-  useEffect(() => { map.fitBounds([[0, 0], [MAP_H, MAP_W]]); }, [map]);
+  useEffect(() => {
+    setTimeout(() => {
+      map.fitBounds([[0, 0], [MAP_H, MAP_W]], { padding: [20, 20] });
+    }, 100);
+  }, [map]);
   return null;
 }
 
 /* ── Grid overlay ── */
 function GridOverlay() {
   const lines: { from: [number, number]; to: [number, number] }[] = [];
-  // Vertical lines (every 10 units in data coordinates)
   for (let gx = 100; gx <= 220; gx += 10) {
     const lx = ((gx - GRID_MIN_X) / DATA_RANGE_X) * MAP_W;
     lines.push({ from: [0, lx], to: [MAP_H, lx] });
   }
-  // Horizontal lines (every 10 units)
   for (let gy = 100; gy <= 180; gy += 10) {
     const ly = ((gy - GRID_MIN_Y) / DATA_RANGE_Y) * MAP_H;
     lines.push({ from: [ly, 0], to: [ly, MAP_W] });
@@ -148,7 +112,7 @@ function GridOverlay() {
   return (
     <>
       {lines.map((l, i) => (
-        <Polyline key={i} positions={[l.from, l.to]} color="rgba(255,255,255,0.07)" weight={1} interactive={false} />
+        <Polyline key={i} positions={[l.from, l.to]} color="rgba(255,255,255,0.08)" weight={1} interactive={false} />
       ))}
     </>
   );
@@ -156,25 +120,23 @@ function GridOverlay() {
 
 /* ── Grid labels on edges ── */
 function GridLabels() {
-  const labels: { pos: [number, number]; text: string; isX: boolean }[] = [];
-  // X-axis labels (top edge)
+  const labels: { pos: [number, number]; text: string }[] = [];
   for (let gx = 100; gx <= 220; gx += 10) {
     const lx = ((gx - GRID_MIN_X) / DATA_RANGE_X) * MAP_W;
-    labels.push({ pos: [MAP_H + 2, lx], text: `${gx}`, isX: true });
+    labels.push({ pos: [MAP_H + 14, lx], text: `${gx}` });
   }
-  // Y-axis labels (left edge)
   for (let gy = 100; gy <= 180; gy += 10) {
     const ly = ((gy - GRID_MIN_Y) / DATA_RANGE_Y) * MAP_H;
-    labels.push({ pos: [ly, -2], text: `${gy}`, isX: false });
+    labels.push({ pos: [ly, -14], text: `${gy}` });
   }
   return (
     <>
       {labels.map((l, i) => {
         const icon = L.divIcon({
           className: '',
-          html: `<span style="font-size:8px;font-family:'JetBrains Mono',monospace;color:rgba(255,255,255,0.25);text-shadow:0 0 6px rgba(0,0,0,0.9);">${l.text}</span>`,
-          iconSize: [24, 10],
-          iconAnchor: l.isX ? [12, 0] : [0, 5],
+          html: `<span style="font-size:9px;font-family:'JetBrains Mono',monospace;color:rgba(255,255,255,0.5);text-shadow:0 0 8px rgba(0,0,0,0.95);font-weight:600;">${l.text}</span>`,
+          iconSize: [32, 14],
+          iconAnchor: i < 13 ? [16, 0] : [0, 7],
         });
         return <Marker key={i} position={l.pos} icon={icon} interactive={false} />;
       })}
@@ -186,7 +148,6 @@ function GridLabels() {
 function MouseTracker({ onMove, onZoom }: { onMove: (g: [number, number]) => void; onZoom: (z: number) => void }) {
   useMapEvents({
     mousemove: (e) => {
-      // e.latlng is [y, x] in CRS.Simple
       const gx = Math.round((e.latlng.lng / MAP_W) * DATA_RANGE_X + GRID_MIN_X);
       const gy = Math.round((e.latlng.lat / MAP_H) * DATA_RANGE_Y + GRID_MIN_Y);
       if (gx >= GRID_MIN_X && gx <= GRID_MAX_X && gy >= GRID_MIN_Y && gy <= GRID_MAX_Y) {
@@ -198,7 +159,7 @@ function MouseTracker({ onMove, onZoom }: { onMove: (g: [number, number]) => voi
   return null;
 }
 
-/* ── Type for flat marker list ── */
+/* ── Types ── */
 interface MarkerItem {
   pos: [number, number];
   name: string;
@@ -214,21 +175,18 @@ interface MarkerItem {
 /* ── MapView component ── */
 export default function MapView() {
   const [filter, setFilter] = useState('all');
-  const [showGrid, setShowGrid] = useState(false);
+  const [showGrid, setShowGrid] = useState(true);
   const [cursorGrid, setCursorGrid] = useState<[number, number] | null>(null);
   const [zoom, setZoom] = useState(0);
   const [searchQuery, setSearchQuery] = useState('');
   const [isFullscreen, setIsFullscreen] = useState(false);
-  const mapContainerRef = useRef<HTMLDivElement>(null);
 
-  /* Track fullscreen changes */
   useEffect(() => {
     const handler = () => setIsFullscreen(!!document.fullscreenElement);
     document.addEventListener('fullscreenchange', handler);
     return () => document.removeEventListener('fullscreenchange', handler);
   }, []);
 
-  /* Toggle fullscreen */
   const toggleFullscreen = () => {
     if (!document.fullscreenElement) {
       document.documentElement.requestFullscreen?.();
@@ -237,12 +195,12 @@ export default function MapView() {
     }
   };
 
-  /* Build markers from map_data.json */
+  /* Build markers */
   const markers = useMemo(() => {
     const result: MarkerItem[] = [];
     const show = (f: string) => filter === 'all' || filter === f;
 
-    /* Towns / cities / POIs */
+    /* Towns / POIs */
     if (show('town') || show('poi') || show('all')) {
       for (const poi of mapData.majorPOIs) {
         const cat = poi.type === 'city' || poi.type === 'town' ? 'town' : 'poi';
@@ -264,27 +222,10 @@ export default function MapView() {
     /* COPs */
     if (show('cop')) {
       for (const cop of mapData.majorCOPs || []) {
-        result.push({
-          pos: parseGrid(cop.grid),
-          name: cop.name,
-          desc: 'Major Combat Outpost',
-          color: COLORS.cop_major,
-          icon: 'fas fa-shield-halved',
-          size: 22,
-          label: cop.name,
-          category: 'cop',
-        });
+        result.push({ pos: parseGrid(cop.grid), name: cop.name, desc: 'Major Combat Outpost', color: COLORS.cop_major, icon: 'fas fa-shield-halved', size: 22, label: cop.name, category: 'cop' });
       }
       for (const cop of mapData.minorCOPs || []) {
-        result.push({
-          pos: parseGrid(cop.grid),
-          name: cop.name,
-          desc: `Minor COP (${cop.region})`,
-          color: COLORS.cop_minor,
-          icon: 'fas fa-shield',
-          size: 16,
-          category: 'cop',
-        });
+        result.push({ pos: parseGrid(cop.grid), name: cop.name, desc: `Minor COP (${cop.region})`, color: COLORS.cop_minor, icon: 'fas fa-shield', size: 16, category: 'cop' });
       }
     }
 
@@ -292,52 +233,27 @@ export default function MapView() {
     if (show('lz')) {
       for (const lz of (mapData as any).landingZones || []) {
         if (!lz.grid) continue;
-        result.push({
-          pos: parseGrid(lz.grid),
-          name: lz.name,
-          desc: `LZ (${lz.region})`,
-          color: COLORS.lz,
-          icon: 'fas fa-helicopter',
-          size: 22,
-          label: lz.name,
-          category: 'lz',
-        });
+        result.push({ pos: parseGrid(lz.grid), name: lz.name, desc: `LZ (${lz.region})`, color: COLORS.lz, icon: 'fas fa-helicopter', size: 22, label: lz.name, category: 'lz' });
       }
     }
 
-    /* Key locations */
+    /* Keys (skip null grid) */
     if (show('key')) {
       for (const k of (mapData as any).keyLocations || []) {
         if (!k.grid) continue;
-        result.push({
-          pos: parseGrid(k.grid),
-          name: k.name,
-          desc: `Key spawn (${k.region})`,
-          color: COLORS.key,
-          icon: 'fas fa-key',
-          size: 16,
-          category: 'key',
-        });
+        result.push({ pos: parseGrid(k.grid), name: k.name, desc: `Key spawn (${k.region})`, color: COLORS.key, icon: 'fas fa-key', size: 16, category: 'key' });
       }
     }
 
-    /* Minor POIs / Places */
+    /* Minor POIs */
     if (show('places')) {
       for (const p of (mapData as any).minorPOIs || []) {
         if (!p.grid) continue;
-        result.push({
-          pos: parseGrid(p.grid),
-          name: p.name,
-          desc: p.region,
-          color: '#6b7280',
-          icon: 'fas fa-circle',
-          size: 10,
-          category: 'places',
-        });
+        result.push({ pos: parseGrid(p.grid), name: p.name, desc: p.region, color: '#6b7280', icon: 'fas fa-circle', size: 10, category: 'places' });
       }
     }
 
-    /* Tasks (grouped by area) */
+    /* Tasks */
     if (show('task')) {
       const taskCounts: Record<string, string[]> = {};
       for (const t of (mapData as any).tasks || []) {
@@ -346,24 +262,14 @@ export default function MapView() {
       }
       for (const poi of mapData.majorPOIs) {
         const areaKey = poi.name.toLowerCase();
-        const entry = Object.entries(taskCounts).find(([k]) =>
-          k.toLowerCase().includes(areaKey) || areaKey.includes(k.toLowerCase())
-        );
+        const entry = Object.entries(taskCounts).find(([k]) => k.toLowerCase().includes(areaKey) || areaKey.includes(k.toLowerCase()));
         if (entry && entry[1].length > 0) {
-          result.push({
-            pos: parseGrid(poi.grid),
-            name: `${entry[1].length} tasks`,
-            desc: `${poi.name}: ${entry[1].slice(0, 6).join(', ')}${entry[1].length > 6 ? '…' : ''}`,
-            color: COLORS.task,
-            icon: 'fas fa-clipboard-list',
-            size: 18,
-            category: 'task',
-          });
+          result.push({ pos: parseGrid(poi.grid), name: `${entry[1].length} tasks`, desc: `${poi.name}: ${entry[1].slice(0, 6).join(', ')}${entry[1].length > 6 ? '…' : ''}`, color: COLORS.task, icon: 'fas fa-clipboard-list', size: 18, category: 'task' });
         }
       }
     }
 
-    // Deduplicate overlapping positions
+    // Deduplicate
     const seen = new Set<string>();
     return result.filter((m) => {
       const k = `${m.pos[0]},${m.pos[1]}`;
@@ -373,27 +279,22 @@ export default function MapView() {
     });
   }, [filter]);
 
-  /* Search-filtered markers */
+  /* Search-filtered */
   const filteredMarkers = useMemo(() => {
     if (!searchQuery.trim()) return markers;
     const q = searchQuery.toLowerCase();
-    return markers.filter((m) =>
-      m.name.toLowerCase().includes(q) ||
-      (m.desc && m.desc.toLowerCase().includes(q))
-    );
+    return markers.filter((m) => m.name.toLowerCase().includes(q) || (m.desc && m.desc.toLowerCase().includes(q)));
   }, [markers, searchQuery]);
 
-  /* Counts per category */
+  /* Counts */
   const counts = useMemo(() => {
     const c: Record<string, number> = {};
-    for (const m of markers) {
-      c[m.category] = (c[m.category] || 0) + 1;
-    }
+    for (const m of markers) { c[m.category] = (c[m.category] || 0) + 1; }
     c['all'] = markers.length;
     return c;
   }, [markers]);
 
-  /* Groups for sidebar rendering */
+  /* Groups for sidebar */
   const groups = useMemo(() => {
     const g: { group: string; cats: FilterCategory[] }[] = [];
     for (const cat of CATEGORIES) {
@@ -405,55 +306,32 @@ export default function MapView() {
     return g;
   }, []);
 
-  /* ── Render ── */
   return (
-    <div className="map-layout" ref={mapContainerRef}>
-      {/* ── Sidebar ── */}
+    <div className="map-layout">
+      {/* Sidebar */}
       <aside className="map-sidebar">
         <div className="map-sidebar-header">
           <i className="fas fa-layer-group text-[10px] text-accent" />
           <span>Layers</span>
         </div>
 
-        {/* Search */}
         <div className="map-search-wrap">
           <i className="fas fa-search map-search-icon" />
-          <input
-            type="text"
-            className="map-search-input"
-            placeholder="Search locations..."
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-          />
-          {searchQuery && (
-            <button className="map-search-clear" onClick={() => setSearchQuery('')}>
-              <i className="fas fa-times" />
-            </button>
-          )}
+          <input type="text" className="map-search-input" placeholder="Search locations..." value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} />
+          {searchQuery && <button className="map-search-clear" onClick={() => setSearchQuery('')}><i className="fas fa-times" /></button>}
         </div>
 
-        {/* Show All / Hide All */}
         <div className="map-bulk-toggle">
-          <button onClick={() => setFilter('all')} className={`map-bulk-btn ${filter === 'all' ? 'active' : ''}`}>
-            <i className="fas fa-eye" /> SHOW ALL
-          </button>
-          <button onClick={() => setFilter('__none__')} className={`map-bulk-btn ${filter === '__none__' ? 'active' : ''}`}>
-            <i className="fas fa-eye-slash" /> HIDE ALL
-          </button>
+          <button onClick={() => setFilter('all')} className={`map-bulk-btn ${filter === 'all' ? 'active' : ''}`}><i className="fas fa-eye" /> SHOW ALL</button>
+          <button onClick={() => setFilter('__none__')} className={`map-bulk-btn ${filter === '__none__' ? 'active' : ''}`}><i className="fas fa-eye-slash" /> HIDE ALL</button>
         </div>
 
-        {/* Category groups */}
         <nav className="map-sidebar-nav">
           {groups.map((g) => (
             <div key={g.group} className="map-group">
-              <div className="map-group-label">{GROUP_LABELS[g.group] || g.group}</div>
+              <div className="map-group-label">{GROUP_LABELS[g.group]}</div>
               {g.cats.map((cat) => (
-                <button
-                  key={cat.key}
-                  onClick={() => setFilter(cat.key)}
-                  className={`map-filter-btn ${filter === cat.key ? 'active' : ''}`}
-                >
-                  <span className="map-filter-dot" style={{ background: cat.color }} />
+                <button key={cat.key} onClick={() => setFilter(cat.key)} className={`map-filter-btn ${filter === cat.key ? 'active' : ''}`}>
                   <i className={cat.icon} style={{ color: cat.color }} />
                   <span className="map-filter-label">{cat.label}</span>
                   <span className="map-filter-count">{counts[cat.key] || 0}</span>
@@ -466,22 +344,19 @@ export default function MapView() {
         <div className="map-sidebar-footer">
           <label className="map-toggle-row">
             <input type="checkbox" checked={showGrid} onChange={() => setShowGrid(!showGrid)} className="map-toggle-checkbox" />
-            <span className="map-toggle-track">
-              <span className={`map-toggle-thumb ${showGrid ? 'on' : ''}`} />
-            </span>
+            <span className="map-toggle-track"><span className={`map-toggle-thumb ${showGrid ? 'on' : ''}`} /></span>
             <span className="map-toggle-label">Grid</span>
           </label>
         </div>
       </aside>
 
-      {/* ── Map canvas ── */}
+      {/* Map canvas */}
       <div className="map-canvas">
         <MapContainer
           center={[MAP_H / 2, MAP_W / 2]}
           zoom={0}
-          maxZoom={8}
-          minZoom={-1}
-          maxBounds={[[-5, -5], [MAP_H + 5, MAP_W + 5]]}
+          maxZoom={10}
+          minZoom={-2}
           style={{ width: '100%', height: '100%' }}
           crs={L.CRS.Simple}
           zoomControl={false}
@@ -495,57 +370,30 @@ export default function MapView() {
           {showGrid && <GridLabels />}
           <MouseTracker onMove={setCursorGrid} onZoom={setZoom} />
 
-          {/* Markers */}
-          <MarkerClusterGroup
-            chunkedLoading={true}
-            maxClusterRadius={60}
-            spiderfyOnMaxZoom={true}
-            showCoverageOnHover={false}
-            zoomToBoundsOnClick={true}
-            disableClusteringAtZoom={5}
-          >
-            {filteredMarkers.map((m, i) => (
-              <Marker key={i} position={m.pos} icon={createIcon(m.color, m.size, m.icon, m.label, m.showName)}>
+          {filteredMarkers.map((m, i) => (
+            <Marker key={i} position={m.pos} icon={createIcon(m.color, m.size, m.icon, m.label, m.showName)}>
               <Popup>
                 <div className="map-popup">
-                  <div className="map-popup-header">
-                    <i className={m.icon} style={{ color: m.color }} />
-                    <span>{m.name}</span>
-                  </div>
+                  <div className="map-popup-header"><i className={m.icon} style={{ color: m.color }} /><span>{m.name}</span></div>
                   {m.desc && <div className="map-popup-desc">{m.desc}</div>}
-                  <div className="map-popup-grid">
-                    Grid: {Math.round((m.pos[1] / MAP_W) * DATA_RANGE_X + GRID_MIN_X)}:{Math.round((m.pos[0] / MAP_H) * DATA_RANGE_Y + GRID_MIN_Y)}
-                  </div>
+                  <div className="map-popup-grid">Grid: {Math.round((m.pos[1] / MAP_W) * DATA_RANGE_X + GRID_MIN_X)}:{Math.round((m.pos[0] / MAP_H) * DATA_RANGE_Y + GRID_MIN_Y)}</div>
                 </div>
               </Popup>
             </Marker>
           ))}
-          </MarkerClusterGroup>
         </MapContainer>
 
-        {/* ── Overlay UI ── */}
         {/* Bottom bar */}
         <div className="map-bottom-bar">
           <div className="map-bottom-left">
             {cursorGrid ? (
-              <span className="map-coords-display">
-                <i className="fas fa-grid-2 text-[9px]" />
-                Grid <b>{cursorGrid[0]}:{cursorGrid[1]}</b>
-              </span>
+              <span className="map-coords-display"><i className="fas fa-grid-2 text-[9px]" /> Grid <b>{cursorGrid[0]}:{cursorGrid[1]}</b></span>
             ) : (
-              <span className="map-coords-display opacity-40">
-                <i className="fas fa-grid-2 text-[9px]" />
-                Grid —:—
-              </span>
+              <span className="map-coords-display opacity-40"><i className="fas fa-grid-2 text-[9px]" /> Grid —:—</span>
             )}
-            <span className="map-zoom-display">
-              <i className="fas fa-magnifying-glass text-[9px]" />
-              Zoom {zoom}
-            </span>
+            <span className="map-zoom-display"><i className="fas fa-magnifying-glass text-[9px]" /> Zoom {zoom}</span>
             {searchQuery && filteredMarkers.length < markers.length && (
-              <span className="map-search-result">
-                {filteredMarkers.length} / {markers.length} found
-              </span>
+              <span className="map-search-result">{filteredMarkers.length} / {markers.length} found</span>
             )}
           </div>
           <div className="map-bottom-right">
@@ -555,24 +403,12 @@ export default function MapView() {
           </div>
         </div>
 
-        {/* Custom zoom controls */}
+        {/* Zoom controls */}
         <div className="map-zoom-ctrl">
-          <button
-            className="map-zoom-btn"
-            onClick={() => { (document.querySelector('.leaflet-container') as any)?._leaflet_map?.zoomIn(); }}
-            title="Zoom In"
-          ><i className="fas fa-plus" /></button>
+          <button className="map-zoom-btn" onClick={() => { (document.querySelector('.leaflet-container') as any)?._leaflet_map?.zoomIn(); }} title="Zoom In"><i className="fas fa-plus" /></button>
           <div className="map-zoom-level">{zoom}</div>
-          <button
-            className="map-zoom-btn"
-            onClick={() => { (document.querySelector('.leaflet-container') as any)?._leaflet_map?.zoomOut(); }}
-            title="Zoom Out"
-          ><i className="fas fa-minus" /></button>
-          <button
-            className="map-zoom-btn map-fit-btn"
-            onClick={() => { (document.querySelector('.leaflet-container') as any)?._leaflet_map?.fitBounds([[0, 0], [MAP_H, MAP_W]]); }}
-            title="Fit Map"
-          ><i className="fas fa-expand" /></button>
+          <button className="map-zoom-btn" onClick={() => { (document.querySelector('.leaflet-container') as any)?._leaflet_map?.zoomOut(); }} title="Zoom Out"><i className="fas fa-minus" /></button>
+          <button className="map-zoom-btn map-fit-btn" onClick={() => { (document.querySelector('.leaflet-container') as any)?._leaflet_map?.fitBounds([[0, 0], [MAP_H, MAP_W]]); }} title="Fit Map"><i className="fas fa-expand" /></button>
         </div>
       </div>
     </div>
