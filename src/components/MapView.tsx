@@ -5,6 +5,9 @@ import {
 } from 'react-leaflet';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
+import 'leaflet.markercluster/dist/MarkerCluster.Default.css';
+import 'leaflet.markercluster/dist/MarkerCluster.css';
+import MarkerClusterGroup from 'react-leaflet-cluster';
 import mapData from '../data/map_data.json';
 
 /* ── Constants ── */
@@ -455,8 +458,16 @@ export default function MapView() {
           <MouseTracker onMove={setCursorGrid} onZoom={setZoom} />
 
           {/* Markers */}
-          {filteredMarkers.map((m, i) => (
-            <Marker key={i} position={m.pos} icon={createIcon(m.color, m.size, m.icon, m.label)}>
+          <MarkerClusterGroup
+            chunkedLoading={true}
+            maxClusterRadius={60}
+            spiderfyOnMaxZoom={true}
+            showCoverageOnHover={false}
+            zoomToBoundsOnClick={true}
+            disableClusteringAtZoom={5}
+          >
+            {filteredMarkers.map((m, i) => (
+              <Marker key={i} position={m.pos} icon={createIcon(m.color, m.size, m.icon, m.label)}>
               <Popup>
                 <div className="map-popup">
                   <div className="map-popup-header">
@@ -471,6 +482,7 @@ export default function MapView() {
               </Popup>
             </Marker>
           ))}
+          </MarkerClusterGroup>
         </MapContainer>
 
         {/* ── Overlay UI ── */}

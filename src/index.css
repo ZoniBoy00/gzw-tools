@@ -1351,3 +1351,44 @@ a:focus-visible {
   flex-direction: column;
   gap: 1px;
 }
+
+/* ── Marker Cluster customization ── */
+
+.marker-cluster-small {
+  background-color: rgba(232, 184, 48, 0.15) !important;
+  border: 2px solid rgba(232, 184, 48, 0.5);
+}
+
+.marker-cluster-small div {
+  background-color: rgba(232, 184, 48, 0.25) !important;
+  color: var(--color-accent) !important;
+  font-family: 'Rajdhani', 'JetBrains Mono', monospace;
+  font-weight: 700;
+  font-size: 11px;
+}
+
+.marker-cluster-medium {
+  background-color: rgba(232, 184, 48, 0.2) !important;
+  border: 2px solid rgba(232, 184, 48, 0.6);
+}
+
+.marker-cluster-medium div {
+  background-color: rgba(232, 184, 48, 0.35) !important;
+  color: #fff !important;
+  font-family: 'Rajdhani', 'JetBrains Mono', monospace;
+  font-weight: 700;
+  font-size: 12px;
+}
+
+.marker-cluster-large {
+  background-color: rgba(232, 184, 48, 0.25) !important;
+  border: 2px solid rgba(232, 184, 48, 0.7);
+}
+
+.marker-cluster-large div {
+  background-color: rgba(232, 184, 48, 0.4) !important;
+  color: #fff !important;
+  font-family: 'Rajdhani', 'JetBrains Mono', monospace;
+  font-weight: 700;
+  font-size: 13px;
+}
