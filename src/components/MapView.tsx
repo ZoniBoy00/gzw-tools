@@ -16,9 +16,9 @@ const GRID_MAX_Y = 172;
 const DATA_RANGE_X = GRID_MAX_X - GRID_MIN_X; // 76
 const DATA_RANGE_Y = GRID_MAX_Y - GRID_MIN_Y; // 65
 
-// IGN clean map (814×455, resized for fast loading)
-const MAP_W = 814;
-const MAP_H = 455;
+// Wiki map with grid labels (1861×936)
+const MAP_W = 1861;
+const MAP_H = 936;
 
 const COLORS: Record<string, string> = {
   city: '#f59e0b',
