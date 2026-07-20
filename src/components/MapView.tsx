@@ -30,6 +30,7 @@ const CATEGORIES = [
   { key: 'all',   label: 'All',         icon: 'fas fa-map',         color: '#fff' },
   { key: 'town',  label: 'Towns',       icon: 'fas fa-city',        color: COLORS.town },
   { key: 'poi',   label: 'POIs',        icon: 'fas fa-location-dot', color: COLORS.poi },
+  { key: 'places', label: 'Places',     icon: 'fas fa-house',       color: '#6b7280' },
   { key: 'cop',   label: 'COPs',        icon: 'fas fa-shield-halved', color: COLORS.cop_major },
   { key: 'lz',    label: 'LZ',          icon: 'fas fa-helicopter',   color: COLORS.lz },
   { key: 'key',   label: 'Keys',        icon: 'fas fa-key',         color: COLORS.key },
@@ -245,6 +246,7 @@ export default function MapView() {
     /* Landing Zones */
     if (show('lz')) {
       for (const lz of (mapData as any).landingZones || []) {
+        if (!lz.grid) continue;
         result.push({
           pos: parseGrid(lz.grid),
           name: lz.name,
@@ -261,6 +263,7 @@ export default function MapView() {
     /* Key locations */
     if (show('key')) {
       for (const k of (mapData as any).keyLocations || []) {
+        if (!k.grid) continue; // skip entries without grid
         result.push({
           pos: parseGrid(k.grid),
           name: k.name,
@@ -269,6 +272,22 @@ export default function MapView() {
           icon: 'fas fa-key',
           size: 16,
           category: 'key',
+        });
+      }
+    }
+
+    /* Minor POIs / Places */
+    if (show('places')) {
+      for (const p of (mapData as any).minorPOIs || []) {
+        if (!p.grid) continue;
+        result.push({
+          pos: parseGrid(p.grid),
+          name: p.name,
+          desc: p.region,
+          color: '#6b7280',
+          icon: 'fas fa-circle',
+          size: 10,
+          category: 'places',
         });
       }
     }
