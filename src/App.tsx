@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route, Navigate, useLocation, Link } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Navigate, Link, useLocation } from 'react-router-dom';
 import { useState } from 'react';
 import Dashboard from './components/Dashboard';
 import RepCalculator from './components/RepCalculator';
@@ -28,15 +28,14 @@ const TABS = [
   { id: 'weapons', label: 'Weapons', icon: 'fas fa-crosshairs', path: '/weapons' },
   { id: 'armor', label: 'Armor', icon: 'fas fa-shield-halved', path: '/armor' },
   { id: 'keys', label: 'Keys', icon: 'fas fa-key', path: '/keys' },
-  { id: 'map', label: 'Map', icon: 'fas fa-map', path: '/map' },
   { id: 'vendors', label: 'Vendors', icon: 'fas fa-store', path: '/vendors' },
   { id: 'loadouts', label: 'Loadouts', icon: 'fas fa-screwdriver-wrench', path: '/loadouts' },
   { id: 'logs', label: 'Log Analyzer', icon: 'fas fa-file-lines', path: '/logs' },
   { id: 'api-docs', label: 'API', icon: 'fas fa-code', path: '/api-docs' },
 ] as const;
 
-function Layout() {
-  const location = useLocation();
+/* ── Normal page layout (all tools) ── */
+function NormalLayout() {
   const [showFaq, setShowFaq] = useState(false);
 
   return (
@@ -58,6 +57,9 @@ function Layout() {
             </div>
           </div>
           <div className="flex items-center gap-2">
+            <Link to="/map" className="text-text-muted/50 hover:text-accent transition-colors text-sm px-1" aria-label="Interactive Map" title="Interactive Map">
+              <i className="fas fa-map" />
+            </Link>
             <button onClick={() => setShowFaq(true)} className="text-text-muted/50 hover:text-accent transition-colors text-sm px-1" aria-label="FAQ">
               <i className="fas fa-circle-question" />
             </button>
@@ -76,7 +78,7 @@ function Layout() {
 
         {/* Content */}
         <div className="mt-5 card p-5 md:p-6 tab-content">
-          <Routes location={location}>
+          <Routes>
             <Route path="/" element={<Dashboard />} />
             <Route path="/rep" element={<RepCalculator />} />
             <Route path="/dollar" element={<DollarCalculator />} />
@@ -89,7 +91,6 @@ function Layout() {
             <Route path="/logs" element={<LogAnalyzer />} />
             <Route path="/api-docs" element={<ApiDocs />} />
             <Route path="/keys" element={<KeysGuide />} />
-            <Route path="/map" element={<MapView />} />
             <Route path="/privacy" element={<PrivacyPolicy />} />
             <Route path="/tos" element={<TermsOfService />} />
             <Route path="*" element={<Navigate to="/" replace />} />
@@ -122,10 +123,54 @@ function Layout() {
   );
 }
 
+/* ── Full-screen map layout ── */
+function MapLayout() {
+  return (
+    <div className="scanlines h-screen bg-bg text-text flex flex-col overflow-hidden">
+      {/* Minimal map header */}
+      <header className="border-b border-border bg-surface z-50 shrink-0">
+        <div className="px-4 py-1.5 flex items-center justify-between">
+          <div className="flex items-center gap-3">
+            <Link to="/" className="flex items-center gap-2 hover:opacity-80 transition-opacity">
+              <div className="w-6 h-6 border border-accent/40 flex items-center justify-center">
+                <i className="fas fa-crosshairs text-accent text-[10px]" />
+              </div>
+              <span className="text-[11px] font-bold tracking-[0.2em] uppercase text-white">
+                <span className="text-accent">GZW</span> MAP
+              </span>
+            </Link>
+            <span className="text-[7px] font-bold px-1 py-0.5 border border-accent/30 text-accent bg-accent/5 tracking-wider">TACTICAL</span>
+          </div>
+          <div className="flex items-center gap-3">
+            <Link to="/" className="text-text-muted/40 hover:text-accent transition-colors text-[11px] flex items-center gap-1 font-mono">
+              <i className="fas fa-arrow-left" /> Tools
+            </Link>
+          </div>
+        </div>
+      </header>
+      {/* Full-screen map */}
+      <div className="flex-1 relative overflow-hidden">
+        <MapView />
+      </div>
+    </div>
+  );
+}
+
+/* ── Router ── */
+function AppRouter() {
+  const location = useLocation();
+
+  if (location.pathname === '/map') {
+    return <MapLayout />;
+  }
+
+  return <NormalLayout />;
+}
+
 export default function App() {
   return (
     <BrowserRouter>
-      <Layout />
+      <AppRouter />
     </BrowserRouter>
   );
 }
