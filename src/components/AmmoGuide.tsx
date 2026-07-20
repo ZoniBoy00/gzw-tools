@@ -3,7 +3,7 @@ import { AMMO, CALIBERS } from '../data/ammo';
 import { ARMOR_CLASSES } from '../data/types';
 import ItemModal from './ui/ItemModal';
 import type { ModalItem } from './ui/ItemModal';
-import itemImages from '../data/item_images.json';
+import itemImages from '../data/images.json';
 
 const PEN: Record<number, { label: string; cls: string }> = {
   0: { label: '✕', cls: 'pen-none' },

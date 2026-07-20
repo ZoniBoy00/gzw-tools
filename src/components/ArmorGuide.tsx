@@ -1,7 +1,7 @@
 import { useState, useMemo } from 'react';
 import { VESTS, HELMETS, PLATE_CARRIERS, RECOMMENDATIONS, MATERIAL_RANK } from '../data/armor';
 import TabBar from './ui/TabBar';
-import itemImages from '../data/item_images.json';
+import itemImages from '../data/images.json';
 import ItemModal from './ui/ItemModal';
 import type { ModalItem } from './ui/ItemModal';
 

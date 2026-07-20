@@ -4,7 +4,7 @@ import { getVendorReps, setVendorRep } from '../lib/vendortracker';
 import { AMMO } from '../data/ammo';
 import { WEAPONS } from '../data/weapons';
 import { VESTS, HELMETS } from '../data/armor';
-import itemImages from '../data/item_images.json';
+import itemImages from '../data/images.json';
 import vendorImages from '../data/vendor_images.json';
 import ItemModal from './ui/ItemModal';
 import type { ModalItem } from './ui/ItemModal';

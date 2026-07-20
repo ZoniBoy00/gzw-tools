@@ -1,6 +1,6 @@
 import { useState, useMemo, useEffect } from 'react';
 import { WEAPONS, WEAPON_TYPES } from '../data/weapons';
-import itemImages from '../data/item_images.json';
+import itemImages from '../data/images.json';
 import ItemModal from './ui/ItemModal';
 import type { ModalItem } from './ui/ItemModal';
 
