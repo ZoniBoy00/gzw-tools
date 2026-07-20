@@ -24,11 +24,6 @@
     "image": "https://static.wikia.nocookie.net/gray-zone-warfare/images/f/f7/Assault_inspect.png/revision/latest/scale-to-width-down/200?cb=20240512024613"
   },
   {
-    "name": "Backpacks",
-    "id": "backpacks",
-    "image": "https://static.wikia.nocookie.net/gray-zone-warfare/images/3/35/2x2_Inventory.png/revision/latest?cb=20240509033218"
-  },
-  {
     "name": "C2 Bag combat compact backpack",
     "id": "c2-bag-combat-compact-backpack",
     "type": "Backpack",

@@ -15,6 +15,7 @@ import ApiDocs from './components/ApiDocs';
 import PrivacyPolicy from './components/PrivacyPolicy';
 import TermsOfService from './components/TermsOfService';
 import FaqModal from './components/FaqModal';
+import BackpackGuide from './components/BackpackGuide';
 import TabBar from './components/ui/TabBar';
 import './index.css';
 
@@ -31,6 +32,7 @@ const TABS = [
   { id: 'loadouts', label: 'Loadouts', icon: 'fas fa-screwdriver-wrench', path: '/loadouts' },
   { id: 'logs', label: 'Log Analyzer', icon: 'fas fa-file-lines', path: '/logs' },
   { id: 'api-docs', label: 'API', icon: 'fas fa-code', path: '/api-docs' },
+  { id: 'backpacks', label: 'Backpacks', icon: 'fas fa-bag-shopping', path: '/backpacks' },
 ] as const;
 
 function Layout() {
@@ -83,6 +85,7 @@ function Layout() {
             <Route path="/logs" element={<LogAnalyzer />} />
             <Route path="/api-docs" element={<ApiDocs />} />
             <Route path="/keys" element={<KeysGuide />} />
+            <Route path="/backpacks" element={<BackpackGuide />} />
             <Route path="/privacy" element={<PrivacyPolicy />} />
             <Route path="/tos" element={<TermsOfService />} />
             <Route path="*" element={<Navigate to="/" replace />} />
