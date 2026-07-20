@@ -253,6 +253,12 @@ export default function VendorGuide() {
                     {pct}%
                   </span>
                 </div>
+                {vendor.slug === 'vulture' && (
+                  <div className="text-[8px] font-mono text-text-muted/60 mb-2 leading-tight">
+                    <i className="fas fa-info-circle mr-1" />
+                    Vulture rep is earned via tasks and selling valuables (half price). Buying/selling regular items doesn't give rep.
+                  </div>
+                )}
                 <div className="progress mb-2" style={{ height: 6 }}>
                   <div className="progress-fill" style={{ width: `${pct}%`, background: `linear-gradient(90deg, ${meta.color}88, ${meta.color})` }} />
                 </div>
