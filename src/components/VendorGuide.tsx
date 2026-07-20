@@ -231,7 +231,7 @@ export default function VendorGuide() {
               <div className="flex items-center gap-3">
                 <div className="w-14 h-14 flex items-center justify-center border overflow-hidden" style={{ borderColor: meta.color + '40', background: meta.color + '12' }}>
                   {vendorImages[selected as keyof typeof vendorImages] ? (
-                    <img src={vendorImages[selected as keyof typeof vendorImages] as string} alt={vendor.name} className="w-full h-full object-cover object-top" />
+                    <img src={vendorImages[selected as keyof typeof vendorImages] as string} alt={vendor.name} className="w-full h-full object-contain" />
                   ) : (
                     <i className={`${meta.icon} text-xl`} style={{ color: meta.color }} />
                   )}
