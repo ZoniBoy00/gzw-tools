@@ -23,7 +23,7 @@
 | **Vendors** | Vendor guide with rep tracking, per-rank item lists, unlock status (7 vendors) |
 | **Loadouts** | Build and save weapon loadouts in your browser |
 | **Log Analyzer** | Parse GZW.log files to extract match data |
-| **API** | [gzw-data.vercel.app](https://gzw-data.vercel.app) — public game data API |
+| **API** | [gzw-data.vercel.app](https://gzw-data.vercel.app) — public game data API (auto-synced weekly) |
 
 ## Tech Stack
 
@@ -49,7 +49,7 @@ The public game data API is hosted at **[gzw-data.vercel.app](https://gzw-data.v
 ```bash
 curl https://gzw-data.vercel.app/api/weapons
 curl https://gzw-data.vercel.app/api/armor
-curl https://gzw-data.vercel.app/api/keys?location=Ban%20Pa
+curl https://gzw-data.vercel.app/api/keys?type=Keycard
 ```
 
 Full API docs with interactive test page: **[gzw-data.vercel.app](https://gzw-data.vercel.app)**
