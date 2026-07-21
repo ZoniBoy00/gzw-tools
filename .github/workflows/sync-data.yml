@@ -37,11 +37,6 @@ jobs:
           wait
           echo "Done downloading all files."
 
-      - name: Normalise data
-        run: |
-          python3 scripts/normalise_data.py 2>&1 || true
-          python3 scripts/reorder_data.py 2>&1 || true
-
       - name: Commit
         run: |
           git config user.name "gzw-bot"
