@@ -4,7 +4,8 @@ export interface ModalItem {
   name: string;
   image?: string;
   fields: { label: string; value: string; color?: string; desc?: string }[];
-  type: 'weapon' | 'vest' | 'helmet' | 'ammo' | 'medical' | 'gear' | 'attachment' | 'container' | 'tool';
+  type: 'weapon' | 'vest' | 'helmet' | 'ammo' | 'medical' | 'gear' | 'attachment' | 'container' | 'tool' | 'backpack' | 'rig' | 'throwable' | 'food' | 'drink' | 'parts' | 'sight';
+  link?: { label: string; url: string };
 }
 
 interface Props {
@@ -102,6 +103,15 @@ export default function ItemModal({ item, onClose }: Props) {
             </div>
           ))}
         </div>
+
+        {/* Wiki link */}
+        {item.link && (
+          <div className="px-4 pb-2">
+            <a href={item.link.url} target="_blank" rel="noopener noreferrer" className="btn btn-outline btn-sm w-full">
+              <i className="fas fa-external-link-alt" /> {item.link.label}
+            </a>
+          </div>
+        )}
 
         {/* Close */}
         <div className="p-4 border-t border-border">

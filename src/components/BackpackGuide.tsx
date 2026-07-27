@@ -1,6 +1,5 @@
 import { useState, useMemo } from 'react';
 import { useApiData } from '../hooks/useApiData';
-import itemImages from '../data/images.json';
 import TabBar from './ui/TabBar';
 import ItemModal from './ui/ItemModal';
 import type { ModalItem } from './ui/ItemModal';
@@ -118,7 +117,7 @@ function GearGrid({ items, icon }: { items: GearItem[]; icon: string }) {
       {/* Grid */}
       <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2">
         {filtered.map((item) => {
-          const imgSrc = itemImages[item.name as keyof typeof itemImages] as string | undefined || item.image;
+          const imgSrc = item.image;
           return (
             <button
               key={item.name}
