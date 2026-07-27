@@ -23,6 +23,13 @@ const TYPE_ICONS = {
   attachment: 'fas fa-screwdriver-wrench',
   container: 'fas fa-box',
   tool: 'fas fa-toolbox',
+  backpack: 'fas fa-backpack',
+  rig: 'fas fa-vest',
+  throwable: 'fas fa-bomb',
+  food: 'fas fa-utensils',
+  drink: 'fas fa-wine-bottle',
+  parts: 'fas fa-cogs',
+  sight: 'fas fa-eye',
 };
 
 export default function ItemModal({ item, onClose }: Props) {
