@@ -1,23 +1,79 @@
 import { useState, useMemo } from 'react';
-import keysData from '../data/keys.json';
+import { useApiData } from '../hooks/useApiData';
 import ItemModal from './ui/ItemModal';
 import type { ModalItem } from './ui/ItemModal';
+
+interface ApiKey {
+  name: string;
+  id?: string;
+  type?: string;
+  weight?: string;
+  grid_size?: string;
+  usage?: string;
+  location?: string;
+  image?: string;
+  wikiUrl?: string;
+  inTask?: boolean;
+}
 
 interface KeyEntry {
   name: string;
   location: string;
-  wikiUrl: string;
   image: string;
-  inTask: boolean;
+  usage: string;
+  wikiUrl?: string;
 }
 
-const keys = keysData as KeyEntry[];
-const LOCATIONS = [...new Set(keys.map((k) => k.location))].sort();
+// Known locations in the game (ordered by length so longer matches take priority)
+const KNOWN_LOCATIONS = [
+  'Midnight Sapphire Hotel', 'Midnight Sapphire',
+  'Fort Narith', 'Tiger Bay',
+  'Nakasa village', 'Nam Thaven',
+  'Inthavong farm', 'Pha Lang Airfield',
+  'Pha Lang', 'Blue Lagoon',
+  'Fanny Paradise', 'Lamang Island',
+  'Phouarun Restaurant', 'Ban Pa',
+  'Sawmill', 'Hunter',
+];
+
+function extractLocation(usage: string | undefined): string {
+  if (!usage) return 'Unknown';
+  for (const loc of KNOWN_LOCATIONS) {
+    if (usage.includes(loc)) return loc;
+  }
+  return 'Misc';
+}
+
+function toKeyEntry(a: ApiKey): KeyEntry {
+  return {
+    name: a.name,
+    location: a.location || extractLocation(a.usage),
+    image: a.image || '',
+    usage: a.usage || '',
+    wikiUrl: a.wikiUrl,
+  };
+}
+
+// Filter out section-header items
+function isRealKey(a: ApiKey): boolean {
+  return !!a.name && !a.name.startsWith('==');
+}
 
 export default function KeysGuide() {
+  const { data: apiData, loading } = useApiData<any>('keys');
+
+  const keys: KeyEntry[] = useMemo(
+    () => ((apiData || []) as ApiKey[]).filter(isRealKey).map(toKeyEntry),
+    [apiData]
+  );
+
+  const LOCATIONS = useMemo(
+    () => [...new Set(keys.map((k) => k.location))].sort(),
+    [keys]
+  );
+
   const [search, setSearch] = useState('');
   const [locationFilter, setLocationFilter] = useState('');
-  const [taskFilter, setTaskFilter] = useState<'all' | 'task' | 'loot'>('all');
   const [modalItem, setModalItem] = useState<ModalItem | null>(null);
 
   const filtered = useMemo(() => {
@@ -27,10 +83,8 @@ export default function KeysGuide() {
       data = data.filter((k) => k.name.toLowerCase().includes(q) || k.location.toLowerCase().includes(q));
     }
     if (locationFilter) data = data.filter((k) => k.location === locationFilter);
-    if (taskFilter === 'task') data = data.filter((k) => k.inTask);
-    if (taskFilter === 'loot') data = data.filter((k) => !k.inTask);
     return data;
-  }, [search, locationFilter, taskFilter]);
+  }, [search, locationFilter, keys]);
 
   const grouped = useMemo(() => {
     const groups: Record<string, KeyEntry[]> = {};
@@ -48,11 +102,23 @@ export default function KeysGuide() {
       type: 'gear',
       fields: [
         { label: 'Location', value: key.location, desc: 'Area where this key is found or used' },
-        { label: 'Type', value: key.inTask ? 'Task Key' : 'Loot Key', desc: 'Task keys have static spawn points, loot keys are random drops' },
-        { label: 'Source', value: key.wikiUrl ? 'GZW Wiki' : '-', desc: 'View the wiki page for spawn locations' },
+        { label: 'Usage', value: key.usage || '-', desc: 'What this key unlocks' },
       ],
+      link: key.wikiUrl ? { label: 'View on Wiki', url: key.wikiUrl } : undefined,
     });
   };
+
+  if (loading) {
+    return (
+      <div className="tab-content">
+        <div className="flex items-center gap-2 mb-4">
+          <i className="fas fa-key text-accent text-sm" />
+          <span className="section-title">Keys & Keycards</span>
+        </div>
+        <div className="empty-state"><i className="fas fa-spinner fa-spin" /><p>Loading keys data...</p></div>
+      </div>
+    );
+  }
 
   return (
     <div className="tab-content">
@@ -61,7 +127,7 @@ export default function KeysGuide() {
         <span className="section-title">Keys & Keycards</span>
       </div>
       <p className="text-[10px] font-mono text-text-muted mb-4">
-        {keys.length} keys across {LOCATIONS.length} locations — {keys.filter((k) => k.inTask).length} task-related
+        {keys.length} keys across {LOCATIONS.length} locations
       </p>
 
       {/* Filters */}
@@ -78,17 +144,6 @@ export default function KeysGuide() {
           <option value="">All Locations</option>
           {LOCATIONS.map((l) => <option key={l} value={l}>{l}</option>)}
         </select>
-        <div className="flex gap-1">
-          {(['all', 'task', 'loot'] as const).map((t) => (
-            <button
-              key={t}
-              onClick={() => setTaskFilter(t)}
-              className={`chip chip-sm ${taskFilter === t ? 'active' : ''}`}
-            >
-              {t === 'all' ? 'All' : t === 'task' ? 'Task Keys' : 'Loot Keys'}
-            </button>
-          ))}
-        </div>
       </div>
 
       {/* Results */}
@@ -122,21 +177,6 @@ export default function KeysGuide() {
                     <div className="text-xs font-medium truncate">{k.name}</div>
                     <div className="text-[9px] font-mono text-text-muted/70 truncate">{k.location}</div>
                   </div>
-                  <span className={`text-[9px] font-mono px-1.5 py-0.5 shrink-0 ${k.inTask ? 'tag tag-amber' : 'text-text-muted/40'}`}>
-                    {k.inTask ? 'Task' : 'Loot'}
-                  </span>
-                  {k.wikiUrl && (
-                    <a
-                      href={k.wikiUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      onClick={(e) => e.stopPropagation()}
-                      className="text-text-muted/30 hover:text-accent transition-colors text-[10px]"
-                      title="View on Wiki"
-                    >
-                      <i className="fas fa-external-link-alt" />
-                    </a>
-                  )}
                 </button>
               ))}
             </div>
@@ -147,7 +187,6 @@ export default function KeysGuide() {
       <div className="mt-3 text-[10px] text-text-muted/60 font-mono flex items-center gap-2">
         <i className="fas fa-database" />
         {filtered.length} / {keys.length} keys
-        <span className="text-accent/60">· {keys.filter((k) => k.inTask).length} task keys</span>
       </div>
 
       {modalItem && <ItemModal item={modalItem} onClose={() => setModalItem(null)} />}
