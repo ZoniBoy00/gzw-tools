@@ -50,7 +50,7 @@ function toKeyEntry(a: ApiKey): KeyEntry {
     location: a.location || extractLocation(a.usage),
     image: a.image || '',
     usage: a.usage || '',
-    wikiUrl: a.wikiUrl,
+    wikiUrl: a.wikiUrl || `https://gray-zone-warfare.fandom.com/wiki/${encodeURIComponent(a.name)}`,
   };
 }
 

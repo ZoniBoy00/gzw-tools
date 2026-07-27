@@ -183,6 +183,15 @@ export default function ApiDocs() {
         >
           https://gzw-tools.vercel.app
         </a>
+        {' | '}
+        <a
+          href="https://gzw-data.vercel.app"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-accent/80 hover:text-accent underline underline-offset-2"
+        >
+          gzw-data API
+        </a>
       </p>
 
       {/* Group filter chips */}
