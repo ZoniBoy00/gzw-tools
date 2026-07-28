@@ -7,6 +7,10 @@ import type { ArmorClass, PenLevel, AmmoRound, ArmorVest, Helmet, WeaponEntry } 
 
 const BASE = 'https://gzw-data.vercel.app/api';
 
+export function wikiUrl(name: string): string {
+  return `https://gray-zone-warfare.fandom.com/wiki/${encodeURIComponent(name.replace(/\s+/g, '_'))}`;
+}
+
 async function fetchJson<T>(url: string): Promise<T> {
   const res = await fetch(url);
   if (!res.ok) throw new Error(`API ${res.status}: ${res.statusText}`);

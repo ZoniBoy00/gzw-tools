@@ -2,6 +2,7 @@ import { useState, useMemo } from 'react';
 import { PLATE_CARRIERS, RECOMMENDATIONS, MATERIAL_RANK } from '../data/armor';
 import TabBar from './ui/TabBar';
 import { useDataContext } from '../lib/DataContext';
+import { wikiUrl } from '../lib/api';
 import ItemModal from './ui/ItemModal';
 import type { ModalItem } from './ui/ItemModal';
 import type { ArmorVest, Helmet } from '../data/types';
@@ -167,7 +168,7 @@ function VestSection({ vests, itemImages }: { vests: ArmorVest[]; itemImages: Re
                 <td data-label="" className="font-medium">
                   <button onClick={() => setModalItem({
                     name: v.name,
-                    image: itemImages[v.name as keyof typeof itemImages] as string | undefined,
+                    image: (v.image || itemImages[v.name as keyof typeof itemImages]) as string | undefined,
                     type: 'vest',
                     fields: [
                       { label: 'NIJ Class', value: v.nij, color: nijColor(v.nij), desc: 'National Institute of Justice protection rating — higher classes stop more powerful rounds' },
@@ -177,9 +178,10 @@ function VestSection({ vests, itemImages }: { vests: ArmorVest[]; itemImages: Re
                       { label: 'Weight', value: `${v.weight} kg`, desc: 'Carry weight in kilograms — heavier armor provides better protection but slows you down' },
                       { label: 'Source', value: v.source, desc: 'Where to obtain this vest — from a vendor at a specific rep level, or found by looting' },
                     ],
+                    link: { label: 'View on Wiki', url: wikiUrl(v.name) },
                   })} className="flex items-center gap-2 text-left w-full hover:text-accent transition-colors">
-                    {itemImages[v.name as keyof typeof itemImages] && (
-                      <img src={itemImages[v.name as keyof typeof itemImages] as string} alt="" className="w-8 h-8 object-contain shrink-0 bg-surface-2 border border-border" loading="lazy" />
+                    {(v.image || itemImages[v.name as keyof typeof itemImages]) && (
+                      <img src={(v.image || itemImages[v.name as keyof typeof itemImages]) as string} alt="" className="w-8 h-8 object-contain shrink-0 bg-surface-2 border border-border" loading="lazy" />
                     )}
                     {v.name}
                   </button>
@@ -284,6 +286,7 @@ function PlateCarrierSection({ itemImages }: { itemImages: Record<string, string
                       { label: 'Weight', value: `${v.weight} kg`, desc: 'Carry weight' },
                       { label: 'Source', value: v.source, desc: 'Where to obtain this item' },
                     ],
+                    link: { label: 'View on Wiki', url: wikiUrl(v.name) },
                   })} className="flex items-center gap-2 text-left w-full hover:text-accent transition-colors">
                     {itemImages[v.name as keyof typeof itemImages] && (
                       <img src={itemImages[v.name as keyof typeof itemImages] as string} alt="" className="w-8 h-8 object-contain shrink-0 bg-surface-2 border border-border" loading="lazy" />
@@ -390,7 +393,7 @@ function HelmetSection({ helmets, itemImages }: { helmets: Helmet[]; itemImages:
                 <td data-label="" className="font-medium">
                   <button onClick={() => setModalItem({
                     name: h.name,
-                    image: itemImages[h.name as keyof typeof itemImages] as string | undefined,
+                    image: (h.image || itemImages[h.name as keyof typeof itemImages]) as string | undefined,
                     type: 'helmet',
                     fields: [
                       { label: 'NIJ Class', value: h.nij, color: nijColor(h.nij), desc: 'National Institute of Justice protection rating — higher classes stop more powerful rounds' },
@@ -398,9 +401,10 @@ function HelmetSection({ helmets, itemImages }: { helmets: Helmet[]; itemImages:
                       { label: 'Weight', value: `${h.weight} kg`, desc: 'Carry weight in kilograms — lighter helmets allow faster movement' },
                       { label: 'Source', value: h.source, desc: 'Where to obtain this helmet — from a vendor at a specific rep level, or found by looting' },
                     ],
+                    link: { label: 'View on Wiki', url: wikiUrl(h.name) },
                   })} className="flex items-center gap-2 text-left w-full hover:text-accent transition-colors">
-                    {itemImages[h.name as keyof typeof itemImages] && (
-                      <img src={itemImages[h.name as keyof typeof itemImages] as string} alt="" className="w-8 h-8 object-contain shrink-0 bg-surface-2 border border-border" loading="lazy" />
+                    {(h.image || itemImages[h.name as keyof typeof itemImages]) && (
+                      <img src={(h.image || itemImages[h.name as keyof typeof itemImages]) as string} alt="" className="w-8 h-8 object-contain shrink-0 bg-surface-2 border border-border" loading="lazy" />
                     )}
                     {h.name}
                   </button>

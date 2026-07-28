@@ -1,5 +1,6 @@
 import { useState, useMemo, useEffect } from 'react';
 import { useDataContext } from '../lib/DataContext';
+import { wikiUrl } from '../lib/api';
 import { ARMOR_CLASSES } from '../data/types';
 import ItemModal from './ui/ItemModal';
 import type { ModalItem } from './ui/ItemModal';
@@ -151,8 +152,8 @@ export default function AmmoGuide() {
               <tr key={i}>
                 <td data-label="" className="font-medium">
                   <button onClick={() => setModalItem({
-                    name: r.caliber ? `${r.caliber} ${r.name}` : r.name,
-                    image: itemImages[`${r.caliber} ${r.name}` as keyof typeof itemImages] as string | undefined,
+                    name: r.name,
+                    image: itemImages[r.name as keyof typeof itemImages] as string | undefined,
                     type: 'ammo',
                     fields: [
                       { label: 'Caliber', value: r.caliber, desc: 'The diameter and case length of the ammunition cartridge' },
@@ -163,9 +164,10 @@ export default function AmmoGuide() {
                       { label: 'Tracer', value: r.tracer ? 'Yes' : 'No', desc: 'Tracer rounds leave a visible trail of light — helps with aiming but reveals your position' },
                       { label: 'Source', value: r.vendor ? `${r.vendor} R.${r.repLevel}` : r.source || 'Looting', desc: 'Where to obtain this ammunition — from a vendor at a specific rep level, or found by looting' },
                     ],
+                    link: { label: 'View on Wiki', url: wikiUrl(r.name) },
                   })} className="flex items-center gap-2 text-left w-full hover:text-accent transition-colors">
-                    {itemImages[`${r.caliber} ${r.name}` as keyof typeof itemImages] && (
-                      <img src={itemImages[`${r.caliber} ${r.name}` as keyof typeof itemImages] as string} alt="" className="w-8 h-8 object-contain shrink-0 bg-surface-2 border border-border" loading="lazy" />
+                    {itemImages[r.name as keyof typeof itemImages] && (
+                      <img src={itemImages[r.name as keyof typeof itemImages] as string} alt="" className="w-8 h-8 object-contain shrink-0 bg-surface-2 border border-border" loading="lazy" />
                     )}
                     <div className="min-w-0">
                       <span>{r.name}</span>

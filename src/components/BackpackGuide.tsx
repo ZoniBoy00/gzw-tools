@@ -5,155 +5,144 @@ import ItemModal from './ui/ItemModal';
 import type { ModalItem } from './ui/ItemModal';
 
 type SubTab = 'backpacks' | 'rigs';
-const SUB: { id: SubTab; label: string; icon?: string }[] = [
-  { id: 'backpacks', label: 'Backpacks', icon: 'fas fa-bag-shopping' },
+const SUB_TABS: { id: SubTab; label: string; icon?: string }[] = [
+  { id: 'backpacks', label: 'Backpacks', icon: 'fas fa-backpack' },
   { id: 'rigs', label: 'Rigs', icon: 'fas fa-vest' },
 ];
 
-interface ApiGearItem {
+interface BackpackEntry {
   name: string;
-  id?: string;
   type?: string;
   weight?: string;
   grid_size?: string;
+  capacity?: string;
   sold_by?: string;
-  slots?: string;
-  manufacturer?: string;
   image?: string;
-  inventory?: string;
+  wikiUrl?: string;
 }
 
-interface GearItem {
+interface RigEntry {
   name: string;
-  weight: number;
-  grid?: string;
+  type?: string;
+  weight?: string;
+  grid_size?: string;
+  capacity?: string;
+  sold_by?: string;
   image?: string;
-  id?: string;
+  wikiUrl?: string;
 }
 
-const SORT_OPTIONS = [
-  { key: 'weight', label: 'Weight' },
-  { key: 'grid', label: 'Size' },
-  { key: 'name', label: 'Name' },
-] as const;
+type TableItem = BackpackEntry & RigEntry;
 
-function parseWeight(w: string | undefined): number {
-  if (!w) return 999;
-  const cleaned = w.replace('kg', '').replace(',', '.').trim();
-  const n = parseFloat(cleaned);
-  return isNaN(n) ? 999 : n;
-}
-
-function gridArea(g: string | undefined): number {
-  if (!g || !g.includes('x')) return 0;
-  const [w, h] = g.split('x').map(Number);
-  return w * h;
-}
-
-function toGearItem(a: ApiGearItem): GearItem {
-  return {
-    name: a.name,
-    weight: parseWeight(a.weight),
-    grid: a.grid_size || a.inventory,
-    image: a.image,
-    id: a.id,
-  };
-}
-
-// Filter out section header items
-function filterReal(items: GearItem[]): GearItem[] {
-  return items.filter((i) => i.weight < 900);
-}
-
-function GearGrid({ items, icon }: { items: GearItem[]; icon: string }) {
+function TableSection({
+  items,
+  typeLabel,
+  icon,
+}: {
+  items: TableItem[];
+  typeLabel: string;
+  icon: string;
+}) {
   const [search, setSearch] = useState('');
-  const [sort, setSort] = useState<string>('weight');
-  const [sortAsc, setSortAsc] = useState(false);
   const [modalItem, setModalItem] = useState<ModalItem | null>(null);
 
   const filtered = useMemo(() => {
-    let data = [...items];
-    if (search.trim()) {
-      const q = search.toLowerCase();
-      data = data.filter((b) => b.name.toLowerCase().includes(q));
-    }
-    data.sort((a, b) => {
-      let cmp = 0;
-      if (sort === 'weight') cmp = a.weight - b.weight;
-      else if (sort === 'grid') cmp = gridArea(a.grid) - gridArea(b.grid);
-      else cmp = a.name.localeCompare(b.name);
-      return sortAsc ? cmp : -cmp;
+    if (!search.trim()) return items;
+    const q = search.toLowerCase();
+    return items.filter((i) => i.name.toLowerCase().includes(q));
+  }, [items, search]);
+
+  const openModal = (item: TableItem) => {
+    setModalItem({
+      name: item.name,
+      image: item.image,
+      type: typeLabel === 'backpacks' ? 'backpack' : 'rig',
+      fields: [
+        ...(item.type ? [{ label: 'Type', value: item.type, desc: 'Item category' }] : []),
+        ...(item.weight ? [{ label: 'Weight', value: item.weight, desc: 'Carry weight' }] : []),
+        ...(item.grid_size ? [{ label: 'Grid Size', value: item.grid_size, desc: 'Inventory space' }] : []),
+        ...(item.capacity ? [{ label: 'Capacity', value: item.capacity, desc: 'Storage capacity' }] : []),
+        ...(item.sold_by ? [{ label: 'Sold By', value: item.sold_by, desc: 'Vendor' }] : []),
+      ],
+      link: {
+        label: 'View on Wiki',
+        url: item.wikiUrl || `https://gray-zone-warfare.fandom.com/wiki/${encodeURIComponent(item.name.replace(/\s+/g, '_'))}`,
+      },
     });
-    return data;
-  }, [items, search, sort, sortAsc]);
+  };
 
   return (
     <div>
-      {/* Controls */}
-      <div className="flex flex-wrap gap-2 mb-4 items-center">
-        <div className="relative flex-1 min-w-[160px] max-w-xs">
-          <i className="fas fa-search absolute left-3 top-1/2 -translate-y-1/2 text-text-muted/40 text-[10px]" />
-          <input
-            type="text"
-            placeholder="Search..."
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
-            className="input input-sm pl-7"
-          />
-        </div>
-        {SORT_OPTIONS.map((opt) => (
-          <button
-            key={opt.key}
-            onClick={() => { setSort(opt.key); setSortAsc(sort === opt.key ? !sortAsc : false); }}
-            className={`chip ${sort === opt.key ? 'active' : ''}`}
-          >
-            <i className={`fas fa-arrow-${sort === opt.key && sortAsc ? 'up' : 'down'} text-[9px]`} />
-            {opt.label}
-          </button>
-        ))}
-        <span className="text-[10px] font-mono text-text-muted/60 ml-auto">{filtered.length} items</span>
-      </div>
-
-      {/* Grid */}
-      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2">
-        {filtered.map((item) => {
-          const imgSrc = item.image;
-          return (
-            <button
-              key={item.name}
-              onClick={() => setModalItem({
-                name: item.name,
-                image: imgSrc,
-                type: 'gear',
-                fields: [
-                  { label: 'Weight', value: `${item.weight} kg`, desc: 'Carry weight' },
-                  ...(item.grid ? [{ label: 'Grid', value: item.grid, desc: 'Inventory size' }] : []),
-                ],
-              })}
-              className="card card-highlight p-3 flex flex-col items-center text-center hover:border-accent/30 transition-colors"
-            >
-              <div className="w-full h-24 flex items-center justify-center mb-2 bg-surface-2 border border-border overflow-hidden">
-                {imgSrc ? (
-                  <img src={imgSrc} alt={item.name} className="max-w-full max-h-full object-contain" loading="lazy" />
-                ) : (
-                  <i className={`fas ${icon} text-2xl text-text-muted/20`} />
-                )}
-              </div>
-              <div className="text-xs font-medium leading-tight mb-1">{item.name}</div>
-              <div className="text-[10px] font-mono text-text-muted/70 flex items-center gap-2">
-                <span>{item.weight} kg</span>
-                {item.grid && <span className="text-text-muted/40">·</span>}
-                {item.grid && <span>{item.grid}</span>}
-              </div>
-            </button>
-          );
-        })}
+      <div className="flex flex-wrap gap-2 mb-4">
+        <input
+          type="text"
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+          placeholder="Search items..."
+          className="input flex-1 min-w-[160px] input-sm"
+          aria-label="Search items"
+        />
+        <span className="text-[10px] font-mono text-text-muted/60 self-center ml-auto">
+          {filtered.length} / {items.length} items
+        </span>
       </div>
 
       {filtered.length === 0 && (
         <div className="empty-state">
           <i className={`fas ${icon}`} />
           <p>No items match your search</p>
+        </div>
+      )}
+
+      {filtered.length > 0 && (
+        <div className="overflow-x-auto">
+          <table className="w-full text-xs font-mono border-collapse">
+            <thead>
+              <tr className="text-text-muted text-[10px] uppercase tracking-[0.08em] border-b border-border">
+                <th className="text-left py-3 px-3 font-medium w-10" />
+                <th className="text-left py-3 px-3 font-medium">Name</th>
+                <th className="text-left py-3 px-3 font-medium">Type</th>
+                <th className="text-right py-3 px-3 font-medium">Weight</th>
+                <th className="text-right py-3 px-3 font-medium">Grid Size</th>
+                <th className="text-left py-3 px-3 font-medium">Source</th>
+                <th className="text-center py-3 px-3 font-medium">Wiki</th>
+              </tr>
+            </thead>
+            <tbody>
+              {filtered.map((item) => (
+                <tr
+                  key={item.name}
+                  onClick={() => openModal(item)}
+                  className="border-b border-border/30 hover:bg-surface-2/50 transition-colors cursor-pointer"
+                >
+                  <td className="py-3 px-3">
+                    {item.image ? (
+                      <img src={item.image} alt="" className="w-8 h-8 object-contain" loading="lazy" />
+                    ) : (
+                      <i className={`fas ${icon} text-text-muted/30 text-lg w-8 h-8 flex items-center justify-center`} />
+                    )}
+                  </td>
+                  <td className="py-3 px-3 font-semibold text-text">{item.name}</td>
+                  <td className="py-3 px-3 text-text-muted">{item.type || '-'}</td>
+                  <td className="py-3 px-3 text-right text-text-muted">{item.weight || '-'}</td>
+                  <td className="py-3 px-3 text-right text-text-muted">{item.grid_size || '-'}</td>
+                  <td className="py-3 px-3 text-text-muted">{item.sold_by || '-'}</td>
+                  <td className="py-3 px-3 text-center">
+                    <a
+                      href={item.wikiUrl || `https://gray-zone-warfare.fandom.com/wiki/${encodeURIComponent(item.name.replace(/\s+/g, '_'))}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      onClick={(e) => e.stopPropagation()}
+                      className="text-accent/70 hover:text-accent transition-colors"
+                      title="View on Wiki"
+                    >
+                      <i className="fas fa-external-link-alt text-[10px]" />
+                    </a>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
         </div>
       )}
 
@@ -164,28 +153,22 @@ function GearGrid({ items, icon }: { items: GearItem[]; icon: string }) {
 
 export default function BackpackGuide() {
   const [tab, setTab] = useState<SubTab>('backpacks');
-  const { data: backpacksData, loading: bpLoading } = useApiData<any>('backpacks');
-  const { data: rigsData, loading: rigsLoading } = useApiData<any>('rigs');
+  const { data: backpacks, loading: bpLoading } = useApiData<BackpackEntry>('backpacks?all=true');
+  const { data: rigs, loading: rigLoading } = useApiData<RigEntry>('rigs?all=true');
 
-  const backpacks: GearItem[] = useMemo(
-    () => filterReal(((backpacksData || []) as ApiGearItem[]).map(toGearItem)),
-    [backpacksData]
-  );
-  const rigs: GearItem[] = useMemo(
-    () => filterReal(((rigsData || []) as ApiGearItem[]).map(toGearItem)),
-    [rigsData]
-  );
-
-  const loading = bpLoading || rigsLoading;
+  const loading = bpLoading || rigLoading;
 
   if (loading) {
     return (
       <div className="tab-content">
         <div className="flex items-center gap-2 mb-4">
-          <i className={`fas ${tab === 'backpacks' ? 'fa-bag-shopping' : 'fa-vest'} text-accent text-sm`} />
-          <span className="section-title">{tab === 'backpacks' ? 'Backpacks' : 'Rigs'}</span>
+          <i className="fas fa-backpack text-accent text-sm" />
+          <span className="section-title">Backpacks & Rigs</span>
         </div>
-        <div className="empty-state"><i className="fas fa-spinner fa-spin" /><p>Loading gear data...</p></div>
+        <div className="empty-state">
+          <i className="fas fa-spinner fa-spin" />
+          <p>Loading gear data...</p>
+        </div>
       </div>
     );
   }
@@ -193,13 +176,22 @@ export default function BackpackGuide() {
   return (
     <div className="tab-content">
       <div className="flex items-center gap-2 mb-4">
-        <i className={`fas ${tab === 'backpacks' ? 'fa-bag-shopping' : 'fa-vest'} text-accent text-sm`} />
-        <span className="section-title">{tab === 'backpacks' ? 'Backpacks' : 'Rigs'}</span>
+        <i className="fas fa-backpack text-accent text-sm" />
+        <span className="section-title">Backpacks & Rigs</span>
       </div>
-      <TabBar tabs={SUB} active={tab} onChange={setTab} />
-      <div className="mt-4">
-        {tab === 'backpacks' && <GearGrid items={backpacks} icon="fa-bag-shopping" />}
-        {tab === 'rigs' && <GearGrid items={rigs} icon="fa-vest" />}
+      <TabBar tabs={SUB_TABS} active={tab} onChange={setTab} />
+      <p className="text-[10px] font-mono text-text-muted mt-2 mb-4">
+        {tab === 'backpacks'
+          ? `${(backpacks || []).length} backpacks`
+          : `${(rigs || []).length} tactical rigs`}
+      </p>
+      <div className="mt-2">
+        {tab === 'backpacks' && (
+          <TableSection items={backpacks || []} typeLabel="backpacks" icon="fa-backpack" />
+        )}
+        {tab === 'rigs' && (
+          <TableSection items={rigs || []} typeLabel="rigs" icon="fa-vest" />
+        )}
       </div>
     </div>
   );

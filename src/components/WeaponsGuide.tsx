@@ -1,5 +1,6 @@
 import { useState, useMemo, useEffect } from 'react';
 import { useDataContext } from '../lib/DataContext';
+import { wikiUrl } from '../lib/api';
 import ItemModal from './ui/ItemModal';
 import type { ModalItem } from './ui/ItemModal';
 
@@ -118,13 +119,13 @@ export default function WeaponsGuide() {
             }`}
           >
             <div className="flex-1 flex items-center gap-2">
-              {itemImages[w.name as keyof typeof itemImages] && (
-                <img src={itemImages[w.name as keyof typeof itemImages] as string} alt="" className="w-10 h-10 object-contain shrink-0 bg-surface-2 border border-border" loading="lazy" />
+              {(w.image || itemImages[w.name as keyof typeof itemImages]) && (
+                <img src={(w.image || itemImages[w.name as keyof typeof itemImages]) as string} alt="" className="w-10 h-10 object-contain shrink-0 bg-surface-2 border border-border" loading="lazy" />
               )}
               <div>
                 <button onClick={() => setModalItem({
                   name: w.name,
-                  image: itemImages[w.name as keyof typeof itemImages] as string | undefined,
+                  image: (w.image || itemImages[w.name as keyof typeof itemImages]) as string | undefined,
                   type: 'weapon',
                   fields: [
                         { label: 'Type', value: w.type, desc: 'Weapon classification — determines handling, role and available attachments' },
@@ -132,6 +133,7 @@ export default function WeaponsGuide() {
                         { label: 'Fire Rate', value: w.fireRate ? `${w.fireRate} RPM` : '-', desc: 'Cyclic rate of fire — rounds per minute the weapon can fire in automatic mode' },
                         { label: 'Source', value: w.source, desc: 'Where to obtain this weapon — from a vendor at a specific rep level, or found by looting' },
                       ],
+                  link: { label: 'View on Wiki', url: wikiUrl(w.name) },
                 })} className="text-sm font-medium text-left hover:text-accent transition-colors">{w.name}</button>
                 <div className="text-[10px] text-text-muted font-mono">{w.type}</div>
               </div>
@@ -196,7 +198,7 @@ export default function WeaponsGuide() {
                   <td className="font-medium">
                     <button onClick={() => setModalItem({
                       name: w.name,
-                      image: itemImages[w.name as keyof typeof itemImages] as string | undefined,
+                      image: (w.image || itemImages[w.name as keyof typeof itemImages]) as string | undefined,
                       type: 'weapon',
                       fields: [
                         { label: 'Type', value: w.type, desc: 'Weapon classification — determines handling, role and available attachments' },
@@ -204,9 +206,10 @@ export default function WeaponsGuide() {
                         { label: 'Fire Rate', value: w.fireRate ? `${w.fireRate} RPM` : '-', desc: 'Cyclic rate of fire — rounds per minute the weapon can fire in automatic mode' },
                         { label: 'Source', value: w.source, desc: 'Where to obtain this weapon — from a vendor at a specific rep level, or found by looting' },
                       ],
+                      link: { label: 'View on Wiki', url: wikiUrl(w.name) },
                     })} className="flex items-center gap-2 text-left w-full hover:text-accent transition-colors">
-                    {itemImages[w.name as keyof typeof itemImages] && (
-                      <img src={itemImages[w.name as keyof typeof itemImages] as string} alt="" className="w-8 h-8 object-contain shrink-0 bg-surface-2 border border-border" loading="lazy" />
+                    {(w.image || itemImages[w.name as keyof typeof itemImages]) && (
+                      <img src={(w.image || itemImages[w.name as keyof typeof itemImages]) as string} alt="" className="w-8 h-8 object-contain shrink-0 bg-surface-2 border border-border" loading="lazy" />
                     )}
                     {w.name}
                     </button>

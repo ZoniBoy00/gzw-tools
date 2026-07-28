@@ -7,6 +7,7 @@ import DollarCalculator from './components/DollarCalculator';
 import MissionFinder from './components/MissionFinder';
 import AmmoGuide from './components/AmmoGuide';
 import ArmorGuide from './components/ArmorGuide';
+import BackpackGuide from './components/BackpackGuide';
 import WeaponsGuide from './components/WeaponsGuide';
 import VendorGuide from './components/VendorGuide';
 import LoadoutBuilder from './components/LoadoutBuilder';
@@ -27,6 +28,7 @@ const TABS = [
   { id: 'ammo', label: 'Ammo', icon: 'fas fa-bolt', path: '/ammo' },
   { id: 'weapons', label: 'Weapons', icon: 'fas fa-crosshairs', path: '/weapons' },
   { id: 'armor', label: 'Armor', icon: 'fas fa-shield-halved', path: '/armor' },
+  { id: 'backpacks', label: 'Backpacks', icon: 'fas fa-backpack', path: '/backpacks' },
   { id: 'keys', label: 'Keys', icon: 'fas fa-key', path: '/keys' },
   { id: 'vendors', label: 'Vendors', icon: 'fas fa-store', path: '/vendors' },
   { id: 'loadouts', label: 'Loadouts', icon: 'fas fa-screwdriver-wrench', path: '/loadouts' },
@@ -83,6 +85,7 @@ function NormalLayout() {
             <Route path="/ammo" element={<AmmoGuide />} />
             <Route path="/weapons" element={<WeaponsGuide />} />
             <Route path="/armor" element={<ArmorGuide />} />
+            <Route path="/backpacks" element={<BackpackGuide />} />
             <Route path="/vendors" element={<VendorGuide />} />
             <Route path="/loadouts" element={<LoadoutBuilder />} />
             <Route path="/logs" element={<LogAnalyzer />} />

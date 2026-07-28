@@ -25,6 +25,7 @@ export interface ArmorVest {
   grid: string;
   weight: number;
   source: string;
+  image?: string;
 }
 
 export interface Helmet {
@@ -33,6 +34,7 @@ export interface Helmet {
   material: string;
   weight: number;
   source: string;
+  image?: string;
 }
 
 export interface GearRecommendation {
@@ -57,6 +59,7 @@ export interface WeaponEntry {
   magSize: number;
   fireRate?: string;
   source: string;
+  image?: string;
 }
 
 export const ARMOR_CLASSES: ArmorClass[] = ['I', 'IIA', 'IIA+', 'IIIA', 'IIIA+', 'III', 'III+', 'III++'];
