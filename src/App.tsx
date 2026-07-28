@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route, Navigate, Link, useLocation } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Navigate, Link } from 'react-router-dom';
 import { useState } from 'react';
 import { DataProvider } from './lib/DataContext';
 import Dashboard from './components/Dashboard';
@@ -16,7 +16,6 @@ import ApiDocs from './components/ApiDocs';
 import PrivacyPolicy from './components/PrivacyPolicy';
 import TermsOfService from './components/TermsOfService';
 import FaqModal from './components/FaqModal';
-import MapView from './components/MapView';
 import TabBar from './components/ui/TabBar';
 import './index.css';
 
@@ -58,9 +57,6 @@ function NormalLayout() {
             </div>
           </div>
           <div className="flex items-center gap-2">
-            <Link to="/map" className="text-text-muted/50 hover:text-accent transition-colors text-sm px-1" aria-label="Interactive Map" title="Interactive Map">
-              <i className="fas fa-map" />
-            </Link>
             <button onClick={() => setShowFaq(true)} className="text-text-muted/50 hover:text-accent transition-colors text-sm px-1" aria-label="FAQ">
               <i className="fas fa-circle-question" />
             </button>
@@ -124,47 +120,8 @@ function NormalLayout() {
   );
 }
 
-/* ── Full-screen map layout ── */
-function MapLayout() {
-  return (
-    <div className="scanlines h-screen bg-bg text-text flex flex-col overflow-hidden">
-      {/* Minimal map header */}
-      <header className="border-b border-border bg-surface z-50 shrink-0">
-        <div className="px-4 py-1.5 flex items-center justify-between">
-          <div className="flex items-center gap-3">
-            <Link to="/" className="flex items-center gap-2 hover:opacity-80 transition-opacity">
-              <div className="w-6 h-6 border border-accent/40 flex items-center justify-center">
-                <i className="fas fa-crosshairs text-accent text-[10px]" />
-              </div>
-              <span className="text-[11px] font-bold tracking-[0.2em] uppercase text-white">
-                <span className="text-accent">GZW</span> MAP
-              </span>
-            </Link>
-            <span className="text-[7px] font-bold px-1 py-0.5 border border-accent/30 text-accent bg-accent/5 tracking-wider">TACTICAL</span>
-          </div>
-          <div className="flex items-center gap-3">
-            <Link to="/" className="text-text-muted/40 hover:text-accent transition-colors text-[11px] flex items-center gap-1 font-mono">
-              <i className="fas fa-arrow-left" /> Tools
-            </Link>
-          </div>
-        </div>
-      </header>
-      {/* Full-screen map */}
-      <div className="flex-1 relative overflow-hidden">
-        <MapView />
-      </div>
-    </div>
-  );
-}
-
 /* ── Router ── */
 function AppRouter() {
-  const location = useLocation();
-
-  if (location.pathname === '/map') {
-    return <MapLayout />;
-  }
-
   return <NormalLayout />;
 }
 
