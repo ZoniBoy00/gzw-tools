@@ -6,7 +6,7 @@ import type { ModalItem } from './ui/ItemModal';
 
 type SubTab = 'backpacks' | 'rigs';
 const SUB_TABS: { id: SubTab; label: string; icon?: string }[] = [
-  { id: 'backpacks', label: 'Backpacks', icon: 'fas fa-backpack' },
+  { id: 'backpacks', label: 'Backpacks', icon: 'fas fa-box' },
   { id: 'rigs', label: 'Rigs', icon: 'fas fa-vest' },
 ];
 
@@ -165,7 +165,7 @@ export default function BackpackGuide() {
     return (
       <div className="tab-content">
         <div className="flex items-center gap-2 mb-4">
-          <i className="fas fa-backpack text-accent text-sm" />
+          <i className="fas fa-box text-accent text-sm" />
           <span className="section-title">Backpacks & Rigs</span>
         </div>
         <div className="empty-state">
@@ -179,7 +179,7 @@ export default function BackpackGuide() {
   return (
     <div className="tab-content">
       <div className="flex items-center gap-2 mb-4">
-        <i className="fas fa-backpack text-accent text-sm" />
+        <i className="fas fa-box text-accent text-sm" />
         <span className="section-title">Backpacks & Rigs</span>
       </div>
       <TabBar tabs={SUB_TABS} active={tab} onChange={setTab} />
