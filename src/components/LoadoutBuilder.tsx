@@ -1,9 +1,8 @@
 import { useState } from 'react';
 import TabBar from './ui/TabBar';
-import { VESTS, HELMETS } from '../data/armor';
-import { AMMO } from '../data/ammo';
-import { WEAPONS } from '../data/weapons';
 import { RECOMMENDATIONS } from '../data/armor';
+import { useDataContext } from '../lib/DataContext';
+import type { AmmoRound, ArmorVest, Helmet, WeaponEntry } from '../data/types';
 
 // ─── Types ───
 
@@ -52,7 +51,7 @@ const PLAYSTYLES = [
     icon: 'fas fa-burst',
     desc: 'Heavy armor, high-penetration ammo, assault rifles',
     armorFocus: ['III+', 'III++'],
-    ammoPreference: (a: typeof AMMO[0]) => a.pen['III'] >= 2 || a.pen['III+'] >= 2,
+    ammoPreference: (a: AmmoRound) => a.pen['III'] >= 2 || a.pen['III+'] >= 2,
   },
   {
     id: 'defense',
@@ -60,7 +59,7 @@ const PLAYSTYLES = [
     icon: 'fas fa-shield-halved',
     desc: 'Balanced protection, medium armor, versatile ammo',
     armorFocus: ['III'],
-    ammoPreference: (a: typeof AMMO[0]) => a.pen['III'] >= 1,
+    ammoPreference: (a: AmmoRound) => a.pen['III'] >= 1,
   },
   {
     id: 'stealth',
@@ -68,7 +67,7 @@ const PLAYSTYLES = [
     icon: 'fas fa-eye-slash',
     desc: 'Light armor, subsonic ammo, SMGs and pistols',
     armorFocus: ['IIIA', 'IIIA+'],
-    ammoPreference: (a: typeof AMMO[0]) => a.subsonic || a.caliber === '9x19mm' || a.caliber === '4.6x30mm' || a.caliber === '.45 ACP',
+    ammoPreference: (a: AmmoRound) => a.subsonic || a.caliber === '9x19mm' || a.caliber === '4.6x30mm' || a.caliber === '.45 ACP',
   },
 ];
 
@@ -82,7 +81,30 @@ const BUDGETS = [
 // ─── Component ───
 
 export default function LoadoutBuilder() {
+  const { weapons, vests, helmets, ammo, loading, error } = useDataContext();
   const [tab, setTab] = useState<SubTab>('builder');
+
+  if (loading) {
+    return (
+      <div className="tab-content">
+        <div className="flex items-center justify-center py-12">
+          <i className="fas fa-spinner fa-spin text-accent text-xl" />
+          <span className="ml-2 text-sm text-text-muted">Loading game data…</span>
+        </div>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="tab-content">
+        <div className="flex items-center justify-center py-12">
+          <i className="fas fa-triangle-exclamation text-red text-xl" />
+          <span className="ml-2 text-sm text-red">Error: {error}</span>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="tab-content">
@@ -94,8 +116,8 @@ export default function LoadoutBuilder() {
       <TabBar tabs={SUB} active={tab} onChange={setTab} />
 
       <div className="mt-4">
-        {tab === 'builder' && <Builder />}
-        {tab === 'recommender' && <Recommender />}
+        {tab === 'builder' && <Builder weapons={weapons} vests={vests} helmets={helmets} ammo={ammo} />}
+        {tab === 'recommender' && <Recommender weapons={weapons} ammo={ammo} />}
       </div>
     </div>
   );
@@ -103,7 +125,7 @@ export default function LoadoutBuilder() {
 
 // ─── Builder ───
 
-function Builder() {
+function Builder({ weapons, vests, helmets, ammo }: { weapons: WeaponEntry[]; vests: ArmorVest[]; helmets: Helmet[]; ammo: AmmoRound[] }) {
   const [loadouts, setLoadouts] = useState<Loadout[]>(loadLoadouts);
   const [editing, setEditing] = useState<Loadout | null>(null);
   const [name, setName] = useState('');
@@ -117,8 +139,8 @@ function Builder() {
 
   // Filter weapons
   const filteredWeapons = weaponSearch.trim()
-    ? WEAPONS.filter((w) => w.name.toLowerCase().includes(weaponSearch.toLowerCase()) || w.caliber.toLowerCase().includes(weaponSearch.toLowerCase()))
-    : WEAPONS;
+    ? weapons.filter((w) => w.name.toLowerCase().includes(weaponSearch.toLowerCase()) || w.caliber.toLowerCase().includes(weaponSearch.toLowerCase()))
+    : weapons;
 
   const resetForm = () => {
     setName('');
@@ -292,7 +314,7 @@ function Builder() {
               </label>
               <select value={selectedVest} onChange={(e) => setSelectedVest(e.target.value)} className="input input-sm" aria-label="Select vest">
                 <option value="">— None —</option>
-                {VESTS.map((v) => (
+                {vests.map((v) => (
                   <option key={v.name} value={v.name}>{v.name} ({v.nij})</option>
                 ))}
               </select>
@@ -303,7 +325,7 @@ function Builder() {
               </label>
               <select value={selectedHelmet} onChange={(e) => setSelectedHelmet(e.target.value)} className="input input-sm" aria-label="Select helmet">
                 <option value="">— None —</option>
-                {HELMETS.map((h) => (
+                {helmets.map((h) => (
                   <option key={h.name} value={h.name}>{h.name} ({h.nij})</option>
                 ))}
               </select>
@@ -316,7 +338,7 @@ function Builder() {
               <i className="fas fa-bolt text-accent/60 mr-1" />Ammunition
             </label>
             <div className="max-h-24 overflow-y-auto space-y-0.5 border border-border p-1.5 bg-surface-2">
-              {AMMO.filter((a, i, arr) => arr.findIndex((x) => x.name === a.name) === i).slice(0, 20).map((a) => (
+              {ammo.filter((a, i, arr) => arr.findIndex((x) => x.name === a.name) === i).slice(0, 20).map((a) => (
                 <button
                   key={a.name}
                   onClick={() => toggleAmmo(a.name)}
@@ -354,7 +376,7 @@ function Builder() {
 
 // ─── Recommender ───
 
-function Recommender() {
+function Recommender({ weapons, ammo }: { weapons: WeaponEntry[]; ammo: AmmoRound[] }) {
   const [budget, setBudget] = useState<string | null>(null);
   const [playstyle, setPlaystyle] = useState<string | null>(null);
   const [step, setStep] = useState<'budget' | 'playstyle' | 'result'>('budget');
@@ -374,7 +396,7 @@ function Recommender() {
 
   // Filter ammo based on playstyle
   const recommendedAmmo = playstyle
-    ? AMMO.filter((a) => {
+    ? ammo.filter((a) => {
         const style = PLAYSTYLES.find((p) => p.id === playstyle);
         if (!style) return false;
         return style.ammoPreference(a);
@@ -383,7 +405,7 @@ function Recommender() {
 
   // Filter weapons based on playstyle
   const recommendedWeapons = playstyle
-    ? WEAPONS.filter((w) => {
+    ? weapons.filter((w) => {
         if (playstyle === 'stealth') return w.type === 'SMG' || w.type === 'Pistol';
         if (playstyle === 'assault') return w.type === 'Assault Rifle' || w.type === 'DMR';
         return true;

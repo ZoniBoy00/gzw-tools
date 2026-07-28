@@ -1,13 +1,10 @@
 import { useState, useMemo } from 'react';
 import { VENDORS, formatNumber } from '../lib/calc';
 import { getVendorReps, setVendorRep } from '../lib/vendortracker';
-import { AMMO } from '../data/ammo';
-import { WEAPONS } from '../data/weapons';
-import { VESTS, HELMETS } from '../data/armor';
-import itemImages from '../data/item_images.json';
-import vendorImages from '../data/vendor_images.json';
+import { useDataContext } from '../lib/DataContext';
 import ItemModal from './ui/ItemModal';
 import type { ModalItem } from './ui/ItemModal';
+import type { WeaponEntry, AmmoRound, ArmorVest, Helmet } from '../data/types';
 
 interface VendorItem {
   name: string;
@@ -28,25 +25,25 @@ function parseRepLevel(source: string): number {
   return m ? parseInt(m[1]) : 0;
 }
 
-function getVendorItems(vendorName: string): VendorItem[] {
+function getVendorItems(vendorName: string, weapons: WeaponEntry[], ammo: AmmoRound[], vests: ArmorVest[], helmets: Helmet[]): VendorItem[] {
   const items: VendorItem[] = [];
 
-  for (const w of WEAPONS) {
-    const rl = parseRepLevel(w.source);
-    if (rl > 0 && w.source.toLowerCase().includes(vendorName.toLowerCase())) {
+  for (const w of weapons) {
+    const rl = parseRepLevel(w.source as string);
+    if (rl > 0 && (w.source as string).toLowerCase().includes(vendorName.toLowerCase())) {
       items.push({
-        name: w.name, type: 'weapon', repLevel: rl,
+        name: w.name as string, type: 'weapon', repLevel: rl,
         detail: `${w.type} · ${w.caliber} · ${w.magSize}rds${w.fireRate ? ` · ${w.fireRate}RPM` : ''}`,
-        source: w.source,
+        source: w.source as string,
         vendorName: vendorName,
         raw: w as unknown as Record<string, unknown>,
       });
     }
   }
-  for (const a of AMMO) {
-    if (a.vendor?.toLowerCase() === vendorName.toLowerCase() && a.repLevel) {
+  for (const a of ammo) {
+    if ((a.vendor as string)?.toLowerCase() === vendorName.toLowerCase() && a.repLevel) {
       items.push({
-        name: a.name, type: 'ammo', repLevel: a.repLevel,
+        name: a.name as string, type: 'ammo', repLevel: a.repLevel as number,
         detail: `${a.caliber} · ${a.speed}m/s`,
         source: `${a.vendor} R.${a.repLevel}`,
         vendorName: vendorName,
@@ -54,25 +51,25 @@ function getVendorItems(vendorName: string): VendorItem[] {
       });
     }
   }
-  for (const v of VESTS) {
-    const rl = parseRepLevel(v.source);
-    if (rl > 0 && v.source.toLowerCase().includes(vendorName.toLowerCase())) {
+  for (const v of vests) {
+    const rl = parseRepLevel(v.source as string);
+    if (rl > 0 && (v.source as string).toLowerCase().includes(vendorName.toLowerCase())) {
       items.push({
-        name: v.name, type: 'vest', repLevel: rl,
+        name: v.name as string, type: 'vest', repLevel: rl,
         detail: `NIJ ${v.nij} · ${v.material} · ${v.weight}kg`,
-        source: v.source,
+        source: v.source as string,
         vendorName: vendorName,
         raw: v as unknown as Record<string, unknown>,
       });
     }
   }
-  for (const h of HELMETS) {
-    const rl = parseRepLevel(h.source);
-    if (rl > 0 && h.source.toLowerCase().includes(vendorName.toLowerCase())) {
+  for (const h of helmets) {
+    const rl = parseRepLevel(h.source as string);
+    if (rl > 0 && (h.source as string).toLowerCase().includes(vendorName.toLowerCase())) {
       items.push({
-        name: h.name, type: 'helmet', repLevel: rl,
+        name: h.name as string, type: 'helmet', repLevel: rl,
         detail: `NIJ ${h.nij} · ${h.material} · ${h.weight}kg`,
-        source: h.source,
+        source: h.source as string,
         vendorName: vendorName,
         raw: h as unknown as Record<string, unknown>,
       });
@@ -82,7 +79,7 @@ function getVendorItems(vendorName: string): VendorItem[] {
   return items.sort((a, b) => a.repLevel - b.repLevel || a.name.localeCompare(b.name));
 }
 
-function buildModal(item: VendorItem): ModalItem {
+function buildModal(item: VendorItem, itemImages: Record<string, string>): ModalItem {
   const ammoKey = item.type === 'ammo' && item.raw ? `${(item.raw as Record<string, unknown>).caliber} ${item.name}` : item.name;
   const base = { name: item.name, image: (itemImages[ammoKey as keyof typeof itemImages] || itemImages[item.name as keyof typeof itemImages]) as string | undefined };
 
@@ -172,10 +169,14 @@ const VENDOR_META: Record<string, { icon: string; color: string }> = {
 export default function VendorGuide() {
   const [selected, setSelected] = useState(VENDORS[0].slug);
   const [reps, setReps] = useState(getVendorReps());
+  const { weapons, ammo, vests, helmets, itemImages, vendorImages, loading, error } = useDataContext();
+
+  if (loading) return <div className="tab-content"><p className="text-text-muted">Loading vendor data...</p></div>;
+  if (error) return <div className="tab-content"><p className="text-red-400">Error loading vendor data: {error}</p></div>;
 
   const vendor = VENDORS.find((v) => v.slug === selected);
   const repData = reps.find((r) => r.slug === selected);
-  const items = vendor ? getVendorItems(vendor.name) : [];
+  const items = vendor ? getVendorItems(vendor.name, weapons, ammo, vests, helmets) : [];
   const meta = VENDOR_META[selected] || VENDOR_META.handshake;
   const [modalItem, setModalItem] = useState<ModalItem | null>(null);
 
@@ -297,7 +298,7 @@ export default function VendorGuide() {
                   {levelItems.map((item, i) => (
                     <button
                       key={i}
-                      onClick={() => setModalItem(buildModal(item))}
+                      onClick={() => setModalItem(buildModal(item, itemImages))}
                       className="flex items-center gap-2 bg-surface-2 border p-2.5 text-left w-full hover:border-accent/30 transition-colors"
                       style={{ borderColor: meta.color + '15' }}
                     >

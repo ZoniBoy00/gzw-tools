@@ -1,5 +1,6 @@
 import { BrowserRouter, Routes, Route, Navigate, Link, useLocation } from 'react-router-dom';
 import { useState } from 'react';
+import { DataProvider } from './lib/DataContext';
 import Dashboard from './components/Dashboard';
 import RepCalculator from './components/RepCalculator';
 import DollarCalculator from './components/DollarCalculator';
@@ -170,7 +171,9 @@ function AppRouter() {
 export default function App() {
   return (
     <BrowserRouter>
-      <AppRouter />
+      <DataProvider>
+        <AppRouter />
+      </DataProvider>
     </BrowserRouter>
   );
 }

@@ -1,9 +1,8 @@
 import { useState, useMemo, useEffect } from 'react';
-import { AMMO, CALIBERS } from '../data/ammo';
+import { useDataContext } from '../lib/DataContext';
 import { ARMOR_CLASSES } from '../data/types';
 import ItemModal from './ui/ItemModal';
 import type { ModalItem } from './ui/ItemModal';
-import itemImages from '../data/item_images.json';
 
 const PEN: Record<number, { label: string; cls: string }> = {
   0: { label: '✕', cls: 'pen-none' },
@@ -18,6 +17,10 @@ const PEN_LABELS: Record<number, string> = {
 };
 
 export default function AmmoGuide() {
+  const { ammo, calibers, itemImages, loading, error } = useDataContext();
+  if (loading) return <div className="tab-content"><div className="loading-spinner" /></div>;
+  if (error) return <div className="tab-content"><div className="error-message">Failed to load data: {error}</div></div>;
+
   const [caliber, setCaliber] = useState(() => new URLSearchParams(window.location.search).get('caliber') || '5.56x45mm');
   const [search, setSearch] = useState(() => new URLSearchParams(window.location.search).get('asearch') || '');
   const [compare, setCompare] = useState<string[]>([]);
@@ -33,7 +36,7 @@ export default function AmmoGuide() {
   }, [caliber, search]);
 
   const filtered = useMemo(() => {
-    const byCal = AMMO.filter((a) => a.caliber === caliber);
+    const byCal = ammo.filter((a) => a.caliber === caliber);
     if (!search.trim()) return byCal;
     const q = search.toLowerCase();
     return byCal.filter((a) => a.name.toLowerCase().includes(q));
@@ -46,7 +49,7 @@ export default function AmmoGuide() {
   };
 
   const comparedRounds = useMemo(
-    () => AMMO.filter((a) => compare.includes(a.name)),
+    () => ammo.filter((a) => compare.includes(a.name)),
     [compare],
   );
 
@@ -72,7 +75,7 @@ export default function AmmoGuide() {
           className="input w-auto"
           aria-label="Filter by caliber"
         >
-          {CALIBERS.map((c) => (
+          {calibers.map((c) => (
             <option key={c} value={c}>
               {c}
             </option>

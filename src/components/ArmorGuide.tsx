@@ -1,9 +1,10 @@
 import { useState, useMemo } from 'react';
-import { VESTS, HELMETS, PLATE_CARRIERS, RECOMMENDATIONS, MATERIAL_RANK } from '../data/armor';
+import { PLATE_CARRIERS, RECOMMENDATIONS, MATERIAL_RANK } from '../data/armor';
 import TabBar from './ui/TabBar';
-import itemImages from '../data/item_images.json';
+import { useDataContext } from '../lib/DataContext';
 import ItemModal from './ui/ItemModal';
 import type { ModalItem } from './ui/ItemModal';
+import type { ArmorVest, Helmet } from '../data/types';
 
 type SubTab = 'recommend' | 'vests' | 'plate_carriers' | 'helmets' | 'vendors';
 const SUB: { id: SubTab; label: string; icon?: string }[] = [
@@ -16,6 +17,10 @@ const SUB: { id: SubTab; label: string; icon?: string }[] = [
 
 export default function ArmorGuide() {
   const [tab, setTab] = useState<SubTab>('recommend');
+  const { vests, helmets, itemImages, loading, error } = useDataContext();
+
+  if (loading) return <div className="tab-content"><p className="text-text-muted">Loading armor data...</p></div>;
+  if (error) return <div className="tab-content"><p className="text-red-400">Error loading armor data: {error}</p></div>;
 
   return (
     <div className="tab-content">
@@ -28,9 +33,9 @@ export default function ArmorGuide() {
 
       <div className="mt-4">
         {tab === 'recommend' && <Recommendations />}
-        {tab === 'vests' && <VestSection />}
-        {tab === 'plate_carriers' && <PlateCarrierSection />}
-        {tab === 'helmets' && <HelmetSection />}
+        {tab === 'vests' && <VestSection vests={vests} itemImages={itemImages} />}
+        {tab === 'plate_carriers' && <PlateCarrierSection itemImages={itemImages} />}
+        {tab === 'helmets' && <HelmetSection helmets={helmets} itemImages={itemImages} />}
         {tab === 'vendors' && <VendorTable />}
       </div>
 
@@ -77,11 +82,11 @@ function Recommendations() {
 
 // ─── Vest compare ───
 
-function VestSection() {
+function VestSection({ vests, itemImages }: { vests: ArmorVest[]; itemImages: Record<string, string> }) {
   const [compare, setCompare] = useState<string[]>([]);
   const [modalItem, setModalItem] = useState<ModalItem | null>(null);
 
-  const sorted = useMemo(() => [...VESTS].sort((a, b) => nij(b.nij) - nij(a.nij)), []);
+  const sorted = useMemo(() => [...vests].sort((a, b) => nij(b.nij) - nij(a.nij)), []);
 
   const toggleCompare = (name: string) => {
     setCompare((prev) =>
@@ -89,7 +94,7 @@ function VestSection() {
     );
   };
 
-  const comparedVests = useMemo(() => VESTS.filter((v) => compare.includes(v.name)), [compare]);
+  const comparedVests = useMemo(() => vests.filter((v) => compare.includes(v.name)), [compare]);
 
   return (
     <div>
@@ -197,7 +202,7 @@ function VestSection() {
 
 // ─── Plate Carrier compare ───
 
-function PlateCarrierSection() {
+function PlateCarrierSection({ itemImages }: { itemImages: Record<string, string> }) {
   const [compare, setCompare] = useState<string[]>([]);
   const [modalItem, setModalItem] = useState<ModalItem | null>(null);
 
@@ -304,11 +309,11 @@ function PlateCarrierSection() {
 
 // ─── Helmet compare ───
 
-function HelmetSection() {
+function HelmetSection({ helmets, itemImages }: { helmets: Helmet[]; itemImages: Record<string, string> }) {
   const [compare, setCompare] = useState<string[]>([]);
   const [modalItem, setModalItem] = useState<ModalItem | null>(null);
 
-  const sorted = useMemo(() => [...HELMETS].sort((a, b) => nij(b.nij) - nij(a.nij)), []);
+  const sorted = useMemo(() => [...helmets].sort((a, b) => nij(b.nij) - nij(a.nij)), []);
 
   const toggleCompare = (name: string) => {
     setCompare((prev) =>
@@ -316,7 +321,7 @@ function HelmetSection() {
     );
   };
 
-  const comparedHelmets = useMemo(() => HELMETS.filter((h) => compare.includes(h.name)), [compare]);
+  const comparedHelmets = useMemo(() => helmets.filter((h) => compare.includes(h.name)), [compare]);
 
   return (
     <div>

@@ -1,10 +1,15 @@
 import { useState, useMemo, useEffect } from 'react';
-import { WEAPONS, WEAPON_TYPES } from '../data/weapons';
-import itemImages from '../data/item_images.json';
+import { useDataContext } from '../lib/DataContext';
 import ItemModal from './ui/ItemModal';
 import type { ModalItem } from './ui/ItemModal';
 
 export default function WeaponsGuide() {
+  const { weapons, itemImages, loading, error } = useDataContext();
+  if (loading) return <div className="tab-content"><div className="loading-spinner" /></div>;
+  if (error) return <div className="tab-content"><div className="error-message">Failed to load data: {error}</div></div>;
+
+  const weaponTypes = useMemo(() => [...new Set(weapons.map(w => w.type))], [weapons]);
+
   const [type, setType] = useState(() => new URLSearchParams(window.location.search).get('wtype') || 'All');
   const [search, setSearch] = useState(() => new URLSearchParams(window.location.search).get('wsearch') || '');
   const [compare, setCompare] = useState<string[]>([]);
@@ -20,7 +25,7 @@ export default function WeaponsGuide() {
   }, [type, search]);
 
   const filtered = useMemo(() => {
-    let data = WEAPONS;
+    let data = weapons;
     if (type !== 'All') data = data.filter((w) => w.type === type);
     if (search.trim()) {
       const q = search.toLowerCase();
@@ -36,7 +41,7 @@ export default function WeaponsGuide() {
   };
 
   const comparedWeapons = useMemo(
-    () => WEAPONS.filter((w) => compare.includes(w.name)),
+    () => weapons.filter((w) => compare.includes(w.name)),
     [compare],
   );
 
@@ -63,7 +68,7 @@ export default function WeaponsGuide() {
           aria-label="Filter by weapon type"
         >
           <option value="All">All Types</option>
-          {WEAPON_TYPES.map((t) => (
+          {weaponTypes.map((t) => (
             <option key={t} value={t}>{t}</option>
           ))}
         </select>
@@ -232,7 +237,7 @@ export default function WeaponsGuide() {
 
       <div className="mt-3 text-[10px] text-text-muted/60 font-mono flex items-center gap-2">
         <i className="fas fa-database" />
-        {filtered.length} / {WEAPONS.length} weapons
+        {filtered.length} / {weapons.length} weapons
         {comparedWeapons.length > 0 && (
           <span className="text-accent/60">· {comparedWeapons.length} selected</span>
         )}
