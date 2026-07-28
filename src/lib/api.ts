@@ -95,14 +95,42 @@ function parseAmmoAcc(acc: string | undefined): number {
   return m ? parseInt(m[0]) : 0;
 }
 
+// Known caliber prefixes extracted from ammo names
+// Each entry: name starts with prefix → use this caliber label
+const CALIBER_PREFIXES: [string, string][] = [
+  ['.222 Remington', '.222 Remington'],
+  ['.300 AAC Blackout', '.300 AAC Blackout'],
+  ['.45 ACP', '.45 ACP'],
+  ['4.6x30mm', '4.6x30mm'],
+  ['5.45x39mm', '5.45x39mm'],
+  ['5.56x45mm', '5.56x45mm'],
+  ['7.62x25mm', '7.62x25mm'],
+  ['7.62x39mm', '7.62x39mm'],
+  ['7.62x51mm', '7.62x51mm'],
+  ['7.62x54', '7.62x54R'],
+  ['7.65mm Browning', '7.65mm Browning'],
+  ['7.65 Browning', '7.65 Browning'],
+  ['9x19mm', '9x19mm'],
+  ['12 Gauge', '12 Gauge'],
+  ['12GA', '12 Gauge'],
+];
+
+function extractCaliber(name: string): string {
+  for (const [prefix, caliber] of CALIBER_PREFIXES) {
+    if (name.startsWith(prefix)) return caliber;
+  }
+  return 'Other';
+}
+
 export async function fetchAmmo(): Promise<{ rounds: AmmoRound[]; calibers: string[] }> {
   const raw = await fetchJson<ApiAmmo[]>(`${BASE}/ammo?all=true`);
   const rounds: AmmoRound[] = [];
   for (const a of raw) {
-    if (!a.name || a.type === 'Ammunition' || !a.caliber) continue; // skip overview pages
+    if (!a.name || !a.type || a.type === 'Ammunition') continue; // skip overview pages (name+id only)
+    const caliber = extractCaliber(a.name);
     rounds.push({
-      name: a.name.replace(/^\.?\d+\s*/, ''), // strip leading caliber prefix for cleaner name
-      caliber: a.caliber,
+      name: a.name,
+      caliber,
       speed: parseInt(a.muzzle_velocity || '0'),
       accMod: parseAmmoAcc(a.accuracy_modifier),
       durMod: -Math.abs(parseAmmoAcc(a.durability_modifier)),
