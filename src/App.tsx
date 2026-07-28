@@ -97,7 +97,7 @@ function NormalLayout() {
               <i className="fas fa-circle-question" />
             </button>
             <a href="https://buymeacoffee.com/zoniboy00" target="_blank" rel="noopener noreferrer" className="flex items-center gap-1 px-2 py-1 text-[10px] font-mono text-accent border border-accent/20 hover:bg-accent/5 transition-colors" aria-label="Donate">
-              <span>☕</span>
+              <i className="fas fa-mug-hot text-[11px]" />
               <span className="hidden sm:inline">Donate</span>
             </a>
             <span className="text-[9px] font-bold px-1.5 py-0.5 border border-accent/40 text-accent bg-accent/5 tracking-wider">BETA</span>
@@ -156,7 +156,7 @@ function NormalLayout() {
             </a>
             <span className="text-text-muted/20">·</span>
             <a href="https://buymeacoffee.com/zoniboy00" target="_blank" rel="noopener noreferrer" className="text-text-muted/40 hover:text-accent/70 transition-colors">
-              ☕ Donate
+              <i className="fas fa-mug-hot mr-1" /> Donate
             </a>
           </div>
         </div>
