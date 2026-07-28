@@ -1,6 +1,7 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import { formatNumber } from '../lib/calc';
 import { getVendorReps, setVendorRep, type VendorRep } from '../lib/vendortracker';
+import { useDataContext } from '../lib/DataContext';
 
 function ProgressRing({ pct, size = 32 }: { pct: number; size?: number }) {
   const r = (size - 8) / 2;
@@ -28,9 +29,17 @@ function ProgressRing({ pct, size = 32 }: { pct: number; size?: number }) {
 }
 
 export default function Dashboard() {
+  const { weapons, ammo, vests, helmets, keys, loading } = useDataContext();
   const [reps, setReps] = useState<VendorRep[]>([]);
   const [editing, setEditing] = useState<string | null>(null);
   const [editValue, setEditValue] = useState('');
+
+  const liveStats = useMemo(() => [
+    { label: 'Weapons', value: String(weapons.length), icon: 'fas fa-crosshairs', color: 'text-red', desc: 'All weapon data' },
+    { label: 'Ammo Rounds', value: String(ammo.length), icon: 'fas fa-bolt', color: 'text-accent', desc: 'Ammunition types' },
+    { label: 'Armor', value: String(vests.length + helmets.length), icon: 'fas fa-shield-halved', color: 'text-blue', desc: 'Vests & helmets' },
+    { label: 'Keys', value: String(keys.length), icon: 'fas fa-key', color: 'text-green', desc: 'Keys & keycards' },
+  ], [weapons, ammo, vests, helmets, keys]);
 
   // Load on mount and on focus (so other tabs can update)
   const load = () => setReps(getVendorReps());
@@ -64,7 +73,21 @@ export default function Dashboard() {
         <span className="section-title">Overview</span>
       </div>
 
-      {/* Stats grid */}
+      {/* Live stats from API */}
+      <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-8 animate-stagger">
+        {liveStats.map((s) => (
+          <div key={s.label} className="card card-highlight p-4">
+            <div className="flex items-center gap-2 mb-2">
+              <i className={`${s.icon} ${s.color} text-xs`} />
+              <span className="text-[9px] font-mono uppercase tracking-[0.12em] text-text-muted">{s.label}</span>
+            </div>
+            <div className={`text-xl font-bold font-mono ${s.color} stat-number`}>{loading ? '...' : s.value}</div>
+            <div className="text-[9px] font-mono text-text-muted/50 mt-1">{s.desc}</div>
+          </div>
+        ))}
+      </div>
+
+      {/* Vendor stats */}
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-8 animate-stagger">
         {[
           { label: 'Total Rep', value: formatNumber(totalRep), icon: 'fas fa-trophy', color: 'text-accent', desc: 'Combined vendor reputation' },

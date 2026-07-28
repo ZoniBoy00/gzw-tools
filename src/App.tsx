@@ -1,6 +1,40 @@
 import { BrowserRouter, Routes, Route, Navigate, Link } from 'react-router-dom';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { DataProvider } from './lib/DataContext';
+
+function StatsBar() {
+  const [stats, setStats] = useState<{ datasets: number; items: number } | null>(null);
+  useEffect(() => {
+    fetch('https://gzw-data.vercel.app/api/stats')
+      .then(r => r.json())
+      .then(d => {
+        const data = d.data || d;
+        const entries = Object.entries(data).filter(([k]) => !['armor_images','gzwtacmap_data','map_pois','weapon_images','item_images','vendor_images'].includes(k));
+        const totalItems = entries.reduce((s, [, v]: [string, any]) => s + (v.total || 0), 0);
+        setStats({ datasets: entries.length, items: totalItems });
+      })
+      .catch(() => {});
+  }, []);
+  if (!stats) return null;
+  return (
+    <div className="border-b border-border/50 bg-surface/50">
+      <div className="max-w-5xl mx-auto px-4 py-1.5 flex items-center justify-center gap-6 text-[10px] font-mono text-text-muted/60">
+        <span className="flex items-center gap-1.5">
+          <span className="w-1.5 h-1.5 bg-green rounded-full" />
+          <span><b className="text-text/80">{stats.datasets}</b> datasets</span>
+        </span>
+        <span className="flex items-center gap-1.5">
+          <span className="w-1.5 h-1.5 bg-accent rounded-full" />
+          <span><b className="text-text/80">{stats.items.toLocaleString()}</b> items</span>
+        </span>
+        <span className="flex items-center gap-1.5 text-text-muted/40">
+          <i className="fas fa-sync-alt text-[8px]" />
+          <span>Weekly updates</span>
+        </span>
+      </div>
+    </div>
+  );
+}
 import Dashboard from './components/Dashboard';
 import RepCalculator from './components/RepCalculator';
 import DollarCalculator from './components/DollarCalculator';
@@ -70,6 +104,7 @@ function NormalLayout() {
           </div>
         </div>
       </header>
+      <StatsBar />
 
       <main className="max-w-5xl mx-auto px-4 py-6">
         {/* Tab bar */}
