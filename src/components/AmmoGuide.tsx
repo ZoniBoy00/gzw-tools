@@ -21,6 +21,8 @@ export default function AmmoGuide() {
   if (loading) return <div className="tab-content"><div className="loading-spinner" /></div>;
   if (error) return <div className="tab-content"><div className="error-message">Failed to load data: {error}</div></div>;
 
+  const validAmmo = useMemo(() => ammo.filter(a => a.caliber), [ammo]);
+
   const [caliber, setCaliber] = useState(() => new URLSearchParams(window.location.search).get('caliber') || '5.56x45mm');
   const [search, setSearch] = useState(() => new URLSearchParams(window.location.search).get('asearch') || '');
   const [compare, setCompare] = useState<string[]>([]);
@@ -36,7 +38,7 @@ export default function AmmoGuide() {
   }, [caliber, search]);
 
   const filtered = useMemo(() => {
-    const byCal = ammo.filter((a) => a.caliber === caliber);
+    const byCal = validAmmo.filter((a) => a.caliber === caliber);
     if (!search.trim()) return byCal;
     const q = search.toLowerCase();
     return byCal.filter((a) => a.name.toLowerCase().includes(q));
@@ -49,7 +51,7 @@ export default function AmmoGuide() {
   };
 
   const comparedRounds = useMemo(
-    () => ammo.filter((a) => compare.includes(a.name)),
+    () => validAmmo.filter((a) => compare.includes(a.name)),
     [compare],
   );
 

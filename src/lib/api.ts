@@ -125,7 +125,7 @@ export async function fetchAmmo(): Promise<{ rounds: AmmoRound[]; calibers: stri
 interface ApiArmor {
   name: string;
   type?: string;
-  nij?: string;
+  nij_class?: string;
   material?: string;
   weight?: string;
   grid_size?: string;
@@ -139,7 +139,7 @@ export async function fetchVests(): Promise<ArmorVest[]> {
   const raw = await fetchJson<ApiArmor[]>(`${BASE}/vests?all=true`);
   return raw.map(v => ({
     name: v.name,
-    nij: v.nij || 'N/A',
+    nij: v.nij_class || 'N/A',
     material: v.material || 'Unknown',
     plates: v.plates || '',
     grid: v.grid_size || '',
@@ -153,7 +153,7 @@ export async function fetchHelmets(): Promise<Helmet[]> {
   const raw = await fetchJson<ApiArmor[]>(`${BASE}/helmets?all=true`);
   return raw.map(h => ({
     name: h.name,
-    nij: h.nij || 'N/A',
+    nij: h.nij_class || 'N/A',
     material: h.material || 'Unknown',
     weight: parseFloat(h.weight || '0'),
     source: h.sold_by || 'Unknown',

@@ -54,13 +54,15 @@ function toKeyEntry(a: ApiKey): KeyEntry {
   };
 }
 
-// Filter out section-header items
+// Filter out section-header items and overview-only items (just name+id)
 function isRealKey(a: ApiKey): boolean {
-  return !!a.name && !a.name.startsWith('==');
+  return !!a.name
+    && !a.name.startsWith('==')
+    && (!!a.type || !!a.usage || !!a.location || !!a.image);
 }
 
 export default function KeysGuide() {
-  const { data: apiData, loading } = useApiData<any>('keys');
+  const { data: apiData, loading } = useApiData<any>('keys?all=true');
 
   const keys: KeyEntry[] = useMemo(
     () => ((apiData || []) as ApiKey[]).filter(isRealKey).map(toKeyEntry),

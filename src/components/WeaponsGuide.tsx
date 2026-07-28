@@ -94,7 +94,6 @@ export default function WeaponsGuide() {
                 {[
                   { label: 'Type', value: w.type },
                   { label: 'Caliber', value: w.caliber },
-                  { label: 'Mag Size', value: `${w.magSize} rds` },
                   { label: 'Fire Rate', value: w.fireRate ? `${w.fireRate} RPM` : '-' },
                   { label: 'Source', value: w.source },
                 ].map((f) => (
@@ -130,7 +129,6 @@ export default function WeaponsGuide() {
                   fields: [
                         { label: 'Type', value: w.type, desc: 'Weapon classification — determines handling, role and available attachments' },
                         { label: 'Caliber', value: w.caliber, desc: 'The ammunition type the weapon uses — determines damage and penetration' },
-                        { label: 'Mag Size', value: `${w.magSize} rds`, desc: 'Number of rounds a standard magazine can hold' },
                         { label: 'Fire Rate', value: w.fireRate ? `${w.fireRate} RPM` : '-', desc: 'Cyclic rate of fire — rounds per minute the weapon can fire in automatic mode' },
                         { label: 'Source', value: w.source, desc: 'Where to obtain this weapon — from a vendor at a specific rep level, or found by looting' },
                       ],
@@ -141,7 +139,7 @@ export default function WeaponsGuide() {
             <div className="text-right mr-2">
               <div className="text-sm font-mono text-accent">{w.caliber}</div>
               <div className="text-[10px] text-text-muted font-mono">
-                {w.magSize} rds{w.fireRate ? ` · ${w.fireRate} RPM` : ''}
+                {w.fireRate ? `${w.fireRate} RPM` : ''}
               </div>
             </div>
             <button
@@ -175,7 +173,6 @@ export default function WeaponsGuide() {
                 <th role="columnheader">Name</th>
                 <th role="columnheader">Type</th>
                 <th role="columnheader">Caliber</th>
-                <th className="text-center" role="columnheader">Mag</th>
                 <th className="text-center" role="columnheader">RPM</th>
                 <th className="text-right" role="columnheader">Source</th>
               </tr>
@@ -204,7 +201,6 @@ export default function WeaponsGuide() {
                       fields: [
                         { label: 'Type', value: w.type, desc: 'Weapon classification — determines handling, role and available attachments' },
                         { label: 'Caliber', value: w.caliber, desc: 'The ammunition type the weapon uses — determines damage and penetration' },
-                        { label: 'Mag Size', value: `${w.magSize} rds`, desc: 'Number of rounds a standard magazine can hold' },
                         { label: 'Fire Rate', value: w.fireRate ? `${w.fireRate} RPM` : '-', desc: 'Cyclic rate of fire — rounds per minute the weapon can fire in automatic mode' },
                         { label: 'Source', value: w.source, desc: 'Where to obtain this weapon — from a vendor at a specific rep level, or found by looting' },
                       ],
@@ -217,14 +213,13 @@ export default function WeaponsGuide() {
                   </td>
                   <td className="text-text-muted">{w.type}</td>
                   <td className="text-accent">{w.caliber}</td>
-                  <td className="text-center text-text-muted">{w.magSize}</td>
                   <td className="text-center text-text-muted">{w.fireRate || '-'}</td>
                   <td className="text-right text-text-muted text-[10px]">{w.source}</td>
                 </tr>
               ))}
               {filtered.length === 0 && (
                 <tr>
-                  <td colSpan={7} className="empty-state">
+                  <td colSpan={6} className="empty-state">
                     <i className="fas fa-crosshairs" aria-hidden="true" />
                     <p>No weapons match your search</p>
                   </td>
