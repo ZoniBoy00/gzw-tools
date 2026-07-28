@@ -4,6 +4,7 @@
 
 [![Vercel](https://img.shields.io/badge/deployed%20on-Vercel-000?logo=vercel)](https://gzw-tools.vercel.app)
 [![License](https://img.shields.io/badge/license-MIT-blue)](LICENSE)
+[![Donate](https://img.shields.io/badge/donate-Buy%20me%20a%20coffee-f0b429?logo=buymeacoffee)](https://buymeacoffee.com/zoniboy00)
 
 ---
 
