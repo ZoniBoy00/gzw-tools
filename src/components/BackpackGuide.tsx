@@ -153,8 +153,11 @@ function TableSection({
 
 export default function BackpackGuide() {
   const [tab, setTab] = useState<SubTab>('backpacks');
-  const { data: backpacks, loading: bpLoading } = useApiData<BackpackEntry>('backpacks?all=true');
-  const { data: rigs, loading: rigLoading } = useApiData<RigEntry>('rigs?all=true');
+  const { data: rawBp, loading: bpLoading } = useApiData<BackpackEntry>('backpacks?all=true');
+  const { data: rawRigs, loading: rigLoading } = useApiData<RigEntry>('rigs?all=true');
+  // Filter out category overview pages (items with only name+id, no game data)
+  const backpacks = useMemo(() => (rawBp || []).filter(i => i.weight || i.grid_size || i.type || i.sold_by), [rawBp]);
+  const rigs = useMemo(() => (rawRigs || []).filter(i => i.weight || i.grid_size || i.type || i.sold_by), [rawRigs]);
 
   const loading = bpLoading || rigLoading;
 

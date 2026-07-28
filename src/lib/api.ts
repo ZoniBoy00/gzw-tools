@@ -169,7 +169,7 @@ interface ApiArmor {
 
 export async function fetchVests(): Promise<ArmorVest[]> {
   const raw = await fetchJson<ApiArmor[]>(`${BASE}/vests?all=true`);
-  return raw.map(v => ({
+  return raw.filter(v => v.type || v.weight || v.material || v.nij_class || v.sold_by).map(v => ({
     name: v.name,
     nij: v.nij_class || 'N/A',
     material: v.material || 'Unknown',
@@ -183,7 +183,7 @@ export async function fetchVests(): Promise<ArmorVest[]> {
 
 export async function fetchHelmets(): Promise<Helmet[]> {
   const raw = await fetchJson<ApiArmor[]>(`${BASE}/helmets?all=true`);
-  return raw.map(h => ({
+  return raw.filter(h => h.type || h.weight || h.material || h.nij_class || h.sold_by).map(h => ({
     name: h.name,
     nij: h.nij_class || 'N/A',
     material: h.material || 'Unknown',
