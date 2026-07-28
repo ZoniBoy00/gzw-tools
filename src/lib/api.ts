@@ -4,6 +4,7 @@
  * Transforms API responses into the types expected by the frontend components.
  */
 import type { ArmorClass, PenLevel, AmmoRound, ArmorVest, Helmet, WeaponEntry } from '../data/types';
+import { ARMOR_CLASSES } from '../data/types';
 
 const BASE = 'https://gzw-data.vercel.app/api';
 
@@ -65,15 +66,17 @@ interface ApiAmmo {
 
 // Map wiki armor class strings to normalized types
 const NIJ_MAP: Record<string, ArmorClass> = {
-  'i': 'I', 'ii': 'IIA', 'iia': 'IIA', 'iia+': 'IIA+',
+  'i': 'I', 'i+': 'I+', 
+  'iia': 'IIA', 'iia+': 'IIA+',
+  'ii': 'II', 'ii+': 'II+',
   'iiia': 'IIIA', 'iiia+': 'IIIA+',
   'iii': 'III', 'iii+': 'III+', 'iii++': 'III++',
-  'iv': 'III++',
+  'iv': 'IV', 'iv+': 'IV+',
 };
 
 function parsePen(stoppedBy: string | undefined): Record<ArmorClass, PenLevel> {
   const pen: Record<string, PenLevel> = {};
-  for (const ac of ['I', 'IIA', 'IIA+', 'IIIA', 'IIIA+', 'III', 'III+', 'III++']) {
+  for (const ac of ARMOR_CLASSES) {
     pen[ac] = 0 as PenLevel;
   }
   if (!stoppedBy) return pen as Record<ArmorClass, PenLevel>;
@@ -82,9 +85,8 @@ function parsePen(stoppedBy: string | undefined): Record<ArmorClass, PenLevel> {
     const key = match[1].toLowerCase();
     const norm = NIJ_MAP[key];
     if (norm) {
-      // Can penetrate up to this class
       let canPen = false;
-      for (const ac of ['I', 'IIA', 'IIA+', 'IIIA', 'IIIA+', 'III', 'III+', 'III++'] as ArmorClass[]) {
+      for (const ac of ARMOR_CLASSES) {
         if (ac === norm) canPen = true;
         pen[ac] = (canPen ? 2 : 1) as PenLevel;
       }

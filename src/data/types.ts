@@ -1,6 +1,6 @@
 // Gray Zone Warfare — Types
 
-export type ArmorClass = 'I' | 'IIA' | 'IIA+' | 'IIIA' | 'IIIA+' | 'III' | 'III+' | 'III++';
+export type ArmorClass = 'I' | 'I+' | 'IIA' | 'IIA+' | 'II' | 'II+' | 'IIIA' | 'IIIA+' | 'III' | 'III+' | 'III++' | 'IV' | 'IV+';
 export type PenLevel = 0 | 1 | 2;
 
 export interface AmmoRound {
@@ -62,4 +62,4 @@ export interface WeaponEntry {
   image?: string;
 }
 
-export const ARMOR_CLASSES: ArmorClass[] = ['I', 'IIA', 'IIA+', 'IIIA', 'IIIA+', 'III', 'III+', 'III++'];
+export const ARMOR_CLASSES: ArmorClass[] = ['I', 'I+', 'IIA', 'IIA+', 'II', 'II+', 'IIIA', 'IIIA+', 'III', 'III+', 'III++', 'IV', 'IV+'];
