@@ -164,6 +164,32 @@ export default function TaskModal({ task, onClose }: Props) {
                 </section>
               )}
 
+              {/* Guide sections with hover previews */}
+              {data.guideSections.length > 0 && (
+                <section>
+                  <SectionTitle icon="fas fa-map-pin" label="Visual Guides" />
+                  <p className="text-[9px] font-mono text-text-muted/50 mb-2 -mt-1">Hover a section to preview its image</p>
+                  <div className="space-y-2">
+                    {data.guideSections.map((loc, i) => (
+                      <div key={i} className="spawn-loc border border-border hover:border-accent/40 p-3">
+                        <div className="flex items-center gap-2">
+                          <i className="fas fa-location-dot text-accent text-[10px]" aria-hidden="true" />
+                          <span className="text-[11px] font-bold font-mono text-accent uppercase tracking-wider">{loc.title}</span>
+                        </div>
+                        {loc.text && <p className="mt-1.5 text-[10px] font-mono text-text-muted/80 leading-relaxed">{loc.text}</p>}
+                        {loc.images.length > 0 && (
+                          <div className="spawn-loc-preview">
+                            {loc.images.map((src, j) => (
+                              <img key={j} src={src} alt={`${loc.title} image ${j + 1}`} loading="lazy" />
+                            ))}
+                          </div>
+                        )}
+                      </div>
+                    ))}
+                  </div>
+                </section>
+              )}
+
               {/* Guide */}
               {data.guide && (
                 <section>

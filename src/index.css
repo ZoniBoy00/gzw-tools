@@ -695,6 +695,29 @@ th.sortable.desc::after {
 .toast-error { border-left-color: var(--color-red); }
 .toast-error i { color: var(--color-red); }
 
+/* ── Spawn location hover preview ── */
+.spawn-loc {
+  position: relative;
+  cursor: default;
+}
+.spawn-loc-preview {
+  display: none;
+  margin-top: 8px;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 6px;
+}
+.spawn-loc:hover .spawn-loc-preview,
+.spawn-loc:focus-within .spawn-loc-preview {
+  display: grid;
+  animation: fadeInUp 0.2s ease-out;
+}
+.spawn-loc-preview img {
+  width: 100%;
+  height: auto;
+  border: 1px solid var(--color-border);
+  background: var(--color-surface-2);
+}
+
 /* ── Scrollbar ── */
 ::-webkit-scrollbar { width: 6px; height: 6px; }
 ::-webkit-scrollbar-track { background: var(--color-bg); }

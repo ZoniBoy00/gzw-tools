@@ -12,6 +12,12 @@ export interface TaskReward {
   text: string;
 }
 
+export interface GuideSection {
+  title: string;
+  text: string;
+  images: string[]; // resolved image URLs
+}
+
 export interface TaskWikiData {
   title: string;
   vendor: string;
@@ -23,6 +29,7 @@ export interface TaskWikiData {
   requiredItems: { item: string; amount: string; notes: string }[];
   rewards: TaskReward[];
   guide: string;
+  guideSections: GuideSection[];
 }
 
 const cache = new Map<string, TaskWikiData>();
@@ -43,8 +50,40 @@ export async function fetchTaskWiki(name: string): Promise<TaskWikiData> {
   if (!wikitext) throw new Error('Page not found on wiki');
 
   const parsed = parseTaskWikitext(wikitext, name);
+
+  // Resolve guide-section image URLs (single batched API call)
+  const allFiles = parsed.guideSections.flatMap((s) => s.images);
+  if (allFiles.length > 0) {
+    const urlMap = await resolveImageUrls(allFiles);
+    parsed.guideSections = parsed.guideSections
+      .map((s) => ({
+        ...s,
+        images: s.images.map((f) => urlMap[f]).filter(Boolean),
+      }))
+      .filter((s) => s.images.length > 0); // drop sections whose images failed to resolve
+  }
+
   cache.set(name, parsed);
   return parsed;
+}
+
+/** Resolve wiki File: names to full image URLs via the imageinfo API. */
+async function resolveImageUrls(files: string[]): Promise<Record<string, string>> {
+  const unique = [...new Set(files)];
+  if (unique.length === 0) return {};
+  const titles = unique.map((f) => `File:${f}`).join('|');
+  const url = `${WIKI_API}?action=query&titles=${encodeURIComponent(titles)}&prop=imageinfo&iiprop=url&format=json&origin=*`;
+  const res = await fetch(url);
+  if (!res.ok) return {};
+  const body = await res.json();
+  const map: Record<string, string> = {};
+  for (const p of Object.values(body?.query?.pages ?? {})) {
+    const page = p as { title?: string; imageinfo?: { url?: string }[] };
+    const title = page.title?.replace(/^File:/, '');
+    const imgUrl = page.imageinfo?.[0]?.url;
+    if (title && imgUrl) map[title] = imgUrl;
+  }
+  return map;
 }
 
 // ─── Wikitext parsing ───
@@ -57,10 +96,15 @@ function parseTaskWikitext(wikitext: string, fallbackTitle: string): TaskWikiDat
   const objectives = parseObjectives(sections['Objectives'] || '');
   const requiredItems = parseRequiredItems(wikitext);
   const rewards = parseRewards(sections['Rewards'] || '');
+  const guideSections = parseGuideSections(sections['Guide'] || '');
   const guide = cleanText(
     (sections['Guide'] || '')
       .replace(/\{\|[\s\S]*?\|\}/g, '') // drop tables (items are shown separately)
-      .replace(/^={2,4}\s*([^=\n]+?)\s*={2,4}\s*$/gm, '\n$1\n'), // unwrap sub-headers
+      // Drop sub-sections that contain images (shown separately as hover previews)
+      .replace(/^={3,4}\s*([^=\n]+?)\s*={3,4}\s*[\s\S]*?(?=^={3,4}\s*[^=\n]|(?![\s\S]))/gim, (match) =>
+        /\[\[(?:File|Image):|<gallery/i.test(match) ? '' : match,
+      )
+      .replace(/^={2,4}\s*([^=\n]+?)\s*={2,4}\s*$/gm, '\n$1\n'), // unwrap remaining sub-headers
   );
 
   return {
@@ -74,7 +118,27 @@ function parseTaskWikitext(wikitext: string, fallbackTitle: string): TaskWikiDat
     requiredItems,
     rewards,
     guide,
+    guideSections,
   };
+}
+
+/** Parse image-bearing "===Sub-section===" blocks (title + text + File: images) from the Guide section. */
+function parseGuideSections(guideContent: string): GuideSection[] {
+  const out: GuideSection[] = [];
+  const headerRe = /^={3,4}\s*([^=\n]+?)\s*={3,4}\s*$/gm;
+  const matches = [...guideContent.matchAll(headerRe)];
+  for (let i = 0; i < matches.length; i++) {
+    const title = cleanText(matches[i][1]);
+    if (/required items/i.test(title)) continue; // handled separately
+    const start = matches[i].index! + matches[i][0].length;
+    const end = i + 1 < matches.length ? matches[i + 1].index! : guideContent.length;
+    const block = guideContent.slice(start, end);
+    const images = [...block.matchAll(/File:([^\]|\n|]+)/gi)].map((m) => m[1].trim());
+    if (images.length === 0) continue; // only sections with images
+    const text = cleanText(block.replace(/<gallery[\s\S]*?<\/gallery>/gi, ''));
+    out.push({ title, text, images });
+  }
+  return out;
 }
 
 /** Extract key=value pairs from the {{Infobox quest ...}} template. */
