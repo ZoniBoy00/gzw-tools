@@ -26,6 +26,16 @@ export default function TaskModal({ task, onClose }: Props) {
   const overlayRef = useRef<HTMLDivElement>(null);
   const [data, setData] = useState<TaskWikiData | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const [openSections, setOpenSections] = useState<Set<number>>(new Set());
+
+  const toggleSection = (i: number) => {
+    setOpenSections((prev) => {
+      const next = new Set(prev);
+      if (next.has(i)) next.delete(i);
+      else next.add(i);
+      return next;
+    });
+  };
 
   useEffect(() => {
     let cancelled = false;
@@ -164,28 +174,42 @@ export default function TaskModal({ task, onClose }: Props) {
                 </section>
               )}
 
-              {/* Guide sections with hover previews */}
+              {/* Guide sections with click-to-expand image previews */}
               {data.guideSections.length > 0 && (
                 <section>
                   <SectionTitle icon="fas fa-map-pin" label="Visual Guides" />
-                  <p className="text-[9px] font-mono text-text-muted/50 mb-2 -mt-1">Hover a section to preview its image</p>
+                  <p className="text-[9px] font-mono text-text-muted/50 mb-2 -mt-1">Click a section to show its images</p>
                   <div className="space-y-2">
-                    {data.guideSections.map((loc, i) => (
-                      <div key={i} className="spawn-loc border border-border hover:border-accent/40 p-3">
-                        <div className="flex items-center gap-2">
-                          <i className="fas fa-location-dot text-accent text-[10px]" aria-hidden="true" />
-                          <span className="text-[11px] font-bold font-mono text-accent uppercase tracking-wider">{loc.title}</span>
+                    {data.guideSections.map((loc, i) => {
+                      const open = openSections.has(i);
+                      return (
+                        <div key={i} className={`spawn-loc border p-3 transition-colors ${open ? 'border-accent/40 bg-accent/5' : 'border-border hover:border-border-light'}`}>
+                          <button
+                            onClick={() => toggleSection(i)}
+                            className="w-full text-left flex items-center justify-between gap-3"
+                            aria-expanded={open}
+                            aria-controls={`guide-section-${i}`}
+                          >
+                            <span className="flex items-center gap-2 min-w-0">
+                              <i className="fas fa-location-dot text-accent text-[10px]" aria-hidden="true" />
+                              <span className="text-[11px] font-bold font-mono text-accent uppercase tracking-wider truncate">{loc.title}</span>
+                            </span>
+                            <span className="flex items-center gap-2 shrink-0">
+                              <span className="text-[9px] font-mono text-text-muted/50">{loc.images.length} img</span>
+                              <i className={`fas fa-chevron-down text-[9px] text-text-muted transition-transform ${open ? 'rotate-180' : ''}`} aria-hidden="true" />
+                            </span>
+                          </button>
+                          {loc.text && <p className="mt-1.5 text-[10px] font-mono text-text-muted/80 leading-relaxed">{loc.text}</p>}
+                          {loc.images.length > 0 && (
+                            <div id={`guide-section-${i}`} className={`spawn-loc-preview ${open ? 'open' : ''}`}>
+                              {loc.images.map((src, j) => (
+                                <img key={j} src={src} alt={`${loc.title} image ${j + 1}`} loading="lazy" />
+                              ))}
+                            </div>
+                          )}
                         </div>
-                        {loc.text && <p className="mt-1.5 text-[10px] font-mono text-text-muted/80 leading-relaxed">{loc.text}</p>}
-                        {loc.images.length > 0 && (
-                          <div className="spawn-loc-preview">
-                            {loc.images.map((src, j) => (
-                              <img key={j} src={src} alt={`${loc.title} image ${j + 1}`} loading="lazy" />
-                            ))}
-                          </div>
-                        )}
-                      </div>
-                    ))}
+                      );
+                    })}
                   </div>
                 </section>
               )}

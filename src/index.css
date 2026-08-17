@@ -695,19 +695,14 @@ th.sortable.desc::after {
 .toast-error { border-left-color: var(--color-red); }
 .toast-error i { color: var(--color-red); }
 
-/* ── Spawn location hover preview ── */
-.spawn-loc {
-  position: relative;
-  cursor: default;
-}
+/* ── Guide section image preview (click to expand) ── */
 .spawn-loc-preview {
   display: none;
   margin-top: 8px;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: 6px;
 }
-.spawn-loc:hover .spawn-loc-preview,
-.spawn-loc:focus-within .spawn-loc-preview {
+.spawn-loc-preview.open {
   display: grid;
   animation: fadeInUp 0.2s ease-out;
 }
