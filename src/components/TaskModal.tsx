@@ -144,10 +144,23 @@ export default function TaskModal({ task, onClose }: Props) {
               )}
 
               {/* Rewards */}
-              {data.rewards && (
+              {data.rewards.length > 0 && (
                 <section>
                   <SectionTitle icon="fas fa-gift" label="Rewards" />
-                  <p className="text-xs font-mono text-text leading-relaxed whitespace-pre-line">{data.rewards}</p>
+                  <ul className="space-y-1.5">
+                    {data.rewards.map((r, i) => (
+                      <li
+                        key={i}
+                        className={`flex items-start gap-2 text-xs font-mono ${r.level === 0 ? 'text-text' : 'text-text-muted/80 pl-5'}`}
+                      >
+                        <i
+                          className={`${r.level === 0 ? 'fas fa-medal text-accent' : 'fas fa-angle-right text-text-muted/40'} mt-0.5 text-[10px]`}
+                          aria-hidden="true"
+                        />
+                        <span>{r.text}</span>
+                      </li>
+                    ))}
+                  </ul>
                 </section>
               )}
 

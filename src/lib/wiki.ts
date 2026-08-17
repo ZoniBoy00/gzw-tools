@@ -7,6 +7,11 @@
 
 const WIKI_API = 'https://gray-zone-warfare.fandom.com/api.php';
 
+export interface TaskReward {
+  level: number; // 0 = main reward, 1 = sub-note (e.g. "after first completion")
+  text: string;
+}
+
 export interface TaskWikiData {
   title: string;
   vendor: string;
@@ -16,7 +21,7 @@ export interface TaskWikiData {
   briefing: string;
   objectives: string[];
   requiredItems: { item: string; amount: string; notes: string }[];
-  rewards: string;
+  rewards: TaskReward[];
   guide: string;
 }
 
@@ -51,7 +56,7 @@ function parseTaskWikitext(wikitext: string, fallbackTitle: string): TaskWikiDat
   const briefing = cleanText(sections['Briefing'] || '');
   const objectives = parseObjectives(sections['Objectives'] || '');
   const requiredItems = parseRequiredItems(wikitext);
-  const rewards = cleanText(sections['Rewards'] || '');
+  const rewards = parseRewards(sections['Rewards'] || '');
   const guide = cleanText(
     (sections['Guide'] || '')
       .replace(/\{\|[\s\S]*?\|\}/g, '') // drop tables (items are shown separately)
@@ -108,6 +113,19 @@ function parseObjectives(content: string): string[] {
   for (const line of lines) {
     const m = line.match(/^\*\*?\s*(.+)$/);
     if (m) out.push(cleanText(m[1]));
+  }
+  return out;
+}
+
+/** Parse reward bullets: "* main" and "** sub-note" lines into a structured list. */
+function parseRewards(content: string): TaskReward[] {
+  const out: TaskReward[] = [];
+  for (const line of content.split('\n')) {
+    const m = line.match(/^(\*+)\s*(.+)$/);
+    if (!m) continue;
+    const text = cleanText(m[2]);
+    if (!text) continue;
+    out.push({ level: m[1].length - 1, text });
   }
   return out;
 }
