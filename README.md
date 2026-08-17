@@ -15,39 +15,37 @@
 | **Overview** | Dashboard with quick stats, rep progress, gear recommendations |
 | **Rep → $** | Calculate cost to reach a target reputation |
 | **$ → Rep** | Calculate how much rep you can buy with your budget |
-| **Overview** | Dashboard with quick stats, rep progress, gear recommendations |
-| **Rep → $** | Calculate cost to reach a target reputation |
-| **$ → Rep** | Calculate how much rep you can buy with your budget |
-| **Missions** | Browse 159 missions from 7 vendors — search, filter, expand |
-| **Ammo** | Full ammo database with caliber, pen values, vendor sources |
+| **Missions** | Browse missions from 7 vendors — search, filter, expand |
+| **Ammo** | Full ammo database with caliber, pen values, vendor sources, compare mode |
 | **Weapons** | Weapons database with compare mode, filters, detail modals |
 | **Armor** | Armor & gear guide with vests, plate carriers, helmets, recommendations |
-| **Keys** 🔑 | 105 keys & keycards across 12 locations — search by location or name |
+| **Backpacks** | Backpack & rig database with stats and vendor sources |
+| **Keys** 🔑 | Keys & keycards across 12 locations — search by location or name |
 | **Vendors** | Vendor guide with rep tracking, per-rank item lists, unlock status (7 vendors) |
-| **Loadouts** | Build and save weapon loadouts in your browser |
+| **Loadouts** | Build and save weapon loadouts in your browser (localStorage) |
 | **Log Analyzer** | Parse GZW.log files to extract match data |
-| **API** | REST API for all game data |
+| **API** | REST API docs for all game data |
 
 ## Tech Stack
 
 - **Frontend:** React 19, TypeScript, Vite, Tailwind CSS
-- **Backend:** Vercel serverless functions (Node.js)
-- **Data:** Scraped from [GZW Fandom Wiki](https://gray-zone-warfare.fandom.com)
+- **Data API:** [gzw-data.vercel.app](https://gzw-data.vercel.app) — proxied through `/api/*` via `vercel.json`
 - **Hosting:** Vercel (Hobby)
 
 ## Data Sources
 
-All game data is scraped from the [GZW Fandom Wiki](https://gray-zone-warfare.fandom.com) via GitHub Actions:
+All game data is served by the [GZW Data API](https://gzw-data.vercel.app), scraped from the [GZW Fandom Wiki](https://gray-zone-warfare.fandom.com):
+
 - Weapon stats, ammo values, armor data
 - Mission objectives & rewards
 - Vendor reputation requirements
 - Keys & keycards
 
-Data refreshes automatically every Monday via the GitHub Actions scraper.
+The frontend never talks to the wiki directly — it fetches everything through the same-origin `/api` proxy (see `vercel.json`), which keeps the app fast and CORS-free. Data refreshes weekly.
 
 ## API
 
-The tool includes a REST API at `/api`:
+The tool includes a REST API at `/api` (proxied to the GZW Data API):
 
 ```
 GET /api                    API documentation
@@ -59,7 +57,7 @@ GET /api/armor/vests        Vests only
 GET /api/armor/helmets      Helmets only
 GET /api/recommendations    Gear recommendations
 GET /api/missions           Mission database
-GET /api/keys               Keys & keycards (105 keys)
+GET /api/keys               Keys & keycards
 GET /api/stats              Aggregate statistics
 GET /api/search?q=          Unified search
 GET /api/calculator/rep-to-dollars?current=&target=&rate=
@@ -80,28 +78,23 @@ npm run dev
 # Build for production
 npm run build
 
-# Scrape wiki data
-python3 scripts/scraper/scrape.py --all
-python3 scripts/scraper/enrich_tasks.py
-python3 scripts/scraper/categorize_tasks.py
-python3 scripts/scraper/gen_frontend_data.py
+# Lint
+npm run lint
 ```
 
 ## Project Structure
 
 ```
-├── api/                  # Vercel serverless function (REST API)
-│   └── index.js
+├── public/               # Static assets (favicon, og-image, robots.txt, sitemap)
 ├── src/
 │   ├── components/       # React components
-│   │   └── ui/          # Shared UI components (TabBar, ItemModal)
-│   ├── data/            # Game data (JSON + TS)
-│   ├── lib/             # Utilities (calculators, vendor tracker)
-│   └── App.tsx          # Root component with routing
-├── scripts/
-│   └── scraper/         # Wiki scraping pipeline
-├── .github/workflows/   # GitHub Actions (weekly data refresh)
-└── vercel.json          # Vercel deployment config
+│   │   └── ui/           # Shared UI components (TabBar, ItemModal, StatRow)
+│   ├── data/             # Static game data (armor recommendations)
+│   ├── hooks/            # Data fetching hooks
+│   ├── lib/              # Utilities (API client, calculators, toast, vendor tracker)
+│   └── App.tsx           # Root component with routing
+├── .github/workflows/    # CI (lint + build on push/PR)
+└── vercel.json           # Vercel config (SPA rewrite + API proxy)
 ```
 
 ## License
