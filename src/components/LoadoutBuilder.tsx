@@ -1,7 +1,8 @@
 import { useState } from 'react';
 import TabBar from './ui/TabBar';
 import { RECOMMENDATIONS } from '../data/armor';
-import { useDataContext } from '../lib/DataContext';
+import { useDataContext } from '../lib/useDataContext';
+import { useToast } from '../lib/useToast';
 import type { AmmoRound, ArmorVest, Helmet, WeaponEntry } from '../data/types';
 
 // ─── Types ───
@@ -126,6 +127,7 @@ export default function LoadoutBuilder() {
 // ─── Builder ───
 
 function Builder({ weapons, vests, helmets, ammo }: { weapons: WeaponEntry[]; vests: ArmorVest[]; helmets: Helmet[]; ammo: AmmoRound[] }) {
+  const toast = useToast();
   const [loadouts, setLoadouts] = useState<Loadout[]>(loadLoadouts);
   const [editing, setEditing] = useState<Loadout | null>(null);
   const [name, setName] = useState('');
@@ -178,6 +180,7 @@ function Builder({ weapons, vests, helmets, ammo }: { weapons: WeaponEntry[]; ve
       const updated = [...loadouts, newLoadout];
       setLoadouts(updated);
       saveLoadouts(updated);
+      toast(`Loadout "${newLoadout.name}" saved`, 'success');
     }
     resetForm();
   };
@@ -194,9 +197,11 @@ function Builder({ weapons, vests, helmets, ammo }: { weapons: WeaponEntry[]; ve
   };
 
   const remove = (id: string) => {
+    const target = loadouts.find((l) => l.id === id);
     const updated = loadouts.filter((l) => l.id !== id);
     setLoadouts(updated);
     saveLoadouts(updated);
+    if (target) toast(`Loadout "${target.name}" deleted`, 'info');
   };
 
   const toggleWeapon = (name: string) => {

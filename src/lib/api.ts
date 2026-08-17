@@ -1,12 +1,13 @@
 /**
  * GZW Data API client.
- * Fetches all game data from gzw-data.vercel.app — the single source of truth.
+ * Fetches all game data from the /api proxy (vercel.json rewrites it to
+ * gzw-data.vercel.app) — the single source of truth.
  * Transforms API responses into the types expected by the frontend components.
  */
 import type { ArmorClass, PenLevel, AmmoRound, ArmorVest, Helmet, WeaponEntry } from '../data/types';
 import { ARMOR_CLASSES } from '../data/types';
 
-const BASE = 'https://gzw-data.vercel.app/api';
+const BASE = '/api';
 
 export function wikiUrl(name: string): string {
   return `https://gray-zone-warfare.fandom.com/wiki/${encodeURIComponent(name.replace(/\s+/g, '_'))}`;

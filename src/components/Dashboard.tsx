@@ -1,7 +1,8 @@
 import { useState, useEffect, useMemo } from 'react';
 import { formatNumber } from '../lib/calc';
 import { getVendorReps, setVendorRep, type VendorRep } from '../lib/vendortracker';
-import { useDataContext } from '../lib/DataContext';
+import { useDataContext } from '../lib/useDataContext';
+import { useToast } from '../lib/useToast';
 
 function ProgressRing({ pct, size = 32 }: { pct: number; size?: number }) {
   const r = (size - 8) / 2;
@@ -30,6 +31,7 @@ function ProgressRing({ pct, size = 32 }: { pct: number; size?: number }) {
 
 export default function Dashboard() {
   const { weapons, ammo, vests, helmets, keys, loading } = useDataContext();
+  const toast = useToast();
   const [reps, setReps] = useState<VendorRep[]>([]);
   const [editing, setEditing] = useState<string | null>(null);
   const [editValue, setEditValue] = useState('');
@@ -64,6 +66,7 @@ export default function Dashboard() {
     setVendorRep(slug, val);
     setEditing(null);
     load();
+    toast('Reputation updated', 'success');
   };
 
   return (
@@ -183,7 +186,7 @@ export default function Dashboard() {
       {/* Reset */}
       <div className="mt-3 flex justify-end">
         <button
-          onClick={() => { localStorage.removeItem('gzw-vendor-reps'); load(); }}
+          onClick={() => { localStorage.removeItem('gzw-vendor-reps'); load(); toast('All vendor rep values reset', 'info'); }}
           className="text-[9px] font-mono text-text-muted/30 hover:text-red/60 transition-colors"
         >
           Reset all vendor rep values

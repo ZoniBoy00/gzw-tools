@@ -1,7 +1,7 @@
 import { useState, useMemo } from 'react';
 import { PLATE_CARRIERS, RECOMMENDATIONS, MATERIAL_RANK } from '../data/armor';
 import TabBar from './ui/TabBar';
-import { useDataContext } from '../lib/DataContext';
+import { useDataContext } from '../lib/useDataContext';
 import { wikiUrl } from '../lib/api';
 import ItemModal from './ui/ItemModal';
 import type { ModalItem } from './ui/ItemModal';
@@ -87,7 +87,7 @@ function VestSection({ vests, itemImages }: { vests: ArmorVest[]; itemImages: Re
   const [compare, setCompare] = useState<string[]>([]);
   const [modalItem, setModalItem] = useState<ModalItem | null>(null);
 
-  const sorted = useMemo(() => [...vests].sort((a, b) => nij(b.nij) - nij(a.nij)), []);
+  const sorted = useMemo(() => [...vests].sort((a, b) => nij(b.nij) - nij(a.nij)), [vests]);
 
   const toggleCompare = (name: string) => {
     setCompare((prev) =>
@@ -95,7 +95,7 @@ function VestSection({ vests, itemImages }: { vests: ArmorVest[]; itemImages: Re
     );
   };
 
-  const comparedVests = useMemo(() => vests.filter((v) => compare.includes(v.name)), [compare]);
+  const comparedVests = useMemo(() => vests.filter((v) => compare.includes(v.name)), [compare, vests]);
 
   return (
     <div>
@@ -316,7 +316,7 @@ function HelmetSection({ helmets, itemImages }: { helmets: Helmet[]; itemImages:
   const [compare, setCompare] = useState<string[]>([]);
   const [modalItem, setModalItem] = useState<ModalItem | null>(null);
 
-  const sorted = useMemo(() => [...helmets].sort((a, b) => nij(b.nij) - nij(a.nij)), []);
+  const sorted = useMemo(() => [...helmets].sort((a, b) => nij(b.nij) - nij(a.nij)), [helmets]);
 
   const toggleCompare = (name: string) => {
     setCompare((prev) =>
@@ -324,7 +324,7 @@ function HelmetSection({ helmets, itemImages }: { helmets: Helmet[]; itemImages:
     );
   };
 
-  const comparedHelmets = useMemo(() => helmets.filter((h) => compare.includes(h.name)), [compare]);
+  const comparedHelmets = useMemo(() => helmets.filter((h) => compare.includes(h.name)), [compare, helmets]);
 
   return (
     <div>

@@ -1,5 +1,6 @@
 import { useState, useMemo, useEffect } from 'react';
-import { useDataContext } from '../lib/DataContext';
+import { useDataContext } from '../lib/useDataContext';
+import { useToast } from '../lib/useToast';
 import { wikiUrl } from '../lib/api';
 import { ARMOR_CLASSES } from '../data/types';
 import ItemModal from './ui/ItemModal';
@@ -19,8 +20,7 @@ const PEN_LABELS: Record<number, string> = {
 
 export default function AmmoGuide() {
   const { ammo, calibers, itemImages, loading, error } = useDataContext();
-  if (loading) return <div className="tab-content"><div className="loading-spinner" /></div>;
-  if (error) return <div className="tab-content"><div className="error-message">Failed to load data: {error}</div></div>;
+  const toast = useToast();
 
   const validAmmo = useMemo(() => ammo.filter(a => a.caliber), [ammo]);
 
@@ -43,18 +43,27 @@ export default function AmmoGuide() {
     if (!search.trim()) return byCal;
     const q = search.toLowerCase();
     return byCal.filter((a) => a.name.toLowerCase().includes(q));
-  }, [caliber, search]);
+  }, [caliber, search, validAmmo]);
 
   const toggleCompare = (name: string) => {
-    setCompare((prev) =>
-      prev.includes(name) ? prev.filter((n) => n !== name) : prev.length < 3 ? [...prev, name] : prev,
-    );
+    setCompare((prev) => {
+      if (prev.includes(name)) return prev.filter((n) => n !== name);
+      if (prev.length >= 3) {
+        toast('Compare limit reached (max 3)', 'error');
+        return prev;
+      }
+      toast(`${name} added to compare`, 'info');
+      return [...prev, name];
+    });
   };
 
   const comparedRounds = useMemo(
     () => validAmmo.filter((a) => compare.includes(a.name)),
-    [compare],
+    [compare, validAmmo],
   );
+
+  if (loading) return <div className="tab-content"><div className="loading-spinner" /></div>;
+  if (error) return <div className="tab-content"><div className="error-message">Failed to load data: {error}</div></div>;
 
   return (
     <div className="tab-content">

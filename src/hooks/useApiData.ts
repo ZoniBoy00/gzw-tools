@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 
-const API = 'https://gzw-data.vercel.app/api';
+const API = '/api';
 
 export function useApiData<T>(endpoint: string) {
   const [data, setData] = useState<T[]>([]);
@@ -22,5 +22,5 @@ export function useApiData<T>(endpoint: string) {
     return () => { cancelled = true; };
   }, [endpoint]);
 
-  return { data, loading, error, refetch: () => {} };
+  return { data, loading, error };
 }

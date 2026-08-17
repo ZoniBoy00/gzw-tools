@@ -1,17 +1,21 @@
 import { BrowserRouter, Routes, Route, Navigate, Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { DataProvider } from './lib/DataContext';
+import { ToastProvider } from './lib/toast';
 
 function StatsBar() {
-  const [stats, setStats] = useState<{ datasets: number; items: number } | null>(null);
+  const [stats, setStats] = useState<{ datasets: number; items: number; updated: string } | null>(null);
   useEffect(() => {
-    fetch('https://gzw-data.vercel.app/api/stats')
+    fetch('/api/stats')
       .then(r => r.json())
       .then(d => {
         const data = d.data || d;
         const entries = Object.entries(data).filter(([k]) => !['armor_images','gzwtacmap_data','map_pois','weapon_images','item_images','vendor_images'].includes(k));
         const totalItems = entries.reduce((s, [, v]: [string, any]) => s + (v.total || 0), 0);
-        setStats({ datasets: entries.length, items: totalItems });
+        const updated = d.timestamp
+          ? new Date(d.timestamp).toLocaleDateString('en-US', { month: 'short', year: 'numeric' })
+          : '';
+        setStats({ datasets: entries.length, items: totalItems, updated });
       })
       .catch(() => {});
   }, []);
@@ -31,6 +35,12 @@ function StatsBar() {
           <i className="fas fa-sync-alt text-[8px]" />
           <span>Weekly updates</span>
         </span>
+        {stats.updated && (
+          <span className="ts-badge text-[9px]">
+            <i className="fas fa-cloud-arrow-down" />
+            <span>Data: {stats.updated}</span>
+          </span>
+        )}
       </div>
     </div>
   );
@@ -101,10 +111,6 @@ function NormalLayout() {
               <span className="hidden sm:inline">Donate</span>
             </a>
             <span className="text-[9px] font-bold px-1.5 py-0.5 border border-accent/40 text-accent bg-accent/5 tracking-wider">BETA</span>
-            <div className="ts-badge text-[9px]">
-              <i className="fas fa-cloud-arrow-down" />
-              <span>Data: Jul 2026</span>
-            </div>
           </div>
         </div>
       </header>
@@ -175,7 +181,9 @@ export default function App() {
   return (
     <BrowserRouter>
       <DataProvider>
-        <AppRouter />
+        <ToastProvider>
+          <AppRouter />
+        </ToastProvider>
       </DataProvider>
     </BrowserRouter>
   );

@@ -2,7 +2,7 @@
  * DataContext — loads ALL game data from gzw-data API at app startup.
  * Components use `useDataContext()` to access any dataset synchronously.
  */
-import { createContext, useContext, useState, useEffect, type ReactNode } from 'react';
+import { createContext, useState, useEffect, type ReactNode } from 'react';
 import { fetchWeapons, fetchAmmo, fetchVests, fetchHelmets, fetchKeys, fetchItemImages, fetchVendorImages, type KeyEntry } from './api';
 import type { AmmoRound, ArmorVest, Helmet, WeaponEntry } from '../data/types';
 
@@ -25,6 +25,7 @@ const defaultData: GameData = {
 };
 
 const DataContext = createContext<GameData>(defaultData);
+export { DataContext };
 
 export function DataProvider({ children }: { children: ReactNode }) {
   const [data, setData] = useState<GameData>(defaultData);
@@ -58,8 +59,4 @@ export function DataProvider({ children }: { children: ReactNode }) {
   }, []);
 
   return <DataContext.Provider value={data}>{children}</DataContext.Provider>;
-}
-
-export function useDataContext() {
-  return useContext(DataContext);
 }

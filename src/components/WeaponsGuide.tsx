@@ -1,13 +1,13 @@
 import { useState, useMemo, useEffect } from 'react';
-import { useDataContext } from '../lib/DataContext';
+import { useDataContext } from '../lib/useDataContext';
+import { useToast } from '../lib/useToast';
 import { wikiUrl } from '../lib/api';
 import ItemModal from './ui/ItemModal';
 import type { ModalItem } from './ui/ItemModal';
 
 export default function WeaponsGuide() {
   const { weapons, itemImages, loading, error } = useDataContext();
-  if (loading) return <div className="tab-content"><div className="loading-spinner" /></div>;
-  if (error) return <div className="tab-content"><div className="error-message">Failed to load data: {error}</div></div>;
+  const toast = useToast();
 
   const weaponTypes = useMemo(() => [...new Set(weapons.map(w => w.type))], [weapons]);
 
@@ -33,18 +33,27 @@ export default function WeaponsGuide() {
       data = data.filter((w) => w.name.toLowerCase().includes(q) || w.caliber.toLowerCase().includes(q));
     }
     return data;
-  }, [type, search]);
+  }, [type, search, weapons]);
 
   const toggleCompare = (name: string) => {
-    setCompare((prev) =>
-      prev.includes(name) ? prev.filter((n) => n !== name) : prev.length < 3 ? [...prev, name] : prev,
-    );
+    setCompare((prev) => {
+      if (prev.includes(name)) return prev.filter((n) => n !== name);
+      if (prev.length >= 3) {
+        toast('Compare limit reached (max 3)', 'error');
+        return prev;
+      }
+      toast(`${name} added to compare`, 'info');
+      return [...prev, name];
+    });
   };
 
   const comparedWeapons = useMemo(
     () => weapons.filter((w) => compare.includes(w.name)),
-    [compare],
+    [compare, weapons],
   );
+
+  if (loading) return <div className="tab-content"><div className="loading-spinner" /></div>;
+  if (error) return <div className="tab-content"><div className="error-message">Failed to load data: {error}</div></div>;
 
   return (
     <div className="tab-content">
