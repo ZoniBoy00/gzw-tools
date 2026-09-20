@@ -34,13 +34,34 @@ const TYPE_ICONS = {
 
 export default function ItemModal({ item, onClose }: Props) {
   const overlayRef = useRef<HTMLDivElement>(null);
+  const dialogRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    const previouslyFocused = document.activeElement as HTMLElement | null;
+    const firstFocusable = dialogRef.current?.querySelector<HTMLElement>('button, a[href]');
+    firstFocusable?.focus();
+
     const handler = (e: KeyboardEvent) => {
       if (e.key === 'Escape') onClose();
+      if (e.key !== 'Tab' || !dialogRef.current) return;
+      const focusable = [...dialogRef.current.querySelectorAll<HTMLElement>('button, a[href]')]
+        .filter(element => !element.hasAttribute('disabled'));
+      if (focusable.length === 0) return;
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+      if (e.shiftKey && document.activeElement === first) {
+        e.preventDefault();
+        last.focus();
+      } else if (!e.shiftKey && document.activeElement === last) {
+        e.preventDefault();
+        first.focus();
+      }
     };
     window.addEventListener('keydown', handler);
-    return () => window.removeEventListener('keydown', handler);
+    return () => {
+      window.removeEventListener('keydown', handler);
+      previouslyFocused?.focus();
+    };
   }, [onClose]);
 
   useEffect(() => {
@@ -63,6 +84,7 @@ export default function ItemModal({ item, onClose }: Props) {
       style={{ animation: 'fadeIn 0.15s ease-out' }}
     >
       <div
+        ref={dialogRef}
         className="bg-surface border border-border w-full max-w-lg mx-3 max-h-[90vh] overflow-y-auto"
         style={{ animation: 'fadeInUp 0.2s ease-out' }}
       >
