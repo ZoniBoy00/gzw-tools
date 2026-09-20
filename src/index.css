@@ -1445,6 +1445,9 @@ a:focus-visible {
 .status-dot { width: 7px; height: 7px; border-radius: 50%; display: inline-block; }
 .status-dot--good { background: #56bd78; }
 .app-content { width: min(1380px, 100%); flex: 1; margin: 0 auto; padding: 30px; }
+.route-fallback { min-height: 260px; display: grid; place-items: center; align-content: center; gap: 10px; color: #9ca5ad; font: 12px 'JetBrains Mono', monospace; }
+.route-fallback__mark { width: 20px; height: 20px; border: 2px solid #3b444c; border-top-color: var(--color-accent); border-radius: 50%; animation: routeSpin .7s linear infinite; }
+@keyframes routeSpin { to { transform: rotate(360deg); } }
 .app-footer { display: flex; justify-content: space-between; gap: 20px; padding: 16px 30px 22px; color: #7b848c; font: 10px 'JetBrains Mono', monospace; border-top: 1px solid #242a30; }
 .app-footer span:last-child { display: flex; gap: 14px; }
 .app-footer a { color: #a5adb3; text-decoration: none; }

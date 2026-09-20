@@ -1,22 +1,28 @@
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import { lazy, Suspense } from 'react';
 import { DataProvider } from './lib/DataContext';
 import AppShell from './components/layout/AppShell';
-import Dashboard from './components/Dashboard';
-import RepCalculator from './components/RepCalculator';
-import DollarCalculator from './components/DollarCalculator';
-import MissionFinder from './components/MissionFinder';
-import AmmoGuide from './components/AmmoGuide';
-import ArmorGuide from './components/ArmorGuide';
-import BackpackGuide from './components/BackpackGuide';
-import WeaponsGuide from './components/WeaponsGuide';
-import VendorGuide from './components/VendorGuide';
-import LoadoutBuilder from './components/LoadoutBuilder';
-import LogAnalyzer from './components/LogAnalyzer';
-import KeysGuide from './components/KeysGuide';
-import ApiDocs from './components/ApiDocs';
-import PrivacyPolicy from './components/PrivacyPolicy';
-import TermsOfService from './components/TermsOfService';
 import './index.css';
+
+const Dashboard = lazy(() => import('./components/Dashboard'));
+const RepCalculator = lazy(() => import('./components/RepCalculator'));
+const DollarCalculator = lazy(() => import('./components/DollarCalculator'));
+const MissionFinder = lazy(() => import('./components/MissionFinder'));
+const AmmoGuide = lazy(() => import('./components/AmmoGuide'));
+const ArmorGuide = lazy(() => import('./components/ArmorGuide'));
+const BackpackGuide = lazy(() => import('./components/BackpackGuide'));
+const WeaponsGuide = lazy(() => import('./components/WeaponsGuide'));
+const VendorGuide = lazy(() => import('./components/VendorGuide'));
+const LoadoutBuilder = lazy(() => import('./components/LoadoutBuilder'));
+const LogAnalyzer = lazy(() => import('./components/LogAnalyzer'));
+const KeysGuide = lazy(() => import('./components/KeysGuide'));
+const ApiDocs = lazy(() => import('./components/ApiDocs'));
+const PrivacyPolicy = lazy(() => import('./components/PrivacyPolicy'));
+const TermsOfService = lazy(() => import('./components/TermsOfService'));
+
+function RouteFallback() {
+  return <div className="route-fallback" role="status"><span className="route-fallback__mark" /> Loading module…</div>;
+}
 
 function AppRoutes() {
   return (
@@ -46,7 +52,7 @@ export default function App() {
     <BrowserRouter>
       <DataProvider>
         <AppShell>
-          <AppRoutes />
+          <Suspense fallback={<RouteFallback />}><AppRoutes /></Suspense>
         </AppShell>
       </DataProvider>
     </BrowserRouter>
