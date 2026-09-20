@@ -1446,6 +1446,10 @@ a:focus-visible {
 .status-dot--good { background: #56bd78; }
 .app-content { width: min(1380px, 100%); flex: 1; margin: 0 auto; padding: 30px; }
 .route-fallback { min-height: 260px; display: grid; place-items: center; align-content: center; gap: 10px; color: #9ca5ad; font: 12px 'JetBrains Mono', monospace; }
+.page-state { min-height: 220px; display: grid; place-items: center; align-content: center; gap: 12px; padding: 30px; color: #a9b1b7; background: #101418; border: 1px solid #2b3238; font: 12px 'JetBrains Mono', monospace; text-align: center; }
+.page-state--error { color: #e08d77; border-color: rgba(224,141,119,.35); }
+.page-state > i { font-size: 18px; }
+.page-state__spinner { width: 22px; height: 22px; border: 2px solid #3b444c; border-top-color: var(--color-accent); border-radius: 50%; animation: routeSpin .7s linear infinite; }
 .route-fallback__mark { width: 20px; height: 20px; border: 2px solid #3b444c; border-top-color: var(--color-accent); border-radius: 50%; animation: routeSpin .7s linear infinite; }
 @keyframes routeSpin { to { transform: rotate(360deg); } }
 .app-footer { display: flex; justify-content: space-between; gap: 20px; padding: 16px 30px 22px; color: #7b848c; font: 10px 'JetBrains Mono', monospace; border-top: 1px solid #242a30; }

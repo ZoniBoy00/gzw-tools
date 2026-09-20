@@ -3,6 +3,7 @@ import { useDataContext } from '../lib/DataContext';
 import { wikiUrl } from '../lib/api';
 import { ARMOR_CLASSES } from '../data/types';
 import ItemModal from './ui/ItemModal';
+import PageState from './ui/PageState';
 import type { ModalItem } from './ui/ItemModal';
 
 const PEN: Record<number, { label: string; cls: string }> = {
@@ -54,8 +55,8 @@ export default function AmmoGuide() {
     [compare, validAmmo],
   );
 
-  if (loading) return <div className="tab-content"><div className="loading-spinner" /></div>;
-  if (error) return <div className="tab-content"><div className="error-message">Failed to load data: {error}</div></div>;
+  if (loading) return <PageState kind="loading" message="Loading ammunition data…" />;
+  if (error) return <PageState kind="error" message={`Failed to load ammunition data: ${error}`} />;
 
   return (
     <div className="tab-content">

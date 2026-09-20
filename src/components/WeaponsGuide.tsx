@@ -2,6 +2,7 @@ import { useState, useMemo, useEffect } from 'react';
 import { useDataContext } from '../lib/DataContext';
 import { wikiUrl } from '../lib/api';
 import ItemModal from './ui/ItemModal';
+import PageState from './ui/PageState';
 import type { ModalItem } from './ui/ItemModal';
 
 export default function WeaponsGuide() {
@@ -44,8 +45,8 @@ export default function WeaponsGuide() {
     [compare, weapons],
   );
 
-  if (loading) return <div className="tab-content"><div className="loading-spinner" /></div>;
-  if (error) return <div className="tab-content"><div className="error-message">Failed to load data: {error}</div></div>;
+  if (loading) return <PageState kind="loading" message="Loading weapons data…" />;
+  if (error) return <PageState kind="error" message={`Failed to load weapons data: ${error}`} />;
 
   return (
     <div className="tab-content">
