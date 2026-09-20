@@ -113,6 +113,14 @@ function TableSection({
                 <tr
                   key={item.name}
                   onClick={() => openModal(item)}
+                  onKeyDown={(event) => {
+                    if (event.key === 'Enter' || event.key === ' ') {
+                      event.preventDefault();
+                      openModal(item);
+                    }
+                  }}
+                  role="button"
+                  tabIndex={0}
                   className="border-b border-border/30 hover:bg-surface-2/50 transition-colors cursor-pointer"
                 >
                   <td className="py-3 px-3">

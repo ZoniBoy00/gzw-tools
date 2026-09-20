@@ -298,9 +298,9 @@ function Builder({ weapons, vests, helmets, ammo }: { weapons: WeaponEntry[]; ve
             {selectedWeapons.length > 0 && (
               <div className="flex flex-wrap gap-1 mt-1">
                 {selectedWeapons.map((n) => (
-                  <span key={n} className="chip chip-sm active" onClick={() => toggleWeapon(n)}>
+                  <button key={n} type="button" className="chip chip-sm active" onClick={() => toggleWeapon(n)} aria-label={`Remove ${n}`}>
                     {n} <i className="fas fa-xmark text-[8px] ml-1" />
-                  </span>
+                  </button>
                 ))}
               </div>
             )}
