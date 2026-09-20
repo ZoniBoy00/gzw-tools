@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://gzw-tools.vercel.app/sitemap.xml

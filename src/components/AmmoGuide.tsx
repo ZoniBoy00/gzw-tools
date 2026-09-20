@@ -1,9 +1,9 @@
 import { useState, useMemo, useEffect } from 'react';
-import { useDataContext } from '../lib/dataContext';
+import { useDataContext } from '../lib/useDataContext';
+import { useToast } from '../lib/useToast';
 import { wikiUrl } from '../lib/api';
 import { ARMOR_CLASSES } from '../data/types';
 import ItemModal from './ui/ItemModal';
-import PageState from './ui/PageState';
 import type { ModalItem } from './ui/ItemModal';
 
 const PEN: Record<number, { label: string; cls: string }> = {
@@ -20,6 +20,7 @@ const PEN_LABELS: Record<number, string> = {
 
 export default function AmmoGuide() {
   const { ammo, calibers, itemImages, loading, error } = useDataContext();
+  const toast = useToast();
 
   const validAmmo = useMemo(() => ammo.filter(a => a.caliber), [ammo]);
 
@@ -45,9 +46,15 @@ export default function AmmoGuide() {
   }, [caliber, search, validAmmo]);
 
   const toggleCompare = (name: string) => {
-    setCompare((prev) =>
-      prev.includes(name) ? prev.filter((n) => n !== name) : prev.length < 3 ? [...prev, name] : prev,
-    );
+    setCompare((prev) => {
+      if (prev.includes(name)) return prev.filter((n) => n !== name);
+      if (prev.length >= 3) {
+        toast('Compare limit reached (max 3)', 'error');
+        return prev;
+      }
+      toast(`${name} added to compare`, 'info');
+      return [...prev, name];
+    });
   };
 
   const comparedRounds = useMemo(
@@ -55,8 +62,8 @@ export default function AmmoGuide() {
     [compare, validAmmo],
   );
 
-  if (loading) return <PageState kind="loading" message="Loading ammunition data…" />;
-  if (error) return <PageState kind="error" message={`Failed to load ammunition data: ${error}`} />;
+  if (loading) return <div className="tab-content"><div className="loading-spinner" /></div>;
+  if (error) return <div className="tab-content"><div className="error-message">Failed to load data: {error}</div></div>;
 
   return (
     <div className="tab-content">
@@ -150,8 +157,8 @@ export default function AmmoGuide() {
             </tr>
           </thead>
           <tbody>
-            {filtered.map((r) => (
-              <tr key={r.name}>
+            {filtered.map((r, i) => (
+              <tr key={i}>
                 <td data-label="" className="font-medium">
                   <button onClick={() => setModalItem({
                     name: r.name,

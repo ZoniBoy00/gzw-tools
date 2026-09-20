@@ -1,7 +1,8 @@
 import { useState, useEffect, useMemo } from 'react';
 import { formatNumber } from '../lib/calc';
 import { getVendorReps, setVendorRep, type VendorRep } from '../lib/vendortracker';
-import { useDataContext } from '../lib/dataContext';
+import { useDataContext } from '../lib/useDataContext';
+import { useToast } from '../lib/useToast';
 
 function ProgressRing({ pct, size = 32 }: { pct: number; size?: number }) {
   const r = (size - 8) / 2;
@@ -30,6 +31,7 @@ function ProgressRing({ pct, size = 32 }: { pct: number; size?: number }) {
 
 export default function Dashboard() {
   const { weapons, ammo, vests, helmets, keys, loading } = useDataContext();
+  const toast = useToast();
   const [reps, setReps] = useState<VendorRep[]>([]);
   const [editing, setEditing] = useState<string | null>(null);
   const [editValue, setEditValue] = useState('');
@@ -64,6 +66,7 @@ export default function Dashboard() {
     setVendorRep(slug, val);
     setEditing(null);
     load();
+    toast('Reputation updated', 'success');
   };
 
   return (
@@ -112,7 +115,7 @@ export default function Dashboard() {
           <i className="fas fa-users text-accent/60 text-xs" />
           <span className="section-title">Vendor Progress</span>
         </div>
-        <span className="text-[10px] font-mono text-text-muted">Click rep value to edit</span>
+        <span className="text-[9px] font-mono text-text-muted/40">Click rep value to edit</span>
       </div>
 
       {/* Vendor cards */}
@@ -128,7 +131,7 @@ export default function Dashboard() {
                   </div>
                   <div>
                     <div className="text-sm font-bold font-mono text-text">{v.name}</div>
-                    <div className="text-[10px] font-mono text-text-muted uppercase tracking-wider">{v.desc}</div>
+                    <div className="text-[9px] font-mono text-text-muted/60 uppercase tracking-wider">{v.desc}</div>
                   </div>
                 </div>
                 <span className={`text-xs font-mono font-bold ${pct >= 90 ? 'text-green' : pct >= 50 ? 'text-accent' : 'text-text-muted'}`}>
@@ -170,7 +173,7 @@ export default function Dashboard() {
                         <span className="text-accent font-bold">{formatNumber(v.rep)}</span>
                         <span className="text-text-muted/40"> / {formatNumber(v.maxRep)}</span>
                       </span>
-                      <span className="text-text-muted text-[9px]">Click to edit</span>
+                      <span className="text-text-muted/40 text-[8px]">Click to edit</span>
                     </div>
                   </button>
                 )}
@@ -183,13 +186,8 @@ export default function Dashboard() {
       {/* Reset */}
       <div className="mt-3 flex justify-end">
         <button
-          onClick={() => {
-            if (window.confirm('Reset all saved vendor reputation values?')) {
-              localStorage.removeItem('gzw-vendor-reps');
-              load();
-            }
-          }}
-          className="text-[10px] font-mono text-text-muted hover:text-red transition-colors"
+          onClick={() => { localStorage.removeItem('gzw-vendor-reps'); load(); toast('All vendor rep values reset', 'info'); }}
+          className="text-[9px] font-mono text-text-muted/30 hover:text-red/60 transition-colors"
         >
           Reset all vendor rep values
         </button>
@@ -204,7 +202,7 @@ export default function Dashboard() {
         <p className="text-xs font-mono text-text-muted/80 leading-relaxed">
           GZW Tools is a fan-made companion for <span className="text-text">Gray Zone Warfare</span>.
           Plan your reputation farming, compare ammunition penetration, browse weapons,
-          and find the best armor — all in one place. Data sourced from the GZW Data API.
+          and find the best armor — all in one place. Data sourced from the GZW Wiki.
         </p>
         <div className="flex flex-wrap gap-3 mt-3 text-[10px] font-mono text-text-muted/50">
           <span>Not affiliated with M.A.G. Studios</span>

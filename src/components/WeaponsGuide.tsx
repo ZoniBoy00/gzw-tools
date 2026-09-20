@@ -1,12 +1,13 @@
 import { useState, useMemo, useEffect } from 'react';
-import { useDataContext } from '../lib/dataContext';
+import { useDataContext } from '../lib/useDataContext';
+import { useToast } from '../lib/useToast';
 import { wikiUrl } from '../lib/api';
 import ItemModal from './ui/ItemModal';
-import PageState from './ui/PageState';
 import type { ModalItem } from './ui/ItemModal';
 
 export default function WeaponsGuide() {
   const { weapons, itemImages, loading, error } = useDataContext();
+  const toast = useToast();
 
   const weaponTypes = useMemo(() => [...new Set(weapons.map(w => w.type))], [weapons]);
 
@@ -35,9 +36,15 @@ export default function WeaponsGuide() {
   }, [type, search, weapons]);
 
   const toggleCompare = (name: string) => {
-    setCompare((prev) =>
-      prev.includes(name) ? prev.filter((n) => n !== name) : prev.length < 3 ? [...prev, name] : prev,
-    );
+    setCompare((prev) => {
+      if (prev.includes(name)) return prev.filter((n) => n !== name);
+      if (prev.length >= 3) {
+        toast('Compare limit reached (max 3)', 'error');
+        return prev;
+      }
+      toast(`${name} added to compare`, 'info');
+      return [...prev, name];
+    });
   };
 
   const comparedWeapons = useMemo(
@@ -45,8 +52,8 @@ export default function WeaponsGuide() {
     [compare, weapons],
   );
 
-  if (loading) return <PageState kind="loading" message="Loading weapons data…" />;
-  if (error) return <PageState kind="error" message={`Failed to load weapons data: ${error}`} />;
+  if (loading) return <div className="tab-content"><div className="loading-spinner" /></div>;
+  if (error) return <div className="tab-content"><div className="error-message">Failed to load data: {error}</div></div>;
 
   return (
     <div className="tab-content">
@@ -113,9 +120,9 @@ export default function WeaponsGuide() {
 
       {/* Mobile: cards */}
       <div className="sm:hidden space-y-1.5">
-        {filtered.map((w) => (
+        {filtered.map((w, i) => (
           <div
-            key={w.name}
+            key={i}
             className={`flex items-center justify-between p-3 border transition-colors ${
               compare.includes(w.name) ? 'border-accent/50 bg-accent/5' : 'border-border hover:border-border-light'
             }`}
@@ -182,8 +189,8 @@ export default function WeaponsGuide() {
               </tr>
             </thead>
             <tbody>
-              {filtered.map((w) => (
-                <tr key={w.name}>
+              {filtered.map((w, i) => (
+                <tr key={i}>
                   <td className="text-center align-middle">
                     <button
                       onClick={() => toggleCompare(w.name)}

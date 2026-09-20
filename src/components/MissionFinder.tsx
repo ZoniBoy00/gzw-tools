@@ -1,6 +1,6 @@
 import { useState, useMemo } from 'react';
 import { useApiData } from '../hooks/useApiData';
-import PageState from './ui/PageState';
+import TaskModal from './TaskModal';
 
 interface Task {
   id: string;
@@ -22,28 +22,12 @@ interface Task {
 }
 
 export default function MissionFinder() {
-  const tasks = useApiData<any>('tasks');
-  const mainTasks = useApiData<any>('main_task');
-  const sideTasks = useApiData<any>('side_task');
-  const hiddenTasks = useApiData<any>('hidden_task');
-  const squadTasks = useApiData<any>('squad_strike_missions');
-  const contractTasks = useApiData<any>('contract');
-  const tasksData = tasks.data;
-  const mainTaskData = mainTasks.data;
-  const sideTaskData = sideTasks.data;
-  const hiddenData = hiddenTasks.data;
-  const squadData = squadTasks.data;
-  const contractData = contractTasks.data;
-  const missionLoading = tasks.loading || mainTasks.loading || sideTasks.loading || hiddenTasks.loading || squadTasks.loading || contractTasks.loading;
-  const missionError = tasks.error || mainTasks.error || sideTasks.error || hiddenTasks.error || squadTasks.error || contractTasks.error;
-  const retryMissions = () => {
-    tasks.refetch();
-    mainTasks.refetch();
-    sideTasks.refetch();
-    hiddenTasks.refetch();
-    squadTasks.refetch();
-    contractTasks.refetch();
-  };
+  const { data: tasksData } = useApiData<any>('tasks');
+  const { data: mainTaskData } = useApiData<any>('main_task');
+  const { data: sideTaskData } = useApiData<any>('side_task');
+  const { data: hiddenData } = useApiData<any>('hidden_task');
+  const { data: squadData } = useApiData<any>('squad_strike_missions');
+  const { data: contractData } = useApiData<any>('contract');
 
   const allTasks: Task[] = useMemo(() => {
     if (!tasksData.length) return [];
@@ -82,7 +66,7 @@ export default function MissionFinder() {
   const [typeFilter, setTypeFilter] = useState('');
   const [categoryFilter, setCategoryFilter] = useState('');
   const [sortBy, setSortBy] = useState<'name' | 'vendor'>('vendor');
-  const [expanded, setExpanded] = useState<string | null>(null);
+  const [modalTask, setModalTask] = useState<Task | null>(null);
 
   const categories = useMemo(() => {
     const cats = ['main_task', 'side_task', 'hidden_task', 'squad_strike', 'contract', 'task'];
@@ -152,24 +136,24 @@ export default function MissionFinder() {
         ))}
       </div>
 
-      {missionError ? (
-        <PageState kind="error" message={`Failed to load missions: ${missionError}`} onRetry={retryMissions} />
-      ) : missionLoading ? (
-        <PageState kind="loading" message="Loading missions…" />
-      ) : filtered.length > 0 ? (
+      {filtered.length > 0 ? (
         <div className="space-y-1">
           {filtered.map((t) => (
-            <div key={t.id} className={`border transition-colors ${expanded === t.id ? 'border-accent/40' : 'border-border hover:border-border-light'}`}>
-              <button onClick={() => setExpanded(expanded === t.id ? null : t.id)} className="w-full text-left px-3.5 py-2.5 flex items-center justify-between gap-3">
+            <div key={t.id} className="border border-border hover:border-accent/40 transition-colors">
+              <button
+                onClick={() => setModalTask(t)}
+                className="w-full text-left px-3.5 py-2.5 flex items-center justify-between gap-3"
+                aria-label={`View details for ${t.name}`}
+              >
                 <div className="flex items-center gap-3 min-w-0">
                   <span className={`w-1.5 h-1.5 shrink-0 ${vendorColor(t.vendor)}`} />
                   <div className="min-w-0">
                     <div className="text-sm font-medium truncate">{t.name}
                       {t.category === 'hidden_task' && <span className="tag tag-amber text-[8px] ml-2">Hidden</span>}
-                      {t.category === 'main_task' && <span className="tag text-[8px] ml-2" style={{background:'rgba(59,130,246,0.15)',color:'#3b82f6'}}>Main</span>}
-                      {t.category === 'side_task' && <span className="tag text-[8px] ml-2" style={{background:'rgba(34,197,94,0.15)',color:'#22c55e'}}>Side</span>}
-                      {t.category === 'squad_strike' && <span className="tag text-[8px] ml-2" style={{background:'rgba(168,85,247,0.15)',color:'#a855f7'}}>Squad</span>}
-                      {t.category === 'contract' && <span className="tag text-[8px] ml-2" style={{background:'rgba(236,72,153,0.15)',color:'#ec4899'}}>Contract</span>}
+                      {t.category === 'main_task' && <span className="tag tag-main text-[8px] ml-2">Main</span>}
+                      {t.category === 'side_task' && <span className="tag tag-side text-[8px] ml-2">Side</span>}
+                      {t.category === 'squad_strike' && <span className="tag tag-squad text-[8px] ml-2">Squad</span>}
+                      {t.category === 'contract' && <span className="tag tag-contract text-[8px] ml-2">Contract</span>}
                     </div>
                     <div className="text-[10px] font-mono text-text-muted flex items-center gap-2">
                       {t.vendor && <span className="tag tag-drab text-[8px]">{t.vendor}</span>}
@@ -177,35 +161,26 @@ export default function MissionFinder() {
                     </div>
                   </div>
                 </div>
-                <i className={`fas fa-chevron-down text-[9px] text-text-muted transition-transform ${expanded === t.id ? 'rotate-180' : ''}`} />
+                <span className="flex items-center gap-2 shrink-0">
+                  <span className="text-[9px] font-mono text-text-muted/40 hidden sm:inline">Details</span>
+                  <i className="fas fa-circle-info text-[10px] text-text-muted/50" />
+                </span>
               </button>
-              {expanded === t.id && (
-                <div className="px-3.5 pb-3 border-t border-border/50 pt-2 text-xs font-mono space-y-1.5">
-                  <div className="grid grid-cols-2 gap-x-4 gap-y-1">
-                    {t.vendor && <div><span className="text-text-muted">Vendor </span><span className="tag tag-drab text-[9px]">{t.vendor}</span></div>}
-                    {(t.location || t.area) && <div><span className="text-text-muted">Area </span><span>{t.location || t.area}</span></div>}
-                  </div>
-                  <div className="pt-2 flex items-center gap-3 text-[9px]">
-                    <a href={`https://gray-zone-warfare.fandom.com/wiki/${encodeURIComponent(t.name)}`} target="_blank" rel="noopener noreferrer" className="text-accent/70 hover:text-accent transition-colors flex items-center gap-1">
-                      <i className="fas fa-external-link-alt text-[8px]" /> View on Wiki
-                    </a>
-                    <span className="text-text-muted/30">ID: {t.id}</span>
-                  </div>
-                </div>
-              )}
             </div>
           ))}
         </div>
       ) : (
         <div className="empty-state">
           <i className="fas fa-clipboard-list" aria-hidden="true" />
-          <p>No missions match the current filters.</p>
+          <p>No missions match your filters</p>
         </div>
       )}
 
       <div className="mt-3 flex flex-wrap items-center gap-2 text-[10px] font-mono text-text-muted/60">
         <span><i className="fas fa-database mr-1" />{filtered.length} / {allTasks.length}</span>
       </div>
+
+      {modalTask && <TaskModal task={modalTask} onClose={() => setModalTask(null)} />}
     </div>
   );
 }
