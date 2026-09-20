@@ -1,5 +1,5 @@
 import { useEffect, useState, type ReactNode } from 'react';
-import { NavLink, Link } from 'react-router-dom';
+import { NavLink, Link, useLocation } from 'react-router-dom';
 import FaqModal from '../FaqModal';
 import { GZW_API_BASE } from '../../lib/api';
 
@@ -101,6 +101,12 @@ function Navigation({ onNavigate }: { onNavigate?: () => void }) {
 export default function AppShell({ children }: { children: ReactNode }) {
   const [showFaq, setShowFaq] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const location = useLocation();
+
+  useEffect(() => {
+    const routeTitle = ALL_ITEMS.find(item => item.path === location.pathname)?.label || 'Field Reference';
+    document.title = `${routeTitle} · GZW Tools`;
+  }, [location.pathname]);
 
   return (
     <div className="app-shell">
