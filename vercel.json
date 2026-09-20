@@ -1,7 +1,7 @@
 {
   "framework": "vite",
   "rewrites": [
-    { "source": "/api/(.*)", "destination": "https://gzw-data.vercel.app/api/$1" },
+    { "source": "/api/v1/(.*)", "destination": "https://gzw-data.dev/api/v1/$1" },
     { "source": "/(.*)", "destination": "/index.html" }
   ]
 }
