@@ -2,6 +2,7 @@ import { useEffect, useState, type ReactNode } from 'react';
 import { NavLink, Link, useLocation } from 'react-router-dom';
 import FaqModal from '../FaqModal';
 import { GZW_API_BASE } from '../../lib/api';
+import { useDataContext } from '../../lib/dataContext';
 
 type NavItem = { id: string; label: string; icon: string; path: string };
 type NavGroup = { label: string; items: NavItem[] };
@@ -102,6 +103,7 @@ export default function AppShell({ children }: { children: ReactNode }) {
   const [showFaq, setShowFaq] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const location = useLocation();
+  const { dataVersion } = useDataContext();
 
   useEffect(() => {
     const routeTitle = ALL_ITEMS.find(item => item.path === location.pathname)?.label || 'Field Reference';
@@ -130,7 +132,7 @@ export default function AppShell({ children }: { children: ReactNode }) {
             <i className="fas fa-bars" aria-hidden="true" />
           </button>
           <div className="topbar__context"><span className="topbar__eyebrow">GZW Tools / Operations console</span><span className="topbar__title">Gray Zone Warfare field reference</span></div>
-          <div className="topbar__actions"><span className="beta-tag">BETA</span><span className="data-tag"><i className="fas fa-database" /> API v1</span></div>
+          <div className="topbar__actions"><span className="beta-tag">BETA</span><span className="data-tag"><i className="fas fa-database" /> {dataVersion ? `DATA ${dataVersion.slice(0, 10)}` : 'API v1'}</span></div>
         </header>
         <StatsStrip />
         <main id="main-content" className="app-content">{children}</main>

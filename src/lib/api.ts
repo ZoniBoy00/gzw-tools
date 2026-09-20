@@ -9,6 +9,11 @@ import { ARMOR_CLASSES } from '../data/types';
 export const GZW_API_BASE = (import.meta.env.VITE_GZW_DATA_URL || 'https://gzw-data.dev/api/v1').replace(/\/$/, '');
 const BASE = GZW_API_BASE;
 
+export async function fetchDataVersion(): Promise<string | null> {
+  const version = await fetchJson<{ dataVersion?: string }>(`${BASE}/version`);
+  return version.dataVersion || null;
+}
+
 export function wikiUrl(name: string): string {
   return `https://gray-zone-warfare.fandom.com/wiki/${encodeURIComponent(name.replace(/\s+/g, '_'))}`;
 }
