@@ -1,7 +1,7 @@
 import { useState, useMemo } from 'react';
 import { PLATE_CARRIERS, RECOMMENDATIONS, MATERIAL_RANK } from '../data/armor';
 import TabBar from './ui/TabBar';
-import { useDataContext } from '../lib/DataContext';
+import { useDataContext } from '../lib/dataContext';
 import { wikiUrl } from '../lib/api';
 import ItemModal from './ui/ItemModal';
 import type { ModalItem } from './ui/ItemModal';

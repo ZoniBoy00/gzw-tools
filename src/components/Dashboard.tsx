@@ -1,7 +1,7 @@
 import { useState, useEffect, useMemo } from 'react';
 import { formatNumber } from '../lib/calc';
 import { getVendorReps, setVendorRep, type VendorRep } from '../lib/vendortracker';
-import { useDataContext } from '../lib/DataContext';
+import { useDataContext } from '../lib/dataContext';
 
 function ProgressRing({ pct, size = 32 }: { pct: number; size?: number }) {
   const r = (size - 8) / 2;

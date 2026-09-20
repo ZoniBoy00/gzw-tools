@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import TabBar from './ui/TabBar';
 import { RECOMMENDATIONS } from '../data/armor';
-import { useDataContext } from '../lib/DataContext';
+import { useDataContext } from '../lib/dataContext';
 import type { AmmoRound, ArmorVest, Helmet, WeaponEntry } from '../data/types';
 
 // ─── Types ───

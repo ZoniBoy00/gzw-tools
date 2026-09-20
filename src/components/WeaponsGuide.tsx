@@ -1,5 +1,5 @@
 import { useState, useMemo, useEffect } from 'react';
-import { useDataContext } from '../lib/DataContext';
+import { useDataContext } from '../lib/dataContext';
 import { wikiUrl } from '../lib/api';
 import ItemModal from './ui/ItemModal';
 import PageState from './ui/PageState';
