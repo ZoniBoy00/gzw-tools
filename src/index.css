@@ -637,7 +637,7 @@ th.sortable.desc::after {
 }
 
 .stat-number {
-  animation: countPop 0.4s ease-out;
+  animation: none;
 }
 
 /* Keep dashboard content immediately available to users and screen readers. */
