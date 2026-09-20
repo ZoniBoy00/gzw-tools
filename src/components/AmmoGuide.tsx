@@ -150,8 +150,8 @@ export default function AmmoGuide() {
             </tr>
           </thead>
           <tbody>
-            {filtered.map((r, i) => (
-              <tr key={i}>
+            {filtered.map((r) => (
+              <tr key={r.name}>
                 <td data-label="" className="font-medium">
                   <button onClick={() => setModalItem({
                     name: r.name,

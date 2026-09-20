@@ -166,9 +166,9 @@ export default function KeysGuide() {
               <span className="text-[9px] font-mono text-text-muted/50">{locKeys.length} keys</span>
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-1">
-              {locKeys.map((k, i) => (
+              {locKeys.map((k) => (
                 <button
-                  key={i}
+                  key={k.name}
                   onClick={() => openModal(k)}
                   className="flex items-center gap-2 px-3 py-2 border border-border hover:border-accent/30 transition-colors text-left w-full"
                 >

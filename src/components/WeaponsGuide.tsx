@@ -113,9 +113,9 @@ export default function WeaponsGuide() {
 
       {/* Mobile: cards */}
       <div className="sm:hidden space-y-1.5">
-        {filtered.map((w, i) => (
+        {filtered.map((w) => (
           <div
-            key={i}
+            key={w.name}
             className={`flex items-center justify-between p-3 border transition-colors ${
               compare.includes(w.name) ? 'border-accent/50 bg-accent/5' : 'border-border hover:border-border-light'
             }`}
@@ -182,8 +182,8 @@ export default function WeaponsGuide() {
               </tr>
             </thead>
             <tbody>
-              {filtered.map((w, i) => (
-                <tr key={i}>
+              {filtered.map((w) => (
+                <tr key={w.name}>
                   <td className="text-center align-middle">
                     <button
                       onClick={() => toggleCompare(w.name)}
