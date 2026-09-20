@@ -15,55 +15,48 @@
 | **Overview** | Dashboard with quick stats, rep progress, gear recommendations |
 | **Rep → $** | Calculate cost to reach a target reputation |
 | **$ → Rep** | Calculate how much rep you can buy with your budget |
-| **Overview** | Dashboard with quick stats, rep progress, gear recommendations |
-| **Rep → $** | Calculate cost to reach a target reputation |
-| **$ → Rep** | Calculate how much rep you can buy with your budget |
-| **Missions** | Browse 159 missions from 7 vendors — search, filter, expand |
+| **Missions** | Browse mission data by vendor, area, type, and category |
 | **Ammo** | Full ammo database with caliber, pen values, vendor sources |
 | **Weapons** | Weapons database with compare mode, filters, detail modals |
 | **Armor** | Armor & gear guide with vests, plate carriers, helmets, recommendations |
-| **Keys** 🔑 | 105 keys & keycards across 12 locations — search by location or name |
+| **Keys** 🔑 | Search keys and keycards by location or name |
 | **Vendors** | Vendor guide with rep tracking, per-rank item lists, unlock status (7 vendors) |
 | **Loadouts** | Build and save weapon loadouts in your browser |
 | **Log Analyzer** | Parse GZW.log files to extract match data |
-| **API** | REST API for all game data |
+| **API Docs** | Explore the public GZW Data API contract |
 
 ## Tech Stack
 
 - **Frontend:** React 19, TypeScript, Vite, Tailwind CSS
-- **Backend:** Vercel serverless functions (Node.js)
-- **Data:** Scraped from [GZW Fandom Wiki](https://gray-zone-warfare.fandom.com)
+- **Data API:** [gzw-data.dev/api/v1](https://gzw-data.dev/api/v1)
+- **Data source:** [gzw-scraper](https://github.com/ZoniBoy00/gzw-scraper) → GZW Data API
 - **Hosting:** Vercel (Hobby)
 
 ## Data Sources
 
-All game data is scraped from the [GZW Fandom Wiki](https://gray-zone-warfare.fandom.com) via GitHub Actions:
+All game data is sourced from the public [GZW Data API](https://gzw-data.dev/api/v1),
+which is maintained by the separate scraper pipeline:
 - Weapon stats, ammo values, armor data
 - Mission objectives & rewards
 - Vendor reputation requirements
 - Keys & keycards
 
-Data refreshes automatically every Monday via the GitHub Actions scraper.
+The API publishes a `dataVersion` snapshot timestamp. The frontend displays that
+snapshot in the application shell instead of inventing a static refresh date.
 
 ## API
 
-The tool includes a REST API at `/api`:
+The tool consumes the versioned GZW Data API:
 
 ```
-GET /api                    API documentation
-GET /api/ammo               All ammunition data
-GET /api/vendors            Vendor reputation data
-GET /api/weapons            Weapons database
-GET /api/armor              Armor vests, plate carriers & helmets
-GET /api/armor/vests        Vests only
-GET /api/armor/helmets      Helmets only
-GET /api/recommendations    Gear recommendations
-GET /api/missions           Mission database
-GET /api/keys               Keys & keycards (105 keys)
-GET /api/stats              Aggregate statistics
-GET /api/search?q=          Unified search
-GET /api/calculator/rep-to-dollars?current=&target=&rate=
-GET /api/calculator/missions?current=&target=
+GET https://gzw-data.dev/api/v1       API root
+GET https://gzw-data.dev/api/v1/ammo  Ammunition dataset
+GET https://gzw-data.dev/api/v1/weapons Weapons dataset
+GET https://gzw-data.dev/api/v1/armor  Combined armor route
+GET https://gzw-data.dev/api/v1/tasks  Mission/task data
+GET https://gzw-data.dev/api/v1/keys   Keys and keycards
+GET https://gzw-data.dev/api/v1/stats  Aggregate statistics
+GET https://gzw-data.dev/api/v1/search?q= Unified search
 ```
 
 All endpoints support `?caliber=`, `?vendor=`, `?location=` and other filters.
@@ -80,27 +73,22 @@ npm run dev
 # Build for production
 npm run build
 
-# Scrape wiki data
-python3 scripts/scraper/scrape.py --all
-python3 scripts/scraper/enrich_tasks.py
-python3 scripts/scraper/categorize_tasks.py
-python3 scripts/scraper/gen_frontend_data.py
+# Run tests
+npm test
+
+# Lint
+npm run lint
 ```
 
 ## Project Structure
 
 ```
-├── api/                  # Vercel serverless function (REST API)
-│   └── index.js
 ├── src/
-│   ├── components/       # React components
-│   │   └── ui/          # Shared UI components (TabBar, ItemModal)
-│   ├── data/            # Game data (JSON + TS)
-│   ├── lib/             # Utilities (calculators, vendor tracker)
-│   └── App.tsx          # Root component with routing
-├── scripts/
-│   └── scraper/         # Wiki scraping pipeline
-├── .github/workflows/   # GitHub Actions (weekly data refresh)
+│   ├── components/       # Tool screens, shell, and shared UI
+│   ├── data/             # Frontend domain types and static recommendations
+│   ├── lib/              # API adapter, calculators, storage, context
+│   └── App.tsx           # Root component and route splitting
+├── .github/workflows/   # Frontend quality CI
 └── vercel.json          # Vercel deployment config
 ```
 
