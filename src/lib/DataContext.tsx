@@ -3,7 +3,7 @@
  * Components use `useDataContext()` to access any dataset synchronously.
  */
 import { createContext, useContext, useState, useEffect, type ReactNode } from 'react';
-import { fetchWeapons, fetchAmmo, fetchVests, fetchHelmets, fetchKeys, fetchItemImages, fetchVendorImages, type KeyEntry } from './api';
+import { fetchWeapons, fetchAmmo, fetchVests, fetchHelmets, fetchKeys, fetchItemImages, type KeyEntry } from './api';
 import type { AmmoRound, ArmorVest, Helmet, WeaponEntry } from '../data/types';
 
 export interface GameData {
@@ -17,11 +17,12 @@ export interface GameData {
   vendorImages: Record<string, string>;
   loading: boolean;
   error: string | null;
+  dataVersion: string | null;
 }
 
 const defaultData: GameData = {
   weapons: [], ammo: [], calibers: [], vests: [], helmets: [],
-  keys: [], itemImages: {}, vendorImages: {}, loading: true, error: null,
+  keys: [], itemImages: {}, vendorImages: {}, loading: true, error: null, dataVersion: null,
 };
 
 const DataContext = createContext<GameData>(defaultData);
@@ -38,16 +39,16 @@ export function DataProvider({ children }: { children: ReactNode }) {
       fetchHelmets(),
       fetchKeys(),
       fetchItemImages(),
-      fetchVendorImages(),
     ])
-      .then(([weapons, ammoData, vests, helmets, keys, itemImages, vendorImages]) => {
+      .then(([weapons, ammoData, vests, helmets, keys, itemImages]) => {
         if (cancelled) return;
         setData({
-          weapons, vests, helmets, keys, itemImages, vendorImages,
+          weapons, vests, helmets, keys, itemImages, vendorImages: itemImages,
           ammo: ammoData.rounds,
           calibers: ammoData.calibers,
           loading: false,
           error: null,
+          dataVersion: null,
         });
       })
       .catch((e: Error) => {

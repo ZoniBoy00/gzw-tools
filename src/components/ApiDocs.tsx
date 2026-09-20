@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
-
-const API_BASE = 'https://gzw-data.vercel.app';
+import { GZW_API_BASE } from '../lib/api';
 
 export default function ApiDocs() {
   const [endpoints, setEndpoints] = useState<string[]>([]);
@@ -8,7 +7,7 @@ export default function ApiDocs() {
 
   useEffect(() => {
     let cancelled = false;
-    fetch(`${API_BASE}/api`)
+    fetch(GZW_API_BASE)
       .then(r => r.json())
       .then(d => {
         if (cancelled) return;
@@ -32,22 +31,22 @@ export default function ApiDocs() {
 
       <div className="space-y-2 mb-4">
         <a
-          href={API_BASE}
+          href={GZW_API_BASE}
           target="_blank"
           rel="noopener noreferrer"
           className="flex items-center gap-2 text-xs font-mono text-accent/80 hover:text-accent underline underline-offset-2"
         >
           <i className="fas fa-globe text-[10px]" />
-          API Playground — {API_BASE}
+          API Playground — {GZW_API_BASE}
         </a>
         <a
-          href={`${API_BASE}/docs`}
+          href="https://gzw-data.dev/docs/"
           target="_blank"
           rel="noopener noreferrer"
           className="flex items-center gap-2 text-xs font-mono text-accent/80 hover:text-accent underline underline-offset-2"
         >
           <i className="fas fa-book text-[10px]" />
-          API Documentation — {API_BASE}/docs
+          API Documentation — gzw-data.dev/docs
         </a>
         <a
           href="https://github.com/ZoniBoy00/gzw-data"

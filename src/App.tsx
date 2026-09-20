@@ -1,11 +1,12 @@
 import { BrowserRouter, Routes, Route, Navigate, Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { DataProvider } from './lib/DataContext';
+import { GZW_API_BASE } from './lib/api';
 
 function StatsBar() {
   const [stats, setStats] = useState<{ datasets: number; items: number } | null>(null);
   useEffect(() => {
-    fetch('https://gzw-data.vercel.app/api/stats')
+    fetch(`${GZW_API_BASE}/stats`)
       .then(r => r.json())
       .then(d => {
         const data = d.data || d;

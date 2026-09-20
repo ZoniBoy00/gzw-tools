@@ -1,12 +1,13 @@
 /**
  * GZW Data API client.
- * Fetches all game data from gzw-data.vercel.app — the single source of truth.
+ * Fetches all game data from the GZW Data API — the single source of truth.
  * Transforms API responses into the types expected by the frontend components.
  */
 import type { ArmorClass, PenLevel, AmmoRound, ArmorVest, Helmet, WeaponEntry } from '../data/types';
 import { ARMOR_CLASSES } from '../data/types';
 
-const BASE = 'https://gzw-data.vercel.app/api';
+export const GZW_API_BASE = (import.meta.env.VITE_GZW_DATA_URL || 'https://gzw-data.dev/api/v1').replace(/\/$/, '');
+const BASE = GZW_API_BASE;
 
 export function wikiUrl(name: string): string {
   return `https://gray-zone-warfare.fandom.com/wiki/${encodeURIComponent(name.replace(/\s+/g, '_'))}`;
@@ -14,7 +15,16 @@ export function wikiUrl(name: string): string {
 
 async function fetchJson<T>(url: string): Promise<T> {
   const res = await fetch(url);
-  if (!res.ok) throw new Error(`API ${res.status}: ${res.statusText}`);
+  if (!res.ok) {
+    let detail = '';
+    try {
+      const body = await res.json();
+      detail = body?.error?.message ? `: ${body.error.message}` : '';
+    } catch {
+      // Keep the HTTP status when the upstream response is not JSON.
+    }
+    throw new Error(`API ${res.status}: ${res.statusText}${detail}`);
+  }
   const body = await res.json();
   // gzw-data API returns { data: ..., count: ..., source: ..., timestamp: ... }
   return (body.data ?? body) as T;
