@@ -629,7 +629,7 @@ th.sortable.desc::after {
 /* ── Animated utilities ── */
 
 .tab-content {
-  animation: fadeInUp 0.3s ease-out;
+  animation: none;
 }
 
 .progress-fill.animate {
@@ -640,21 +640,11 @@ th.sortable.desc::after {
   animation: countPop 0.4s ease-out;
 }
 
-/* Staggered entrance — child items fade in one by one */
+/* Keep dashboard content immediately available to users and screen readers. */
 .animate-stagger > * {
-  opacity: 0;
-  animation: fadeInUp 0.35s ease-out forwards;
+  opacity: 1;
+  animation: none;
 }
-.animate-stagger > *:nth-child(1) { animation-delay: 0.04s; }
-.animate-stagger > *:nth-child(2) { animation-delay: 0.08s; }
-.animate-stagger > *:nth-child(3) { animation-delay: 0.12s; }
-.animate-stagger > *:nth-child(4) { animation-delay: 0.16s; }
-.animate-stagger > *:nth-child(5) { animation-delay: 0.20s; }
-.animate-stagger > *:nth-child(6) { animation-delay: 0.24s; }
-.animate-stagger > *:nth-child(7) { animation-delay: 0.28s; }
-.animate-stagger > *:nth-child(8) { animation-delay: 0.32s; }
-.animate-stagger > *:nth-child(9) { animation-delay: 0.36s; }
-.animate-stagger > *:nth-child(10) { animation-delay: 0.40s; }
 
 /* Shimmer loading bar */
 .shimmer {
