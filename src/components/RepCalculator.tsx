@@ -190,7 +190,7 @@ export default function RepCalculator() {
         <div className="mt-5 p-4 bg-surface-2 border border-border">
           <div className="flex justify-between items-center mb-3">
             <span className="text-xs text-text-muted uppercase tracking-wide font-heading">Total Required</span>
-            <span className="text-2xl font-bold font-mono text-accent text-glow">
+            <span className="text-2xl font-bold font-mono text-accent">
               {formatCurrency(result.cost)}
             </span>
           </div>
