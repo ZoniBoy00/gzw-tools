@@ -251,16 +251,4 @@ export async function fetchItemImages(): Promise<ImageMap> {
   return imagesCache;
 }
 
-export async function fetchVendorImages(): Promise<ImageMap> {
-  return fetchItemImages(); // same endpoint
-}
 
-// ─── Misc ───
-
-export async function fetchBackpacks() {
-  return fetchJson(`${BASE}/backpacks?all=true`);
-}
-
-export async function fetchTasks() {
-  return fetchJson(`${BASE}/tasks?all=true`);
-}

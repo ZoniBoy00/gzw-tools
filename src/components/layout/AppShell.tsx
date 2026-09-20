@@ -140,7 +140,7 @@ export default function AppShell({ children }: { children: ReactNode }) {
         </footer>
       </div>
       <nav className="mobile-nav" aria-label="Mobile navigation">
-        {ALL_ITEMS.slice(0, 4).map(item => <NavLink key={item.id} to={item.path} end={item.path === '/'} aria-label={item.label}><i className={item.icon} aria-hidden="true" /><span>{item.label}</span></NavLink>)}
+        {ALL_ITEMS.slice(0, 4).map(item => <NavLink key={item.id} to={item.path} end={item.path === '/'} aria-label={item.label} className={({ isActive }) => isActive ? 'active' : undefined}><i className={item.icon} aria-hidden="true" /><span>{item.label}</span></NavLink>)}
         <button type="button" onClick={() => setMenuOpen(true)} aria-label="More navigation"><i className="fas fa-ellipsis" aria-hidden="true" /><span>More</span></button>
       </nav>
       {showFaq && <FaqModal onClose={() => setShowFaq(false)} />}
