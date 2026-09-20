@@ -48,8 +48,8 @@ export default function ArmorGuide() {
 function Recommendations() {
   return (
     <div className="space-y-2 animate-stagger">
-      {RECOMMENDATIONS.map((rec, i) => (
-        <div key={i} className="border border-border p-4">
+      {RECOMMENDATIONS.map((rec) => (
+        <div key={rec.label} className="border border-border p-4">
           <div className="flex items-center gap-2 mb-3">
             <span className="tag tag-amber">{rec.tier}</span>
             <span className="text-sm font-bold tracking-wide">{rec.label}</span>
