@@ -106,7 +106,11 @@ export default function AppShell({ children }: { children: ReactNode }) {
   const { dataVersion } = useDataContext();
 
   useEffect(() => {
-    const routeTitle = ALL_ITEMS.find(item => item.path === location.pathname)?.label || 'Field Reference';
+    const specialTitles: Record<string, string> = {
+      '/privacy': 'Privacy Policy',
+      '/tos': 'Terms of Service',
+    };
+    const routeTitle = specialTitles[location.pathname] || ALL_ITEMS.find(item => item.path === location.pathname)?.label || 'Field Reference';
     document.title = `${routeTitle} · GZW Tools`;
   }, [location.pathname]);
 

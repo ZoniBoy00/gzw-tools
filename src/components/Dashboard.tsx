@@ -204,7 +204,7 @@ export default function Dashboard() {
         <p className="text-xs font-mono text-text-muted/80 leading-relaxed">
           GZW Tools is a fan-made companion for <span className="text-text">Gray Zone Warfare</span>.
           Plan your reputation farming, compare ammunition penetration, browse weapons,
-          and find the best armor — all in one place. Data sourced from the GZW Wiki.
+          and find the best armor — all in one place. Data sourced from the GZW Data API.
         </p>
         <div className="flex flex-wrap gap-3 mt-3 text-[10px] font-mono text-text-muted/50">
           <span>Not affiliated with M.A.G. Studios</span>
