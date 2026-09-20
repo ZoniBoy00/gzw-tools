@@ -1,5 +1,6 @@
 import { useState, useMemo } from 'react';
 import { useApiData } from '../hooks/useApiData';
+import PageState from './ui/PageState';
 
 interface Task {
   id: string;
@@ -21,12 +22,28 @@ interface Task {
 }
 
 export default function MissionFinder() {
-  const { data: tasksData } = useApiData<any>('tasks');
-  const { data: mainTaskData } = useApiData<any>('main_task');
-  const { data: sideTaskData } = useApiData<any>('side_task');
-  const { data: hiddenData } = useApiData<any>('hidden_task');
-  const { data: squadData } = useApiData<any>('squad_strike_missions');
-  const { data: contractData } = useApiData<any>('contract');
+  const tasks = useApiData<any>('tasks');
+  const mainTasks = useApiData<any>('main_task');
+  const sideTasks = useApiData<any>('side_task');
+  const hiddenTasks = useApiData<any>('hidden_task');
+  const squadTasks = useApiData<any>('squad_strike_missions');
+  const contractTasks = useApiData<any>('contract');
+  const tasksData = tasks.data;
+  const mainTaskData = mainTasks.data;
+  const sideTaskData = sideTasks.data;
+  const hiddenData = hiddenTasks.data;
+  const squadData = squadTasks.data;
+  const contractData = contractTasks.data;
+  const missionLoading = tasks.loading || mainTasks.loading || sideTasks.loading || hiddenTasks.loading || squadTasks.loading || contractTasks.loading;
+  const missionError = tasks.error || mainTasks.error || sideTasks.error || hiddenTasks.error || squadTasks.error || contractTasks.error;
+  const retryMissions = () => {
+    tasks.refetch();
+    mainTasks.refetch();
+    sideTasks.refetch();
+    hiddenTasks.refetch();
+    squadTasks.refetch();
+    contractTasks.refetch();
+  };
 
   const allTasks: Task[] = useMemo(() => {
     if (!tasksData.length) return [];
@@ -135,7 +152,11 @@ export default function MissionFinder() {
         ))}
       </div>
 
-      {filtered.length > 0 ? (
+      {missionError ? (
+        <PageState kind="error" message={`Failed to load missions: ${missionError}`} onRetry={retryMissions} />
+      ) : missionLoading ? (
+        <PageState kind="loading" message="Loading missions…" />
+      ) : filtered.length > 0 ? (
         <div className="space-y-1">
           {filtered.map((t) => (
             <div key={t.id} className={`border transition-colors ${expanded === t.id ? 'border-accent/40' : 'border-border hover:border-border-light'}`}>
@@ -178,7 +199,7 @@ export default function MissionFinder() {
       ) : (
         <div className="empty-state">
           <i className="fas fa-clipboard-list" aria-hidden="true" />
-          <p>Loading missions...</p>
+          <p>No missions match the current filters.</p>
         </div>
       )}
 
