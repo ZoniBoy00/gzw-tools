@@ -2,6 +2,7 @@ import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { lazy, Suspense } from 'react';
 import { DataProvider } from './lib/DataContext';
 import AppShell from './components/layout/AppShell';
+import AppErrorBoundary from './components/layout/AppErrorBoundary';
 import './index.css';
 
 const Dashboard = lazy(() => import('./components/Dashboard'));
@@ -52,7 +53,7 @@ export default function App() {
     <BrowserRouter>
       <DataProvider>
         <AppShell>
-          <Suspense fallback={<RouteFallback />}><AppRoutes /></Suspense>
+          <AppErrorBoundary><Suspense fallback={<RouteFallback />}><AppRoutes /></Suspense></AppErrorBoundary>
         </AppShell>
       </DataProvider>
     </BrowserRouter>

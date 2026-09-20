@@ -1419,6 +1419,14 @@ a:focus-visible {
 .status-dot { width: 7px; height: 7px; border-radius: 50%; display: inline-block; }
 .status-dot--good { background: #56bd78; }
 .app-content { width: min(1380px, 100%); flex: 1; margin: 0 auto; padding: 30px; }
+.app-crash { min-height: 60vh; display: grid; place-items: center; padding: 30px; background: var(--color-bg); }
+.app-crash__panel { width: min(560px, 100%); padding: 28px; border: 1px solid #72443b; background: #171311; }
+.app-crash__code { color: #e08d77; font: 10px 'JetBrains Mono', monospace; letter-spacing: .12em; }
+.app-crash h1 { margin: 12px 0 8px; color: #f2f0ee; font: 700 22px Rajdhani, sans-serif; }
+.app-crash p { color: #b8aaa5; font: 12px/1.6 'JetBrains Mono', monospace; }
+.app-crash__actions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 20px; }
+.app-crash details { margin-top: 20px; color: #9d8982; font: 10px 'JetBrains Mono', monospace; }
+.app-crash details code { display: block; margin-top: 8px; overflow-wrap: anywhere; color: #c9b9b3; }
 .route-fallback { min-height: 260px; display: grid; place-items: center; align-content: center; gap: 10px; color: #9ca5ad; font: 12px 'JetBrains Mono', monospace; }
 .page-state { min-height: 220px; display: grid; place-items: center; align-content: center; gap: 12px; padding: 30px; color: #a9b1b7; background: #101418; border: 1px solid #2b3238; font: 12px 'JetBrains Mono', monospace; text-align: center; }
 .page-state--error { color: #e08d77; border-color: rgba(224,141,119,.35); }
