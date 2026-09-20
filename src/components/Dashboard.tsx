@@ -112,7 +112,7 @@ export default function Dashboard() {
           <i className="fas fa-users text-accent/60 text-xs" />
           <span className="section-title">Vendor Progress</span>
         </div>
-        <span className="text-[9px] font-mono text-text-muted/40">Click rep value to edit</span>
+        <span className="text-[10px] font-mono text-text-muted">Click rep value to edit</span>
       </div>
 
       {/* Vendor cards */}
@@ -128,7 +128,7 @@ export default function Dashboard() {
                   </div>
                   <div>
                     <div className="text-sm font-bold font-mono text-text">{v.name}</div>
-                    <div className="text-[9px] font-mono text-text-muted/60 uppercase tracking-wider">{v.desc}</div>
+                    <div className="text-[10px] font-mono text-text-muted uppercase tracking-wider">{v.desc}</div>
                   </div>
                 </div>
                 <span className={`text-xs font-mono font-bold ${pct >= 90 ? 'text-green' : pct >= 50 ? 'text-accent' : 'text-text-muted'}`}>
@@ -170,7 +170,7 @@ export default function Dashboard() {
                         <span className="text-accent font-bold">{formatNumber(v.rep)}</span>
                         <span className="text-text-muted/40"> / {formatNumber(v.maxRep)}</span>
                       </span>
-                      <span className="text-text-muted/40 text-[8px]">Click to edit</span>
+                      <span className="text-text-muted text-[9px]">Click to edit</span>
                     </div>
                   </button>
                 )}
@@ -183,8 +183,13 @@ export default function Dashboard() {
       {/* Reset */}
       <div className="mt-3 flex justify-end">
         <button
-          onClick={() => { localStorage.removeItem('gzw-vendor-reps'); load(); }}
-          className="text-[9px] font-mono text-text-muted/30 hover:text-red/60 transition-colors"
+          onClick={() => {
+            if (window.confirm('Reset all saved vendor reputation values?')) {
+              localStorage.removeItem('gzw-vendor-reps');
+              load();
+            }
+          }}
+          className="text-[10px] font-mono text-text-muted hover:text-red transition-colors"
         >
           Reset all vendor rep values
         </button>
