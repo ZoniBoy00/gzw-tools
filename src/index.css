@@ -65,7 +65,6 @@ td, .table-wrap table {
 }
 .card-highlight:hover {
   border-color: rgba(240, 180, 41, 0.4);
-  box-shadow: 0 0 30px rgba(240, 180, 41, 0.08);
 }
 
 /* ── Buttons ── */
@@ -435,19 +434,19 @@ th.sortable.desc::after {
   transition: width 0.5s ease;
 }
 .progress-fill.amber {
-  background: linear-gradient(90deg, var(--color-drab), var(--color-accent));
+  background: var(--color-accent);
 }
 .progress-fill.green {
-  background: linear-gradient(90deg, var(--color-drab), var(--color-green));
+  background: var(--color-green);
 }
 
 /* ── Misc ── */
 .section-title {
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 2px;
-  color: var(--color-text-muted);
+  color: #b1b8be;
   margin-bottom: 12px;
 }
 .divider {
