@@ -19,8 +19,6 @@ const PEN_LABELS: Record<number, string> = {
 
 export default function AmmoGuide() {
   const { ammo, calibers, itemImages, loading, error } = useDataContext();
-  if (loading) return <div className="tab-content"><div className="loading-spinner" /></div>;
-  if (error) return <div className="tab-content"><div className="error-message">Failed to load data: {error}</div></div>;
 
   const validAmmo = useMemo(() => ammo.filter(a => a.caliber), [ammo]);
 
@@ -43,7 +41,7 @@ export default function AmmoGuide() {
     if (!search.trim()) return byCal;
     const q = search.toLowerCase();
     return byCal.filter((a) => a.name.toLowerCase().includes(q));
-  }, [caliber, search]);
+  }, [caliber, search, validAmmo]);
 
   const toggleCompare = (name: string) => {
     setCompare((prev) =>
@@ -53,8 +51,11 @@ export default function AmmoGuide() {
 
   const comparedRounds = useMemo(
     () => validAmmo.filter((a) => compare.includes(a.name)),
-    [compare],
+    [compare, validAmmo],
   );
+
+  if (loading) return <div className="tab-content"><div className="loading-spinner" /></div>;
+  if (error) return <div className="tab-content"><div className="error-message">Failed to load data: {error}</div></div>;
 
   return (
     <div className="tab-content">

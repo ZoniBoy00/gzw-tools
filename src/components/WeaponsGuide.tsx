@@ -6,8 +6,6 @@ import type { ModalItem } from './ui/ItemModal';
 
 export default function WeaponsGuide() {
   const { weapons, itemImages, loading, error } = useDataContext();
-  if (loading) return <div className="tab-content"><div className="loading-spinner" /></div>;
-  if (error) return <div className="tab-content"><div className="error-message">Failed to load data: {error}</div></div>;
 
   const weaponTypes = useMemo(() => [...new Set(weapons.map(w => w.type))], [weapons]);
 
@@ -33,7 +31,7 @@ export default function WeaponsGuide() {
       data = data.filter((w) => w.name.toLowerCase().includes(q) || w.caliber.toLowerCase().includes(q));
     }
     return data;
-  }, [type, search]);
+  }, [type, search, weapons]);
 
   const toggleCompare = (name: string) => {
     setCompare((prev) =>
@@ -43,8 +41,11 @@ export default function WeaponsGuide() {
 
   const comparedWeapons = useMemo(
     () => weapons.filter((w) => compare.includes(w.name)),
-    [compare],
+    [compare, weapons],
   );
+
+  if (loading) return <div className="tab-content"><div className="loading-spinner" /></div>;
+  if (error) return <div className="tab-content"><div className="error-message">Failed to load data: {error}</div></div>;
 
   return (
     <div className="tab-content">
