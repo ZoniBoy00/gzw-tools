@@ -89,24 +89,29 @@ const NIJ_MAP: Record<string, ArmorClass> = {
   'iv': 'IV', 'iv+': 'IV+',
 };
 
-function parsePen(stoppedBy: string | undefined): Record<ArmorClass, PenLevel> {
+export function parsePen(stoppedBy: string | undefined): Record<ArmorClass, PenLevel> {
   const pen: Record<string, PenLevel> = {};
   for (const ac of ARMOR_CLASSES) {
     pen[ac] = 0 as PenLevel;
   }
   if (!stoppedBy) return pen as Record<ArmorClass, PenLevel>;
+
   const match = stoppedBy.match(/NIJ\s*([\w+]+)/i);
-  if (match) {
-    const key = match[1].toLowerCase();
-    const norm = NIJ_MAP[key];
-    if (norm) {
-      let canPen = false;
-      for (const ac of ARMOR_CLASSES) {
-        if (ac === norm) canPen = true;
-        pen[ac] = (canPen ? 2 : 1) as PenLevel;
-      }
-    }
-  }
+  if (!match) return pen as Record<ArmorClass, PenLevel>;
+
+  const norm = NIJ_MAP[match[1].toLowerCase()];
+  const stopIndex = norm ? ARMOR_CLASSES.indexOf(norm) : -1;
+  if (stopIndex < 0) return pen as Record<ArmorClass, PenLevel>;
+
+  // `stopped_by_armor_class` is the first armor class that stops the round.
+  // Classes below that threshold are penetrated, the threshold is a magdump
+  // matchup, and stronger classes are ineffective. The previous implementation
+  // applied the results in the opposite direction, making stronger armor look
+  // easier to penetrate than weaker armor.
+  ARMOR_CLASSES.forEach((ac, index) => {
+    pen[ac] = (index < stopIndex ? 2 : index === stopIndex ? 1 : 0) as PenLevel;
+  });
+
   return pen as Record<ArmorClass, PenLevel>;
 }
 
