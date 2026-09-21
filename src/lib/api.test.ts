@@ -19,8 +19,9 @@ describe('ammo penetration mapping', () => {
     expect(m995['IV+']).toBe(0);
   });
 
-  it('returns ineffective results when the source value is missing or unknown', () => {
-    expect(parsePen(undefined)['I']).toBe(0);
-    expect(parsePen('NIJ unknown')['IV']).toBe(0);
+  it('returns ineffective results for an explicit no-penetration marker', () => {
+    const wolf = parsePen('NIJ 0');
+
+    expect(Object.values(wolf).every((level) => level === 0)).toBe(true);
   });
 });

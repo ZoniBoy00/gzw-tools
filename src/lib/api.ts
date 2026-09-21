@@ -98,6 +98,7 @@ export function parsePen(stoppedBy: string | undefined): Record<ArmorClass, PenL
 
   const match = stoppedBy.match(/NIJ\s*([\w+]+)/i);
   if (!match) return pen as Record<ArmorClass, PenLevel>;
+  if (match[1] === '0') return pen as Record<ArmorClass, PenLevel>;
 
   const norm = NIJ_MAP[match[1].toLowerCase()];
   const stopIndex = norm ? ARMOR_CLASSES.indexOf(norm) : -1;
