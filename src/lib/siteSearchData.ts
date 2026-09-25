@@ -39,6 +39,6 @@ export function buildSiteSearchItems(data: {
     ...data.vests.map(item => ({ id: `vest:${item.name}`, title: item.name, type: 'Armor', detail: [item.nij, item.source].filter(Boolean).join(' · '), path: '/armor', searchParams: { tab: 'vests' } })),
     ...data.helmets.map(item => ({ id: `helmet:${item.name}`, title: item.name, type: 'Helmet', detail: [item.nij, item.source].filter(Boolean).join(' · '), path: '/armor', searchParams: { tab: 'helmets' } })),
     ...data.keys.map(item => ({ id: `key:${item.name}`, title: item.name, type: item.type || 'Key', detail: [item.location, item.usage].filter(Boolean).join(' · '), path: '/keys', searchParams: { keysearch: item.name } })),
-    ...VENDORS.map(item => ({ id: `vendor:${item.slug}`, title: item.name, type: 'Vendor', detail: item.desc, path: '/vendors' })),
+    ...VENDORS.map(item => ({ id: `vendor:${item.slug}`, title: item.name, type: 'Vendor', detail: item.desc, path: '/' })),
   ];
 }

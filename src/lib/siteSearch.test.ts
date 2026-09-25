@@ -43,6 +43,7 @@ describe('site search', () => {
     expect(items.find(item => item.id === 'weapon:AK-12')?.searchParams).toEqual({ wsearch: 'AK-12' });
     expect(items.find(item => item.id === 'ammo:5.45x39mm:SP')?.searchParams).toEqual({ asearch: 'SP', caliber: '5.45x39mm' });
     expect(items.find(item => item.id === 'key:Office Key')?.searchParams).toEqual({ keysearch: 'Office Key' });
+    expect(items.find(item => item.id === 'vendor:handshake')?.path).toBe('/');
   });
 });
 
