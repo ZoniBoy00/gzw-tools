@@ -1,6 +1,13 @@
 import { useState, useMemo } from 'react';
 import { useApiData } from '../hooks/useApiData';
 import TaskModal from './TaskModal';
+import { parseCompletedTaskIds, summarizeTaskProgress, toggleTaskCompletion } from '../lib/taskProgress';
+
+const TASK_STATUS_KEY = 'gzw-completed-tasks';
+
+function readCompletedTasks(): string[] {
+  try { return parseCompletedTaskIds(localStorage.getItem(TASK_STATUS_KEY)); } catch { return []; }
+}
 
 interface Task {
   id: string;
@@ -60,13 +67,25 @@ export default function MissionFinder() {
   const AREAS = useMemo(() => [...new Set((allTasks.map((t) => t.location || t.area)).filter(Boolean))].sort(), [allTasks]);
   const TYPES = useMemo(() => [...new Set(allTasks.map((t) => t.type || 'Task').filter(Boolean))].sort(), [allTasks]);
 
-  const [search, setSearch] = useState('');
+  const [search, setSearch] = useState(() => new URLSearchParams(window.location.search).get('search') || '');
   const [vendorFilter, setVendorFilter] = useState('');
   const [areaFilter, setAreaFilter] = useState('');
   const [typeFilter, setTypeFilter] = useState('');
   const [categoryFilter, setCategoryFilter] = useState('');
   const [sortBy, setSortBy] = useState<'name' | 'vendor'>('vendor');
   const [modalTask, setModalTask] = useState<Task | null>(null);
+  const [completedIds, setCompletedIds] = useState<string[]>(readCompletedTasks);
+  const [hideCompleted, setHideCompleted] = useState(false);
+  const completedSet = useMemo(() => new Set(completedIds), [completedIds]);
+  const vendorProgress = useMemo(() => summarizeTaskProgress(allTasks, completedIds).filter(item => item.vendor !== 'Unassigned'), [allTasks, completedIds]);
+
+  const toggleCompleted = (id: string) => {
+    setCompletedIds(current => {
+      const next = toggleTaskCompletion(current, id);
+      try { localStorage.setItem(TASK_STATUS_KEY, JSON.stringify(next)); } catch { /* Tracking remains usable for this session. */ }
+      return next;
+    });
+  };
 
   const categories = useMemo(() => {
     const cats = ['main_task', 'side_task', 'hidden_task', 'squad_strike', 'contract', 'task'];
@@ -90,9 +109,10 @@ export default function MissionFinder() {
     if (areaFilter) data = data.filter((t) => (t.location || t.area) === areaFilter);
     if (typeFilter) data = data.filter((t) => (t.type || 'Task') === typeFilter);
     if (categoryFilter) data = data.filter((t) => t.category === categoryFilter);
+    if (hideCompleted) data = data.filter((t) => !completedSet.has(t.id));
     data.sort((a, b) => (sortBy === 'name' ? a.name.localeCompare(b.name) : (a.vendor || '').localeCompare(b.vendor || '')));
     return data;
-  }, [search, vendorFilter, areaFilter, typeFilter, categoryFilter, sortBy, allTasks]);
+  }, [search, vendorFilter, areaFilter, typeFilter, categoryFilter, sortBy, allTasks, hideCompleted, completedSet]);
 
   // Grouped computed - currently unused
   /* grouped removed - single view used instead */
@@ -105,8 +125,18 @@ export default function MissionFinder() {
         <span className="section-title">Mission Finder</span>
       </div>
       <p className="text-[10px] font-mono text-text-muted mb-4">
-        {allTasks.length} missions — search by name, vendor, or location
+        {allTasks.length} missions — search by name, vendor, or location. Completion tracking stays in this browser.
       </p>
+
+      {vendorProgress.length > 0 && <section className="mb-4" aria-label="Task completion by vendor">
+        <div className="mb-2 flex items-center justify-between gap-2"><span className="text-[9px] font-bold uppercase tracking-[0.12em] text-text-muted">Task progress by vendor</span><span className="text-[9px] font-mono text-text-muted">{allTasks.filter(task => completedSet.has(task.id)).length} / {allTasks.length} complete</span></div>
+        <div className="grid grid-cols-2 gap-2 sm:grid-cols-3 lg:grid-cols-4">
+          {vendorProgress.map(progress => <div key={progress.vendor} className="border border-border bg-surface-2/40 p-2">
+            <div className="flex justify-between gap-2 text-[10px]"><span className="truncate font-medium">{progress.vendor}</span><span className="font-mono text-text-muted">{progress.completed}/{progress.total}</span></div>
+            <div className="mt-1 h-1 bg-surface-3"><div className="h-full bg-accent" style={{ width: `${progress.total ? (progress.completed / progress.total) * 100 : 0}%` }} /></div>
+          </div>)}
+        </div>
+      </section>}
 
       <div className="flex flex-wrap gap-2 mb-4">
         <input type="text" value={search} onChange={(e) => setSearch(e.target.value)} placeholder="Search missions..." className="input flex-1 min-w-[160px] input-sm" aria-label="Search missions" />
@@ -125,6 +155,9 @@ export default function MissionFinder() {
         <button onClick={() => setSortBy((s) => (s === 'name' ? 'vendor' : 'name'))} className="chip chip-sm">
           <i className="fas fa-arrow-down-a-z text-[9px]" /> {sortBy === 'name' ? 'Name' : 'Vendor'}
         </button>
+        <button type="button" onClick={() => setHideCompleted(value => !value)} className={`chip chip-sm ${hideCompleted ? 'active' : ''}`} aria-pressed={hideCompleted}>
+          <i className={`fas ${hideCompleted ? 'fa-eye-slash' : 'fa-list-check'} text-[9px]`} /> {hideCompleted ? 'Showing incomplete' : 'Hide completed'}
+        </button>
       </div>
 
       <div className="flex flex-wrap gap-1.5 mb-3">
@@ -138,36 +171,37 @@ export default function MissionFinder() {
 
       {filtered.length > 0 ? (
         <div className="space-y-1">
-          {filtered.map((t) => (
-            <div key={t.id} className="border border-border hover:border-accent/40 transition-colors">
+          {filtered.map((t) => {
+            const isCompleted = completedSet.has(t.id);
+            return <div key={t.id} className="flex items-stretch border border-border hover:border-accent/40 transition-colors">
               <button
                 onClick={() => setModalTask(t)}
-                className="w-full text-left px-3.5 py-2.5 flex items-center justify-between gap-3"
+                className="flex min-w-0 flex-1 items-center justify-between gap-3 px-3.5 py-2.5 text-left"
                 aria-label={`View details for ${t.name}`}
               >
-                <div className="flex items-center gap-3 min-w-0">
+                <div className="flex min-w-0 items-center gap-3">
                   <span className={`w-1.5 h-1.5 shrink-0 ${vendorColor(t.vendor)}`} />
                   <div className="min-w-0">
-                    <div className="text-sm font-medium truncate">{t.name}
+                    <div className={`truncate text-sm font-medium ${isCompleted ? 'text-text-muted line-through' : ''}`}>{t.name}
                       {t.category === 'hidden_task' && <span className="tag tag-amber text-[8px] ml-2">Hidden</span>}
                       {t.category === 'main_task' && <span className="tag tag-main text-[8px] ml-2">Main</span>}
                       {t.category === 'side_task' && <span className="tag tag-side text-[8px] ml-2">Side</span>}
                       {t.category === 'squad_strike' && <span className="tag tag-squad text-[8px] ml-2">Squad</span>}
                       {t.category === 'contract' && <span className="tag tag-contract text-[8px] ml-2">Contract</span>}
                     </div>
-                    <div className="text-[10px] font-mono text-text-muted flex items-center gap-2">
+                    <div className="flex items-center gap-2 text-[10px] font-mono text-text-muted">
                       {t.vendor && <span className="tag tag-drab text-[8px]">{t.vendor}</span>}
                       {(t.location || t.area) && <span className="truncate">{t.location || t.area}</span>}
                     </div>
                   </div>
                 </div>
-                <span className="flex items-center gap-2 shrink-0">
-                  <span className="text-[9px] font-mono text-text-muted/40 hidden sm:inline">Details</span>
-                  <i className="fas fa-circle-info text-[10px] text-text-muted/50" />
-                </span>
+                <span className="flex shrink-0 items-center gap-2"><span className="hidden text-[9px] font-mono text-text-muted/40 sm:inline">Details</span><i className="fas fa-circle-info text-[10px] text-text-muted/50" aria-hidden="true" /></span>
               </button>
-            </div>
-          ))}
+              <button type="button" onClick={() => toggleCompleted(t.id)} className={`shrink-0 border-l border-border px-3 transition-colors ${isCompleted ? 'text-green' : 'text-text-muted hover:text-accent'}`} aria-pressed={isCompleted} aria-label={`${isCompleted ? 'Mark incomplete' : 'Mark complete'}: ${t.name}`} title={isCompleted ? 'Mark incomplete' : 'Mark complete'}>
+                <i className={`fas ${isCompleted ? 'fa-circle-check' : 'fa-circle'}`} aria-hidden="true" />
+              </button>
+            </div>;
+          })}
         </div>
       ) : (
         <div className="empty-state">

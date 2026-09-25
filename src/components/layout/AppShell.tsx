@@ -1,6 +1,7 @@
-import { useEffect, useState, type ReactNode } from 'react';
+import { useCallback, useEffect, useMemo, useState, type ReactNode } from 'react';
 import { NavLink, Link, useLocation } from 'react-router-dom';
 import FaqModal from '../FaqModal';
+import SiteSearchDialog from '../SiteSearchDialog';
 import { GZW_API_BASE } from '../../lib/api';
 import { useDataContext } from '../../lib/dataContext';
 
@@ -42,6 +43,17 @@ const NAV_GROUPS: NavGroup[] = [
 ];
 
 const ALL_ITEMS = NAV_GROUPS.flatMap(group => group.items);
+const FAVORITES_KEY = 'gzw-tool-favorites';
+const RECENTS_KEY = 'gzw-tool-recents';
+
+function readPaths(key: string): string[] {
+  try {
+    const value: unknown = JSON.parse(localStorage.getItem(key) || '[]');
+    return Array.isArray(value) ? value.filter((path): path is string => typeof path === 'string') : [];
+  } catch {
+    return [];
+  }
+}
 
 function StatsStrip() {
   const [stats, setStats] = useState<{ datasets: number; items: number } | null>(null);
@@ -75,35 +87,81 @@ function StatsStrip() {
   );
 }
 
-function Navigation({ onNavigate }: { onNavigate?: () => void }) {
+function Navigation({ onNavigate, favorites, onToggleFavorite }: { onNavigate?: () => void; favorites: string[]; onToggleFavorite: (path: string) => void }) {
+  const favoriteItems = ALL_ITEMS.filter(item => favorites.includes(item.path));
   return (
     <nav className="command-nav" aria-label="GZW Tools navigation">
+      {favoriteItems.length > 0 && <div className="command-nav__group">
+        <div className="command-nav__label">Favorites</div>
+        {favoriteItems.map(item => <NavEntry key={`favorite-${item.id}`} item={item} onNavigate={onNavigate} favorite onToggleFavorite={onToggleFavorite} />)}
+      </div>}
       {NAV_GROUPS.map(group => (
         <div className="command-nav__group" key={group.label}>
           <div className="command-nav__label">{group.label}</div>
-          {group.items.map(item => (
-            <NavLink
-              key={item.id}
-              to={item.path}
-              end={item.path === '/'}
-              onClick={onNavigate}
-              className={({ isActive }) => `command-nav__item${isActive ? ' is-active' : ''}`}
-            >
-              <i className={item.icon} aria-hidden="true" />
-              <span>{item.label}</span>
-            </NavLink>
-          ))}
+          {group.items.map(item => <NavEntry key={item.id} item={item} onNavigate={onNavigate} favorite={favorites.includes(item.path)} onToggleFavorite={onToggleFavorite} />)}
         </div>
       ))}
     </nav>
   );
 }
 
+function NavEntry({ item, onNavigate, favorite, onToggleFavorite }: { item: NavItem; onNavigate?: () => void; favorite: boolean; onToggleFavorite: (path: string) => void }) {
+  return (
+    <div className="flex items-center gap-1">
+      <NavLink to={item.path} end={item.path === '/'} onClick={onNavigate} className={({ isActive }) => `command-nav__item min-w-0 flex-1${isActive ? ' is-active' : ''}`}>
+        <i className={item.icon} aria-hidden="true" /><span>{item.label}</span>
+      </NavLink>
+      <button type="button" onClick={() => onToggleFavorite(item.path)} className="px-2 py-2 text-[10px] text-text-muted/60 hover:text-accent focus-visible:outline focus-visible:outline-1 focus-visible:outline-accent" aria-label={`${favorite ? 'Remove' : 'Add'} ${item.label} ${favorite ? 'from' : 'to'} favorites`} aria-pressed={favorite}>
+        <i className={`fas fa-star ${favorite ? 'text-accent' : ''}`} aria-hidden="true" />
+      </button>
+    </div>
+  );
+}
+
 export default function AppShell({ children }: { children: ReactNode }) {
   const [showFaq, setShowFaq] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [searchOpen, setSearchOpen] = useState(false);
+  const [searchMounted, setSearchMounted] = useState(false);
+  const [favorites, setFavorites] = useState<string[]>(() => readPaths(FAVORITES_KEY));
+  const [recentPaths, setRecentPaths] = useState<string[]>(() => readPaths(RECENTS_KEY));
   const location = useLocation();
   const { dataVersion } = useDataContext();
+  const continueItem = useMemo(() => recentPaths.map(path => ALL_ITEMS.find(item => item.path === path)).find(item => item && item.path !== location.pathname), [recentPaths, location.pathname]);
+
+  const openSearch = useCallback(() => {
+    setSearchMounted(true);
+    setSearchOpen(true);
+  }, []);
+  const closeSearch = useCallback(() => setSearchOpen(false), []);
+
+  const toggleFavorite = (path: string) => {
+    setFavorites(current => {
+      const next = current.includes(path) ? current.filter(item => item !== path) : [...current, path];
+      try { localStorage.setItem(FAVORITES_KEY, JSON.stringify(next)); } catch { /* Keep the current session usable when storage is unavailable. */ }
+      return next;
+    });
+  };
+
+  useEffect(() => {
+    if (!ALL_ITEMS.some(item => item.path === location.pathname)) return;
+    setRecentPaths(current => {
+      const next = [location.pathname, ...current.filter(path => path !== location.pathname && ALL_ITEMS.some(item => item.path === path))].slice(0, 6);
+      try { localStorage.setItem(RECENTS_KEY, JSON.stringify(next)); } catch { /* Recent navigation is optional. */ }
+      return next;
+    });
+  }, [location.pathname]);
+
+  useEffect(() => {
+    const onKeyDown = (event: KeyboardEvent) => {
+      if ((event.ctrlKey || event.metaKey) && event.key.toLowerCase() === 'k') {
+        event.preventDefault();
+        openSearch();
+      }
+    };
+    window.addEventListener('keydown', onKeyDown);
+    return () => window.removeEventListener('keydown', onKeyDown);
+  }, [openSearch]);
 
   useEffect(() => {
     const specialTitles: Record<string, string> = {
@@ -122,7 +180,7 @@ export default function AppShell({ children }: { children: ReactNode }) {
           <span className="brand-mark" aria-hidden="true"><i className="fas fa-crosshairs" /></span>
           <span className="brand-copy"><strong><em>GZW</em> Tools</strong><small>field reference / v2</small></span>
         </div>
-        <Navigation onNavigate={() => setMenuOpen(false)} />
+        <Navigation onNavigate={() => setMenuOpen(false)} favorites={favorites} onToggleFavorite={toggleFavorite} />
         <div className="command-rail__footer">
           <button className="shell-link" type="button" onClick={() => setShowFaq(true)}><i className="fas fa-circle-question" /> FAQ</button>
           <a className="shell-link" href="https://buymeacoffee.com/zoniboy00" target="_blank" rel="noopener noreferrer"><i className="fas fa-mug-hot" /> Support</a>
@@ -135,8 +193,8 @@ export default function AppShell({ children }: { children: ReactNode }) {
           <button className="mobile-menu-button" type="button" aria-label="Open navigation" aria-expanded={menuOpen} onClick={() => setMenuOpen(true)}>
             <i className="fas fa-bars" aria-hidden="true" />
           </button>
-          <div className="topbar__context"><span className="topbar__eyebrow">GZW Tools / Operations console</span><span className="topbar__title">Gray Zone Warfare field reference</span></div>
-          <div className="topbar__actions"><span className="beta-tag">BETA</span><span className="data-tag"><i className="fas fa-database" /> {dataVersion ? `DATA ${dataVersion.slice(0, 10)}` : 'API v1'}</span></div>
+          <div className="topbar__context"><span className="topbar__eyebrow">GZW Tools / Operations console</span><span className="topbar__title">Gray Zone Warfare field reference</span>{continueItem && <Link to={continueItem.path} className="mt-1 inline-flex items-center gap-1 text-[9px] font-mono text-text-muted hover:text-accent"><i className="fas fa-clock-rotate-left" aria-hidden="true" />Continue: {continueItem.label}</Link>}</div>
+          <div className="topbar__actions"><button type="button" onClick={openSearch} className="btn btn-outline btn-sm" aria-label="Search all tools"><i className="fas fa-magnifying-glass" /><span className="hidden sm:inline">Search</span><kbd className="hidden text-[9px] opacity-60 md:inline">Ctrl/⌘ K</kbd></button><span className="beta-tag">BETA</span><span className="data-tag"><i className="fas fa-database" /> {dataVersion ? `DATA ${dataVersion.slice(0, 10)}` : 'API v1'}</span></div>
         </header>
         <StatsStrip />
         <main id="main-content" className="app-content">{children}</main>
@@ -150,6 +208,7 @@ export default function AppShell({ children }: { children: ReactNode }) {
         <button type="button" onClick={() => setMenuOpen(true)} aria-label="More navigation"><i className="fas fa-ellipsis" aria-hidden="true" /><span>More</span></button>
       </nav>
       {showFaq && <FaqModal onClose={() => setShowFaq(false)} />}
+      {searchMounted && <SiteSearchDialog open={searchOpen} onClose={closeSearch} />}
     </div>
   );
 }

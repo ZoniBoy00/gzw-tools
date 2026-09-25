@@ -17,7 +17,10 @@ const SUB: { id: SubTab; label: string; icon?: string }[] = [
 ];
 
 export default function ArmorGuide() {
-  const [tab, setTab] = useState<SubTab>('recommend');
+  const [tab, setTab] = useState<SubTab>(() => {
+    const requested = new URLSearchParams(window.location.search).get('tab');
+    return SUB.some(item => item.id === requested) ? requested as SubTab : 'recommend';
+  });
   const { vests, helmets, itemImages, loading, error } = useDataContext();
 
   if (loading) return <div className="tab-content"><p className="text-text-muted">Loading armor data...</p></div>;

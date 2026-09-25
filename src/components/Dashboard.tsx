@@ -1,4 +1,5 @@
 import { useState, useEffect, useMemo } from 'react';
+import { Link } from 'react-router-dom';
 import { formatNumber } from '../lib/calc';
 import { getVendorReps, setVendorRep, type VendorRep } from '../lib/vendortracker';
 import { useDataContext } from '../lib/useDataContext';
@@ -108,6 +109,16 @@ export default function Dashboard() {
           </div>
         ))}
       </div>
+
+      {/* Quick paths into common workflows */}
+      <section className="mb-8" aria-labelledby="quick-actions-title">
+        <div className="mb-3 flex items-center gap-2"><i className="fas fa-bolt text-accent/60 text-xs" aria-hidden="true" /><h2 id="quick-actions-title" className="section-title mb-0">Quick Actions</h2></div>
+        <div className="grid grid-cols-1 gap-2 sm:grid-cols-3">
+          <Link to="/missions" className="card card-highlight flex items-center gap-3 p-3 transition-colors hover:border-accent/50"><i className="fas fa-list-check text-accent" aria-hidden="true" /><span><span className="block text-xs font-bold">Track missions</span><span className="block text-[9px] text-text-muted">Plan vendor task progress</span></span><i className="fas fa-arrow-right ml-auto text-[9px] text-text-muted" aria-hidden="true" /></Link>
+          <Link to="/ammo" className="card card-highlight flex items-center gap-3 p-3 transition-colors hover:border-accent/50"><i className="fas fa-bolt text-accent" aria-hidden="true" /><span><span className="block text-xs font-bold">Compare ammo</span><span className="block text-[9px] text-text-muted">Find penetration by armor class</span></span><i className="fas fa-arrow-right ml-auto text-[9px] text-text-muted" aria-hidden="true" /></Link>
+          <Link to="/loadouts" className="card card-highlight flex items-center gap-3 p-3 transition-colors hover:border-accent/50"><i className="fas fa-screwdriver-wrench text-accent" aria-hidden="true" /><span><span className="block text-xs font-bold">Build a loadout</span><span className="block text-[9px] text-text-muted">Save your next kit locally</span></span><i className="fas fa-arrow-right ml-auto text-[9px] text-text-muted" aria-hidden="true" /></Link>
+        </div>
+      </section>
 
       {/* Section title */}
       <div className="flex items-center justify-between gap-2 mb-4">

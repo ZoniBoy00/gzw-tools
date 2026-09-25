@@ -74,7 +74,7 @@ export default function KeysGuide() {
     [keys]
   );
 
-  const [search, setSearch] = useState('');
+  const [search, setSearch] = useState(() => new URLSearchParams(window.location.search).get('keysearch') || '');
   const [locationFilter, setLocationFilter] = useState('');
   const [modalItem, setModalItem] = useState<ModalItem | null>(null);
 
