@@ -174,7 +174,7 @@ export default function BackpackGuide() {
       <div className="tab-content">
         <div className="flex items-center gap-2 mb-4">
           <i className="fas fa-box text-accent text-sm" />
-          <span className="section-title">Backpacks & Rigs</span>
+          <h1 className="section-title">Backpacks & Rigs</h1>
         </div>
         <div className="empty-state">
           <i className="fas fa-spinner fa-spin" />
@@ -188,7 +188,7 @@ export default function BackpackGuide() {
     <div className="tab-content">
       <div className="flex items-center gap-2 mb-4">
         <i className="fas fa-box text-accent text-sm" />
-        <span className="section-title">Backpacks & Rigs</span>
+        <h1 className="section-title">Backpacks & Rigs</h1>
       </div>
       <TabBar tabs={SUB_TABS} active={tab} onChange={setTab} />
       <p className="text-[10px] font-mono text-text-muted mt-2 mb-4">

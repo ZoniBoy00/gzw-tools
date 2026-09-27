@@ -1,0 +1,25 @@
+# GZW Tools
+
+> Free, read-only community companion tools and reference data for Gray Zone Warfare.
+
+GZW Tools provides a vendor reputation calculator, mission planner, ammunition penetration comparison, and searchable references for weapons, armor, backpacks, keys, vendors, and loadouts. It is a fan-made project and is not affiliated with M.A.G. Studios. Game data is sourced from the public GZW Data API; saved loadouts and calculator settings stay in the user's browser.
+
+## Tools
+
+- [Overview and vendor reputation](https://gzw-tools.vercel.app/): Dashboard, vendor progress, and links to the main tools.
+- [Reputation calculator](https://gzw-tools.vercel.app/rep): Plan reputation progress for vendors.
+- [Dollar to reputation calculator](https://gzw-tools.vercel.app/dollar): Estimate spend for a reputation target.
+- [Mission planner](https://gzw-tools.vercel.app/missions): Browse tasks, objectives, and rewards.
+- [Ammo comparison](https://gzw-tools.vercel.app/ammo): Compare ammunition and armor penetration.
+- [Weapon database](https://gzw-tools.vercel.app/weapons): Browse weapons and their stats.
+- [Armor guide](https://gzw-tools.vercel.app/armor): Compare armor and protection classes.
+- [Backpack guide](https://gzw-tools.vercel.app/backpacks): Browse storage equipment.
+- [Keys and keycards](https://gzw-tools.vercel.app/keys): Find keys, locations, and unlocks.
+- [Vendor guide](https://gzw-tools.vercel.app/vendors): Review vendor services and reputation.
+- [Loadout builder](https://gzw-tools.vercel.app/loadouts): Create and save equipment plans locally.
+- [GZW Data API documentation](https://gzw-tools.vercel.app/api-docs): Public game-data API reference.
+
+## Policies
+
+- [Privacy policy](https://gzw-tools.vercel.app/privacy)
+- [Terms of service](https://gzw-tools.vercel.app/tos)

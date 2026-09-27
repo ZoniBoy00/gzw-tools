@@ -22,7 +22,7 @@ export default function ApiDocs() {
     <div className="tab-content">
       <div className="flex items-center gap-2 mb-1">
         <i className="fas fa-code text-accent text-sm" />
-        <span className="section-title">GZW Data API</span>
+        <h1 className="section-title">GZW Data API</h1>
       </div>
 
       <p className="text-[11px] font-mono text-text-muted mb-4 leading-relaxed">

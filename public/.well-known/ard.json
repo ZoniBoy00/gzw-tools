@@ -1,0 +1,18 @@
+{
+  "entries": [
+    {
+      "identifier": "urn:air:gzw-tools.vercel.app:web:gray-zone-warfare-companion",
+      "displayName": "GZW Tools",
+      "type": "text/html",
+      "url": "https://gzw-tools.vercel.app/",
+      "description": "Community companion for Gray Zone Warfare: plan vendor reputation and missions, compare ammo penetration, and browse weapons, armor, keys, and loadouts.",
+      "representativeQueries": [
+        "Compare ammunition penetration against armor in Gray Zone Warfare",
+        "Find a Gray Zone Warfare key and the door it unlocks",
+        "Plan vendor reputation and missions in Gray Zone Warfare"
+      ],
+      "capabilities": ["game-data-reference", "ammo-comparison", "mission-planning", "vendor-reputation-planning"],
+      "tags": ["Gray Zone Warfare", "GZW", "game data", "missions", "ammunition", "armor"]
+    }
+  ]
+}

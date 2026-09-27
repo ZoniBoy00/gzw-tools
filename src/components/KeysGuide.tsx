@@ -115,7 +115,7 @@ export default function KeysGuide() {
       <div className="tab-content">
         <div className="flex items-center gap-2 mb-4">
           <i className="fas fa-key text-accent text-sm" />
-          <span className="section-title">Keys & Keycards</span>
+          <h1 className="section-title">Keys & Keycards</h1>
         </div>
         <div className="empty-state"><i className="fas fa-spinner fa-spin" /><p>Loading keys data...</p></div>
       </div>
@@ -126,7 +126,7 @@ export default function KeysGuide() {
     <div className="tab-content">
       <div className="flex items-center gap-2 mb-4">
         <i className="fas fa-key text-accent text-sm" />
-        <span className="section-title">Keys & Keycards</span>
+        <h1 className="section-title">Keys & Keycards</h1>
       </div>
       <p className="text-[10px] font-mono text-text-muted mb-4">
         {keys.length} keys across {LOCATIONS.length} locations

@@ -64,7 +64,7 @@ export default function RepCalculator() {
     <div className="tab-content">
       <div className="flex items-center gap-2 mb-4">
         <i className="fas fa-bullseye text-accent text-sm" />
-        <span className="section-title">Rep to Dollars</span>
+        <h1 className="section-title">Reputation to Dollars</h1>
       </div>
 
       <div className="grid grid-cols-2 gap-3 mb-4">

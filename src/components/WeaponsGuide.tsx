@@ -59,7 +59,7 @@ export default function WeaponsGuide() {
     <div className="tab-content">
       <div className="flex items-center gap-2 mb-4">
         <i className="fas fa-crosshairs text-accent text-sm" />
-        <span className="section-title">Weapons Database</span>
+        <h1 className="section-title">Weapons Database</h1>
       </div>
 
       <div className="flex gap-2 mb-4">

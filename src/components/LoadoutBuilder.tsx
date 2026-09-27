@@ -111,7 +111,7 @@ export default function LoadoutBuilder() {
     <div className="tab-content">
       <div className="flex items-center gap-2 mb-4">
         <i className="fas fa-screwdriver-wrench text-accent text-sm" />
-        <span className="section-title">Loadouts</span>
+        <h1 className="section-title">Loadout Builder</h1>
       </div>
 
       <TabBar tabs={SUB} active={tab} onChange={setTab} />

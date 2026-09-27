@@ -5,7 +5,7 @@ export default function TermsOfService() {
     <div className="tab-content">
       <div className="flex items-center gap-2 mb-4">
         <i className="fas fa-file-contract text-accent text-sm" />
-        <span className="section-title">Terms of Service</span>
+        <h1 className="section-title">Terms of Service</h1>
       </div>
 
       <div className="space-y-4 text-sm text-text-muted leading-relaxed">

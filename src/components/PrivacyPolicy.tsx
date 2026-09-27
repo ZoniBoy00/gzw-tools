@@ -5,7 +5,7 @@ export default function PrivacyPolicy() {
     <div className="tab-content">
       <div className="flex items-center gap-2 mb-4">
         <i className="fas fa-shield-halved text-accent text-sm" />
-        <span className="section-title">Privacy Policy</span>
+        <h1 className="section-title">Privacy Policy</h1>
       </div>
 
       <div className="space-y-4 text-sm text-text-muted leading-relaxed">

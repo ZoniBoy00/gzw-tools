@@ -122,7 +122,7 @@ export default function MissionFinder() {
     <div className="tab-content">
       <div className="flex items-center gap-2 mb-1">
         <i className="fas fa-clipboard-list text-accent text-sm" />
-        <span className="section-title">Mission Finder</span>
+        <h1 className="section-title">Mission Finder</h1>
       </div>
       <p className="text-[10px] font-mono text-text-muted mb-4">
         {allTasks.length} missions — search by name, vendor, or location. Completion tracking stays in this browser.

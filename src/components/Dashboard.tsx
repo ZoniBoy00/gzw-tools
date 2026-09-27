@@ -74,7 +74,7 @@ export default function Dashboard() {
     <div className="tab-content">
       <div className="flex items-center gap-2 mb-6">
         <i className="fas fa-gauge text-accent text-sm" />
-        <span className="section-title">Overview</span>
+        <h1 className="section-title">Gray Zone Warfare Tools</h1>
       </div>
 
       {/* Live stats from API */}

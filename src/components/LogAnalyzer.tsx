@@ -57,7 +57,7 @@ export default function LogAnalyzer() {
     <div className="tab-content">
       <div className="flex items-center gap-2 mb-4">
         <i className="fas fa-file-lines text-accent text-sm" />
-        <span className="section-title">GZW Log Analyzer</span>
+        <h1 className="section-title">GZW Log Analyzer</h1>
       </div>
 
       <p className="text-[11px] font-mono text-text-muted mb-4 leading-relaxed">

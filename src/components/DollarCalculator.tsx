@@ -10,7 +10,7 @@ export default function DollarCalculator() {
     <div className="tab-content">
       <div className="flex items-center gap-2 mb-4">
         <i className="fas fa-coins text-accent text-sm" />
-        <span className="section-title">Dollars to Rep</span>
+        <h1 className="section-title">Dollars to Reputation</h1>
       </div>
 
       <div className="mb-4">

@@ -55,6 +55,69 @@ function readPaths(key: string): string[] {
   }
 }
 
+const SEO_META: Record<string, { title: string; description: string }> = {
+  '/': {
+    title: 'Gray Zone Warfare Tools — Missions, Ammo & Gear | GZW Tools',
+    description: 'Plan Gray Zone Warfare vendor reputation and missions, compare ammunition penetration, and browse weapons, armor, keys and loadouts.',
+  },
+  '/rep': {
+    title: 'Reputation Calculator | Gray Zone Warfare | GZW Tools',
+    description: 'Calculate vendor reputation and plan task progress in Gray Zone Warfare. Compare reputation gains across all GZW vendors.',
+  },
+  '/dollar': {
+    title: 'Dollar to Reputation Calculator | GZW Tools',
+    description: 'Estimate how much money you need to spend to reach a vendor reputation target in Gray Zone Warfare.',
+  },
+  '/missions': {
+    title: 'Mission Planner & Finder | Gray Zone Warfare | GZW Tools',
+    description: 'Browse Gray Zone Warfare tasks, track objectives and rewards, and plan your next mission route.',
+  },
+  '/ammo': {
+    title: 'Ammo Penetration Chart | Gray Zone Warfare | GZW Tools',
+    description: 'Compare Gray Zone Warfare ammunition by caliber, penetration and armor class to choose the right round.',
+  },
+  '/weapons': {
+    title: 'Weapon Database | Gray Zone Warfare | GZW Tools',
+    description: 'Browse Gray Zone Warfare weapons by caliber, fire rate, magazine size, weight and vendor.',
+  },
+  '/armor': {
+    title: 'Armor & Gear Guide | Gray Zone Warfare | GZW Tools',
+    description: 'Compare Gray Zone Warfare armor, helmets, plate carriers and protection classes.',
+  },
+  '/backpacks': {
+    title: 'Backpack Guide | Gray Zone Warfare | GZW Tools',
+    description: 'Compare Gray Zone Warfare backpacks, storage capacity, grid size and equipment options.',
+  },
+  '/keys': {
+    title: 'Keys & Keycards Database | Gray Zone Warfare | GZW Tools',
+    description: 'Find Gray Zone Warfare keys and keycards, their locations and the doors they unlock.',
+  },
+  '/vendors': {
+    title: 'Vendor Guide | Gray Zone Warfare | GZW Tools',
+    description: 'Explore Gray Zone Warfare vendors, reputation levels, services and available equipment.',
+  },
+  '/loadouts': {
+    title: 'Loadout Builder | Gray Zone Warfare | GZW Tools',
+    description: 'Build and save Gray Zone Warfare equipment loadouts with weapons, armor, helmets and ammunition.',
+  },
+  '/logs': {
+    title: 'Log Analyzer | Gray Zone Warfare | GZW Tools',
+    description: 'Analyze Gray Zone Warfare logs and review session, performance, warning and error details locally.',
+  },
+  '/api-docs': {
+    title: 'API Documentation | GZW Tools',
+    description: 'Explore the public Gray Zone Warfare data API, available datasets and request examples.',
+  },
+  '/privacy': {
+    title: 'Privacy Policy | GZW Tools',
+    description: 'Read the GZW Tools privacy policy and learn how locally stored tool data is handled.',
+  },
+  '/tos': {
+    title: 'Terms of Service | GZW Tools',
+    description: 'Read the terms of service for the GZW Tools community companion website.',
+  },
+};
+
 function StatsStrip() {
   const [stats, setStats] = useState<{ datasets: number; items: number } | null>(null);
 
@@ -164,12 +227,16 @@ export default function AppShell({ children }: { children: ReactNode }) {
   }, [openSearch]);
 
   useEffect(() => {
-    const specialTitles: Record<string, string> = {
-      '/privacy': 'Privacy Policy',
-      '/tos': 'Terms of Service',
-    };
-    const routeTitle = specialTitles[location.pathname] || ALL_ITEMS.find(item => item.path === location.pathname)?.label || 'Field Reference';
-    document.title = `${routeTitle} · GZW Tools`;
+    const page = SEO_META[location.pathname] ?? SEO_META['/'];
+    const canonical = `https://gzw-tools.vercel.app${location.pathname}`;
+    document.title = page.title;
+    document.querySelector('meta[name="description"]')?.setAttribute('content', page.description);
+    document.querySelector('link[rel="canonical"]')?.setAttribute('href', canonical);
+    document.querySelector('meta[property="og:title"]')?.setAttribute('content', page.title);
+    document.querySelector('meta[property="og:description"]')?.setAttribute('content', page.description);
+    document.querySelector('meta[property="og:url"]')?.setAttribute('content', canonical);
+    document.querySelector('meta[name="twitter:title"]')?.setAttribute('content', page.title);
+    document.querySelector('meta[name="twitter:description"]')?.setAttribute('content', page.description);
   }, [location.pathname]);
 
   return (

@@ -69,7 +69,7 @@ export default function AmmoGuide() {
     <div className="tab-content">
       <div className="flex items-center gap-2 mb-4">
         <i className="fas fa-bolt text-accent text-sm" />
-        <span className="section-title">Ammunition Penetration Chart</span>
+        <h1 className="section-title">Ammunition Penetration Chart</h1>
       </div>
 
       <div className="flex gap-2 mb-4">
