@@ -1,11 +1,11 @@
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { lazy, Suspense } from 'react';
+import Dashboard from './components/Dashboard';
 import { DataProvider } from './lib/DataContext';
 import AppShell from './components/layout/AppShell';
 import AppErrorBoundary from './components/layout/AppErrorBoundary';
 import './index.css';
 
-const Dashboard = lazy(() => import('./components/Dashboard'));
 const RepCalculator = lazy(() => import('./components/RepCalculator'));
 const DollarCalculator = lazy(() => import('./components/DollarCalculator'));
 const MissionFinder = lazy(() => import('./components/MissionFinder'));
