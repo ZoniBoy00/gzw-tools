@@ -33,7 +33,7 @@ function ProgressRing({ pct, size = 32 }: { pct: number; size?: number }) {
 export default function Dashboard() {
   const { weapons, ammo, vests, helmets, keys, loading } = useDataContext();
   const toast = useToast();
-  const [reps, setReps] = useState<VendorRep[]>([]);
+  const [reps, setReps] = useState<VendorRep[]>(() => getVendorReps());
   const [editing, setEditing] = useState<string | null>(null);
   const [editValue, setEditValue] = useState('');
 
@@ -48,7 +48,6 @@ export default function Dashboard() {
   const load = () => setReps(getVendorReps());
 
   useEffect(() => {
-    load();
     window.addEventListener('focus', load);
     return () => window.removeEventListener('focus', load);
   }, []);
