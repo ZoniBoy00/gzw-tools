@@ -1,5 +1,5 @@
 import { afterEach, describe, expect, it, vi } from 'vitest';
-import { fetchPlateCarriers, fetchVests, parsePen } from './api';
+import { fetchBosses, fetchPlateCarriers, fetchRegions, fetchVests, parsePen } from './api';
 
 describe('ammo penetration mapping', () => {
   it('maps classes below the stopping class to penetration', () => {
@@ -115,5 +115,86 @@ describe('armor API adapters', () => {
       expect.objectContaining({ name: 'Commander (Black)', nij: 'IIIA', protectionRating: 'P3' }),
       expect.objectContaining({ name: 'Rating-only vest', nij: 'N/A', protectionRating: 'R2' }),
     ]);
+  });
+});
+
+describe('world guide API adapters', () => {
+  it('loads regions with tier, local faction, and split LZ callsigns', async () => {
+    const fetchMock = vi.fn().mockResolvedValue({
+      ok: true,
+      status: 200,
+      statusText: 'OK',
+      json: async () => ({
+        data: [{
+          name: 'Blue Lagoon',
+          id: 'blue-lagoon',
+          tier: '2',
+          locals_type: 'Rebels',
+          lz_callsign: 'JULIETT,KILO,NOVEMBER',
+          description: 'Tourism center and campground.',
+          image: 'https://example.test/blue-lagoon.png',
+        }],
+      }),
+    });
+    vi.stubGlobal('fetch', fetchMock);
+
+    await expect(fetchRegions()).resolves.toEqual([{
+      name: 'Blue Lagoon',
+      id: 'blue-lagoon',
+      tier: '2',
+      localsType: 'Rebels',
+      lzCallsigns: ['JULIETT', 'KILO', 'NOVEMBER'],
+      description: 'Tourism center and campground.',
+      image: 'https://example.test/blue-lagoon.png',
+    }]);
+    expect(fetchMock).toHaveBeenCalledWith(expect.stringMatching(/\/regions\?per_page=100$/));
+  });
+
+  it('loads boss location, faction, and task notes without inventing missing data', async () => {
+    const fetchMock = vi.fn().mockResolvedValue({
+      ok: true,
+      status: 200,
+      statusText: 'OK',
+      json: async () => ({
+        data: [{
+          name: 'Grin',
+          id: 'grin',
+          full_name: 'Malo "Grin" Luangrath',
+          faction: 'Sifa Syndicate',
+          location: 'Blue Lagoon',
+          image: 'https://example.test/grin.png',
+          tasks: 'Grin needs to be killed for Deep Waters task.',
+        }, {
+          name: 'Viper',
+          id: 'viper',
+          faction: '???',
+          location: 'Pha Lang Airfield',
+          tasks: 'Viper needs to be killed for X task.',
+        }],
+      }),
+    });
+    vi.stubGlobal('fetch', fetchMock);
+
+    await expect(fetchBosses()).resolves.toEqual([
+      {
+        name: 'Grin',
+        id: 'grin',
+        fullName: 'Malo "Grin" Luangrath',
+        faction: 'Sifa Syndicate',
+        location: 'Blue Lagoon',
+        image: 'https://example.test/grin.png',
+        tasks: 'Grin needs to be killed for Deep Waters task.',
+      },
+      {
+        name: 'Viper',
+        id: 'viper',
+        fullName: '',
+        faction: '???',
+        location: 'Pha Lang Airfield',
+        image: undefined,
+        tasks: 'Viper needs to be killed for X task.',
+      },
+    ]);
+    expect(fetchMock).toHaveBeenCalledWith(expect.stringMatching(/\/bosses\?per_page=100$/));
   });
 });

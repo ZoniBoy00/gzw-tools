@@ -20,6 +20,7 @@
 | **Weapons** | Weapons database with compare mode, filters, detail modals |
 | **Armor** | Armor & gear guide with vests, plate carriers, helmets, recommendations |
 | **Keys** 🔑 | Search keys and keycards by location or name |
+| **Regions & Bosses** | Browse region tiers and LZ callsigns, plus boss locations, factions, and task notes |
 | **Vendors** | Vendor guide with rep tracking, per-rank item lists, unlock status (7 vendors) |
 | **Loadouts** | Build and save weapon loadouts in your browser |
 | **Log Analyzer** | Parse GZW.log files to extract match data |

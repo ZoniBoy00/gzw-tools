@@ -36,13 +36,18 @@ describe('site search', () => {
       vests: [{ name: 'Vest A' }],
       helmets: [{ name: 'Helmet A' }],
       keys: [{ name: 'Office Key', location: 'Tiger Bay' }],
-      tasks: [{ id: 't1', name: 'Recon', vendor: 'Handshake', location: 'Tiger Bay' }],
+      regions: [{ id: 'blue-lagoon', name: 'Blue Lagoon', tier: '2', localsType: 'Rebels', lzCallsigns: ['JULIETT'], description: '' }],
+      bosses: [{ id: 'grin', name: 'Grin', fullName: 'Malo Grin Luangrath', faction: 'Sifa Syndicate', location: 'Blue Lagoon', tasks: 'Grin is tied to Deep Waters.' }],
+      tasks: [{ id: 't1', name: 'Recon', vendor: 'Handshake', location: 'Tiger Bay', objectives: 'Find the radio' }],
     });
-    expect(new Set(items.map(item => item.type))).toEqual(new Set(['Task', 'Weapon', 'Ammunition', 'Armor', 'Helmet', 'Key', 'Vendor']));
+    expect(new Set(items.map(item => item.type))).toEqual(new Set(['Task', 'Weapon', 'Ammunition', 'Armor', 'Helmet', 'Key', 'Vendor', 'Region', 'Boss']));
     expect(items.find(item => item.id === 'task:t1')?.searchParams).toEqual({ search: 'Recon' });
+    expect(items.find(item => item.id === 'task:t1')?.keywords).toBe('Find the radio');
     expect(items.find(item => item.id === 'weapon:AK-12')?.searchParams).toEqual({ wsearch: 'AK-12' });
     expect(items.find(item => item.id === 'ammo:5.45x39mm:SP')?.searchParams).toEqual({ asearch: 'SP', caliber: '5.45x39mm' });
     expect(items.find(item => item.id === 'key:Office Key')?.searchParams).toEqual({ keysearch: 'Office Key' });
+    expect(items.find(item => item.id === 'region:blue-lagoon')?.searchParams).toEqual({ tab: 'regions', search: 'Blue Lagoon' });
+    expect(items.find(item => item.id === 'boss:grin')?.searchParams).toEqual({ tab: 'bosses', search: 'Grin' });
     expect(items.find(item => item.id === 'vendor:handshake')?.path).toBe('/');
   });
 });

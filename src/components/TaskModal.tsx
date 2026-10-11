@@ -39,8 +39,6 @@ export default function TaskModal({ task, onClose }: Props) {
 
   useEffect(() => {
     let cancelled = false;
-    setError(null);
-    setData(null);
     fetchTaskWiki(task.name)
       .then((d) => { if (!cancelled) setData(d); })
       .catch((e: Error) => { if (!cancelled) setError(e.message); });

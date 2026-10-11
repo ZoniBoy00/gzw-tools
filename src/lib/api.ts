@@ -277,4 +277,72 @@ export async function fetchItemImages(): Promise<ImageMap> {
   return imagesCache;
 }
 
+// ─── World intel ───
+
+export interface RegionEntry {
+  name: string;
+  id: string;
+  tier: string;
+  localsType: string;
+  lzCallsigns: string[];
+  description: string;
+  image?: string;
+}
+
+interface ApiRegion {
+  name: string;
+  id?: string;
+  tier?: string;
+  locals_type?: string;
+  lz_callsign?: string;
+  description?: string;
+  image?: string;
+}
+
+export async function fetchRegions(): Promise<RegionEntry[]> {
+  const raw = await fetchJson<ApiRegion[]>(`${BASE}/regions?per_page=100`);
+  return raw.map(region => ({
+    name: region.name,
+    id: region.id || region.name,
+    tier: region.tier || '',
+    localsType: region.locals_type || '',
+    lzCallsigns: (region.lz_callsign || '').split(',').map(value => value.trim()).filter(Boolean),
+    description: region.description || '',
+    image: region.image,
+  }));
+}
+
+export interface BossEntry {
+  name: string;
+  id: string;
+  fullName: string;
+  faction: string;
+  location: string;
+  image?: string;
+  tasks: string;
+}
+
+interface ApiBoss {
+  name: string;
+  id?: string;
+  full_name?: string;
+  faction?: string;
+  location?: string;
+  image?: string;
+  tasks?: string;
+}
+
+export async function fetchBosses(): Promise<BossEntry[]> {
+  const raw = await fetchJson<ApiBoss[]>(`${BASE}/bosses?per_page=100`);
+  return raw.map(boss => ({
+    name: boss.name,
+    id: boss.id || boss.name,
+    fullName: boss.full_name || '',
+    faction: boss.faction || '',
+    location: boss.location || '',
+    image: boss.image,
+    tasks: boss.tasks || '',
+  }));
+}
+
 

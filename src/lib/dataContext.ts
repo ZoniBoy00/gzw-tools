@@ -1,6 +1,6 @@
 import { createContext, useContext } from 'react';
 import type { AmmoRound, ArmorVest, Helmet, WeaponEntry } from '../data/types';
-import type { KeyEntry } from './api';
+import type { KeyEntry, RegionEntry, BossEntry } from './api';
 
 export interface GameData {
   weapons: WeaponEntry[];
@@ -10,6 +10,9 @@ export interface GameData {
   plateCarriers: ArmorVest[];
   helmets: Helmet[];
   keys: KeyEntry[];
+  regions: RegionEntry[];
+  bosses: BossEntry[];
+  worldGuideError: string | null;
   itemImages: Record<string, string>;
   vendorImages: Record<string, string>;
   loading: boolean;
@@ -25,6 +28,9 @@ export const defaultData: GameData = {
   plateCarriers: [],
   helmets: [],
   keys: [],
+  regions: [],
+  bosses: [],
+  worldGuideError: null,
   itemImages: {},
   vendorImages: {},
   loading: true,

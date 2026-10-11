@@ -10,8 +10,6 @@ export function useApiData<T>(endpoint: string) {
 
   useEffect(() => {
     let cancelled = false;
-    setLoading(true);
-    setError(null);
     const controller = new AbortController();
     fetch(`${API}/${endpoint}`, { signal: controller.signal })
       .then(async r => {
@@ -33,5 +31,11 @@ export function useApiData<T>(endpoint: string) {
     return () => { cancelled = true; controller.abort(); };
   }, [endpoint, reload]);
 
-  return { data, loading, error, refetch: () => setReload(value => value + 1) };
+  const refetch = () => {
+    setLoading(true);
+    setError(null);
+    setReload(value => value + 1);
+  };
+
+  return { data, loading, error, refetch };
 }

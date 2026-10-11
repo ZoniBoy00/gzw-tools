@@ -29,6 +29,10 @@ const NAV_GROUPS: NavGroup[] = [
     ],
   },
   {
+    label: 'World Intel',
+    items: [{ id: 'regions', label: 'Regions & Bosses', icon: 'fas fa-map-location-dot', path: '/regions' }],
+  },
+  {
     label: 'Planning',
     items: [
       { id: 'missions', label: 'Missions', icon: 'fas fa-clipboard-list', path: '/missions' },
@@ -91,6 +95,10 @@ const SEO_META: Record<string, { title: string; description: string }> = {
   '/keys': {
     title: 'Keys & Keycards Database | Gray Zone Warfare | GZW Tools',
     description: 'Find Gray Zone Warfare keys and keycards, their locations and the doors they unlock.',
+  },
+  '/regions': {
+    title: 'Regions & Bosses Guide | Gray Zone Warfare | GZW Tools',
+    description: 'Browse Gray Zone Warfare region tiers and LZ callsigns, plus known boss locations, factions and task notes.',
   },
   '/vendors': {
     title: 'Vendor Guide | Gray Zone Warfare | GZW Tools',
@@ -187,9 +195,13 @@ export default function AppShell({ children }: { children: ReactNode }) {
   const [searchOpen, setSearchOpen] = useState(false);
   const [searchMounted, setSearchMounted] = useState(false);
   const [favorites, setFavorites] = useState<string[]>(() => readPaths(FAVORITES_KEY));
-  const [recentPaths, setRecentPaths] = useState<string[]>(() => readPaths(RECENTS_KEY));
   const location = useLocation();
   const { dataVersion } = useDataContext();
+  const recentPaths = useMemo(() => {
+    const savedPaths = readPaths(RECENTS_KEY);
+    if (!ALL_ITEMS.some(item => item.path === location.pathname)) return savedPaths;
+    return [location.pathname, ...savedPaths.filter(path => path !== location.pathname && ALL_ITEMS.some(item => item.path === path))].slice(0, 6);
+  }, [location.pathname]);
   const continueItem = useMemo(() => recentPaths.map(path => ALL_ITEMS.find(item => item.path === path)).find(item => item && item.path !== location.pathname), [recentPaths, location.pathname]);
 
   const openSearch = useCallback(() => {
@@ -208,12 +220,8 @@ export default function AppShell({ children }: { children: ReactNode }) {
 
   useEffect(() => {
     if (!ALL_ITEMS.some(item => item.path === location.pathname)) return;
-    setRecentPaths(current => {
-      const next = [location.pathname, ...current.filter(path => path !== location.pathname && ALL_ITEMS.some(item => item.path === path))].slice(0, 6);
-      try { localStorage.setItem(RECENTS_KEY, JSON.stringify(next)); } catch { /* Recent navigation is optional. */ }
-      return next;
-    });
-  }, [location.pathname]);
+    try { localStorage.setItem(RECENTS_KEY, JSON.stringify(recentPaths)); } catch { /* Recent navigation is optional. */ }
+  }, [location.pathname, recentPaths]);
 
   useEffect(() => {
     const onKeyDown = (event: KeyboardEvent) => {

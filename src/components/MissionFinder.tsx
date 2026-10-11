@@ -214,7 +214,7 @@ export default function MissionFinder() {
         <span><i className="fas fa-database mr-1" />{filtered.length} / {allTasks.length}</span>
       </div>
 
-      {modalTask && <TaskModal task={modalTask} onClose={() => setModalTask(null)} />}
+      {modalTask && <TaskModal key={modalTask.id} task={modalTask} onClose={() => setModalTask(null)} />}
     </div>
   );
 }

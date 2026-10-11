@@ -18,6 +18,7 @@ const LoadoutBuilder = lazy(() => import('./components/LoadoutBuilder'));
 const LogAnalyzer = lazy(() => import('./components/LogAnalyzer'));
 const KeysGuide = lazy(() => import('./components/KeysGuide'));
 const ApiDocs = lazy(() => import('./components/ApiDocs'));
+const WorldGuide = lazy(() => import('./components/WorldGuide'));
 const PrivacyPolicy = lazy(() => import('./components/PrivacyPolicy'));
 const TermsOfService = lazy(() => import('./components/TermsOfService'));
 
@@ -41,6 +42,7 @@ function AppRoutes() {
       <Route path="/logs" element={<LogAnalyzer />} />
       <Route path="/api-docs" element={<ApiDocs />} />
       <Route path="/keys" element={<KeysGuide />} />
+      <Route path="/regions" element={<WorldGuide />} />
       <Route path="/privacy" element={<PrivacyPolicy />} />
       <Route path="/tos" element={<TermsOfService />} />
       <Route path="*" element={<Navigate to="/" replace />} />
