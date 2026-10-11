@@ -45,6 +45,9 @@ describe('armor API adapters', () => {
             nij_class: 'III++',
             material: 'Ceramic',
             armor_locations: 'Front, Back, Sides',
+            grid_size: '3x3',
+            weight: '9.600kg',
+            sold_by: 'Looting',
             image: 'https://example.test/buran.png',
           },
           {
@@ -73,6 +76,9 @@ describe('armor API adapters', () => {
         protectionRating: 'R3',
         material: 'Ceramic',
         plates: 'Front, Back, Sides',
+        grid: '3x3',
+        weight: 9.6,
+        source: 'Looting',
         image: 'https://example.test/buran.png',
       }),
       expect.objectContaining({
