@@ -20,6 +20,7 @@ export interface AmmoRound {
 export interface ArmorVest {
   name: string;
   nij: string;
+  protectionRating?: string;
   material: string;
   plates: string;
   grid: string;

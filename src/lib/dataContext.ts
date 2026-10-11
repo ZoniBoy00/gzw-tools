@@ -7,6 +7,7 @@ export interface GameData {
   ammo: AmmoRound[];
   calibers: string[];
   vests: ArmorVest[];
+  plateCarriers: ArmorVest[];
   helmets: Helmet[];
   keys: KeyEntry[];
   itemImages: Record<string, string>;
@@ -21,6 +22,7 @@ export const defaultData: GameData = {
   ammo: [],
   calibers: [],
   vests: [],
+  plateCarriers: [],
   helmets: [],
   keys: [],
   itemImages: {},

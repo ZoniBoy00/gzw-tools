@@ -1,18 +1,6 @@
 // Manual data (not from API — curated gear recommendations and metadata).
 import type { GearRecommendation } from "./types";
 
-export const PLATE_CARRIERS = [
-  { name: "Specter IIIA", nij: "IIIA", material: "Aramid", plates: "None", grid: "4x3", weight: 2.2, source: "Handshake R.1" },
-  { name: "CGPC3 TQS", nij: "IIIA", material: "Aramid", plates: "None", grid: "4x3", weight: 2.6, source: "Handshake R.1" },
-  { name: "Modular Operator Carrier Gen II", nij: "IIIA", material: "Aramid", plates: "None", grid: "4x3", weight: 2.5, source: "Handshake R.1" },
-  { name: "Chest Rig 901 Elite 4", nij: "III", material: "UHMWPE", plates: "None", grid: "4x3", weight: 2.8, source: "Handshake R.2" },
-  { name: "LCS Sentry", nij: "III", material: "UHMWPE", plates: "None", grid: "4x3", weight: 3.0, source: "Handshake R.2" },
-  { name: "Recon Plate Carrier", nij: "III+", material: "Ceramic", plates: "None", grid: "4x3", weight: 3.4, source: "Handshake R.3" },
-  { name: "Plate6 Plate Carrier", nij: "III++", material: "Ceramic", plates: "None", grid: "4x3", weight: 3.8, source: "Handshake R.4" },
-  { name: "LBT-6094 G3v2", nij: "III++", material: "Ceramic", plates: "None", grid: "4x3", weight: 3.9, source: "Handshake R.4" },
-  { name: "Pantsir 2.0", nij: "III", material: "UHMWPE", plates: "None", grid: "4x3", weight: 2.7, source: "Turncoat R.2" },
-  { name: "Phantom Type 2", nij: "III++", material: "Ceramic", plates: "None", grid: "4x3", weight: 3.9, source: "Turncoat R.4" },
-];
 
 export const MATERIAL_RANK: Record<string, { rank: number; desc: string; color: string }> = {
   Aramid: { rank: 1, desc: 'Light, flexible', color: 'text-blue-400' },

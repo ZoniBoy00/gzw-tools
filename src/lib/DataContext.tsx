@@ -3,7 +3,7 @@
  * Components use `useDataContext()` to access any dataset synchronously.
  */
 import { useState, useEffect, type ReactNode } from 'react';
-import { fetchWeapons, fetchAmmo, fetchVests, fetchHelmets, fetchKeys, fetchItemImages, fetchDataVersion } from './api';
+import { fetchWeapons, fetchAmmo, fetchVests, fetchPlateCarriers, fetchHelmets, fetchKeys, fetchItemImages, fetchDataVersion } from './api';
 import { DataContext, defaultData, type GameData } from './dataContext';
 
 export function DataProvider({ children }: { children: ReactNode }) {
@@ -15,15 +15,16 @@ export function DataProvider({ children }: { children: ReactNode }) {
       fetchWeapons(),
       fetchAmmo(),
       fetchVests(),
+      fetchPlateCarriers(),
       fetchHelmets(),
       fetchKeys(),
       fetchItemImages(),
       fetchDataVersion().catch(() => null),
     ])
-    .then(([weapons, ammoData, vests, helmets, keys, itemImages, dataVersion]) => {
+    .then(([weapons, ammoData, vests, plateCarriers, helmets, keys, itemImages, dataVersion]) => {
         if (cancelled) return;
         setData({
-          weapons, vests, helmets, keys, itemImages, vendorImages: itemImages,
+          weapons, vests, plateCarriers, helmets, keys, itemImages, vendorImages: itemImages,
           ammo: ammoData.rounds,
           calibers: ammoData.calibers,
           loading: false,

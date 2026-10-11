@@ -1,5 +1,5 @@
 import { useState, useMemo } from 'react';
-import { PLATE_CARRIERS, RECOMMENDATIONS, MATERIAL_RANK } from '../data/armor';
+import { RECOMMENDATIONS, MATERIAL_RANK } from '../data/armor';
 import TabBar from './ui/TabBar';
 import { useDataContext } from '../lib/useDataContext';
 import { wikiUrl } from '../lib/api';
@@ -21,7 +21,7 @@ export default function ArmorGuide() {
     const requested = new URLSearchParams(window.location.search).get('tab');
     return SUB.some(item => item.id === requested) ? requested as SubTab : 'recommend';
   });
-  const { vests, helmets, itemImages, loading, error } = useDataContext();
+  const { vests, plateCarriers, helmets, itemImages, loading, error } = useDataContext();
 
   if (loading) return <div className="tab-content"><p className="text-text-muted">Loading armor data...</p></div>;
   if (error) return <div className="tab-content"><p className="text-red-400">Error loading armor data: {error}</p></div>;
@@ -38,7 +38,7 @@ export default function ArmorGuide() {
       <div className="mt-4">
         {tab === 'recommend' && <Recommendations />}
         {tab === 'vests' && <VestSection vests={vests} itemImages={itemImages} />}
-        {tab === 'plate_carriers' && <PlateCarrierSection itemImages={itemImages} />}
+        {tab === 'plate_carriers' && <PlateCarrierSection plateCarriers={plateCarriers} itemImages={itemImages} />}
         {tab === 'helmets' && <HelmetSection helmets={helmets} itemImages={itemImages} />}
         {tab === 'vendors' && <VendorTable />}
       </div>
@@ -120,7 +120,7 @@ function VestSection({ vests, itemImages }: { vests: ArmorVest[]; itemImages: Re
               <div key={v.name} className="compare-card selected">
                 <div className="text-sm font-bold mb-2 text-accent">{v.name}</div>
                 {[
-                  { label: 'NIJ Class', value: v.nij, cls: nijColor(v.nij) },
+                  { label: 'Rating / NIJ', value: protectionLabel(v), cls: nijColor(v.nij) },
                   { label: 'Material', value: v.material, cls: matColor(v.material) },
                   { label: 'Plates', value: v.plates },
                   { label: 'Grid', value: v.grid },
@@ -144,7 +144,7 @@ function VestSection({ vests, itemImages }: { vests: ArmorVest[]; itemImages: Re
             <tr>
               <th className="w-8 text-center" role="columnheader"></th>
               <th role="columnheader">Name</th>
-              <th className="text-center" role="columnheader">NIJ</th>
+              <th className="text-center" role="columnheader">Rating / NIJ</th>
               <th className="text-center" role="columnheader">Mat</th>
               <th className="text-center" role="columnheader"><i className="fas fa-shield" aria-hidden="true" /><span className="sr-only">Plates</span></th>
               <th className="text-center" role="columnheader">Grid</th>
@@ -153,8 +153,8 @@ function VestSection({ vests, itemImages }: { vests: ArmorVest[]; itemImages: Re
             </tr>
           </thead>
           <tbody>
-            {sorted.map((v, i) => (
-              <tr key={i}>
+            {sorted.map((v) => (
+              <tr key={v.name}>
                 <td className="text-center align-middle">
                   <button
                     onClick={() => toggleCompare(v.name)}
@@ -174,7 +174,7 @@ function VestSection({ vests, itemImages }: { vests: ArmorVest[]; itemImages: Re
                     image: (v.image || itemImages[v.name as keyof typeof itemImages]) as string | undefined,
                     type: 'vest',
                     fields: [
-                      { label: 'NIJ Class', value: v.nij, color: nijColor(v.nij), desc: 'National Institute of Justice protection rating — higher classes stop more powerful rounds' },
+                      { label: 'Rating / NIJ', value: protectionLabel(v), color: nijColor(v.nij), desc: 'Wiki protection rating and its NIJ equivalent, when both are available' },
                       { label: 'Material', value: v.material, color: matColor(v.material), desc: 'Armor material — affects weight, durability and protection level. Aramid=light, Steel=heavy, Ceramic=best but brittle' },
                       { label: 'Plates', value: v.plates, desc: 'Areas protected by armor plates — Front, Back, or Sides coverage' },
                       { label: 'Grid', value: v.grid, desc: 'Inventory grid size in slots — determines how much space the vest takes in your inventory' },
@@ -189,7 +189,7 @@ function VestSection({ vests, itemImages }: { vests: ArmorVest[]; itemImages: Re
                     {v.name}
                   </button>
                 </td>
-                <td data-label="NIJ" className={`text-center font-bold ${nijColor(v.nij)}`}>{v.nij}</td>
+                <td data-label="Rating / NIJ" className={`text-center font-bold ${nijColor(v.nij)}`}>{protectionLabel(v)}</td>
                 <td data-label="Mat" className={`text-center ${matColor(v.material)}`}>{v.material.slice(0, 4)}</td>
                 <td data-label="Plates" className="text-center text-text-muted">{v.plates.replace(', ', '/')}</td>
                 <td data-label="Grid" className="text-center text-text-muted">{v.grid}</td>
@@ -207,11 +207,11 @@ function VestSection({ vests, itemImages }: { vests: ArmorVest[]; itemImages: Re
 
 // ─── Plate Carrier compare ───
 
-function PlateCarrierSection({ itemImages }: { itemImages: Record<string, string> }) {
+function PlateCarrierSection({ plateCarriers, itemImages }: { plateCarriers: ArmorVest[]; itemImages: Record<string, string> }) {
   const [compare, setCompare] = useState<string[]>([]);
   const [modalItem, setModalItem] = useState<ModalItem | null>(null);
 
-  const sorted = useMemo(() => [...PLATE_CARRIERS].sort((a, b) => nij(b.nij) - nij(a.nij)), []);
+  const sorted = useMemo(() => [...plateCarriers].sort((a, b) => nij(b.nij) - nij(a.nij)), [plateCarriers]);
 
   const toggleCompare = (name: string) => {
     setCompare((prev) =>
@@ -219,7 +219,7 @@ function PlateCarrierSection({ itemImages }: { itemImages: Record<string, string
     );
   };
 
-  const comparedPC = useMemo(() => PLATE_CARRIERS.filter((v) => compare.includes(v.name)), [compare]);
+  const comparedPC = useMemo(() => plateCarriers.filter((v) => compare.includes(v.name)), [compare, plateCarriers]);
 
   return (
     <div>
@@ -235,7 +235,7 @@ function PlateCarrierSection({ itemImages }: { itemImages: Record<string, string
               <div key={v.name} className="compare-card selected">
                 <div className="text-sm font-bold mb-2 text-accent">{v.name}</div>
                 {[
-                  { label: 'NIJ Class', value: v.nij, cls: nijColor(v.nij) },
+                  { label: 'Rating / NIJ', value: protectionLabel(v), cls: nijColor(v.nij) },
                   { label: 'Material', value: v.material, cls: matColor(v.material) },
                   { label: 'Plates', value: v.plates },
                   { label: 'Grid', value: v.grid },
@@ -259,7 +259,7 @@ function PlateCarrierSection({ itemImages }: { itemImages: Record<string, string
             <tr>
               <th className="w-8 text-center" role="columnheader"></th>
               <th role="columnheader">Name</th>
-              <th className="text-center" role="columnheader">NIJ</th>
+              <th className="text-center" role="columnheader">Rating / NIJ</th>
               <th className="text-center" role="columnheader">Mat</th>
               <th className="text-center" role="columnheader"><i className="fas fa-shield" /><span className="sr-only">Plates</span></th>
               <th className="text-center" role="columnheader">Grid</th>
@@ -268,8 +268,8 @@ function PlateCarrierSection({ itemImages }: { itemImages: Record<string, string
             </tr>
           </thead>
           <tbody>
-            {sorted.map((v, i) => (
-              <tr key={i}>
+            {sorted.map((v) => (
+              <tr key={v.name}>
                 <td className="text-center align-middle">
                   <button onClick={() => toggleCompare(v.name)}
                     className={`inline-flex items-center justify-center w-5 h-5 text-[10px] border ${compare.includes(v.name) ? 'border-accent/50 text-accent bg-accent/10' : 'border-border text-text-muted hover:border-text-muted/30'}`}
@@ -282,7 +282,7 @@ function PlateCarrierSection({ itemImages }: { itemImages: Record<string, string
                     image: itemImages[v.name as keyof typeof itemImages] as string | undefined,
                     type: 'vest',
                     fields: [
-                      { label: 'NIJ Class', value: v.nij, color: nijColor(v.nij), desc: 'National Institute of Justice protection rating' },
+                      { label: 'Rating / NIJ', value: protectionLabel(v), color: nijColor(v.nij), desc: 'Wiki protection rating and its NIJ equivalent, when both are available' },
                       { label: 'Material', value: v.material, color: matColor(v.material), desc: 'Armor material type' },
                       { label: 'Plates', value: v.plates, desc: 'Areas protected by armor plates' },
                       { label: 'Grid', value: v.grid, desc: 'Inventory grid size' },
@@ -297,7 +297,7 @@ function PlateCarrierSection({ itemImages }: { itemImages: Record<string, string
                     {v.name}
                   </button>
                 </td>
-                <td data-label="NIJ" className={`text-center font-bold ${nijColor(v.nij)}`}>{v.nij}</td>
+                <td data-label="Rating / NIJ" className={`text-center font-bold ${nijColor(v.nij)}`}>{protectionLabel(v)}</td>
                 <td data-label="Mat" className={`text-center ${matColor(v.material)}`}>{v.material.slice(0, 4)}</td>
                 <td data-label="Plates" className="text-center text-text-muted">{v.plates.replace(', ', '/')}</td>
                 <td data-label="Grid" className="text-center text-text-muted">{v.grid}</td>
@@ -378,8 +378,8 @@ function HelmetSection({ helmets, itemImages }: { helmets: Helmet[]; itemImages:
             </tr>
           </thead>
           <tbody>
-            {sorted.map((h, i) => (
-              <tr key={i}>
+            {sorted.map((h) => (
+              <tr key={h.name}>
                 <td className="text-center align-middle">
                   <button
                     onClick={() => toggleCompare(h.name)}
@@ -447,8 +447,8 @@ function VendorTable() {
             { vendor: 'Turncoat', rep: 2, items: 'SK-S III, ATBV III, ACH IIIA' },
             { vendor: 'Turncoat', rep: 3, items: '6B23-1 III+' },
             { vendor: 'Banshee', rep: 2, items: 'FAST Carbon IIIA helmet' },
-          ].map((v, i) => (
-            <tr key={i}>
+          ].map((v) => (
+            <tr key={`${v.vendor}-${v.rep}`}>
               <td data-label="" className="font-medium">{v.vendor}</td>
               <td data-label="Rep" className="text-center"><span className="tag tag-drab">R.{v.rep}</span></td>
               <td data-label="Items" className="text-text-muted">{v.items}</td>
@@ -483,6 +483,10 @@ function Legend() {
       </div>
     </div>
   );
+}
+
+function protectionLabel(armor: Pick<ArmorVest, 'nij' | 'protectionRating'>): string {
+  return armor.protectionRating ? `${armor.protectionRating} / ${armor.nij}` : armor.nij;
 }
 
 function nij(n: string): number {

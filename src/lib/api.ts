@@ -181,10 +181,13 @@ interface ApiArmor {
   name: string;
   type?: string;
   nij_class?: string;
+  protection_rating?: string;
   material?: string;
   weight?: string;
   grid_size?: string;
+  inventory?: string;
   plates?: string;
+  armor_locations?: string;
   sold_by?: string;
   category?: string; // added by smart routes
   image?: string;
@@ -192,16 +195,28 @@ interface ApiArmor {
 
 export async function fetchVests(): Promise<ArmorVest[]> {
   const raw = await fetchJson<ApiArmor[]>(`${BASE}/vests?all=true`);
-  return raw.filter(v => v.type || v.weight || v.material || v.nij_class || v.sold_by).map(v => ({
+  return raw.filter(v => v.type || v.weight || v.material || v.nij_class || v.protection_rating || v.sold_by).map(mapArmor);
+}
+
+export async function fetchPlateCarriers(): Promise<ArmorVest[]> {
+  const raw = await fetchJson<ApiArmor[]>(`${BASE}/plate_carriers?all=true`);
+  return raw
+    .filter(v => v.name !== 'Plate Carriers' && (v.type === 'Plate Carrier' || v.protection_rating || v.nij_class || v.material || v.weight || v.sold_by))
+    .map(mapArmor);
+}
+
+function mapArmor(v: ApiArmor): ArmorVest {
+  return {
     name: v.name,
     nij: v.nij_class || 'N/A',
+    protectionRating: v.protection_rating,
     material: v.material || 'Unknown',
-    plates: v.plates || '',
-    grid: v.grid_size || '',
+    plates: v.plates || v.armor_locations || '',
+    grid: v.grid_size || v.inventory || '',
     weight: parseFloat(v.weight || '0'),
     source: v.sold_by || 'Unknown',
     image: v.image,
-  }));
+  };
 }
 
 export async function fetchHelmets(): Promise<Helmet[]> {
