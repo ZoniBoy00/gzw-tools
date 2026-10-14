@@ -2,7 +2,7 @@ import { useCallback, useEffect, useMemo, useState, type ReactNode } from 'react
 import { NavLink, Link, useLocation } from 'react-router-dom';
 import FaqModal from '../FaqModal';
 import SiteSearchDialog from '../SiteSearchDialog';
-import { GZW_API_BASE } from '../../lib/api';
+import { fetchApiStats, gzwClient } from '../../lib/api';
 import { useDataContext } from '../../lib/dataContext';
 
 type NavItem = { id: string; label: string; icon: string; path: string };
@@ -131,20 +131,15 @@ function StatsStrip() {
 
   useEffect(() => {
     const controller = new AbortController();
-    fetch(`${GZW_API_BASE}/stats`, { signal: controller.signal })
-      .then(response => {
-        if (!response.ok) throw new Error(`Stats request failed: ${response.status}`);
-        return response.json();
-      })
-      .then(body => {
-        const data = body.data || body;
+    fetchApiStats(gzwClient, controller.signal)
+      .then(data => {
         const excluded = new Set(['armor_images', 'gzwtacmap_data', 'map_pois', 'weapon_images', 'item_images', 'vendor_images']);
         const entries = Object.entries(data).filter(([key]) => !excluded.has(key));
-        const items = entries.reduce((sum, [, value]) => sum + ((value as { total?: number }).total || 0), 0);
+        const items = entries.reduce((sum, [, value]) => sum + value.total, 0);
         setStats({ datasets: entries.length, items });
       })
-      .catch(error => {
-        if (error.name !== 'AbortError') setStats(null);
+      .catch((error: unknown) => {
+        if (!(error instanceof Error && error.name === 'AbortError')) setStats(null);
       });
     return () => controller.abort();
   }, []);
@@ -275,7 +270,7 @@ export default function AppShell({ children }: { children: ReactNode }) {
         <main id="main-content" className="app-content">{children}</main>
         <footer className="app-footer">
           <span>Community tool · not affiliated with M.A.G. Studios</span>
-          <span><Link to="/privacy">Privacy</Link><Link to="/tos">Terms</Link><a href="https://gzw-data.dev/" target="_blank" rel="noopener noreferrer">GZW Data API</a><a href="https://github.com/ZoniBoy00/gzw-tools" target="_blank" rel="noopener noreferrer">GitHub</a></span>
+          <span><Link to="/privacy">Privacy</Link><Link to="/tos">Terms</Link><a href="https://gzw-data.dev/" target="_blank" rel="noopener noreferrer">GZW Data API</a><a href="https://github.com/ZoniBoy00/gzw-data/blob/main/DATA_LICENSE.md" target="_blank" rel="noopener noreferrer">Data sources</a><a href="https://github.com/ZoniBoy00/gzw-tools" target="_blank" rel="noopener noreferrer">GitHub</a></span>
         </footer>
       </div>
       <nav className="mobile-nav" aria-label="Mobile navigation">

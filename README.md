@@ -3,7 +3,8 @@
 **Gray Zone Warfare** — fan-made reference tool. Not affiliated with M.A.G. Studios.
 
 [![Vercel](https://img.shields.io/badge/deployed%20on-Vercel-000?logo=vercel)](https://gzw-tools.vercel.app)
-[![License](https://img.shields.io/badge/license-MIT-blue)](LICENSE)
+[![CI](https://github.com/ZoniBoy00/gzw-tools/actions/workflows/ci.yml/badge.svg)](https://github.com/ZoniBoy00/gzw-tools/actions/workflows/ci.yml)
+[![Code license](https://img.shields.io/badge/code%20license-MIT-blue)](LICENSE)
 [![Donate](https://img.shields.io/badge/donate-Buy%20me%20a%20coffee-f0b429?logo=buymeacoffee)](https://buymeacoffee.com/zoniboy00)
 
 ---
@@ -29,7 +30,7 @@
 ## Tech Stack
 
 - **Frontend:** React 19, TypeScript, Vite, Tailwind CSS
-- **Data API:** [gzw-data.dev/api/v1](https://gzw-data.dev/api/v1)
+- **Data API:** [gzw-data.dev/api/v1](https://gzw-data.dev/api/v1), consumed through [`@zoniboy/gzw-data-client`](https://www.npmjs.com/package/@zoniboy/gzw-data-client)
 - **Data source:** [gzw-scraper](https://github.com/ZoniBoy00/gzw-scraper) → GZW Data API
 - **Hosting:** Vercel (Hobby)
 
@@ -44,6 +45,9 @@ which is maintained by the separate scraper pipeline:
 
 The API publishes a `dataVersion` snapshot timestamp. The frontend displays that
 snapshot in the application shell instead of inventing a static refresh date.
+
+Data rights and attribution are separate from this repository's code license.
+See the [GZW Data source and licensing notice](https://github.com/ZoniBoy00/gzw-data/blob/main/DATA_LICENSE.md); no blanket MIT license is claimed for wiki-derived data or linked game assets.
 
 ## API
 
@@ -63,6 +67,8 @@ GET https://gzw-data.dev/api/v1/search?q= Unified search
 All endpoints support `?caliber=`, `?vendor=`, `?location=` and other filters.
 
 ## Development
+
+Node.js 22+ is required by the current source and CI matrix (22 and 24).
 
 ```bash
 # Install dependencies
@@ -93,6 +99,9 @@ npm run lint
 └── vercel.json          # Vercel deployment config
 ```
 
-## License
+## Code and data licensing
 
-MIT — use it, modify it, share it. Game content belongs to M.A.G. Studios.
+The [MIT license](LICENSE) applies to the project code. It does not relicense
+third-party game data, wiki-derived material, images, or trademarks. See the
+[GZW Data source and licensing notice](https://github.com/ZoniBoy00/gzw-data/blob/main/DATA_LICENSE.md)
+for provenance and attribution guidance.

@@ -1,5 +1,50 @@
-import { afterEach, describe, expect, it, vi } from 'vitest';
-import { fetchBosses, fetchPlateCarriers, fetchRegions, fetchVests, parsePen } from './api';
+import { describe, expect, it, vi } from 'vitest';
+import { createGzwDataClient, fetchApiRoot, fetchApiStats, fetchBosses, fetchDataVersion, fetchPlateCarriers, fetchRegions, fetchVests, GZW_API_BASE, parsePen } from './api';
+
+describe('SDK-backed API client', () => {
+  it('uses the injected SDK fetch for version requests', async () => {
+    const fetchMock = vi.fn().mockResolvedValue({
+      ok: true,
+      status: 200,
+      statusText: 'OK',
+      headers: { get: () => null },
+      json: async () => ({
+        data: { dataVersion: '2026-10-12T15:45:06Z' },
+      }),
+    });
+    const client = createGzwDataClient(fetchMock);
+
+    await expect(fetchDataVersion(client)).resolves.toBe('2026-10-12T15:45:06Z');
+    expect(fetchMock).toHaveBeenCalledWith(
+      `${GZW_API_BASE}/version`,
+      expect.objectContaining({ method: 'GET' }),
+    );
+  });
+
+  it('loads API stats and endpoint discovery through SDK methods', async () => {
+    const fetchMock = vi.fn()
+      .mockResolvedValueOnce({
+        ok: true,
+        status: 200,
+        statusText: 'OK',
+        headers: { get: () => null },
+        json: async () => ({ data: { weapons: { total: 2, sources: ['wiki'] } } }),
+      })
+      .mockResolvedValueOnce({
+        ok: true,
+        status: 200,
+        statusText: 'OK',
+        headers: { get: () => null },
+        json: async () => ({ data: { endpoints: ['weapons', 'ammo'] } }),
+      });
+    const client = createGzwDataClient(fetchMock);
+
+    await expect(fetchApiStats(client)).resolves.toEqual({ weapons: { total: 2, sources: ['wiki'] } });
+    await expect(fetchApiRoot(client)).resolves.toEqual({ endpoints: ['weapons', 'ammo'] });
+    expect(fetchMock).toHaveBeenNthCalledWith(1, `${GZW_API_BASE}/stats`, expect.objectContaining({ method: 'GET' }));
+    expect(fetchMock).toHaveBeenNthCalledWith(2, `${GZW_API_BASE}/`, expect.objectContaining({ method: 'GET' }));
+  });
+});
 
 describe('ammo penetration mapping', () => {
   it('maps classes below the stopping class to penetration', () => {
@@ -26,16 +71,13 @@ describe('ammo penetration mapping', () => {
   });
 });
 
-afterEach(() => {
-  vi.unstubAllGlobals();
-});
-
 describe('armor API adapters', () => {
   it('maps live plate carrier records including optional protection ratings', async () => {
     const fetchMock = vi.fn().mockResolvedValue({
       ok: true,
       status: 200,
       statusText: 'OK',
+      headers: { get: () => null },
       json: async () => ({
         data: [
           {
@@ -64,11 +106,13 @@ describe('armor API adapters', () => {
         ],
       }),
     });
-    vi.stubGlobal('fetch', fetchMock);
+    const client = createGzwDataClient(fetchMock);
+    const plateCarriers = await fetchPlateCarriers(client);
 
-    const plateCarriers = await fetchPlateCarriers();
-
-    expect(fetchMock).toHaveBeenCalledWith(expect.stringMatching(/\/plate_carriers\?all=true$/));
+    expect(fetchMock).toHaveBeenCalledWith(
+      expect.stringMatching(/\/plate_carriers\?all=true$/),
+      expect.objectContaining({ method: 'GET' }),
+    );
     expect(plateCarriers).toEqual([
       expect.objectContaining({
         name: "Buran's Pantsir 2.0",
@@ -93,10 +137,11 @@ describe('armor API adapters', () => {
   });
 
   it('retains the added wiki protection rating for vests', async () => {
-    vi.stubGlobal('fetch', vi.fn().mockResolvedValue({
+    const fetchMock = vi.fn().mockResolvedValue({
       ok: true,
       status: 200,
       statusText: 'OK',
+      headers: { get: () => null },
       json: async () => ({
         data: [{
           name: 'Commander (Black)',
@@ -109,9 +154,10 @@ describe('armor API adapters', () => {
           protection_rating: 'R2',
         }],
       }),
-    }));
+    });
+    const client = createGzwDataClient(fetchMock);
 
-    await expect(fetchVests()).resolves.toEqual([
+    await expect(fetchVests(client)).resolves.toEqual([
       expect.objectContaining({ name: 'Commander (Black)', nij: 'IIIA', protectionRating: 'P3' }),
       expect.objectContaining({ name: 'Rating-only vest', nij: 'N/A', protectionRating: 'R2' }),
     ]);
@@ -124,6 +170,7 @@ describe('world guide API adapters', () => {
       ok: true,
       status: 200,
       statusText: 'OK',
+      headers: { get: () => null },
       json: async () => ({
         data: [{
           name: 'Blue Lagoon',
@@ -136,9 +183,9 @@ describe('world guide API adapters', () => {
         }],
       }),
     });
-    vi.stubGlobal('fetch', fetchMock);
+    const client = createGzwDataClient(fetchMock);
 
-    await expect(fetchRegions()).resolves.toEqual([{
+    await expect(fetchRegions(client)).resolves.toEqual([{
       name: 'Blue Lagoon',
       id: 'blue-lagoon',
       tier: '2',
@@ -147,7 +194,10 @@ describe('world guide API adapters', () => {
       description: 'Tourism center and campground.',
       image: 'https://example.test/blue-lagoon.png',
     }]);
-    expect(fetchMock).toHaveBeenCalledWith(expect.stringMatching(/\/regions\?per_page=100$/));
+    expect(fetchMock).toHaveBeenCalledWith(
+      expect.stringMatching(/\/regions\?per_page=100$/),
+      expect.objectContaining({ method: 'GET' }),
+    );
   });
 
   it('loads boss location, faction, and task notes without inventing missing data', async () => {
@@ -155,6 +205,7 @@ describe('world guide API adapters', () => {
       ok: true,
       status: 200,
       statusText: 'OK',
+      headers: { get: () => null },
       json: async () => ({
         data: [{
           name: 'Grin',
@@ -173,9 +224,9 @@ describe('world guide API adapters', () => {
         }],
       }),
     });
-    vi.stubGlobal('fetch', fetchMock);
+    const client = createGzwDataClient(fetchMock);
 
-    await expect(fetchBosses()).resolves.toEqual([
+    await expect(fetchBosses(client)).resolves.toEqual([
       {
         name: 'Grin',
         id: 'grin',
@@ -195,6 +246,9 @@ describe('world guide API adapters', () => {
         tasks: 'Viper needs to be killed for X task.',
       },
     ]);
-    expect(fetchMock).toHaveBeenCalledWith(expect.stringMatching(/\/bosses\?per_page=100$/));
+    expect(fetchMock).toHaveBeenCalledWith(
+      expect.stringMatching(/\/bosses\?per_page=100$/),
+      expect.objectContaining({ method: 'GET' }),
+    );
   });
 });

@@ -3,36 +3,41 @@
  * Fetches all game data from the GZW Data API — the single source of truth.
  * Transforms API responses into the types expected by the frontend components.
  */
+import { GzwDataClient, type DatasetQuery, type GzwApiRoot, type GzwStats } from '@zoniboy/gzw-data-client';
 import type { ArmorClass, PenLevel, AmmoRound, ArmorVest, Helmet, WeaponEntry } from '../data/types';
 import { ARMOR_CLASSES } from '../data/types';
 
 export const GZW_API_BASE = (import.meta.env.VITE_GZW_DATA_URL || 'https://gzw-data.dev/api/v1').replace(/\/$/, '');
-const BASE = GZW_API_BASE;
 
-export async function fetchDataVersion(): Promise<string | null> {
-  const version = await fetchJson<{ dataVersion?: string }>(`${BASE}/version`);
+export function createGzwDataClient(fetchImpl?: typeof globalThis.fetch): GzwDataClient {
+  return new GzwDataClient({
+    baseUrl: GZW_API_BASE,
+    fetch: fetchImpl ?? ((input, init) => globalThis.fetch(input, init)),
+  });
+}
+
+export const gzwClient = createGzwDataClient();
+
+async function listDataset<T>(client: GzwDataClient, name: string, query: DatasetQuery = {}): Promise<T[]> {
+  const response = await client.dataset(name).list(query);
+  return response.data as T[];
+}
+
+export async function fetchDataVersion(client: GzwDataClient = gzwClient): Promise<string | null> {
+  const version = await client.version();
   return version.dataVersion || null;
+}
+
+export function fetchApiStats(client: GzwDataClient = gzwClient, signal?: AbortSignal): Promise<GzwStats> {
+  return client.stats(signal);
+}
+
+export function fetchApiRoot(client: GzwDataClient = gzwClient, signal?: AbortSignal): Promise<GzwApiRoot> {
+  return client.endpoints(signal);
 }
 
 export function wikiUrl(name: string): string {
   return `https://gray-zone-warfare.fandom.com/wiki/${encodeURIComponent(name.replace(/\s+/g, '_'))}`;
-}
-
-async function fetchJson<T>(url: string): Promise<T> {
-  const res = await fetch(url);
-  if (!res.ok) {
-    let detail = '';
-    try {
-      const body = await res.json();
-      detail = body?.error?.message ? `: ${body.error.message}` : '';
-    } catch {
-      // Keep the HTTP status when the upstream response is not JSON.
-    }
-    throw new Error(`API ${res.status}: ${res.statusText}${detail}`);
-  }
-  const body = await res.json();
-  // gzw-data API returns { data: ..., count: ..., source: ..., timestamp: ... }
-  return (body.data ?? body) as T;
 }
 
 // ─── Weapons ───
@@ -50,8 +55,8 @@ interface ApiWeapon {
   image?: string;
 }
 
-export async function fetchWeapons(): Promise<WeaponEntry[]> {
-  const raw = await fetchJson<ApiWeapon[]>(`${BASE}/weapons`);
+export async function fetchWeapons(client: GzwDataClient = gzwClient): Promise<WeaponEntry[]> {
+  const raw = await listDataset<ApiWeapon>(client, 'weapons');
   return raw.map(w => ({
     name: w.name,
     type: w.type || 'Unknown',
@@ -149,8 +154,8 @@ function extractCaliber(name: string): string {
   return 'Other';
 }
 
-export async function fetchAmmo(): Promise<{ rounds: AmmoRound[]; calibers: string[] }> {
-  const raw = await fetchJson<ApiAmmo[]>(`${BASE}/ammo?all=true`);
+export async function fetchAmmo(client: GzwDataClient = gzwClient): Promise<{ rounds: AmmoRound[]; calibers: string[] }> {
+  const raw = await listDataset<ApiAmmo>(client, 'ammo', { all: true });
   const rounds: AmmoRound[] = [];
   for (const a of raw) {
     if (!a.name || !a.type || a.type === 'Ammunition') continue; // skip overview pages (name+id only)
@@ -193,13 +198,13 @@ interface ApiArmor {
   image?: string;
 }
 
-export async function fetchVests(): Promise<ArmorVest[]> {
-  const raw = await fetchJson<ApiArmor[]>(`${BASE}/vests?all=true`);
+export async function fetchVests(client: GzwDataClient = gzwClient): Promise<ArmorVest[]> {
+  const raw = await listDataset<ApiArmor>(client, 'vests', { all: true });
   return raw.filter(v => v.type || v.weight || v.material || v.nij_class || v.protection_rating || v.sold_by).map(mapArmor);
 }
 
-export async function fetchPlateCarriers(): Promise<ArmorVest[]> {
-  const raw = await fetchJson<ApiArmor[]>(`${BASE}/plate_carriers?all=true`);
+export async function fetchPlateCarriers(client: GzwDataClient = gzwClient): Promise<ArmorVest[]> {
+  const raw = await listDataset<ApiArmor>(client, 'plate_carriers', { all: true });
   return raw
     .filter(v => v.name !== 'Plate Carriers' && (v.type === 'Plate Carrier' || v.protection_rating || v.nij_class || v.material || v.weight || v.sold_by))
     .map(mapArmor);
@@ -219,8 +224,8 @@ function mapArmor(v: ApiArmor): ArmorVest {
   };
 }
 
-export async function fetchHelmets(): Promise<Helmet[]> {
-  const raw = await fetchJson<ApiArmor[]>(`${BASE}/helmets?all=true`);
+export async function fetchHelmets(client: GzwDataClient = gzwClient): Promise<Helmet[]> {
+  const raw = await listDataset<ApiArmor>(client, 'helmets', { all: true });
   return raw.filter(h => h.type || h.weight || h.material || h.nij_class || h.sold_by).map(h => ({
     name: h.name,
     nij: h.nij_class || 'N/A',
@@ -251,8 +256,8 @@ export interface KeyEntry {
   image?: string;
 }
 
-export async function fetchKeys(): Promise<KeyEntry[]> {
-  const raw = await fetchJson<ApiKey[]>(`${BASE}/keys?all=true`);
+export async function fetchKeys(client: GzwDataClient = gzwClient): Promise<KeyEntry[]> {
+  const raw = await listDataset<ApiKey>(client, 'keys', { all: true });
   return raw.map(k => ({
     name: k.name,
     type: k.type || 'Key',
@@ -271,9 +276,9 @@ interface ImageMap {
 
 let imagesCache: ImageMap | null = null;
 
-export async function fetchItemImages(): Promise<ImageMap> {
+export async function fetchItemImages(client: GzwDataClient = gzwClient): Promise<ImageMap> {
   if (imagesCache) return imagesCache;
-  imagesCache = await fetchJson<ImageMap>(`${BASE}/images`);
+  imagesCache = await client.images();
   return imagesCache;
 }
 
@@ -299,8 +304,8 @@ interface ApiRegion {
   image?: string;
 }
 
-export async function fetchRegions(): Promise<RegionEntry[]> {
-  const raw = await fetchJson<ApiRegion[]>(`${BASE}/regions?per_page=100`);
+export async function fetchRegions(client: GzwDataClient = gzwClient): Promise<RegionEntry[]> {
+  const raw = await listDataset<ApiRegion>(client, 'regions', { perPage: 100 });
   return raw.map(region => ({
     name: region.name,
     id: region.id || region.name,
@@ -332,8 +337,8 @@ interface ApiBoss {
   tasks?: string;
 }
 
-export async function fetchBosses(): Promise<BossEntry[]> {
-  const raw = await fetchJson<ApiBoss[]>(`${BASE}/bosses?per_page=100`);
+export async function fetchBosses(client: GzwDataClient = gzwClient): Promise<BossEntry[]> {
+  const raw = await listDataset<ApiBoss>(client, 'bosses', { perPage: 100 });
   return raw.map(boss => ({
     name: boss.name,
     id: boss.id || boss.name,
