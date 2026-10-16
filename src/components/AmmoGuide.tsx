@@ -176,7 +176,7 @@ export default function AmmoGuide() {
                     link: { label: 'View on Wiki', url: wikiUrl(r.name) },
                   })} className="flex items-center gap-2 text-left w-full hover:text-accent transition-colors">
                     {itemImages[r.name as keyof typeof itemImages] && (
-                      <img src={itemImages[r.name as keyof typeof itemImages] as string} alt="" className="w-8 h-8 object-contain shrink-0 bg-surface-2 border border-border" loading="lazy" />
+                      <img crossOrigin="anonymous" src={itemImages[r.name as keyof typeof itemImages] as string} alt="" className="w-8 h-8 object-contain shrink-0 bg-surface-2 border border-border" loading="lazy" />
                     )}
                     <div className="min-w-0">
                       <span>{r.name}</span>

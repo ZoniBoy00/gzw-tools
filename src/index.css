@@ -945,7 +945,7 @@ a:focus-visible {
 .brand-copy small, .command-nav__label { color: #89929b; font: 10px/1.2 'JetBrains Mono', monospace; letter-spacing: .08em; text-transform: uppercase; }
 .command-nav { flex: 1; padding: 18px 10px; overflow-y: auto; }
 .command-nav__group { margin-bottom: 20px; }
-.command-nav__label { padding: 0 10px 7px; color: #707982; }
+.command-nav__label { padding: 0 10px 7px; color: #8a929a; }
 .command-nav__item { min-height: 42px; display: flex; align-items: center; gap: 11px; padding: 0 11px; color: #a6adb4; border-left: 2px solid transparent; font: 12px 'JetBrains Mono', monospace; text-decoration: none; transition: color .15s, background .15s, border-color .15s; }
 .command-nav__item i { width: 16px; text-align: center; color: #77818a; }
 .command-nav__item:hover { color: #f0f2f3; background: #171c21; }
@@ -957,7 +957,7 @@ a:focus-visible {
 .app-shell__main { min-width: 0; flex: 1; display: flex; flex-direction: column; }
 .topbar { min-height: 70px; display: flex; align-items: center; justify-content: space-between; gap: 18px; padding: 0 30px; background: #0d1014; border-bottom: 1px solid #2b3036; }
 .topbar__context { display: flex; flex-direction: column; gap: 3px; }
-.topbar__eyebrow { color: #727b84; font: 10px 'JetBrains Mono', monospace; letter-spacing: .12em; text-transform: uppercase; }
+.topbar__eyebrow { color: #8a929a; font: 10px 'JetBrains Mono', monospace; letter-spacing: .12em; text-transform: uppercase; }
 .topbar__title { color: #e9ecee; font: 17px Rajdhani, sans-serif; font-weight: 700; letter-spacing: .04em; }
 .topbar__actions { display: flex; align-items: center; gap: 9px; }
 .beta-tag, .data-tag { padding: 6px 8px; border: 1px solid #3a4149; color: #9ba3aa; font: 10px 'JetBrains Mono', monospace; letter-spacing: .06em; }
@@ -966,7 +966,7 @@ a:focus-visible {
 .status-strip { min-height: 34px; display: flex; align-items: center; gap: 20px; padding: 0 30px; color: #a0a8af; background: #14191e; border-bottom: 1px solid #242a30; font: 10px 'JetBrains Mono', monospace; }
 .status-strip__item { display: inline-flex; align-items: center; gap: 7px; }
 .status-strip__item strong { color: #e4e7e8; }
-.status-strip__muted { color: #6e777f; }
+.status-strip__muted { color: #8a929a; }
 .status-dot { width: 7px; height: 7px; border-radius: 50%; display: inline-block; }
 .status-dot--good { background: #56bd78; }
 .app-content { width: min(1380px, 100%); flex: 1; margin: 0 auto; padding: 30px; }
@@ -985,7 +985,7 @@ a:focus-visible {
 .page-state__spinner { width: 22px; height: 22px; border: 2px solid #3b444c; border-top-color: var(--color-accent); border-radius: 50%; animation: routeSpin .7s linear infinite; }
 .route-fallback__mark { width: 20px; height: 20px; border: 2px solid #3b444c; border-top-color: var(--color-accent); border-radius: 50%; animation: routeSpin .7s linear infinite; }
 @keyframes routeSpin { to { transform: rotate(360deg); } }
-.app-footer { display: flex; justify-content: space-between; gap: 20px; padding: 16px 30px 22px; color: #7b848c; font: 10px 'JetBrains Mono', monospace; border-top: 1px solid #242a30; }
+.app-footer { display: flex; justify-content: space-between; gap: 20px; padding: 16px 30px 22px; color: #8a929a; font: 10px 'JetBrains Mono', monospace; border-top: 1px solid #242a30; }
 .app-footer span:last-child { display: flex; gap: 14px; }
 .app-footer a { color: #a5adb3; text-decoration: none; }
 .app-footer a:hover { color: var(--color-accent); }
@@ -1033,3 +1033,7 @@ a:focus-visible {
   *, *::before, *::after { animation-delay: 0s !important; }
 }
 
+
+/* Stable layout: reserve space so late data does not push the footer or the toolbar around. */
+.app-content { min-height: 100vh; }
+.data-tag { display: inline-flex; align-items: center; min-width: 8.5rem; justify-content: center; }

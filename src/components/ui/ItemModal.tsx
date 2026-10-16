@@ -106,7 +106,7 @@ export default function ItemModal({ item, onClose }: Props) {
         {/* Image */}
         {item.image && (
           <div className="flex justify-center p-4 bg-surface-2 border-b border-border">
-            <img
+            <img crossOrigin="anonymous"
               src={item.image}
               alt={item.name}
               className="max-h-48 object-contain"

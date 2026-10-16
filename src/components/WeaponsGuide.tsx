@@ -129,7 +129,7 @@ export default function WeaponsGuide() {
           >
             <div className="flex-1 flex items-center gap-2">
               {(w.image || itemImages[w.name as keyof typeof itemImages]) && (
-                <img src={(w.image || itemImages[w.name as keyof typeof itemImages]) as string} alt="" className="w-10 h-10 object-contain shrink-0 bg-surface-2 border border-border" loading="lazy" />
+                <img crossOrigin="anonymous" src={(w.image || itemImages[w.name as keyof typeof itemImages]) as string} alt="" className="w-10 h-10 object-contain shrink-0 bg-surface-2 border border-border" loading="lazy" />
               )}
               <div>
                 <button onClick={() => setModalItem({
@@ -204,7 +204,7 @@ export default function WeaponsGuide() {
                       <i className={`fas fa-${compare.includes(w.name) ? 'check' : 'plus'}`} />
                     </button>
                   </td>
-                  <td className="font-medium">
+                  <td className="font-medium" role="rowheader">
                     <button onClick={() => setModalItem({
                       name: w.name,
                       image: (w.image || itemImages[w.name as keyof typeof itemImages]) as string | undefined,
@@ -218,7 +218,7 @@ export default function WeaponsGuide() {
                       link: { label: 'View on Wiki', url: wikiUrl(w.name) },
                     })} className="flex items-center gap-2 text-left w-full hover:text-accent transition-colors">
                     {(w.image || itemImages[w.name as keyof typeof itemImages]) && (
-                      <img src={(w.image || itemImages[w.name as keyof typeof itemImages]) as string} alt="" className="w-8 h-8 object-contain shrink-0 bg-surface-2 border border-border" loading="lazy" />
+                      <img crossOrigin="anonymous" src={(w.image || itemImages[w.name as keyof typeof itemImages]) as string} alt="" className="w-8 h-8 object-contain shrink-0 bg-surface-2 border border-border" loading="lazy" />
                     )}
                     {w.name}
                     </button>

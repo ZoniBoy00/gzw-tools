@@ -184,7 +184,7 @@ function VestSection({ vests, itemImages }: { vests: ArmorVest[]; itemImages: Re
                     link: { label: 'View on Wiki', url: wikiUrl(v.name) },
                   })} className="flex items-center gap-2 text-left w-full hover:text-accent transition-colors">
                     {(v.image || itemImages[v.name as keyof typeof itemImages]) && (
-                      <img src={(v.image || itemImages[v.name as keyof typeof itemImages]) as string} alt="" className="w-8 h-8 object-contain shrink-0 bg-surface-2 border border-border" loading="lazy" />
+                      <img crossOrigin="anonymous" src={(v.image || itemImages[v.name as keyof typeof itemImages]) as string} alt="" className="w-8 h-8 object-contain shrink-0 bg-surface-2 border border-border" loading="lazy" />
                     )}
                     {v.name}
                   </button>
@@ -292,7 +292,7 @@ function PlateCarrierSection({ plateCarriers, itemImages }: { plateCarriers: Arm
                     link: { label: 'View on Wiki', url: wikiUrl(v.name) },
                   })} className="flex items-center gap-2 text-left w-full hover:text-accent transition-colors">
                     {itemImages[v.name as keyof typeof itemImages] && (
-                      <img src={itemImages[v.name as keyof typeof itemImages] as string} alt="" className="w-8 h-8 object-contain shrink-0 bg-surface-2 border border-border" loading="lazy" />
+                      <img crossOrigin="anonymous" src={itemImages[v.name as keyof typeof itemImages] as string} alt="" className="w-8 h-8 object-contain shrink-0 bg-surface-2 border border-border" loading="lazy" />
                     )}
                     {v.name}
                   </button>
@@ -407,7 +407,7 @@ function HelmetSection({ helmets, itemImages }: { helmets: Helmet[]; itemImages:
                     link: { label: 'View on Wiki', url: wikiUrl(h.name) },
                   })} className="flex items-center gap-2 text-left w-full hover:text-accent transition-colors">
                     {(h.image || itemImages[h.name as keyof typeof itemImages]) && (
-                      <img src={(h.image || itemImages[h.name as keyof typeof itemImages]) as string} alt="" className="w-8 h-8 object-contain shrink-0 bg-surface-2 border border-border" loading="lazy" />
+                      <img crossOrigin="anonymous" src={(h.image || itemImages[h.name as keyof typeof itemImages]) as string} alt="" className="w-8 h-8 object-contain shrink-0 bg-surface-2 border border-border" loading="lazy" />
                     )}
                     {h.name}
                   </button>

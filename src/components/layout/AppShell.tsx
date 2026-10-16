@@ -264,7 +264,7 @@ export default function AppShell({ children }: { children: ReactNode }) {
             <i className="fas fa-bars" aria-hidden="true" />
           </button>
           <div className="topbar__context"><span className="topbar__eyebrow">GZW Tools / Operations console</span><span className="topbar__title">Gray Zone Warfare field reference</span>{continueItem && <Link to={continueItem.path} className="mt-1 inline-flex items-center gap-1 text-[9px] font-mono text-text-muted hover:text-accent"><i className="fas fa-clock-rotate-left" aria-hidden="true" />Continue: {continueItem.label}</Link>}</div>
-          <div className="topbar__actions"><button type="button" onClick={openSearch} className="btn btn-outline btn-sm" aria-label="Search all tools"><i className="fas fa-magnifying-glass" /><span className="hidden sm:inline">Search</span><kbd className="hidden text-[9px] opacity-60 md:inline">Ctrl/⌘ K</kbd></button><span className="beta-tag">BETA</span><span className="data-tag"><i className="fas fa-database" /> {dataVersion ? `DATA ${dataVersion.slice(0, 10)}` : 'API v1'}</span></div>
+          <div className="topbar__actions"><button type="button" onClick={openSearch} className="btn btn-outline btn-sm"><i className="fas fa-magnifying-glass" aria-hidden="true" /><span className="sr-only sm:not-sr-only">Search</span><kbd className="hidden text-[9px] text-text-muted md:inline">Ctrl/⌘ K</kbd></button><span className="beta-tag">BETA</span><span className="data-tag"><i className="fas fa-database" /> {dataVersion ? `DATA ${dataVersion.slice(0, 10)}` : 'API v1'}</span></div>
         </header>
         <StatsStrip />
         <main id="main-content" className="app-content">{children}</main>

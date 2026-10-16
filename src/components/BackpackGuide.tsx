@@ -125,7 +125,7 @@ function TableSection({
                 >
                   <td className="py-3 px-3">
                     {item.image ? (
-                      <img src={item.image} alt="" className="w-8 h-8 object-contain" loading="lazy" />
+                      <img crossOrigin="anonymous" src={item.image} alt="" className="w-8 h-8 object-contain" loading="lazy" />
                     ) : (
                       <i className={`fas ${icon} text-text-muted/30 text-lg w-8 h-8 flex items-center justify-center`} />
                     )}

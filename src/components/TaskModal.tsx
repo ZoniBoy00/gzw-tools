@@ -201,7 +201,7 @@ export default function TaskModal({ task, onClose }: Props) {
                           {loc.images.length > 0 && (
                             <div id={`guide-section-${i}`} className={`spawn-loc-preview ${open ? 'open' : ''}`}>
                               {loc.images.map((src, j) => (
-                                <img key={j} src={src} alt={`${loc.title} image ${j + 1}`} loading="lazy" />
+                                <img crossOrigin="anonymous" key={j} src={src} alt={`${loc.title} image ${j + 1}`} loading="lazy" />
                               ))}
                             </div>
                           )}

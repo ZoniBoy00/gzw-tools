@@ -173,7 +173,7 @@ export default function KeysGuide() {
                   className="flex items-center gap-2 px-3 py-2 border border-border hover:border-accent/30 transition-colors text-left w-full"
                 >
                   {k.image && (
-                    <img src={k.image} alt="" className="w-8 h-8 object-contain shrink-0" loading="lazy" />
+                    <img crossOrigin="anonymous" src={k.image} alt="" className="w-8 h-8 object-contain shrink-0" loading="lazy" />
                   )}
                   <div className="min-w-0 flex-1">
                     <div className="text-xs font-medium truncate">{k.name}</div>

@@ -27,7 +27,7 @@ function RegionCard({ region }: { region: RegionEntry }) {
     <article className="card p-3 flex flex-col gap-3">
       <div className="flex items-start gap-3">
         {region.image && (
-          <img
+          <img crossOrigin="anonymous"
             src={region.image}
             alt=""
             loading="lazy"
@@ -83,7 +83,7 @@ function BossCard({ boss, onViewRegion }: { boss: BossEntry; onViewRegion: (loca
     <article className="card p-3 flex flex-col gap-3">
       <div className="flex items-start gap-3">
         {image && (
-          <img
+          <img crossOrigin="anonymous"
             src={image}
             alt=""
             loading="lazy"
