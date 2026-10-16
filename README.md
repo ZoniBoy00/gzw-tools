@@ -109,3 +109,10 @@ The [MIT license](LICENSE) applies to the project code. It does not relicense
 third-party game data, wiki-derived material, images, or trademarks. See the
 [GZW Data source and licensing notice](https://github.com/ZoniBoy00/gzw-data/blob/main/DATA_LICENSE.md)
 for provenance and attribution guidance.
+
+## Related projects
+
+- [gzw-data](https://github.com/ZoniBoy00/gzw-data): the public API and datasets ([gzw-data.dev](https://gzw-data.dev/))
+- [gzw-data-js](https://github.com/ZoniBoy00/gzw-data-js): JavaScript / TypeScript client ([npm](https://www.npmjs.com/package/@zoniboy/gzw-data-client))
+- [gzw-data-py](https://github.com/ZoniBoy00/gzw-data-py): Python client ([PyPI](https://pypi.org/project/gzw-data/))
+- [gzw-scraper](https://github.com/ZoniBoy00/gzw-scraper): the scraper that feeds the data
