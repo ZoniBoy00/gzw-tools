@@ -85,7 +85,7 @@ export default function Dashboard() {
               <span className="text-[9px] font-mono uppercase tracking-[0.12em] text-text-muted">{s.label}</span>
             </div>
             <div className={`text-xl font-bold font-mono ${s.color} stat-number`}>{loading ? '...' : s.value}</div>
-            <div className="text-[9px] font-mono text-text-muted/50 mt-1">{s.desc}</div>
+            <div className="text-[9px] font-mono text-text-muted mt-1">{s.desc}</div>
           </div>
         ))}
       </div>
@@ -104,7 +104,7 @@ export default function Dashboard() {
               <span className="text-[9px] font-mono uppercase tracking-[0.12em] text-text-muted">{s.label}</span>
             </div>
             <div className={`text-xl font-bold font-mono ${s.color} stat-number`}>{s.value}</div>
-            <div className="text-[9px] font-mono text-text-muted/50 mt-1">{s.desc}</div>
+            <div className="text-[9px] font-mono text-text-muted mt-1">{s.desc}</div>
           </div>
         ))}
       </div>
@@ -126,7 +126,7 @@ export default function Dashboard() {
           <i className="fas fa-users text-accent/60 text-xs" />
           <span className="section-title">Vendor Progress</span>
         </div>
-        <span className="text-[9px] font-mono text-text-muted/40">Click rep value to edit</span>
+        <span className="text-[9px] font-mono text-text-muted">Click rep value to edit</span>
       </div>
 
       {/* Vendor cards */}
@@ -142,7 +142,7 @@ export default function Dashboard() {
                   </div>
                   <div>
                     <div className="text-sm font-bold font-mono text-text">{v.name}</div>
-                    <div className="text-[9px] font-mono text-text-muted/60 uppercase tracking-wider">{v.desc}</div>
+                    <div className="text-[9px] font-mono text-text-muted uppercase tracking-wider">{v.desc}</div>
                   </div>
                 </div>
                 <span className={`text-xs font-mono font-bold ${pct >= 90 ? 'text-green' : pct >= 50 ? 'text-accent' : 'text-text-muted'}`}>
@@ -182,9 +182,9 @@ export default function Dashboard() {
                     <div className="flex items-center justify-between text-[10px] font-mono">
                       <span className="text-text-muted">
                         <span className="text-accent font-bold">{formatNumber(v.rep)}</span>
-                        <span className="text-text-muted/40"> / {formatNumber(v.maxRep)}</span>
+                        <span className="text-text-muted"> / {formatNumber(v.maxRep)}</span>
                       </span>
-                      <span className="text-text-muted/40 text-[8px]">Click to edit</span>
+                      <span className="text-text-muted text-[8px]">Click to edit</span>
                     </div>
                   </button>
                 )}
@@ -198,7 +198,7 @@ export default function Dashboard() {
       <div className="mt-3 flex justify-end">
         <button
           onClick={() => { localStorage.removeItem('gzw-vendor-reps'); load(); toast('All vendor rep values reset', 'info'); }}
-          className="text-[9px] font-mono text-text-muted/30 hover:text-red/60 transition-colors"
+          className="text-[9px] font-mono text-text-muted hover:text-red/60 transition-colors"
         >
           Reset all vendor rep values
         </button>
@@ -210,12 +210,12 @@ export default function Dashboard() {
           <i className="fas fa-circle-info text-accent/60 text-xs" />
           <span className="section-title">About This Tool</span>
         </div>
-        <p className="text-xs font-mono text-text-muted/80 leading-relaxed">
+        <p className="text-xs font-mono text-text-muted leading-relaxed">
           GZW Tools is a fan-made companion for <span className="text-text">Gray Zone Warfare</span>.
           Plan your reputation farming, compare ammunition penetration, browse weapons,
           and find the best armor — all in one place. Data sourced from the GZW Wiki.
         </p>
-        <div className="flex flex-wrap gap-3 mt-3 text-[10px] font-mono text-text-muted/50">
+        <div className="flex flex-wrap gap-3 mt-3 text-[10px] font-mono text-text-muted">
           <span>Not affiliated with MADFINGER Games</span>
           <span>•</span>
           <span>v{import.meta.env.VITE_APP_VERSION || '1.0'}</span>

@@ -163,7 +163,7 @@ export default function KeysGuide() {
             <div className="flex items-center gap-2 mb-2">
               <i className="fas fa-location-dot text-accent/60 text-xs" />
               <span className="text-[10px] font-bold uppercase tracking-[0.1em] text-text-muted">{loc}</span>
-              <span className="text-[9px] font-mono text-text-muted/50">{locKeys.length} keys</span>
+              <span className="text-[9px] font-mono text-text-muted">{locKeys.length} keys</span>
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-1">
               {locKeys.map((k) => (
@@ -186,7 +186,7 @@ export default function KeysGuide() {
         ))}
       </div>
 
-      <div className="mt-3 text-[10px] text-text-muted/60 font-mono flex items-center gap-2">
+      <div className="mt-3 text-[10px] text-text-muted font-mono flex items-center gap-2">
         <i className="fas fa-database" />
         {filtered.length} / {keys.length} keys
       </div>

@@ -177,7 +177,7 @@ function NavEntry({ item, onNavigate, favorite, onToggleFavorite }: { item: NavI
       <NavLink to={item.path} end={item.path === '/'} onClick={onNavigate} className={({ isActive }) => `command-nav__item min-w-0 flex-1${isActive ? ' is-active' : ''}`}>
         <i className={item.icon} aria-hidden="true" /><span>{item.label}</span>
       </NavLink>
-      <button type="button" onClick={() => onToggleFavorite(item.path)} className="px-2 py-2 text-[10px] text-text-muted/60 hover:text-accent focus-visible:outline focus-visible:outline-1 focus-visible:outline-accent" aria-label={`${favorite ? 'Remove' : 'Add'} ${item.label} ${favorite ? 'from' : 'to'} favorites`} aria-pressed={favorite}>
+      <button type="button" onClick={() => onToggleFavorite(item.path)} className="px-2 py-2 text-[10px] text-text-muted hover:text-accent focus-visible:outline focus-visible:outline-1 focus-visible:outline-accent" aria-label={`${favorite ? 'Remove' : 'Add'} ${item.label} ${favorite ? 'from' : 'to'} favorites`} aria-pressed={favorite}>
         <i className={`fas fa-star ${favorite ? 'text-accent' : ''}`} aria-hidden="true" />
       </button>
     </div>

@@ -69,7 +69,7 @@ export default function ApiDocs() {
         <div className="flex items-center gap-2 mb-2">
           <i className="fas fa-list text-accent/60 text-xs" />
           <span className="text-[10px] font-bold uppercase tracking-[0.1em] text-text-muted">Available Endpoints</span>
-          <span className="text-[9px] font-mono text-text-muted/50">{endpoints.length} total</span>
+          <span className="text-[9px] font-mono text-text-muted">{endpoints.length} total</span>
         </div>
 
         {loading ? (
@@ -82,7 +82,7 @@ export default function ApiDocs() {
             {endpoints.map((ep) => (
               <div
                 key={ep}
-                className="text-[10px] font-mono text-text-muted/80 bg-surface-2 border border-border px-2.5 py-1.5 truncate hover:text-accent/80 hover:border-accent/20 transition-colors"
+                className="text-[10px] font-mono text-text-muted bg-surface-2 border border-border px-2.5 py-1.5 truncate hover:text-accent/80 hover:border-accent/20 transition-colors"
               >
                 <span className="text-green/70 font-bold mr-1">/api/</span>{ep}
               </div>

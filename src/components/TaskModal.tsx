@@ -144,7 +144,7 @@ export default function TaskModal({ task, onClose }: Props) {
                           <span className="text-xs font-bold font-mono text-accent">{r.item}</span>
                           {r.amount && <span className="tag tag-amber text-[9px]">× {r.amount}</span>}
                         </div>
-                        {r.notes && <p className="mt-1.5 text-[10px] font-mono text-text-muted/80 leading-relaxed">{r.notes}</p>}
+                        {r.notes && <p className="mt-1.5 text-[10px] font-mono text-text-muted leading-relaxed">{r.notes}</p>}
                       </div>
                     ))}
                   </div>
@@ -159,10 +159,10 @@ export default function TaskModal({ task, onClose }: Props) {
                     {data.rewards.map((r, i) => (
                       <li
                         key={i}
-                        className={`flex items-start gap-2 text-xs font-mono ${r.level === 0 ? 'text-text' : 'text-text-muted/80 pl-5'}`}
+                        className={`flex items-start gap-2 text-xs font-mono ${r.level === 0 ? 'text-text' : 'text-text-muted pl-5'}`}
                       >
                         <i
-                          className={`${r.level === 0 ? 'fas fa-medal text-accent' : 'fas fa-angle-right text-text-muted/40'} mt-0.5 text-[10px]`}
+                          className={`${r.level === 0 ? 'fas fa-medal text-accent' : 'fas fa-angle-right text-text-muted'} mt-0.5 text-[10px]`}
                           aria-hidden="true"
                         />
                         <span>{r.text}</span>
@@ -176,7 +176,7 @@ export default function TaskModal({ task, onClose }: Props) {
               {data.guideSections.length > 0 && (
                 <section>
                   <SectionTitle icon="fas fa-map-pin" label="Visual Guides" />
-                  <p className="text-[9px] font-mono text-text-muted/50 mb-2 -mt-1">Click a section to show its images</p>
+                  <p className="text-[9px] font-mono text-text-muted mb-2 -mt-1">Click a section to show its images</p>
                   <div className="space-y-2">
                     {data.guideSections.map((loc, i) => {
                       const open = openSections.has(i);
@@ -193,11 +193,11 @@ export default function TaskModal({ task, onClose }: Props) {
                               <span className="text-[11px] font-bold font-mono text-accent uppercase tracking-wider truncate">{loc.title}</span>
                             </span>
                             <span className="flex items-center gap-2 shrink-0">
-                              <span className="text-[9px] font-mono text-text-muted/50">{loc.images.length} img</span>
+                              <span className="text-[9px] font-mono text-text-muted">{loc.images.length} img</span>
                               <i className={`fas fa-chevron-down text-[9px] text-text-muted transition-transform ${open ? 'rotate-180' : ''}`} aria-hidden="true" />
                             </span>
                           </button>
-                          {loc.text && <p className="mt-1.5 text-[10px] font-mono text-text-muted/80 leading-relaxed">{loc.text}</p>}
+                          {loc.text && <p className="mt-1.5 text-[10px] font-mono text-text-muted leading-relaxed">{loc.text}</p>}
                           {loc.images.length > 0 && (
                             <div id={`guide-section-${i}`} className={`spawn-loc-preview ${open ? 'open' : ''}`}>
                               {loc.images.map((src, j) => (
@@ -231,7 +231,7 @@ export default function TaskModal({ task, onClose }: Props) {
                         <a href={wikiTaskUrl(data.previous)} target="_blank" rel="noopener noreferrer" className="text-accent/80 hover:text-accent">{data.previous}</a>
                       </>
                     )}
-                    {data.previous && data.next && <span className="text-text-muted/30">→</span>}
+                    {data.previous && data.next && <span className="text-text-muted">→</span>}
                     {data.next && (
                       <>
                         <span className="text-text-muted">Next:</span>

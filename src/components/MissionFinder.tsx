@@ -29,12 +29,12 @@ interface Task {
 }
 
 export default function MissionFinder() {
-  const { data: tasksData } = useApiData<any>('tasks');
-  const { data: mainTaskData } = useApiData<any>('main_task');
-  const { data: sideTaskData } = useApiData<any>('side_task');
-  const { data: hiddenData } = useApiData<any>('hidden_task');
-  const { data: squadData } = useApiData<any>('squad_strike_missions');
-  const { data: contractData } = useApiData<any>('contract');
+  const { data: tasksData, loading: tasksDataLoading } = useApiData<any>('tasks');
+  const { data: mainTaskData, loading: mainTaskDataLoading } = useApiData<any>('main_task');
+  const { data: sideTaskData, loading: sideTaskDataLoading } = useApiData<any>('side_task');
+  const { data: hiddenData, loading: hiddenDataLoading } = useApiData<any>('hidden_task');
+  const { data: squadData, loading: squadDataLoading } = useApiData<any>('squad_strike_missions');
+  const { data: contractData, loading: contractDataLoading } = useApiData<any>('contract');
 
   const allTasks: Task[] = useMemo(() => {
     if (!tasksData.length) return [];
@@ -117,7 +117,20 @@ export default function MissionFinder() {
   // Grouped computed - currently unused
   /* grouped removed - single view used instead */
 
-  // Rest of the component stays the same from here
+  // Hold the whole layout back until every dataset arrived, so the page does not jump while it fills in.
+  const stillLoading = tasksDataLoading || mainTaskDataLoading || sideTaskDataLoading || hiddenDataLoading || squadDataLoading || contractDataLoading;
+  if (stillLoading && !allTasks.length) {
+    return (
+      <div className="tab-content" style={{ minHeight: '90vh' }} aria-busy="true">
+        <div className="flex items-center gap-2 mb-1">
+          <i className="fas fa-clipboard-list text-accent text-sm" />
+          <h1 className="section-title">Mission Finder</h1>
+        </div>
+        <p className="text-[10px] font-mono text-text-muted mb-4">Loading missions…</p>
+      </div>
+    );
+  }
+
   return (
     <div className="tab-content">
       <div className="flex items-center gap-2 mb-1">
@@ -177,7 +190,6 @@ export default function MissionFinder() {
               <button
                 onClick={() => setModalTask(t)}
                 className="flex min-w-0 flex-1 items-center justify-between gap-3 px-3.5 py-2.5 text-left"
-                aria-label={`View details for ${t.name}`}
               >
                 <div className="flex min-w-0 items-center gap-3">
                   <span className={`w-1.5 h-1.5 shrink-0 ${vendorColor(t.vendor)}`} />
@@ -195,7 +207,7 @@ export default function MissionFinder() {
                     </div>
                   </div>
                 </div>
-                <span className="flex shrink-0 items-center gap-2"><span className="hidden text-[9px] font-mono text-text-muted/40 sm:inline">Details</span><i className="fas fa-circle-info text-[10px] text-text-muted/50" aria-hidden="true" /></span>
+                <span className="flex shrink-0 items-center gap-2"><span className="hidden text-[9px] font-mono text-text-muted sm:inline">Details</span><i className="fas fa-circle-info text-[10px] text-text-muted" aria-hidden="true" /></span>
               </button>
               <button type="button" onClick={() => toggleCompleted(t.id)} className={`shrink-0 border-l border-border px-3 transition-colors ${isCompleted ? 'text-green' : 'text-text-muted hover:text-accent'}`} aria-pressed={isCompleted} aria-label={`${isCompleted ? 'Mark incomplete' : 'Mark complete'}: ${t.name}`} title={isCompleted ? 'Mark incomplete' : 'Mark complete'}>
                 <i className={`fas ${isCompleted ? 'fa-circle-check' : 'fa-circle'}`} aria-hidden="true" />
@@ -210,7 +222,7 @@ export default function MissionFinder() {
         </div>
       )}
 
-      <div className="mt-3 flex flex-wrap items-center gap-2 text-[10px] font-mono text-text-muted/60">
+      <div className="mt-3 flex flex-wrap items-center gap-2 text-[10px] font-mono text-text-muted">
         <span><i className="fas fa-database mr-1" />{filtered.length} / {allTasks.length}</span>
       </div>
 

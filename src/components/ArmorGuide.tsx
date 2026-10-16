@@ -77,7 +77,7 @@ function Recommendations() {
               <span className="text-text-muted">{rec.ammo.join(', ')}</span>
             </div>
           </div>
-          <p className="mt-2 text-[11px] text-text-muted/80 italic font-mono">— {rec.notes}</p>
+          <p className="mt-2 text-[11px] text-text-muted italic font-mono">— {rec.notes}</p>
         </div>
       ))}
     </div>
@@ -470,7 +470,7 @@ function Legend() {
       <div className="flex flex-wrap gap-2 text-xs font-mono items-center mb-2">
         {['I', '→', 'II', '→', 'II+', '→', 'IIIA', '→', 'IIIA+', '→', 'III', '→', 'III+', '→', 'III++'].map((s, i) =>
           s === '→' ? (
-            <span key={i} className="text-text-muted/40">{s}</span>
+            <span key={i} className="text-text-muted">{s}</span>
           ) : (
             <span key={i} className={`font-bold ${nijColor(s)}`}>{s}</span>
           )

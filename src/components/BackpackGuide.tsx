@@ -82,7 +82,7 @@ function TableSection({
           className="input flex-1 min-w-[160px] input-sm"
           aria-label="Search items"
         />
-        <span className="text-[10px] font-mono text-text-muted/60 self-center ml-auto">
+        <span className="text-[10px] font-mono text-text-muted self-center ml-auto">
           {filtered.length} / {items.length} items
         </span>
       </div>
@@ -127,7 +127,7 @@ function TableSection({
                     {item.image ? (
                       <img crossOrigin="anonymous" src={item.image} alt="" className="w-8 h-8 object-contain" loading="lazy" />
                     ) : (
-                      <i className={`fas ${icon} text-text-muted/30 text-lg w-8 h-8 flex items-center justify-center`} />
+                      <i className={`fas ${icon} text-text-muted text-lg w-8 h-8 flex items-center justify-center`} />
                     )}
                   </td>
                   <td className="py-3 px-3 font-semibold text-text">{item.name}</td>

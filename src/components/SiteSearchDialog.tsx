@@ -77,7 +77,7 @@ export default function SiteSearchDialog({ open, onClose }: Props) {
             <button key={item.id} type="button" role="option" aria-selected="false" onClick={() => { closeDialog(); const params = new URLSearchParams(item.searchParams); navigate(params.size ? `${item.path}?${params}` : item.path); }} className="flex w-full items-start gap-3 border-b border-border/50 px-3 py-3 text-left transition-colors hover:bg-surface-2 focus:bg-surface-2 focus:outline-none">
               <span className="mt-0.5 w-20 shrink-0 text-[9px] font-mono uppercase tracking-wider text-accent">{item.type}</span>
               <span className="min-w-0 flex-1"><span className="block truncate text-sm font-medium text-text">{item.title}</span>{item.detail && <span className="mt-0.5 block truncate text-[10px] text-text-muted">{item.detail}</span>}</span>
-              <i className="fas fa-arrow-up-right-from-square mt-1 text-[10px] text-text-muted/60" aria-hidden="true" />
+              <i className="fas fa-arrow-up-right-from-square mt-1 text-[10px] text-text-muted" aria-hidden="true" />
             </button>
           )) : <p className="px-3 py-8 text-center text-xs text-text-muted">No matches. Try another name, location, caliber, or vendor.</p>}
         </div>

@@ -139,7 +139,7 @@ export default function LogAnalyzer() {
                 {parsed.playerName && <div><span className="text-text-muted">Player </span><span>{parsed.playerName}</span></div>}
                 {parsed.region && <div><span className="text-text-muted">Region </span><span className="tag tag-amber text-[9px]">{parsed.region}</span></div>}
                 {parsed.gameMap && <div><span className="text-text-muted">Map </span><span>{parsed.gameMap}</span></div>}
-                {parsed.audioDevice && <div className="col-span-2"><span className="text-text-muted">Audio </span><span className="text-text-muted/80">{parsed.audioDevice}</span></div>}
+                {parsed.audioDevice && <div className="col-span-2"><span className="text-text-muted">Audio </span><span className="text-text-muted">{parsed.audioDevice}</span></div>}
               </div>
             </div>
           )}
@@ -246,7 +246,7 @@ export default function LogAnalyzer() {
                           />
                         </div>
                         <span className="w-12 text-right text-text-muted">{pct}%</span>
-                        <span className="w-10 text-right text-text-muted/60">{stats.count}</span>
+                        <span className="w-10 text-right text-text-muted">{stats.count}</span>
                         {stats.warnings > 0 && <span className="w-6 text-right text-amber-400/70">⚠{stats.warnings}</span>}
                         {stats.errors > 0 && <span className="w-6 text-right text-red/70">✗{stats.errors}</span>}
                       </div>
@@ -263,7 +263,7 @@ export default function LogAnalyzer() {
                 <div className="flex items-center gap-2 flex-wrap">
                   <i className="fas fa-timeline text-accent/60" />
                   Event Timeline
-                  <span className="text-text-muted/50 font-mono text-[9px]">{parsed.events.length} events</span>
+                  <span className="text-text-muted font-mono text-[9px]">{parsed.events.length} events</span>
 
                   {/* Category filter chips */}
                   <span className="ml-auto" />
@@ -287,7 +287,7 @@ export default function LogAnalyzer() {
                   .reverse()
                   .map((e, i) => (
                     <div key={i} className="text-[10px] font-mono flex gap-2 py-0.5 border-b border-border/10 hover:bg-surface-2/40">
-                      <span className="text-text-muted/40 shrink-0 w-14 truncate">{e.timestamp.slice(-8)}</span>
+                      <span className="text-text-muted shrink-0 w-14 truncate">{e.timestamp.slice(-8)}</span>
                       <span className={`shrink-0 w-16 truncate ${
                         e.level === 'error' ? 'text-red' : e.level === 'warning' ? 'text-amber-400/80' : 'text-drab'
                       }`}>

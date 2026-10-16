@@ -331,7 +331,7 @@ function Builder({ weapons, vests, helmets, ammo }: { weapons: WeaponEntry[]; ve
                   }`}
                 >
                   {w.name}
-                  <span className="text-[9px] text-text-muted/50 ml-2">{w.type} · {w.caliber}</span>
+                  <span className="text-[9px] text-text-muted ml-2">{w.type} · {w.caliber}</span>
                 </button>
               ))}
               {filteredWeapons.length === 0 && <div className="text-[10px] text-text-muted py-2 text-center">No weapons match</div>}
@@ -390,7 +390,7 @@ function Builder({ weapons, vests, helmets, ammo }: { weapons: WeaponEntry[]; ve
                   }`}
                 >
                   {a.name}
-                  <span className="text-[9px] text-text-muted/50 ml-2">{a.caliber}</span>
+                  <span className="text-[9px] text-text-muted ml-2">{a.caliber}</span>
                 </button>
               ))}
             </div>
@@ -470,7 +470,7 @@ function Recommender({ weapons, ammo }: { weapons: WeaponEntry[]; ammo: AmmoRoun
             >
               {i + 1}. {s === 'budget' ? 'Budget' : s === 'playstyle' ? 'Playstyle' : 'Result'}
             </span>
-            {i < 2 && <span className="text-text-muted/30 text-[10px]"><i className="fas fa-chevron-right" /></span>}
+            {i < 2 && <span className="text-text-muted text-[10px]"><i className="fas fa-chevron-right" /></span>}
           </div>
         ))}
       </div>
@@ -567,7 +567,7 @@ function Recommender({ weapons, ammo }: { weapons: WeaponEntry[]; ammo: AmmoRoun
                   {recommendation.ammo.join(', ')}
                 </div>
               </div>
-              <p className="mt-2 text-[11px] font-mono text-text-muted/80 italic">— {recommendation.notes}</p>
+              <p className="mt-2 text-[11px] font-mono text-text-muted italic">— {recommendation.notes}</p>
             </div>
           ) : (
             <div className="empty-state mb-4">
@@ -620,7 +620,7 @@ function Recommender({ weapons, ammo }: { weapons: WeaponEntry[]; ammo: AmmoRoun
               <i className="fas fa-circle-info text-accent/60 text-[10px]" />
               <span className="text-[9px] font-bold uppercase tracking-[0.12em] text-text-muted">Why this loadout?</span>
             </div>
-            <p className="text-[11px] font-mono text-text-muted/80 leading-relaxed">
+            <p className="text-[11px] font-mono text-text-muted leading-relaxed">
               {selectedStyle.id === 'assault' && 'Assault builds prioritize stopping power. Heavy ceramic plates stop rifle rounds, while AP ammo ensures you can penetrate any armor. Assault rifles and DMRs give you the range and firepower to win engagements.'}
               {selectedStyle.id === 'defense' && 'Defense builds balance protection and mobility. UHMWPE and steel plates offer good protection without the weight of ceramic. Versatile ammo like M855 or BP 7N23 handles both AI and players effectively.'}
               {selectedStyle.id === 'stealth' && 'Stealth builds favor lightweight gear and quiet ammunition. Subsonic rounds keep you off the minimap, SMGs and pistols allow fast movement. Aramid armor stops pistol rounds while keeping you agile.'}

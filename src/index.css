@@ -53,7 +53,7 @@
   --color-border: #252a3a;
   --color-border-light: #2e3548;
   --color-text: #e8eaed;
-  --color-text-muted: #7a7f8e;
+  --color-text-muted: #8c92a2;
   --color-accent: #e8b830;
   --color-accent-hover: #f0c548;
   --color-green: #22c55e;
@@ -473,7 +473,7 @@ th.sortable.desc::after {
 }
 .tag-squad {
   background: rgba(168, 85, 247, 0.15);
-  color: #a855f7;
+  color: #b98af8;
 }
 .tag-contract {
   background: rgba(236, 72, 153, 0.15);

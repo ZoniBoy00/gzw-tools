@@ -180,7 +180,7 @@ export default function WeaponsGuide() {
           <table className="weapons-table" role="table" aria-label="Weapons database">
             <thead>
               <tr>
-                <th role="columnheader" className="w-8"></th>
+                <th role="columnheader" className="w-8"><span className="sr-only">Image</span></th>
                 <th role="columnheader">Name</th>
                 <th role="columnheader">Type</th>
                 <th role="columnheader">Caliber</th>
@@ -242,7 +242,7 @@ export default function WeaponsGuide() {
         </div>
       </div>
 
-      <div className="mt-3 text-[10px] text-text-muted/60 font-mono flex items-center gap-2">
+      <div className="mt-3 text-[10px] text-text-muted font-mono flex items-center gap-2">
         <i className="fas fa-database" />
         {filtered.length} / {weapons.length} weapons
         {comparedWeapons.length > 0 && (
