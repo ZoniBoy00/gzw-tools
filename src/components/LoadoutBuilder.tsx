@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { decodeLoadout, loadoutShareUrl } from '../lib/loadoutShare';
 import TabBar from './ui/TabBar';
 import { RECOMMENDATIONS } from '../data/armor';
 import { useDataContext } from '../lib/useDataContext';
@@ -139,6 +140,38 @@ function Builder({ weapons, vests, helmets, ammo }: { weapons: WeaponEntry[]; ve
   const [notes, setNotes] = useState('');
   const [showForm, setShowForm] = useState(false);
 
+  // Import a loadout shared via ?loadout=
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const encoded = params.get('loadout');
+    if (!encoded) return;
+    const shared = decodeLoadout(encoded);
+    params.delete('loadout');
+    const rest = params.toString();
+    window.history.replaceState(null, '', `${window.location.pathname}${rest ? `?${rest}` : ''}`);
+    if (!shared) {
+      toast('That shared loadout link is invalid', 'error');
+      return;
+    }
+    setLoadouts((current) => {
+      const updated = [...current, { ...shared, id: genId(), createdAt: new Date().toISOString() }];
+      saveLoadouts(updated);
+      return updated;
+    });
+    toast(`Imported loadout "${shared.name}"`, 'success');
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  const share = async (l: Loadout) => {
+    const url = loadoutShareUrl(l, window.location.origin);
+    try {
+      await navigator.clipboard.writeText(url);
+      toast('Share link copied to clipboard', 'success');
+    } catch {
+      window.prompt('Copy this share link:', url);
+    }
+  };
+
   // Filter weapons
   const filteredWeapons = weaponSearch.trim()
     ? weapons.filter((w) => w.name.toLowerCase().includes(weaponSearch.toLowerCase()) || w.caliber.toLowerCase().includes(weaponSearch.toLowerCase()))
@@ -232,6 +265,9 @@ function Builder({ weapons, vests, helmets, ammo }: { weapons: WeaponEntry[]; ve
                 </div>
               </div>
               <div className="flex gap-1">
+                <button onClick={() => share(l)} className="text-text-muted hover:text-accent text-xs px-1.5 py-1" aria-label={`Copy share link for ${l.name}`}>
+                  <i className="fas fa-share-nodes" />
+                </button>
                 <button onClick={() => edit(l)} className="text-text-muted hover:text-accent text-xs px-1.5 py-1" aria-label={`Edit ${l.name}`}>
                   <i className="fas fa-pen-to-square" />
                 </button>
