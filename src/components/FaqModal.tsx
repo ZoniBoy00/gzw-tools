@@ -7,7 +7,7 @@ const FAQS = [
   },
   {
     q: 'Is this official?',
-    a: 'No. This is an unofficial fan project. We are not affiliated with, endorsed by, or connected to M.A.G. Studios. Gray Zone Warfare is a trademark of M.A.G. Studios.',
+    a: 'No. This is an unofficial fan project. We are not affiliated with, endorsed by, or connected to MADFINGER Games. Gray Zone Warfare is a trademark of MADFINGER Games.',
   },
   {
     q: 'Where does the data come from?',

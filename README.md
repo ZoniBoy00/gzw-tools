@@ -1,6 +1,6 @@
 # GZW Tools
 
-**Gray Zone Warfare** — fan-made reference tool. Not affiliated with M.A.G. Studios.
+**Gray Zone Warfare** — fan-made reference tool. Not affiliated with MADFINGER Games.
 
 [![Vercel](https://img.shields.io/badge/deployed%20on-Vercel-000?logo=vercel)](https://gzw-tools.vercel.app)
 [![CI](https://github.com/ZoniBoy00/gzw-tools/actions/workflows/ci.yml/badge.svg)](https://github.com/ZoniBoy00/gzw-tools/actions/workflows/ci.yml)

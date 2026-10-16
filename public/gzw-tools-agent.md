@@ -5,7 +5,7 @@ description: Use when locating or comparing Gray Zone Warfare game information t
 
 # GZW Tools Browser Guide
 
-GZW Tools is a community-made browser companion for Gray Zone Warfare. It is not affiliated with M.A.G. Studios. Use the linked pages as read-only references; reputation, task progress, and loadouts that users save are stored in their browser.
+GZW Tools is a community-made browser companion for Gray Zone Warfare. It is not affiliated with MADFINGER Games. Use the linked pages as read-only references; reputation, task progress, and loadouts that users save are stored in their browser.
 
 ## Find information
 
@@ -22,5 +22,5 @@ GZW Tools is a community-made browser companion for Gray Zone Warfare. It is not
 ## Use responsibly
 
 - Prefer the page or API documentation for the exact field definitions; do not infer game mechanics from a display label alone.
-- Treat game data as community reference data, not official M.A.G. Studios information.
+- Treat game data as community reference data, not official MADFINGER Games information.
 - Do not claim that a locally saved plan has been synced to an account or server.

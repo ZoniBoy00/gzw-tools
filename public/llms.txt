@@ -2,7 +2,7 @@
 
 > Free, read-only community companion tools and reference data for Gray Zone Warfare.
 
-GZW Tools provides a vendor reputation calculator, mission planner, ammunition penetration comparison, and searchable references for weapons, armor, backpacks, keys, vendors, and loadouts. It is a fan-made project and is not affiliated with M.A.G. Studios. Game data is sourced from the public GZW Data API; saved loadouts and calculator settings stay in the user's browser.
+GZW Tools provides a vendor reputation calculator, mission planner, ammunition penetration comparison, and searchable references for weapons, armor, backpacks, keys, vendors, and loadouts. It is a fan-made project and is not affiliated with MADFINGER Games. Game data is sourced from the public GZW Data API; saved loadouts and calculator settings stay in the user's browser.
 
 ## Tools
 

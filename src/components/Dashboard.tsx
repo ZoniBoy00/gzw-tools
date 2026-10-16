@@ -216,7 +216,7 @@ export default function Dashboard() {
           and find the best armor — all in one place. Data sourced from the GZW Wiki.
         </p>
         <div className="flex flex-wrap gap-3 mt-3 text-[10px] font-mono text-text-muted/50">
-          <span>Not affiliated with M.A.G. Studios</span>
+          <span>Not affiliated with MADFINGER Games</span>
           <span>•</span>
           <span>v{import.meta.env.VITE_APP_VERSION || '1.0'}</span>
         </div>

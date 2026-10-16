@@ -269,7 +269,7 @@ export default function AppShell({ children }: { children: ReactNode }) {
         <StatsStrip />
         <main id="main-content" className="app-content">{children}</main>
         <footer className="app-footer">
-          <span>Community tool · not affiliated with M.A.G. Studios</span>
+          <span>Community tool · not affiliated with MADFINGER Games</span>
           <span><Link to="/privacy">Privacy</Link><Link to="/tos">Terms</Link><a href="https://gzw-data.dev/" target="_blank" rel="noopener noreferrer">GZW Data API</a><a href="https://github.com/ZoniBoy00/gzw-data/blob/main/DATA_LICENSE.md" target="_blank" rel="noopener noreferrer">Data sources</a><a href="https://github.com/ZoniBoy00/gzw-tools" target="_blank" rel="noopener noreferrer">GitHub</a></span>
         </footer>
       </div>

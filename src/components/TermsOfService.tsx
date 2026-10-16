@@ -16,7 +16,7 @@ export default function TermsOfService() {
 
         <div className="border border-border p-4">
           <h3 className="text-xs font-bold uppercase tracking-wider text-accent mb-2">Fan Project</h3>
-          <p>GZW Tools is an unofficial fan-made project. It is <strong>not affiliated with, endorsed by, or connected to</strong> M.A.G. Studios or any of their partners. Gray Zone Warfare is a registered trademark of M.A.G. Studios. All game-related content, images, and data are property of their respective owners.</p>
+          <p>GZW Tools is an unofficial fan-made project. It is <strong>not affiliated with, endorsed by, or connected to</strong> MADFINGER Games or any of their partners. Gray Zone Warfare is a registered trademark of MADFINGER Games. All game-related content, images, and data are property of their respective owners.</p>
         </div>
 
         <div className="border border-border p-4">
