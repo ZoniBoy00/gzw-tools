@@ -4,7 +4,7 @@
  */
 import { useState, useEffect, type ReactNode } from 'react';
 import { fetchWeapons, fetchAmmo, fetchVests, fetchPlateCarriers, fetchHelmets, fetchKeys, fetchItemImages, fetchDataVersion, fetchRegions, fetchBosses, type RegionEntry, type BossEntry } from './api';
-import { DataContext, defaultData, type GameData } from './dataContext';
+import { DataContext, defaultData, type GameData } from './dataContextValue';
 
 export function DataProvider({ children }: { children: ReactNode }) {
   const [data, setData] = useState<GameData>(defaultData);

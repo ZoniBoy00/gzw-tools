@@ -3,7 +3,7 @@ import { NavLink, Link, useLocation } from 'react-router-dom';
 import FaqModal from '../FaqModal';
 import SiteSearchDialog from '../SiteSearchDialog';
 import { fetchApiStats, gzwClient } from '../../lib/api';
-import { useDataContext } from '../../lib/dataContext';
+import { useDataContext } from '../../lib/dataContextValue';
 
 type NavItem = { id: string; label: string; icon: string; path: string };
 type NavGroup = { label: string; items: NavItem[] };
