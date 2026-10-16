@@ -23,9 +23,13 @@
 | **Keys** 🔑 | Search keys and keycards by location or name |
 | **Regions & Bosses** | Browse region tiers and LZ callsigns, plus boss locations, factions, and task notes |
 | **Vendors** | Vendor guide with rep tracking, per-rank item lists, unlock status (7 vendors) |
-| **Loadouts** | Build and save weapon loadouts in your browser |
+| **Loadouts** | Build and save weapon loadouts in your browser, and share them with a link |
 | **Log Analyzer** | Parse GZW.log files to extract match data |
 | **API Docs** | Explore the public GZW Data API contract |
+
+## Install as an app
+
+GZW Tools is an installable PWA. Use your browser's *Install* / *Add to Home Screen* option; the app shell and recently loaded API responses are cached so it opens offline.
 
 ## Tech Stack
 
