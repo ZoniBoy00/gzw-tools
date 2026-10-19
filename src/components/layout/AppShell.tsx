@@ -185,6 +185,7 @@ function NavEntry({ item, onNavigate, favorite, onToggleFavorite }: { item: NavI
 }
 
 export default function AppShell({ children }: { children: ReactNode }) {
+  const [copyrightYear] = useState(() => new Date().getFullYear());
   const [showFaq, setShowFaq] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
@@ -269,7 +270,7 @@ export default function AppShell({ children }: { children: ReactNode }) {
         <StatsStrip />
         <main id="main-content" className="app-content">{children}</main>
         <footer className="app-footer">
-          <span>© {new Date().getFullYear()} GZW Tools · Community tool · not affiliated with MADFINGER Games</span>
+          <span>© {copyrightYear} GZW Tools · Community tool · not affiliated with MADFINGER Games</span>
           <span><Link to="/privacy">Privacy</Link><Link to="/tos">Terms</Link><a href="https://gzw-data.dev/" target="_blank" rel="noopener noreferrer">GZW Data API</a><a href="https://github.com/ZoniBoy00/gzw-data/blob/main/DATA_LICENSE.md" target="_blank" rel="noopener noreferrer">Data sources</a><a href="https://github.com/ZoniBoy00/gzw-tools" target="_blank" rel="noopener noreferrer">GitHub</a></span>
         </footer>
       </div>
