@@ -484,6 +484,50 @@ export async function fetchDisassemblyRecipes(client: GzwDataClient = gzwClient)
     }));
 }
 
+// ─── Loot ───
+
+export interface LootItem {
+  id: string;
+  name: string;
+  gridSize: string;
+  weight?: string;
+  weightKg?: number;
+  sellPrice?: string;
+  pricePerCell?: string;
+  trader?: string;
+  image?: string;
+}
+
+interface ApiLootItem {
+  id?: string;
+  name: string;
+  grid_size?: string;
+  weight?: string;
+  sell_price?: string;
+  price_per_grid_cell?: string;
+  trader?: string;
+  image?: string;
+  numeric_values?: { weight?: { value?: number; unit?: string } };
+}
+
+export async function fetchLootItems(client: GzwDataClient = gzwClient): Promise<LootItem[]> {
+  const raw = await listDataset<ApiLootItem>(client, 'loot_items', { all: true });
+  return raw.map(item => {
+    const weight = item.numeric_values?.weight;
+    return {
+      id: item.id || item.name,
+      name: item.name,
+      gridSize: item.grid_size || '',
+      weight: item.weight,
+      weightKg: weight?.unit === 'kg' && typeof weight.value === 'number' ? weight.value : undefined,
+      sellPrice: item.sell_price,
+      pricePerCell: item.price_per_grid_cell,
+      trader: item.trader,
+      image: item.image,
+    };
+  });
+}
+
 // ─── Vendors ───
 
 export interface VendorProfile {

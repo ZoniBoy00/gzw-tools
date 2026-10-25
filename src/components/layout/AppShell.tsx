@@ -25,6 +25,7 @@ const NAV_GROUPS: NavGroup[] = [
       { id: 'armor', label: 'Armor', icon: 'fas fa-shield-halved', path: '/armor' },
       { id: 'backpacks', label: 'Backpacks', icon: 'fas fa-box', path: '/backpacks' },
       { id: 'keys', label: 'Keys', icon: 'fas fa-key', path: '/keys' },
+      { id: 'loot', label: 'Loot Values', icon: 'fas fa-sack-dollar', path: '/loot' },
       { id: 'vendors', label: 'Vendors', icon: 'fas fa-store', path: '/vendors' },
     ],
   },
@@ -116,6 +117,10 @@ const SEO_META: Record<string, { title: string; description: string }> = {
   '/xp': {
     title: 'XP Calculator | Gray Zone Warfare | GZW Tools',
     description: 'Calculate the experience needed to reach any Gray Zone Warfare level, how many kills or discoveries that takes and what each level unlocks.',
+  },
+  '/loot': {
+    title: 'Loot Values | Gray Zone Warfare | GZW Tools',
+    description: 'Search Gray Zone Warfare loot and sort by sell price, price per inventory cell and price per kg to find the most valuable items.',
   },
   '/vendors': {
     title: 'Vendor Guide | Gray Zone Warfare | GZW Tools',
