@@ -484,6 +484,75 @@ export async function fetchDisassemblyRecipes(client: GzwDataClient = gzwClient)
     }));
 }
 
+// ─── Vendors ───
+
+export interface VendorProfile {
+  id: string;
+  name: string;
+  fullName: string;
+  sells: string;
+  buys: string;
+  image?: string;
+}
+
+interface ApiVendorProfile {
+  id?: string;
+  name: string;
+  full_name?: string;
+  sells?: string;
+  buys?: string;
+  image?: string;
+}
+
+export async function fetchVendorProfiles(client: GzwDataClient = gzwClient): Promise<VendorProfile[]> {
+  const raw = await listDataset<ApiVendorProfile>(client, 'vendors', { perPage: 100 });
+  return raw.map(vendor => ({
+    id: vendor.id || vendor.name,
+    name: vendor.name,
+    fullName: vendor.full_name || '',
+    sells: vendor.sells || '',
+    buys: vendor.buys || '',
+    image: vendor.image,
+  }));
+}
+
+export interface VendorStockRow {
+  id: string;
+  item: string;
+  vendor: string;
+  /** Vendor rank (R.1-R.4) needed to buy the item; null when the wiki lists none. */
+  rank: number | null;
+  /** Source dataset, e.g. `weapon_parts`. */
+  category: string;
+  type?: string;
+  buyPrice?: string;
+}
+
+interface ApiVendorStock {
+  id?: string;
+  item?: string;
+  vendor?: string;
+  rank?: number | null;
+  category?: string;
+  type?: string;
+  buy_price?: string;
+}
+
+export async function fetchVendorStock(client: GzwDataClient = gzwClient): Promise<VendorStockRow[]> {
+  const raw = await listDataset<ApiVendorStock>(client, 'vendor_stock', { all: true });
+  return raw
+    .filter(entry => entry.item && entry.vendor)
+    .map(entry => ({
+      id: entry.id || `${entry.vendor}-${entry.item}`,
+      item: entry.item as string,
+      vendor: entry.vendor as string,
+      rank: typeof entry.rank === 'number' ? entry.rank : null,
+      category: entry.category || 'items',
+      type: entry.type,
+      buyPrice: entry.buy_price,
+    }));
+}
+
 // ─── Experience ───
 
 export interface ExperienceLevel {
