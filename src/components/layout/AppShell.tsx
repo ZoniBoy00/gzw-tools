@@ -30,7 +30,10 @@ const NAV_GROUPS: NavGroup[] = [
   },
   {
     label: 'World Intel',
-    items: [{ id: 'regions', label: 'Regions & Bosses', icon: 'fas fa-map-location-dot', path: '/regions' }],
+    items: [
+      { id: 'regions', label: 'Regions & Bosses', icon: 'fas fa-map-location-dot', path: '/regions' },
+      { id: 'guide', label: 'Game Guide', icon: 'fas fa-book-open', path: '/guide' },
+    ],
   },
   {
     label: 'Planning',
@@ -99,6 +102,10 @@ const SEO_META: Record<string, { title: string; description: string }> = {
   '/regions': {
     title: 'Regions & Bosses Guide | Gray Zone Warfare | GZW Tools',
     description: 'Browse Gray Zone Warfare region tiers and LZ callsigns, plus known boss locations, factions and task notes.',
+  },
+  '/guide': {
+    title: 'Game Guide | Gray Zone Warfare | GZW Tools',
+    description: 'Read about the Gray Zone Warfare hideout, experience, health, trading and other game systems, plus player task guides and evidence items.',
   },
   '/vendors': {
     title: 'Vendor Guide | Gray Zone Warfare | GZW Tools',

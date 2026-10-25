@@ -351,3 +351,86 @@ export async function fetchBosses(client: GzwDataClient = gzwClient): Promise<Bo
 }
 
 
+
+// ─── Game guide ───
+
+export interface GuideArticle {
+  id: string;
+  name: string;
+  content: string;
+  image?: string;
+}
+
+interface ApiArticle {
+  name: string;
+  id?: string;
+  content?: string;
+  image?: string;
+}
+
+function toArticle(raw: ApiArticle): GuideArticle {
+  return { id: raw.id || raw.name, name: raw.name, content: raw.content || '', image: raw.image };
+}
+
+/** Hideout plus the wiki's game-system pages (Experience, Health, Trading, ...). */
+export async function fetchGuideArticles(client: GzwDataClient = gzwClient): Promise<GuideArticle[]> {
+  const [hideout, systems] = await Promise.all([
+    listDataset<ApiArticle>(client, 'hideout', { perPage: 100 }),
+    listDataset<ApiArticle>(client, 'game_systems', { perPage: 100 }),
+  ]);
+  return [...hideout, ...systems].map(toArticle).filter(article => article.content.trim());
+}
+
+export async function fetchTaskGuides(client: GzwDataClient = gzwClient): Promise<GuideArticle[]> {
+  const raw = await listDataset<ApiArticle>(client, 'task_guides', { perPage: 100 });
+  return raw.map(toArticle).filter(article => article.content.trim());
+}
+
+export interface EvidenceItem {
+  id: string;
+  name: string;
+  weight: string;
+  gridSize: string;
+  sellPrice: string;
+  image?: string;
+}
+
+interface ApiEvidence {
+  name: string;
+  id?: string;
+  weight?: string;
+  grid_size?: string;
+  sell_price?: string;
+  image?: string;
+}
+
+export async function fetchEvidence(client: GzwDataClient = gzwClient): Promise<EvidenceItem[]> {
+  const raw = await listDataset<ApiEvidence>(client, 'evidence', { perPage: 100 });
+  return raw.map(item => ({
+    id: item.id || item.name,
+    name: item.name,
+    weight: item.weight || '',
+    gridSize: item.grid_size || '',
+    sellPrice: item.sell_price || '',
+    image: item.image,
+  }));
+}
+
+/**
+ * The wiki text arrives as one flat string. Split it into readable paragraphs at
+ * sentence boundaries, starting a new paragraph once the current one is long enough.
+ */
+export function splitParagraphs(text: string, minLength = 280): string[] {
+  const sentences = text.replace(/\s+/g, ' ').trim().split(/(?<=[.!?])\s+(?=[A-Z[])/).filter(Boolean);
+  const paragraphs: string[] = [];
+  let current = '';
+  for (const sentence of sentences) {
+    current = current ? `${current} ${sentence}` : sentence;
+    if (current.length >= minLength) {
+      paragraphs.push(current);
+      current = '';
+    }
+  }
+  if (current) paragraphs.push(current);
+  return paragraphs;
+}

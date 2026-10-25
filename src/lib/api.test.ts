@@ -1,5 +1,5 @@
 import { describe, expect, it, vi } from 'vitest';
-import { createGzwDataClient, fetchApiRoot, fetchApiStats, fetchBosses, fetchDataVersion, fetchPlateCarriers, fetchRegions, fetchVests, GZW_API_BASE, parsePen } from './api';
+import { createGzwDataClient, fetchApiRoot, fetchApiStats, fetchBosses, fetchDataVersion, fetchEvidence, fetchGuideArticles, fetchPlateCarriers, fetchRegions, fetchVests, GZW_API_BASE, parsePen, splitParagraphs } from './api';
 
 describe('SDK-backed API client', () => {
   it('uses the injected SDK fetch for version requests', async () => {
@@ -250,5 +250,52 @@ describe('world guide API adapters', () => {
       expect.stringMatching(/\/bosses\?per_page=100$/),
       expect.objectContaining({ method: 'GET' }),
     );
+  });
+});
+
+describe('game guide data', () => {
+  const okResponse = (data: unknown[]) => ({
+    ok: true,
+    status: 200,
+    statusText: 'OK',
+    headers: { get: () => null },
+    json: async () => ({ data }),
+  });
+
+  it('combines hideout and game system pages and drops empty articles', async () => {
+    const fetchMock = vi.fn()
+      .mockResolvedValueOnce(okResponse([{ name: 'Hideout', id: 'hideout', content: 'Your workspace.' }]))
+      .mockResolvedValueOnce(okResponse([
+        { name: 'Experience', id: 'experience', content: 'Levels.', image: 'https://example.test/xp.png' },
+        { name: 'Empty', id: 'empty', content: '  ' },
+      ]));
+    const articles = await fetchGuideArticles(createGzwDataClient(fetchMock));
+
+    expect(articles.map(article => article.id)).toEqual(['hideout', 'experience']);
+    expect(articles[1].image).toBe('https://example.test/xp.png');
+    expect(fetchMock).toHaveBeenCalledWith(expect.stringMatching(/\/hideout\?per_page=100$/), expect.anything());
+    expect(fetchMock).toHaveBeenCalledWith(expect.stringMatching(/\/game_systems\?per_page=100$/), expect.anything());
+  });
+
+  it('maps evidence records without inventing missing fields', async () => {
+    const fetchMock = vi.fn().mockResolvedValue(okResponse([
+      { name: 'Laptop', id: 'laptop', weight: '1.2kg', grid_size: '2x2', sell_price: '$5,000' },
+      { name: 'Tourist Passport' },
+    ]));
+    const items = await fetchEvidence(createGzwDataClient(fetchMock));
+
+    expect(items[0]).toEqual({ id: 'laptop', name: 'Laptop', weight: '1.2kg', gridSize: '2x2', sellPrice: '$5,000', image: undefined });
+    expect(items[1]).toMatchObject({ id: 'Tourist Passport', weight: '', gridSize: '', sellPrice: '' });
+  });
+
+  it('splits flat wiki text into sentence-aligned paragraphs', () => {
+    const sentence = 'This is a reasonably long sentence about the hideout and its rooms.';
+    const text = Array(12).fill(sentence).join(' ');
+    const paragraphs = splitParagraphs(text, 150);
+
+    expect(paragraphs.length).toBeGreaterThan(1);
+    expect(paragraphs.every(paragraph => paragraph.endsWith('.'))).toBe(true);
+    expect(paragraphs.join(' ')).toBe(text);
+    expect(splitParagraphs('   ')).toEqual([]);
   });
 });
