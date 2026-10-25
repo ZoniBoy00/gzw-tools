@@ -5,6 +5,8 @@ import type { DisassemblyRecipe } from '../lib/api';
 import { computeUpgradeCost, formatRequirement, groupHideout, parseHideoutPlan } from '../lib/hideout';
 import type { HideoutPlan, HideoutRoom } from '../lib/hideout';
 import { useDataContext } from '../lib/useDataContext';
+import ItemModal from './ui/ItemModal';
+import type { ModalItem } from './ui/ItemModal';
 
 type HideoutTab = 'planner' | 'disassembly';
 
@@ -131,6 +133,7 @@ function Planner({ rooms, images }: { rooms: HideoutRoom[]; images: Record<strin
 }
 
 function Disassembly({ recipes, images, search }: { recipes: DisassemblyRecipe[]; images: Record<string, string>; search: string }) {
+  const [modalItem, setModalItem] = useState<ModalItem | null>(null);
   const query = search.trim().toLowerCase();
   const filtered = recipes.filter(recipe => !query || `${recipe.item} ${recipe.outcome.join(' ')}`.toLowerCase().includes(query));
 
@@ -141,10 +144,21 @@ function Disassembly({ recipes, images, search }: { recipes: DisassemblyRecipe[]
   return (
     <div className="grid grid-cols-1 gap-2 md:grid-cols-2 xl:grid-cols-3">
       {filtered.map(recipe => (
-        <article key={recipe.id} className="card p-3 flex flex-col gap-2">
+        <article key={recipe.id} className="card p-3 flex flex-col gap-2 cursor-pointer hover:border-accent" onClick={() => setModalItem({
+          name: recipe.item,
+          image: images[recipe.item],
+          type: 'parts',
+          fields: [
+            ...(recipe.duration ? [{ label: 'Duration', value: recipe.duration, desc: 'Time the disassembly takes' }] : []),
+            ...recipe.outcome.map(name => ({ label: 'Yields', value: name, desc: 'Item you receive' })),
+          ],
+          link: { label: 'View on Wiki', url: wikiUrl(recipe.item) },
+        })}>
           <div className="flex items-center gap-2">
             <ItemIcon name={recipe.item} images={images} />
-            <h2 className="min-w-0 flex-1 text-sm font-bold leading-tight">{recipe.item}</h2>
+            <h2 className="min-w-0 flex-1 text-sm font-bold leading-tight">
+              <button type="button" className="text-left hover:text-accent focus-visible:outline focus-visible:outline-1 focus-visible:outline-accent" aria-label={`${recipe.item} details`}>{recipe.item}</button>
+            </h2>
             {recipe.duration && <span className="tag">{recipe.duration}</span>}
           </div>
           <div className="text-[9px] font-bold uppercase tracking-[0.12em] text-text-muted">Disassembles into</div>
@@ -152,12 +166,13 @@ function Disassembly({ recipes, images, search }: { recipes: DisassemblyRecipe[]
             {recipe.outcome.map(name => (
               <li key={name} className="flex items-center gap-2 text-xs">
                 <ItemIcon name={name} images={images} />
-                <a href={wikiUrl(name)} target="_blank" rel="noopener noreferrer" className="hover:text-accent hover:underline">{name}</a>
+                <a href={wikiUrl(name)} target="_blank" rel="noopener noreferrer" className="hover:text-accent hover:underline" onClick={event => event.stopPropagation()}>{name}</a>
               </li>
             ))}
           </ul>
         </article>
       ))}
+      {modalItem && <ItemModal item={modalItem} onClose={() => setModalItem(null)} />}
     </div>
   );
 }

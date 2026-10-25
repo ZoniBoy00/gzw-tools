@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react';
 import { fetchLootItems, wikiUrl } from '../lib/api';
+import ItemModal from './ui/ItemModal';
+import type { ModalItem } from './ui/ItemModal';
 import { filterLoot, formatMoney, sortLoot, toLootRow } from '../lib/loot';
 import type { LootRow, LootSort } from '../lib/loot';
 
@@ -12,6 +14,18 @@ const SORTS: { id: LootSort; label: string }[] = [
 ];
 
 const MAX_ROWS = 200;
+
+function toModal(row: LootRow): ModalItem {
+  const fields = [
+    { label: 'Sell Price', value: formatMoney(row.price), desc: 'Price a trader pays for this item', color: 'text-accent' },
+    ...(row.perCell !== null ? [{ label: 'Price / Cell', value: formatMoney(row.perCell), desc: 'Sell price divided by inventory cells' }] : []),
+    ...(row.perKg !== null ? [{ label: 'Price / kg', value: formatMoney(row.perKg), desc: 'Sell price divided by weight' }] : []),
+    ...(row.size ? [{ label: 'Grid Size', value: row.size, desc: 'Inventory space' }] : []),
+    ...(row.weightKg !== null ? [{ label: 'Weight', value: `${row.weightKg} kg`, desc: 'Carry weight' }] : []),
+    ...(row.trader ? [{ label: 'Trader', value: row.trader, desc: 'Vendor that buys or sells it' }] : []),
+  ];
+  return { name: row.name, image: row.image, type: 'gear', fields, link: { label: 'View on Wiki', url: wikiUrl(row.name) } };
+}
 
 function Thumb({ src }: { src?: string }) {
   if (!src) return <span className="inline-block h-9 w-9 shrink-0 border border-border bg-surface-2" aria-hidden="true" />;
@@ -32,6 +46,7 @@ export default function LootGuide() {
   const [search, setSearch] = useState('');
   const [sort, setSort] = useState<LootSort>('perCell');
   const [minPrice, setMinPrice] = useState(0);
+  const [modalItem, setModalItem] = useState<ModalItem | null>(null);
 
   useEffect(() => {
     let cancelled = false;
@@ -104,10 +119,10 @@ export default function LootGuide() {
           ) : (
             <div className="grid grid-cols-1 gap-2 md:grid-cols-2 xl:grid-cols-3">
               {shown.map(row => (
-                <article key={row.id} className="card p-2 flex items-center gap-2">
+                <button key={row.id} type="button" onClick={() => setModalItem(toModal(row))} className="card p-2 flex items-center gap-2 text-left w-full cursor-pointer hover:border-accent focus-visible:outline focus-visible:outline-1 focus-visible:outline-accent" aria-label={`${row.name} details`}>
                   <Thumb src={row.image} />
                   <div className="min-w-0 flex-1">
-                    <a href={wikiUrl(row.name)} target="_blank" rel="noopener noreferrer" className="block truncate text-xs font-bold hover:text-accent hover:underline">{row.name}</a>
+                    <span className="block truncate text-xs font-bold">{row.name}</span>
                     <div className="truncate font-mono text-[9px] text-text-muted">
                       {[row.size, row.weightKg !== null ? `${row.weightKg} kg` : '', row.perKg !== null ? `${formatMoney(row.perKg)}/kg` : ''].filter(Boolean).join(' · ')}
                     </div>
@@ -116,7 +131,7 @@ export default function LootGuide() {
                     <div className="font-mono text-xs font-bold text-accent">{formatMoney(row.price)}</div>
                     <div className="font-mono text-[9px] text-text-muted">{row.perCell !== null ? `${formatMoney(row.perCell)}/cell` : ''}</div>
                   </div>
-                </article>
+                </button>
               ))}
             </div>
           )}
@@ -130,6 +145,8 @@ export default function LootGuide() {
         <i className="fas fa-database" aria-hidden="true" />
         Read-only records from GZW Data API · prices come from the community wiki and may lag behind the game.
       </div>
+
+      {modalItem && <ItemModal item={modalItem} onClose={() => setModalItem(null)} />}
     </div>
   );
 }

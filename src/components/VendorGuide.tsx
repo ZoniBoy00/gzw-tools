@@ -6,6 +6,8 @@ import { VENDORS } from '../lib/calc';
 import { categoryLabel, filterStock, groupByRank, rankForRep, repToNextRank, stockCategories } from '../lib/vendors';
 import { getVendorReps, setVendorRep } from '../lib/vendortracker';
 import { useDataContext } from '../lib/useDataContext';
+import ItemModal from './ui/ItemModal';
+import type { ModalItem } from './ui/ItemModal';
 
 interface GuideData {
   profiles: VendorProfile[];
@@ -35,6 +37,7 @@ export default function VendorGuide() {
   const [search, setSearch] = useState('');
   const [category, setCategory] = useState('');
   const [onlyAvailable, setOnlyAvailable] = useState(false);
+  const [modalItem, setModalItem] = useState<ModalItem | null>(null);
 
   useEffect(() => {
     let cancelled = false;
@@ -68,6 +71,23 @@ export default function VendorGuide() {
     else next.set('vendor', slug);
     setSearchParams(next, { replace: true });
     setCategory('');
+  };
+
+  const openStock = (row: VendorStockRow, locked: boolean) => {
+    setModalItem({
+      name: row.item,
+      image: itemImages[row.item],
+      type: 'gear',
+      fields: [
+        { label: 'Vendor', value: vendor.name, desc: 'Who sells it' },
+        { label: 'Rank', value: row.rank ? `R.${row.rank}` : 'Not listed', desc: 'Vendor rank needed to buy it' },
+        { label: 'Status', value: row.rank === null ? 'Unknown' : locked ? 'Locked at your rank' : 'Available', color: locked ? 'text-text-muted' : 'text-accent', desc: 'Based on the reputation you entered' },
+        ...(row.buyPrice ? [{ label: 'Price', value: row.buyPrice, desc: 'Buy price listed on the wiki' }] : []),
+        ...(row.type ? [{ label: 'Type', value: row.type, desc: 'Item type' }] : []),
+        { label: 'Category', value: categoryLabel(row.category), desc: 'Item category' },
+      ],
+      link: { label: 'View on Wiki', url: wikiUrl(row.item) },
+    });
   };
 
   const changeRep = (value: number) => {
@@ -204,16 +224,16 @@ export default function VendorGuide() {
                     {group.rows.map(row => {
                       const locked = row.rank !== null && row.rank > currentRank;
                       return (
-                        <article key={row.id} className={`card p-2 flex items-center gap-2 ${locked ? 'opacity-60' : ''}`}>
+                        <button key={row.id} type="button" onClick={() => openStock(row, locked)} className={`card p-2 flex items-center gap-2 text-left w-full cursor-pointer hover:border-accent focus-visible:outline focus-visible:outline-1 focus-visible:outline-accent ${locked ? 'opacity-60' : ''}`} aria-label={`${row.item} details`}>
                           <ItemImage name={row.item} images={itemImages} />
                           <div className="min-w-0 flex-1">
-                            <a href={wikiUrl(row.item)} target="_blank" rel="noopener noreferrer" className="block truncate text-xs font-bold hover:text-accent hover:underline">{row.item}</a>
+                            <span className="block truncate text-xs font-bold">{row.item}</span>
                             <div className="truncate font-mono text-[9px] text-text-muted">
                               {[row.type, categoryLabel(row.category), row.buyPrice].filter(Boolean).join(' · ')}
                             </div>
                           </div>
                           {locked && <i className="fas fa-lock text-[10px] text-text-muted" aria-label="Locked at your rank" />}
-                        </article>
+                        </button>
                       );
                     })}
                   </div>
@@ -223,6 +243,8 @@ export default function VendorGuide() {
           )}
         </>
       )}
+
+      {modalItem && <ItemModal item={modalItem} onClose={() => setModalItem(null)} />}
 
       <div className="mt-4 flex items-center gap-2 text-[9px] font-mono text-text-muted/70">
         <i className="fas fa-database" aria-hidden="true" />
