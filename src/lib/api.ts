@@ -416,6 +416,74 @@ export async function fetchEvidence(client: GzwDataClient = gzwClient): Promise<
   }));
 }
 
+// ─── Hideout ───
+
+export interface HideoutRequirement {
+  name: string;
+  quantity: number;
+}
+
+export interface HideoutModuleLevel {
+  id: string;
+  room: string;
+  module: string;
+  level: number;
+  requirements: HideoutRequirement[];
+  function: string;
+}
+
+interface ApiHideoutModule {
+  id?: string;
+  name: string;
+  room?: string;
+  module?: string;
+  level?: number;
+  requirements?: { name?: string; quantity?: number }[];
+  function?: string;
+}
+
+export async function fetchHideoutModules(client: GzwDataClient = gzwClient): Promise<HideoutModuleLevel[]> {
+  const raw = await listDataset<ApiHideoutModule>(client, 'hideout_modules', { perPage: 200 });
+  return raw
+    .filter(entry => entry.module && typeof entry.level === 'number')
+    .map(entry => ({
+      id: entry.id || entry.name,
+      room: entry.room || 'Hideout',
+      module: entry.module as string,
+      level: entry.level as number,
+      requirements: (entry.requirements ?? [])
+        .filter(requirement => requirement.name && Number(requirement.quantity) > 0)
+        .map(requirement => ({ name: requirement.name as string, quantity: Number(requirement.quantity) })),
+      function: entry.function || '',
+    }));
+}
+
+export interface DisassemblyRecipe {
+  id: string;
+  item: string;
+  duration: string;
+  outcome: string[];
+}
+
+interface ApiDisassemblyRecipe {
+  id?: string;
+  name: string;
+  duration?: string;
+  outcome?: string[];
+}
+
+export async function fetchDisassemblyRecipes(client: GzwDataClient = gzwClient): Promise<DisassemblyRecipe[]> {
+  const raw = await listDataset<ApiDisassemblyRecipe>(client, 'disassembly_recipes', { perPage: 200 });
+  return raw
+    .filter(entry => Array.isArray(entry.outcome) && entry.outcome.length > 0)
+    .map(entry => ({
+      id: entry.id || entry.name,
+      item: entry.name,
+      duration: entry.duration || '',
+      outcome: entry.outcome as string[],
+    }));
+}
+
 /**
  * The wiki text arrives as one flat string. Split it into readable paragraphs at
  * sentence boundaries, starting a new paragraph once the current one is long enough.

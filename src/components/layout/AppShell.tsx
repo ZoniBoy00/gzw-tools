@@ -39,6 +39,7 @@ const NAV_GROUPS: NavGroup[] = [
     label: 'Planning',
     items: [
       { id: 'missions', label: 'Missions', icon: 'fas fa-clipboard-list', path: '/missions' },
+      { id: 'hideout', label: 'Hideout', icon: 'fas fa-warehouse', path: '/hideout' },
       { id: 'loadouts', label: 'Loadouts', icon: 'fas fa-screwdriver-wrench', path: '/loadouts' },
       { id: 'logs', label: 'Log Analyzer', icon: 'fas fa-file-lines', path: '/logs' },
     ],
@@ -106,6 +107,10 @@ const SEO_META: Record<string, { title: string; description: string }> = {
   '/guide': {
     title: 'Game Guide | Gray Zone Warfare | GZW Tools',
     description: 'Read about the Gray Zone Warfare hideout, experience, health, trading and other game systems, plus player task guides and evidence items.',
+  },
+  '/hideout': {
+    title: 'Hideout Planner | Gray Zone Warfare | GZW Tools',
+    description: 'Plan Gray Zone Warfare hideout module upgrades, total the materials you need and look up disassembly recipes.',
   },
   '/vendors': {
     title: 'Vendor Guide | Gray Zone Warfare | GZW Tools',
