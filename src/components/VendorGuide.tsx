@@ -9,6 +9,8 @@ import { useDataContext } from '../lib/useDataContext';
 import ItemModal from './ui/ItemModal';
 import type { ModalItem } from './ui/ItemModal';
 
+const NO_PRICE = 'Price not listed on wiki';
+
 interface GuideData {
   profiles: VendorProfile[];
   stock: VendorStockRow[];
@@ -82,7 +84,7 @@ export default function VendorGuide() {
         { label: 'Vendor', value: vendor.name, desc: 'Who sells it' },
         { label: 'Rank', value: row.rank ? `R.${row.rank}` : 'Not listed', desc: 'Vendor rank needed to buy it' },
         { label: 'Status', value: row.rank === null ? 'Unknown' : locked ? 'Locked at your rank' : 'Available', color: locked ? 'text-text-muted' : 'text-accent', desc: 'Based on the reputation you entered' },
-        ...(row.buyPrice ? [{ label: 'Price', value: row.buyPrice, desc: 'Buy price listed on the wiki' }] : []),
+        { label: 'Price', value: row.buyPrice || NO_PRICE, desc: 'Buy price listed on the wiki', color: row.buyPrice ? undefined : 'text-text-muted' },
         ...(row.type ? [{ label: 'Type', value: row.type, desc: 'Item type' }] : []),
         { label: 'Category', value: categoryLabel(row.category), desc: 'Item category' },
       ],
@@ -229,7 +231,7 @@ export default function VendorGuide() {
                           <div className="min-w-0 flex-1">
                             <span className="block truncate text-xs font-bold">{row.item}</span>
                             <div className="truncate font-mono text-[9px] text-text-muted">
-                              {[row.type, categoryLabel(row.category), row.buyPrice].filter(Boolean).join(' · ')}
+                              {[row.type, categoryLabel(row.category), row.buyPrice || NO_PRICE].filter(Boolean).join(' · ')}
                             </div>
                           </div>
                           {locked && <i className="fas fa-lock text-[10px] text-text-muted" aria-label="Locked at your rank" />}
