@@ -4,7 +4,9 @@ export interface ModalItem {
   name: string;
   image?: string;
   fields: { label: string; value: string; color?: string; desc?: string }[];
-  type: 'weapon' | 'vest' | 'helmet' | 'ammo' | 'medical' | 'gear' | 'attachment' | 'container' | 'tool' | 'backpack' | 'rig' | 'throwable' | 'food' | 'drink' | 'parts' | 'sight';
+  type: 'weapon' | 'vest' | 'helmet' | 'ammo' | 'medical' | 'gear' | 'attachment' | 'container' | 'tool' | 'backpack' | 'rig' | 'throwable' | 'food' | 'drink' | 'parts' | 'sight' | 'guide' | 'region' | 'boss' | 'evidence';
+  /** Longer descriptive paragraphs shown under the fields. */
+  text?: string[];
   link?: { label: string; url: string };
 }
 
@@ -30,6 +32,10 @@ const TYPE_ICONS = {
   drink: 'fas fa-wine-bottle',
   parts: 'fas fa-cogs',
   sight: 'fas fa-eye',
+  guide: 'fas fa-book-open',
+  region: 'fas fa-map',
+  boss: 'fas fa-crosshairs',
+  evidence: 'fas fa-box-archive',
 };
 
 export default function ItemModal({ item, onClose }: Props) {
@@ -132,6 +138,14 @@ export default function ItemModal({ item, onClose }: Props) {
             </div>
           ))}
         </div>
+
+        {item.text && item.text.length > 0 && (
+          <div className="px-4 pb-4 space-y-2">
+            {item.text.map((paragraph, index) => (
+              <p key={index} className="text-xs leading-relaxed text-text-muted">{paragraph}</p>
+            ))}
+          </div>
+        )}
 
         {/* Wiki link */}
         {item.link && (

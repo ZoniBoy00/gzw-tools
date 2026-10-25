@@ -1,8 +1,10 @@
-import { useMemo } from 'react';
+import { useMemo, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { useDataContext } from '../lib/useDataContext';
 import { wikiUrl } from '../lib/api';
 import type { BossEntry, RegionEntry } from '../lib/api';
+import ItemModal from './ui/ItemModal';
+import type { ModalItem } from './ui/ItemModal';
 
 type WorldTab = 'regions' | 'bosses';
 
@@ -22,9 +24,22 @@ function taskNote(tasks: string): string {
   return tasks;
 }
 
-function RegionCard({ region }: { region: RegionEntry }) {
+function RegionCard({ region, onOpen }: { region: RegionEntry; onOpen: (item: ModalItem) => void }) {
+  const open = () => onOpen({
+    name: region.name,
+    image: region.image,
+    type: 'region',
+    fields: [
+      ...(region.tier ? [{ label: 'Tier', value: region.tier, desc: 'Region difficulty tier' }] : []),
+      { label: 'Locals', value: isKnown(region.localsType) ? region.localsType : 'Not listed', desc: 'Local faction' },
+      { label: region.lzCallsigns.length === 1 ? 'LZ Callsign' : 'LZ Callsigns', value: region.lzCallsigns.length ? region.lzCallsigns.join(', ') : 'Not listed', desc: 'Landing zone callsigns' },
+    ],
+    text: isUsefulRegionDescription(region.description) ? [region.description] : undefined,
+    link: { label: 'View on Wiki', url: wikiUrl(region.name) },
+  });
+
   return (
-    <article className="card p-3 flex flex-col gap-3">
+    <article className="card p-3 flex flex-col gap-3 cursor-pointer hover:border-accent" onClick={open}>
       <div className="flex items-start gap-3">
         {region.image && (
           <img crossOrigin="anonymous"
@@ -37,7 +52,9 @@ function RegionCard({ region }: { region: RegionEntry }) {
         )}
         <div className="min-w-0 flex-1">
           <div className="flex flex-wrap items-center gap-2">
-            <h2 className="text-base font-bold leading-tight">{region.name}</h2>
+            <h2 className="text-base font-bold leading-tight">
+              <button type="button" className="text-left hover:text-accent focus-visible:outline focus-visible:outline-1 focus-visible:outline-accent" aria-label={`${region.name} details`}>{region.name}</button>
+            </h2>
             {region.tier && <span className="tag">Tier {region.tier}</span>}
           </div>
           <p className="mt-1 text-[10px] font-mono text-text-muted">
@@ -64,23 +81,28 @@ function RegionCard({ region }: { region: RegionEntry }) {
         <p className="text-xs leading-relaxed text-text-muted">{region.description}</p>
       )}
 
-      <a
-        href={wikiUrl(region.name)}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="mt-auto inline-flex items-center gap-1 self-start text-[10px] text-text-muted hover:text-accent focus-visible:outline focus-visible:outline-1 focus-visible:outline-accent"
-      >
-        <i className="fas fa-arrow-up-right-from-square" aria-hidden="true" /> Source wiki
-      </a>
+      <span className="mt-auto text-[10px] text-accent">Details</span>
     </article>
   );
 }
 
-function BossCard({ boss, onViewRegion }: { boss: BossEntry; onViewRegion: (location: string) => void }) {
+function BossCard({ boss, onViewRegion, onOpen }: { boss: BossEntry; onViewRegion: (location: string) => void; onOpen: (item: ModalItem) => void }) {
   const image = boss.image && !boss.image.includes('UnknownVendor_Small.png') ? boss.image : undefined;
+  const open = () => onOpen({
+    name: boss.name,
+    image,
+    type: 'boss',
+    fields: [
+      ...(isKnown(boss.fullName) && boss.fullName !== boss.name ? [{ label: 'Full Name', value: boss.fullName }] : []),
+      { label: 'Faction', value: isKnown(boss.faction) ? boss.faction : 'Not listed', desc: 'Faction the boss belongs to' },
+      { label: 'Location', value: isKnown(boss.location) ? boss.location : 'Not listed', desc: 'Known location' },
+    ],
+    text: [taskNote(boss.tasks)],
+    link: { label: 'View on Wiki', url: wikiUrl(boss.name) },
+  });
 
   return (
-    <article className="card p-3 flex flex-col gap-3">
+    <article className="card p-3 flex flex-col gap-3 cursor-pointer hover:border-accent" onClick={open}>
       <div className="flex items-start gap-3">
         {image && (
           <img crossOrigin="anonymous"
@@ -92,7 +114,9 @@ function BossCard({ boss, onViewRegion }: { boss: BossEntry; onViewRegion: (loca
           />
         )}
         <div className="min-w-0 flex-1">
-          <h2 className="text-base font-bold leading-tight">{boss.name}</h2>
+          <h2 className="text-base font-bold leading-tight">
+            <button type="button" className="text-left hover:text-accent focus-visible:outline focus-visible:outline-1 focus-visible:outline-accent" aria-label={`${boss.name} details`}>{boss.name}</button>
+          </h2>
           {isKnown(boss.fullName) && boss.fullName !== boss.name && (
             <p className="mt-1 text-[10px] font-mono text-text-muted">{boss.fullName}</p>
           )}
@@ -108,7 +132,7 @@ function BossCard({ boss, onViewRegion }: { boss: BossEntry; onViewRegion: (loca
         {isKnown(boss.location) ? (
           <button
             type="button"
-            onClick={() => onViewRegion(boss.location)}
+            onClick={event => { event.stopPropagation(); onViewRegion(boss.location); }}
             className="inline-flex items-center gap-1 text-left text-xs text-accent hover:underline focus-visible:outline focus-visible:outline-1 focus-visible:outline-accent"
             aria-label={`View region details for ${boss.location}`}
           >
@@ -122,14 +146,7 @@ function BossCard({ boss, onViewRegion }: { boss: BossEntry; onViewRegion: (loca
         <p className="text-xs leading-relaxed text-text-muted">{taskNote(boss.tasks)}</p>
       </div>
 
-      <a
-        href={wikiUrl(boss.name)}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="mt-auto inline-flex items-center gap-1 self-start text-[10px] text-text-muted hover:text-accent focus-visible:outline focus-visible:outline-1 focus-visible:outline-accent"
-      >
-        <i className="fas fa-arrow-up-right-from-square" aria-hidden="true" /> Source wiki
-      </a>
+      <span className="mt-auto text-[10px] text-accent">Details</span>
     </article>
   );
 }
@@ -137,6 +154,7 @@ function BossCard({ boss, onViewRegion }: { boss: BossEntry; onViewRegion: (loca
 export default function WorldGuide() {
   const { regions, bosses, loading, error, worldGuideError } = useDataContext();
   const [searchParams, setSearchParams] = useSearchParams();
+  const [modalItem, setModalItem] = useState<ModalItem | null>(null);
   const activeTab: WorldTab = searchParams.get('tab') === 'bosses' ? 'bosses' : 'regions';
   const search = searchParams.get('search') || '';
   const setActiveTab = (tab: WorldTab) => {
@@ -264,7 +282,7 @@ export default function WorldGuide() {
             <div className="empty-state"><i className="fas fa-map" aria-hidden="true" /><p>{regions.length ? 'No regions match your search.' : 'No region records are available.'}</p></div>
           ) : (
             <div className="grid grid-cols-1 gap-2 md:grid-cols-2 xl:grid-cols-3">
-              {filteredRegions.map(region => <RegionCard key={region.id} region={region} />)}
+              {filteredRegions.map(region => <RegionCard key={region.id} region={region} onOpen={setModalItem} />)}
             </div>
           )}
         </section>
@@ -274,11 +292,13 @@ export default function WorldGuide() {
             <div className="empty-state"><i className="fas fa-crosshairs" aria-hidden="true" /><p>{bosses.length ? 'No bosses match your search.' : 'No boss records are available.'}</p></div>
           ) : (
             <div className="grid grid-cols-1 gap-2 md:grid-cols-2 xl:grid-cols-3">
-              {filteredBosses.map(boss => <BossCard key={boss.id} boss={boss} onViewRegion={viewRegion} />)}
+              {filteredBosses.map(boss => <BossCard key={boss.id} boss={boss} onViewRegion={viewRegion} onOpen={setModalItem} />)}
             </div>
           )}
         </section>
       )}
+
+      {modalItem && <ItemModal item={modalItem} onClose={() => setModalItem(null)} />}
 
       <div className="mt-4 flex items-center gap-2 text-[9px] font-mono text-text-muted/70">
         <i className="fas fa-database" aria-hidden="true" />

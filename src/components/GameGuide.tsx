@@ -2,6 +2,8 @@ import { useEffect, useMemo, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { fetchEvidence, fetchGuideArticles, fetchTaskGuides, splitParagraphs, wikiUrl } from '../lib/api';
 import type { EvidenceItem, GuideArticle } from '../lib/api';
+import ItemModal from './ui/ItemModal';
+import type { ModalItem } from './ui/ItemModal';
 
 type GuideTab = 'systems' | 'tasks' | 'evidence';
 
@@ -18,14 +20,19 @@ const TABS: { id: GuideTab; label: string; icon: string }[] = [
   { id: 'evidence', label: 'Evidence', icon: 'fas fa-box-archive' },
 ];
 
-function ArticleCard({ article }: { article: GuideArticle }) {
-  const [open, setOpen] = useState(false);
+function ArticleCard({ article, onOpen }: { article: GuideArticle; onOpen: (item: ModalItem) => void }) {
   const paragraphs = useMemo(() => splitParagraphs(article.content), [article.content]);
-  const visible = open ? paragraphs : paragraphs.slice(0, 1);
-  const collapsible = paragraphs.length > 1;
+  const open = () => onOpen({
+    name: article.name,
+    image: article.image,
+    type: 'guide',
+    fields: [],
+    text: paragraphs,
+    link: { label: 'View on Wiki', url: wikiUrl(article.name) },
+  });
 
   return (
-    <article className="card p-3 flex flex-col gap-3">
+    <article className="card p-3 flex flex-col gap-3 cursor-pointer hover:border-accent" onClick={open}>
       <div className="flex items-start gap-3">
         {article.image && (
           <img crossOrigin="anonymous"
@@ -36,40 +43,31 @@ function ArticleCard({ article }: { article: GuideArticle }) {
             onError={event => { event.currentTarget.hidden = true; }}
           />
         )}
-        <h2 className="min-w-0 flex-1 text-base font-bold leading-tight">{article.name}</h2>
+        <h2 className="min-w-0 flex-1 text-base font-bold leading-tight">
+          <button type="button" className="text-left hover:text-accent focus-visible:outline focus-visible:outline-1 focus-visible:outline-accent" aria-label={`${article.name} details`}>{article.name}</button>
+        </h2>
       </div>
-      <div className="flex flex-col gap-2">
-        {visible.map((paragraph, index) => (
-          <p key={index} className="text-xs leading-relaxed text-text-muted">{paragraph}</p>
-        ))}
-      </div>
-      <div className="mt-auto flex items-center justify-between gap-2">
-        <a
-          href={wikiUrl(article.name)}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="inline-flex items-center gap-1 text-[10px] text-text-muted hover:text-accent focus-visible:outline focus-visible:outline-1 focus-visible:outline-accent"
-        >
-          <i className="fas fa-arrow-up-right-from-square" aria-hidden="true" /> Source wiki
-        </a>
-        {collapsible && (
-          <button
-            type="button"
-            onClick={() => setOpen(value => !value)}
-            aria-expanded={open}
-            className="text-[10px] text-accent hover:underline focus-visible:outline focus-visible:outline-1 focus-visible:outline-accent"
-          >
-            {open ? 'Show less' : 'Read more'}
-          </button>
-        )}
-      </div>
+      {paragraphs[0] && <p className="line-clamp-3 text-xs leading-relaxed text-text-muted">{paragraphs[0]}</p>}
+      <span className="mt-auto text-[10px] text-accent">{paragraphs.length > 1 ? 'Read more' : 'Details'}</span>
     </article>
   );
 }
 
-function EvidenceCard({ item }: { item: EvidenceItem }) {
+function EvidenceCard({ item, onOpen }: { item: EvidenceItem; onOpen: (item: ModalItem) => void }) {
+  const open = () => onOpen({
+    name: item.name,
+    image: item.image,
+    type: 'evidence',
+    fields: [
+      ...(item.sellPrice ? [{ label: 'Sell Price', value: item.sellPrice, desc: 'Price a trader pays for this item', color: 'text-accent' }] : []),
+      ...(item.weight ? [{ label: 'Weight', value: item.weight, desc: 'Carry weight' }] : []),
+      ...(item.gridSize ? [{ label: 'Grid Size', value: item.gridSize, desc: 'Inventory space' }] : []),
+    ],
+    link: { label: 'View on Wiki', url: wikiUrl(item.name) },
+  });
+
   return (
-    <article className="card p-3 flex items-start gap-3">
+    <article className="card p-3 flex items-start gap-3 cursor-pointer hover:border-accent" onClick={open}>
       {item.image && (
         <img crossOrigin="anonymous"
           src={item.image}
@@ -80,20 +78,14 @@ function EvidenceCard({ item }: { item: EvidenceItem }) {
         />
       )}
       <div className="min-w-0 flex-1">
-        <h2 className="text-sm font-bold leading-tight">{item.name}</h2>
+        <h2 className="text-sm font-bold leading-tight">
+          <button type="button" className="text-left hover:text-accent focus-visible:outline focus-visible:outline-1 focus-visible:outline-accent" aria-label={`${item.name} details`}>{item.name}</button>
+        </h2>
         <dl className="mt-2 flex flex-wrap gap-x-4 gap-y-1 font-mono text-[10px] text-text-muted">
           {item.sellPrice && <div><dt className="inline">Sell </dt><dd className="inline text-accent">{item.sellPrice}</dd></div>}
           {item.weight && <div><dt className="inline">Weight </dt><dd className="inline">{item.weight}</dd></div>}
           {item.gridSize && <div><dt className="inline">Grid </dt><dd className="inline">{item.gridSize}</dd></div>}
         </dl>
-        <a
-          href={wikiUrl(item.name)}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="mt-2 inline-flex items-center gap-1 text-[10px] text-text-muted hover:text-accent focus-visible:outline focus-visible:outline-1 focus-visible:outline-accent"
-        >
-          <i className="fas fa-arrow-up-right-from-square" aria-hidden="true" /> Source wiki
-        </a>
       </div>
     </article>
   );
@@ -110,6 +102,7 @@ export default function GameGuide() {
   const activeTab: GuideTab = TABS.find(tab => tab.id === requestedTab)?.id ?? 'systems';
   const search = searchParams.get('search') || '';
   const [data, setData] = useState<GuideData | null>(null);
+  const [modalItem, setModalItem] = useState<ModalItem | null>(null);
 
   useEffect(() => {
     let cancelled = false;
@@ -201,14 +194,16 @@ export default function GameGuide() {
               <div className="empty-state"><i className="fas fa-book-open" aria-hidden="true" /><p>{counts[activeTab][1] ? 'Nothing matches your search.' : 'No records are available.'}</p></div>
             ) : (
               <div className="grid grid-cols-1 gap-2 md:grid-cols-2 xl:grid-cols-3">
-                {activeTab === 'systems' && filteredArticles.map(article => <ArticleCard key={article.id} article={article} />)}
-                {activeTab === 'tasks' && filteredGuides.map(article => <ArticleCard key={article.id} article={article} />)}
-                {activeTab === 'evidence' && filteredEvidence.map(item => <EvidenceCard key={item.id} item={item} />)}
+                {activeTab === 'systems' && filteredArticles.map(article => <ArticleCard key={article.id} article={article} onOpen={setModalItem} />)}
+                {activeTab === 'tasks' && filteredGuides.map(article => <ArticleCard key={article.id} article={article} onOpen={setModalItem} />)}
+                {activeTab === 'evidence' && filteredEvidence.map(item => <EvidenceCard key={item.id} item={item} onOpen={setModalItem} />)}
               </div>
             )}
           </section>
         </>
       )}
+
+      {modalItem && <ItemModal item={modalItem} onClose={() => setModalItem(null)} />}
 
       <div className="mt-4 flex items-center gap-2 text-[9px] font-mono text-text-muted/70">
         <i className="fas fa-database" aria-hidden="true" />
