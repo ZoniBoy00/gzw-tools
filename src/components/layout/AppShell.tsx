@@ -40,6 +40,7 @@ const NAV_GROUPS: NavGroup[] = [
     items: [
       { id: 'missions', label: 'Missions', icon: 'fas fa-clipboard-list', path: '/missions' },
       { id: 'hideout', label: 'Hideout', icon: 'fas fa-warehouse', path: '/hideout' },
+      { id: 'xp', label: 'XP Calculator', icon: 'fas fa-ranking-star', path: '/xp' },
       { id: 'loadouts', label: 'Loadouts', icon: 'fas fa-screwdriver-wrench', path: '/loadouts' },
       { id: 'logs', label: 'Log Analyzer', icon: 'fas fa-file-lines', path: '/logs' },
     ],
@@ -111,6 +112,10 @@ const SEO_META: Record<string, { title: string; description: string }> = {
   '/hideout': {
     title: 'Hideout Planner | Gray Zone Warfare | GZW Tools',
     description: 'Plan Gray Zone Warfare hideout module upgrades, total the materials you need and look up disassembly recipes.',
+  },
+  '/xp': {
+    title: 'XP Calculator | Gray Zone Warfare | GZW Tools',
+    description: 'Calculate the experience needed to reach any Gray Zone Warfare level, how many kills or discoveries that takes and what each level unlocks.',
   },
   '/vendors': {
     title: 'Vendor Guide | Gray Zone Warfare | GZW Tools',

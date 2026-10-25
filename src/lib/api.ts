@@ -484,6 +484,63 @@ export async function fetchDisassemblyRecipes(client: GzwDataClient = gzwClient)
     }));
 }
 
+// ─── Experience ───
+
+export interface ExperienceLevel {
+  id: string;
+  level: number;
+  /** Total experience needed to reach this level. */
+  threshold: number;
+  rewards: string[];
+}
+
+export interface ExperienceAction {
+  id: string;
+  name: string;
+  category: string;
+  experience: number;
+}
+
+interface ApiExperienceLevel {
+  id?: string;
+  name: string;
+  level?: number;
+  threshold?: number;
+  rewards?: string[];
+}
+
+interface ApiExperienceAction {
+  id?: string;
+  name: string;
+  category?: string;
+  experience?: number;
+}
+
+export async function fetchExperienceLevels(client: GzwDataClient = gzwClient): Promise<ExperienceLevel[]> {
+  const raw = await listDataset<ApiExperienceLevel>(client, 'experience_levels', { perPage: 200 });
+  return raw
+    .filter(entry => typeof entry.level === 'number' && typeof entry.threshold === 'number')
+    .map(entry => ({
+      id: entry.id || entry.name,
+      level: entry.level as number,
+      threshold: entry.threshold as number,
+      rewards: Array.isArray(entry.rewards) ? entry.rewards : [],
+    }))
+    .sort((a, b) => a.level - b.level);
+}
+
+export async function fetchExperienceActions(client: GzwDataClient = gzwClient): Promise<ExperienceAction[]> {
+  const raw = await listDataset<ApiExperienceAction>(client, 'experience_actions', { perPage: 200 });
+  return raw
+    .filter(entry => typeof entry.experience === 'number' && entry.experience > 0)
+    .map(entry => ({
+      id: entry.id || entry.name,
+      name: entry.name,
+      category: entry.category || '',
+      experience: entry.experience as number,
+    }));
+}
+
 /**
  * The wiki text arrives as one flat string. Split it into readable paragraphs at
  * sentence boundaries, starting a new paragraph once the current one is long enough.
