@@ -1,5 +1,5 @@
 import { useRef, useState } from 'react';
-import { parseLog, type ParsedLog } from '../lib/logparser';
+import { useLogAnalysis } from '../hooks/useLogAnalysis';
 import { safeReportFilename, serializeLogReport } from '../lib/logreport';
 
 const LOG_FOLDER = '%LOCALAPPDATA%'+String.raw`\GZW\Saved\Logs`;
@@ -12,7 +12,7 @@ function friendlySize(mb: number): string {
 export default function LogAnalyzer() {
   const [copyStatus, setCopyStatus] = useState('');
   const [logText, setLogText] = useState('');
-  const [parsed, setParsed] = useState<ParsedLog | null>(null);
+  const { parsed, analyzing, progress, error: analysisError, analyze, cancel } = useLogAnalysis();
   const [timelineFilter, setTimelineFilter] = useState<string>('all');
   const [sourceName, setSourceName] = useState('gzw-log');
   const [fileError, setFileError] = useState<string | null>(null);
@@ -38,21 +38,16 @@ export default function LogAnalyzer() {
       setFileError('This file is over the 50 MB limit.');
       return;
     }
-    try {
-      const text = await file.text();
-      setLogText(text);
-      setSourceName(file.name);
-      setParsed(parseLog(text));
-      setFileError(null);
-    } catch {
-      setFileError('The selected file could not be read. Try pasting the log text instead.');
-    }
+    setLogText('');
+    setSourceName(file.name);
+    setFileError(null);
+    analyze(file);
   };
 
   const handleAnalyze = () => {
     if (!logText.trim()) return;
-    setParsed(parseLog(logText));
     setFileError(null);
+    analyze(logText);
   };
 
   const downloadReport = () => {
@@ -105,7 +100,7 @@ export default function LogAnalyzer() {
       <div className="mb-3">
         <textarea
           value={logText}
-          onChange={(e) => { setLogText(e.target.value); setSourceName('pasted-log'); }}
+          onChange={(e) => { cancel(); setLogText(e.target.value); setSourceName('pasted-log'); }}
           placeholder="Paste GZW.log contents here..."
           className="input resize-none font-mono text-[11px]"
           rows={8}
@@ -113,12 +108,19 @@ export default function LogAnalyzer() {
         />
       </div>
 
-      <button onClick={handleAnalyze} className="btn btn-primary w-full btn-sm" disabled={!logText.trim()}>
-        <i className="fas fa-microchip" /> Analyze Log
+      <button onClick={handleAnalyze} className="btn btn-primary w-full btn-sm" disabled={analyzing || !logText.trim()}>
+        <i className={`fas ${analyzing ? 'fa-spinner fa-spin' : 'fa-microchip'}`} /> {analyzing ? 'Analyzing log?' : 'Analyze Log'}
       </button>
       <p className="mt-2 text-[9px] font-mono text-text-muted/70">Privacy: log text is parsed in your browser and is not uploaded. The downloadable report is created locally.</p>
 
-      {parsed && (
+      {analysisError && <p role="alert" className="mt-3 text-xs text-red">{analysisError}</p>}
+      {analyzing && <div className="card p-4 mt-4" aria-busy="true">
+        <p role="status" className="mb-2 text-sm">{progress === null ? 'Reading log?' : progress === 100 ? 'Preparing results?' : `Analyzing log: ${progress}%`}</p>
+        <progress className="w-full h-3 accent-accent" aria-label="Log analysis progress" max={100} value={progress ?? undefined} />
+        <button type="button" className="btn btn-outline btn-sm mt-2" onClick={cancel}>Cancel analysis</button>
+      </div>}
+
+      {parsed && !analyzing && (
         <div className="mt-5 animate-stagger">
           <div className="mb-3 flex flex-wrap items-center justify-between gap-2 border border-border bg-surface-2/40 p-3">
             <span className="text-[10px] font-mono text-text-muted">Analysis ready · local report</span>

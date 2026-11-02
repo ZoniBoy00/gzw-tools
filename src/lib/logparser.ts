@@ -50,7 +50,7 @@ function formatDur(minutes: number): string {
   return `${minutes}m`;
 }
 
-export function parseLog(text: string): ParsedLog {
+export function parseLog(text: string, onProgress?: (percent: number) => void): ParsedLog {
   const lines = text.split('\n');
   const events: LogEvent[] = [];
   const quests = new Set<string>();
@@ -73,7 +73,10 @@ export function parseLog(text: string): ParsedLog {
   let tickTrackerCount = 0;
   let maxTickDelay = 0;
 
-  for (const raw of lines) {
+  onProgress?.(0);
+  for (let index = 0; index < lines.length; index++) {
+    if (index > 0 && index % 1000 === 0) onProgress?.(Math.floor(index / lines.length * 100));
+    const raw = lines[index];
     const trimmed = raw.trim();
     if (!trimmed) continue;
 
@@ -195,6 +198,8 @@ export function parseLog(text: string): ParsedLog {
       }
     }
   }
+
+  onProgress?.(100);
 
   // Calculate session
   let sessionMinutes = 0;
