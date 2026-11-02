@@ -2,12 +2,15 @@ import { useRef, useState } from 'react';
 import { parseLog, type ParsedLog } from '../lib/logparser';
 import { safeReportFilename, serializeLogReport } from '../lib/logreport';
 
+const LOG_FOLDER = '%LOCALAPPDATA%'+String.raw`\GZW\Saved\Logs`;
+
 function friendlySize(mb: number): string {
   if (mb >= 1024) return `${(mb / 1024).toFixed(1)} GB`;
   return `${Math.round(mb)} MB`;
 }
 
 export default function LogAnalyzer() {
+  const [copyStatus, setCopyStatus] = useState('');
   const [logText, setLogText] = useState('');
   const [parsed, setParsed] = useState<ParsedLog | null>(null);
   const [timelineFilter, setTimelineFilter] = useState<string>('all');
@@ -15,6 +18,15 @@ export default function LogAnalyzer() {
   const [fileError, setFileError] = useState<string | null>(null);
   const [dragActive, setDragActive] = useState(false);
   const fileInput = useRef<HTMLInputElement>(null);
+
+  const copyLogFolder = async () => {
+    try {
+      await navigator.clipboard.writeText(LOG_FOLDER);
+      setCopyStatus('Copied. Paste into File Explorer or Win+R.');
+    } catch {
+      setCopyStatus('Copy unavailable. Select and copy the path above.');
+    }
+  };
 
   const handleFile = async (file?: File) => {
     if (!file) return;
@@ -63,8 +75,14 @@ export default function LogAnalyzer() {
       <p className="text-[11px] font-mono text-text-muted mb-4 leading-relaxed">
         Paste your <code className="text-accent">GZW.log</code> contents or select the file to extract gameplay data.
         Log location:{' '}
-        <code className="text-accent/70">C:\Users\USER\AppData\Local\GZW\Saved\Logs</code>
+        <code className="text-accent/70 select-all break-all">{LOG_FOLDER}</code>
       </p>
+
+      <div className="mb-4 text-xs text-text-muted">
+        <button type="button" className="btn btn-outline btn-sm" onClick={() => { void copyLogFolder(); }}>Copy log folder path</button>
+        <p className="mt-2">Paste this path into the File Explorer address bar or press Win+R, then press Enter. Select GZW.log in that folder.</p>
+        <p role="status" className="mt-1">{copyStatus}</p>
+      </div>
 
       <input ref={fileInput} className="sr-only" type="file" accept=".log,.txt,text/plain" aria-label="Choose a GZW log file" onChange={event => { void handleFile(event.target.files?.[0]); event.target.value = ''; }} />
       <div
