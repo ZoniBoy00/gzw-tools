@@ -29,12 +29,12 @@ interface Task {
 }
 
 export default function MissionFinder() {
-  const { data: tasksData, loading: tasksDataLoading } = useApiData<any>('tasks');
-  const { data: mainTaskData, loading: mainTaskDataLoading } = useApiData<any>('main_task');
-  const { data: sideTaskData, loading: sideTaskDataLoading } = useApiData<any>('side_task');
-  const { data: hiddenData, loading: hiddenDataLoading } = useApiData<any>('hidden_task');
-  const { data: squadData, loading: squadDataLoading } = useApiData<any>('squad_strike_missions');
-  const { data: contractData, loading: contractDataLoading } = useApiData<any>('contract');
+  const { data: tasksData, loading: tasksDataLoading } = useApiData<any>('tasks?all=true');
+  const { data: mainTaskData, loading: mainTaskDataLoading } = useApiData<any>('main_task?all=true');
+  const { data: sideTaskData, loading: sideTaskDataLoading } = useApiData<any>('side_task?all=true');
+  const { data: hiddenData, loading: hiddenDataLoading } = useApiData<any>('hidden_task?all=true');
+  const { data: squadData, loading: squadDataLoading } = useApiData<any>('squad_strike_missions?all=true');
+  const { data: contractData, loading: contractDataLoading } = useApiData<any>('contract?all=true');
 
   const allTasks: Task[] = useMemo(() => {
     if (!tasksData.length) return [];

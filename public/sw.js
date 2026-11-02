@@ -1,5 +1,5 @@
 // Offline support: app shell is cached on first visit, API reads fall back to the last response.
-const VERSION = 'gzw-tools-v1'
+const VERSION = 'gzw-tools-v2'
 const SHELL = ['/', '/manifest.webmanifest', '/favicon-32.png']
 
 self.addEventListener('install', (event) => {
@@ -18,7 +18,7 @@ async function networkFirst(request, fallbackKey) {
   const cache = await caches.open(VERSION)
   try {
     const response = await fetch(request)
-    if (response.ok) cache.put(fallbackKey || request, response.clone())
+    if (response.ok) await cache.put(fallbackKey || request, response.clone()).catch(() => {})
     return response
   } catch (error) {
     const cached = await cache.match(fallbackKey || request)
@@ -41,12 +41,16 @@ self.addEventListener('fetch', (event) => {
   const { request } = event
   if (request.method !== 'GET') return
   const url = new URL(request.url)
+  // The SDK uses the public API directly; also support this site's API proxy.
+  const apiOrigin = url.origin === self.location.origin || url.origin === 'https://gzw-data.dev'
+  if (apiOrigin && url.pathname.startsWith('/api/v1/')) {
+    event.respondWith(networkFirst(request))
+    return
+  }
   if (url.origin !== self.location.origin) return
 
   if (request.mode === 'navigate') {
     event.respondWith(networkFirst(request, '/'))
-  } else if (url.pathname.startsWith('/api/v1/')) {
-    event.respondWith(networkFirst(request))
   } else if (url.pathname.startsWith('/assets/') || /\.(woff2?|png|webp|svg)$/.test(url.pathname)) {
     event.respondWith(staleWhileRevalidate(request))
   }

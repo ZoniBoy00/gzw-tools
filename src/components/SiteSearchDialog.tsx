@@ -13,12 +13,12 @@ interface Props {
 export default function SiteSearchDialog({ open, onClose }: Props) {
   const navigate = useNavigate();
   const { weapons, ammo, vests, helmets, keys, regions, bosses } = useDataContext();
-  const { data: tasksBase } = useApiData<TaskSearchRecord>('tasks');
-  const { data: mainTasks } = useApiData<TaskSearchRecord>('main_task');
-  const { data: sideTasks } = useApiData<TaskSearchRecord>('side_task');
-  const { data: hiddenTasks } = useApiData<TaskSearchRecord>('hidden_task');
-  const { data: squadTasks } = useApiData<TaskSearchRecord>('squad_strike_missions');
-  const { data: contracts } = useApiData<TaskSearchRecord>('contract');
+  const { data: tasksBase } = useApiData<TaskSearchRecord>('tasks?all=true');
+  const { data: mainTasks } = useApiData<TaskSearchRecord>('main_task?all=true');
+  const { data: sideTasks } = useApiData<TaskSearchRecord>('side_task?all=true');
+  const { data: hiddenTasks } = useApiData<TaskSearchRecord>('hidden_task?all=true');
+  const { data: squadTasks } = useApiData<TaskSearchRecord>('squad_strike_missions?all=true');
+  const { data: contracts } = useApiData<TaskSearchRecord>('contract?all=true');
   const [query, setQuery] = useState('');
   const inputRef = useRef<HTMLInputElement>(null);
   const tasks = useMemo(() => mergeTaskSources(tasksBase, mainTasks, sideTasks, hiddenTasks, squadTasks, contracts), [tasksBase, mainTasks, sideTasks, hiddenTasks, squadTasks, contracts]);
