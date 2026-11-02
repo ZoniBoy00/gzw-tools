@@ -22,8 +22,8 @@ export default function LogAnalyzer() {
       setFileError('Choose a .log or .txt file.');
       return;
     }
-    if (file.size > 25 * 1024 * 1024) {
-      setFileError('This file is over the 25 MB limit.');
+    if (file.size > 50 * 1024 * 1024) {
+      setFileError('This file is over the 50 MB limit.');
       return;
     }
     try {
@@ -63,7 +63,7 @@ export default function LogAnalyzer() {
       <p className="text-[11px] font-mono text-text-muted mb-4 leading-relaxed">
         Paste your <code className="text-accent">GZW.log</code> contents or select the file to extract gameplay data.
         Log location:{' '}
-        <code className="text-accent/70">%localappdata%\GrayZoneWarfare\Saved\Logs\</code>
+        <code className="text-accent/70">C:\Users\USER\AppData\Local\GZW\Saved\Logs</code>
       </p>
 
       <input ref={fileInput} className="sr-only" type="file" accept=".log,.txt,text/plain" aria-label="Choose a GZW log file" onChange={event => { void handleFile(event.target.files?.[0]); event.target.value = ''; }} />
@@ -80,7 +80,7 @@ export default function LogAnalyzer() {
       >
         <i className="fas fa-file-arrow-up text-accent" aria-hidden="true" />
         <span className="ml-2 text-xs text-text">Drop a .log/.txt file here or choose file</span>
-        <span id="log-file-help" className="mt-1 block text-[9px] font-mono text-text-muted">Up to 25 MB · processed locally in this browser</span>
+        <span id="log-file-help" className="mt-1 block text-[9px] font-mono text-text-muted">Up to 50 MB · processed locally in this browser</span>
       </div>
       {fileError && <p className="mb-3 text-xs text-red" role="alert">{fileError}</p>}
 

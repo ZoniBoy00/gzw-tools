@@ -18,6 +18,9 @@ export interface GameData {
   loading: boolean;
   error: string | null;
   dataVersion: string | null;
+  datasetErrors: Record<string, string>;
+  retryFailed: () => void;
+  retrying: boolean;
 }
 
 export const defaultData: GameData = {
@@ -36,6 +39,9 @@ export const defaultData: GameData = {
   loading: true,
   error: null,
   dataVersion: null,
+  datasetErrors: {},
+  retryFailed: () => {},
+  retrying: false,
 };
 
 export const DataContext = createContext<GameData>(defaultData);

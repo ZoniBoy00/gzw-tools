@@ -1,4 +1,6 @@
 import { useEffect, useState } from 'react';
+import LoadoutCost from './LoadoutCost';
+import { useLoadoutStock } from '../hooks/useLoadoutStock';
 import { decodeLoadout, loadoutShareUrl } from '../lib/loadoutShare';
 import TabBar from './ui/TabBar';
 import { RECOMMENDATIONS } from '../data/armor';
@@ -129,6 +131,7 @@ export default function LoadoutBuilder() {
 
 function Builder({ weapons, vests, helmets, ammo }: { weapons: WeaponEntry[]; vests: ArmorVest[]; helmets: Helmet[]; ammo: AmmoRound[] }) {
   const toast = useToast();
+  const stock = useLoadoutStock();
   const [loadouts, setLoadouts] = useState<Loadout[]>(loadLoadouts);
   const [editing, setEditing] = useState<Loadout | null>(null);
   const [name, setName] = useState('');
@@ -247,6 +250,8 @@ function Builder({ weapons, vests, helmets, ammo }: { weapons: WeaponEntry[]; ve
 
   return (
     <div>
+      {stock.loading && <p role="status">Loading vendor prices?</p>}
+      {stock.error && <div role="status">Vendor prices unavailable: {stock.error} <button className="btn btn-outline btn-sm" onClick={stock.retry}>Retry prices</button></div>}
       {/* Saved loadouts */}
       {loadouts.length > 0 && (
         <div className="mb-5 space-y-1.5 animate-stagger">
@@ -258,6 +263,7 @@ function Builder({ weapons, vests, helmets, ammo }: { weapons: WeaponEntry[]; ve
             <div key={l.id} className="card card-highlight p-3 flex items-center justify-between">
               <div>
                 <div className="text-sm font-bold">{l.name}</div>
+                {!stock.loading && !stock.error && <LoadoutCost items={[...l.weapons, l.vest, l.helmet, ...l.ammo]} stock={stock.stock} />}
                 <div className="text-[10px] font-mono text-text-muted mt-0.5">
                   {l.weapons.length} weapon{l.weapons.length !== 1 ? 's' : ''}
                   {l.vest && ` · ${l.vest.slice(0, 24)}${l.vest.length > 24 ? '…' : ''}`}
@@ -396,6 +402,7 @@ function Builder({ weapons, vests, helmets, ammo }: { weapons: WeaponEntry[]; ve
             </div>
           </div>
 
+          {!stock.loading && !stock.error && <LoadoutCost items={[...selectedWeapons, selectedVest, selectedHelmet, ...selectedAmmo]} stock={stock.stock} />}
           {/* Notes */}
           <textarea
             value={notes}

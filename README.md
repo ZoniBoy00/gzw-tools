@@ -116,3 +116,9 @@ for provenance and attribution guidance.
 - [gzw-data-js](https://github.com/ZoniBoy00/gzw-data-js): JavaScript / TypeScript client ([npm](https://www.npmjs.com/package/@zoniboy/gzw-data-client))
 - [gzw-data-py](https://github.com/ZoniBoy00/gzw-data-py): Python client ([PyPI](https://pypi.org/project/gzw-data/))
 - [gzw-scraper](https://github.com/ZoniBoy00/gzw-scraper): the scraper that feeds the data
+
+## Loadout purchase estimates
+
+Saved loadouts and the editor show vendor offers, required rank, and purchase prices using your locally saved vendor reputation. The total uses the cheapest confirmed unlocked offer per item. Missing prices and unknown rank requirements remain explicit; locked or unconfirmed offers are excluded from the known purchasable subtotal. Estimates include one listed sale unit per selection, not a complete ammunition supply or weapon attachments.
+
+Shared game datasets load independently. A failed request does not discard successful data, and the application banner retries only failed datasets. Vendor prices have their own retry control.

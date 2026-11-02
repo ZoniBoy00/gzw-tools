@@ -207,6 +207,7 @@ function NavEntry({ item, onNavigate, favorite, onToggleFavorite }: { item: NavI
 }
 
 export default function AppShell({ children }: { children: ReactNode }) {
+  const { datasetErrors, retryFailed, retrying } = useDataContext();
   const [copyrightYear] = useState(() => new Date().getFullYear());
   const [showFaq, setShowFaq] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
@@ -290,7 +291,14 @@ export default function AppShell({ children }: { children: ReactNode }) {
           <div className="topbar__actions"><button type="button" onClick={openSearch} className="btn btn-outline btn-sm"><i className="fas fa-magnifying-glass" aria-hidden="true" /><span className="sr-only sm:not-sr-only">Search</span><kbd className="hidden text-[9px] text-text-muted md:inline">Ctrl/⌘ K</kbd></button><span className="beta-tag">BETA</span><span className="data-tag"><i className="fas fa-database" /> {dataVersion ? `DATA ${dataVersion.slice(0, 10)}` : 'API v1'}</span></div>
         </header>
         <StatsStrip />
-        <main id="main-content" className="app-content">{children}</main>
+        <main id="main-content" className="app-content">
+          {Object.keys(datasetErrors).length > 0 && <div role="status" className="card p-3 mb-4 text-sm">
+            <p>Some data could not be loaded. Other tools remain available.</p>
+            <ul>{Object.entries(datasetErrors).map(([name, message]) => <li key={name}>{name}: {message}</li>)}</ul>
+            <button className="btn btn-outline btn-sm mt-2" disabled={retrying} onClick={retryFailed}>{retrying ? 'Retrying?' : 'Retry failed datasets'}</button>
+          </div>}
+          {children}
+        </main>
         <footer className="app-footer">
           <span>© {copyrightYear} GZW Tools · Community tool · not affiliated with MADFINGER Games</span>
           <span><Link to="/privacy">Privacy</Link><Link to="/tos">Terms</Link><a href="https://gzw-data.dev/" target="_blank" rel="noopener noreferrer">GZW Data API</a><a href="https://github.com/ZoniBoy00/gzw-data/blob/main/DATA_LICENSE.md" target="_blank" rel="noopener noreferrer">Data sources</a><a href="https://github.com/ZoniBoy00/gzw-tools" target="_blank" rel="noopener noreferrer">GitHub</a></span>
