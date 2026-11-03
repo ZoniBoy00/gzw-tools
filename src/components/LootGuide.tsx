@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
-import { fetchLootItems, wikiUrl } from '../lib/api';
+import { VALUE_DATASETS, fetchValueItems, wikiUrl } from '../lib/api';
 import ItemModal from './ui/ItemModal';
 import type { ModalItem } from './ui/ItemModal';
-import { filterLoot, formatMoney, sortLoot, toLootRow } from '../lib/loot';
+import { filterLoot, formatMoney, priceSourceLabel, sortLoot, toLootRow } from '../lib/loot';
 import type { LootRow, LootSort } from '../lib/loot';
 
 const SORTS: { id: LootSort; label: string }[] = [
@@ -23,6 +23,8 @@ function toModal(row: LootRow): ModalItem {
     ...(row.size ? [{ label: 'Grid Size', value: row.size, desc: 'Inventory space' }] : []),
     ...(row.weightKg !== null ? [{ label: 'Weight', value: `${row.weightKg} kg`, desc: 'Carry weight' }] : []),
     ...(row.trader ? [{ label: 'Trader', value: row.trader, desc: 'Vendor that buys or sells it' }] : []),
+    ...(row.category ? [{ label: 'Category', value: row.category, desc: 'Kind of item' }] : []),
+    ...(row.priceSource ? [{ label: 'Price source', value: priceSourceLabel(row.priceSource), desc: 'The wiki had no price, so it comes from the community-run GZW Items site' }] : []),
   ];
   return { name: row.name, image: row.image, type: 'gear', fields, link: { label: 'View on Wiki', url: wikiUrl(row.name) } };
 }
@@ -45,19 +47,20 @@ export default function LootGuide() {
   const [error, setError] = useState('');
   const [search, setSearch] = useState('');
   const [sort, setSort] = useState<LootSort>('perCell');
+  const [category, setCategory] = useState('');
   const [minPrice, setMinPrice] = useState(0);
   const [modalItem, setModalItem] = useState<ModalItem | null>(null);
 
   useEffect(() => {
     let cancelled = false;
-    fetchLootItems()
+    fetchValueItems()
       .then(items => { if (!cancelled) setRows(items.map(toLootRow)); })
       .catch(reason => { if (!cancelled) setError(reason instanceof Error ? reason.message : String(reason)); });
     return () => { cancelled = true; };
   }, []);
 
   const priced = rows?.filter(row => row.price !== null).length ?? 0;
-  const visible = rows ? sortLoot(filterLoot(rows, search, minPrice), sort) : [];
+  const visible = rows ? sortLoot(filterLoot(rows, search, minPrice, category), sort) : [];
   const shown = visible.slice(0, MAX_ROWS);
 
   return (
@@ -67,7 +70,7 @@ export default function LootGuide() {
         <h1 className="section-title">Loot Values</h1>
       </div>
       <p className="mb-4 text-[12px] font-mono text-text-muted">
-        Find what is worth carrying out of the zone. Sort by price per inventory cell to fill your bag with the most money.
+        Find what is worth carrying out of the zone, from loot and keys to medical supplies, food and drinks. Sort by price per inventory cell to fill your bag with the most money.
       </p>
 
       {error ? (
@@ -78,17 +81,21 @@ export default function LootGuide() {
         <>
           <div className="mb-3 flex flex-wrap items-center gap-2">
             <label className="relative min-w-[180px] flex-1">
-              <span className="sr-only">Search loot</span>
+              <span className="sr-only">Search items</span>
               <i className="fas fa-magnifying-glass pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-[12px] text-text-muted" aria-hidden="true" />
               <input
                 type="search"
                 value={search}
                 onChange={event => setSearch(event.target.value)}
-                placeholder="Search loot…"
+                placeholder="Search items…"
                 className="input input-sm pl-8"
-                aria-label="Search loot"
+                aria-label="Search items"
               />
             </label>
+            <select className="input input-sm w-auto" value={category} onChange={event => setCategory(event.target.value)} aria-label="Category">
+              <option value="">All categories</option>
+              {VALUE_DATASETS.map(entry => <option key={entry.label} value={entry.label}>{entry.label}</option>)}
+            </select>
             <select className="input input-sm w-auto" value={sort} onChange={event => setSort(event.target.value as LootSort)} aria-label="Sort by">
               {SORTS.map(entry => <option key={entry.id} value={entry.id}>Sort: {entry.label}</option>)}
             </select>
@@ -115,7 +122,7 @@ export default function LootGuide() {
           )}
 
           {shown.length === 0 ? (
-            <div className="empty-state"><i className="fas fa-box-open" aria-hidden="true" /><p>No loot matches your filters.</p></div>
+            <div className="empty-state"><i className="fas fa-box-open" aria-hidden="true" /><p>No items match your filters.</p></div>
           ) : (
             <div className="grid grid-cols-1 gap-2 md:grid-cols-2 xl:grid-cols-3">
               {shown.map(row => (
@@ -128,7 +135,7 @@ export default function LootGuide() {
                     </div>
                   </div>
                   <div className="shrink-0 text-right">
-                    <div className="font-mono text-xs font-bold text-accent">{formatMoney(row.price)}</div>
+                    <div className="font-mono text-xs font-bold text-accent">{formatMoney(row.price)}{row.priceSource && <span title={`Price from ${priceSourceLabel(row.priceSource)}`} aria-label={`Price from ${priceSourceLabel(row.priceSource)}`}>*</span>}</div>
                     <div className="font-mono text-[11px] text-text-muted">{row.perCell !== null ? `${formatMoney(row.perCell)}/cell` : ''}</div>
                   </div>
                 </button>
@@ -145,6 +152,9 @@ export default function LootGuide() {
         <i className="fas fa-database" aria-hidden="true" />
         Read-only records from GZW Data API · prices come from the community wiki and may lag behind the game.
       </div>
+      <p className="mt-1 text-[11px] font-mono text-text-muted/70">
+        * Price from <a className="underline" href="https://gzwitems.com/" target="_blank" rel="noopener noreferrer">GZW Items</a>, a community-run price tracker, where the wiki has none. Thank you to its contributors.
+      </p>
 
       {modalItem && <ItemModal item={modalItem} onClose={() => setModalItem(null)} />}
     </div>

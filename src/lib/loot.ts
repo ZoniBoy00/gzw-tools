@@ -36,6 +36,8 @@ export interface LootRow {
   perCell: number | null;
   perKg: number | null;
   trader?: string;
+  category?: string;
+  priceSource?: string;
 }
 
 export function toLootRow(item: LootItem): LootRow {
@@ -53,6 +55,8 @@ export function toLootRow(item: LootItem): LootRow {
     perCell: price !== null && cells ? Math.round(price / cells) : parseMoney(item.pricePerCell),
     perKg: price !== null && weightKg ? Math.round(price / weightKg) : null,
     trader: item.trader,
+    category: item.category,
+    priceSource: item.priceSource,
   };
 }
 
@@ -78,12 +82,18 @@ export function sortLoot(rows: LootRow[], sort: LootSort): LootRow[] {
   });
 }
 
-export function filterLoot(rows: LootRow[], search: string, minPrice: number): LootRow[] {
+export function filterLoot(rows: LootRow[], search: string, minPrice: number, category = ''): LootRow[] {
   const query = search.trim().toLowerCase();
   return rows.filter(row => {
+    if (category && row.category !== category) return false;
     if (query && !row.name.toLowerCase().includes(query)) return false;
     return minPrice <= 0 || (row.price !== null && row.price >= minPrice);
   });
+}
+
+/** Readable name for a `sell_price_source` value; an unknown source is shown as it is. */
+export function priceSourceLabel(source: string | undefined): string {
+  return source === 'gzwitems.com' ? 'GZW Items' : source ?? '';
 }
 
 export function formatMoney(value: number | null): string {

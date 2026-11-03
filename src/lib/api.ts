@@ -496,6 +496,9 @@ export interface LootItem {
   pricePerCell?: string;
   trader?: string;
   image?: string;
+  category?: string;
+  /** Where the sell price came from when it is not the wiki, for example "gzwitems.com". */
+  priceSource?: string;
 }
 
 interface ApiLootItem {
@@ -504,28 +507,81 @@ interface ApiLootItem {
   grid_size?: string;
   weight?: string;
   sell_price?: string;
+  sell_price_source?: string;
   price_per_grid_cell?: string;
   trader?: string;
   image?: string;
   numeric_values?: { weight?: { value?: number; unit?: string } };
 }
 
+function toLootItem(item: ApiLootItem, category?: string): LootItem {
+  const weight = item.numeric_values?.weight;
+  return {
+    id: item.id || item.name,
+    name: item.name,
+    gridSize: item.grid_size || '',
+    weight: item.weight,
+    weightKg: weight?.unit === 'kg' && typeof weight.value === 'number' ? weight.value : undefined,
+    sellPrice: item.sell_price,
+    pricePerCell: item.price_per_grid_cell,
+    trader: item.trader,
+    image: item.image,
+    ...(category ? { category } : {}),
+    ...(item.sell_price_source ? { priceSource: item.sell_price_source } : {}),
+  };
+}
+
 export async function fetchLootItems(client: GzwDataClient = gzwClient): Promise<LootItem[]> {
   const raw = await listDataset<ApiLootItem>(client, 'loot_items', { all: true });
-  return raw.map(item => {
-    const weight = item.numeric_values?.weight;
-    return {
-      id: item.id || item.name,
-      name: item.name,
-      gridSize: item.grid_size || '',
-      weight: item.weight,
-      weightKg: weight?.unit === 'kg' && typeof weight.value === 'number' ? weight.value : undefined,
-      sellPrice: item.sell_price,
-      pricePerCell: item.price_per_grid_cell,
-      trader: item.trader,
-      image: item.image,
-    };
-  });
+  return raw.map(item => toLootItem(item));
+}
+
+/**
+ * Datasets that carry sell prices, in priority order: when two datasets list the same id the first one wins.
+ * Some prices (marked with `sell_price_source`) are filled in from the community-run GZW Items site.
+ */
+export const VALUE_DATASETS: { dataset: string; label: string }[] = [
+  { dataset: 'loot_items', label: 'Loot' },
+  { dataset: 'vices', label: 'Vices' },
+  { dataset: 'jewellery', label: 'Jewellery' },
+  { dataset: 'electronics', label: 'Electronics' },
+  { dataset: 'household_item', label: 'Household' },
+  { dataset: 'laboratory_supplies', label: 'Laboratory' },
+  { dataset: 'military_equipment', label: 'Military' },
+  { dataset: 'evidence', label: 'Evidence' },
+  { dataset: 'medical', label: 'Medical' },
+  { dataset: 'food', label: 'Food' },
+  { dataset: 'drinks', label: 'Drinks' },
+  { dataset: 'provisions', label: 'Provisions' },
+  { dataset: 'keys', label: 'Keys' },
+  { dataset: 'keycards', label: 'Keycards' },
+  { dataset: 'disassembly_recipes', label: 'Disassembly' },
+  { dataset: 'uncategorized', label: 'Other' },
+];
+
+/** Every priced item from the value datasets. A dataset that fails to load is skipped unless all of them fail. */
+export async function fetchValueItems(client: GzwDataClient = gzwClient): Promise<LootItem[]> {
+  const results = await Promise.allSettled(
+    VALUE_DATASETS.map(async ({ dataset, label }) => {
+      const raw = await listDataset<ApiLootItem>(client, dataset, { all: true });
+      return raw.filter(item => item.name && item.sell_price && /\d/.test(item.sell_price)).map(item => toLootItem(item, label));
+    }),
+  );
+  const loaded = results.filter((result): result is PromiseFulfilledResult<LootItem[]> => result.status === 'fulfilled');
+  if (!loaded.length) {
+    const failed = results.find((result): result is PromiseRejectedResult => result.status === 'rejected');
+    throw failed?.reason instanceof Error ? failed.reason : new Error('Could not load prices');
+  }
+  const seen = new Set<string>();
+  const items: LootItem[] = [];
+  for (const { value } of loaded) {
+    for (const item of value) {
+      if (seen.has(item.id)) continue;
+      seen.add(item.id);
+      items.push(item);
+    }
+  }
+  return items;
 }
 
 // ─── Vendors ───

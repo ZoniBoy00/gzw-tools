@@ -2,6 +2,7 @@ import { useState, useMemo } from 'react';
 import { useApiData } from '../hooks/useApiData';
 import ItemModal from './ui/ItemModal';
 import type { ModalItem } from './ui/ItemModal';
+import { formatMoney, parseMoney, priceSourceLabel } from '../lib/loot';
 
 interface ApiKey {
   name: string;
@@ -14,6 +15,8 @@ interface ApiKey {
   image?: string;
   wikiUrl?: string;
   inTask?: boolean;
+  sell_price?: string;
+  sell_price_source?: string;
 }
 
 interface KeyEntry {
@@ -22,6 +25,8 @@ interface KeyEntry {
   image: string;
   usage: string;
   wikiUrl?: string;
+  price: number | null;
+  priceSource?: string;
 }
 
 // Known locations in the game (ordered by length so longer matches take priority)
@@ -50,6 +55,8 @@ function toKeyEntry(a: ApiKey): KeyEntry {
     location: a.location || extractLocation(a.usage),
     image: a.image || '',
     usage: a.usage || '',
+    price: parseMoney(a.sell_price),
+    priceSource: a.sell_price_source,
     wikiUrl: a.wikiUrl || `https://gray-zone-warfare.fandom.com/wiki/${encodeURIComponent(a.name)}`,
   };
 }
@@ -105,6 +112,8 @@ export default function KeysGuide() {
       fields: [
         { label: 'Location', value: key.location, desc: 'Area where this key is found or used' },
         { label: 'Usage', value: key.usage || '-', desc: 'What this key unlocks' },
+        ...(key.price !== null ? [{ label: 'Sell Price', value: formatMoney(key.price), desc: 'Price a trader pays for this key', color: 'text-accent' }] : []),
+        ...(key.priceSource ? [{ label: 'Price source', value: priceSourceLabel(key.priceSource), desc: 'The wiki had no price, so it comes from the community-run GZW Items site' }] : []),
       ],
       link: key.wikiUrl ? { label: 'View on Wiki', url: key.wikiUrl } : undefined,
     });
@@ -179,6 +188,11 @@ export default function KeysGuide() {
                     <div className="text-xs font-medium truncate">{k.name}</div>
                     <div className="text-[11px] font-mono text-text-muted/70 truncate">{k.location}</div>
                   </div>
+                  {k.price !== null && (
+                    <div className="shrink-0 font-mono text-xs font-bold text-accent">
+                      {formatMoney(k.price)}{k.priceSource && <span title={`Price from ${priceSourceLabel(k.priceSource)}`} aria-label={`Price from ${priceSourceLabel(k.priceSource)}`}>*</span>}
+                    </div>
+                  )}
                 </button>
               ))}
             </div>
@@ -190,6 +204,9 @@ export default function KeysGuide() {
         <i className="fas fa-database" />
         {filtered.length} / {keys.length} keys
       </div>
+      <p className="mt-1 text-[11px] font-mono text-text-muted/70">
+        * Price from <a className="underline" href="https://gzwitems.com/" target="_blank" rel="noopener noreferrer">GZW Items</a>, a community-run price tracker, where the wiki has none.
+      </p>
 
       {modalItem && <ItemModal item={modalItem} onClose={() => setModalItem(null)} />}
     </div>

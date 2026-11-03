@@ -120,7 +120,7 @@ const SEO_META: Record<string, { title: string; description: string }> = {
   },
   '/loot': {
     title: 'Loot Values | Gray Zone Warfare | GZW Tools',
-    description: 'Search Gray Zone Warfare loot and sort by sell price, price per inventory cell and price per kg to find the most valuable items.',
+    description: 'Search Gray Zone Warfare loot, keys, medical supplies, food and drinks and sort by sell price, price per inventory cell and price per kg to find the most valuable items.',
   },
   '/vendors': {
     title: 'Vendor Guide | Gray Zone Warfare | GZW Tools',
@@ -301,7 +301,7 @@ export default function AppShell({ children }: { children: ReactNode }) {
         </main>
         <footer className="app-footer">
           <span>© {copyrightYear} GZW Tools · Community tool · not affiliated with MADFINGER Games</span>
-          <span><Link to="/privacy">Privacy</Link><Link to="/tos">Terms</Link><a href="https://gzw-data.dev/" target="_blank" rel="noopener noreferrer">GZW Data API</a><a href="https://github.com/ZoniBoy00/gzw-data/blob/main/DATA_LICENSE.md" target="_blank" rel="noopener noreferrer">Data sources</a><a href="https://github.com/ZoniBoy00/gzw-tools" target="_blank" rel="noopener noreferrer">GitHub</a></span>
+          <span><Link to="/privacy">Privacy</Link><Link to="/tos">Terms</Link><a href="https://gzw-data.dev/" target="_blank" rel="noopener noreferrer">GZW Data API</a><a href="https://gzwitems.com/" target="_blank" rel="noopener noreferrer">GZW Items</a><a href="https://github.com/ZoniBoy00/gzw-data/blob/main/DATA_LICENSE.md" target="_blank" rel="noopener noreferrer">Data sources</a><a href="https://github.com/ZoniBoy00/gzw-tools" target="_blank" rel="noopener noreferrer">GitHub</a></span>
         </footer>
       </div>
       <nav className="mobile-nav" aria-label="Mobile navigation">

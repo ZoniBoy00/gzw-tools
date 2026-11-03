@@ -11,7 +11,7 @@ const FAQS = [
   },
   {
     q: 'Where does the data come from?',
-    a: 'All game data is scraped from the GZW Fandom Wiki. Weapon stats, armor values, mission details, and vendor inventories are pulled automatically and updated weekly via GitHub Actions.',
+    a: 'All game data is scraped from the GZW Fandom Wiki. Weapon stats, armor values, mission details, and vendor inventories are pulled automatically and updated weekly via GitHub Actions. Where the wiki has no sell price, it is filled in from GZW Items (gzwitems.com), a community-run price tracker, and those prices are marked with an asterisk.',
   },
   {
     q: 'How accurate is the data?',
