@@ -30,25 +30,25 @@ export function DataProvider({ children }: { children: ReactNode }) {
   }, []);
 
   useEffect(() => {
-    let cancelled = false;
+    const run = { cancelled: false };
     busy.current = true;
     const selected = attempt === 0 ? loaders : Object.fromEntries(
       Object.keys(failures.current).map(name => [name, loaders[name]]),
     );
     void loadDatasets(selected, (name, patch) => {
-      if (cancelled) return;
+      if (run.cancelled) return;
       delete failures.current[name];
       setData(previous => ({ ...previous, ...patch, loading: false, datasetErrors: { ...failures.current } }));
     }, (name, message) => {
-      if (cancelled) return;
+      if (run.cancelled) return;
       failures.current[name] = message;
       setData(previous => ({ ...previous, datasetErrors: { ...failures.current } }));
     }).then(() => {
-      if (cancelled) return;
+      if (run.cancelled) return;
       busy.current = false;
       setData(previous => ({ ...previous, loading: false, retrying: false }));
     });
-    return () => { cancelled = true; };
+    return () => { run.cancelled = true; };
   }, [attempt]);
 
   return <DataContext.Provider value={{ ...data, retryFailed }}>{children}</DataContext.Provider>;
