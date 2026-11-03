@@ -82,10 +82,10 @@ export default function Dashboard() {
           <div key={s.label} className="card card-highlight p-4">
             <div className="flex items-center gap-2 mb-2">
               <i className={`${s.icon} ${s.color} text-xs`} />
-              <span className="text-[9px] font-mono uppercase tracking-[0.12em] text-text-muted">{s.label}</span>
+              <span className="text-[11px] font-mono uppercase tracking-[0.12em] text-text-muted">{s.label}</span>
             </div>
             <div className={`text-xl font-bold font-mono ${s.color} stat-number`}>{loading ? '...' : s.value}</div>
-            <div className="text-[9px] font-mono text-text-muted mt-1">{s.desc}</div>
+            <div className="text-[11px] font-mono text-text-muted mt-1">{s.desc}</div>
           </div>
         ))}
       </div>
@@ -101,10 +101,10 @@ export default function Dashboard() {
           <div key={s.label} className="card card-highlight p-4">
             <div className="flex items-center gap-2 mb-2">
               <i className={`${s.icon} ${s.color} text-xs`} />
-              <span className="text-[9px] font-mono uppercase tracking-[0.12em] text-text-muted">{s.label}</span>
+              <span className="text-[11px] font-mono uppercase tracking-[0.12em] text-text-muted">{s.label}</span>
             </div>
             <div className={`text-xl font-bold font-mono ${s.color} stat-number`}>{s.value}</div>
-            <div className="text-[9px] font-mono text-text-muted mt-1">{s.desc}</div>
+            <div className="text-[11px] font-mono text-text-muted mt-1">{s.desc}</div>
           </div>
         ))}
       </div>
@@ -113,10 +113,10 @@ export default function Dashboard() {
       <section className="mb-8" aria-labelledby="quick-actions-title">
         <div className="mb-3 flex items-center gap-2"><i className="fas fa-bolt text-accent/60 text-xs" aria-hidden="true" /><h2 id="quick-actions-title" className="section-title mb-0">Quick Actions</h2></div>
         <div className="grid grid-cols-1 gap-2 sm:grid-cols-2 xl:grid-cols-4">
-          <Link to="/missions" className="card card-highlight flex items-center gap-3 p-3 transition-colors hover:border-accent/50"><i className="fas fa-list-check text-accent" aria-hidden="true" /><span><span className="block text-xs font-bold">Track missions</span><span className="block text-[9px] text-text-muted">Plan vendor task progress</span></span><i className="fas fa-arrow-right ml-auto text-[9px] text-text-muted" aria-hidden="true" /></Link>
-          <Link to="/ammo" className="card card-highlight flex items-center gap-3 p-3 transition-colors hover:border-accent/50"><i className="fas fa-bolt text-accent" aria-hidden="true" /><span><span className="block text-xs font-bold">Compare ammo</span><span className="block text-[9px] text-text-muted">Find penetration by armor class</span></span><i className="fas fa-arrow-right ml-auto text-[9px] text-text-muted" aria-hidden="true" /></Link>
-          <Link to="/loadouts" className="card card-highlight flex items-center gap-3 p-3 transition-colors hover:border-accent/50"><i className="fas fa-screwdriver-wrench text-accent" aria-hidden="true" /><span><span className="block text-xs font-bold">Build a loadout</span><span className="block text-[9px] text-text-muted">Save your next kit locally</span></span><i className="fas fa-arrow-right ml-auto text-[9px] text-text-muted" aria-hidden="true" /></Link>
-          <Link to="/regions" className="card card-highlight flex items-center gap-3 p-3 transition-colors hover:border-accent/50"><i className="fas fa-map-location-dot text-accent" aria-hidden="true" /><span><span className="block text-xs font-bold">Browse regions &amp; bosses</span><span className="block text-[9px] text-text-muted">LZ callsigns, tiers and boss intel</span></span><i className="fas fa-arrow-right ml-auto text-[9px] text-text-muted" aria-hidden="true" /></Link>
+          <Link to="/missions" className="card card-highlight flex items-center gap-3 p-3 transition-colors hover:border-accent/50"><i className="fas fa-list-check text-accent" aria-hidden="true" /><span><span className="block text-xs font-bold">Track missions</span><span className="block text-[11px] text-text-muted">Plan vendor task progress</span></span><i className="fas fa-arrow-right ml-auto text-[11px] text-text-muted" aria-hidden="true" /></Link>
+          <Link to="/ammo" className="card card-highlight flex items-center gap-3 p-3 transition-colors hover:border-accent/50"><i className="fas fa-bolt text-accent" aria-hidden="true" /><span><span className="block text-xs font-bold">Compare ammo</span><span className="block text-[11px] text-text-muted">Find penetration by armor class</span></span><i className="fas fa-arrow-right ml-auto text-[11px] text-text-muted" aria-hidden="true" /></Link>
+          <Link to="/loadouts" className="card card-highlight flex items-center gap-3 p-3 transition-colors hover:border-accent/50"><i className="fas fa-screwdriver-wrench text-accent" aria-hidden="true" /><span><span className="block text-xs font-bold">Build a loadout</span><span className="block text-[11px] text-text-muted">Save your next kit locally</span></span><i className="fas fa-arrow-right ml-auto text-[11px] text-text-muted" aria-hidden="true" /></Link>
+          <Link to="/regions" className="card card-highlight flex items-center gap-3 p-3 transition-colors hover:border-accent/50"><i className="fas fa-map-location-dot text-accent" aria-hidden="true" /><span><span className="block text-xs font-bold">Browse regions &amp; bosses</span><span className="block text-[11px] text-text-muted">LZ callsigns, tiers and boss intel</span></span><i className="fas fa-arrow-right ml-auto text-[11px] text-text-muted" aria-hidden="true" /></Link>
         </div>
       </section>
 
@@ -126,7 +126,7 @@ export default function Dashboard() {
           <i className="fas fa-users text-accent/60 text-xs" />
           <span className="section-title">Vendor Progress</span>
         </div>
-        <span className="text-[9px] font-mono text-text-muted">Click rep value to edit</span>
+        <span className="text-[11px] font-mono text-text-muted">Click rep value to edit</span>
       </div>
 
       {/* Vendor cards */}
@@ -142,7 +142,7 @@ export default function Dashboard() {
                   </div>
                   <div>
                     <div className="text-sm font-bold font-mono text-text">{v.name}</div>
-                    <div className="text-[9px] font-mono text-text-muted uppercase tracking-wider">{v.desc}</div>
+                    <div className="text-[11px] font-mono text-text-muted uppercase tracking-wider">{v.desc}</div>
                   </div>
                 </div>
                 <span className={`text-xs font-mono font-bold ${pct >= 90 ? 'text-green' : pct >= 50 ? 'text-accent' : 'text-text-muted'}`}>
@@ -165,10 +165,10 @@ export default function Dashboard() {
                       aria-label={`Set ${v.name} reputation`}
                     />
                     <button onClick={() => saveEdit(v.slug)} className="btn btn-primary btn-sm px-3">
-                      <i className="fas fa-check text-[10px]" />
+                      <i className="fas fa-check text-[12px]" />
                     </button>
                     <button onClick={() => setEditing(null)} className="btn btn-outline btn-sm px-3">
-                      <i className="fas fa-xmark text-[10px]" />
+                      <i className="fas fa-xmark text-[12px]" />
                     </button>
                   </div>
                 ) : (
@@ -179,12 +179,12 @@ export default function Dashboard() {
                     <div className="progress mb-1">
                       <div className="progress-fill amber animate" style={{ width: `${pct}%` }} />
                     </div>
-                    <div className="flex items-center justify-between text-[10px] font-mono">
+                    <div className="flex items-center justify-between text-[12px] font-mono">
                       <span className="text-text-muted">
                         <span className="text-accent font-bold">{formatNumber(v.rep)}</span>
                         <span className="text-text-muted"> / {formatNumber(v.maxRep)}</span>
                       </span>
-                      <span className="text-text-muted text-[8px]">Click to edit</span>
+                      <span className="text-text-muted text-[11px]">Click to edit</span>
                     </div>
                   </button>
                 )}
@@ -198,7 +198,7 @@ export default function Dashboard() {
       <div className="mt-3 flex justify-end">
         <button
           onClick={() => { localStorage.removeItem('gzw-vendor-reps'); load(); toast('All vendor rep values reset', 'info'); }}
-          className="text-[9px] font-mono text-text-muted hover:text-red/60 transition-colors"
+          className="text-[11px] font-mono text-text-muted hover:text-red/60 transition-colors"
         >
           Reset all vendor rep values
         </button>
@@ -215,7 +215,7 @@ export default function Dashboard() {
           Plan your reputation farming, compare ammunition penetration, browse weapons,
           and find the best armor — all in one place. Data sourced from the GZW Wiki.
         </p>
-        <div className="flex flex-wrap gap-3 mt-3 text-[10px] font-mono text-text-muted">
+        <div className="flex flex-wrap gap-3 mt-3 text-[12px] font-mono text-text-muted">
           <span>Not affiliated with MADFINGER Games</span>
           <span>•</span>
           <span>v{import.meta.env.VITE_APP_VERSION || '1.0'}</span>

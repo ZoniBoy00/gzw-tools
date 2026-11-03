@@ -5,6 +5,9 @@ import { wikiUrl } from '../lib/api';
 import ItemModal from './ui/ItemModal';
 import type { ModalItem } from './ui/ItemModal';
 
+// The scraped fire rate sometimes already ends in "RPM", so only add the unit when it is missing.
+const formatRpm = (rate: string | number) => (/rpm/i.test(String(rate)) ? String(rate) : `${rate} RPM`);
+
 export default function WeaponsGuide() {
   const { weapons, itemImages, loading, error } = useDataContext();
   const toast = useToast();
@@ -68,7 +71,7 @@ export default function WeaponsGuide() {
           value={search}
           onChange={(e) => setSearch(e.target.value)}
           placeholder="Search weapon or caliber..."
-          className="input flex-1 min-w-[120px]"
+          className="input flex-1 min-w-[300px]"
           aria-label="Search weapons"
         />
         <select
@@ -87,12 +90,12 @@ export default function WeaponsGuide() {
       {/* Compare section */}
       {comparedWeapons.length > 0 && (
         <div className="mb-4 p-3 border border-accent/20 bg-accent/5">
-          <div className="text-[10px] font-bold uppercase tracking-[0.12em] text-accent mb-2 flex items-center gap-2">
+          <div className="text-[12px] font-bold uppercase tracking-[0.12em] text-accent mb-2 flex items-center gap-2">
             <i className="fas fa-not-equal text-xs" />
             Compare Mode — {comparedWeapons.length} weapon{comparedWeapons.length > 1 ? 's' : ''} selected
             <button
               onClick={() => setCompare([])}
-              className="ml-auto text-[9px] font-mono text-text-muted hover:text-text"
+              className="ml-auto text-[11px] font-mono text-text-muted hover:text-text"
             >
               Clear
             </button>
@@ -104,7 +107,7 @@ export default function WeaponsGuide() {
                 {[
                   { label: 'Type', value: w.type },
                   { label: 'Caliber', value: w.caliber },
-                  { label: 'Fire Rate', value: w.fireRate ? `${w.fireRate} RPM` : '-' },
+                  { label: 'Fire Rate', value: w.fireRate ? formatRpm(w.fireRate) : '-' },
                   { label: 'Source', value: w.source },
                 ].map((f) => (
                   <div key={f.label} className="compare-field">
@@ -129,7 +132,7 @@ export default function WeaponsGuide() {
           >
             <div className="flex-1 flex items-center gap-2">
               {(w.image || itemImages[w.name as keyof typeof itemImages]) && (
-                <img crossOrigin="anonymous" src={(w.image || itemImages[w.name as keyof typeof itemImages]) as string} alt="" className="w-10 h-10 object-contain shrink-0 bg-surface-2 border border-border" loading="lazy" />
+                <img crossOrigin="anonymous" src={(w.image || itemImages[w.name as keyof typeof itemImages]) as string} alt="" className="w-24 h-14 object-contain shrink-0 bg-surface-2 border border-border" loading="lazy" />
               )}
               <div>
                 <button onClick={() => setModalItem({
@@ -139,23 +142,23 @@ export default function WeaponsGuide() {
                   fields: [
                         { label: 'Type', value: w.type, desc: 'Weapon classification — determines handling, role and available attachments' },
                         { label: 'Caliber', value: w.caliber, desc: 'The ammunition type the weapon uses — determines damage and penetration' },
-                        { label: 'Fire Rate', value: w.fireRate ? `${w.fireRate} RPM` : '-', desc: 'Cyclic rate of fire — rounds per minute the weapon can fire in automatic mode' },
+                        { label: 'Fire Rate', value: w.fireRate ? formatRpm(w.fireRate) : '-', desc: 'Cyclic rate of fire — rounds per minute the weapon can fire in automatic mode' },
                         { label: 'Source', value: w.source, desc: 'Where to obtain this weapon — from a vendor at a specific rep level, or found by looting' },
                       ],
                   link: { label: 'View on Wiki', url: wikiUrl(w.name) },
                 })} className="text-sm font-medium text-left hover:text-accent transition-colors">{w.name}</button>
-                <div className="text-[10px] text-text-muted font-mono">{w.type}</div>
+                <div className="text-[12px] text-text-muted font-mono">{w.type}</div>
               </div>
             </div>
             <div className="text-right mr-2">
               <div className="text-sm font-mono text-accent">{w.caliber}</div>
-              <div className="text-[10px] text-text-muted font-mono">
-                {w.fireRate ? `${w.fireRate} RPM` : ''}
+              <div className="text-[12px] text-text-muted font-mono">
+                {w.fireRate ? formatRpm(w.fireRate) : ''}
               </div>
             </div>
             <button
               onClick={() => toggleCompare(w.name)}
-              className={`inline-flex items-center justify-center w-6 h-6 text-[10px] border shrink-0 ${
+              className={`inline-flex items-center justify-center w-6 h-6 text-[12px] border shrink-0 ${
                 compare.includes(w.name)
                   ? 'border-accent/50 text-accent bg-accent/10'
                   : 'border-border text-text-muted'
@@ -194,7 +197,7 @@ export default function WeaponsGuide() {
                   <td className="text-center align-middle">
                     <button
                       onClick={() => toggleCompare(w.name)}
-                      className={`inline-flex items-center justify-center w-5 h-5 text-[10px] border ${
+                      className={`inline-flex items-center justify-center w-5 h-5 text-[12px] border ${
                         compare.includes(w.name)
                           ? 'border-accent/50 text-accent bg-accent/10'
                           : 'border-border text-text-muted hover:border-text-muted/30'
@@ -212,21 +215,21 @@ export default function WeaponsGuide() {
                       fields: [
                         { label: 'Type', value: w.type, desc: 'Weapon classification — determines handling, role and available attachments' },
                         { label: 'Caliber', value: w.caliber, desc: 'The ammunition type the weapon uses — determines damage and penetration' },
-                        { label: 'Fire Rate', value: w.fireRate ? `${w.fireRate} RPM` : '-', desc: 'Cyclic rate of fire — rounds per minute the weapon can fire in automatic mode' },
+                        { label: 'Fire Rate', value: w.fireRate ? formatRpm(w.fireRate) : '-', desc: 'Cyclic rate of fire — rounds per minute the weapon can fire in automatic mode' },
                         { label: 'Source', value: w.source, desc: 'Where to obtain this weapon — from a vendor at a specific rep level, or found by looting' },
                       ],
                       link: { label: 'View on Wiki', url: wikiUrl(w.name) },
                     })} className="flex items-center gap-2 text-left w-full hover:text-accent transition-colors">
                     {(w.image || itemImages[w.name as keyof typeof itemImages]) && (
-                      <img crossOrigin="anonymous" src={(w.image || itemImages[w.name as keyof typeof itemImages]) as string} alt="" className="w-8 h-8 object-contain shrink-0 bg-surface-2 border border-border" loading="lazy" />
+                      <img crossOrigin="anonymous" src={(w.image || itemImages[w.name as keyof typeof itemImages]) as string} alt="" className="w-16 h-12 object-contain shrink-0 bg-surface-2 border border-border" loading="lazy" />
                     )}
                     {w.name}
                     </button>
                   </td>
                   <td className="text-text-muted">{w.type}</td>
                   <td className="text-accent">{w.caliber}</td>
-                  <td className="text-center text-text-muted">{w.fireRate || '-'}</td>
-                  <td className="text-right text-text-muted text-[10px]">{w.source}</td>
+                  <td className="text-center text-text-muted whitespace-nowrap">{w.fireRate || '-'}</td>
+                  <td className="text-right text-text-muted text-[12px]">{w.source}</td>
                 </tr>
               ))}
               {filtered.length === 0 && (
@@ -242,7 +245,7 @@ export default function WeaponsGuide() {
         </div>
       </div>
 
-      <div className="mt-3 text-[10px] text-text-muted font-mono flex items-center gap-2">
+      <div className="mt-3 text-[12px] text-text-muted font-mono flex items-center gap-2">
         <i className="fas fa-database" />
         {filtered.length} / {weapons.length} weapons
         {comparedWeapons.length > 0 && (

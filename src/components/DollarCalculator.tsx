@@ -14,7 +14,7 @@ export default function DollarCalculator() {
       </div>
 
       <div className="mb-4">
-        <label className="text-[10px] font-bold uppercase tracking-[0.1em] text-text-muted mb-1.5 block">
+        <label className="text-[12px] font-bold uppercase tracking-[0.1em] text-text-muted mb-1.5 block">
           <i className="fas fa-dollar-sign text-accent/60 mr-1" />Dollars to Spend
         </label>
         <input
@@ -27,7 +27,7 @@ export default function DollarCalculator() {
         />
       </div>
       <div className="mb-4">
-        <label className="text-[10px] font-bold uppercase tracking-[0.1em] text-text-muted mb-1.5 block">
+        <label className="text-[12px] font-bold uppercase tracking-[0.1em] text-text-muted mb-1.5 block">
           <i className="fas fa-percentage text-accent/60 mr-1" />$ / Rep Point
         </label>
         <input

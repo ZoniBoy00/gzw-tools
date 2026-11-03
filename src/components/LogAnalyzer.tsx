@@ -67,7 +67,7 @@ export default function LogAnalyzer() {
         <h1 className="section-title">GZW Log Analyzer</h1>
       </div>
 
-      <p className="text-[11px] font-mono text-text-muted mb-4 leading-relaxed">
+      <p className="text-[13px] font-mono text-text-muted mb-4 leading-relaxed">
         Paste your <code className="text-accent">GZW.log</code> contents or select the file to extract gameplay data.
         Log location:{' '}
         <code className="text-accent/70 select-all break-all">{LOG_FOLDER}</code>
@@ -93,7 +93,7 @@ export default function LogAnalyzer() {
       >
         <i className="fas fa-file-arrow-up text-accent" aria-hidden="true" />
         <span className="ml-2 text-xs text-text">Drop a .log/.txt file here or choose file</span>
-        <span id="log-file-help" className="mt-1 block text-[9px] font-mono text-text-muted">Up to 50 MB · processed locally in this browser</span>
+        <span id="log-file-help" className="mt-1 block text-[11px] font-mono text-text-muted">Up to 50 MB · processed locally in this browser</span>
       </div>
       {fileError && <p className="mb-3 text-xs text-red" role="alert">{fileError}</p>}
 
@@ -102,7 +102,7 @@ export default function LogAnalyzer() {
           value={logText}
           onChange={(e) => { cancel(); setLogText(e.target.value); setSourceName('pasted-log'); }}
           placeholder="Paste GZW.log contents here..."
-          className="input resize-none font-mono text-[11px]"
+          className="input resize-none font-mono text-[13px]"
           rows={8}
           aria-label="GZW log contents"
         />
@@ -111,7 +111,7 @@ export default function LogAnalyzer() {
       <button onClick={handleAnalyze} className="btn btn-primary w-full btn-sm" disabled={analyzing || !logText.trim()}>
         <i className={`fas ${analyzing ? 'fa-spinner fa-spin' : 'fa-microchip'}`} /> {analyzing ? 'Analyzing log?' : 'Analyze Log'}
       </button>
-      <p className="mt-2 text-[9px] font-mono text-text-muted/70">Privacy: log text is parsed in your browser and is not uploaded. The downloadable report is created locally.</p>
+      <p className="mt-2 text-[11px] font-mono text-text-muted/70">Privacy: log text is parsed in your browser and is not uploaded. The downloadable report is created locally.</p>
 
       {analysisError && <p role="alert" className="mt-3 text-xs text-red">{analysisError}</p>}
       {analyzing && <div className="card p-4 mt-4" aria-busy="true">
@@ -123,7 +123,7 @@ export default function LogAnalyzer() {
       {parsed && !analyzing && (
         <div className="mt-5 animate-stagger">
           <div className="mb-3 flex flex-wrap items-center justify-between gap-2 border border-border bg-surface-2/40 p-3">
-            <span className="text-[10px] font-mono text-text-muted">Analysis ready · local report</span>
+            <span className="text-[12px] font-mono text-text-muted">Analysis ready · local report</span>
             <button type="button" onClick={downloadReport} className="btn btn-outline btn-sm"><i className="fas fa-download" aria-hidden="true" /> Download JSON report</button>
           </div>
           {/* ─── STAT CARDS ─── */}
@@ -137,8 +137,8 @@ export default function LogAnalyzer() {
             ].map((s) => (
               <div key={s.label} className="card card-highlight p-3">
                 <div className="flex items-center gap-1.5 mb-1">
-                  <i className={`${s.icon} ${s.color || 'text-accent/60'} text-[10px]`} />
-                  <span className="text-[9px] font-bold uppercase tracking-[0.12em] text-text-muted">{s.label}</span>
+                  <i className={`${s.icon} ${s.color || 'text-accent/60'} text-[12px]`} />
+                  <span className="text-[11px] font-bold uppercase tracking-[0.12em] text-text-muted">{s.label}</span>
                 </div>
                 <span className={`text-lg font-bold font-mono ${s.color || 'text-text'}`}>{s.value}</span>
               </div>
@@ -148,7 +148,7 @@ export default function LogAnalyzer() {
           {/* ─── SESSION INFO ─── */}
           {(parsed.sessionStart || parsed.region || parsed.playerName || parsed.audioDevice || parsed.gameMap) && (
             <div className="card card-highlight p-3 mb-3">
-              <div className="text-[9px] font-bold uppercase tracking-[0.12em] text-text-muted mb-2 flex items-center gap-2">
+              <div className="text-[11px] font-bold uppercase tracking-[0.12em] text-text-muted mb-2 flex items-center gap-2">
                 <i className="fas fa-gamepad text-accent/60" />
                 Game Session
               </div>
@@ -157,7 +157,7 @@ export default function LogAnalyzer() {
                 {parsed.sessionEnd && <div><span className="text-text-muted">End </span><span>{parsed.sessionEnd.replace('.', ' ').slice(0, 19)}</span></div>}
                 {parsed.sessionLabel && parsed.sessionLabel !== 'N/A' && <div><span className="text-text-muted">Duration </span><span className="text-accent font-bold">{parsed.sessionLabel}</span></div>}
                 {parsed.playerName && <div><span className="text-text-muted">Player </span><span>{parsed.playerName}</span></div>}
-                {parsed.region && <div><span className="text-text-muted">Region </span><span className="tag tag-amber text-[9px]">{parsed.region}</span></div>}
+                {parsed.region && <div><span className="text-text-muted">Region </span><span className="tag tag-amber text-[11px]">{parsed.region}</span></div>}
                 {parsed.gameMap && <div><span className="text-text-muted">Map </span><span>{parsed.gameMap}</span></div>}
                 {parsed.audioDevice && <div className="col-span-2"><span className="text-text-muted">Audio </span><span className="text-text-muted">{parsed.audioDevice}</span></div>}
               </div>
@@ -167,32 +167,32 @@ export default function LogAnalyzer() {
           {/* ─── PERFORMANCE ─── */}
           {parsed.performance.length > 0 && (
             <div className="card card-highlight p-3 mb-3">
-              <div className="text-[9px] font-bold uppercase tracking-[0.12em] text-text-muted mb-2 flex items-center gap-2">
+              <div className="text-[11px] font-bold uppercase tracking-[0.12em] text-text-muted mb-2 flex items-center gap-2">
                 <i className="fas fa-gauge-high text-accent/60" />
                 Performance ({parsed.performance.length} events)
               </div>
               <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
                 <div className="bg-surface-2 border border-border p-2">
-                  <div className="text-[8px] uppercase text-text-muted">Tick Delays</div>
+                  <div className="text-[11px] uppercase text-text-muted">Tick Delays</div>
                   <div className="text-sm font-bold font-mono text-accent">{parsed.performance.filter(p => p.type === 'tick_delay').length}</div>
-                  <div className="text-[9px] text-text-muted">network stutters</div>
+                  <div className="text-[11px] text-text-muted">network stutters</div>
                 </div>
                 <div className="bg-surface-2 border border-border p-2">
-                  <div className="text-[8px] uppercase text-text-muted">Frame Drops</div>
+                  <div className="text-[11px] uppercase text-text-muted">Frame Drops</div>
                   <div className="text-sm font-bold font-mono text-red">{parsed.performance.filter(p => p.type === 'frame_drop').length}</div>
-                  <div className="text-[9px] text-text-muted">{'>100ms frames'}</div>
+                  <div className="text-[11px] text-text-muted">{'>100ms frames'}</div>
                 </div>
                 <div className="bg-surface-2 border border-border p-2">
-                  <div className="text-[8px] uppercase text-text-muted">Max Delay</div>
+                  <div className="text-[11px] uppercase text-text-muted">Max Delay</div>
                   <div className="text-sm font-bold font-mono text-accent">
                     {Math.max(...parsed.performance.filter(p => p.type === 'tick_delay').map(p => p.value), 0).toFixed(1)}s
                   </div>
-                  <div className="text-[9px] text-text-muted">worst tick</div>
+                  <div className="text-[11px] text-text-muted">worst tick</div>
                 </div>
                 <div className="bg-surface-2 border border-border p-2">
-                  <div className="text-[8px] uppercase text-text-muted">RAM Peak</div>
+                  <div className="text-[11px] uppercase text-text-muted">RAM Peak</div>
                   <div className="text-sm font-bold font-mono text-green">{friendlySize(parsed.memory.peak)}</div>
-                  <div className="text-[9px] text-text-muted">{friendlySize(parsed.memory.total)} total</div>
+                  <div className="text-[11px] text-text-muted">{friendlySize(parsed.memory.total)} total</div>
                 </div>
               </div>
             </div>
@@ -201,7 +201,7 @@ export default function LogAnalyzer() {
           {/* ─── SQUAD QUESTS ─── */}
           {parsed.quests.length > 0 && (
             <div className="card card-highlight p-3 mb-3">
-              <div className="text-[9px] font-bold uppercase tracking-[0.12em] text-text-muted mb-2 flex items-center gap-2">
+              <div className="text-[11px] font-bold uppercase tracking-[0.12em] text-text-muted mb-2 flex items-center gap-2">
                 <i className="fas fa-clipboard-list text-accent/60" />
                 Squad Quests ({parsed.quests.length})
               </div>
@@ -217,7 +217,7 @@ export default function LogAnalyzer() {
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-3">
             {parsed.servers.length > 0 && (
               <div className="card card-highlight p-3">
-                <div className="text-[9px] font-bold uppercase tracking-[0.12em] text-text-muted mb-2 flex items-center gap-2">
+                <div className="text-[11px] font-bold uppercase tracking-[0.12em] text-text-muted mb-2 flex items-center gap-2">
                   <i className="fas fa-server text-accent/60" />
                   Servers ({parsed.servers.length})
                 </div>
@@ -230,7 +230,7 @@ export default function LogAnalyzer() {
             )}
             {parsed.friends.length > 0 && (
               <div className="card card-highlight p-3">
-                <div className="text-[9px] font-bold uppercase tracking-[0.12em] text-text-muted mb-2 flex items-center gap-2">
+                <div className="text-[11px] font-bold uppercase tracking-[0.12em] text-text-muted mb-2 flex items-center gap-2">
                   <i className="fas fa-users text-accent/60" />
                   Friends Online
                 </div>
@@ -246,7 +246,7 @@ export default function LogAnalyzer() {
           {/* ─── LOG BREAKDOWN ─── */}
           {Object.keys(parsed.categoryStats).length > 0 && (
             <div className="card card-highlight p-3 mb-3">
-              <div className="text-[9px] font-bold uppercase tracking-[0.12em] text-text-muted mb-2 flex items-center gap-2">
+              <div className="text-[11px] font-bold uppercase tracking-[0.12em] text-text-muted mb-2 flex items-center gap-2">
                 <i className="fas fa-chart-pie text-accent/60" />
                 Log Breakdown by Category
               </div>
@@ -257,7 +257,7 @@ export default function LogAnalyzer() {
                   .map(([cat, stats]) => {
                     const pct = ((stats.count / parsed.totalLines) * 100).toFixed(1);
                     return (
-                      <div key={cat} className="flex items-center gap-2 text-[10px] font-mono">
+                      <div key={cat} className="flex items-center gap-2 text-[12px] font-mono">
                         <span className="w-20 shrink-0 text-text-muted truncate">{cat}</span>
                         <div className="flex-1 h-3 bg-surface-2 border border-border overflow-hidden">
                           <div
@@ -279,11 +279,11 @@ export default function LogAnalyzer() {
           {/* ─── TIMELINE ─── */}
           {parsed.events.length > 0 && (
             <div className="card card-highlight p-3">
-              <div className="text-[9px] font-bold uppercase tracking-[0.12em] text-text-muted mb-2">
+              <div className="text-[11px] font-bold uppercase tracking-[0.12em] text-text-muted mb-2">
                 <div className="flex items-center gap-2 flex-wrap">
                   <i className="fas fa-timeline text-accent/60" />
                   Event Timeline
-                  <span className="text-text-muted font-mono text-[9px]">{parsed.events.length} events</span>
+                  <span className="text-text-muted font-mono text-[11px]">{parsed.events.length} events</span>
 
                   {/* Category filter chips */}
                   <span className="ml-auto" />
@@ -291,7 +291,7 @@ export default function LogAnalyzer() {
                     <button
                       key={cat}
                       onClick={() => setTimelineFilter(cat)}
-                      className={`text-[8px] px-1.5 py-0.5 border ${
+                      className={`text-[11px] px-1.5 py-0.5 border ${
                         timelineFilter === cat ? 'border-accent/50 text-accent bg-accent/10' : 'border-border text-text-muted'
                       }`}
                     >
@@ -306,7 +306,7 @@ export default function LogAnalyzer() {
                   .slice(-60)
                   .reverse()
                   .map((e, i) => (
-                    <div key={i} className="text-[10px] font-mono flex gap-2 py-0.5 border-b border-border/10 hover:bg-surface-2/40">
+                    <div key={i} className="text-[12px] font-mono flex gap-2 py-0.5 border-b border-border/10 hover:bg-surface-2/40">
                       <span className="text-text-muted shrink-0 w-14 truncate">{e.timestamp.slice(-8)}</span>
                       <span className={`shrink-0 w-16 truncate ${
                         e.level === 'error' ? 'text-red' : e.level === 'warning' ? 'text-amber-400/80' : 'text-drab'

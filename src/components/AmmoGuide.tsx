@@ -78,7 +78,7 @@ export default function AmmoGuide() {
           value={search}
           onChange={(e) => setSearch(e.target.value)}
           placeholder="Search ammo..."
-          className="input flex-1 min-w-[120px]"
+          className="input flex-1 min-w-[300px]"
           aria-label="Search ammunition"
         />
         <select
@@ -98,12 +98,12 @@ export default function AmmoGuide() {
       {/* Compare section */}
       {comparedRounds.length > 0 && (
         <div className="mb-4 p-3 border border-accent/20 bg-accent/5">
-          <div className="text-[10px] font-bold uppercase tracking-[0.12em] text-accent mb-2 flex items-center gap-2">
+          <div className="text-[12px] font-bold uppercase tracking-[0.12em] text-accent mb-2 flex items-center gap-2">
             <i className="fas fa-not-equal text-xs" />
             Compare Mode — {comparedRounds.length} round{comparedRounds.length > 1 ? 's' : ''} selected
             <button
               onClick={() => setCompare([])}
-              className="ml-auto text-[9px] font-mono text-text-muted hover:text-text"
+              className="ml-auto text-[11px] font-mono text-text-muted hover:text-text"
             >
               Clear
             </button>
@@ -176,11 +176,11 @@ export default function AmmoGuide() {
                     link: { label: 'View on Wiki', url: wikiUrl(r.name) },
                   })} className="flex items-center gap-2 text-left w-full hover:text-accent transition-colors">
                     {itemImages[r.name as keyof typeof itemImages] && (
-                      <img crossOrigin="anonymous" src={itemImages[r.name as keyof typeof itemImages] as string} alt="" className="w-8 h-8 object-contain shrink-0 bg-surface-2 border border-border" loading="lazy" />
+                      <img crossOrigin="anonymous" src={itemImages[r.name as keyof typeof itemImages] as string} alt="" className="w-12 h-12 object-contain shrink-0 bg-surface-2 border border-border" loading="lazy" />
                     )}
                     <div className="min-w-0">
                       <span>{r.name}</span>
-                      <span className="text-[10px] text-text-muted font-normal block truncate">
+                      <span className="text-[12px] text-text-muted font-normal block truncate">
                         {r.vendor ? `${r.vendor} R.${r.repLevel}` : r.source || 'Looting'}
                       </span>
                     </div>
@@ -215,7 +215,7 @@ export default function AmmoGuide() {
                 <td data-label="" className="text-center align-middle">
                   <button
                     onClick={() => toggleCompare(r.name)}
-                    className={`inline-flex items-center justify-center w-5 h-5 text-[10px] border transition-colors ${
+                    className={`inline-flex items-center justify-center w-5 h-5 text-[12px] border transition-colors ${
                       compare.includes(r.name)
                         ? 'border-accent/50 text-accent bg-accent/10'
                         : 'border-border text-text-muted hover:border-text-muted/30'
@@ -241,7 +241,7 @@ export default function AmmoGuide() {
       </div>
 
       {/* Legend */}
-      <div className="flex flex-wrap gap-4 mt-4 text-[11px] font-mono text-text-muted">
+      <div className="flex flex-wrap gap-4 mt-4 text-[13px] font-mono text-text-muted">
         {Object.entries(PEN).map(([k, v]) => (
           <span key={k} className="flex items-center gap-1.5">
             <span className={`w-2.5 h-2.5 inline-block ${v.cls}`} />

@@ -46,7 +46,7 @@ function RegionCard({ region, onOpen }: { region: RegionEntry; onOpen: (item: Mo
             src={region.image}
             alt=""
             loading="lazy"
-            className="w-16 h-16 shrink-0 object-cover border border-border bg-surface-2"
+            className="w-20 h-20 shrink-0 object-cover border border-border bg-surface-2"
             onError={event => { event.currentTarget.hidden = true; }}
           />
         )}
@@ -57,7 +57,7 @@ function RegionCard({ region, onOpen }: { region: RegionEntry; onOpen: (item: Mo
             </h2>
             {region.tier && <span className="tag">Tier {region.tier}</span>}
           </div>
-          <p className="mt-1 text-[10px] font-mono text-text-muted">
+          <p className="mt-1 text-[12px] font-mono text-text-muted">
             <i className="fas fa-person-rifle mr-1" aria-hidden="true" />
             {isKnown(region.localsType) ? region.localsType : 'Local faction not listed'}
           </p>
@@ -65,11 +65,11 @@ function RegionCard({ region, onOpen }: { region: RegionEntry; onOpen: (item: Mo
       </div>
 
       <div>
-        <div className="mb-1 text-[9px] font-bold uppercase tracking-[0.12em] text-text-muted">LZ callsign{region.lzCallsigns.length === 1 ? '' : 's'}</div>
+        <div className="mb-1 text-[11px] font-bold uppercase tracking-[0.12em] text-text-muted">LZ callsign{region.lzCallsigns.length === 1 ? '' : 's'}</div>
         {region.lzCallsigns.length > 0 ? (
           <div className="flex flex-wrap gap-1.5">
             {region.lzCallsigns.map(callsign => (
-              <span key={callsign} className="border border-accent/25 bg-accent/5 px-2 py-1 font-mono text-[10px] text-accent">
+              <span key={callsign} className="border border-accent/25 bg-accent/5 px-2 py-1 font-mono text-[12px] text-accent">
                 {callsign}
               </span>
             ))}
@@ -81,7 +81,7 @@ function RegionCard({ region, onOpen }: { region: RegionEntry; onOpen: (item: Mo
         <p className="text-xs leading-relaxed text-text-muted">{region.description}</p>
       )}
 
-      <span className="mt-auto text-[10px] text-accent">Details</span>
+      <span className="mt-auto text-[12px] text-accent">Details</span>
     </article>
   );
 }
@@ -109,7 +109,7 @@ function BossCard({ boss, onViewRegion, onOpen }: { boss: BossEntry; onViewRegio
             src={image}
             alt=""
             loading="lazy"
-            className="w-16 h-16 shrink-0 object-cover border border-border bg-surface-2"
+            className="w-20 h-20 shrink-0 object-cover border border-border bg-surface-2"
             onError={event => { event.currentTarget.hidden = true; }}
           />
         )}
@@ -118,9 +118,9 @@ function BossCard({ boss, onViewRegion, onOpen }: { boss: BossEntry; onViewRegio
             <button type="button" className="text-left hover:text-accent focus-visible:outline focus-visible:outline-1 focus-visible:outline-accent" aria-label={`${boss.name} details`}>{boss.name}</button>
           </h2>
           {isKnown(boss.fullName) && boss.fullName !== boss.name && (
-            <p className="mt-1 text-[10px] font-mono text-text-muted">{boss.fullName}</p>
+            <p className="mt-1 text-[12px] font-mono text-text-muted">{boss.fullName}</p>
           )}
-          <p className="mt-2 text-[10px] font-mono text-text-muted">
+          <p className="mt-2 text-[12px] font-mono text-text-muted">
             <i className="fas fa-people-group mr-1" aria-hidden="true" />
             {isKnown(boss.faction) ? boss.faction : 'Faction not listed'}
           </p>
@@ -128,7 +128,7 @@ function BossCard({ boss, onViewRegion, onOpen }: { boss: BossEntry; onViewRegio
       </div>
 
       <div>
-        <div className="mb-1 text-[9px] font-bold uppercase tracking-[0.12em] text-text-muted">Known location</div>
+        <div className="mb-1 text-[11px] font-bold uppercase tracking-[0.12em] text-text-muted">Known location</div>
         {isKnown(boss.location) ? (
           <button
             type="button"
@@ -142,11 +142,11 @@ function BossCard({ boss, onViewRegion, onOpen }: { boss: BossEntry; onViewRegio
       </div>
 
       <div className="border-t border-border pt-2">
-        <div className="mb-1 text-[9px] font-bold uppercase tracking-[0.12em] text-text-muted">Task connection</div>
+        <div className="mb-1 text-[11px] font-bold uppercase tracking-[0.12em] text-text-muted">Task connection</div>
         <p className="text-xs leading-relaxed text-text-muted">{taskNote(boss.tasks)}</p>
       </div>
 
-      <span className="mt-auto text-[10px] text-accent">Details</span>
+      <span className="mt-auto text-[12px] text-accent">Details</span>
     </article>
   );
 }
@@ -225,7 +225,7 @@ export default function WorldGuide() {
         <i className="fas fa-map-location-dot text-accent text-sm" aria-hidden="true" />
         <h1 className="section-title">Regions &amp; Bosses</h1>
       </div>
-      <p className="mb-4 text-[10px] font-mono text-text-muted">
+      <p className="mb-4 text-[12px] font-mono text-text-muted">
         Regional tiers and LZ callsigns, with known boss factions, locations, and task notes.
       </p>
 
@@ -239,7 +239,7 @@ export default function WorldGuide() {
           className={`tab ${activeTab === 'regions' ? 'active' : ''}`}
           onClick={() => setActiveTab('regions')}
         >
-          <i className="fas fa-map mr-2" aria-hidden="true" />Regions <span className="ml-1 font-mono text-[9px]">{regions.length}</span>
+          <i className="fas fa-map mr-2" aria-hidden="true" />Regions <span className="ml-1 font-mono text-[11px]">{regions.length}</span>
         </button>
         <button
           id="bosses-tab"
@@ -250,14 +250,14 @@ export default function WorldGuide() {
           className={`tab ${activeTab === 'bosses' ? 'active' : ''}`}
           onClick={() => setActiveTab('bosses')}
         >
-          <i className="fas fa-crosshairs mr-2" aria-hidden="true" />Bosses <span className="ml-1 font-mono text-[9px]">{bosses.length}</span>
+          <i className="fas fa-crosshairs mr-2" aria-hidden="true" />Bosses <span className="ml-1 font-mono text-[11px]">{bosses.length}</span>
         </button>
       </div>
 
       <div className="mb-4 flex flex-wrap items-center gap-2">
         <label className="relative min-w-[180px] flex-1">
           <span className="sr-only">Search regions and bosses</span>
-          <i className="fas fa-magnifying-glass pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-[10px] text-text-muted" aria-hidden="true" />
+          <i className="fas fa-magnifying-glass pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-[12px] text-text-muted" aria-hidden="true" />
           <input
             type="search"
             value={search}
@@ -267,7 +267,7 @@ export default function WorldGuide() {
             aria-label={`Search ${activeTab}`}
           />
         </label>
-        <span className="text-[9px] font-mono text-text-muted" aria-live="polite">{activeCount} / {totalCount}</span>
+        <span className="text-[11px] font-mono text-text-muted" aria-live="polite">{activeCount} / {totalCount}</span>
       </div>
 
       {worldGuideError && (
@@ -300,7 +300,7 @@ export default function WorldGuide() {
 
       {modalItem && <ItemModal item={modalItem} onClose={() => setModalItem(null)} />}
 
-      <div className="mt-4 flex items-center gap-2 text-[9px] font-mono text-text-muted/70">
+      <div className="mt-4 flex items-center gap-2 text-[11px] font-mono text-text-muted/70">
         <i className="fas fa-database" aria-hidden="true" />
         Read-only records from GZW Data API · unknown fields are shown as unlisted rather than guessed.
       </div>

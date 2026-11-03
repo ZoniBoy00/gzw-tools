@@ -81,10 +81,10 @@ export default function TaskModal({ task, onClose }: Props) {
             <div className="flex items-center gap-2 flex-wrap">
               <i className="fas fa-clipboard-list text-accent text-sm" />
               <span className="section-title mb-0">{task.name}</span>
-              {badge && <span className={`tag ${badge.cls} text-[8px]`}>{badge.label}</span>}
+              {badge && <span className={`tag ${badge.cls} text-[11px]`}>{badge.label}</span>}
             </div>
-            <div className="flex items-center gap-2 mt-1.5 text-[10px] font-mono text-text-muted flex-wrap">
-              {task.vendor && <span className="tag tag-drab text-[9px]">{task.vendor}</span>}
+            <div className="flex items-center gap-2 mt-1.5 text-[12px] font-mono text-text-muted flex-wrap">
+              {task.vendor && <span className="tag tag-drab text-[11px]">{task.vendor}</span>}
               {task.location && <span className="truncate">{task.location}</span>}
             </div>
           </div>
@@ -103,7 +103,7 @@ export default function TaskModal({ task, onClose }: Props) {
             <div className="error-message">
               <p className="mb-2">Could not load mission details from the wiki.</p>
               <a href={wikiTaskUrl(task.name)} target="_blank" rel="noopener noreferrer" className="text-accent hover:text-accent-hover underline">
-                <i className="fas fa-external-link-alt text-[10px] mr-1" />Open on wiki instead
+                <i className="fas fa-external-link-alt text-[12px] mr-1" />Open on wiki instead
               </a>
             </div>
           ) : !data ? (
@@ -125,7 +125,7 @@ export default function TaskModal({ task, onClose }: Props) {
                   <ul className="space-y-1.5">
                     {data.objectives.map((o, i) => (
                       <li key={i} className="flex items-start gap-2 text-xs font-mono text-text">
-                        <i className="fas fa-check text-green mt-0.5 text-[10px]" aria-hidden="true" />
+                        <i className="fas fa-check text-green mt-0.5 text-[12px]" aria-hidden="true" />
                         <span>{o}</span>
                       </li>
                     ))}
@@ -142,9 +142,9 @@ export default function TaskModal({ task, onClose }: Props) {
                       <div key={i} className="border border-accent/25 bg-accent/5 p-3">
                         <div className="flex items-center justify-between gap-2 flex-wrap">
                           <span className="text-xs font-bold font-mono text-accent">{r.item}</span>
-                          {r.amount && <span className="tag tag-amber text-[9px]">× {r.amount}</span>}
+                          {r.amount && <span className="tag tag-amber text-[11px]">× {r.amount}</span>}
                         </div>
-                        {r.notes && <p className="mt-1.5 text-[10px] font-mono text-text-muted leading-relaxed">{r.notes}</p>}
+                        {r.notes && <p className="mt-1.5 text-[12px] font-mono text-text-muted leading-relaxed">{r.notes}</p>}
                       </div>
                     ))}
                   </div>
@@ -162,7 +162,7 @@ export default function TaskModal({ task, onClose }: Props) {
                         className={`flex items-start gap-2 text-xs font-mono ${r.level === 0 ? 'text-text' : 'text-text-muted pl-5'}`}
                       >
                         <i
-                          className={`${r.level === 0 ? 'fas fa-medal text-accent' : 'fas fa-angle-right text-text-muted'} mt-0.5 text-[10px]`}
+                          className={`${r.level === 0 ? 'fas fa-medal text-accent' : 'fas fa-angle-right text-text-muted'} mt-0.5 text-[12px]`}
                           aria-hidden="true"
                         />
                         <span>{r.text}</span>
@@ -176,7 +176,7 @@ export default function TaskModal({ task, onClose }: Props) {
               {data.guideSections.length > 0 && (
                 <section>
                   <SectionTitle icon="fas fa-map-pin" label="Visual Guides" />
-                  <p className="text-[9px] font-mono text-text-muted mb-2 -mt-1">Click a section to show its images</p>
+                  <p className="text-[11px] font-mono text-text-muted mb-2 -mt-1">Click a section to show its images</p>
                   <div className="space-y-2">
                     {data.guideSections.map((loc, i) => {
                       const open = openSections.has(i);
@@ -189,15 +189,15 @@ export default function TaskModal({ task, onClose }: Props) {
                             aria-controls={`guide-section-${i}`}
                           >
                             <span className="flex items-center gap-2 min-w-0">
-                              <i className="fas fa-location-dot text-accent text-[10px]" aria-hidden="true" />
-                              <span className="text-[11px] font-bold font-mono text-accent uppercase tracking-wider truncate">{loc.title}</span>
+                              <i className="fas fa-location-dot text-accent text-[12px]" aria-hidden="true" />
+                              <span className="text-[13px] font-bold font-mono text-accent uppercase tracking-wider truncate">{loc.title}</span>
                             </span>
                             <span className="flex items-center gap-2 shrink-0">
-                              <span className="text-[9px] font-mono text-text-muted">{loc.images.length} img</span>
-                              <i className={`fas fa-chevron-down text-[9px] text-text-muted transition-transform ${open ? 'rotate-180' : ''}`} aria-hidden="true" />
+                              <span className="text-[11px] font-mono text-text-muted">{loc.images.length} img</span>
+                              <i className={`fas fa-chevron-down text-[11px] text-text-muted transition-transform ${open ? 'rotate-180' : ''}`} aria-hidden="true" />
                             </span>
                           </button>
-                          {loc.text && <p className="mt-1.5 text-[10px] font-mono text-text-muted leading-relaxed">{loc.text}</p>}
+                          {loc.text && <p className="mt-1.5 text-[12px] font-mono text-text-muted leading-relaxed">{loc.text}</p>}
                           {loc.images.length > 0 && (
                             <div id={`guide-section-${i}`} className={`spawn-loc-preview ${open ? 'open' : ''}`}>
                               {loc.images.map((src, j) => (
@@ -224,7 +224,7 @@ export default function TaskModal({ task, onClose }: Props) {
               {(data.previous || data.next) && (
                 <section>
                   <SectionTitle icon="fas fa-link" label="Mission Chain" />
-                  <div className="flex items-center gap-2 flex-wrap text-[11px] font-mono">
+                  <div className="flex items-center gap-2 flex-wrap text-[13px] font-mono">
                     {data.previous && (
                       <>
                         <span className="text-text-muted">Prev:</span>
@@ -248,10 +248,10 @@ export default function TaskModal({ task, onClose }: Props) {
         {/* Footer */}
         <div className="p-4 border-t border-border flex gap-2">
           <a href={wikiTaskUrl(task.name)} target="_blank" rel="noopener noreferrer" className="btn btn-outline flex-1 btn-sm">
-            <i className="fas fa-external-link-alt text-[10px]" /> View on Wiki
+            <i className="fas fa-external-link-alt text-[12px]" /> View on Wiki
           </a>
           <button onClick={onClose} className="btn btn-primary flex-1 btn-sm">
-            <i className="fas fa-xmark text-[10px]" /> Close
+            <i className="fas fa-xmark text-[12px]" /> Close
           </button>
         </div>
       </div>
@@ -263,7 +263,7 @@ function SectionTitle({ icon, label }: { icon: string; label: string }) {
   return (
     <div className="flex items-center gap-2 mb-2">
       <i className={`${icon} text-accent/60 text-xs`} />
-      <span className="text-[10px] font-bold uppercase tracking-[0.12em] text-text-muted">{label}</span>
+      <span className="text-[12px] font-bold uppercase tracking-[0.12em] text-text-muted">{label}</span>
     </div>
   );
 }

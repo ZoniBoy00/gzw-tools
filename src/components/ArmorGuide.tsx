@@ -59,25 +59,25 @@ function Recommendations() {
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs font-mono">
             <div className="bg-surface-2 p-2 border border-border">
-              <div className="text-[9px] uppercase tracking-wider text-text-muted mb-1 flex items-center gap-1">
+              <div className="text-[11px] uppercase tracking-wider text-text-muted mb-1 flex items-center gap-1">
                 <i className="fas fa-vest text-accent/60" /> Vest
               </div>
               {rec.vest}
             </div>
             <div className="bg-surface-2 p-2 border border-border">
-              <div className="text-[9px] uppercase tracking-wider text-text-muted mb-1 flex items-center gap-1">
+              <div className="text-[11px] uppercase tracking-wider text-text-muted mb-1 flex items-center gap-1">
                 <i className="fas fa-hard-hat text-accent/60" /> Helmet
               </div>
               {rec.helmet}
             </div>
             <div className="bg-surface-2 p-2 border border-border">
-              <div className="text-[9px] uppercase tracking-wider text-text-muted mb-1 flex items-center gap-1">
+              <div className="text-[11px] uppercase tracking-wider text-text-muted mb-1 flex items-center gap-1">
                 <i className="fas fa-bolt text-accent/60" /> Ammo
               </div>
               <span className="text-text-muted">{rec.ammo.join(', ')}</span>
             </div>
           </div>
-          <p className="mt-2 text-[11px] text-text-muted italic font-mono">— {rec.notes}</p>
+          <p className="mt-2 text-[13px] text-text-muted italic font-mono">— {rec.notes}</p>
         </div>
       ))}
     </div>
@@ -105,12 +105,12 @@ function VestSection({ vests, itemImages }: { vests: ArmorVest[]; itemImages: Re
       {/* Compare section */}
       {comparedVests.length > 0 && (
         <div className="mb-4 p-3 border border-accent/20 bg-accent/5">
-          <div className="text-[10px] font-bold uppercase tracking-[0.12em] text-accent mb-2 flex items-center gap-2">
+          <div className="text-[12px] font-bold uppercase tracking-[0.12em] text-accent mb-2 flex items-center gap-2">
             <i className="fas fa-not-equal text-xs" />
             Compare Mode — {comparedVests.length} vest{comparedVests.length > 1 ? 's' : ''} selected
             <button
               onClick={() => setCompare([])}
-              className="ml-auto text-[9px] font-mono text-text-muted hover:text-text"
+              className="ml-auto text-[11px] font-mono text-text-muted hover:text-text"
             >
               Clear
             </button>
@@ -158,7 +158,7 @@ function VestSection({ vests, itemImages }: { vests: ArmorVest[]; itemImages: Re
                 <td className="text-center align-middle">
                   <button
                     onClick={() => toggleCompare(v.name)}
-                    className={`inline-flex items-center justify-center w-5 h-5 text-[10px] border ${
+                    className={`inline-flex items-center justify-center w-5 h-5 text-[12px] border ${
                       compare.includes(v.name)
                         ? 'border-accent/50 text-accent bg-accent/10'
                         : 'border-border text-text-muted hover:border-text-muted/30'
@@ -184,7 +184,7 @@ function VestSection({ vests, itemImages }: { vests: ArmorVest[]; itemImages: Re
                     link: { label: 'View on Wiki', url: wikiUrl(v.name) },
                   })} className="flex items-center gap-2 text-left w-full hover:text-accent transition-colors">
                     {(v.image || itemImages[v.name as keyof typeof itemImages]) && (
-                      <img crossOrigin="anonymous" src={(v.image || itemImages[v.name as keyof typeof itemImages]) as string} alt="" className="w-8 h-8 object-contain shrink-0 bg-surface-2 border border-border" loading="lazy" />
+                      <img crossOrigin="anonymous" src={(v.image || itemImages[v.name as keyof typeof itemImages]) as string} alt="" className="w-12 h-12 object-contain shrink-0 bg-surface-2 border border-border" loading="lazy" />
                     )}
                     {v.name}
                   </button>
@@ -225,10 +225,10 @@ function PlateCarrierSection({ plateCarriers, itemImages }: { plateCarriers: Arm
     <div>
       {comparedPC.length > 0 && (
         <div className="mb-4 p-3 border border-accent/20 bg-accent/5">
-          <div className="text-[10px] font-bold uppercase tracking-[0.12em] text-accent mb-2 flex items-center gap-2">
+          <div className="text-[12px] font-bold uppercase tracking-[0.12em] text-accent mb-2 flex items-center gap-2">
             <i className="fas fa-not-equal text-xs" />
             Compare Mode — {comparedPC.length} carrier{comparedPC.length > 1 ? 's' : ''} selected
-            <button onClick={() => setCompare([])} className="ml-auto text-[9px] font-mono text-text-muted hover:text-text">Clear</button>
+            <button onClick={() => setCompare([])} className="ml-auto text-[11px] font-mono text-text-muted hover:text-text">Clear</button>
           </div>
           <div className="compare-grid">
             {comparedPC.map((v) => (
@@ -272,7 +272,7 @@ function PlateCarrierSection({ plateCarriers, itemImages }: { plateCarriers: Arm
               <tr key={v.name}>
                 <td className="text-center align-middle">
                   <button onClick={() => toggleCompare(v.name)}
-                    className={`inline-flex items-center justify-center w-5 h-5 text-[10px] border ${compare.includes(v.name) ? 'border-accent/50 text-accent bg-accent/10' : 'border-border text-text-muted hover:border-text-muted/30'}`}
+                    className={`inline-flex items-center justify-center w-5 h-5 text-[12px] border ${compare.includes(v.name) ? 'border-accent/50 text-accent bg-accent/10' : 'border-border text-text-muted hover:border-text-muted/30'}`}
                     aria-label={`${compare.includes(v.name) ? 'Remove' : 'Add'} ${v.name}`}
                   ><i className={`fas fa-${compare.includes(v.name) ? 'check' : 'plus'}`} /></button>
                 </td>
@@ -292,7 +292,7 @@ function PlateCarrierSection({ plateCarriers, itemImages }: { plateCarriers: Arm
                     link: { label: 'View on Wiki', url: wikiUrl(v.name) },
                   })} className="flex items-center gap-2 text-left w-full hover:text-accent transition-colors">
                     {itemImages[v.name as keyof typeof itemImages] && (
-                      <img crossOrigin="anonymous" src={itemImages[v.name as keyof typeof itemImages] as string} alt="" className="w-8 h-8 object-contain shrink-0 bg-surface-2 border border-border" loading="lazy" />
+                      <img crossOrigin="anonymous" src={itemImages[v.name as keyof typeof itemImages] as string} alt="" className="w-12 h-12 object-contain shrink-0 bg-surface-2 border border-border" loading="lazy" />
                     )}
                     {v.name}
                   </button>
@@ -334,12 +334,12 @@ function HelmetSection({ helmets, itemImages }: { helmets: Helmet[]; itemImages:
       {/* Compare section */}
       {comparedHelmets.length > 0 && (
         <div className="mb-4 p-3 border border-accent/20 bg-accent/5">
-          <div className="text-[10px] font-bold uppercase tracking-[0.12em] text-accent mb-2 flex items-center gap-2">
+          <div className="text-[12px] font-bold uppercase tracking-[0.12em] text-accent mb-2 flex items-center gap-2">
             <i className="fas fa-not-equal text-xs" />
             Compare Mode — {comparedHelmets.length} helmet{comparedHelmets.length > 1 ? 's' : ''} selected
             <button
               onClick={() => setCompare([])}
-              className="ml-auto text-[9px] font-mono text-text-muted hover:text-text"
+              className="ml-auto text-[11px] font-mono text-text-muted hover:text-text"
             >
               Clear
             </button>
@@ -383,7 +383,7 @@ function HelmetSection({ helmets, itemImages }: { helmets: Helmet[]; itemImages:
                 <td className="text-center align-middle">
                   <button
                     onClick={() => toggleCompare(h.name)}
-                    className={`inline-flex items-center justify-center w-5 h-5 text-[10px] border ${
+                    className={`inline-flex items-center justify-center w-5 h-5 text-[12px] border ${
                       compare.includes(h.name)
                         ? 'border-accent/50 text-accent bg-accent/10'
                         : 'border-border text-text-muted hover:border-text-muted/30'
@@ -407,7 +407,7 @@ function HelmetSection({ helmets, itemImages }: { helmets: Helmet[]; itemImages:
                     link: { label: 'View on Wiki', url: wikiUrl(h.name) },
                   })} className="flex items-center gap-2 text-left w-full hover:text-accent transition-colors">
                     {(h.image || itemImages[h.name as keyof typeof itemImages]) && (
-                      <img crossOrigin="anonymous" src={(h.image || itemImages[h.name as keyof typeof itemImages]) as string} alt="" className="w-8 h-8 object-contain shrink-0 bg-surface-2 border border-border" loading="lazy" />
+                      <img crossOrigin="anonymous" src={(h.image || itemImages[h.name as keyof typeof itemImages]) as string} alt="" className="w-12 h-12 object-contain shrink-0 bg-surface-2 border border-border" loading="lazy" />
                     )}
                     {h.name}
                   </button>
@@ -463,7 +463,7 @@ function VendorTable() {
 function Legend() {
   return (
     <div className="mt-4 border border-border p-3">
-      <div className="text-[10px] font-bold uppercase tracking-wider text-text-muted mb-2 flex items-center gap-2">
+      <div className="text-[12px] font-bold uppercase tracking-wider text-text-muted mb-2 flex items-center gap-2">
         <i className="fas fa-circle-info text-accent/60" />
         NIJ Protection Levels
       </div>
@@ -476,7 +476,7 @@ function Legend() {
           )
         )}
       </div>
-      <div className="flex flex-wrap gap-3 text-[10px] text-text-muted">
+      <div className="flex flex-wrap gap-3 text-[12px] text-text-muted">
         {Object.entries(MATERIAL_RANK).map(([mat, info]) => (
           <span key={mat} className={info.color}>{mat} — {info.desc}</span>
         ))}

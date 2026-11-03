@@ -30,7 +30,7 @@ export default function ApiDocs() {
         <h1 className="section-title">GZW Data API</h1>
       </div>
 
-      <p className="text-[11px] font-mono text-text-muted mb-4 leading-relaxed">
+      <p className="text-[13px] font-mono text-text-muted mb-4 leading-relaxed">
         Public REST API for Gray Zone Warfare game data. All endpoints return JSON with CORS headers.
       </p>
 
@@ -41,7 +41,7 @@ export default function ApiDocs() {
           rel="noopener noreferrer"
           className="flex items-center gap-2 text-xs font-mono text-accent/80 hover:text-accent underline underline-offset-2"
         >
-          <i className="fas fa-globe text-[10px]" />
+          <i className="fas fa-globe text-[12px]" />
           API Playground — {GZW_API_BASE}
         </a>
         <a
@@ -50,7 +50,7 @@ export default function ApiDocs() {
           rel="noopener noreferrer"
           className="flex items-center gap-2 text-xs font-mono text-accent/80 hover:text-accent underline underline-offset-2"
         >
-          <i className="fas fa-book text-[10px]" />
+          <i className="fas fa-book text-[12px]" />
           API Documentation — gzw-data.dev/docs
         </a>
         <a
@@ -68,8 +68,8 @@ export default function ApiDocs() {
       <div className="mt-4">
         <div className="flex items-center gap-2 mb-2">
           <i className="fas fa-list text-accent/60 text-xs" />
-          <span className="text-[10px] font-bold uppercase tracking-[0.1em] text-text-muted">Available Endpoints</span>
-          <span className="text-[9px] font-mono text-text-muted">{endpoints.length} total</span>
+          <span className="text-[12px] font-bold uppercase tracking-[0.1em] text-text-muted">Available Endpoints</span>
+          <span className="text-[11px] font-mono text-text-muted">{endpoints.length} total</span>
         </div>
 
         {loading ? (
@@ -82,7 +82,7 @@ export default function ApiDocs() {
             {endpoints.map((ep) => (
               <div
                 key={ep}
-                className="text-[10px] font-mono text-text-muted bg-surface-2 border border-border px-2.5 py-1.5 truncate hover:text-accent/80 hover:border-accent/20 transition-colors"
+                className="text-[12px] font-mono text-text-muted bg-surface-2 border border-border px-2.5 py-1.5 truncate hover:text-accent/80 hover:border-accent/20 transition-colors"
               >
                 <span className="text-green/70 font-bold mr-1">/api/</span>{ep}
               </div>
@@ -93,10 +93,10 @@ export default function ApiDocs() {
 
       <div className="mt-4 border border-border p-3">
         <div className="flex items-center gap-2 mb-1">
-          <i className="fas fa-sync text-accent/60 text-[10px]" />
-          <span className="text-[9px] font-mono font-bold uppercase tracking-[0.12em] text-text-muted">Auto-Updated Weekly</span>
+          <i className="fas fa-sync text-accent/60 text-[12px]" />
+          <span className="text-[11px] font-mono font-bold uppercase tracking-[0.12em] text-text-muted">Auto-Updated Weekly</span>
         </div>
-        <p className="text-[10px] font-mono text-text-muted/70 leading-relaxed">
+        <p className="text-[12px] font-mono text-text-muted/70 leading-relaxed">
           This API is automatically updated every week with the latest data scraped from the
           {' '}<a href="https://gray-zone-warfare.fandom.com/wiki/Gray_Zone_Warfare_Wiki" target="_blank" rel="noopener noreferrer" className="text-accent/70 hover:text-accent underline underline-offset-2">Gray Zone Warfare Wiki</a>.
           Data is refreshed, deduplicated, and normalized during each update cycle.

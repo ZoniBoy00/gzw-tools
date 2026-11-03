@@ -126,7 +126,7 @@ export default function MissionFinder() {
           <i className="fas fa-clipboard-list text-accent text-sm" />
           <h1 className="section-title">Mission Finder</h1>
         </div>
-        <p className="text-[10px] font-mono text-text-muted mb-4">Loading missions…</p>
+        <p className="text-[12px] font-mono text-text-muted mb-4">Loading missions…</p>
       </div>
     );
   }
@@ -137,15 +137,15 @@ export default function MissionFinder() {
         <i className="fas fa-clipboard-list text-accent text-sm" />
         <h1 className="section-title">Mission Finder</h1>
       </div>
-      <p className="text-[10px] font-mono text-text-muted mb-4">
+      <p className="text-[12px] font-mono text-text-muted mb-4">
         {allTasks.length} missions — search by name, vendor, or location. Completion tracking stays in this browser.
       </p>
 
       {vendorProgress.length > 0 && <section className="mb-4" aria-label="Task completion by vendor">
-        <div className="mb-2 flex items-center justify-between gap-2"><span className="text-[9px] font-bold uppercase tracking-[0.12em] text-text-muted">Task progress by vendor</span><span className="text-[9px] font-mono text-text-muted">{allTasks.filter(task => completedSet.has(task.id)).length} / {allTasks.length} complete</span></div>
+        <div className="mb-2 flex items-center justify-between gap-2"><span className="text-[11px] font-bold uppercase tracking-[0.12em] text-text-muted">Task progress by vendor</span><span className="text-[11px] font-mono text-text-muted">{allTasks.filter(task => completedSet.has(task.id)).length} / {allTasks.length} complete</span></div>
         <div className="grid grid-cols-2 gap-2 sm:grid-cols-3 lg:grid-cols-4">
           {vendorProgress.map(progress => <div key={progress.vendor} className="border border-border bg-surface-2/40 p-2">
-            <div className="flex justify-between gap-2 text-[10px]"><span className="truncate font-medium">{progress.vendor}</span><span className="font-mono text-text-muted">{progress.completed}/{progress.total}</span></div>
+            <div className="flex justify-between gap-2 text-[12px]"><span className="truncate font-medium">{progress.vendor}</span><span className="font-mono text-text-muted">{progress.completed}/{progress.total}</span></div>
             <div className="mt-1 h-1 bg-surface-3"><div className="h-full bg-accent" style={{ width: `${progress.total ? (progress.completed / progress.total) * 100 : 0}%` }} /></div>
           </div>)}
         </div>
@@ -166,18 +166,18 @@ export default function MissionFinder() {
           {TYPES.map((t) => <option key={t} value={t}>{t.charAt(0).toUpperCase() + t.slice(1)}</option>)}
         </select>
         <button onClick={() => setSortBy((s) => (s === 'name' ? 'vendor' : 'name'))} className="chip chip-sm">
-          <i className="fas fa-arrow-down-a-z text-[9px]" /> {sortBy === 'name' ? 'Name' : 'Vendor'}
+          <i className="fas fa-arrow-down-a-z text-[11px]" /> {sortBy === 'name' ? 'Name' : 'Vendor'}
         </button>
         <button type="button" onClick={() => setHideCompleted(value => !value)} className={`chip chip-sm ${hideCompleted ? 'active' : ''}`} aria-pressed={hideCompleted}>
-          <i className={`fas ${hideCompleted ? 'fa-eye-slash' : 'fa-list-check'} text-[9px]`} /> {hideCompleted ? 'Showing incomplete' : 'Hide completed'}
+          <i className={`fas ${hideCompleted ? 'fa-eye-slash' : 'fa-list-check'} text-[11px]`} /> {hideCompleted ? 'Showing incomplete' : 'Hide completed'}
         </button>
       </div>
 
       <div className="flex flex-wrap gap-1.5 mb-3">
-        <button onClick={() => setCategoryFilter('')} className={`chip chip-sm ${!categoryFilter ? 'active' : ''}`}><i className="fas fa-list text-[9px]" /> All</button>
+        <button onClick={() => setCategoryFilter('')} className={`chip chip-sm ${!categoryFilter ? 'active' : ''}`}><i className="fas fa-list text-[11px]" /> All</button>
         {categories.map((c) => (
           <button key={c.key} onClick={() => setCategoryFilter(c.key)} className={`chip chip-sm ${categoryFilter === c.key ? 'active' : ''}`}>
-            <i className={`${c.icon} text-[9px]`} /> {c.label}
+            <i className={`${c.icon} text-[11px]`} /> {c.label}
           </button>
         ))}
       </div>
@@ -195,19 +195,19 @@ export default function MissionFinder() {
                   <span className={`w-1.5 h-1.5 shrink-0 ${vendorColor(t.vendor)}`} />
                   <div className="min-w-0">
                     <div className={`truncate text-sm font-medium ${isCompleted ? 'text-text-muted line-through' : ''}`}>{t.name}
-                      {t.category === 'hidden_task' && <span className="tag tag-amber text-[8px] ml-2">Hidden</span>}
-                      {t.category === 'main_task' && <span className="tag tag-main text-[8px] ml-2">Main</span>}
-                      {t.category === 'side_task' && <span className="tag tag-side text-[8px] ml-2">Side</span>}
-                      {t.category === 'squad_strike' && <span className="tag tag-squad text-[8px] ml-2">Squad</span>}
-                      {t.category === 'contract' && <span className="tag tag-contract text-[8px] ml-2">Contract</span>}
+                      {t.category === 'hidden_task' && <span className="tag tag-amber text-[11px] ml-2">Hidden</span>}
+                      {t.category === 'main_task' && <span className="tag tag-main text-[11px] ml-2">Main</span>}
+                      {t.category === 'side_task' && <span className="tag tag-side text-[11px] ml-2">Side</span>}
+                      {t.category === 'squad_strike' && <span className="tag tag-squad text-[11px] ml-2">Squad</span>}
+                      {t.category === 'contract' && <span className="tag tag-contract text-[11px] ml-2">Contract</span>}
                     </div>
-                    <div className="flex items-center gap-2 text-[10px] font-mono text-text-muted">
-                      {t.vendor && <span className="tag tag-drab text-[8px]">{t.vendor}</span>}
+                    <div className="flex items-center gap-2 text-[12px] font-mono text-text-muted">
+                      {t.vendor && <span className="tag tag-drab text-[11px]">{t.vendor}</span>}
                       {(t.location || t.area) && <span className="truncate">{t.location || t.area}</span>}
                     </div>
                   </div>
                 </div>
-                <span className="flex shrink-0 items-center gap-2"><span className="hidden text-[9px] font-mono text-text-muted sm:inline">Details</span><i className="fas fa-circle-info text-[10px] text-text-muted" aria-hidden="true" /></span>
+                <span className="flex shrink-0 items-center gap-2"><span className="hidden text-[11px] font-mono text-text-muted sm:inline">Details</span><i className="fas fa-circle-info text-[12px] text-text-muted" aria-hidden="true" /></span>
               </button>
               <button type="button" onClick={() => toggleCompleted(t.id)} className={`shrink-0 border-l border-border px-3 transition-colors ${isCompleted ? 'text-green' : 'text-text-muted hover:text-accent'}`} aria-pressed={isCompleted} aria-label={`${isCompleted ? 'Mark incomplete' : 'Mark complete'}: ${t.name}`} title={isCompleted ? 'Mark incomplete' : 'Mark complete'}>
                 <i className={`fas ${isCompleted ? 'fa-circle-check' : 'fa-circle'}`} aria-hidden="true" />
@@ -222,7 +222,7 @@ export default function MissionFinder() {
         </div>
       )}
 
-      <div className="mt-3 flex flex-wrap items-center gap-2 text-[10px] font-mono text-text-muted">
+      <div className="mt-3 flex flex-wrap items-center gap-2 text-[12px] font-mono text-text-muted">
         <span><i className="fas fa-database mr-1" />{filtered.length} / {allTasks.length}</span>
       </div>
 

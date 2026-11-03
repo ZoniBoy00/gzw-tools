@@ -69,19 +69,19 @@ export default function SiteSearchDialog({ open, onClose }: Props) {
         <div className="flex items-center gap-3 border-b border-border px-4 py-3">
           <i className="fas fa-magnifying-glass text-accent" aria-hidden="true" />
           <input ref={inputRef} value={query} onChange={event => setQuery(event.target.value)} className="min-w-0 flex-1 bg-transparent text-sm outline-none placeholder:text-text-muted" placeholder="Search tasks, regions, bosses, weapons, ammo, armor, keys…" aria-label="Search all GZW data" aria-controls="site-search-results" />
-          <kbd className="hidden border border-border px-1.5 py-0.5 text-[10px] text-text-muted sm:inline">ESC</kbd>
+          <kbd className="hidden border border-border px-1.5 py-0.5 text-[12px] text-text-muted sm:inline">ESC</kbd>
           <button type="button" onClick={closeDialog} className="text-text-muted hover:text-text" aria-label="Close search"><i className="fas fa-xmark" /></button>
         </div>
         <div id="site-search-results" className="max-h-[65vh] overflow-y-auto p-2" role="listbox" aria-label="Search results">
           {!query.trim() ? <p className="px-3 py-8 text-center text-xs text-text-muted">Start typing to search across the site.</p> : results.length ? results.map(item => (
             <button key={item.id} type="button" role="option" aria-selected="false" onClick={() => { closeDialog(); const params = new URLSearchParams(item.searchParams); navigate(params.size ? `${item.path}?${params}` : item.path); }} className="flex w-full items-start gap-3 border-b border-border/50 px-3 py-3 text-left transition-colors hover:bg-surface-2 focus:bg-surface-2 focus:outline-none">
-              <span className="mt-0.5 w-20 shrink-0 text-[9px] font-mono uppercase tracking-wider text-accent">{item.type}</span>
-              <span className="min-w-0 flex-1"><span className="block truncate text-sm font-medium text-text">{item.title}</span>{item.detail && <span className="mt-0.5 block truncate text-[10px] text-text-muted">{item.detail}</span>}</span>
-              <i className="fas fa-arrow-up-right-from-square mt-1 text-[10px] text-text-muted" aria-hidden="true" />
+              <span className="mt-0.5 w-20 shrink-0 text-[11px] font-mono uppercase tracking-wider text-accent">{item.type}</span>
+              <span className="min-w-0 flex-1"><span className="block truncate text-sm font-medium text-text">{item.title}</span>{item.detail && <span className="mt-0.5 block truncate text-[12px] text-text-muted">{item.detail}</span>}</span>
+              <i className="fas fa-arrow-up-right-from-square mt-1 text-[12px] text-text-muted" aria-hidden="true" />
             </button>
           )) : <p className="px-3 py-8 text-center text-xs text-text-muted">No matches. Try another name, location, caliber, or vendor.</p>}
         </div>
-        <div className="border-t border-border px-4 py-2 text-[9px] font-mono text-text-muted/70">Search covers tasks, regions, bosses, weapons, ammo, armor, helmets, keys, and vendors · {items.length.toLocaleString()} indexed records</div>
+        <div className="border-t border-border px-4 py-2 text-[11px] font-mono text-text-muted/70">Search covers tasks, regions, bosses, weapons, ammo, armor, helmets, keys, and vendors · {items.length.toLocaleString()} indexed records</div>
       </section>
     </div>
   );

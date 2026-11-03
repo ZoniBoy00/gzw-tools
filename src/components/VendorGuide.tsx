@@ -19,13 +19,13 @@ interface GuideData {
 
 function ItemImage({ name, images }: { name: string; images: Record<string, string> }) {
   const src = images[name];
-  if (!src) return <span className="inline-block h-9 w-9 shrink-0 border border-border bg-surface-2" aria-hidden="true" />;
+  if (!src) return <span className="inline-block h-12 w-12 shrink-0 border border-border bg-surface-2" aria-hidden="true" />;
   return (
     <img crossOrigin="anonymous"
       src={src}
       alt=""
       loading="lazy"
-      className="h-9 w-9 shrink-0 object-contain border border-border bg-surface-2"
+      className="h-12 w-12 shrink-0 object-contain border border-border bg-surface-2"
       onError={event => { event.currentTarget.style.visibility = 'hidden'; }}
     />
   );
@@ -103,7 +103,7 @@ export default function VendorGuide() {
         <i className="fas fa-store text-accent text-sm" aria-hidden="true" />
         <h1 className="section-title">Vendors</h1>
       </div>
-      <p className="mb-4 text-[10px] font-mono text-text-muted">
+      <p className="mb-4 text-[12px] font-mono text-text-muted">
         What each vendor sells, which rank unlocks it, and how much reputation you still need.
       </p>
 
@@ -128,13 +128,13 @@ export default function VendorGuide() {
             <img crossOrigin="anonymous"
               src={profile.image}
               alt=""
-              className="h-16 w-16 shrink-0 object-cover border border-border bg-surface-2"
+              className="h-20 w-20 shrink-0 object-cover border border-border bg-surface-2"
               onError={event => { event.currentTarget.hidden = true; }}
             />
           )}
           <div className="min-w-0 flex-1">
             <h2 className="text-base font-bold leading-tight">{vendor.name}</h2>
-            <p className="mt-1 text-[10px] font-mono text-text-muted">
+            <p className="mt-1 text-[12px] font-mono text-text-muted">
               {profile?.fullName && profile.fullName.toLowerCase() !== 'unknown' ? `${profile.fullName} · ` : ''}{vendor.desc}
             </p>
             {profile && (profile.sells || profile.buys) && (
@@ -147,7 +147,7 @@ export default function VendorGuide() {
         </div>
 
         <div className="grid grid-cols-1 gap-3 border-t border-border pt-3 sm:grid-cols-[200px_1fr]">
-          <label className="flex flex-col gap-1 text-[10px] text-text-muted">
+          <label className="flex flex-col gap-1 text-[12px] text-text-muted">
             Your reputation with {vendor.name}
             <input
               type="number"
@@ -166,7 +166,7 @@ export default function VendorGuide() {
                 ? <span className="text-text-muted"> · {nextRank.missing.toLocaleString('en-US')} rep to R.{nextRank.rank}</span>
                 : <span className="text-text-muted"> · top rank</span>}
             </div>
-            <div className="mt-1 flex flex-wrap gap-x-3 font-mono text-[9px] text-text-muted">
+            <div className="mt-1 flex flex-wrap gap-x-3 font-mono text-[11px] text-text-muted">
               {vendor.rankCumulative.map((needed, index) => <span key={needed + index}>R.{index + 1}: {needed.toLocaleString('en-US')}</span>)}
             </div>
           </div>
@@ -186,7 +186,7 @@ export default function VendorGuide() {
           <div className="mb-3 flex flex-wrap items-center gap-2">
             <label className="relative min-w-[180px] flex-1">
               <span className="sr-only">Search {vendor.name} stock</span>
-              <i className="fas fa-magnifying-glass pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-[10px] text-text-muted" aria-hidden="true" />
+              <i className="fas fa-magnifying-glass pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-[12px] text-text-muted" aria-hidden="true" />
               <input
                 type="search"
                 value={search}
@@ -200,11 +200,11 @@ export default function VendorGuide() {
               <option value="">All categories</option>
               {categories.map(entry => <option key={entry} value={entry}>{categoryLabel(entry)}</option>)}
             </select>
-            <label className="flex items-center gap-1.5 text-[10px] text-text-muted">
+            <label className="flex items-center gap-1.5 text-[12px] text-text-muted">
               <input type="checkbox" checked={onlyAvailable} onChange={event => setOnlyAvailable(event.target.checked)} />
               Only what I can buy now
             </label>
-            <span className="text-[9px] font-mono text-text-muted" aria-live="polite">{shownCount} / {vendorStock.length}</span>
+            <span className="text-[11px] font-mono text-text-muted" aria-live="polite">{shownCount} / {vendorStock.length}</span>
           </div>
 
           {shownCount === 0 ? (
@@ -213,14 +213,14 @@ export default function VendorGuide() {
             <div className="flex flex-col gap-4">
               {groups.map(group => (
                 <section key={group.rank ?? 'none'} aria-label={group.rank ? `Rank ${group.rank}` : 'Rank not listed'}>
-                  <h3 className="mb-2 flex items-center gap-2 text-[10px] font-bold uppercase tracking-[0.12em] text-text-muted">
+                  <h3 className="mb-2 flex items-center gap-2 text-[12px] font-bold uppercase tracking-[0.12em] text-text-muted">
                     {group.rank ? `Rank R.${group.rank}` : 'Rank not listed'}
                     {group.rank !== null && (
                       <span className={`tag ${group.rank <= currentRank ? '' : 'opacity-60'}`}>
                         {group.rank <= currentRank ? 'unlocked' : `${(vendor.rankCumulative[group.rank - 1] ?? 0).toLocaleString('en-US')} rep`}
                       </span>
                     )}
-                    <span className="font-mono text-[9px]">{group.rows.length}</span>
+                    <span className="font-mono text-[11px]">{group.rows.length}</span>
                   </h3>
                   <div className="grid grid-cols-1 gap-2 md:grid-cols-2 xl:grid-cols-3">
                     {group.rows.map(row => {
@@ -230,11 +230,11 @@ export default function VendorGuide() {
                           <ItemImage name={row.item} images={itemImages} />
                           <div className="min-w-0 flex-1">
                             <span className="block truncate text-xs font-bold">{row.item}</span>
-                            <div className="truncate font-mono text-[9px] text-text-muted">
+                            <div className="truncate font-mono text-[11px] text-text-muted">
                               {[row.type, categoryLabel(row.category), row.buyPrice || NO_PRICE].filter(Boolean).join(' · ')}
                             </div>
                           </div>
-                          {locked && <i className="fas fa-lock text-[10px] text-text-muted" aria-label="Locked at your rank" />}
+                          {locked && <i className="fas fa-lock text-[12px] text-text-muted" aria-label="Locked at your rank" />}
                         </button>
                       );
                     })}
@@ -248,7 +248,7 @@ export default function VendorGuide() {
 
       {modalItem && <ItemModal item={modalItem} onClose={() => setModalItem(null)} />}
 
-      <div className="mt-4 flex items-center gap-2 text-[9px] font-mono text-text-muted/70">
+      <div className="mt-4 flex items-center gap-2 text-[11px] font-mono text-text-muted/70">
         <i className="fas fa-database" aria-hidden="true" />
         Read-only records from GZW Data API · stock and ranks come from the community wiki and may lag behind the game. Your reputation is stored only in this browser.
       </div>

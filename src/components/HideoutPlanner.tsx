@@ -14,13 +14,13 @@ const PLAN_KEY = 'gzw-hideout-plan';
 
 function ItemIcon({ name, images }: { name: string; images: Record<string, string> }) {
   const src = images[name];
-  if (!src) return <span className="inline-block h-8 w-8 shrink-0 border border-border bg-surface-2" aria-hidden="true" />;
+  if (!src) return <span className="inline-block h-12 w-12 shrink-0 border border-border bg-surface-2" aria-hidden="true" />;
   return (
     <img crossOrigin="anonymous"
       src={src}
       alt=""
       loading="lazy"
-      className="h-8 w-8 shrink-0 object-contain border border-border bg-surface-2"
+      className="h-12 w-12 shrink-0 object-contain border border-border bg-surface-2"
       onError={event => { event.currentTarget.style.visibility = 'hidden'; }}
     />
   );
@@ -59,7 +59,7 @@ function Planner({ rooms, images }: { rooms: HideoutRoom[]; images: Record<strin
       <div className="flex flex-col gap-4">
         {rooms.map(room => (
           <section key={room.room} aria-labelledby={`room-${room.room}`}>
-            <h2 id={`room-${room.room}`} className="mb-2 text-[10px] font-bold uppercase tracking-[0.12em] text-text-muted">{room.room}</h2>
+            <h2 id={`room-${room.room}`} className="mb-2 text-[12px] font-bold uppercase tracking-[0.12em] text-text-muted">{room.room}</h2>
             <div className="grid grid-cols-1 gap-2 md:grid-cols-2">
               {room.modules.map(module => {
                 const step = plan[module.key] ?? { current: 0, target: 0 };
@@ -68,7 +68,7 @@ function Planner({ rooms, images }: { rooms: HideoutRoom[]; images: Record<strin
                   <article key={module.key} className="card p-3 flex flex-col gap-2">
                     <h3 className="text-sm font-bold leading-tight">{module.module}</h3>
                     <div className="grid grid-cols-2 gap-2">
-                      <label className="flex flex-col gap-1 text-[10px] text-text-muted">
+                      <label className="flex flex-col gap-1 text-[12px] text-text-muted">
                         Built level
                         <select
                           className="input input-sm"
@@ -78,7 +78,7 @@ function Planner({ rooms, images }: { rooms: HideoutRoom[]; images: Record<strin
                           {Array.from({ length: module.maxLevel + 1 }, (_, level) => <option key={level} value={level}>{level === 0 ? 'Not built' : `Level ${level}`}</option>)}
                         </select>
                       </label>
-                      <label className="flex flex-col gap-1 text-[10px] text-text-muted">
+                      <label className="flex flex-col gap-1 text-[12px] text-text-muted">
                         Target level
                         <select
                           className="input input-sm"
@@ -89,12 +89,12 @@ function Planner({ rooms, images }: { rooms: HideoutRoom[]; images: Record<strin
                         </select>
                       </label>
                     </div>
-                    <p className="text-[10px] leading-relaxed text-text-muted">
+                    <p className="text-[12px] leading-relaxed text-text-muted">
                       {next
                         ? <>Next (level {next.level}): {next.requirements.map(formatRequirement).join(', ') || 'no requirements listed'}</>
                         : step.current >= module.maxLevel ? 'Maximum level reached.' : 'No requirements listed.'}
                     </p>
-                    {next?.function && <p className="font-mono text-[10px] text-accent">{next.function}</p>}
+                    {next?.function && <p className="font-mono text-[12px] text-accent">{next.function}</p>}
                   </article>
                 );
               })}
@@ -106,7 +106,7 @@ function Planner({ rooms, images }: { rooms: HideoutRoom[]; images: Record<strin
       <aside className="card h-fit p-3 lg:sticky lg:top-3" aria-label="Materials needed">
         <div className="mb-2 flex items-center justify-between gap-2">
           <h2 className="text-sm font-bold">Materials needed</h2>
-          <button type="button" onClick={reset} className="text-[10px] text-text-muted hover:text-accent focus-visible:outline focus-visible:outline-1 focus-visible:outline-accent">Reset</button>
+          <button type="button" onClick={reset} className="text-[12px] text-text-muted hover:text-accent focus-visible:outline focus-visible:outline-1 focus-visible:outline-accent">Reset</button>
         </div>
         {cost.length === 0 ? (
           <p className="text-xs text-text-muted">Pick a built and a target level for the modules you plan to upgrade.</p>
@@ -115,7 +115,7 @@ function Planner({ rooms, images }: { rooms: HideoutRoom[]; images: Record<strin
             {cost.map(requirement => (
               <li key={requirement.name} className="flex items-center gap-2 text-xs">
                 {requirement.name === 'Dollars'
-                  ? <i className="fas fa-sack-dollar flex h-8 w-8 shrink-0 items-center justify-center border border-border bg-surface-2 text-accent" aria-hidden="true" />
+                  ? <i className="fas fa-sack-dollar flex h-12 w-12 shrink-0 items-center justify-center border border-border bg-surface-2 text-accent" aria-hidden="true" />
                   : <ItemIcon name={requirement.name} images={images} />}
                 <span className="min-w-0 flex-1">
                   {requirement.name === 'Dollars'
@@ -161,7 +161,7 @@ function Disassembly({ recipes, images, search }: { recipes: DisassemblyRecipe[]
             </h2>
             {recipe.duration && <span className="tag">{recipe.duration}</span>}
           </div>
-          <div className="text-[9px] font-bold uppercase tracking-[0.12em] text-text-muted">Disassembles into</div>
+          <div className="text-[11px] font-bold uppercase tracking-[0.12em] text-text-muted">Disassembles into</div>
           <ul className="flex flex-col gap-1.5">
             {recipe.outcome.map(name => (
               <li key={name} className="flex items-center gap-2 text-xs">
@@ -214,7 +214,7 @@ export default function HideoutPlanner() {
         <i className="fas fa-warehouse text-accent text-sm" aria-hidden="true" />
         <h1 className="section-title">Hideout</h1>
       </div>
-      <p className="mb-4 text-[10px] font-mono text-text-muted">
+      <p className="mb-4 text-[12px] font-mono text-text-muted">
         Plan module upgrades and total the materials, or look up what an item disassembles into.
       </p>
 
@@ -228,7 +228,7 @@ export default function HideoutPlanner() {
           className={`tab ${activeTab === 'planner' ? 'active' : ''}`}
           onClick={() => setParam('tab', '')}
         >
-          <i className="fas fa-list-check mr-2" aria-hidden="true" />Upgrade planner <span className="ml-1 font-mono text-[9px]">{moduleCount}</span>
+          <i className="fas fa-list-check mr-2" aria-hidden="true" />Upgrade planner <span className="ml-1 font-mono text-[11px]">{moduleCount}</span>
         </button>
         <button
           id="disassembly-tab"
@@ -239,7 +239,7 @@ export default function HideoutPlanner() {
           className={`tab ${activeTab === 'disassembly' ? 'active' : ''}`}
           onClick={() => setParam('tab', 'disassembly')}
         >
-          <i className="fas fa-recycle mr-2" aria-hidden="true" />Disassembly <span className="ml-1 font-mono text-[9px]">{recipes?.length ?? 0}</span>
+          <i className="fas fa-recycle mr-2" aria-hidden="true" />Disassembly <span className="ml-1 font-mono text-[11px]">{recipes?.length ?? 0}</span>
         </button>
       </div>
 
@@ -247,7 +247,7 @@ export default function HideoutPlanner() {
         <div className="mb-4 flex flex-wrap items-center gap-2">
           <label className="relative min-w-[180px] flex-1">
             <span className="sr-only">Search disassembly recipes</span>
-            <i className="fas fa-magnifying-glass pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-[10px] text-text-muted" aria-hidden="true" />
+            <i className="fas fa-magnifying-glass pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-[12px] text-text-muted" aria-hidden="true" />
             <input
               type="search"
               value={search}
@@ -279,7 +279,7 @@ export default function HideoutPlanner() {
         </>
       )}
 
-      <div className="mt-4 flex items-center gap-2 text-[9px] font-mono text-text-muted/70">
+      <div className="mt-4 flex items-center gap-2 text-[11px] font-mono text-text-muted/70">
         <i className="fas fa-database" aria-hidden="true" />
         Read-only records from GZW Data API · requirements come from the community wiki and may lag behind the game. Your plan is stored only in this browser.
       </div>

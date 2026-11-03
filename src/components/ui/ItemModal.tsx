@@ -115,7 +115,7 @@ export default function ItemModal({ item, onClose }: Props) {
             <img crossOrigin="anonymous"
               src={item.image}
               alt={item.name}
-              className="max-h-48 object-contain"
+              className="max-h-72 object-contain"
             />
           </div>
         )}
@@ -124,7 +124,7 @@ export default function ItemModal({ item, onClose }: Props) {
         <div className="p-4 space-y-2">
           {item.fields.map((f) => (
             <div key={f.label} className="flex justify-between items-center text-sm font-mono py-1.5 border-b border-border/30">
-              <span className="tooltip-item text-text-muted text-[11px] uppercase tracking-wider">
+              <span className="tooltip-item text-text-muted text-[13px] uppercase tracking-wider">
                 {f.desc ? (
                   <>
                     {f.label}

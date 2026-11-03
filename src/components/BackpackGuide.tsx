@@ -82,7 +82,7 @@ function TableSection({
           className="input flex-1 min-w-[160px] input-sm"
           aria-label="Search items"
         />
-        <span className="text-[10px] font-mono text-text-muted self-center ml-auto">
+        <span className="text-[12px] font-mono text-text-muted self-center ml-auto">
           {filtered.length} / {items.length} items
         </span>
       </div>
@@ -98,7 +98,7 @@ function TableSection({
         <div className="overflow-x-auto">
           <table className="w-full text-xs font-mono border-collapse">
             <thead>
-              <tr className="text-text-muted text-[10px] uppercase tracking-[0.08em] border-b border-border">
+              <tr className="text-text-muted text-[12px] uppercase tracking-[0.08em] border-b border-border">
                 <th className="text-left py-3 px-3 font-medium w-10" />
                 <th className="text-left py-3 px-3 font-medium">Name</th>
                 <th className="text-left py-3 px-3 font-medium">Type</th>
@@ -125,9 +125,9 @@ function TableSection({
                 >
                   <td className="py-3 px-3">
                     {item.image ? (
-                      <img crossOrigin="anonymous" src={item.image} alt="" className="w-8 h-8 object-contain" loading="lazy" />
+                      <img crossOrigin="anonymous" src={item.image} alt="" className="w-12 h-12 object-contain" loading="lazy" />
                     ) : (
-                      <i className={`fas ${icon} text-text-muted text-lg w-8 h-8 flex items-center justify-center`} />
+                      <i className={`fas ${icon} text-text-muted text-lg w-12 h-12 flex items-center justify-center`} />
                     )}
                   </td>
                   <td className="py-3 px-3 font-semibold text-text">{item.name}</td>
@@ -144,7 +144,7 @@ function TableSection({
                       className="text-accent/70 hover:text-accent transition-colors"
                       title="View on Wiki"
                     >
-                      <i className="fas fa-external-link-alt text-[10px]" />
+                      <i className="fas fa-external-link-alt text-[12px]" />
                     </a>
                   </td>
                 </tr>
@@ -191,7 +191,7 @@ export default function BackpackGuide() {
         <h1 className="section-title">Backpacks & Rigs</h1>
       </div>
       <TabBar tabs={SUB_TABS} active={tab} onChange={setTab} />
-      <p className="text-[10px] font-mono text-text-muted mt-2 mb-4">
+      <p className="text-[12px] font-mono text-text-muted mt-2 mb-4">
         {tab === 'backpacks'
           ? `${(backpacks || []).length} backpacks`
           : `${(rigs || []).length} tactical rigs`}

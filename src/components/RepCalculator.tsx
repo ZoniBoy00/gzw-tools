@@ -69,7 +69,7 @@ export default function RepCalculator() {
 
       <div className="grid grid-cols-2 gap-3 mb-4">
         <div>
-          <label className="text-[10px] font-bold uppercase tracking-[0.1em] text-text-muted mb-1.5 block">
+          <label className="text-[12px] font-bold uppercase tracking-[0.1em] text-text-muted mb-1.5 block">
             <i className="fas fa-arrow-right-to-bracket text-accent/60 mr-1" />
             Current Rep
           </label>
@@ -84,7 +84,7 @@ export default function RepCalculator() {
           />
         </div>
         <div>
-          <label className="text-[10px] font-bold uppercase tracking-[0.1em] text-text-muted mb-1.5 block">
+          <label className="text-[12px] font-bold uppercase tracking-[0.1em] text-text-muted mb-1.5 block">
             <i className="fas fa-bullseye text-accent/60 mr-1" />
             Target Rep
           </label>
@@ -104,11 +104,11 @@ export default function RepCalculator() {
       {preview && (
         <div className="card card-highlight p-4 mb-4">
           <div className="flex items-center justify-between mb-2">
-            <span className="text-[10px] font-bold uppercase tracking-[0.1em] text-text-muted flex items-center gap-1">
+            <span className="text-[12px] font-bold uppercase tracking-[0.1em] text-text-muted flex items-center gap-1">
               <i className="fas fa-chart-line text-accent/60" />
               Real-Time Preview
             </span>
-            <span className="text-[10px] font-mono text-text-muted">
+            <span className="text-[12px] font-mono text-text-muted">
               {formatNumber(preview.current)} → {formatNumber(preview.target)}
             </span>
           </div>
@@ -135,7 +135,7 @@ export default function RepCalculator() {
               style={{ left: `${preview.progressAfterPct}%` }}
             />
           </div>
-          <div className="flex justify-between text-[9px] font-mono">
+          <div className="flex justify-between text-[11px] font-mono">
             <span className="flex items-center gap-1">
               <span className="w-2 h-2 bg-accent inline-block" /> Current ({preview.progressPct.toFixed(0)}%)
             </span>
@@ -148,7 +148,7 @@ export default function RepCalculator() {
       )}
 
       <div className="mb-4">
-        <label className="text-[10px] font-bold uppercase tracking-[0.1em] text-text-muted mb-1.5 block">
+        <label className="text-[12px] font-bold uppercase tracking-[0.1em] text-text-muted mb-1.5 block">
           <i className="fas fa-dollar-sign text-accent/60 mr-1" />
           $ / Rep Point
         </label>
@@ -163,7 +163,7 @@ export default function RepCalculator() {
       </div>
 
       <div className="mb-5">
-        <label className="text-[10px] font-bold uppercase tracking-[0.1em] text-text-muted mb-2 block">
+        <label className="text-[12px] font-bold uppercase tracking-[0.1em] text-text-muted mb-2 block">
           <i className="fas fa-user text-accent/60 mr-1" />
           Vendor Quick Pick
         </label>
@@ -210,7 +210,7 @@ export default function RepCalculator() {
             ))}
           </div>
           <div className="divider" />
-          <div className="flex justify-between text-[10px] font-mono text-text-muted mb-1">
+          <div className="flex justify-between text-[12px] font-mono text-text-muted mb-1">
             <span>0</span>
             <span>{formatNumber(result.current)} / {formatNumber(result.maxRep)}</span>
           </div>

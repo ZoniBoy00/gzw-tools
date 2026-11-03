@@ -255,7 +255,7 @@ function Builder({ weapons, vests, helmets, ammo }: { weapons: WeaponEntry[]; ve
       {/* Saved loadouts */}
       {loadouts.length > 0 && (
         <div className="mb-5 space-y-1.5 animate-stagger">
-          <div className="text-[10px] font-bold uppercase tracking-[0.12em] text-text-muted mb-2 flex items-center gap-2">
+          <div className="text-[12px] font-bold uppercase tracking-[0.12em] text-text-muted mb-2 flex items-center gap-2">
             <i className="fas fa-box-archive text-accent/60" />
             Saved Loadouts ({loadouts.length})
           </div>
@@ -264,7 +264,7 @@ function Builder({ weapons, vests, helmets, ammo }: { weapons: WeaponEntry[]; ve
               <div>
                 <div className="text-sm font-bold">{l.name}</div>
                 {!stock.loading && !stock.error && <LoadoutCost items={[...l.weapons, l.vest, l.helmet, ...l.ammo]} stock={stock.stock} />}
-                <div className="text-[10px] font-mono text-text-muted mt-0.5">
+                <div className="text-[12px] font-mono text-text-muted mt-0.5">
                   {l.weapons.length} weapon{l.weapons.length !== 1 ? 's' : ''}
                   {l.vest && ` · ${l.vest.slice(0, 24)}${l.vest.length > 24 ? '…' : ''}`}
                   {l.helmet && ` · ${l.helmet.slice(0, 20)}`}
@@ -295,11 +295,11 @@ function Builder({ weapons, vests, helmets, ammo }: { weapons: WeaponEntry[]; ve
         /* Build form */
         <div className="border border-accent/20 bg-accent/[0.02] p-4">
           <div className="flex items-center justify-between mb-3">
-            <span className="text-[10px] font-bold uppercase tracking-[0.12em] text-accent">
+            <span className="text-[12px] font-bold uppercase tracking-[0.12em] text-accent">
               <i className="fas fa-pen-ruler mr-1" />
               {editing ? 'Edit Loadout' : 'New Loadout'}
             </span>
-            <button onClick={resetForm} className="text-[10px] text-text-muted hover:text-text font-mono">Cancel</button>
+            <button onClick={resetForm} className="text-[12px] text-text-muted hover:text-text font-mono">Cancel</button>
           </div>
 
           {/* Name */}
@@ -314,7 +314,7 @@ function Builder({ weapons, vests, helmets, ammo }: { weapons: WeaponEntry[]; ve
 
           {/* Weapons */}
           <div className="mb-3">
-            <label className="text-[9px] font-bold uppercase tracking-[0.12em] text-text-muted mb-1.5 block">
+            <label className="text-[11px] font-bold uppercase tracking-[0.12em] text-text-muted mb-1.5 block">
               <i className="fas fa-crosshairs text-accent/60 mr-1" />Weapons
             </label>
             <input
@@ -330,23 +330,23 @@ function Builder({ weapons, vests, helmets, ammo }: { weapons: WeaponEntry[]; ve
                 <button
                   key={w.name}
                   onClick={() => toggleWeapon(w.name)}
-                  className={`block w-full text-left text-[11px] font-mono px-2 py-1 transition-colors ${
+                  className={`block w-full text-left text-[13px] font-mono px-2 py-1 transition-colors ${
                     selectedWeapons.includes(w.name)
                       ? 'bg-accent/10 text-accent border-l-2 border-accent'
                       : 'text-text-muted hover:text-text hover:bg-surface-3 border-l-2 border-transparent'
                   }`}
                 >
                   {w.name}
-                  <span className="text-[9px] text-text-muted ml-2">{w.type} · {w.caliber}</span>
+                  <span className="text-[11px] text-text-muted ml-2">{w.type} · {w.caliber}</span>
                 </button>
               ))}
-              {filteredWeapons.length === 0 && <div className="text-[10px] text-text-muted py-2 text-center">No weapons match</div>}
+              {filteredWeapons.length === 0 && <div className="text-[12px] text-text-muted py-2 text-center">No weapons match</div>}
             </div>
             {selectedWeapons.length > 0 && (
               <div className="flex flex-wrap gap-1 mt-1">
                 {selectedWeapons.map((n) => (
                   <span key={n} className="chip chip-sm active" onClick={() => toggleWeapon(n)}>
-                    {n} <i className="fas fa-xmark text-[8px] ml-1" />
+                    {n} <i className="fas fa-xmark text-[11px] ml-1" />
                   </span>
                 ))}
               </div>
@@ -356,7 +356,7 @@ function Builder({ weapons, vests, helmets, ammo }: { weapons: WeaponEntry[]; ve
           {/* Vest + Helmet */}
           <div className="grid grid-cols-2 gap-2 mb-3">
             <div>
-              <label className="text-[9px] font-bold uppercase tracking-[0.12em] text-text-muted mb-1.5 block">
+              <label className="text-[11px] font-bold uppercase tracking-[0.12em] text-text-muted mb-1.5 block">
                 <i className="fas fa-vest text-accent/60 mr-1" />Vest
               </label>
               <select value={selectedVest} onChange={(e) => setSelectedVest(e.target.value)} className="input input-sm" aria-label="Select vest">
@@ -367,7 +367,7 @@ function Builder({ weapons, vests, helmets, ammo }: { weapons: WeaponEntry[]; ve
               </select>
             </div>
             <div>
-              <label className="text-[9px] font-bold uppercase tracking-[0.12em] text-text-muted mb-1.5 block">
+              <label className="text-[11px] font-bold uppercase tracking-[0.12em] text-text-muted mb-1.5 block">
                 <i className="fas fa-hard-hat text-accent/60 mr-1" />Helmet
               </label>
               <select value={selectedHelmet} onChange={(e) => setSelectedHelmet(e.target.value)} className="input input-sm" aria-label="Select helmet">
@@ -381,7 +381,7 @@ function Builder({ weapons, vests, helmets, ammo }: { weapons: WeaponEntry[]; ve
 
           {/* Ammo */}
           <div className="mb-3">
-            <label className="text-[9px] font-bold uppercase tracking-[0.12em] text-text-muted mb-1.5 block">
+            <label className="text-[11px] font-bold uppercase tracking-[0.12em] text-text-muted mb-1.5 block">
               <i className="fas fa-bolt text-accent/60 mr-1" />Ammunition
             </label>
             <div className="max-h-24 overflow-y-auto space-y-0.5 border border-border p-1.5 bg-surface-2">
@@ -389,14 +389,14 @@ function Builder({ weapons, vests, helmets, ammo }: { weapons: WeaponEntry[]; ve
                 <button
                   key={a.name}
                   onClick={() => toggleAmmo(a.name)}
-                  className={`block w-full text-left text-[11px] font-mono px-2 py-0.5 transition-colors ${
+                  className={`block w-full text-left text-[13px] font-mono px-2 py-0.5 transition-colors ${
                     selectedAmmo.includes(a.name)
                       ? 'bg-accent/10 text-accent border-l-2 border-accent'
                       : 'text-text-muted hover:text-text hover:bg-surface-3 border-l-2 border-transparent'
                   }`}
                 >
                   {a.name}
-                  <span className="text-[9px] text-text-muted ml-2">{a.caliber}</span>
+                  <span className="text-[11px] text-text-muted ml-2">{a.caliber}</span>
                 </button>
               ))}
             </div>
@@ -467,7 +467,7 @@ function Recommender({ weapons, ammo }: { weapons: WeaponEntry[]; ammo: AmmoRoun
         {['budget', 'playstyle', 'result'].map((s, i) => (
           <div key={s} className="flex items-center gap-2">
             <span
-              className={`text-[10px] font-bold px-2.5 py-1 border transition-colors ${
+              className={`text-[12px] font-bold px-2.5 py-1 border transition-colors ${
                 step === s
                   ? 'border-accent text-accent bg-accent/5'
                   : ['budget', 'playstyle'].includes(step) && i < ['budget', 'playstyle', 'result'].indexOf(step)
@@ -477,7 +477,7 @@ function Recommender({ weapons, ammo }: { weapons: WeaponEntry[]; ammo: AmmoRoun
             >
               {i + 1}. {s === 'budget' ? 'Budget' : s === 'playstyle' ? 'Playstyle' : 'Result'}
             </span>
-            {i < 2 && <span className="text-text-muted text-[10px]"><i className="fas fa-chevron-right" /></span>}
+            {i < 2 && <span className="text-text-muted text-[12px]"><i className="fas fa-chevron-right" /></span>}
           </div>
         ))}
       </div>
@@ -499,7 +499,7 @@ function Recommender({ weapons, ammo }: { weapons: WeaponEntry[]; ammo: AmmoRoun
                   <i className={`${b.icon} ${budget === b.id ? 'text-accent' : 'text-text-muted'} text-sm`} />
                   <span className="font-bold text-sm">{b.label}</span>
                 </div>
-                <div className="text-[10px] font-mono text-text-muted">
+                <div className="text-[12px] font-mono text-text-muted">
                   {b.id === 'budget' && 'Best value, AI-focused'}
                   {b.id === 'mid' && 'Balanced vs players'}
                   {b.id === 'high' && 'Premium gear'}
@@ -527,12 +527,12 @@ function Recommender({ weapons, ammo }: { weapons: WeaponEntry[]; ammo: AmmoRoun
                 <div className="flex items-center gap-2 mb-1">
                   <i className={`${p.icon} ${playstyle === p.id ? 'text-accent' : 'text-text-muted'} text-sm`} />
                   <span className="font-bold text-sm">{p.label}</span>
-                  <span className="text-[10px] font-mono text-text-muted ml-2">{p.desc}</span>
+                  <span className="text-[12px] font-mono text-text-muted ml-2">{p.desc}</span>
                 </div>
               </button>
             ))}
           </div>
-          <button onClick={() => setStep('budget')} className="text-[10px] text-text-muted hover:text-accent mt-3 font-mono">
+          <button onClick={() => setStep('budget')} className="text-[12px] text-text-muted hover:text-accent mt-3 font-mono">
             <i className="fas fa-arrow-left mr-1" /> Back to budget
           </button>
         </div>
@@ -542,7 +542,7 @@ function Recommender({ weapons, ammo }: { weapons: WeaponEntry[]; ammo: AmmoRoun
       {step === 'result' && selectedBudget && selectedStyle && (
         <div className="animate-stagger">
           {/* Summary */}
-          <div className="flex gap-2 mb-4 text-[10px] font-mono text-text-muted">
+          <div className="flex gap-2 mb-4 text-[12px] font-mono text-text-muted">
             <span className="chip active">{selectedBudget.label}</span>
             <span className="chip active">{selectedStyle.label}</span>
           </div>
@@ -556,25 +556,25 @@ function Recommender({ weapons, ammo }: { weapons: WeaponEntry[]; ammo: AmmoRoun
               </div>
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 text-xs font-mono">
                 <div className="bg-surface-2 p-2 border border-border">
-                  <div className="text-[9px] uppercase tracking-wider text-text-muted mb-1">
+                  <div className="text-[11px] uppercase tracking-wider text-text-muted mb-1">
                     <i className="fas fa-vest text-accent/60 mr-1" />Vest
                   </div>
                   {recommendation.vest}
                 </div>
                 <div className="bg-surface-2 p-2 border border-border">
-                  <div className="text-[9px] uppercase tracking-wider text-text-muted mb-1">
+                  <div className="text-[11px] uppercase tracking-wider text-text-muted mb-1">
                     <i className="fas fa-hard-hat text-accent/60 mr-1" />Helmet
                   </div>
                   {recommendation.helmet}
                 </div>
                 <div className="bg-surface-2 p-2 border border-border">
-                  <div className="text-[9px] uppercase tracking-wider text-text-muted mb-1">
+                  <div className="text-[11px] uppercase tracking-wider text-text-muted mb-1">
                     <i className="fas fa-bolt text-accent/60 mr-1" />Ammo
                   </div>
                   {recommendation.ammo.join(', ')}
                 </div>
               </div>
-              <p className="mt-2 text-[11px] font-mono text-text-muted italic">— {recommendation.notes}</p>
+              <p className="mt-2 text-[13px] font-mono text-text-muted italic">— {recommendation.notes}</p>
             </div>
           ) : (
             <div className="empty-state mb-4">
@@ -585,7 +585,7 @@ function Recommender({ weapons, ammo }: { weapons: WeaponEntry[]; ammo: AmmoRoun
 
           {/* Recommended weapons */}
           <div className="mb-4">
-            <div className="text-[9px] font-bold uppercase tracking-[0.12em] text-text-muted mb-2 flex items-center gap-2">
+            <div className="text-[11px] font-bold uppercase tracking-[0.12em] text-text-muted mb-2 flex items-center gap-2">
               <i className="fas fa-crosshairs text-accent/60" />
               Recommended Weapons
             </div>
@@ -594,9 +594,9 @@ function Recommender({ weapons, ammo }: { weapons: WeaponEntry[]; ammo: AmmoRoun
                 <div key={w.name} className="flex items-center justify-between bg-surface-2 border border-border p-2.5">
                   <div>
                     <span className="text-xs font-medium">{w.name}</span>
-                    <span className="text-[10px] text-text-muted ml-2">{w.type}</span>
+                    <span className="text-[12px] text-text-muted ml-2">{w.type}</span>
                   </div>
-                  <span className="text-[10px] font-mono text-accent">{w.caliber} · {w.magSize}rds</span>
+                  <span className="text-[12px] font-mono text-accent">{w.caliber} · {w.magSize}rds</span>
                 </div>
               ))}
             </div>
@@ -604,7 +604,7 @@ function Recommender({ weapons, ammo }: { weapons: WeaponEntry[]; ammo: AmmoRoun
 
           {/* Recommended ammo */}
           <div className="mb-4">
-            <div className="text-[9px] font-bold uppercase tracking-[0.12em] text-text-muted mb-2 flex items-center gap-2">
+            <div className="text-[11px] font-bold uppercase tracking-[0.12em] text-text-muted mb-2 flex items-center gap-2">
               <i className="fas fa-bolt text-accent/60" />
               Recommended Ammunition
             </div>
@@ -616,7 +616,7 @@ function Recommender({ weapons, ammo }: { weapons: WeaponEntry[]; ammo: AmmoRoun
                 </span>
               ))}
               {recommendedAmmo.length === 0 && (
-                <span className="text-[10px] text-text-muted font-mono">No specific ammo suggestions</span>
+                <span className="text-[12px] text-text-muted font-mono">No specific ammo suggestions</span>
               )}
             </div>
           </div>
@@ -624,10 +624,10 @@ function Recommender({ weapons, ammo }: { weapons: WeaponEntry[]; ammo: AmmoRoun
           {/* Playstyle insight */}
           <div className="border border-border p-3 mb-4">
             <div className="flex items-center gap-2 mb-2">
-              <i className="fas fa-circle-info text-accent/60 text-[10px]" />
-              <span className="text-[9px] font-bold uppercase tracking-[0.12em] text-text-muted">Why this loadout?</span>
+              <i className="fas fa-circle-info text-accent/60 text-[12px]" />
+              <span className="text-[11px] font-bold uppercase tracking-[0.12em] text-text-muted">Why this loadout?</span>
             </div>
-            <p className="text-[11px] font-mono text-text-muted leading-relaxed">
+            <p className="text-[13px] font-mono text-text-muted leading-relaxed">
               {selectedStyle.id === 'assault' && 'Assault builds prioritize stopping power. Heavy ceramic plates stop rifle rounds, while AP ammo ensures you can penetrate any armor. Assault rifles and DMRs give you the range and firepower to win engagements.'}
               {selectedStyle.id === 'defense' && 'Defense builds balance protection and mobility. UHMWPE and steel plates offer good protection without the weight of ceramic. Versatile ammo like M855 or BP 7N23 handles both AI and players effectively.'}
               {selectedStyle.id === 'stealth' && 'Stealth builds favor lightweight gear and quiet ammunition. Subsonic rounds keep you off the minimap, SMGs and pistols allow fast movement. Aramid armor stops pistol rounds while keeping you agile.'}

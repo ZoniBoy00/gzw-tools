@@ -199,7 +199,7 @@ function NavEntry({ item, onNavigate, favorite, onToggleFavorite }: { item: NavI
       <NavLink to={item.path} end={item.path === '/'} onClick={onNavigate} className={({ isActive }) => `command-nav__item min-w-0 flex-1${isActive ? ' is-active' : ''}`}>
         <i className={item.icon} aria-hidden="true" /><span>{item.label}</span>
       </NavLink>
-      <button type="button" onClick={() => onToggleFavorite(item.path)} className="px-2 py-2 text-[10px] text-text-muted hover:text-accent focus-visible:outline focus-visible:outline-1 focus-visible:outline-accent" aria-label={`${favorite ? 'Remove' : 'Add'} ${item.label} ${favorite ? 'from' : 'to'} favorites`} aria-pressed={favorite}>
+      <button type="button" onClick={() => onToggleFavorite(item.path)} className="px-2 py-2 text-[12px] text-text-muted hover:text-accent focus-visible:outline focus-visible:outline-1 focus-visible:outline-accent" aria-label={`${favorite ? 'Remove' : 'Add'} ${item.label} ${favorite ? 'from' : 'to'} favorites`} aria-pressed={favorite}>
         <i className={`fas fa-star ${favorite ? 'text-accent' : ''}`} aria-hidden="true" />
       </button>
     </div>
@@ -287,8 +287,8 @@ export default function AppShell({ children }: { children: ReactNode }) {
           <button className="mobile-menu-button" type="button" aria-label="Open navigation" aria-expanded={menuOpen} onClick={() => setMenuOpen(true)}>
             <i className="fas fa-bars" aria-hidden="true" />
           </button>
-          <div className="topbar__context"><span className="topbar__eyebrow">GZW Tools / Operations console</span><span className="topbar__title">Gray Zone Warfare field reference</span>{continueItem && <Link to={continueItem.path} className="mt-1 inline-flex items-center gap-1 text-[9px] font-mono text-text-muted hover:text-accent"><i className="fas fa-clock-rotate-left" aria-hidden="true" />Continue: {continueItem.label}</Link>}</div>
-          <div className="topbar__actions"><button type="button" onClick={openSearch} className="btn btn-outline btn-sm"><i className="fas fa-magnifying-glass" aria-hidden="true" /><span className="sr-only sm:not-sr-only">Search</span><kbd className="hidden text-[9px] text-text-muted md:inline">Ctrl/⌘ K</kbd></button><span className="beta-tag">BETA</span><span className="data-tag"><i className="fas fa-database" /> {dataVersion ? `DATA ${dataVersion.slice(0, 10)}` : 'API v1'}</span></div>
+          <div className="topbar__context"><span className="topbar__eyebrow">GZW Tools / Operations console</span><span className="topbar__title">Gray Zone Warfare field reference</span>{continueItem && <Link to={continueItem.path} className="mt-1 inline-flex items-center gap-1 text-[11px] font-mono text-text-muted hover:text-accent"><i className="fas fa-clock-rotate-left" aria-hidden="true" />Continue: {continueItem.label}</Link>}</div>
+          <div className="topbar__actions"><button type="button" onClick={openSearch} className="btn btn-outline btn-sm"><i className="fas fa-magnifying-glass" aria-hidden="true" /><span className="sr-only sm:not-sr-only">Search</span><kbd className="hidden text-[11px] text-text-muted md:inline">Ctrl/⌘ K</kbd></button><span className="beta-tag">BETA</span><span className="data-tag"><i className="fas fa-database" /> {dataVersion ? `DATA ${dataVersion.slice(0, 10)}` : 'API v1'}</span></div>
         </header>
         <StatsStrip />
         <main id="main-content" className="app-content">

@@ -39,7 +39,7 @@ function ArticleCard({ article, onOpen }: { article: GuideArticle; onOpen: (item
             src={article.image}
             alt=""
             loading="lazy"
-            className="w-16 h-16 shrink-0 object-cover border border-border bg-surface-2"
+            className="w-20 h-20 shrink-0 object-cover border border-border bg-surface-2"
             onError={event => { event.currentTarget.hidden = true; }}
           />
         )}
@@ -48,7 +48,7 @@ function ArticleCard({ article, onOpen }: { article: GuideArticle; onOpen: (item
         </h2>
       </div>
       {paragraphs[0] && <p className="line-clamp-3 text-xs leading-relaxed text-text-muted">{paragraphs[0]}</p>}
-      <span className="mt-auto text-[10px] text-accent">{paragraphs.length > 1 ? 'Read more' : 'Details'}</span>
+      <span className="mt-auto text-[12px] text-accent">{paragraphs.length > 1 ? 'Read more' : 'Details'}</span>
     </article>
   );
 }
@@ -73,7 +73,7 @@ function EvidenceCard({ item, onOpen }: { item: EvidenceItem; onOpen: (item: Mod
           src={item.image}
           alt=""
           loading="lazy"
-          className="w-16 h-16 shrink-0 object-contain border border-border bg-surface-2"
+          className="w-20 h-20 shrink-0 object-contain border border-border bg-surface-2"
           onError={event => { event.currentTarget.hidden = true; }}
         />
       )}
@@ -81,7 +81,7 @@ function EvidenceCard({ item, onOpen }: { item: EvidenceItem; onOpen: (item: Mod
         <h2 className="text-sm font-bold leading-tight">
           <button type="button" className="text-left hover:text-accent focus-visible:outline focus-visible:outline-1 focus-visible:outline-accent" aria-label={`${item.name} details`}>{item.name}</button>
         </h2>
-        <dl className="mt-2 flex flex-wrap gap-x-4 gap-y-1 font-mono text-[10px] text-text-muted">
+        <dl className="mt-2 flex flex-wrap gap-x-4 gap-y-1 font-mono text-[12px] text-text-muted">
           {item.sellPrice && <div><dt className="inline">Sell </dt><dd className="inline text-accent">{item.sellPrice}</dd></div>}
           {item.weight && <div><dt className="inline">Weight </dt><dd className="inline">{item.weight}</dd></div>}
           {item.gridSize && <div><dt className="inline">Grid </dt><dd className="inline">{item.gridSize}</dd></div>}
@@ -143,7 +143,7 @@ export default function GameGuide() {
         <i className="fas fa-book-open text-accent text-sm" aria-hidden="true" />
         <h1 className="section-title">Game Guide</h1>
       </div>
-      <p className="mb-4 text-[10px] font-mono text-text-muted">
+      <p className="mb-4 text-[12px] font-mono text-text-muted">
         Hideout, experience, health, trading and other game systems, player task guides and evidence items.
       </p>
 
@@ -159,7 +159,7 @@ export default function GameGuide() {
             className={`tab ${activeTab === tab.id ? 'active' : ''}`}
             onClick={() => setActiveTab(tab.id)}
           >
-            <i className={`${tab.icon} mr-2`} aria-hidden="true" />{tab.label} <span className="ml-1 font-mono text-[9px]">{counts[tab.id][1]}</span>
+            <i className={`${tab.icon} mr-2`} aria-hidden="true" />{tab.label} <span className="ml-1 font-mono text-[11px]">{counts[tab.id][1]}</span>
           </button>
         ))}
       </div>
@@ -167,7 +167,7 @@ export default function GameGuide() {
       <div className="mb-4 flex flex-wrap items-center gap-2">
         <label className="relative min-w-[180px] flex-1">
           <span className="sr-only">Search the game guide</span>
-          <i className="fas fa-magnifying-glass pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-[10px] text-text-muted" aria-hidden="true" />
+          <i className="fas fa-magnifying-glass pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-[12px] text-text-muted" aria-hidden="true" />
           <input
             type="search"
             value={search}
@@ -177,7 +177,7 @@ export default function GameGuide() {
             aria-label="Search guides"
           />
         </label>
-        <span className="text-[9px] font-mono text-text-muted" aria-live="polite">{counts[activeTab][0]} / {counts[activeTab][1]}</span>
+        <span className="text-[11px] font-mono text-text-muted" aria-live="polite">{counts[activeTab][0]} / {counts[activeTab][1]}</span>
       </div>
 
       {!data ? (
@@ -205,7 +205,7 @@ export default function GameGuide() {
 
       {modalItem && <ItemModal item={modalItem} onClose={() => setModalItem(null)} />}
 
-      <div className="mt-4 flex items-center gap-2 text-[9px] font-mono text-text-muted/70">
+      <div className="mt-4 flex items-center gap-2 text-[11px] font-mono text-text-muted/70">
         <i className="fas fa-database" aria-hidden="true" />
         Read-only records from GZW Data API · text is taken from the community wiki and may lag behind the game.
       </div>

@@ -128,7 +128,7 @@ export default function KeysGuide() {
         <i className="fas fa-key text-accent text-sm" />
         <h1 className="section-title">Keys & Keycards</h1>
       </div>
-      <p className="text-[10px] font-mono text-text-muted mb-4">
+      <p className="text-[12px] font-mono text-text-muted mb-4">
         {keys.length} keys across {LOCATIONS.length} locations
       </p>
 
@@ -162,8 +162,8 @@ export default function KeysGuide() {
           <div key={loc}>
             <div className="flex items-center gap-2 mb-2">
               <i className="fas fa-location-dot text-accent/60 text-xs" />
-              <span className="text-[10px] font-bold uppercase tracking-[0.1em] text-text-muted">{loc}</span>
-              <span className="text-[9px] font-mono text-text-muted">{locKeys.length} keys</span>
+              <span className="text-[12px] font-bold uppercase tracking-[0.1em] text-text-muted">{loc}</span>
+              <span className="text-[11px] font-mono text-text-muted">{locKeys.length} keys</span>
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-1">
               {locKeys.map((k) => (
@@ -173,11 +173,11 @@ export default function KeysGuide() {
                   className="flex items-center gap-2 px-3 py-2 border border-border hover:border-accent/30 transition-colors text-left w-full"
                 >
                   {k.image && (
-                    <img crossOrigin="anonymous" src={k.image} alt="" className="w-8 h-8 object-contain shrink-0" loading="lazy" />
+                    <img crossOrigin="anonymous" src={k.image} alt="" className="w-12 h-12 object-contain shrink-0" loading="lazy" />
                   )}
                   <div className="min-w-0 flex-1">
                     <div className="text-xs font-medium truncate">{k.name}</div>
-                    <div className="text-[9px] font-mono text-text-muted/70 truncate">{k.location}</div>
+                    <div className="text-[11px] font-mono text-text-muted/70 truncate">{k.location}</div>
                   </div>
                 </button>
               ))}
@@ -186,7 +186,7 @@ export default function KeysGuide() {
         ))}
       </div>
 
-      <div className="mt-3 text-[10px] text-text-muted font-mono flex items-center gap-2">
+      <div className="mt-3 text-[12px] text-text-muted font-mono flex items-center gap-2">
         <i className="fas fa-database" />
         {filtered.length} / {keys.length} keys
       </div>

@@ -109,10 +109,10 @@ export default function FaqModal({ onClose }: Props) {
           {FAQS.map((faq, i) => (
             <details key={i} className="group border border-border open:border-accent/30 transition-colors">
               <summary className="flex items-center gap-2 p-3 cursor-pointer text-sm font-medium text-text-muted group-open:text-accent hover:text-text transition-colors list-none">
-                <i className="fas fa-chevron-right text-[8px] transition-transform group-open:rotate-90 text-accent/60" />
+                <i className="fas fa-chevron-right text-[11px] transition-transform group-open:rotate-90 text-accent/60" />
                 {faq.q}
               </summary>
-              <div className="px-3 pb-3 text-sm text-text-muted/90 leading-relaxed font-mono text-[11px]">
+              <div className="px-3 pb-3 text-sm text-text-muted/90 leading-relaxed font-mono text-[13px]">
                 {faq.a}
               </div>
             </details>

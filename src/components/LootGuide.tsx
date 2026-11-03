@@ -28,13 +28,13 @@ function toModal(row: LootRow): ModalItem {
 }
 
 function Thumb({ src }: { src?: string }) {
-  if (!src) return <span className="inline-block h-9 w-9 shrink-0 border border-border bg-surface-2" aria-hidden="true" />;
+  if (!src) return <span className="inline-block h-12 w-12 shrink-0 border border-border bg-surface-2" aria-hidden="true" />;
   return (
     <img crossOrigin="anonymous"
       src={src}
       alt=""
       loading="lazy"
-      className="h-9 w-9 shrink-0 object-contain border border-border bg-surface-2"
+      className="h-12 w-12 shrink-0 object-contain border border-border bg-surface-2"
       onError={event => { event.currentTarget.style.visibility = 'hidden'; }}
     />
   );
@@ -66,7 +66,7 @@ export default function LootGuide() {
         <i className="fas fa-sack-dollar text-accent text-sm" aria-hidden="true" />
         <h1 className="section-title">Loot Values</h1>
       </div>
-      <p className="mb-4 text-[10px] font-mono text-text-muted">
+      <p className="mb-4 text-[12px] font-mono text-text-muted">
         Find what is worth carrying out of the zone. Sort by price per inventory cell to fill your bag with the most money.
       </p>
 
@@ -79,7 +79,7 @@ export default function LootGuide() {
           <div className="mb-3 flex flex-wrap items-center gap-2">
             <label className="relative min-w-[180px] flex-1">
               <span className="sr-only">Search loot</span>
-              <i className="fas fa-magnifying-glass pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-[10px] text-text-muted" aria-hidden="true" />
+              <i className="fas fa-magnifying-glass pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-[12px] text-text-muted" aria-hidden="true" />
               <input
                 type="search"
                 value={search}
@@ -92,7 +92,7 @@ export default function LootGuide() {
             <select className="input input-sm w-auto" value={sort} onChange={event => setSort(event.target.value as LootSort)} aria-label="Sort by">
               {SORTS.map(entry => <option key={entry.id} value={entry.id}>Sort: {entry.label}</option>)}
             </select>
-            <label className="flex items-center gap-1.5 text-[10px] text-text-muted">
+            <label className="flex items-center gap-1.5 text-[12px] text-text-muted">
               Min price
               <input
                 type="number"
@@ -105,7 +105,7 @@ export default function LootGuide() {
                 onChange={event => setMinPrice(Math.max(0, Number(event.target.value) || 0))}
               />
             </label>
-            <span className="text-[9px] font-mono text-text-muted" aria-live="polite">{visible.length} / {rows.length}</span>
+            <span className="text-[11px] font-mono text-text-muted" aria-live="polite">{visible.length} / {rows.length}</span>
           </div>
 
           {priced === 0 && rows.length > 0 && (
@@ -123,25 +123,25 @@ export default function LootGuide() {
                   <Thumb src={row.image} />
                   <div className="min-w-0 flex-1">
                     <span className="block truncate text-xs font-bold">{row.name}</span>
-                    <div className="truncate font-mono text-[9px] text-text-muted">
+                    <div className="truncate font-mono text-[11px] text-text-muted">
                       {[row.size, row.weightKg !== null ? `${row.weightKg} kg` : '', row.perKg !== null ? `${formatMoney(row.perKg)}/kg` : ''].filter(Boolean).join(' · ')}
                     </div>
                   </div>
                   <div className="shrink-0 text-right">
                     <div className="font-mono text-xs font-bold text-accent">{formatMoney(row.price)}</div>
-                    <div className="font-mono text-[9px] text-text-muted">{row.perCell !== null ? `${formatMoney(row.perCell)}/cell` : ''}</div>
+                    <div className="font-mono text-[11px] text-text-muted">{row.perCell !== null ? `${formatMoney(row.perCell)}/cell` : ''}</div>
                   </div>
                 </button>
               ))}
             </div>
           )}
           {visible.length > shown.length && (
-            <p className="mt-2 text-[10px] font-mono text-text-muted">Showing the first {MAX_ROWS}. Narrow the search to see more.</p>
+            <p className="mt-2 text-[12px] font-mono text-text-muted">Showing the first {MAX_ROWS}. Narrow the search to see more.</p>
           )}
         </>
       )}
 
-      <div className="mt-4 flex items-center gap-2 text-[9px] font-mono text-text-muted/70">
+      <div className="mt-4 flex items-center gap-2 text-[11px] font-mono text-text-muted/70">
         <i className="fas fa-database" aria-hidden="true" />
         Read-only records from GZW Data API · prices come from the community wiki and may lag behind the game.
       </div>
