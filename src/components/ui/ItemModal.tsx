@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, type ReactNode } from 'react';
 
 export interface ModalItem {
   name: string;
@@ -13,6 +13,8 @@ export interface ModalItem {
 interface Props {
   item: ModalItem;
   onClose: () => void;
+  /** Extra sections rendered under the fields and text. */
+  children?: ReactNode;
 }
 
 const TYPE_ICONS = {
@@ -38,7 +40,7 @@ const TYPE_ICONS = {
   evidence: 'fas fa-box-archive',
 };
 
-export default function ItemModal({ item, onClose }: Props) {
+export default function ItemModal({ item, onClose, children }: Props) {
   const overlayRef = useRef<HTMLDivElement>(null);
   const dialogRef = useRef<HTMLDivElement>(null);
 
@@ -146,6 +148,8 @@ export default function ItemModal({ item, onClose }: Props) {
             ))}
           </div>
         )}
+
+        {children}
 
         {/* Wiki link */}
         {item.link && (

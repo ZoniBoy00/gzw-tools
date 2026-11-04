@@ -26,6 +26,7 @@ const NAV_GROUPS: NavGroup[] = [
       { id: 'backpacks', label: 'Backpacks', icon: 'fas fa-box', path: '/backpacks' },
       { id: 'keys', label: 'Keys', icon: 'fas fa-key', path: '/keys' },
       { id: 'loot', label: 'Loot Values', icon: 'fas fa-sack-dollar', path: '/loot' },
+      { id: 'game-data', label: 'Game Data', icon: 'fas fa-database', path: '/game-data' },
       { id: 'vendors', label: 'Vendors', icon: 'fas fa-store', path: '/vendors' },
     ],
   },
@@ -121,6 +122,10 @@ const SEO_META: Record<string, { title: string; description: string }> = {
   '/loot': {
     title: 'Loot Values | Gray Zone Warfare | GZW Tools',
     description: 'Search Gray Zone Warfare loot, keys, medical supplies, food and drinks and sort by sell price, price per inventory cell and price per kg to find the most valuable items.',
+  },
+  '/game-data': {
+    title: 'Game Data | Gray Zone Warfare | GZW Tools',
+    description: 'Browse Gray Zone Warfare items read straight from the game files: weights, grid sizes, prices, vendors, loot sources, attachment compatibility and hideout crafting recipes.',
   },
   '/vendors': {
     title: 'Vendor Guide | Gray Zone Warfare | GZW Tools',
