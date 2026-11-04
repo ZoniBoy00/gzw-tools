@@ -16,7 +16,7 @@ import {
 } from '../lib/gameData';
 import type { CompatHost, GameItem, LootByItem } from '../lib/gameData';
 
-function Section({ title, children }: { title: string; children: React.ReactNode }) {
+export function Section({ title, children }: { title: string; children: React.ReactNode }) {
   return (
     <div className="px-4 pb-3">
       <h3 className="mb-1 mt-2 font-mono text-[11px] uppercase tracking-wider text-text-muted">{title}</h3>

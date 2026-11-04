@@ -1,6 +1,10 @@
 import { describe, expect, it } from 'vitest';
 import {
   amountList,
+  capabilityList,
+  indexItems,
+  objectiveLine,
+  totalBasePrice,
   bestSellPrice,
   cheapestOffer,
   craftTimeLabel,
@@ -145,5 +149,29 @@ describe('findGameItem', () => {
     expect(findGameItem([list[0]], 'Kangaroo Rig')?.id).toBe('v1');
     expect(findGameItem(list, 'Nothing here')).toBeNull();
     expect(findGameItem(list, '')).toBeNull();
+  });
+});
+
+describe('hideout helpers', () => {
+  const byId = indexItems([item({ id: 'plastics', name: 'Plastics', base_price: 100 }), item({ id: 'board', name: 'Board', base_price: 250 })]);
+  it('adds up base prices, counts cash as its amount and reports unpriced materials', () => {
+    const result = totalBasePrice([
+      { id: 'plastics', name: 'Plastics', amount: 2 },
+      { id: 'board', name: 'Board', amount: 3 },
+      { id: 'IS_Misc_Dollars', name: 'US Dollars', amount: 35000 },
+      { id: 'mystery', name: 'Mystery', amount: 1 },
+    ], byId);
+    expect(result).toEqual({ total: 200 + 750 + 35000, unpriced: 1 });
+  });
+  it('writes capability lists and objective lines', () => {
+    expect(capabilityList({ heat_control: 2, analysis: 5 })).toBe('Heat control 2, Analysis 5');
+    expect(capabilityList(undefined)).toBe('');
+    expect(objectiveLine({ id: 1, kind: 'hand_over_money', description: 'Pay', amount: 50000 })).toBe('Hand over $50,000');
+    expect(objectiveLine({ id: 2, kind: 'hand_over_item', description: 'x', item: { id: 'a', name: 'Phone Logs' }, amount: 2 })).toBe('Hand over 2× Phone Logs');
+    expect(objectiveLine({ id: 3, kind: 'hideout_capability', description: 'Compute', room: 'MicroLab', capability: 'Compute', required_value: 1 })).toBe('Compute: MicroLab Compute level 1');
+    expect(objectiveLine({ id: 4, kind: 'produce_recipe', description: 'x', recipe_name: 'Morphine Base', amount: 1 })).toBe('Produce Morphine Base');
+    expect(objectiveLine({ id: 5, kind: 'time_limit', description: 'Time', enabled: false })).toBe('');
+    expect(objectiveLine({ id: 6, kind: 'time_limit', description: 'Time', enabled: true, duration_seconds: 3600 })).toBe('Time limit 60 min');
+    expect(objectiveLine({ id: 7, kind: 'smuggling_pickup', description: 'Pick up', possible_items: [{ id: 'h', name: 'Gray Heroin', min: 5, max: 5 }] })).toBe('Pick up (5× Gray Heroin)');
   });
 });
