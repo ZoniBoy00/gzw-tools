@@ -195,6 +195,21 @@ function weightKg(item: GameItem): number | null {
   return match ? Number(match[1]) : null;
 }
 
+function nameKey(name: string | undefined): string {
+  return (name ?? '').toLowerCase().replace(/×/g, 'x').replace(/[^a-z0-9]/g, '');
+}
+
+/**
+ * Game-file record for an item name from the wiki datasets. Variants that share a display name are ambiguous;
+ * the base item (no `display_name`) wins, otherwise the first one.
+ */
+export function findGameItem(items: GameItem[], name: string): GameItem | null {
+  const key = nameKey(name);
+  if (!key) return null;
+  const matches = items.filter(item => !isDevItem(item) && (nameKey(item.name) === key || nameKey(item.display_name) === key));
+  return matches.find(item => nameKey(item.name) === key) ?? matches[0] ?? null;
+}
+
 /** Name shown to players. Variants with equal names carry an id suffix in `name`; `display_name` is the original. */
 export function gameItemTitle(item: GameItem): string {
   return item.display_name ?? item.name;

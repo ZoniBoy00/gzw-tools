@@ -5,6 +5,7 @@ import {
   cheapestOffer,
   craftTimeLabel,
   filterGameItems,
+  findGameItem,
   formatChance,
   formatSell,
   gameItemTitle,
@@ -125,5 +126,24 @@ describe('hideout formatting', () => {
     expect(craftTimeLabel(120)).toBe('2 min');
     expect(craftTimeLabel(135)).toBe('2 min 15 s');
     expect(amountList([{ id: 'a', name: 'Plastics', amount: 2 }, { id: 'b', name: null, amount: 1 }])).toBe('2× Plastics, b');
+  });
+});
+
+describe('findGameItem', () => {
+  const list = [
+    item({ id: 'v1', name: 'Kangaroo Rig (Rig_V1)', display_name: 'Kangaroo Rig' }),
+    item({ id: 'b', name: 'Kangaroo Rig' }),
+    item({ id: 'a', name: 'AK-12' }),
+    item({ id: 'd', name: '<DEV> AK-12' }),
+  ];
+  it('matches wiki names ignoring case and punctuation', () => {
+    expect(findGameItem(list, 'ak 12')?.id).toBe('a');
+    expect(findGameItem(list, 'AK-12')?.id).toBe('a');
+  });
+  it('prefers the base item over variants and returns null when unknown', () => {
+    expect(findGameItem(list, 'Kangaroo Rig')?.id).toBe('b');
+    expect(findGameItem([list[0]], 'Kangaroo Rig')?.id).toBe('v1');
+    expect(findGameItem(list, 'Nothing here')).toBeNull();
+    expect(findGameItem(list, '')).toBeNull();
   });
 });

@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from 'react';
 import ItemModal from './ui/ItemModal';
+import { ItemExtras } from './GameItemExtras';
 import type { ModalItem } from './ui/ItemModal';
 import {
   GAME_ITEM_CATEGORIES,
@@ -7,27 +8,21 @@ import {
   bestSellPrice,
   cheapestOffer,
   craftTimeLabel,
-  fetchCompatibilityHost,
   fetchGameItems,
   fetchHideoutDevices,
   fetchHideoutQuests,
   fetchHideoutRecipes,
-  fetchLootSources,
   filterGameItems,
-  formatChance,
   formatDollars,
   formatSell,
   gameItemTitle,
   gridLabel,
   indexItemNames,
-  lootTableLabel,
-  resolveSlots,
   sortGameItems,
   statLabel,
-  topLootSources,
   weightLabel,
 } from '../lib/gameData';
-import type { CompatHost, GameItem, GameItemSort, HideoutDevice, HideoutQuest, HideoutRecipe, LootByItem } from '../lib/gameData';
+import type { GameItem, GameItemSort, HideoutDevice, HideoutQuest, HideoutRecipe } from '../lib/gameData';
 
 type Tab = 'items' | 'hideout';
 const MAX_ROWS = 200;
@@ -77,89 +72,6 @@ function toModal(item: GameItem): ModalItem {
     fields,
     text: item.description ? [item.description] : undefined,
   };
-}
-
-function Section({ title, children }: { title: string; children: React.ReactNode }) {
-  return (
-    <div className="px-4 pb-3">
-      <h3 className="mb-1 mt-2 font-mono text-[11px] uppercase tracking-wider text-text-muted">{title}</h3>
-      {children}
-    </div>
-  );
-}
-
-/** Vendor offers, loot sources and compatibility of one item; loot and compatibility are fetched when the item opens. */
-function ItemExtras({ item, names }: { item: GameItem; names: Map<string, string> }) {
-  const [loot, setLoot] = useState<LootByItem | undefined | null>(null);
-  const [host, setHost] = useState<CompatHost | undefined | null>(null);
-  const [failed, setFailed] = useState(false);
-
-  useEffect(() => {
-    let cancelled = false;
-    fetchLootSources(item.id).then(value => { if (!cancelled) setLoot(value); }).catch(() => { if (!cancelled) setFailed(true); });
-    if (item.slots?.length) {
-      fetchCompatibilityHost(item.id).then(value => { if (!cancelled) setHost(value); }).catch(() => { if (!cancelled) setFailed(true); });
-    }
-    return () => { cancelled = true; };
-  }, [item.id, item.slots?.length]);
-
-  const sources = topLootSources(loot ?? undefined);
-  const slots = resolveSlots(host ?? undefined, names);
-
-  return (
-    <>
-      {item.vendors && item.vendors.length > 0 && (
-        <Section title="Sold by">
-          <ul className="space-y-0.5 font-mono text-xs">
-            {[...item.vendors].sort((a, b) => a.rank - b.rank).map(offer => (
-              <li key={`${offer.vendor}-${offer.rank}`} className="flex justify-between"><span>{offer.vendor} · rank {offer.rank}</span><span className="text-accent">{formatDollars(offer.price)}</span></li>
-            ))}
-          </ul>
-        </Section>
-      )}
-      {item.sell_prices && item.sell_prices.length > 0 && (
-        <Section title="Vendors pay">
-          <ul className="space-y-0.5 font-mono text-xs">
-            {item.sell_prices.map(offer => (
-              <li key={offer.vendors.join()} className="flex justify-between"><span>{offer.vendors.join(', ')}</span><span>{formatSell(offer.price)}</span></li>
-            ))}
-          </ul>
-        </Section>
-      )}
-      {item.fits_on && item.fits_on.length > 0 && (
-        <Section title={`Fits on (${item.fits_on.length})`}>
-          <p className="text-xs leading-relaxed text-text-muted">
-            {item.fits_on.slice(0, 40).map(id => names.get(id) ?? id).join(', ')}{item.fits_on.length > 40 ? ` … and ${item.fits_on.length - 40} more` : ''}
-          </p>
-        </Section>
-      )}
-      {slots.length > 0 && (
-        <Section title="Attachment slots">
-          <ul className="space-y-1 text-xs">
-            {slots.map(slot => (
-              <li key={slot.slot}>
-                <details>
-                  <summary className="cursor-pointer font-mono">{slot.slot}{slot.critical ? ' · required' : ''}{slot.welded ? ' · fixed' : ''} <span className="text-text-muted">({slot.accepts.length})</span></summary>
-                  <p className="mt-1 leading-relaxed text-text-muted">{slot.accepts.length ? slot.accepts.map(entry => entry.name).join(', ') : 'Nothing fits this slot.'}</p>
-                </details>
-              </li>
-            ))}
-          </ul>
-        </Section>
-      )}
-      {sources.length > 0 && (
-        <Section title="Found in">
-          <ul className="space-y-0.5 font-mono text-xs">
-            {sources.map(source => (
-              <li key={source.table} className="flex justify-between gap-2"><span className="truncate">{lootTableLabel(source.table)}</span><span>{formatChance(source.chance_per_roll)}</span></li>
-            ))}
-          </ul>
-          <p className="mt-1 text-[11px] text-text-muted/70">Estimated: the chance of a loot rule is split evenly between its items. Not verified in game.</p>
-        </Section>
-      )}
-      {failed && <p className="px-4 pb-3 text-[11px] text-text-muted">Some details could not be loaded.</p>}
-    </>
-  );
 }
 
 function ItemsTab() {
@@ -232,7 +144,7 @@ function ItemsTab() {
       {visible.length > shown.length && <p className="mt-2 text-[12px] font-mono text-text-muted">Showing the first {MAX_ROWS}. Narrow the search to see more.</p>}
 
       {selected && (
-        <ItemModal item={toModal(selected)} onClose={() => setSelected(null)}>
+        <ItemModal item={toModal(selected)} onClose={() => setSelected(null)} gameData={false}>
           <ItemExtras key={selected.id} item={selected} names={names} />
         </ItemModal>
       )}
