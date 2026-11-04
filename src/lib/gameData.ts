@@ -60,6 +60,24 @@ export interface HideoutDevice {
   build_materials: Amount[];
   capabilities_required?: Record<string, number>;
   capabilities_provided?: Record<string, number>;
+  infrastructure_required?: Record<string, number>;
+  infrastructure_provided?: Record<string, number>;
+  next_upgrade?: string | null;
+}
+export interface QuestObjective {
+  id: number;
+  description: string;
+  kind: string;
+  sub_objectives?: QuestObjective[];
+  item?: { id: string | null; name: string | null };
+  amount?: number;
+  room?: string;
+  capability?: string;
+  required_value?: number;
+  recipe_name?: string;
+  possible_items?: { id: string; name: string; min: number; max: number }[];
+  duration_seconds?: number;
+  enabled?: boolean;
 }
 export interface HideoutQuest {
   id: string;
@@ -68,6 +86,10 @@ export interface HideoutQuest {
   required_vendor_level?: number;
   requires_quests?: string[];
   briefing?: string;
+  accept_message?: string;
+  debriefing?: string;
+  objectives?: QuestObjective[];
+  rewards?: { recipes?: { id: string; name: string }[]; items?: { id: string; name: string; count: number }[] };
 }
 
 /** Item categories in `gamedata_<category>`; the label is shown in the category filter. */
@@ -295,4 +317,50 @@ export function craftTimeLabel(seconds: number): string {
 
 export function amountList(list: Amount[]): string {
   return list.map(entry => `${entry.amount > 1 ? `${entry.amount.toLocaleString('en-US')}× ` : ''}${entry.name ?? entry.id}`).join(', ');
+}
+
+export const MONEY_ITEM_ID = 'IS_Misc_Dollars';
+
+export function indexItems(items: GameItem[]): Map<string, GameItem> {
+  return new Map(items.map(item => [item.id, item]));
+}
+
+/** Base price of a material list. Dollars count as their amount; materials without a price count as 0 and are reported. */
+export function totalBasePrice(list: Amount[], byId: Map<string, GameItem>): { total: number; unpriced: number } {
+  let total = 0;
+  let unpriced = 0;
+  for (const entry of list) {
+    if (entry.id === MONEY_ITEM_ID) { total += entry.amount; continue; }
+    const price = byId.get(entry.id)?.base_price;
+    if (price === undefined) unpriced += 1;
+    else total += price * entry.amount;
+  }
+  return { total, unpriced };
+}
+
+/** `heat_control` -> `Heat control` */
+export function capabilityLabel(key: string): string {
+  const text = statLabel(key);
+  return text.charAt(0).toUpperCase() + text.slice(1);
+}
+
+export function capabilityList(values: Record<string, number> | undefined): string {
+  return Object.entries(values ?? {}).map(([key, value]) => `${capabilityLabel(key)} ${value}`).join(', ');
+}
+
+/** One readable line for a quest objective; objectives without a useful text (disabled timers) give an empty string. */
+export function objectiveLine(objective: QuestObjective): string {
+  const amount = objective.amount ?? 1;
+  switch (objective.kind) {
+    case 'hand_over_money': return `Hand over ${formatDollars(amount)}`;
+    case 'hand_over_item': return `Hand over ${amount}× ${objective.item?.name ?? objective.description}`;
+    case 'hideout_capability': return `${objective.description}: ${objective.room ?? ''} ${capabilityLabel(objective.capability ?? '')} level ${objective.required_value ?? '?'}`.replace(/\s+/g, ' ');
+    case 'produce_recipe': return `Produce ${amount > 1 ? `${amount}× ` : ''}${objective.recipe_name ?? objective.description}`;
+    case 'smuggling_pickup': {
+      const options = (objective.possible_items ?? []).map(entry => `${entry.min === entry.max ? entry.min : `${entry.min}-${entry.max}`}× ${entry.name}`).join(' or ');
+      return options ? `${objective.description} (${options})` : objective.description;
+    }
+    case 'time_limit': return objective.enabled ? `Time limit ${craftTimeLabel(objective.duration_seconds ?? 0)}` : '';
+    default: return objective.description;
+  }
 }

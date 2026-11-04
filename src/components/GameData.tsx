@@ -1,10 +1,12 @@
 import { useEffect, useMemo, useState } from 'react';
 import ItemModal from './ui/ItemModal';
 import { ItemExtras } from './GameItemExtras';
+import { DeviceModal, QuestModal, RecipeModal } from './HideoutDetails';
 import type { ModalItem } from './ui/ItemModal';
 import {
   GAME_ITEM_CATEGORIES,
   amountList,
+  capabilityList,
   bestSellPrice,
   cheapestOffer,
   craftTimeLabel,
@@ -18,6 +20,7 @@ import {
   gameItemTitle,
   gridLabel,
   indexItemNames,
+  indexItems,
   sortGameItems,
   statLabel,
   weightLabel,
@@ -156,16 +159,24 @@ function HideoutTab() {
   const [recipes, setRecipes] = useState<HideoutRecipe[] | null>(null);
   const [devices, setDevices] = useState<HideoutDevice[] | null>(null);
   const [quests, setQuests] = useState<HideoutQuest[] | null>(null);
+  const [items, setItems] = useState<GameItem[]>([]);
   const [error, setError] = useState('');
   const [search, setSearch] = useState('');
+  const [openRecipe, setOpenRecipe] = useState<HideoutRecipe | null>(null);
+  const [openDevice, setOpenDevice] = useState<HideoutDevice | null>(null);
+  const [openQuest, setOpenQuest] = useState<HideoutQuest | null>(null);
 
   useEffect(() => {
     let cancelled = false;
     Promise.all([fetchHideoutRecipes(), fetchHideoutDevices(), fetchHideoutQuests()])
       .then(([r, d, q]) => { if (!cancelled) { setRecipes(r); setDevices(d); setQuests(q); } })
       .catch(reason => { if (!cancelled) setError(reason instanceof Error ? reason.message : String(reason)); });
+    // Pictures and prices of the materials; the lists work without them.
+    fetchGameItems().then(value => { if (!cancelled) setItems(value); }).catch(() => undefined);
     return () => { cancelled = true; };
   }, []);
+
+  const byId = useMemo(() => indexItems(items), [items]);
 
   if (error) return <div className="empty-state" role="alert"><i className="fas fa-triangle-exclamation" aria-hidden="true" /><p>Could not load hideout data: {error}</p></div>;
   if (!recipes || !devices || !quests) return <div className="empty-state" role="status"><i className="fas fa-spinner fa-spin" aria-hidden="true" /><p>Loading hideout data…</p></div>;
@@ -175,6 +186,7 @@ function HideoutTab() {
   const shownRecipes = recipes.filter(r => match(r.name, r.pipeline, amountList(r.inputs), amountList(r.outputs)));
   const shownDevices = devices.filter(d => match(d.name, d.slot, amountList(d.build_materials)));
   const shownQuests = quests.filter(q => match(q.name, q.vendor));
+  const cardClass = 'card p-2 text-left text-xs w-full cursor-pointer hover:border-accent focus-visible:outline focus-visible:outline-1 focus-visible:outline-accent';
 
   return (
     <>
@@ -186,37 +198,47 @@ function HideoutTab() {
 
       <h2 className="section-title">Crafting recipes ({shownRecipes.length})</h2>
       <div className="mb-4 grid grid-cols-1 gap-2 md:grid-cols-2">
-        {shownRecipes.map(recipe => (
-          <div key={recipe.id} className="card p-2 text-xs">
-            <div className="flex justify-between gap-2"><span className="font-bold">{recipe.name ?? recipe.id}</span><span className="font-mono text-text-muted">{recipe.pipeline}</span></div>
-            <div className="mt-1 text-text-muted">{amountList(recipe.inputs)} → <span className="text-text">{amountList(recipe.outputs)}</span></div>
-            <div className="mt-1 font-mono text-[11px] text-text-muted">
-              {craftTimeLabel(recipe.craft_time_seconds)}{recipe.known_by_default ? ' · known from start' : ''}
-              {recipe.required_capabilities ? ` · needs ${Object.entries(recipe.required_capabilities).map(([key, value]) => `${key} ${value}`).join(', ')}` : ''}
-            </div>
-          </div>
-        ))}
+        {shownRecipes.map(recipe => {
+          const output = recipe.outputs[0] ? byId.get(recipe.outputs[0].id) : undefined;
+          return (
+            <button key={recipe.id} type="button" onClick={() => setOpenRecipe(recipe)} className={`${cardClass} flex items-start gap-2`} aria-label={`${recipe.name ?? recipe.id} recipe details`}>
+              <Thumb src={output?.image} />
+              <span className="min-w-0 flex-1">
+                <span className="flex justify-between gap-2"><span className="font-bold">{recipe.name ?? recipe.id}</span><span className="font-mono text-text-muted">{recipe.pipeline}</span></span>
+                <span className="mt-1 block text-text-muted">{amountList(recipe.inputs)} → <span className="text-text">{amountList(recipe.outputs)}</span></span>
+                <span className="mt-1 block font-mono text-[11px] text-text-muted">
+                  {craftTimeLabel(recipe.craft_time_seconds)}{recipe.known_by_default ? ' · known from start' : ''}
+                  {recipe.required_capabilities ? ` · needs ${capabilityList(recipe.required_capabilities)}` : ''}
+                </span>
+              </span>
+            </button>
+          );
+        })}
       </div>
 
       <h2 className="section-title">Devices ({shownDevices.length})</h2>
       <div className="mb-4 grid grid-cols-1 gap-2 md:grid-cols-2">
         {shownDevices.map(device => (
-          <div key={device.id} className="card p-2 text-xs">
-            <div className="flex justify-between gap-2"><span className="font-bold">{device.name}</span><span className="font-mono text-text-muted">{device.slot} · L{device.level}</span></div>
-            <div className="mt-1 text-text-muted">Build: {amountList(device.build_materials)}</div>
-          </div>
+          <button key={device.id} type="button" onClick={() => setOpenDevice(device)} className={cardClass} aria-label={`${device.name} device details`}>
+            <span className="flex justify-between gap-2"><span className="font-bold">{device.name}</span><span className="font-mono text-text-muted">{device.slot} · L{device.level}</span></span>
+            <span className="mt-1 block text-text-muted">Build: {amountList(device.build_materials)}</span>
+          </button>
         ))}
       </div>
 
       <h2 className="section-title">Hideout quests ({shownQuests.length})</h2>
       <div className="grid grid-cols-1 gap-2 md:grid-cols-2">
         {shownQuests.map(quest => (
-          <div key={quest.id} className="card p-2 text-xs">
-            <div className="flex justify-between gap-2"><span className="font-bold">{quest.name}</span><span className="font-mono text-text-muted">{quest.vendor}{quest.required_vendor_level ? ` · L${quest.required_vendor_level}` : ''}</span></div>
-            {quest.briefing && <p className="mt-1 line-clamp-3 text-text-muted">{quest.briefing}</p>}
-          </div>
+          <button key={quest.id} type="button" onClick={() => setOpenQuest(quest)} className={cardClass} aria-label={`${quest.name} quest details`}>
+            <span className="flex justify-between gap-2"><span className="font-bold">{quest.name}</span><span className="font-mono text-text-muted">{quest.vendor}{quest.required_vendor_level ? ` · L${quest.required_vendor_level}` : ''}</span></span>
+            {quest.briefing && <span className="mt-1 line-clamp-3 block text-text-muted">{quest.briefing}</span>}
+          </button>
         ))}
       </div>
+
+      {openRecipe && <RecipeModal recipe={openRecipe} byId={byId} onClose={() => setOpenRecipe(null)} />}
+      {openDevice && <DeviceModal device={openDevice} devices={devices} byId={byId} onClose={() => setOpenDevice(null)} />}
+      {openQuest && <QuestModal quest={openQuest} quests={quests} byId={byId} onClose={() => setOpenQuest(null)} />}
     </>
   );
 }
