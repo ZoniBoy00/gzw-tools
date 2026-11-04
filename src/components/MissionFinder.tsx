@@ -1,6 +1,9 @@
-import { useState, useMemo } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { useApiData } from '../hooks/useApiData';
 import TaskModal from './TaskModal';
+import { QuestModal } from './HideoutDetails';
+import { fetchGameItems, fetchHideoutQuests, indexItems } from '../lib/gameData';
+import type { GameItem, HideoutQuest } from '../lib/gameData';
 import { parseCompletedTaskIds, summarizeTaskProgress, toggleTaskCompletion } from '../lib/taskProgress';
 
 const TASK_STATUS_KEY = 'gzw-completed-tasks';
@@ -36,6 +39,16 @@ export default function MissionFinder() {
   const { data: squadData, loading: squadDataLoading } = useApiData<any>('squad_strike_missions?all=true');
   const { data: contractData, loading: contractDataLoading } = useApiData<any>('contract?all=true');
 
+  // Hideout quests come from the game files (gamedata_hideout_quests); the tracker handles them like any other task.
+  const [hideoutQuests, setHideoutQuests] = useState<HideoutQuest[]>([]);
+  const [rewardItems, setRewardItems] = useState<GameItem[]>([]);
+  useEffect(() => {
+    let cancelled = false;
+    fetchHideoutQuests().then(quests => { if (!cancelled) setHideoutQuests(quests); }).catch(() => undefined);
+    return () => { cancelled = true; };
+  }, []);
+  const hideoutQuestById = useMemo(() => new Map(hideoutQuests.map(quest => [quest.id, quest])), [hideoutQuests]);
+
   const allTasks: Task[] = useMemo(() => {
     if (!tasksData.length) return [];
     const hiddenTaskIds = new Set((hiddenData as Task[]).map((h: Task) => h.id));
@@ -59,9 +72,17 @@ export default function MissionFinder() {
     add(hiddenData as Task[], 'hidden_task');
     add(squadData as Task[], 'squad_strike');
     add(contractData as Task[], 'contract');
-    
+    add(hideoutQuests.map(quest => ({
+      id: quest.id,
+      name: quest.name,
+      vendor: quest.vendor === 'LabRat' ? 'Lab Rat' : quest.vendor ?? '',
+      area: 'Hideout',
+      location: 'Hideout',
+      type: 'Hideout',
+    })), 'hideout_quest');
+
     return result;
-  }, [tasksData, mainTaskData, sideTaskData, hiddenData, squadData, contractData]);
+  }, [tasksData, mainTaskData, sideTaskData, hiddenData, squadData, contractData, hideoutQuests]);
 
   const VENDORS = useMemo(() => [...new Set(allTasks.map((t) => t.vendor).filter(Boolean))].sort(), [allTasks]);
   const AREAS = useMemo(() => [...new Set((allTasks.map((t) => t.location || t.area)).filter(Boolean))].sort(), [allTasks]);
@@ -77,6 +98,13 @@ export default function MissionFinder() {
   const [completedIds, setCompletedIds] = useState<string[]>(readCompletedTasks);
   const [hideCompleted, setHideCompleted] = useState(false);
   const completedSet = useMemo(() => new Set(completedIds), [completedIds]);
+  const openedHideoutQuest = modalTask !== null && hideoutQuestById.has(modalTask.id);
+  useEffect(() => {
+    if (!openedHideoutQuest) return undefined;
+    let cancelled = false;
+    fetchGameItems().then(items => { if (!cancelled) setRewardItems(items); }).catch(() => undefined);
+    return () => { cancelled = true; };
+  }, [openedHideoutQuest]);
   const vendorProgress = useMemo(() => summarizeTaskProgress(allTasks, completedIds).filter(item => item.vendor !== 'Unassigned'), [allTasks, completedIds]);
 
   const toggleCompleted = (id: string) => {
@@ -88,12 +116,12 @@ export default function MissionFinder() {
   };
 
   const categories = useMemo(() => {
-    const cats = ['main_task', 'side_task', 'hidden_task', 'squad_strike', 'contract', 'task'];
+    const cats = ['main_task', 'side_task', 'hidden_task', 'squad_strike', 'contract', 'hideout_quest', 'task'];
     const result: { key: string; label: string; icon: string }[] = [];
     for (const c of cats) {
       const count = allTasks.filter((t) => t.category === c).length;
-      const labels: Record<string, string> = { main_task: 'Main Tasks', side_task: 'Side Tasks', hidden_task: 'Hidden Tasks', squad_strike: 'Squad Strikes', contract: 'Contracts', task: 'Tasks' };
-      const icons: Record<string, string> = { main_task: 'fas fa-star', side_task: 'fas fa-list', hidden_task: 'fas fa-eye-slash', squad_strike: 'fas fa-people-group', contract: 'fas fa-file-contract', task: 'fas fa-clipboard-list' };
+      const labels: Record<string, string> = { main_task: 'Main Tasks', side_task: 'Side Tasks', hidden_task: 'Hidden Tasks', squad_strike: 'Squad Strikes', contract: 'Contracts', hideout_quest: 'Hideout Quests', task: 'Tasks' };
+      const icons: Record<string, string> = { main_task: 'fas fa-star', side_task: 'fas fa-list', hidden_task: 'fas fa-eye-slash', squad_strike: 'fas fa-people-group', contract: 'fas fa-file-contract', hideout_quest: 'fas fa-warehouse', task: 'fas fa-clipboard-list' };
       result.push({ key: c, label: `${labels[c] || c} (${count})`, icon: icons[c] || 'fas fa-circle' });
     }
     return result;
@@ -200,6 +228,7 @@ export default function MissionFinder() {
                       {t.category === 'side_task' && <span className="tag tag-side text-[11px] ml-2">Side</span>}
                       {t.category === 'squad_strike' && <span className="tag tag-squad text-[11px] ml-2">Squad</span>}
                       {t.category === 'contract' && <span className="tag tag-contract text-[11px] ml-2">Contract</span>}
+                      {t.category === 'hideout_quest' && <span className="tag tag-drab text-[11px] ml-2">Hideout</span>}
                     </div>
                     <div className="flex items-center gap-2 text-[12px] font-mono text-text-muted">
                       {t.vendor && <span className="tag tag-drab text-[11px]">{t.vendor}</span>}
@@ -226,7 +255,9 @@ export default function MissionFinder() {
         <span><i className="fas fa-database mr-1" />{filtered.length} / {allTasks.length}</span>
       </div>
 
-      {modalTask && <TaskModal key={modalTask.id} task={modalTask} onClose={() => setModalTask(null)} />}
+      {modalTask && hideoutQuestById.has(modalTask.id) ? (
+        <QuestModal key={modalTask.id} quest={hideoutQuestById.get(modalTask.id) as HideoutQuest} quests={hideoutQuests} byId={indexItems(rewardItems)} onClose={() => setModalTask(null)} />
+      ) : modalTask && <TaskModal key={modalTask.id} task={modalTask} onClose={() => setModalTask(null)} />}
     </div>
   );
 }
