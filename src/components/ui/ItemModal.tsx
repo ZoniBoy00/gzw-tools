@@ -1,4 +1,5 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, type ReactNode } from 'react';
+import { GameDataSection } from '../GameItemExtras';
 
 export interface ModalItem {
   name: string;
@@ -13,7 +14,14 @@ export interface ModalItem {
 interface Props {
   item: ModalItem;
   onClose: () => void;
+  /** Extra sections rendered under the fields and text. */
+  children?: ReactNode;
+  /** Set to false when the caller already shows game-file details itself. */
+  gameData?: boolean;
 }
+
+/** Modal kinds that are not items, so there is nothing to look up in the game-file item data. */
+const NON_ITEM_TYPES: ModalItem['type'][] = ['guide', 'region', 'boss', 'evidence'];
 
 const TYPE_ICONS = {
   weapon: 'fas fa-crosshairs',
@@ -38,7 +46,7 @@ const TYPE_ICONS = {
   evidence: 'fas fa-box-archive',
 };
 
-export default function ItemModal({ item, onClose }: Props) {
+export default function ItemModal({ item, onClose, children, gameData = true }: Props) {
   const overlayRef = useRef<HTMLDivElement>(null);
   const dialogRef = useRef<HTMLDivElement>(null);
 
@@ -146,6 +154,9 @@ export default function ItemModal({ item, onClose }: Props) {
             ))}
           </div>
         )}
+
+        {children}
+        {gameData && !NON_ITEM_TYPES.includes(item.type) && <GameDataSection name={item.name} />}
 
         {/* Wiki link */}
         {item.link && (

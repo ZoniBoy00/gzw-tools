@@ -23,6 +23,7 @@ const GameGuide = lazy(() => import('./components/GameGuide'));
 const HideoutPlanner = lazy(() => import('./components/HideoutPlanner'));
 const XpCalculator = lazy(() => import('./components/XpCalculator'));
 const LootGuide = lazy(() => import('./components/LootGuide'));
+const GameData = lazy(() => import('./components/GameData'));
 const PrivacyPolicy = lazy(() => import('./components/PrivacyPolicy'));
 const TermsOfService = lazy(() => import('./components/TermsOfService'));
 
@@ -51,6 +52,7 @@ function AppRoutes() {
       <Route path="/hideout" element={<HideoutPlanner />} />
       <Route path="/xp" element={<XpCalculator />} />
       <Route path="/loot" element={<LootGuide />} />
+      <Route path="/game-data" element={<GameData />} />
       <Route path="/privacy" element={<PrivacyPolicy />} />
       <Route path="/tos" element={<TermsOfService />} />
       <Route path="*" element={<Navigate to="/" replace />} />
